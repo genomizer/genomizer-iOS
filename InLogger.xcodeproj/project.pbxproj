@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6484A2F4190E8F160071BB23 /* ServerConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6484A2F3190E8F160071BB23 /* ServerConnection.m */; };
+		76E2DA9F190E96C90048069D /* JSONBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 76E2DA9E190E96C90048069D /* JSONBuilder.m */; };
 		DE403ACD190A8A3E003D21F5 /* XYZSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE403ACC190A8A3E003D21F5 /* XYZSearchViewController.m */; };
 		DED1228D190E966200D8E530 /* XYZInLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = DED12280190E966200D8E530 /* XYZInLogger.m */; };
 		DED1228E190E966200D8E530 /* XYZSearchResultTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DED12282190E966200D8E530 /* XYZSearchResultTableViewCell.m */; };
@@ -50,6 +51,8 @@
 /* Begin PBXFileReference section */
 		6484A2F2190E8F160071BB23 /* ServerConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerConnection.h; sourceTree = "<group>"; };
 		6484A2F3190E8F160071BB23 /* ServerConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerConnection.m; sourceTree = "<group>"; };
+		76E2DA9D190E96C90048069D /* JSONBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSONBuilder.h; path = ../JSONBuilder.h; sourceTree = "<group>"; };
+		76E2DA9E190E96C90048069D /* JSONBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSONBuilder.m; path = ../JSONBuilder.m; sourceTree = "<group>"; };
 		DE403ACB190A8A3E003D21F5 /* XYZSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZSearchViewController.h; sourceTree = "<group>"; };
 		DE403ACC190A8A3E003D21F5 /* XYZSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZSearchViewController.m; sourceTree = "<group>"; };
 		DED1227F190E966200D8E530 /* XYZInLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZInLogger.h; sourceTree = "<group>"; };
@@ -148,6 +151,8 @@
 		DEEF6AED19094F8A00A2CD8C /* InLogger */ = {
 			isa = PBXGroup;
 			children = (
+				76E2DA9D190E96C90048069D /* JSONBuilder.h */,
+				76E2DA9E190E96C90048069D /* JSONBuilder.m */,
 				DED1227F190E966200D8E530 /* XYZInLogger.h */,
 				DED12280190E966200D8E530 /* XYZInLogger.m */,
 				DED12281190E966200D8E530 /* XYZSearchResultTableViewCell.h */,
@@ -313,6 +318,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DE403ACD190A8A3E003D21F5 /* XYZSearchViewController.m in Sources */,
+				76E2DA9F190E96C90048069D /* JSONBuilder.m in Sources */,
 				DED12290190E966200D8E530 /* XYZSearchResultTableViewController.m in Sources */,
 				6484A2F4190E8F160071BB23 /* ServerConnection.m in Sources */,
 				DEEF7D94190A55D1005EDB8E /* XYZTabViewController.m in Sources */,
