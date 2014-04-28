@@ -1,48 +1,30 @@
 //
-//  XYZSearchViewController.m
+//  XYZSearchResultTableViewController.m
 //  InLogger
 //
-//  Created by Joel Viklund on 25/04/14.
+//  Created by Joel Viklund on 28/04/14.
 //  Copyright (c) 2014 Joel Viklund. All rights reserved.
 //
 
-#import "XYZSearchViewController.h"
-#import "XYZSearchTableViewCell.h"
+#import "XYZSearchResultTableViewController.h"
 
-@interface XYZSearchViewController ()
+@interface XYZSearchResultTableViewController ()
 
-@property NSMutableArray *searchFields;
+@property NSMutableArray *searchResults;
 
 @end
 
-@implementation XYZSearchViewController
-
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-       // self.searchFields = [self initialSearchFields]
-       // [self loadInitialData];
-    }
-    return self;
-}
+@implementation XYZSearchResultTableViewController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.searchFields = [self createSearchFields ];
-    [self.tableView reloadData];
-
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-}
-
-- (NSMutableArray *) createSearchFields
-{
-    return [NSMutableArray arrayWithObjects:@"Experiment ID", @"Publication ID" , @"Type of data", @"Species", @"Genom release", @"Cell-line", @"Developmental stage", @"Sex", @"Tissue", @"Processing", @"Asd", nil];;
 }
 
 - (void)didReceiveMemoryWarning
@@ -55,24 +37,28 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 1;
+    return 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return [self.searchFields count];
+    return 0;
 }
 
+/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"ListPrototypeCell";
-    XYZSearchTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    NSString *annotation = [self.searchFields objectAtIndex:indexPath.row];
-    cell.inputField.placeholder = annotation;
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    
+    // Configure the cell...
+    
     return cell;
 }
+*/
 
 /*
 // Override to support conditional editing of the table view.
@@ -113,13 +99,19 @@
 */
 
 /*
-#pragma mark - Navigation
+#pragma mark - Table view delegate
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+// In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Get the new view controller using [segue destinationViewController].
+    // Navigation logic may go here, for example:
+    // Create the next view controller.
+    <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:<#@"Nib name"#> bundle:nil];
+    
     // Pass the selected object to the new view controller.
+    
+    // Push the view controller.
+    [self.navigationController pushViewController:detailViewController animated:YES];
 }
 */
 

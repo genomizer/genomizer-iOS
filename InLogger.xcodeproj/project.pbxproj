@@ -9,6 +9,15 @@
 /* Begin PBXBuildFile section */
 		6484A2F4190E8F160071BB23 /* ServerConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6484A2F3190E8F160071BB23 /* ServerConnection.m */; };
 		DE403ACD190A8A3E003D21F5 /* XYZSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE403ACC190A8A3E003D21F5 /* XYZSearchViewController.m */; };
+		DED1228D190E966200D8E530 /* XYZInLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = DED12280190E966200D8E530 /* XYZInLogger.m */; };
+		DED1228E190E966200D8E530 /* XYZSearchResultTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DED12282190E966200D8E530 /* XYZSearchResultTableViewCell.m */; };
+		DED1228F190E966200D8E530 /* XYZSearchResultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DED12283190E966200D8E530 /* XYZSearchResultTableViewCell.xib */; };
+		DED12290190E966200D8E530 /* XYZSearchResultTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DED12285190E966200D8E530 /* XYZSearchResultTableViewController.m */; };
+		DED12291190E966200D8E530 /* XYZSearchResultTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DED12286190E966200D8E530 /* XYZSearchResultTableViewController.xib */; };
+		DED12292190E966200D8E530 /* XYZSearchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DED12288190E966200D8E530 /* XYZSearchTableViewCell.m */; };
+		DED12293190E966200D8E530 /* XYZSearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DED12289190E966200D8E530 /* XYZSearchTableViewCell.xib */; };
+		DED12294190E966200D8E530 /* XYZSelectedFilesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DED1228B190E966200D8E530 /* XYZSelectedFilesViewController.m */; };
+		DED12295190E966200D8E530 /* XYZSelectedFilesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DED1228C190E966200D8E530 /* XYZSelectedFilesViewController.xib */; };
 		DEEF6AE819094F8A00A2CD8C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEEF6AE719094F8A00A2CD8C /* Foundation.framework */; };
 		DEEF6AEA19094F8A00A2CD8C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEEF6AE919094F8A00A2CD8C /* CoreGraphics.framework */; };
 		DEEF6AEC19094F8A00A2CD8C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEEF6AEB19094F8A00A2CD8C /* UIKit.framework */; };
@@ -43,6 +52,20 @@
 		6484A2F3190E8F160071BB23 /* ServerConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerConnection.m; sourceTree = "<group>"; };
 		DE403ACB190A8A3E003D21F5 /* XYZSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZSearchViewController.h; sourceTree = "<group>"; };
 		DE403ACC190A8A3E003D21F5 /* XYZSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZSearchViewController.m; sourceTree = "<group>"; };
+		DED1227F190E966200D8E530 /* XYZInLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZInLogger.h; sourceTree = "<group>"; };
+		DED12280190E966200D8E530 /* XYZInLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZInLogger.m; sourceTree = "<group>"; };
+		DED12281190E966200D8E530 /* XYZSearchResultTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZSearchResultTableViewCell.h; sourceTree = "<group>"; };
+		DED12282190E966200D8E530 /* XYZSearchResultTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZSearchResultTableViewCell.m; sourceTree = "<group>"; };
+		DED12283190E966200D8E530 /* XYZSearchResultTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XYZSearchResultTableViewCell.xib; sourceTree = "<group>"; };
+		DED12284190E966200D8E530 /* XYZSearchResultTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZSearchResultTableViewController.h; sourceTree = "<group>"; };
+		DED12285190E966200D8E530 /* XYZSearchResultTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZSearchResultTableViewController.m; sourceTree = "<group>"; };
+		DED12286190E966200D8E530 /* XYZSearchResultTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XYZSearchResultTableViewController.xib; sourceTree = "<group>"; };
+		DED12287190E966200D8E530 /* XYZSearchTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZSearchTableViewCell.h; sourceTree = "<group>"; };
+		DED12288190E966200D8E530 /* XYZSearchTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZSearchTableViewCell.m; sourceTree = "<group>"; };
+		DED12289190E966200D8E530 /* XYZSearchTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XYZSearchTableViewCell.xib; sourceTree = "<group>"; };
+		DED1228A190E966200D8E530 /* XYZSelectedFilesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZSelectedFilesViewController.h; sourceTree = "<group>"; };
+		DED1228B190E966200D8E530 /* XYZSelectedFilesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZSelectedFilesViewController.m; sourceTree = "<group>"; };
+		DED1228C190E966200D8E530 /* XYZSelectedFilesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XYZSelectedFilesViewController.xib; sourceTree = "<group>"; };
 		DEEF6AE419094F8A00A2CD8C /* InLogger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InLogger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEEF6AE719094F8A00A2CD8C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DEEF6AE919094F8A00A2CD8C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -125,6 +148,20 @@
 		DEEF6AED19094F8A00A2CD8C /* InLogger */ = {
 			isa = PBXGroup;
 			children = (
+				DED1227F190E966200D8E530 /* XYZInLogger.h */,
+				DED12280190E966200D8E530 /* XYZInLogger.m */,
+				DED12281190E966200D8E530 /* XYZSearchResultTableViewCell.h */,
+				DED12282190E966200D8E530 /* XYZSearchResultTableViewCell.m */,
+				DED12283190E966200D8E530 /* XYZSearchResultTableViewCell.xib */,
+				DED12284190E966200D8E530 /* XYZSearchResultTableViewController.h */,
+				DED12285190E966200D8E530 /* XYZSearchResultTableViewController.m */,
+				DED12286190E966200D8E530 /* XYZSearchResultTableViewController.xib */,
+				DED12287190E966200D8E530 /* XYZSearchTableViewCell.h */,
+				DED12288190E966200D8E530 /* XYZSearchTableViewCell.m */,
+				DED12289190E966200D8E530 /* XYZSearchTableViewCell.xib */,
+				DED1228A190E966200D8E530 /* XYZSelectedFilesViewController.h */,
+				DED1228B190E966200D8E530 /* XYZSelectedFilesViewController.m */,
+				DED1228C190E966200D8E530 /* XYZSelectedFilesViewController.xib */,
 				DEEF7D91190A55D1005EDB8E /* XYZTabViewController.h */,
 				DEEF7D92190A55D1005EDB8E /* XYZTabViewController.m */,
 				DEEF7D93190A55D1005EDB8E /* XYZTabViewController.xib */,
@@ -252,7 +289,11 @@
 				DEEF6B1719094FA000A2CD8C /* Main.storyboard in Resources */,
 				DEEF6AF219094F8A00A2CD8C /* InfoPlist.strings in Resources */,
 				DEEF6B1C1909553C00A2CD8C /* XYZLogInViewController.xib in Resources */,
+				DED12291190E966200D8E530 /* XYZSearchResultTableViewController.xib in Resources */,
+				DED1228F190E966200D8E530 /* XYZSearchResultTableViewCell.xib in Resources */,
 				DEEF6AFA19094F8A00A2CD8C /* Images.xcassets in Resources */,
+				DED12293190E966200D8E530 /* XYZSearchTableViewCell.xib in Resources */,
+				DED12295190E966200D8E530 /* XYZSelectedFilesViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,11 +313,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				DE403ACD190A8A3E003D21F5 /* XYZSearchViewController.m in Sources */,
+				DED12290190E966200D8E530 /* XYZSearchResultTableViewController.m in Sources */,
 				6484A2F4190E8F160071BB23 /* ServerConnection.m in Sources */,
 				DEEF7D94190A55D1005EDB8E /* XYZTabViewController.m in Sources */,
 				DEEF6AF819094F8A00A2CD8C /* AppDelegate.m in Sources */,
+				DED12292190E966200D8E530 /* XYZSearchTableViewCell.m in Sources */,
+				DED1228E190E966200D8E530 /* XYZSearchResultTableViewCell.m in Sources */,
+				DED12294190E966200D8E530 /* XYZSelectedFilesViewController.m in Sources */,
 				DEEF6AF419094F8A00A2CD8C /* main.m in Sources */,
 				DEEF6B1B1909553C00A2CD8C /* XYZLogInViewController.m in Sources */,
+				DED1228D190E966200D8E530 /* XYZInLogger.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
