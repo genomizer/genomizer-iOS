@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DE403ACD190A8A3E003D21F5 /* XYZSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE403ACC190A8A3E003D21F5 /* XYZSearchViewController.m */; };
 		DEEF6AE819094F8A00A2CD8C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEEF6AE719094F8A00A2CD8C /* Foundation.framework */; };
 		DEEF6AEA19094F8A00A2CD8C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEEF6AE919094F8A00A2CD8C /* CoreGraphics.framework */; };
 		DEEF6AEC19094F8A00A2CD8C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEEF6AEB19094F8A00A2CD8C /* UIKit.framework */; };
@@ -19,6 +20,12 @@
 		DEEF6B0319094F8B00A2CD8C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEEF6AEB19094F8A00A2CD8C /* UIKit.framework */; };
 		DEEF6B0B19094F8B00A2CD8C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DEEF6B0919094F8B00A2CD8C /* InfoPlist.strings */; };
 		DEEF6B0D19094F8B00A2CD8C /* InLoggerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DEEF6B0C19094F8B00A2CD8C /* InLoggerTests.m */; };
+		DEEF6B1719094FA000A2CD8C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEEF6B1619094FA000A2CD8C /* Main.storyboard */; };
+		DEEF6B1B1909553C00A2CD8C /* XYZLogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEEF6B191909553C00A2CD8C /* XYZLogInViewController.m */; };
+		DEEF6B1C1909553C00A2CD8C /* XYZLogInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DEEF6B1A1909553C00A2CD8C /* XYZLogInViewController.xib */; };
+		DEEF7CF6190A3D23005EDB8E /* XYZInLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = DEEF7CF5190A3D23005EDB8E /* XYZInLogger.m */; };
+		DEEF7D94190A55D1005EDB8E /* XYZTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEEF7D92190A55D1005EDB8E /* XYZTabViewController.m */; };
+		DEEF7D95190A55D1005EDB8E /* XYZTabViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DEEF7D93190A55D1005EDB8E /* XYZTabViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,6 +39,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DE403ACB190A8A3E003D21F5 /* XYZSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZSearchViewController.h; sourceTree = "<group>"; };
+		DE403ACC190A8A3E003D21F5 /* XYZSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZSearchViewController.m; sourceTree = "<group>"; };
 		DEEF6AE419094F8A00A2CD8C /* InLogger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InLogger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEEF6AE719094F8A00A2CD8C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DEEF6AE919094F8A00A2CD8C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -48,6 +57,15 @@
 		DEEF6B0819094F8B00A2CD8C /* InLoggerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "InLoggerTests-Info.plist"; sourceTree = "<group>"; };
 		DEEF6B0A19094F8B00A2CD8C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DEEF6B0C19094F8B00A2CD8C /* InLoggerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InLoggerTests.m; sourceTree = "<group>"; };
+		DEEF6B1619094FA000A2CD8C /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = ../Main.storyboard; sourceTree = "<group>"; };
+		DEEF6B181909553C00A2CD8C /* XYZLogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZLogInViewController.h; sourceTree = "<group>"; };
+		DEEF6B191909553C00A2CD8C /* XYZLogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZLogInViewController.m; sourceTree = "<group>"; };
+		DEEF6B1A1909553C00A2CD8C /* XYZLogInViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XYZLogInViewController.xib; sourceTree = "<group>"; };
+		DEEF7CF4190A3D23005EDB8E /* XYZInLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZInLogger.h; sourceTree = "<group>"; };
+		DEEF7CF5190A3D23005EDB8E /* XYZInLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZInLogger.m; sourceTree = "<group>"; };
+		DEEF7D91190A55D1005EDB8E /* XYZTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XYZTabViewController.h; path = ../XYZTabViewController.h; sourceTree = "<group>"; };
+		DEEF7D92190A55D1005EDB8E /* XYZTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XYZTabViewController.m; path = ../XYZTabViewController.m; sourceTree = "<group>"; };
+		DEEF7D93190A55D1005EDB8E /* XYZTabViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = XYZTabViewController.xib; path = ../XYZTabViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,10 +125,21 @@
 		DEEF6AED19094F8A00A2CD8C /* InLogger */ = {
 			isa = PBXGroup;
 			children = (
+				DEEF7D91190A55D1005EDB8E /* XYZTabViewController.h */,
+				DEEF7D92190A55D1005EDB8E /* XYZTabViewController.m */,
+				DEEF7D93190A55D1005EDB8E /* XYZTabViewController.xib */,
+				DEEF6B1619094FA000A2CD8C /* Main.storyboard */,
+				DEEF7CF4190A3D23005EDB8E /* XYZInLogger.h */,
+				DEEF7CF5190A3D23005EDB8E /* XYZInLogger.m */,
 				DEEF6AF619094F8A00A2CD8C /* AppDelegate.h */,
 				DEEF6AF719094F8A00A2CD8C /* AppDelegate.m */,
 				DEEF6AF919094F8A00A2CD8C /* Images.xcassets */,
 				DEEF6AEE19094F8A00A2CD8C /* Supporting Files */,
+				DEEF6B181909553C00A2CD8C /* XYZLogInViewController.h */,
+				DEEF6B191909553C00A2CD8C /* XYZLogInViewController.m */,
+				DEEF6B1A1909553C00A2CD8C /* XYZLogInViewController.xib */,
+				DE403ACB190A8A3E003D21F5 /* XYZSearchViewController.h */,
+				DE403ACC190A8A3E003D21F5 /* XYZSearchViewController.m */,
 			);
 			path = InLogger;
 			sourceTree = "<group>";
@@ -219,7 +248,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DEEF7D95190A55D1005EDB8E /* XYZTabViewController.xib in Resources */,
+				DEEF6B1719094FA000A2CD8C /* Main.storyboard in Resources */,
 				DEEF6AF219094F8A00A2CD8C /* InfoPlist.strings in Resources */,
+				DEEF6B1C1909553C00A2CD8C /* XYZLogInViewController.xib in Resources */,
 				DEEF6AFA19094F8A00A2CD8C /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -239,8 +271,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE403ACD190A8A3E003D21F5 /* XYZSearchViewController.m in Sources */,
+				DEEF7D94190A55D1005EDB8E /* XYZTabViewController.m in Sources */,
 				DEEF6AF819094F8A00A2CD8C /* AppDelegate.m in Sources */,
 				DEEF6AF419094F8A00A2CD8C /* main.m in Sources */,
+				DEEF7CF6190A3D23005EDB8E /* XYZInLogger.m in Sources */,
+				DEEF6B1B1909553C00A2CD8C /* XYZLogInViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -437,6 +473,7 @@
 				DEEF6B1219094F8B00A2CD8C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DEEF6B1319094F8B00A2CD8C /* Build configuration list for PBXNativeTarget "InLoggerTests" */ = {
 			isa = XCConfigurationList;
@@ -445,6 +482,7 @@
 				DEEF6B1519094F8B00A2CD8C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
