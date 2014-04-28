@@ -118,6 +118,61 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DED12296190E9C2F00D8E530 /* SearchResult */ = {
+			isa = PBXGroup;
+			children = (
+				DED12281190E966200D8E530 /* XYZSearchResultTableViewCell.h */,
+				DED12282190E966200D8E530 /* XYZSearchResultTableViewCell.m */,
+				DED12283190E966200D8E530 /* XYZSearchResultTableViewCell.xib */,
+				DED12284190E966200D8E530 /* XYZSearchResultTableViewController.h */,
+				DED12285190E966200D8E530 /* XYZSearchResultTableViewController.m */,
+				DED12286190E966200D8E530 /* XYZSearchResultTableViewController.xib */,
+			);
+			name = SearchResult;
+			sourceTree = "<group>";
+		};
+		DED12297190E9C5700D8E530 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				DED12287190E966200D8E530 /* XYZSearchTableViewCell.h */,
+				DED12288190E966200D8E530 /* XYZSearchTableViewCell.m */,
+				DED12289190E966200D8E530 /* XYZSearchTableViewCell.xib */,
+				DE403ACB190A8A3E003D21F5 /* XYZSearchViewController.h */,
+				DE403ACC190A8A3E003D21F5 /* XYZSearchViewController.m */,
+			);
+			name = Search;
+			sourceTree = "<group>";
+		};
+		DED12298190E9C7400D8E530 /* SelectedFiles */ = {
+			isa = PBXGroup;
+			children = (
+				DED1228A190E966200D8E530 /* XYZSelectedFilesViewController.h */,
+				DED1228B190E966200D8E530 /* XYZSelectedFilesViewController.m */,
+				DED1228C190E966200D8E530 /* XYZSelectedFilesViewController.xib */,
+			);
+			name = SelectedFiles;
+			sourceTree = "<group>";
+		};
+		DED12299190E9C8100D8E530 /* MainGUI */ = {
+			isa = PBXGroup;
+			children = (
+				DEEF7D91190A55D1005EDB8E /* XYZTabViewController.h */,
+				DEEF7D92190A55D1005EDB8E /* XYZTabViewController.m */,
+				DEEF7D93190A55D1005EDB8E /* XYZTabViewController.xib */,
+			);
+			name = MainGUI;
+			sourceTree = "<group>";
+		};
+		DED1229A190E9C9100D8E530 /* LogIn */ = {
+			isa = PBXGroup;
+			children = (
+				DEEF6B181909553C00A2CD8C /* XYZLogInViewController.h */,
+				DEEF6B191909553C00A2CD8C /* XYZLogInViewController.m */,
+				DEEF6B1A1909553C00A2CD8C /* XYZLogInViewController.xib */,
+			);
+			name = LogIn;
+			sourceTree = "<group>";
+		};
 		DEEF6ADB19094F8A00A2CD8C = {
 			isa = PBXGroup;
 			children = (
@@ -155,33 +210,18 @@
 				76E2DA9E190E96C90048069D /* JSONBuilder.m */,
 				DED1227F190E966200D8E530 /* XYZInLogger.h */,
 				DED12280190E966200D8E530 /* XYZInLogger.m */,
-				DED12281190E966200D8E530 /* XYZSearchResultTableViewCell.h */,
-				DED12282190E966200D8E530 /* XYZSearchResultTableViewCell.m */,
-				DED12283190E966200D8E530 /* XYZSearchResultTableViewCell.xib */,
-				DED12284190E966200D8E530 /* XYZSearchResultTableViewController.h */,
-				DED12285190E966200D8E530 /* XYZSearchResultTableViewController.m */,
-				DED12286190E966200D8E530 /* XYZSearchResultTableViewController.xib */,
-				DED12287190E966200D8E530 /* XYZSearchTableViewCell.h */,
-				DED12288190E966200D8E530 /* XYZSearchTableViewCell.m */,
-				DED12289190E966200D8E530 /* XYZSearchTableViewCell.xib */,
-				DED1228A190E966200D8E530 /* XYZSelectedFilesViewController.h */,
-				DED1228B190E966200D8E530 /* XYZSelectedFilesViewController.m */,
-				DED1228C190E966200D8E530 /* XYZSelectedFilesViewController.xib */,
-				DEEF7D91190A55D1005EDB8E /* XYZTabViewController.h */,
-				DEEF7D92190A55D1005EDB8E /* XYZTabViewController.m */,
-				DEEF7D93190A55D1005EDB8E /* XYZTabViewController.xib */,
+				DED1229A190E9C9100D8E530 /* LogIn */,
+				DED12296190E9C2F00D8E530 /* SearchResult */,
+				DED12297190E9C5700D8E530 /* Search */,
+				DED12298190E9C7400D8E530 /* SelectedFiles */,
+				DED12299190E9C8100D8E530 /* MainGUI */,
 				DEEF6B1619094FA000A2CD8C /* Main.storyboard */,
 				DEEF6AF619094F8A00A2CD8C /* AppDelegate.h */,
 				DEEF6AF719094F8A00A2CD8C /* AppDelegate.m */,
 				DEEF6AF919094F8A00A2CD8C /* Images.xcassets */,
 				DEEF6AEE19094F8A00A2CD8C /* Supporting Files */,
-				DEEF6B181909553C00A2CD8C /* XYZLogInViewController.h */,
-				DEEF6B191909553C00A2CD8C /* XYZLogInViewController.m */,
 				6484A2F2190E8F160071BB23 /* ServerConnection.h */,
 				6484A2F3190E8F160071BB23 /* ServerConnection.m */,
-				DEEF6B1A1909553C00A2CD8C /* XYZLogInViewController.xib */,
-				DE403ACB190A8A3E003D21F5 /* XYZSearchViewController.h */,
-				DE403ACC190A8A3E003D21F5 /* XYZSearchViewController.m */,
 			);
 			path = InLogger;
 			sourceTree = "<group>";
