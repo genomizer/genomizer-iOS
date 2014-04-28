@@ -1,18 +1,18 @@
 //
-//  XYZInLogger.m
+//  ServerConnection.m
 //  InLogger
 //
-//  Created by Joel Viklund on 25/04/14.
-//  Copyright (c) 2014 Joel Viklund. All rights reserved.
+//  Created by Linus Öberg on 28/04/14.
+//  Copyright (c) 2014 Linus Öberg. All rights reserved.
 //
 
-#import "XYZInLogger.h"
+#import "ServerConnection.h"
 
-@implementation XYZInLogger
+@implementation ServerConnection
+NSString *token;
 
-+ (BOOL)validAccount:(NSString *)username withPassword:(NSString *)password
++ (int)login:(NSString *)username withPassword:(NSString *)password
 {
-    
     
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     [dict setValue:password forKey:@"password"];
@@ -36,22 +36,15 @@
     NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
     
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:POSTReply options:kNilOptions error:&error];
-    
-   // NSString *theReply = [[NSString alloc] initWithBytes:[POSTReply bytes] length:[POSTReply length] encoding: NSASCIIStringEncoding];
-    
-    
-  //  NSLog(@"Reply: %@", theReply); // token
-    NSLog(@"req %@", [json objectForKey:@"token"]);
+
+    token = [json objectForKey:@"token"];
+    NSLog(@"req %@", token);
     NSLog(@"req %@", dict);
     NSLog(@"Header: %ld", (long)httpResp.statusCode);
     
-    // return token instead
-    if(httpResp.statusCode == 200){
-        return true;
-    }
-    else
-        return false;
+    return httpResp.statusCode;
 }
+
 
 
 @end

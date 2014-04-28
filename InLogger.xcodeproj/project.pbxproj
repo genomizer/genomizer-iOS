@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6484A2F4190E8F160071BB23 /* ServerConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6484A2F3190E8F160071BB23 /* ServerConnection.m */; };
 		DE403ACD190A8A3E003D21F5 /* XYZSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE403ACC190A8A3E003D21F5 /* XYZSearchViewController.m */; };
 		DEEF6AE819094F8A00A2CD8C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEEF6AE719094F8A00A2CD8C /* Foundation.framework */; };
 		DEEF6AEA19094F8A00A2CD8C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEEF6AE919094F8A00A2CD8C /* CoreGraphics.framework */; };
@@ -23,7 +24,6 @@
 		DEEF6B1719094FA000A2CD8C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEEF6B1619094FA000A2CD8C /* Main.storyboard */; };
 		DEEF6B1B1909553C00A2CD8C /* XYZLogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEEF6B191909553C00A2CD8C /* XYZLogInViewController.m */; };
 		DEEF6B1C1909553C00A2CD8C /* XYZLogInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DEEF6B1A1909553C00A2CD8C /* XYZLogInViewController.xib */; };
-		DEEF7CF6190A3D23005EDB8E /* XYZInLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = DEEF7CF5190A3D23005EDB8E /* XYZInLogger.m */; };
 		DEEF7D94190A55D1005EDB8E /* XYZTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEEF7D92190A55D1005EDB8E /* XYZTabViewController.m */; };
 		DEEF7D95190A55D1005EDB8E /* XYZTabViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DEEF7D93190A55D1005EDB8E /* XYZTabViewController.xib */; };
 /* End PBXBuildFile section */
@@ -39,6 +39,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6484A2F2190E8F160071BB23 /* ServerConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerConnection.h; sourceTree = "<group>"; };
+		6484A2F3190E8F160071BB23 /* ServerConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerConnection.m; sourceTree = "<group>"; };
 		DE403ACB190A8A3E003D21F5 /* XYZSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZSearchViewController.h; sourceTree = "<group>"; };
 		DE403ACC190A8A3E003D21F5 /* XYZSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZSearchViewController.m; sourceTree = "<group>"; };
 		DEEF6AE419094F8A00A2CD8C /* InLogger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InLogger.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -61,8 +63,6 @@
 		DEEF6B181909553C00A2CD8C /* XYZLogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZLogInViewController.h; sourceTree = "<group>"; };
 		DEEF6B191909553C00A2CD8C /* XYZLogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZLogInViewController.m; sourceTree = "<group>"; };
 		DEEF6B1A1909553C00A2CD8C /* XYZLogInViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XYZLogInViewController.xib; sourceTree = "<group>"; };
-		DEEF7CF4190A3D23005EDB8E /* XYZInLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZInLogger.h; sourceTree = "<group>"; };
-		DEEF7CF5190A3D23005EDB8E /* XYZInLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZInLogger.m; sourceTree = "<group>"; };
 		DEEF7D91190A55D1005EDB8E /* XYZTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XYZTabViewController.h; path = ../XYZTabViewController.h; sourceTree = "<group>"; };
 		DEEF7D92190A55D1005EDB8E /* XYZTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XYZTabViewController.m; path = ../XYZTabViewController.m; sourceTree = "<group>"; };
 		DEEF7D93190A55D1005EDB8E /* XYZTabViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = XYZTabViewController.xib; path = ../XYZTabViewController.xib; sourceTree = "<group>"; };
@@ -129,14 +129,14 @@
 				DEEF7D92190A55D1005EDB8E /* XYZTabViewController.m */,
 				DEEF7D93190A55D1005EDB8E /* XYZTabViewController.xib */,
 				DEEF6B1619094FA000A2CD8C /* Main.storyboard */,
-				DEEF7CF4190A3D23005EDB8E /* XYZInLogger.h */,
-				DEEF7CF5190A3D23005EDB8E /* XYZInLogger.m */,
 				DEEF6AF619094F8A00A2CD8C /* AppDelegate.h */,
 				DEEF6AF719094F8A00A2CD8C /* AppDelegate.m */,
 				DEEF6AF919094F8A00A2CD8C /* Images.xcassets */,
 				DEEF6AEE19094F8A00A2CD8C /* Supporting Files */,
 				DEEF6B181909553C00A2CD8C /* XYZLogInViewController.h */,
 				DEEF6B191909553C00A2CD8C /* XYZLogInViewController.m */,
+				6484A2F2190E8F160071BB23 /* ServerConnection.h */,
+				6484A2F3190E8F160071BB23 /* ServerConnection.m */,
 				DEEF6B1A1909553C00A2CD8C /* XYZLogInViewController.xib */,
 				DE403ACB190A8A3E003D21F5 /* XYZSearchViewController.h */,
 				DE403ACC190A8A3E003D21F5 /* XYZSearchViewController.m */,
@@ -272,10 +272,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				DE403ACD190A8A3E003D21F5 /* XYZSearchViewController.m in Sources */,
+				6484A2F4190E8F160071BB23 /* ServerConnection.m in Sources */,
 				DEEF7D94190A55D1005EDB8E /* XYZTabViewController.m in Sources */,
 				DEEF6AF819094F8A00A2CD8C /* AppDelegate.m in Sources */,
 				DEEF6AF419094F8A00A2CD8C /* main.m in Sources */,
-				DEEF7CF6190A3D23005EDB8E /* XYZInLogger.m in Sources */,
 				DEEF6B1B1909553C00A2CD8C /* XYZLogInViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

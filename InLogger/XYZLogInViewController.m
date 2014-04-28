@@ -7,7 +7,7 @@
 //
 
 #import "XYZLogInViewController.h"
-#import "XYZInLogger.h"
+#import "ServerConnection.h"
 
 @interface XYZLogInViewController ()
 
@@ -21,9 +21,8 @@
 @implementation XYZLogInViewController
 
 - (void)validate {
-    if ([XYZInLogger validAccount:self.userField.text withPassword:self.passwordField.text]) {
-        //XYZHomeViewController *viewController = [[XYZHomeViewController alloc] init];
-        //[self presentViewController:asdasd animated:YES completion:nil];
+    int httpResponse = [ServerConnection login:self.userField.text withPassword:self.passwordField.text];
+    if (httpResponse == 200) {
         [self performSegueWithIdentifier:@"loginSegue" sender:self];
     } else {
         [self showMessage];
@@ -31,16 +30,18 @@
 }
 
 - (IBAction)SignInButtonTouchDOwn:(id)sender {
+    
     [self validate];
 }
 
 - (IBAction)showMessage
 {
-    UIAlertView *helloWorldAlert = [[UIAlertView alloc]
-                                    initWithTitle:@"" message:@"Wrong username or password." delegate:nil cancelButtonTitle:@"Try again" otherButtonTitles:nil];
+    UIAlertView *loginFailed = [[UIAlertView alloc]
+                                initWithTitle:@"" message:@"Wrong username or password."
+                                delegate:nil cancelButtonTitle:@"Try again"
+                                otherButtonTitles:nil];
     
-    // Display the Hello World Message
-    [helloWorldAlert show];
+    [loginFailed show];
 }
 
 
@@ -55,7 +56,6 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    //NSLog(@"%f %f", self.view.frame.origin.y, self.view.center.y);
     if(self.view.frame.origin.y < 0) {
         return;
     }
