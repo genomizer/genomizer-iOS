@@ -24,12 +24,46 @@ NSString *token;
 
     token = [json objectForKey:@"token"];
     NSLog(@"req %@", token);
-//    NSLog(@"req %@", dict);
+    NSLog(@"Header: %ld", (long)httpResp.statusCode);
+  
+    return httpResp.statusCode;
+}
+
++ (int)logout
+{
+    NSMutableURLRequest *request = [JSONBuilder getLogoutJSON:token];
+    
+    NSURLResponse *response;
+    NSData *POSTReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
+    NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
+    
+    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:POSTReply options:kNilOptions error:nil];
+    
+    token = [json objectForKey:@"token"];
+    NSLog(@"req %@", token);
     NSLog(@"Header: %ld", (long)httpResp.statusCode);
     
     return httpResp.statusCode;
 }
++ (int)search
+{
+    // fill in annotations
+    NSString *annotations=@"annotations=";
+    NSMutableURLRequest *request = [JSONBuilder getSearchJSON:annotations withToken:token];
+    NSURLResponse *response;
+    NSData *POSTReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
+    NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
+    
+    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:POSTReply options:kNilOptions error:nil];
+    
+    //token = [json objectForKey:@"token"];
+    NSLog(@"json search %@", json);
+    NSLog(@"Header: %ld", (long)httpResp.statusCode);
+    
+    return httpResp.statusCode;
 
+    
+}
 
 
 @end
