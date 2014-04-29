@@ -11,5 +11,6 @@
 @interface ServerConnection : NSObject
 
 + (int)login:(NSString *)username withPassword:(NSString *)password;
-
++ (int)logout;
++ (int)search:(NSArray *) annotations;
 @end

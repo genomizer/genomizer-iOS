@@ -11,5 +11,6 @@
 @interface JSONBuilder : NSObject
 
 +(NSMutableURLRequest*) getLoginJSON:(NSString *) username withPassword: (NSString *) password;
-
++(NSMutableURLRequest*)getLogoutJSON:(NSString *)token;
++(NSMutableURLRequest*)getSearchJSON:(NSArray *)annotations withToken:(NSString *)token;
 @end
