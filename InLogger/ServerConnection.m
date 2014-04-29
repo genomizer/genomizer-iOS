@@ -39,7 +39,7 @@ NSString *token;
     
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:POSTReply options:kNilOptions error:nil];
     
-    token = [json objectForKey:@"token"];
+  //  token = [json objectForKey:@"token"];
     NSLog(@"req %@", token);
     NSLog(@"Header: %ld", (long)httpResp.statusCode);
     

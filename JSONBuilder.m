@@ -49,13 +49,13 @@
     NSString *adress = @"http://genomizer.apiary-mock.com/search/";
     NSString *completeAdress = [adress stringByAppendingString:annotations];
 
-    NSLog(@"adress %@", completeAdress);
+    NSLog(@"token %@", token);
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:completeAdress]];
     [request setHTTPMethod:@"GET"];
-    [request setValue:0 forHTTPHeaderField:@"Content-Length"];
+    [request setValue:@"0" forHTTPHeaderField:@"Content-Length"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [request addValue:0 forHTTPHeaderField:@"Authorization"];
+    [request setValue:token  forHTTPHeaderField:@"Authorization"];
     return request;
     
 
