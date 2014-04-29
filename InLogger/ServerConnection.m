@@ -15,7 +15,7 @@ NSString *token;
 
 + (int)login:(NSString *)username withPassword:(NSString *)password
 {
-    NSMutableURLRequest *request = [JSONBuilder getLoginJSON:username withPassword:password toURL:[self getServerURL]];
+    NSMutableURLRequest *request = [JSONBuilder getLoginJSON:username withPassword:password];
     NSURLResponse *response;
     NSData *POSTReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
     NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
@@ -45,6 +45,7 @@ NSString *token;
     
     return httpResp.statusCode;
 }
+/*
 + (int)search
 {
     // fill in annotations
@@ -61,10 +62,11 @@ NSString *token;
     NSLog(@"Header: %ld", (long)httpResp.statusCode);
     
     return httpResp.statusCode;
-
+*/
+ 
 +(int)search:(NSArray*)annotations
 {
-    NSMutableURLRequest *request = [JSONBuilder getSearchJSON:annotations toURL:[self getServerURL] withAuthorization: token];
+    NSMutableURLRequest *request = [JSONBuilder getSearchJSON:annotations withToken: token];
     NSURLResponse *response;
     NSData *POSTReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
     NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
@@ -80,13 +82,6 @@ NSString *token;
     
     return httpResp.statusCode;
 }
-
-
-+ (NSString*) getServerURL
-{
-    return @"http://genomizer.apiary-mock.com";
-}
-
 
 
 @end
