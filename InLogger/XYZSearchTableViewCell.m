@@ -23,10 +23,26 @@
 
     // Configure the view for the selected state
 }
+- (IBAction)inputFieldValueChanged:(id)sender {
+    if(self.inputField.text.length == 0) {
+        self.switchButton.on = false;
+        self.switchButton.enabled = false;
+    } else {
+        if(!self.switchButton.enabled) {
+            self.switchButton.on = true;
+        }
+        self.switchButton.enabled = true;
+    }
+}
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [self.superview endEditing:YES];
     [super touchesBegan:touches withEvent:event];
+    
 }
+
+
+
+
 
 @end

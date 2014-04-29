@@ -10,4 +10,6 @@
 
 @interface XYZSearchResultTableViewCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UITextView *textField;
+
 @end
