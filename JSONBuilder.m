@@ -38,12 +38,8 @@
 +(NSMutableURLRequest*)getLogoutJSON:(NSString *)token
 {
    
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    NSMutableURLRequest *request = [self basicRequest:@"DELETE" withToken:token];
     [request setURL:[NSURL URLWithString:[[self getServerURL] stringByAppendingString:@"/login"]]];
-    [request setHTTPMethod:@"DELETE"];
-    [request setValue:0 forHTTPHeaderField:@"Content-Length"];
-    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [request addValue:token forHTTPHeaderField:@"Authorization"];
     return request;
 }
 
@@ -51,9 +47,21 @@
 +(NSMutableURLRequest*) getSearchJSON:(NSArray*) annotations withToken:(NSString *) token
 {
     NSString *annotationString = @"/search/annotations=?";
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    NSMutableURLRequest *request =  [self basicRequest:@"GET" withToken:token];
     [request setURL:[NSURL URLWithString: [[self getServerURL] stringByAppendingString:annotationString]]];
-    [request setHTTPMethod:@"GET"];
+    return request;
+}
+
++(NSMutableURLRequest*)getConversionJSON:(NSString*)fileID withToken:(NSString *)token{
+    NSString *conversionString = [@"/process/rawtoprofile/" stringByAppendingString:fileID];
+    NSMutableURLRequest *request = [self basicRequest:@"PUT" withToken:token];
+    [request setURL:[NSURL URLWithString: [[self getServerURL] stringByAppendingString:conversionString]]];
+    return request;
+}
+
++ (NSMutableURLRequest*) basicRequest:(NSString*) requestType withToken:(NSString*) token{
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setHTTPMethod:requestType];
     [request setValue:0 forHTTPHeaderField:@"Content-Length"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [request setValue:token forHTTPHeaderField:@"Authorization"];
