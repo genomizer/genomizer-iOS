@@ -10,7 +10,6 @@
 
 @interface XYZSearchMother : NSObject
 
-- (void) setVisibility: (BOOL) visibility forAnnotation: (NSString*) annotation;
-- (NSString*) getDescription: NSString;
-
+- (void) setAnnotationVisibilityFor: (NSString *) annotation withVisiblity: (BOOL) visibility;
+- (NSString*) getDescriptionOfChildAt: NSInteger;
 @end

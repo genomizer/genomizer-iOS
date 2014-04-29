@@ -25,7 +25,7 @@
     if (httpResponse == 200) {
         [ServerConnection logout];
      //   NSString *annotations=@"annotations=?<annotation1>&<annotation2>";
- 
+        
         [self performSegueWithIdentifier:@"loginSegue" sender:self];
     } else {
         [self showMessage];
