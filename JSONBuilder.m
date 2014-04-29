@@ -22,7 +22,7 @@
     
     NSError *error = nil;
     NSData *postData = [NSJSONSerialization dataWithJSONObject:dict
-                                                       options:NSJSONWritingPrettyPrinted // Pass 0 if you don't care about the readability of the generated string
+                                                       options:NSJSONWritingPrettyPrinted 
                                                          error:&error];
     
     NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
@@ -47,24 +47,6 @@
     return request;
 }
 
-/*
-+(NSMutableURLRequest*)getSearchJSON:(NSString *)annotations withToken:(NSString *)token
-{
-    NSString *adress = @"http://genomizer.apiary-mock.com/search/";
-    NSString *completeAdress = [adress stringByAppendingString:annotations];
-
-    NSLog(@"token %@", token);
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setURL:[NSURL URLWithString:completeAdress]];
-    [request setHTTPMethod:@"GET"];
-    [request setValue:@"0" forHTTPHeaderField:@"Content-Length"];
-    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [request setValue:@"Basic efsdghjk3545687988"  forHTTPHeaderField:@"Authorization"];
-    return request;
-    
-
-}
-*/
 
 +(NSMutableURLRequest*) getSearchJSON:(NSArray*) annotations withToken:(NSString *) token
 {

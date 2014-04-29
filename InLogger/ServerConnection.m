@@ -45,24 +45,7 @@ NSString *token;
     
     return httpResp.statusCode;
 }
-/*
-+ (int)search
-{
-    // fill in annotations
-    NSString *annotations=@"annotations=";
-    NSMutableURLRequest *request = [JSONBuilder getSearchJSON:annotations withToken:token];
-    NSURLResponse *response;
-    NSData *POSTReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
-    NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
-    
-    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:POSTReply options:kNilOptions error:nil];
-    
-    //[json objectForKey:@"URL"]
-    NSLog(@"json search %@", json);
-    NSLog(@"Header: %ld", (long)httpResp.statusCode);
-    
-    return httpResp.statusCode;
-*/
+
  
 +(int)search:(NSArray*)annotations
 {
