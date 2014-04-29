@@ -12,6 +12,8 @@
 
 - (void)awakeFromNib
 {
+    //self.inputField.delegate = self;
+
     // Initialization code
 }
 
@@ -22,28 +24,9 @@
     // Configure the view for the selected state
 }
 
-
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    [self.inputField resignFirstResponder];
-    //[self.view endEditing:YES];
-    //[self centerFrameView];
-    //[super touchesBegan:touches withEvent:event];
+    [self.superview endEditing:YES];
+    [super touchesBegan:touches withEvent:event];
 }
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [self.inputField resignFirstResponder];
-    NSLog(@"ASDASD");
-
-    /*
-     if(textField == self.userField) {
-     [self.passwordField becomeFirstResponder];
-     } else if(textField == self.passwordField) {
-     [self.passwordField resignFirstResponder];
-     [self centerFrameView];
-     [self validate];
-     }*/
-    return NO;
-}
-
 
 @end

@@ -47,7 +47,7 @@ NSString *token;
 }
 
  
-+(int)search:(NSArray*)annotations
++(NSDictionary*)search:(NSArray*)annotations
 {
     NSMutableURLRequest *request = [JSONBuilder getSearchJSON:annotations withToken: token];
     NSURLResponse *response;
@@ -56,14 +56,14 @@ NSString *token;
     
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:POSTReply options:kNilOptions error:nil];
     
-    //    NSLog(@"req %@", dict);
+
     NSLog(@"Header: %ld", (long)httpResp.statusCode);
     for (NSString *b in json){
         NSLog(@"Body: %@", b);
         
     }
     
-    return httpResp.statusCode;
+    return json;
 }
 
 
