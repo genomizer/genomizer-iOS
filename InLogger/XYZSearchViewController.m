@@ -14,7 +14,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property NSMutableArray *searchFields;
-@property NSMutableArray *stringArray;
+@property NSMutableDictionary *searchValues;
 
 @end
 
@@ -25,12 +25,8 @@
     [super viewDidLoad];
     self.searchFields = [self createSearchFields ];
     [self.tableView reloadData];
-NSMutableArray *stringArray = [[NSMutableArray alloc] init];
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    self.searchValues = [NSMutableDictionary dictionary];
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (NSMutableArray *) createSearchFields
@@ -64,16 +60,14 @@ NSMutableArray *stringArray = [[NSMutableArray alloc] init];
     XYZSearchTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     NSString *annotation = [self.searchFields objectAtIndex:indexPath.row];
     cell.inputField.placeholder = annotation;
-    cell.switchButton.enabled = false;
+    cell.switchButton.enabled = true;
     cell.switchButton.on = false;
     cell.inputField.delegate = self;
-    [_stringArray addObject:cell.inputField.placeholder];
-      NSLog(@"req %@", [self.stringArray objectAtIndex:1]);
     return cell;
 }
 - (IBAction)searchButton:(id)sender {
-
- //   NSLog(@"req %@",  );
+ NSLog(@"text %@", self.searchValues);
+      [self performSegueWithIdentifier:@"searchResult" sender:self];
   
 }
 
@@ -89,6 +83,18 @@ NSMutableArray *stringArray = [[NSMutableArray alloc] init];
 
     return NO;
 }
+
+- (void) textFieldDidEndEditing:(UITextField *)textField {
+    if(textField.text.length > 0){
+    [self.searchValues setObject:textField.text forKey:textField.placeholder];
+    }
+    else {
+        [self.searchValues removeObjectForKey:textField.placeholder];
+    }
+    
+    
+}
+
 
 - (IBAction)touchUpInsideSwitch:(id)sender {
     [self.view endEditing:YES];
