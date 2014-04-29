@@ -21,7 +21,8 @@
     [super viewDidLoad];
     NSArray* annotations;
     NSDictionary * allResults= [ServerConnection search:annotations];
-    
+ //   self.searchFields = [self createSearchFields ];
+  //  [self.tableView reloadData];
     
 }
 
@@ -30,19 +31,21 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+- (NSMutableArray *) createSearchFields
+{
+    return [NSMutableArray arrayWithObjects:@"Experiment ID", @"Publication ID" , nil];
+}
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
     return 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
+
     // Return the number of rows in the section.
     return 0;
 }
