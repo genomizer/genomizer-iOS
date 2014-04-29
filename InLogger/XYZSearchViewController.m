@@ -11,21 +11,13 @@
 
 @interface XYZSearchViewController ()
 
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+
 @property NSMutableArray *searchFields;
 
 @end
 
 @implementation XYZSearchViewController
-
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-       // self.searchFields = [self initialSearchFields]
-       // [self loadInitialData];
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
@@ -42,7 +34,7 @@
 
 - (NSMutableArray *) createSearchFields
 {
-    return [NSMutableArray arrayWithObjects:@"Experiment ID", @"Publication ID" , @"Type of data", @"Species", @"Genom release", @"Cell-line", @"Developmental stage", @"Sex", @"Tissue", @"Processing", @"Asd", nil];;
+    return [NSMutableArray arrayWithObjects:@"Experiment ID", @"Publication ID" , @"Type of data", @"Species", @"Genom release", @"Cell-line", @"Developmental stage", @"Sex", @"Tissue", @"Processing", @"Asd", nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -73,29 +65,27 @@
     cell.inputField.placeholder = annotation;
     cell.switchButton.enabled = false;
     cell.switchButton.on = false;
+    cell.inputField.delegate = self;
     return cell;
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    [self.view endEditing:YES];
+    //[self.view endEditing:YES];
     //[self centerFrameView];
+    NSLog(@"ASDASDASD");
+
     [super touchesBegan:touches withEvent:event];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [self.view endEditing:YES];
-    NSLog(@"ASD");
-/*
-    if(textField == self.userField) {
-        [self.passwordField becomeFirstResponder];
-    } else if(textField == self.passwordField) {
-        [self.passwordField resignFirstResponder];
-        [self centerFrameView];
-        [self validate];
-    }*/
+
     return NO;
 }
 
+- (IBAction)touchUpInsideSwitch:(id)sender {
+    [self.view endEditing:YES];
+}
 
 /*
 // Override to support conditional editing of the table view.
