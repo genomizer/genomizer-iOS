@@ -14,4 +14,6 @@
 
 - (NSString*) getDescriptionOfChildAt: NSInteger;
 
+- (XYZSearchMother*) init:(NSDictionary*) incomingData;
+
 @end

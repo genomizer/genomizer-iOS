@@ -54,15 +54,15 @@ NSString *token;
     NSData *POSTReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
     NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
     
-    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:POSTReply options:kNilOptions error:nil];
     
+    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:POSTReply options:kNilOptions error:nil];
+    NSMutableArray *arrayOfResults = [[NSMutableArray alloc] init];
 
     NSLog(@"Header: %ld", (long)httpResp.statusCode);
     for (NSString *b in json){
-        NSLog(@"Body: %@", b);
-        
+        [arrayOfResults addObject:b];
     }
-    
+
     return json;
 }
 

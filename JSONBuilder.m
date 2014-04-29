@@ -8,10 +8,7 @@
 
 #import "JSONBuilder.h"
 
-
-
 @implementation JSONBuilder
-
 
 +(NSMutableURLRequest*)getLoginJSON:(NSString *)username withPassword:(NSString *)password
 {
@@ -19,7 +16,6 @@
     [dict setValue:password forKey:@"password"];
     [dict setValue:username forKey:@"username"];
    
-    
     NSError *error = nil;
     NSData *postData = [NSJSONSerialization dataWithJSONObject:dict
                                                        options:NSJSONWritingPrettyPrinted
@@ -43,7 +39,6 @@
     return request;
 }
 
-
 +(NSMutableURLRequest*) getSearchJSON:(NSArray*) annotations withToken:(NSString *) token
 {
     NSString *annotationString = @"/search/annotations=?";
@@ -52,14 +47,16 @@
     return request;
 }
 
-+(NSMutableURLRequest*)getConversionJSON:(NSString*)fileID withToken:(NSString *)token{
++(NSMutableURLRequest*)getConversionJSON:(NSString*)fileID withToken:(NSString *)token
+{
     NSString *conversionString = [@"/process/rawtoprofile/" stringByAppendingString:fileID];
     NSMutableURLRequest *request = [self basicRequest:@"PUT" withToken:token];
     [request setURL:[NSURL URLWithString: [[self getServerURL] stringByAppendingString:conversionString]]];
     return request;
 }
 
-+ (NSMutableURLRequest*) basicRequest:(NSString*) requestType withToken:(NSString*) token{
++ (NSMutableURLRequest*) basicRequest:(NSString*) requestType withToken:(NSString*) token
+{
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setHTTPMethod:requestType];
     [request setValue:0 forHTTPHeaderField:@"Content-Length"];
@@ -70,7 +67,7 @@
                                   
 + (NSString*) getServerURL
 {
-        return @"http://genomizer.apiary-mock.com";
+    return @"http://genomizer.apiary-mock.com";
 }
 
 @end
