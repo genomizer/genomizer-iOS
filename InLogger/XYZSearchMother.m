@@ -17,4 +17,23 @@
 
 @implementation XYZSearchMother
 
+- (XYZSearchMother*) init:(NSDictionary*) incomingData{
+    self = [super init];
+    [incomingData enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        NSString *country = key;
+        NSString *beer = obj;
+        NSLog(@"%@ is %@",country,beer);
+    }];
+    
+    return self;
+}
+
+- (void) setAnnotationVisibility: (NSString*)annotation withVisibility:(bool) visibility{
+    
+}
+
+- (NSString*) getDescriptionOfChildAt: NSInteger{
+    return [NSString alloc];
+}
+
 @end

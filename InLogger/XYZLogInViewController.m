@@ -8,6 +8,7 @@
 
 #import "XYZLogInViewController.h"
 #import "ServerConnection.h"
+#import "XYZSearchMother.h"
 
 @interface XYZLogInViewController ()
 
@@ -30,6 +31,9 @@
     } else {
         [self showMessage];
     }
+    
+    NSDictionary *ns = [ServerConnection search:nil];
+  //  XYZSearchMother *s = [[XYZSearchMother alloc] init:ns];
 }
 
 - (IBAction)SignInButtonTouchDOwn:(id)sender {
