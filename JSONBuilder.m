@@ -8,7 +8,10 @@
 
 #import "JSONBuilder.h"
 
+
+
 @implementation JSONBuilder
+
 
 +(NSMutableURLRequest*)getLoginJSON:(NSString *)username withPassword:(NSString *)password
 {
@@ -24,7 +27,7 @@
     
     NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setURL:[NSURL URLWithString:@"http://genomizer.apiary-mock.com/login"]];
+    [request setURL:[NSURL URLWithString:[[self getServerURL] stringByAppendingString:@"/login"]]];
     [request setHTTPMethod:@"POST"];
     [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -36,7 +39,7 @@
 {
    
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setURL:[NSURL URLWithString:@"http://genomizer.apiary-mock.com/login"]];
+    [request setURL:[NSURL URLWithString:[[self getServerURL] stringByAppendingString:@"/login"]]];
     [request setHTTPMethod:@"DELETE"];
     [request setValue:0 forHTTPHeaderField:@"Content-Length"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -44,6 +47,7 @@
     return request;
 }
 
+/*
 +(NSMutableURLRequest*)getSearchJSON:(NSString *)annotations withToken:(NSString *)token
 {
     NSString *adress = @"http://genomizer.apiary-mock.com/search/";
@@ -60,4 +64,23 @@
     
 
 }
+*/
+
++(NSMutableURLRequest*) getSearchJSON:(NSArray*) annotations withToken:(NSString *) token
+{
+    NSString *annotationString = @"/search/annotations=?";
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString: [[self getServerURL] stringByAppendingString:annotationString]]];
+    [request setHTTPMethod:@"GET"];
+    [request setValue:0 forHTTPHeaderField:@"Content-Length"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:token forHTTPHeaderField:@"Authorization"];
+    return request;
+}
+                                  
++ (NSString*) getServerURL
+{
+        return @"http://genomizer.apiary-mock.com";
+}
+
 @end

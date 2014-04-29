@@ -45,6 +45,7 @@ NSString *token;
     
     return httpResp.statusCode;
 }
+/*
 + (int)search
 {
     // fill in annotations
@@ -61,8 +62,25 @@ NSString *token;
     NSLog(@"Header: %ld", (long)httpResp.statusCode);
     
     return httpResp.statusCode;
-
+*/
+ 
++(int)search:(NSArray*)annotations
+{
+    NSMutableURLRequest *request = [JSONBuilder getSearchJSON:annotations withToken: token];
+    NSURLResponse *response;
+    NSData *POSTReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
+    NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
     
+    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:POSTReply options:kNilOptions error:nil];
+    
+    //    NSLog(@"req %@", dict);
+    NSLog(@"Header: %ld", (long)httpResp.statusCode);
+    for (NSString *b in json){
+        NSLog(@"Body: %@", b);
+        
+    }
+    
+    return httpResp.statusCode;
 }
 
 
