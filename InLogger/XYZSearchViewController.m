@@ -13,6 +13,7 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
+@property NSMutableArray *selectedFields;
 @property NSMutableArray *searchFields;
 @property NSMutableDictionary *searchValues;
 
@@ -26,6 +27,7 @@
     self.searchFields = [self createSearchFields ];
     [self.tableView reloadData];
     self.searchValues = [NSMutableDictionary dictionary];
+    self.selectedFields = [[NSMutableArray alloc] init];
     
 }
 
@@ -61,7 +63,7 @@
     NSString *annotation = [self.searchFields objectAtIndex:indexPath.row];
     cell.inputField.placeholder = annotation;
     cell.inputField.tag = indexPath.row;
-    cell.switchButton.enabled = true;
+    cell.switchButton.enabled = false;
     cell.switchButton.on = false;
     cell.switchButton.tag = indexPath.row;
     [cell.switchButton addTarget:self action:@selector(switched:) forControlEvents:UIControlEventValueChanged];
@@ -82,10 +84,17 @@
     [super touchesBegan:touches withEvent:event];
 }
 
+
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [self.view endEditing:YES];
 
     return NO;
+}
+
+- (void) textFieldDidBeginEditing:(UITextField *)textField {
+   // XYZSearchTableViewCell *cell = [_tableView cellForRowAtIndexPath:0];
+  //  cell.switchButton.on=true;
 }
 
 - (void) textFieldDidEndEditing:(UITextField *)textField {
@@ -96,11 +105,15 @@
     else {
         [self.searchValues removeObjectForKey:textField.placeholder];
     }
+    XYZSearchTableViewCell *cell = [_tableView cellForRowAtIndexPath:0];
+    
 }
 - (void) switched: (id) sender {
-    UISwitch * switchy = (UISwitch *) sender;
-    if(switchy.on) {
-        NSLog(@"text %ld", (long)switchy);
+    UISwitch * currentSwitch = (UISwitch *) sender;
+    NSString *placeholder = [self.searchFields objectAtIndex:currentSwitch.tag];
+    if(currentSwitch.on && ![self.selectedFields containsObject:placeholder]) {
+        [self.selectedFields addObject:placeholder];
+        NSLog(@"text %@", self.selectedFields);
     }
 }
 
