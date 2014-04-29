@@ -58,10 +58,12 @@ NSString *token;
     //recieve answer
     NSData *POSTReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
     NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
-    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:POSTReply options:kNilOptions error:nil];
+    NSArray *arr = [NSJSONSerialization JSONObjectWithData:POSTReply options:kNilOptions error:nil];
+    NSDictionary *json = [arr objectAtIndex:0];
+    for (NSString *a in [json allKeys]) {
 
-    NSLog(@"%d", [json count]);
-   
+        NSLog(@"Key : %@ Object: %@", a, [json objectForKey:a]);
+    }
     //TODO: Create experiments from data
     
     return nil;
