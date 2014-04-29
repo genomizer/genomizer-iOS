@@ -40,7 +40,7 @@ NSString *token;
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:POSTReply options:kNilOptions error:nil];
     
   //  token = [json objectForKey:@"token"];
-    NSLog(@"req %@", token);
+    NSLog(@"req %@", json);
     NSLog(@"Header: %ld", (long)httpResp.statusCode);
     
     return httpResp.statusCode;
@@ -54,14 +54,17 @@ NSString *token;
     NSData *POSTReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
     NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
     
+  //  NSDictionary *res = [NSJSONSerialization JSONObjectWithData:POSTReply options: NSJSONReadingMutableContainers error:nil];
     
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:POSTReply options:kNilOptions error:nil];
-    NSMutableArray *arrayOfResults = [[NSMutableArray alloc] init];
+    NSDictionary *arrayOfResults = [[NSMutableArray alloc] init];
 
-    NSLog(@"Header: %ld", (long)httpResp.statusCode);
-    for (NSString *b in json){
-        [arrayOfResults addObject:b];
-    }
+    NSLog(@"search head: %ld", (long)httpResp.statusCode);
+     NSLog(@"search json %@", response);
+  //  NSLog(@"search res %@", res);
+    
+    NSLog(@"search json %@", json);
+
 
     return json;
 }

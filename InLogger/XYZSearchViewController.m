@@ -8,6 +8,7 @@
 
 #import "XYZSearchViewController.h"
 #import "XYZSearchTableViewCell.h"
+#import "ServerConnection.h"
 
 @interface XYZSearchViewController ()
 
@@ -71,8 +72,9 @@
     return cell;
 }
 - (IBAction)searchButton:(id)sender {
-    
+   [ServerConnection search:nil];
  NSLog(@"text %@", self.searchValues);
+    
       [self performSegueWithIdentifier:@"searchResult" sender:self];
   
 }
