@@ -38,12 +38,8 @@
 +(NSMutableURLRequest*)getLogoutJSON:(NSString *)token
 {
    
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    NSMutableURLRequest *request = [self basicRequest:@"DELETE" withToken:token];
     [request setURL:[NSURL URLWithString:[[self getServerURL] stringByAppendingString:@"/login"]]];
-    [request setHTTPMethod:@"DELETE"];
-    [request setValue:0 forHTTPHeaderField:@"Content-Length"];
-    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [request addValue:token forHTTPHeaderField:@"Authorization"];
     return request;
 }
 
