@@ -98,14 +98,13 @@
 }
 
 - (void) textFieldDidEndEditing:(UITextField *)textField {
-    if(textField.text.length > 0){
+       if(textField.text.length > 0){
         [self.searchValues setObject:textField.text forKey:textField.placeholder];
-        
     }
     else {
         [self.searchValues removeObjectForKey:textField.placeholder];
     }
-    XYZSearchTableViewCell *cell = [_tableView cellForRowAtIndexPath:0];
+    
     
 }
 - (void) switched: (id) sender {
