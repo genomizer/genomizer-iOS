@@ -31,6 +31,11 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+- (NSMutableArray *) createSearchFields
+{
+    return [NSMutableArray arrayWithObjects:@"Experiment ID", @"Publication ID" , nil];
+}
+#pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {

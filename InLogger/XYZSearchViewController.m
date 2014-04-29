@@ -60,7 +60,7 @@
     XYZSearchTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     NSString *annotation = [self.searchFields objectAtIndex:indexPath.row];
     cell.inputField.placeholder = annotation;
-    cell.switchButton.enabled = true;
+    cell.switchButton.enabled = false;
     cell.switchButton.on = false;
     cell.inputField.delegate = self;
     return cell;
