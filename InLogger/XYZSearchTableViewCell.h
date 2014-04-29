@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface XYZSearchTableViewCell : UITableViewCell <UITextFieldDelegate>
+@interface XYZSearchTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UITextField *inputField;
 @property (weak, nonatomic) IBOutlet UISwitch *switchButton;

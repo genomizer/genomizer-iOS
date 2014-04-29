@@ -10,6 +10,7 @@
 		6484A2F4190E8F160071BB23 /* ServerConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6484A2F3190E8F160071BB23 /* ServerConnection.m */; };
 		76E2DA9F190E96C90048069D /* JSONBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 76E2DA9E190E96C90048069D /* JSONBuilder.m */; };
 		DE403ACD190A8A3E003D21F5 /* XYZSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE403ACC190A8A3E003D21F5 /* XYZSearchViewController.m */; };
+		DE821D18190F982F00EEAFE3 /* XYZSearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = DE821D17190F982F00EEAFE3 /* XYZSearchResult.m */; };
 		DED1228D190E966200D8E530 /* XYZInLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = DED12280190E966200D8E530 /* XYZInLogger.m */; };
 		DED1228E190E966200D8E530 /* XYZSearchResultTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DED12282190E966200D8E530 /* XYZSearchResultTableViewCell.m */; };
 		DED1228F190E966200D8E530 /* XYZSearchResultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DED12283190E966200D8E530 /* XYZSearchResultTableViewCell.xib */; };
@@ -55,6 +56,8 @@
 		76E2DA9E190E96C90048069D /* JSONBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSONBuilder.m; path = ../JSONBuilder.m; sourceTree = "<group>"; };
 		DE403ACB190A8A3E003D21F5 /* XYZSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZSearchViewController.h; sourceTree = "<group>"; };
 		DE403ACC190A8A3E003D21F5 /* XYZSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZSearchViewController.m; sourceTree = "<group>"; };
+		DE821D16190F982F00EEAFE3 /* XYZSearchResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZSearchResult.h; sourceTree = "<group>"; };
+		DE821D17190F982F00EEAFE3 /* XYZSearchResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZSearchResult.m; sourceTree = "<group>"; };
 		DED1227F190E966200D8E530 /* XYZInLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZInLogger.h; sourceTree = "<group>"; };
 		DED12280190E966200D8E530 /* XYZInLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZInLogger.m; sourceTree = "<group>"; };
 		DED12281190E966200D8E530 /* XYZSearchResultTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZSearchResultTableViewCell.h; sourceTree = "<group>"; };
@@ -127,6 +130,8 @@
 				DED12284190E966200D8E530 /* XYZSearchResultTableViewController.h */,
 				DED12285190E966200D8E530 /* XYZSearchResultTableViewController.m */,
 				DED12286190E966200D8E530 /* XYZSearchResultTableViewController.xib */,
+				DE821D16190F982F00EEAFE3 /* XYZSearchResult.h */,
+				DE821D17190F982F00EEAFE3 /* XYZSearchResult.m */,
 			);
 			name = SearchResult;
 			sourceTree = "<group>";
@@ -367,6 +372,7 @@
 				DED1228E190E966200D8E530 /* XYZSearchResultTableViewCell.m in Sources */,
 				DED12294190E966200D8E530 /* XYZSelectedFilesViewController.m in Sources */,
 				DEEF6AF419094F8A00A2CD8C /* main.m in Sources */,
+				DE821D18190F982F00EEAFE3 /* XYZSearchResult.m in Sources */,
 				DEEF6B1B1909553C00A2CD8C /* XYZLogInViewController.m in Sources */,
 				DED1228D190E966200D8E530 /* XYZInLogger.m in Sources */,
 			);
