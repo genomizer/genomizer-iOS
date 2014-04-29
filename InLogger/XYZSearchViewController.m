@@ -60,12 +60,16 @@
     XYZSearchTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     NSString *annotation = [self.searchFields objectAtIndex:indexPath.row];
     cell.inputField.placeholder = annotation;
+    cell.inputField.tag = indexPath.row;
     cell.switchButton.enabled = true;
     cell.switchButton.on = false;
+    cell.switchButton.tag = indexPath.row;
+    [cell.switchButton addTarget:self action:@selector(switched:) forControlEvents:UIControlEventValueChanged];
     cell.inputField.delegate = self;
     return cell;
 }
 - (IBAction)searchButton:(id)sender {
+    
  NSLog(@"text %@", self.searchValues);
       [self performSegueWithIdentifier:@"searchResult" sender:self];
   
@@ -86,15 +90,19 @@
 
 - (void) textFieldDidEndEditing:(UITextField *)textField {
     if(textField.text.length > 0){
-    [self.searchValues setObject:textField.text forKey:textField.placeholder];
+        [self.searchValues setObject:textField.text forKey:textField.placeholder];
+        
     }
     else {
         [self.searchValues removeObjectForKey:textField.placeholder];
     }
-    
-    
 }
-
+- (void) switched: (id) sender {
+    UISwitch * switchy = (UISwitch *) sender;
+    if(switchy.on) {
+        NSLog(@"text %ld", (long)switchy);
+    }
+}
 
 - (IBAction)touchUpInsideSwitch:(id)sender {
     [self.view endEditing:YES];
