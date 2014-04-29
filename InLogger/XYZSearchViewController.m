@@ -13,6 +13,7 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
+@property NSMutableArray *selectedFields;
 @property NSMutableArray *searchFields;
 @property NSMutableDictionary *searchValues;
 
@@ -26,6 +27,7 @@
     self.searchFields = [self createSearchFields ];
     [self.tableView reloadData];
     self.searchValues = [NSMutableDictionary dictionary];
+    self.selectedFields = [[NSMutableArray alloc] init];
     
 }
 
@@ -61,12 +63,16 @@
     XYZSearchTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     NSString *annotation = [self.searchFields objectAtIndex:indexPath.row];
     cell.inputField.placeholder = annotation;
+    cell.inputField.tag = indexPath.row;
     cell.switchButton.enabled = false;
     cell.switchButton.on = false;
+    cell.switchButton.tag = indexPath.row;
+    [cell.switchButton addTarget:self action:@selector(switched:) forControlEvents:UIControlEventValueChanged];
     cell.inputField.delegate = self;
     return cell;
 }
 - (IBAction)searchButton:(id)sender {
+    
  NSLog(@"text %@", self.searchValues);
       [self performSegueWithIdentifier:@"searchResult" sender:self];
 }
@@ -75,23 +81,38 @@
     [super touchesBegan:touches withEvent:event];
 }
 
+
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [self.view endEditing:YES];
 
     return NO;
 }
 
+- (void) textFieldDidBeginEditing:(UITextField *)textField {
+   // XYZSearchTableViewCell *cell = [_tableView cellForRowAtIndexPath:0];
+  //  cell.switchButton.on=true;
+}
+
 - (void) textFieldDidEndEditing:(UITextField *)textField {
     if(textField.text.length > 0){
-    [self.searchValues setObject:textField.text forKey:textField.placeholder];
+        [self.searchValues setObject:textField.text forKey:textField.placeholder];
+        
     }
     else {
         [self.searchValues removeObjectForKey:textField.placeholder];
     }
-    
+    XYZSearchTableViewCell *cell = [_tableView cellForRowAtIndexPath:0];
     
 }
-
+- (void) switched: (id) sender {
+    UISwitch * currentSwitch = (UISwitch *) sender;
+    NSString *placeholder = [self.searchFields objectAtIndex:currentSwitch.tag];
+    if(currentSwitch.on && ![self.selectedFields containsObject:placeholder]) {
+        [self.selectedFields addObject:placeholder];
+        NSLog(@"text %@", self.selectedFields);
+    }
+}
 
 - (IBAction)touchUpInsideSwitch:(id)sender {
     [self.view endEditing:YES];

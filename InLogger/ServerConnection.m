@@ -8,6 +8,7 @@
 
 #import "ServerConnection.h"
 #import "JSONBuilder.h"
+#import "XYZExperiment.h"
 
 
 @implementation ServerConnection
@@ -49,21 +50,21 @@ NSString *token;
  
 +(NSDictionary*)search:(NSArray*)annotations
 {
+    //create send request
     NSMutableURLRequest *request = [JSONBuilder getSearchJSON:annotations withToken: token];
     NSURLResponse *response;
+    NSError *rr;
+    
+    //recieve answer
     NSData *POSTReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
     NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
-    
-    
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:POSTReply options:kNilOptions error:nil];
-    NSMutableArray *arrayOfResults = [[NSMutableArray alloc] init];
 
-    NSLog(@"Header: %ld", (long)httpResp.statusCode);
-    for (NSString *b in json){
-        [arrayOfResults addObject:b];
-    }
-
-    return json;
+    NSLog(@"%d", [json count]);
+   
+    //TODO: Create experiments from data
+    
+    return nil;
 }
 
 
