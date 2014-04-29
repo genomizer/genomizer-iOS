@@ -55,7 +55,7 @@
     [request setHTTPMethod:@"GET"];
     [request setValue:@"0" forHTTPHeaderField:@"Content-Length"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [request setValue:token  forHTTPHeaderField:@"Authorization"];
+    [request setValue:@"Basic efsdghjk3545687988"  forHTTPHeaderField:@"Authorization"];
     return request;
     
 

@@ -56,7 +56,7 @@ NSString *token;
     
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:POSTReply options:kNilOptions error:nil];
     
-    //token = [json objectForKey:@"token"];
+    //[json objectForKey:@"URL"]
     NSLog(@"json search %@", json);
     NSLog(@"Header: %ld", (long)httpResp.statusCode);
     
