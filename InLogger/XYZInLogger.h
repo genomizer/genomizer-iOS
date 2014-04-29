@@ -10,6 +10,6 @@
 
 @interface XYZInLogger : NSObject
 
-+ (BOOL)validAccount:(NSString *)username withPassword:(NSString *)password;
++ (int)login:(NSString *)username withPassword:(NSString *)password;
 
 @end

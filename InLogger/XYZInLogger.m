@@ -9,8 +9,8 @@
 #import "XYZInLogger.h"
 
 @implementation XYZInLogger
-
-+ (BOOL)validAccount:(NSString *)username withPassword:(NSString *)password
+id token;
++ (int)login:(NSString *)username withPassword:(NSString *)password
 {
     
     
@@ -37,21 +37,16 @@
     
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:POSTReply options:kNilOptions error:&error];
     
-   // NSString *theReply = [[NSString alloc] initWithBytes:[POSTReply bytes] length:[POSTReply length] encoding: NSASCIIStringEncoding];
-    
-    
-  //  NSLog(@"Reply: %@", theReply); // token
+
+    token = [json objectForKey:@"token"];
     NSLog(@"req %@", [json objectForKey:@"token"]);
     NSLog(@"req %@", dict);
     NSLog(@"Header: %ld", (long)httpResp.statusCode);
     
-    // return token instead
-    if(httpResp.statusCode == 200){
-        return true;
-    }
-    else
-        return false;
+    return httpResp.statusCode;
+
 }
+
 
 
 @end

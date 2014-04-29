@@ -23,6 +23,9 @@
 - (void)validate {
     int httpResponse = [ServerConnection login:self.userField.text withPassword:self.passwordField.text];
     if (httpResponse == 200) {
+        [ServerConnection logout];
+     //   NSString *annotations=@"annotations=?<annotation1>&<annotation2>";
+        [ServerConnection search];
         [self performSegueWithIdentifier:@"loginSegue" sender:self];
     } else {
         [self showMessage];
