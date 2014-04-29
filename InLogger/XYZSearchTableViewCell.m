@@ -27,6 +27,11 @@
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [self.superview endEditing:YES];
     [super touchesBegan:touches withEvent:event];
+    
 }
+
+
+
+
 
 @end

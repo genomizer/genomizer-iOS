@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface XYZSearchResultTableViewController : UITableViewController
-
+- (NSMutableArray *) createSearchFields;
 @end

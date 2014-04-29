@@ -21,7 +21,8 @@
     [super viewDidLoad];
     NSArray* annotations;
     NSDictionary * allResults= [ServerConnection search:annotations];
-    
+ //   self.searchFields = [self createSearchFields ];
+  //  [self.tableView reloadData];
     
 }
 
