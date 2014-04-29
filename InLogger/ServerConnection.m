@@ -51,19 +51,29 @@ NSString *token;
 {
     NSMutableURLRequest *request = [JSONBuilder getSearchJSON:annotations withToken: token];
     NSURLResponse *response;
+    NSError *rr;
     NSData *POSTReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
     NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
     
+    NSArray *json = [NSJSONSerialization JSONObjectWithData:POSTReply options:0 error:&rr];
+    NSLog(@"mrMan: %@", rr);
+    NSLog(@"%d", [POSTReply length]);
     
-    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:POSTReply options:kNilOptions error:nil];
-    NSMutableArray *arrayOfResults = [[NSMutableArray alloc] init];
+    /*for(NSString *a in json){
+        NSLog(@"lol: %@", a);
+    }
 
+    NSMutableArray *arrayOfResults = [[NSMutableArray alloc] init];
+    
     NSLog(@"Header: %ld", (long)httpResp.statusCode);
     for (NSString *b in json){
         [arrayOfResults addObject:b];
     }
-
-    return json;
+    NSLog(@"test%@", [json valueForKey:@"URL"]);
+    return json;*/
+    //NSLog(@"%@", [jsonDataArray ]);
+    
+    return nil;
 }
 
 

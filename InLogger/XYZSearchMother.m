@@ -24,6 +24,8 @@
         NSString *beer = obj;
         NSLog(@"%@ is %@",country,beer);
     }];
+
+     
     
     return self;
 }
@@ -33,7 +35,7 @@
 }
 
 - (NSString*) getDescriptionOfChildAt: NSInteger{
-    return [NSString alloc];
+    return [NSS]
 }
 
 @end
