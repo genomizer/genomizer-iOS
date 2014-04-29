@@ -76,6 +76,27 @@
     return cell;
 }
 
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self.view endEditing:YES];
+    //[self centerFrameView];
+    [super touchesBegan:touches withEvent:event];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self.view endEditing:YES];
+    NSLog(@"ASD");
+/*
+    if(textField == self.userField) {
+        [self.passwordField becomeFirstResponder];
+    } else if(textField == self.passwordField) {
+        [self.passwordField resignFirstResponder];
+        [self centerFrameView];
+        [self validate];
+    }*/
+    return NO;
+}
+
+
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath

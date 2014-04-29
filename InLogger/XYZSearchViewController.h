@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface XYZSearchViewController : UITableViewController
+@interface XYZSearchViewController : UITableViewController<UITextFieldDelegate>
 
 @end
