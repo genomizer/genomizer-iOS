@@ -8,6 +8,7 @@
 
 #import "XYZSearchViewController.h"
 #import "XYZSearchTableViewCell.h"
+#import "XYZSearchResultTableViewController.h"
 #import "ServerConnection.h"
 
 @interface XYZSearchViewController ()
@@ -74,9 +75,19 @@
     return cell;
 }
 - (IBAction)searchButton:(id)sender {
-   self.SearchResults = [ServerConnection search:nil];
-   [self performSegueWithIdentifier:@"searchResult" sender:self];
+   self.searchResults = [ServerConnection search:nil];
+   [self performSegueWithIdentifier:@"searchResult" sender:self.searchResults];
 }
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    
+    if ([segue.identifier isEqualToString:@"searchResult"]) {
+        XYZSearchResultTableViewController *nextVC = (XYZSearchResultTableViewController *)[segue destinationViewController];
+        nextVC.searchResults1 = self.searchResults;
+    }
+}
+
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesBegan:touches withEvent:event];

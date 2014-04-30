@@ -29,20 +29,24 @@
         
         [self performSegueWithIdentifier:@"loginSegue" sender:self];
     } else {
-        [self showMessage];
+        [self showMessage:@"Wrong username or password."];
     }
     
 }
 
 - (IBAction)SignInButtonTouchDOwn:(id)sender {
-    
+    if((self.userField.text.length > 1) && (self.passwordField.text.length > 2)) {
     [self validate];
+    }
+    else{
+        [self showMessage:@"Username or password is too short."];
+    }
 }
 
-- (IBAction)showMessage
+- (IBAction)showMessage:(NSString*)text
 {
     UIAlertView *loginFailed = [[UIAlertView alloc]
-                                initWithTitle:@"" message:@"Wrong username or password."
+                                initWithTitle:@"" message:text
                                 delegate:nil cancelButtonTitle:@"Try again"
                                 otherButtonTitles:nil];
     

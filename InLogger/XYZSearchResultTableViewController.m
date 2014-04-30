@@ -15,7 +15,7 @@
 
 @interface XYZSearchResultTableViewController ()
 
-@property NSMutableArray *searchResults;
+
 @property CGFloat tableCellHeight;
 @property XYZExperimentDescriber *experimentDescriber;
 
@@ -32,8 +32,9 @@
     _tableCellHeight = 120;
  //   self.searchFields = [self createSearchFields ];
   //  [self.tableView reloadData];
+     NSLog(@"text %@", self.searchResults1);
     _experimentDescriber = [[XYZExperimentDescriber alloc] init];
-    _searchResults = [self defaultResults ];
+    _searchResults1 = [self defaultResults ];
     
 }
 
@@ -64,7 +65,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.searchResults count];
+    return [self.searchResults1 count];
 }
 
 
@@ -72,7 +73,7 @@
 {
     static NSString *CellIdentifier = @"ListPrototypeCell";
     XYZSearchResultTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    [ cell setTextFieldText: [_experimentDescriber getDescriptionOf: [_searchResults objectAtIndex: indexPath.row]]];
+    [ cell setTextFieldText: [_experimentDescriber getDescriptionOf: [_searchResults1 objectAtIndex: indexPath.row]]];
     _tableCellHeight = cell.frame.size.height;
     
     return cell;
