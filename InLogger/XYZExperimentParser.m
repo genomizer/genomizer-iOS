@@ -7,12 +7,11 @@
 //
 
 #import "XYZExperimentParser.h"
-#import "XYZExperiment.h"
-#import "XYZExperimentFile.h"
+
 
 @implementation XYZExperimentParser
 
-+(void) expParser:(NSDictionary*) json{
++(XYZExperiment*) expParser:(NSDictionary*) json{
     
     XYZExperiment *exp = [[XYZExperiment alloc] init];
     exp.name = [json valueForKey:@"name"];
@@ -39,5 +38,6 @@
         expFile.URL = [file valueForKey:@"URL"];
         [exp.files addObject:expFile];
     }
+    return exp;
 }
 @end

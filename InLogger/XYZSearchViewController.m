@@ -16,6 +16,7 @@
 
 @property NSMutableArray *selectedFields;
 @property NSMutableArray *searchFields;
+@property NSMutableArray *searchResults;
 @property NSMutableDictionary *searchValues;
 
 @end
@@ -73,10 +74,8 @@
     return cell;
 }
 - (IBAction)searchButton:(id)sender {
-   [ServerConnection search:nil];
- NSLog(@"text %@", self.searchValues);
-    
-      [self performSegueWithIdentifier:@"searchResult" sender:self];
+   self.SearchResults = [ServerConnection search:nil];
+   [self performSegueWithIdentifier:@"searchResult" sender:self];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
