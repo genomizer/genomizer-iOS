@@ -8,7 +8,6 @@
 
 #import "XYZSearchResultTableViewController.h"
 #import "ServerConnection.h"
-#import "XYZSearchMother.h"
 #import "XYZSearchResultTableViewCell.h"
 #import "XYZExperimentDescriber.h"
 
@@ -74,7 +73,9 @@
     XYZExperiment *experiment = [_searchResults objectAtIndex: indexPath.row];
     [cell setTextFieldText: [_experimentDescriber getDescriptionOf: experiment]];
     _tableCellHeight = cell.frame.size.height;
-    cell.experiment = experiment;
+    cell.index = indexPath.row;
+    cell.experiement = experiment;
+    cell.controller = self;
     
     return cell;
 }
@@ -83,7 +84,6 @@
 {
     return _tableCellHeight;
 }
-
 
 /*
 // Override to support conditional editing of the table view.

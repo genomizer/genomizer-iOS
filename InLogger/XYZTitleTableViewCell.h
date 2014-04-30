@@ -10,4 +10,6 @@
 
 @interface XYZTitleTableViewCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UILabel *textField;
+
 @end

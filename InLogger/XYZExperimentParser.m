@@ -30,13 +30,13 @@
     for(NSDictionary *file in filesArray){
         XYZExperimentFile *expFile = [[XYZExperimentFile alloc] init];
         expFile.idFile = [file valueForKey:@"id"];
-        expFile.type = [file valueForKey:@"type"];
+        expFile.type = [XYZExperimentFile NSStringFileTypeToEnumFileType:[file valueForKey:@"type"]];
         expFile.name = [file valueForKey:@"name"];
         expFile.uploadedBy = [file valueForKey:@"uploadedBy"];
         expFile.date = [file valueForKey:@"date"];
         expFile.size = [file valueForKey:@"size"];
         expFile.URL = [file valueForKey:@"URL"];
-        [exp.files addObject:expFile];
+        [exp addExperimentFile:expFile];
     }
     return exp;
 }

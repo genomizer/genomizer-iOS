@@ -348,8 +348,7 @@
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <connections>
-                                                <action selector="experimentTouchUpInside:" destination="ggw-44-oMv" eventType="touchUpInside" id="3c6-5H-e9P"/>
-                                                <action selector="experimentTouchUpInside:" destination="CwE-h2-EVG" eventType="touchUpInside" id="f7Q-Ql-aPl"/>
+                                                <action selector="experimentTouchDownInside:" destination="CwE-h2-EVG" eventType="touchDown" id="qyq-2Q-cTa"/>
                                                 <segue destination="y6w-6T-HLO" kind="push" id="x6z-Hk-ytI"/>
                                             </connections>
                                         </button>
@@ -689,7 +688,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="hvD-VJ-b0q" detailTextLabel="am1-EB-5GE" rowHeight="55" style="IBUITableViewCellStyleValue1" id="rTn-6U-qYi" customClass="XYZTitleTableViewCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TitlePrototypeCell" textLabel="hvD-VJ-b0q" detailTextLabel="am1-EB-5GE" rowHeight="55" style="IBUITableViewCellStyleValue1" id="rTn-6U-qYi" customClass="XYZTitleTableViewCell">
                                         <rect key="frame" x="0.0" y="22" width="320" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rTn-6U-qYi" id="2nQ-0E-oVh">
@@ -712,8 +711,11 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="textField" destination="hvD-VJ-b0q" id="oGG-FY-Nh4"/>
+                                        </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="41" id="v7S-cH-m5b" customClass="XYZDataFileTableViewCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DataFilePrototypeCell" rowHeight="41" id="v7S-cH-m5b" customClass="XYZDataFileTableViewCell">
                                         <rect key="frame" x="0.0" y="77" width="320" height="41"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="v7S-cH-m5b" id="emy-nU-fzP">
@@ -721,7 +723,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Datafile1.wig    2014-01-27    Yuri" translatesAutoresizingMaskIntoConstraints="NO" id="Pwu-Qh-dkc">
-                                                    <rect key="frame" x="20" y="3" width="280" height="32"/>
+                                                    <rect key="frame" x="20" y="3" width="228" height="32"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -733,6 +735,10 @@
                                                 </switch>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="switchButton" destination="sPr-ab-gDA" id="9WO-Gr-zVN"/>
+                                            <outlet property="textField" destination="Pwu-Qh-dkc" id="hVb-5s-8aE"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="41" id="dLh-i9-oAv" customClass="XYZSearchResultTableViewCell">
                                         <rect key="frame" x="0.0" y="118" width="320" height="41"/>
@@ -889,10 +895,15 @@
                                     </tableViewCell>
                                 </prototypes>
                                 <sections/>
+                                <connections>
+                                    <outlet property="dataSource" destination="y6w-6T-HLO" id="tcL-V6-E3F"/>
+                                    <outlet property="delegate" destination="y6w-6T-HLO" id="wFM-HX-8gp"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="tXm-QS-c3z" firstAttribute="top" secondItem="hh9-fK-Ke2" secondAttribute="bottom" id="IUm-lj-9Ff"/>
                             <constraint firstItem="5W2-Ws-6aa" firstAttribute="top" secondItem="tXm-QS-c3z" secondAttribute="bottom" constant="44" id="ese-9c-NMX"/>
                             <constraint firstItem="5W2-Ws-6aa" firstAttribute="top" secondItem="AeG-tu-3ad" secondAttribute="bottom" constant="9" id="wNz-kJ-3DO"/>
                         </constraints>

@@ -22,6 +22,11 @@
 {
     self = [super init];
     _annotations = [[NSMutableDictionary alloc] init];
+    _rawFiles = [[NSMutableArray alloc] init];
+    _profileFiles = [[NSMutableArray alloc] init];
+    _regionFiles = [[NSMutableArray alloc] init];
+    _otherFiles = [[NSMutableArray alloc] init];
+
     return self;
 }
 
@@ -34,6 +39,20 @@
     [exp.annotations setValue: @"abc123" forKey:@"pubmedId"];
     [exp.annotations setValue: @"raw" forKey:@"type"];
     [exp.annotations setValue: @"specie" forKey:@"human"];
+    
+    [exp addExperimentFile:[XYZExperimentFile defaultFileWithType:RAW]];
+    [exp addExperimentFile:[XYZExperimentFile defaultFileWithType:RAW]];
+    [exp addExperimentFile:[XYZExperimentFile defaultFileWithType:RAW]];
+
+    [exp addExperimentFile:[XYZExperimentFile defaultFileWithType:PROFILE]];
+    
+    [exp addExperimentFile:[XYZExperimentFile defaultFileWithType:REGION]];
+    [exp addExperimentFile:[XYZExperimentFile defaultFileWithType:REGION]];
+
+    [exp addExperimentFile:[XYZExperimentFile defaultFileWithType:OTHER]];
+    
+    NSLog(@"Number: %d", [exp numberOfFiles]);
+    
     return exp;
     
 }
@@ -48,6 +67,25 @@
 {
     return [_annotations valueForKey:annotation];
 }
+
+- (void) addExperimentFile: (XYZExperimentFile *) file
+{
+    if (file.type == RAW) {
+        [_rawFiles addObject:file];
+    } else if (file.type == REGION) {
+        [_regionFiles addObject:file];
+    } else if (file.type == PROFILE) {
+        [_profileFiles addObject:file];
+    } else {
+        [_otherFiles addObject:file];
+    }
+}
+
+- (NSInteger) numberOfFiles
+{
+    return [_rawFiles count] + [_profileFiles count] + [_regionFiles count] + [_otherFiles count];
+}
+
 
 
 //:::::::::: SAFE, IGNORE :::::::::

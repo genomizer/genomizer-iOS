@@ -9,8 +9,16 @@
 #import <Foundation/Foundation.h>
 
 @interface XYZExperimentFile : NSObject
+
+typedef NS_ENUM(NSInteger, FileType) {
+    RAW,
+    PROFILE,
+    REGION,
+    OTHER
+};
+
 @property NSString *idFile;
-@property NSString *type;
+@property FileType type;
 @property NSString *name;
 @property NSString *uploadedBy;
 @property NSString *date;
@@ -18,5 +26,10 @@
 @property NSString *URL;
 
 //+ (void) createExperimentFile:(NSDictionary*)file;
+
+- (NSString *) getDescription;
+- (NSComparisonResult) compareTo: (XYZExperimentFile *) experiment;
++ (FileType) NSStringFileTypeToEnumFileType: (NSString *) type;
++ (XYZExperimentFile *) defaultFileWithType: (FileType) type;
 
 @end

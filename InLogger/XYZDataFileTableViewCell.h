@@ -10,4 +10,7 @@
 
 @interface XYZDataFileTableViewCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UITextView *textField;
+@property (weak, nonatomic) IBOutlet UISwitch *switchButton;
+
 @end

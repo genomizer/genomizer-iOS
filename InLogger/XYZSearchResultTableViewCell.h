@@ -7,10 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XYZExperiment.h"
+#import "XYZSearchResultTableViewController.h"
 
 @interface XYZSearchResultTableViewCell : UITableViewCell
 
-@property XYZExperiment *experiment;
+@property NSInteger index;
+
+@property XYZExperiment *experiement;
+@property XYZSearchResultTableViewController *controller;
 
 - (void) setTextFieldText: (NSString *) text;
 

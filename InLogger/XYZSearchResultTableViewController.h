@@ -12,6 +12,7 @@
 @interface XYZSearchResultTableViewController : UITableViewController
 
 @property XYZExperiment * selectedExperiment;
+@property XYZExperiment *selectedFiles;
 
 - (NSMutableArray *) createSearchFields;
 

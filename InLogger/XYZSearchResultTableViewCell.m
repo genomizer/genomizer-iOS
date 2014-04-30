@@ -50,4 +50,10 @@
     _textView.frame = frame;
 }
 
+- (IBAction)experimentTouchDownInside:(id)sender
+{
+    _controller.selectedExperiment = _experiement;
+    NSLog(@"ASD: %d", [_experiement numberOfFiles]);
+}
+
 @end
