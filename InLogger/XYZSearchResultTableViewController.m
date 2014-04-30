@@ -8,9 +8,14 @@
 
 #import "XYZSearchResultTableViewController.h"
 #import "ServerConnection.h"
+#import "XYZSearchMother.h"
+#import "XYZSearchResultTableViewCell.h"
+
 @interface XYZSearchResultTableViewController ()
 
 @property NSMutableArray *searchResults;
+@property XYZSearchMother *mother;
+@property CGFloat tableCellHeight;
 
 @end
 
@@ -21,6 +26,8 @@
     [super viewDidLoad];
     NSArray* annotations;
     NSDictionary * allResults= [ServerConnection search:annotations];
+    _mother = [[XYZSearchMother alloc] init];
+    _tableCellHeight = 120;
  //   self.searchFields = [self createSearchFields ];
   //  [self.tableView reloadData];
     
@@ -45,19 +52,25 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.searchResults count];
+    return 2; //[self.searchResults count];
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
+    static NSString *CellIdentifier = @"ListPrototypeCell";
+    XYZSearchResultTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    [cell setTextFieldText:[_mother getDescriptionOfChildAt:indexPath]];
+    //cell_mother getDescriptionOfChildAt:indexPath]];
+    _tableCellHeight = cell.frame.size.height;
     
     return cell;
 }
-*/
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return _tableCellHeight;
+}
 
 /*
 // Override to support conditional editing of the table view.
