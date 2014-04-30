@@ -10,6 +10,8 @@
 
 @interface XYZSearchResultTableViewCell : UITableViewCell
 
+@property XYZExperiment *experiment;
+
 - (void) setTextFieldText: (NSString *) text;
 
 @end

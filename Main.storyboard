@@ -349,6 +349,7 @@
                                             </state>
                                             <connections>
                                                 <action selector="experimentTouchUpInside:" destination="ggw-44-oMv" eventType="touchUpInside" id="3c6-5H-e9P"/>
+                                                <action selector="experimentTouchUpInside:" destination="CwE-h2-EVG" eventType="touchUpInside" id="f7Q-Ql-aPl"/>
                                                 <segue destination="y6w-6T-HLO" kind="push" id="x6z-Hk-ytI"/>
                                             </connections>
                                         </button>

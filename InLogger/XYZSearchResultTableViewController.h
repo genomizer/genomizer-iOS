@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XYZExperiment.h"
 
 @interface XYZSearchResultTableViewController : UITableViewController
+
+@property XYZExperiment * selectedExperiment;
+
 - (NSMutableArray *) createSearchFields;
+
 @end

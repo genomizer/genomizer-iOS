@@ -10,7 +10,6 @@
 #import "ServerConnection.h"
 #import "XYZSearchMother.h"
 #import "XYZSearchResultTableViewCell.h"
-#import "XYZExperiment.h"
 #import "XYZExperimentDescriber.h"
 
 @interface XYZSearchResultTableViewController ()
@@ -72,8 +71,10 @@
 {
     static NSString *CellIdentifier = @"ListPrototypeCell";
     XYZSearchResultTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    [ cell setTextFieldText: [_experimentDescriber getDescriptionOf: [_searchResults objectAtIndex: indexPath.row]]];
+    XYZExperiment *experiment = [_searchResults objectAtIndex: indexPath.row];
+    [cell setTextFieldText: [_experimentDescriber getDescriptionOf: experiment]];
     _tableCellHeight = cell.frame.size.height;
+    cell.experiment = experiment;
     
     return cell;
 }
@@ -83,10 +84,6 @@
     return _tableCellHeight;
 }
 
-- (IBAction)experimentTouchUpInside:(id)sender
-{
-    
-}
 
 /*
 // Override to support conditional editing of the table view.

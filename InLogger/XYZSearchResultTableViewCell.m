@@ -7,6 +7,7 @@
 //
 
 #import "XYZSearchResultTableViewCell.h"
+#import "XYZSearchResultTableViewController.h"
 
 @interface XYZSearchResultTableViewCell()
 

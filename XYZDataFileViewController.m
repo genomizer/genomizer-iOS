@@ -7,6 +7,7 @@
 //
 
 #import "XYZDataFileViewController.h"
+#import "XYZSearchResultTableViewController.h"
 
 @interface XYZDataFileViewController ()
 
@@ -33,6 +34,11 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)unwindToList:(UIStoryboardSegue *)segue
+{
+    XYZSearchResultTableViewController *source = [segue sourceViewController];
 }
 
 @end
