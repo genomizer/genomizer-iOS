@@ -14,5 +14,8 @@
 @property NSString *type;
 @property NSString *name;
 @property NSString *uploadedBy;
+@property NSString *date;
+@property NSString *size;
+@property NSString *URL;
 
 @end

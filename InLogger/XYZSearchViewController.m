@@ -34,6 +34,7 @@
 
 - (NSMutableArray *) createSearchFields
 {
+    
     return [NSMutableArray arrayWithObjects:@"Experiment ID", @"Publication ID" , @"Type of data", @"Species", @"Genom release", @"Cell-line", @"Developmental stage", @"Sex", @"Tissue", @"Processing", @"Asd", nil];
 }
 
@@ -76,13 +77,9 @@
  NSLog(@"text %@", self.searchValues);
     
       [self performSegueWithIdentifier:@"searchResult" sender:self];
-  
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-
-    NSLog(@"ASDASDASD");
-
     [super touchesBegan:touches withEvent:event];
 }
 

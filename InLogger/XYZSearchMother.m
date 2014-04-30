@@ -29,7 +29,7 @@
 
 
 - (NSString*) getDescriptionOfChildAt: NSInteger{
-    return [NSString alloc];
+    return @"Experiment ID: 12312\nPublication ID: 50555\nDate: 2014-03-04\nExperiment ID: 12312\nPublication ID: 50555\nDate: 2014-03-04";
 }
 
 @end
