@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XYZExperiment.h"
 
 @interface XYZDataFileViewController : UIViewController
+
+@property XYZExperiment *experiment;
 
 @end

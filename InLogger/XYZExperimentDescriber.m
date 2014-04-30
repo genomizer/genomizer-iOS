@@ -54,7 +54,7 @@
     NSMutableString *description = [[NSMutableString alloc] init];
     [description appendString: annotation];
     [description appendString: @": "];
-    if(value == nil) {
+    if(![value isKindOfClass:[NSString class]]) {
         [description appendString:@"?"];
     } else {
         [description appendString:value];

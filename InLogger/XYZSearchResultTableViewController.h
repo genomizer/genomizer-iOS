@@ -13,6 +13,7 @@
 
 @property XYZExperiment * selectedExperiment;
 @property XYZExperiment *selectedFiles;
+@property NSMutableArray *searchResults1;
 
 - (NSMutableArray *) createSearchFields;
 

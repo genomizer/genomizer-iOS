@@ -10,6 +10,7 @@
 #import "ServerConnection.h"
 #import "XYZSearchResultTableViewCell.h"
 #import "XYZExperimentDescriber.h"
+#import "XYZDataFileViewController.h"
 
 @interface XYZSearchResultTableViewController ()
 
@@ -26,14 +27,14 @@
     NSError *error;
     [super viewDidLoad];
     NSArray* annotations;
-    NSDictionary * allResults= [ServerConnection search:annotations error:&error];
+//    NSDictionary * allResults= [ServerConnection search:annotations error:&error];
  
     _tableCellHeight = 120;
  //   self.searchFields = [self createSearchFields ];
   //  [self.tableView reloadData];
-     NSLog(@"text %@", self.searchResults1);
+     //NSLog(@"text %@", self.searchResults1);
     _experimentDescriber = [[XYZExperimentDescriber alloc] init];
-    _searchResults1 = [self defaultResults ];
+    //_searchResults1 = [self defaultResults ];
     
 }
 
@@ -72,7 +73,8 @@
 {
     static NSString *CellIdentifier = @"ListPrototypeCell";
     XYZSearchResultTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    XYZExperiment *experiment = [_searchResults objectAtIndex: indexPath.row];
+    XYZExperiment *experiment = [_searchResults1 objectAtIndex: indexPath.row];
+    NSLog(@"asdasdads%@", experiment.createdByUser);
     [cell setTextFieldText: [_experimentDescriber getDescriptionOf: experiment]];
     _tableCellHeight = cell.frame.size.height;
     cell.index = indexPath.row;
@@ -85,6 +87,15 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return _tableCellHeight;
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    
+    if ([segue.identifier isEqualToString:@"toFileList"]) {
+        XYZDataFileViewController *nextVC = (XYZDataFileViewController *)[segue destinationViewController];
+        nextVC.experiment = _selectedExperiment;
+    }
 }
 
 /*

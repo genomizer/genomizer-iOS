@@ -12,6 +12,6 @@
 
 + (int)login:(NSString *)username withPassword:(NSString *)password error:(NSError**) error;
 + (int)logout:(NSError**) error;
-+ (NSDictionary*)search:(NSArray *) annotations error:(NSError**) error;
++ (NSMutableArray*)search:(NSArray *) annotations error:(NSError**) error;
 + (NSDictionary*)parseJSONToDictionary:(NSData*)POSTReply error:(NSError**)error;
 @end

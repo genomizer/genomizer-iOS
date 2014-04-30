@@ -14,8 +14,9 @@
 +(XYZExperiment*) expParser:(NSDictionary*) json{
     
     XYZExperiment *exp = [[XYZExperiment alloc] init];
-    exp.name = [json valueForKey:@"name"];
-    exp.createdByUser = [json valueForKey:@"created by"];
+    //NSLog(@"adsadsads %@", [json valueForKey:@"name"][0]);
+    exp.name = [json valueForKey:@"name"][0];
+    exp.createdByUser = [json valueForKey:@"created by"][0];
     
     // add annotations
     NSArray *annotationsArray = [[json valueForKey:@"annotations"]objectAtIndex:0];
@@ -31,7 +32,7 @@
         XYZExperimentFile *expFile = [[XYZExperimentFile alloc] init];
         expFile.idFile = [file valueForKey:@"id"];
         expFile.type = [XYZExperimentFile NSStringFileTypeToEnumFileType:[file valueForKey:@"type"]];
-        expFile.name = [file valueForKey:@"name"];
+        expFile.name = (NSString *)[file valueForKey:@"name"];
         expFile.uploadedBy = [file valueForKey:@"uploadedBy"];
         expFile.date = [file valueForKey:@"date"];
         expFile.size = [file valueForKey:@"size"];

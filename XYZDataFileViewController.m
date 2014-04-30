@@ -14,11 +14,19 @@
 
 @interface XYZDataFileViewController ()
 
-@property XYZExperiment *experiment;
+@property NSMutableArray *rawCells;
 
 @end
 
 @implementation XYZDataFileViewController
+
+- (XYZDataFileViewController *) init
+{
+    self = [super init];
+    _rawCells = [[NSMutableArray alloc] init];
+    
+    return self;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -70,7 +78,6 @@ NSInteger sortFunc(id id1, id id2, void *context)
     return [_experiment numberOfFiles] + 4;
 }
 
-
 - (XYZTitleTableViewCell *)createTitleCell:(NSIndexPath *)indexPath tableView:(UITableView *)tableView withTitle:(NSString *) title
 {
     NSString *cellIdentifier = @"TitlePrototypeCell";
@@ -83,7 +90,13 @@ NSInteger sortFunc(id id1, id id2, void *context)
 {
     NSString *cellIdentifier = @"DataFilePrototypeCell";
     XYZDataFileTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
-    cell.textField.text = @"ASD";
+    cell.textField.text = [file getDescription];
+    cell.switchButton.on = NO;
+    if (file.type == RAW) {
+        [_rawCells addObject:cell];
+    } else {
+        cell.switchButton.hidden = YES;
+    }
     return cell;
 }
 
@@ -97,16 +110,27 @@ NSInteger sortFunc(id id1, id id2, void *context)
     } else if (indexPath.row == [_experiment.rawFiles count] + 1) {
         return [self createTitleCell:indexPath tableView:tableView withTitle:@"Profile Data"];
     } else if (indexPath.row < [_experiment.rawFiles count] + [_experiment.profileFiles count] + 2) {
-        return [self createDataFileCell:indexPath tableView:tableView withFile:[_experiment.profileFiles objectAtIndex:indexPath.row-2]];
+        return [self createDataFileCell:indexPath tableView:tableView withFile:[_experiment.profileFiles objectAtIndex:indexPath.row-[_experiment.rawFiles count]-2]];
     } else if (indexPath.row == [_experiment.rawFiles count] + [_experiment.profileFiles count] + 2) {
         return [self createTitleCell:indexPath tableView:tableView withTitle:@"Region Data"];
     } else if (indexPath.row < [_experiment.rawFiles count] + [_experiment.profileFiles count] + [_experiment.regionFiles count] + 3) {
-        return [self createDataFileCell:indexPath tableView:tableView withFile:[_experiment.regionFiles objectAtIndex:indexPath.row-3]];
+        return [self createDataFileCell:indexPath tableView:tableView withFile:[_experiment.regionFiles objectAtIndex:indexPath.row-[_experiment.rawFiles count]-[_experiment.profileFiles count]-3]];
     } else if (indexPath.row == [_experiment.rawFiles count] + [_experiment.profileFiles count] + [_experiment.regionFiles count] + 3) {
         return [self createTitleCell:indexPath tableView:tableView withTitle:@"Other Files"];
     } else {
-        return [self createDataFileCell:indexPath tableView:tableView withFile:[_experiment.otherFiles objectAtIndex:indexPath.row-4]];
+        return [self createDataFileCell:indexPath tableView:tableView withFile:[_experiment.otherFiles objectAtIndex:indexPath.row-[_experiment.rawFiles count]-[_experiment.profileFiles count]-[_experiment.regionFiles count]-4]];
     }
 }
+
+- (IBAction)convertToProfileOnTouchUpInside:(id)sender {
+    //TODO - Send to server.
+    for (NSInteger i = 0; i < [_rawCells count]; i++) {
+        XYZDataFileTableViewCell *cell = [_rawCells objectAtIndex:i];
+        if (cell.switchButton.on) {
+            
+        }
+    }
+}
+
 
 @end

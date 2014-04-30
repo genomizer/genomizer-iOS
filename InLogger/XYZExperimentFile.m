@@ -26,7 +26,7 @@
 + (XYZExperimentFile *) defaultFileWithType: (FileType) type
 {
     XYZExperimentFile *defaultFile = [[XYZExperimentFile alloc] init];
-    defaultFile.name = @"file1.wig";
+    defaultFile.name = @"Datafile.wig";
     defaultFile.date = @"2014-04-01";
     defaultFile.uploadedBy = @"Yuri";
     defaultFile.type = type;
@@ -38,10 +38,10 @@
 - (NSString *) getDescription
 {
     NSMutableString *string = [[NSMutableString alloc] init];
-    [string appendString:_name];
-    [string appendString:@"   "];
+    [string appendString: _name];
+    [string appendString:@"  "];
     [string appendString: _date];
-    [string appendString:@"   "];
+    [string appendString:@"  "];
     [string appendString: _uploadedBy];
     return string;
 }
