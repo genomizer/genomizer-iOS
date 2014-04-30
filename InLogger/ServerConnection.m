@@ -16,19 +16,18 @@ NSString *token;
 
 + (int)login:(NSString *)username withPassword:(NSString *)password error:(NSError**) error
 {
-    NSError *httpError;
-    NSError *jsonParseError;
+    NSError *internalError;
+
 
     NSMutableURLRequest *request = [JSONBuilder getLoginJSON:username withPassword:password];
-    NSURLResponse *response;
-    NSData *POSTReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&httpError];
+    NSHTTPURLResponse *httpResp;
+    NSData *POSTReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&httpResp error:&internalError];
 
-    if (httpError == nil)
+    if (internalError == nil)
     {
-        NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
-        NSDictionary *json = [self parseJSONToDictionary:POSTReply error:&jsonParseError];
+        NSDictionary *json = [self parseJSONToDictionary:POSTReply error:&internalError];
         
-        if(jsonParseError == nil){
+        if(internalError == nil){
             token = [json objectForKey:@"token"];
             NSLog(@"login token %@", token);
             NSLog(@"Header: %ld", (long)httpResp.statusCode);
@@ -38,31 +37,28 @@ NSString *token;
                 [dict setObject:@"Incorrect Username/Password" forKey:NSLocalizedDescriptionKey];
                 *error = [NSError errorWithDomain:@"Login" code:0 userInfo:dict];
             }
-            return httpResp.statusCode;
         } else{
             NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
             [dict setObject:@"Server sent incorrectly formatted data, talk to admin" forKey:NSLocalizedDescriptionKey];
             *error = [NSError errorWithDomain:@"Servererror" code:2 userInfo:dict];
-            return -1;
         }
     }
     else
     {
         NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
         [dict setObject:@"Could not connect to server" forKey:NSLocalizedDescriptionKey];
-        [dict setObject:httpError forKey:NSUnderlyingErrorKey];
+        [dict setObject:internalError forKey:NSUnderlyingErrorKey];
         *error = [NSError errorWithDomain:@"Connection" code:1 userInfo:dict];
-        return -1;
     }
+    return -1;
 }
 
 + (int)logout:(NSError**)error;
 {
     NSMutableURLRequest *request = [JSONBuilder getLogoutJSON:token];
     
-    NSURLResponse *response;
-    NSData *POSTReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:error];
-    NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
+    NSHTTPURLResponse *httpResp;
+    [NSURLConnection sendSynchronousRequest:request returningResponse:&httpResp error:error];
 
     NSLog(@"logout token %@", token);
     NSLog(@"Header: %ld", (long)httpResp.statusCode);
@@ -72,32 +68,45 @@ NSString *token;
 }
 
  
-+(NSDictionary*)search:(NSArray*)annotations error:(NSError**) searchError
++(NSMutableArray*)search:(NSArray*)annotations error:(NSError**) error
 {
-    NSError *error;
+    NSError *internalError;
    
-    //create send request
     NSMutableURLRequest *request = [JSONBuilder getSearchJSON:annotations withToken: token];
-    NSURLResponse *response;
+    NSHTTPURLResponse *httpResp;
     
-    //recieve answer
-    NSData *POSTReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
-    NSArray *arr = [NSJSONSerialization JSONObjectWithData:POSTReply options:kNilOptions error:&error];
-    NSDictionary *json = [arr objectAtIndex:0];
-    for (NSString *a in [json allKeys]) {
-
-        NSLog(@"Key : %@ Object: %@", a, [json objectForKey:a]);
-    }
-    //TODO: Create experiments from data
-    
-    if(httpResp.statusCode == 200){
-        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:POSTReply options: NSJSONReadingMutableContainers error:nil];
-   
-        NSMutableArray * experiments = [[NSMutableArray alloc] init];
-        [experiments addObject:[XYZExperimentParser expParser:json]];
+    NSData *POSTReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&httpResp error:&internalError];
+    if(internalError == nil)
+    {
+        if(httpResp.statusCode == 200){
+            NSDictionary *json = [NSJSONSerialization JSONObjectWithData:POSTReply options: NSJSONReadingMutableContainers error:&internalError];
+            if(internalError == nil)
+            {
+                NSMutableArray *experiments = [[NSMutableArray alloc] init];
+                [experiments addObject:[XYZExperimentParser expParser:json]];
         
-        return experiments;
+                return experiments;
+            }
+            else
+            {
+                NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+                [dict setObject:@"Server sent incorrectly formatted data, talk to admin" forKey:NSLocalizedDescriptionKey];
+                *error = [NSError errorWithDomain:@"Servererror" code:2 userInfo:dict];
+            }
+        }
+        else
+        {
+            NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+            [dict setObject:@"Insufficient permissions" forKey:NSLocalizedDescriptionKey];
+            *error = [NSError errorWithDomain:@"Authorization" code:0 userInfo:dict];
+            
+        }
+    }
+    else{
+        NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+        [dict setObject:@"Could not connect to server" forKey:NSLocalizedDescriptionKey];
+        [dict setObject:internalError forKey:NSUnderlyingErrorKey];
+        *error = [NSError errorWithDomain:@"Connection" code:1 userInfo:dict];
     }
     return nil;
 }
