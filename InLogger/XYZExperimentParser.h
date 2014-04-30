@@ -7,9 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "XYZExperiment.h"
+#import "XYZExperimentFile.h"
 
 @interface XYZExperimentParser : NSObject
 
-+(void) expParser:(NSDictionary*) json;
++(XYZExperiment *) expParser:(NSDictionary*) json;
 
 @end

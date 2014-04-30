@@ -12,5 +12,5 @@
 
 + (int)login:(NSString *)username withPassword:(NSString *)password;
 + (int)logout;
-+ (NSDictionary*)search:(NSArray *) annotations;
++ (NSMutableArray*)search:(NSArray *) annotations;
 @end

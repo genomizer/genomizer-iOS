@@ -49,7 +49,7 @@ NSString *token;
 }
 
  
-+(NSDictionary*)search:(NSArray*)annotations
++(NSMutableArray*)search:(NSArray*)annotations
 {
     //create send request
     NSMutableURLRequest *request = [JSONBuilder getSearchJSON:annotations withToken: token];
@@ -59,12 +59,14 @@ NSString *token;
     NSData *POSTReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
     NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
     
-    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:POSTReply options: NSJSONReadingMutableContainers error:nil];
-    NSLog(@"req %@", json);
- [XYZExperimentParser expParser:json];
-    
-    return json;
+    if(httpResp.statusCode == 200){
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:POSTReply options: NSJSONReadingMutableContainers error:nil];
+   
+        NSMutableArray * experiments = [[NSMutableArray alloc] init];
+        [experiments addObject:[XYZExperimentParser expParser:json]];
+        
+        return experiments;
+    }
+    return nil;
 }
-
-
 @end
