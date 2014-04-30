@@ -9,12 +9,19 @@
 #import "XYZExperiment.h"
 #import "XYZExperimentFile.h"
 
+
+@interface XYZExperiment()
+
+
+@end
+
 @implementation XYZExperiment
 
 
-- (XYZExperiment*) init:NSArray{
+- (XYZExperiment*) init
+{
     self = [super init];
-    _annotations = [[NSDictionary alloc] init];
+    _annotations = [[NSMutableDictionary alloc] init];
     return self;
 }
 
@@ -35,6 +42,11 @@
 {
     [_annotations setValue: value forKey:annotation];
 
+}
+
+- (NSString *) getValueForAnnotation: (NSString *) annotation
+{
+    return [_annotations valueForKey:annotation];
 }
 
 
