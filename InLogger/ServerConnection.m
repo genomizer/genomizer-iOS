@@ -8,7 +8,7 @@
 
 #import "ServerConnection.h"
 #import "JSONBuilder.h"
-#import "XYZExperiment.h"
+#import "XYZExperimentParser.h"
 
 
 @implementation ServerConnection
@@ -66,6 +66,7 @@ NSString *token;
 
     NSLog(@"logout token %@", token);
     NSLog(@"Header: %ld", (long)httpResp.statusCode);
+   
     
     return httpResp.statusCode;
 }
@@ -90,6 +91,14 @@ NSString *token;
     }
     //TODO: Create experiments from data
     
+    if(httpResp.statusCode == 200){
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:POSTReply options: NSJSONReadingMutableContainers error:nil];
+   
+        NSMutableArray * experiments = [[NSMutableArray alloc] init];
+        [experiments addObject:[XYZExperimentParser expParser:json]];
+        
+        return experiments;
+    }
     return nil;
 }
 

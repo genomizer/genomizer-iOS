@@ -10,12 +10,14 @@
 #import "ServerConnection.h"
 #import "XYZSearchMother.h"
 #import "XYZSearchResultTableViewCell.h"
+#import "XYZExperiment.h"
+#import "XYZExperimentDescriber.h"
 
 @interface XYZSearchResultTableViewController ()
 
-@property NSMutableArray *searchResults;
-@property XYZSearchMother *mother;
+
 @property CGFloat tableCellHeight;
+@property XYZExperimentDescriber *experimentDescriber;
 
 @end
 
@@ -31,7 +33,18 @@
     _tableCellHeight = 120;
  //   self.searchFields = [self createSearchFields ];
   //  [self.tableView reloadData];
+     NSLog(@"text %@", self.searchResults1);
+    _experimentDescriber = [[XYZExperimentDescriber alloc] init];
+    _searchResults1 = [self defaultResults ];
     
+}
+
+- (NSMutableArray *) defaultResults
+{
+    NSMutableArray *results = [[NSMutableArray alloc] init];
+    [results addObject:[XYZExperiment defaultExperiment]];
+    [results addObject:[XYZExperiment defaultExperiment]];
+    return results;
 }
 
 - (void)didReceiveMemoryWarning
@@ -53,7 +66,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 2; //[self.searchResults count];
+    return [self.searchResults1 count];
 }
 
 
@@ -61,8 +74,7 @@
 {
     static NSString *CellIdentifier = @"ListPrototypeCell";
     XYZSearchResultTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    [cell setTextFieldText:[_mother getDescriptionOfChildAt:indexPath]];
-    //cell_mother getDescriptionOfChildAt:indexPath]];
+    [ cell setTextFieldText: [_experimentDescriber getDescriptionOf: [_searchResults1 objectAtIndex: indexPath.row]]];
     _tableCellHeight = cell.frame.size.height;
     
     return cell;
@@ -71,6 +83,11 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return _tableCellHeight;
+}
+
+- (IBAction)experimentTouchUpInside:(id)sender
+{
+    
 }
 
 /*

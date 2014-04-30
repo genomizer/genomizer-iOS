@@ -7,15 +7,47 @@
 //
 
 #import "XYZExperiment.h"
+#import "XYZExperimentFile.h"
+
+
+@interface XYZExperiment()
+
+
+@end
 
 @implementation XYZExperiment
 
-- (XYZExperiment*) init:NSArray{
+
+- (XYZExperiment*) init
+{
     self = [super init];
+    _annotations = [[NSMutableDictionary alloc] init];
     return self;
 }
 
 
++ (XYZExperiment*) defaultExperiment
+{
+    XYZExperiment *exp = [[XYZExperiment alloc] init];
+    exp.name = @"Experiment name";
+    exp.createdByUser = @"Yuri Yuri";
+    [exp.annotations setValue: @"abc123" forKey:@"pubmedId"];
+    [exp.annotations setValue: @"raw" forKey:@"type"];
+    [exp.annotations setValue: @"specie" forKey:@"human"];
+    return exp;
+    
+}
+
+- (void) setValue: (id) value forAnnotation: (NSString*) annotation
+{
+    [_annotations setValue: value forKey:annotation];
+
+}
+
+- (NSString *) getValueForAnnotation: (NSString *) annotation
+{
+    return [_annotations valueForKey:annotation];
+}
 
 
 //:::::::::: SAFE, IGNORE :::::::::

@@ -38,8 +38,12 @@
 }
 
 - (IBAction)SignInButtonTouchDOwn:(id)sender {
-    
+    if((self.userField.text.length > 1) && (self.passwordField.text.length > 2)) {
     [self validate];
+    }
+    else{
+        [self showMessage:@"Username or password is too short."];
+    }
 }
 
 - (IBAction)showMessage:(NSString*) error

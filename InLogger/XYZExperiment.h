@@ -10,11 +10,13 @@
 
 @interface XYZExperiment : NSObject
 
-@property NSString *experimentName;
+@property NSString *name;
 @property NSString *createdByUser;
-@property NSArray *files;
-@property NSDictionary *annotations;
+@property NSMutableArray *files;
+@property NSMutableDictionary *annotations;
 
-- (XYZExperiment*) init:NSArray;
+- (void) setValue: (id) value forAnnotation: (NSString*) annotation;
+- (NSString *) getValueForAnnotation: (NSString *) annotation;
++ (XYZExperiment*) defaultExperiment;
 
 @end

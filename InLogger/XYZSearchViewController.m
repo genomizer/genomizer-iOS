@@ -8,6 +8,8 @@
 
 #import "XYZSearchViewController.h"
 #import "XYZSearchTableViewCell.h"
+#import "XYZSearchResultTableViewController.h"
+#import "ServerConnection.h"
 
 @interface XYZSearchViewController ()
 
@@ -15,6 +17,7 @@
 
 @property NSMutableArray *selectedFields;
 @property NSMutableArray *searchFields;
+@property NSMutableArray *searchResults;
 @property NSMutableDictionary *searchValues;
 
 @end
@@ -72,10 +75,19 @@
     return cell;
 }
 - (IBAction)searchButton:(id)sender {
-    
- NSLog(@"text %@", self.searchValues);
-      [self performSegueWithIdentifier:@"searchResult" sender:self];
+   self.searchResults = [ServerConnection search:nil];
+   [self performSegueWithIdentifier:@"searchResult" sender:self.searchResults];
 }
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    
+    if ([segue.identifier isEqualToString:@"searchResult"]) {
+        XYZSearchResultTableViewController *nextVC = (XYZSearchResultTableViewController *)[segue destinationViewController];
+        nextVC.searchResults1 = self.searchResults;
+    }
+}
+
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesBegan:touches withEvent:event];
@@ -95,14 +107,13 @@
 }
 
 - (void) textFieldDidEndEditing:(UITextField *)textField {
-    if(textField.text.length > 0){
+       if(textField.text.length > 0){
         [self.searchValues setObject:textField.text forKey:textField.placeholder];
-        
     }
     else {
         [self.searchValues removeObjectForKey:textField.placeholder];
     }
-    XYZSearchTableViewCell *cell = [_tableView cellForRowAtIndexPath:0];
+    
     
 }
 - (void) switched: (id) sender {
