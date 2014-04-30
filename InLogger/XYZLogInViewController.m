@@ -25,7 +25,6 @@
     NSError *error;
     [ServerConnection login:self.userField.text withPassword:self.passwordField.text error:&error];
     if ([error localizedDescription] == nil) {
-        [ServerConnection logout:&error];
         NSDictionary *ns = [ServerConnection search:nil error:&error];
      //   NSString *annotations=@"annotations=?<annotation1>&<annotation2>";
         
@@ -39,7 +38,7 @@
 
 - (IBAction)SignInButtonTouchDOwn:(id)sender {
     if((self.userField.text.length > 1) && (self.passwordField.text.length > 2)) {
-    [self validate];
+        [self validate];
     }
     else{
         [self showMessage:@"Username or password is too short."];
@@ -105,7 +104,13 @@
     } else if(textField == self.passwordField) {
         [self.passwordField resignFirstResponder];
         [self centerFrameView];
-        [self validate];
+        if((self.userField.text.length > 1) && (self.passwordField.text.length > 2)) {
+            NSLog(@"boriz");
+            [self validate];
+        }
+        else{
+            [self showMessage:@"Username or password is too short."];
+        }
     }
     return NO;
 }
