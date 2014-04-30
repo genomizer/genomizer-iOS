@@ -13,7 +13,7 @@
 @property NSString *name;
 @property NSString *createdByUser;
 @property NSMutableArray *files;
-@property NSDictionary *annotations;
+@property NSMutableDictionary *annotations;
 
 - (XYZExperiment*) init:NSArray;
 @end
