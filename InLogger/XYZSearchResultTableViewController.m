@@ -10,11 +10,11 @@
 #import "ServerConnection.h"
 #import "XYZSearchMother.h"
 #import "XYZSearchResultTableViewCell.h"
+#import "XYZExperiment.h"
 
 @interface XYZSearchResultTableViewController ()
 
 @property NSMutableArray *searchResults;
-@property XYZSearchMother *mother;
 @property CGFloat tableCellHeight;
 
 @end
@@ -24,13 +24,22 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSArray* annotations;
-    NSDictionary * allResults= [ServerConnection search:annotations];
-    _mother = [[XYZSearchMother alloc] init];
+   // NSArray* annotations;
+   // NSDictionary * allResults= [ServerConnection search:annotations];
+    //_mother = [[XYZSearchMother alloc] init];
     _tableCellHeight = 120;
  //   self.searchFields = [self createSearchFields ];
   //  [self.tableView reloadData];
+    _searchResults = [self defaultResults ];
     
+}
+
+- (NSMutableArray *) defaultResults
+{
+    NSMutableArray *results = [[NSMutableArray alloc] init];
+    [results addObject:[XYZExperiment defaultExperiment]];
+    [results addObject:[XYZExperiment defaultExperiment]];
+    return results;
 }
 
 - (void)didReceiveMemoryWarning
@@ -60,7 +69,7 @@
 {
     static NSString *CellIdentifier = @"ListPrototypeCell";
     XYZSearchResultTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    [cell setTextFieldText:[_mother getDescriptionOfChildAt:indexPath]];
+    //[cell setTextFieldText:[_mother getDescriptionOfChildAt:indexPath]];
     //cell_mother getDescriptionOfChildAt:indexPath]];
     _tableCellHeight = cell.frame.size.height;
     

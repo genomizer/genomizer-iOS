@@ -10,7 +10,7 @@
 
 @interface XYZExperiment : NSObject
 
-@property NSString *experimentName;
+@property NSString *name;
 @property NSString *createdByUser;
 @property NSMutableArray *files;
 @property NSDictionary *annotations;

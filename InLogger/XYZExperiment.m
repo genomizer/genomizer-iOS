@@ -14,6 +14,7 @@
 
 - (XYZExperiment*) init:NSArray{
     self = [super init];
+    _annotations = [[NSDictionary alloc] init];
     return self;
 }
 
