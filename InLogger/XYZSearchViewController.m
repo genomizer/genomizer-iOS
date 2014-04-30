@@ -8,6 +8,7 @@
 
 #import "XYZSearchViewController.h"
 #import "XYZSearchTableViewCell.h"
+#import "ServerConnection.h"
 
 @interface XYZSearchViewController ()
 
@@ -72,8 +73,9 @@
     return cell;
 }
 - (IBAction)searchButton:(id)sender {
-    
+   [ServerConnection search:nil];
  NSLog(@"text %@", self.searchValues);
+    
       [self performSegueWithIdentifier:@"searchResult" sender:self];
 }
 
@@ -95,14 +97,13 @@
 }
 
 - (void) textFieldDidEndEditing:(UITextField *)textField {
-    if(textField.text.length > 0){
+       if(textField.text.length > 0){
         [self.searchValues setObject:textField.text forKey:textField.placeholder];
-        
     }
     else {
         [self.searchValues removeObjectForKey:textField.placeholder];
     }
-    XYZSearchTableViewCell *cell = [_tableView cellForRowAtIndexPath:0];
+    
     
 }
 - (void) switched: (id) sender {

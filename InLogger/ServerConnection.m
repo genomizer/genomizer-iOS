@@ -41,7 +41,7 @@ NSString *token;
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:POSTReply options:kNilOptions error:nil];
     
   //  token = [json objectForKey:@"token"];
-    NSLog(@"req %@", token);
+    NSLog(@"req %@", json);
     NSLog(@"Header: %ld", (long)httpResp.statusCode);
     
     return httpResp.statusCode;
@@ -53,18 +53,19 @@ NSString *token;
     //create send request
     NSMutableURLRequest *request = [JSONBuilder getSearchJSON:annotations withToken: token];
     NSURLResponse *response;
-    NSError *rr;
     
     //recieve answer
     NSData *POSTReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
     NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
-    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:POSTReply options:kNilOptions error:nil];
-
-    NSLog(@"%d", [json count]);
-   
-    //TODO: Create experiments from data
     
-    return nil;
+    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:POSTReply options: NSJSONReadingMutableContainers error:nil];
+
+  
+  //  NSLog(@"search head: %ld", (long)httpResp.statusCode);
+    NSArray *annotationsArray = [[json valueForKey:@"annotations"]objectAtIndex:0];
+   NSLog(@"search names %@", annotationsArray);
+    NSLog(@"search names %@", [json valueForKey:@"created by"]);
+    return json;
 }
 
 
