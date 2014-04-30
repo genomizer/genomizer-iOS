@@ -7,8 +7,10 @@
 //
 
 #import "XYZExperiment.h"
+#import "XYZExperimentFile.h"
 
 @implementation XYZExperiment
+
 
 - (XYZExperiment*) init:NSArray{
     self = [super init];
@@ -16,7 +18,10 @@
 }
 
 
++ (void) createExperiment:(NSDictionary*)json{
 
+    
+}
 
 //:::::::::: SAFE, IGNORE :::::::::
 /*

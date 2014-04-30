@@ -12,9 +12,8 @@
 
 @property NSString *experimentName;
 @property NSString *createdByUser;
-@property NSArray *files;
+@property NSMutableArray *files;
 @property NSDictionary *annotations;
 
 - (XYZExperiment*) init:NSArray;
-
 @end
