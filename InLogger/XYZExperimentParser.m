@@ -19,15 +19,16 @@
     exp.createdByUser = [json valueForKey:@"created by"][0];
     
     // add annotations
-    NSArray *annotationsArray = [[json valueForKey:@"annotations"]objectAtIndex:0];
+    NSArray *annotationsArray = [json  valueForKey:@"annotations"];
+    NSLog(@"*******2 %@", [json objectForKey:@"created by"]);
     NSMutableDictionary* annonDict = [NSMutableDictionary dictionary];
     for(NSDictionary *annon in annotationsArray){
-        [annonDict setObject:[annon valueForKey:@"value"] forKey:[annon valueForKey:@"name"]];
+        [annonDict setObject:[annon objectForKey:@"value"] forKey:[annon objectForKey:@"name"]];
     }
     exp.annotations = annonDict;
     
     // add files
-    NSArray *filesArray = [[json valueForKey:@"files"]objectAtIndex:0];
+    NSArray *filesArray = [json valueForKey:@"files"];
     for(NSDictionary *file in filesArray){
         XYZExperimentFile *expFile = [[XYZExperimentFile alloc] init];
         expFile.idFile = [file valueForKey:@"id"];

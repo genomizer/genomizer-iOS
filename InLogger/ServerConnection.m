@@ -79,12 +79,15 @@ NSString *token;
     if(internalError == nil)
     {
         if(httpResp.statusCode == 200){
-            NSDictionary *json = [NSJSONSerialization JSONObjectWithData:POSTReply options: NSJSONReadingMutableContainers error:&internalError];
+            NSArray *array = [NSJSONSerialization JSONObjectWithData:POSTReply options: NSJSONReadingMutableContainers error:&internalError];
             if(internalError == nil)
             {
                 NSMutableArray *experiments = [[NSMutableArray alloc] init];
-                [experiments addObject:[XYZExperimentParser expParser:json]];
-        
+                for(NSDictionary *json in array)
+                {
+                    NSLog(@"****** %@", json);
+                    [experiments addObject:[XYZExperimentParser expParser:json]];
+                }
                 return experiments;
             }
             else
