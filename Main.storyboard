@@ -632,10 +632,10 @@
             </objects>
             <point key="canvasLocation" x="2433" y="993"/>
         </scene>
-        <!--View Controller-->
+        <!--More View Controller-->
         <scene sceneID="CYu-Ig-EHi">
             <objects>
-                <viewController id="p2d-tC-kAj" sceneMemberID="viewController">
+                <viewController id="p2d-tC-kAj" customClass="MoreViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9Yp-85-UEo"/>
                         <viewControllerLayoutGuide type="bottom" id="ZPy-QJ-wXB"/>
@@ -658,7 +658,8 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="Csn-f6-9k9" kind="modal" id="F3Y-aA-19j"/>
+                                    <action selector="logoutButtonTouched:" destination="p2d-tC-kAj" eventType="touchUpInside" id="cCZ-Bb-X8W"/>
+                                    <segue destination="x1l-HJ-QPz" kind="modal" id="bDh-8s-HKm"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -668,7 +669,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nhz-aV-3zZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2894" y="993"/>
+            <point key="canvasLocation" x="834" y="609"/>
         </scene>
         <!--Data File View Controller - Files-->
         <scene sceneID="Zof-6r-61V">
@@ -917,7 +918,4 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
-    <inferredMetricsTieBreakers>
-        <segue reference="F3Y-aA-19j"/>
-    </inferredMetricsTieBreakers>
 </document>

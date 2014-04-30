@@ -25,7 +25,6 @@
     NSError *error;
     [ServerConnection login:self.userField.text withPassword:self.passwordField.text error:&error];
     if ([error localizedDescription] == nil) {
-        [ServerConnection logout:&error];
         NSDictionary *ns = [ServerConnection search:nil error:&error];
      //   NSString *annotations=@"annotations=?<annotation1>&<annotation2>";
         
