@@ -21,33 +21,38 @@
 @implementation XYZLogInViewController
 
 - (void)validate {
-    int httpResponse = [ServerConnection login:self.userField.text withPassword:self.passwordField.text];
-    if (httpResponse == 200) {
-        [ServerConnection logout];
+    NSError *error;
+    [ServerConnection login:self.userField.text withPassword:self.passwordField.text error:&error];
+    if ([error localizedDescription] == nil) {
+        NSDictionary *ns = [ServerConnection search:nil error:&error];
      //   NSString *annotations=@"annotations=?<annotation1>&<annotation2>";
         
         [self performSegueWithIdentifier:@"loginSegue" sender:self];
     } else {
-        [self showMessage];
+        [self showMessage:[error localizedDescription]];
     }
     
+  //  XYZSearchMother *s = [[XYZSearchMother alloc] init:ns];
 }
 
 - (IBAction)SignInButtonTouchDOwn:(id)sender {
-    
-    [self validate];
+    if((self.userField.text.length > 1) && (self.passwordField.text.length > 2)) {
+        [self validate];
+    }
+    else{
+        [self showMessage:@"Username or password is too short."];
+    }
 }
 
-- (IBAction)showMessage
+- (IBAction)showMessage:(NSString*) error
 {
     UIAlertView *loginFailed = [[UIAlertView alloc]
-                                initWithTitle:@"" message:@"Wrong username or password."
+                                initWithTitle:@"" message:error
                                 delegate:nil cancelButtonTitle:@"Try again"
                                 otherButtonTitles:nil];
     
     [loginFailed show];
 }
-
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -98,7 +103,13 @@
     } else if(textField == self.passwordField) {
         [self.passwordField resignFirstResponder];
         [self centerFrameView];
-        [self validate];
+        if((self.userField.text.length > 1) && (self.passwordField.text.length > 2)) {
+            NSLog(@"boriz");
+            [self validate];
+        }
+        else{
+            [self showMessage:@"Username or password is too short."];
+        }
     }
     return NO;
 }

@@ -10,7 +10,8 @@
 
 @interface ServerConnection : NSObject
 
-+ (int)login:(NSString *)username withPassword:(NSString *)password;
-+ (int)logout;
-+ (NSMutableArray*)search:(NSArray *) annotations;
++ (int)login:(NSString *)username withPassword:(NSString *)password error:(NSError**) error;
++ (int)logout:(NSError**) error;
++ (NSDictionary*)search:(NSArray *) annotations error:(NSError**) error;
++ (NSDictionary*)parseJSONToDictionary:(NSData*)POSTReply error:(NSError**)error;
 @end

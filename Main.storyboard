@@ -26,7 +26,7 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="qhR-JL-4yB">
                                 <rect key="frame" x="70" y="312" width="180" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iwx-tD-EHi">
@@ -39,12 +39,19 @@
                                     <action selector="SignInButtonTouchDOwn:" destination="Csn-f6-9k9" eventType="touchUpInside" id="0e2-Bu-o9E"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="taco" translatesAutoresizingMaskIntoConstraints="NO" id="awD-vC-4gM">
-                                <rect key="frame" x="40" y="77" width="240" height="128"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="80" verticalHuggingPriority="237" fixedFrame="YES" placeholderIntrinsicWidth="138" placeholderIntrinsicHeight="128" image="taco" translatesAutoresizingMaskIntoConstraints="NO" id="AtL-z1-FEd">
+                                <rect key="frame" x="95" y="58" width="130" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Genomizer" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A3I-4g-ZnF">
+                                <rect key="frame" x="102" y="194" width="117" height="26"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <color key="textColor" red="0.088182518708678548" green="0.29770220251103074" blue="0.51135784646739135" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="highlightedColor" red="0.071601144374781031" green="0.21912855349169111" blue="0.39514690896739135" alpha="1" colorSpace="calibratedRGB"/>
+                            </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.70607581703814914" green="1" blue="0.84138083468231817" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.98121178668478259" green="0.98121178668478259" blue="0.98121178668478259" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="heV-ix-3Xk" firstAttribute="leading" secondItem="4hb-dP-mX9" secondAttribute="leading" constant="70" id="0e6-iK-3VZ"/>
@@ -53,13 +60,9 @@
                             <constraint firstItem="heV-ix-3Xk" firstAttribute="top" secondItem="GTu-al-233" secondAttribute="bottom" constant="231" id="JbR-qT-BAO"/>
                             <constraint firstAttribute="trailing" secondItem="iwx-tD-EHi" secondAttribute="trailing" constant="136" id="UFf-sA-vNk"/>
                             <constraint firstAttribute="trailing" secondItem="heV-ix-3Xk" secondAttribute="trailing" constant="70" id="UHe-za-YpW"/>
-                            <constraint firstItem="awD-vC-4gM" firstAttribute="top" secondItem="GTu-al-233" secondAttribute="bottom" constant="57" id="VNz-TI-pdL"/>
-                            <constraint firstAttribute="trailing" secondItem="awD-vC-4gM" secondAttribute="trailing" constant="40" id="Zbk-U1-Dpm"/>
                             <constraint firstItem="iwx-tD-EHi" firstAttribute="leading" secondItem="4hb-dP-mX9" secondAttribute="leading" constant="137" id="bLH-ao-LcZ"/>
                             <constraint firstAttribute="trailing" secondItem="qhR-JL-4yB" secondAttribute="trailing" constant="70" id="hga-iH-Qyh"/>
-                            <constraint firstItem="awD-vC-4gM" firstAttribute="leading" secondItem="4hb-dP-mX9" secondAttribute="leading" constant="40" id="kjZ-x1-Psk"/>
                             <constraint firstItem="qhR-JL-4yB" firstAttribute="top" secondItem="heV-ix-3Xk" secondAttribute="bottom" constant="31" id="luW-bA-jU0"/>
-                            <constraint firstItem="heV-ix-3Xk" firstAttribute="top" secondItem="awD-vC-4gM" secondAttribute="bottom" constant="46" id="mGQ-50-f5m"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Genomixer" id="u7O-yS-ijM">
@@ -627,12 +630,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rqa-sC-xTB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2426" y="1683"/>
+            <point key="canvasLocation" x="2433" y="993"/>
         </scene>
-        <!--View Controller-->
+        <!--More View Controller-->
         <scene sceneID="CYu-Ig-EHi">
             <objects>
-                <viewController id="p2d-tC-kAj" sceneMemberID="viewController">
+                <viewController id="p2d-tC-kAj" customClass="MoreViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9Yp-85-UEo"/>
                         <viewControllerLayoutGuide type="bottom" id="ZPy-QJ-wXB"/>
@@ -654,6 +657,10 @@
                                 <state key="normal" title="Logout">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="logoutButtonTouched:" destination="p2d-tC-kAj" eventType="touchUpInside" id="cCZ-Bb-X8W"/>
+                                    <segue destination="x1l-HJ-QPz" kind="modal" id="bDh-8s-HKm"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -662,7 +669,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nhz-aV-3zZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2945" y="1683"/>
+            <point key="canvasLocation" x="834" y="609"/>
         </scene>
         <!--Data File View Controller - Files-->
         <scene sceneID="Zof-6r-61V">
@@ -916,7 +923,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="taco" width="580" height="480"/>
+        <image name="taco" width="392" height="372"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
