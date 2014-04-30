@@ -75,7 +75,8 @@
     return cell;
 }
 - (IBAction)searchButton:(id)sender {
-   self.searchResults = [ServerConnection search:nil];
+    NSError *error;
+    self.searchResults = [ServerConnection search:nil error:&error];
    [self performSegueWithIdentifier:@"searchResult" sender:self.searchResults];
 }
 

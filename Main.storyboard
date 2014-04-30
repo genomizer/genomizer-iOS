@@ -630,7 +630,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rqa-sC-xTB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2426" y="1683"/>
+            <point key="canvasLocation" x="2433" y="993"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="CYu-Ig-EHi">
@@ -657,6 +657,9 @@
                                 <state key="normal" title="Logout">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="Csn-f6-9k9" kind="modal" id="F3Y-aA-19j"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -665,7 +668,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nhz-aV-3zZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2945" y="1683"/>
+            <point key="canvasLocation" x="2894" y="993"/>
         </scene>
         <!--Data File View Controller - Files-->
         <scene sceneID="Zof-6r-61V">
@@ -914,4 +917,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="F3Y-aA-19j"/>
+    </inferredMetricsTieBreakers>
 </document>

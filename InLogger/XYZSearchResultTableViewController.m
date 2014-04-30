@@ -29,7 +29,7 @@
     [super viewDidLoad];
     NSArray* annotations;
     NSDictionary * allResults= [ServerConnection search:annotations error:&error];
-    _mother = [[XYZSearchMother alloc] init];
+ 
     _tableCellHeight = 120;
  //   self.searchFields = [self createSearchFields ];
   //  [self.tableView reloadData];
