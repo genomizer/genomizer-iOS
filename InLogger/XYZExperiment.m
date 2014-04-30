@@ -17,11 +17,11 @@
 
 @implementation XYZExperiment
 
-- (XYZExperiment *) init
+
+- (XYZExperiment*) init
 {
     self = [super init];
-    _annotations = [[NSDictionary alloc] init];
-    NSLog(@"INIT");
+    _annotations = [[NSMutableDictionary alloc] init];
     return self;
 }
 
@@ -31,19 +31,9 @@
     XYZExperiment *exp = [[XYZExperiment alloc] init];
     exp.name = @"Experiment name";
     exp.createdByUser = @"Yuri Yuri";
-    [exp setValue:@"abc123" forAnnotation:@"pubmedId"];
-    NSString *key = @"type";
-    [exp setValue: @"raw" forAnnotation:key];
-    [exp setValue: @"human" forAnnotation:@"specie"];
-    NSLog(@"TEST:");
-    
-    NSEnumerator *enumerator = [exp.annotations keyEnumerator];
-    id key2;
-    while ((key2 = [enumerator nextObject])){
-        NSLog(@"%@", [exp.annotations objectForKey: key2]);
-    }
-    
-    NSLog(@"%@", [exp.annotations valueForKey:key]);
+    [exp.annotations setValue: @"abc123" forKey:@"pubmedId"];
+    [exp.annotations setValue: @"raw" forKey:@"type"];
+    [exp.annotations setValue: @"specie" forKey:@"human"];
     return exp;
     
 }
@@ -56,13 +46,7 @@
 
 - (NSString *) getValueForAnnotation: (NSString *) annotation
 {
-    NSLog(@"go");
-
-    NSLog(annotation);
-    NSString *asd = [_annotations valueForKey:annotation];
-    NSLog(asd);
-    NSLog(@"done");
-    return asd;
+    return [_annotations valueForKey:annotation];
 }
 
 

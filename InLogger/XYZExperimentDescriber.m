@@ -41,8 +41,6 @@
     [description appendString: [self createRowForAnnotation:@"Name" withValue:experiment.name andNewLine:YES]];
     [description appendString: [self createRowForAnnotation:@"Created by" withValue:experiment.createdByUser andNewLine:YES]];
     for (NSInteger i = 0; i < [_annotations count]; i++) {
-        NSString *str = [_annotations objectAtIndex:i];
-        NSLog(str);
         [description appendString: [self createRowForAnnotation:_annotations[i]
                                                      withValue:[experiment getValueForAnnotation:[_annotations objectAtIndex:i]]
                                                      andNewLine:i != [_annotations count] -1]];

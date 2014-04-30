@@ -12,7 +12,7 @@
 
 @property NSString *name;
 @property NSString *createdByUser;
-@property NSArray *files;
+@property NSMutableArray *files;
 @property NSMutableDictionary *annotations;
 
 - (void) setValue: (id) value forAnnotation: (NSString*) annotation;

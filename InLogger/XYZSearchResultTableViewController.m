@@ -40,8 +40,8 @@
 - (NSMutableArray *) defaultResults
 {
     NSMutableArray *results = [[NSMutableArray alloc] init];
- //   [results addObject:[XYZExperiment defaultExperiment]];
-   // [results addObject:[XYZExperiment defaultExperiment]];
+    [results addObject:[XYZExperiment defaultExperiment]];
+    [results addObject:[XYZExperiment defaultExperiment]];
     return results;
 }
 
@@ -81,6 +81,11 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return _tableCellHeight;
+}
+
+- (IBAction)experimentTouchUpInside:(id)sender
+{
+    
 }
 
 /*
