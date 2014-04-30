@@ -7,6 +7,7 @@
 //
 
 #import "XYZExperiment.h"
+#import "XYZExperimentFile.h"
 
 
 @interface XYZExperiment()

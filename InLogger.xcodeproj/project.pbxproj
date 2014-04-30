@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6484A2F4190E8F160071BB23 /* ServerConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6484A2F3190E8F160071BB23 /* ServerConnection.m */; };
+		649778EB1910EC9D000FD14F /* XYZExperimentParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 649778EA1910EC9D000FD14F /* XYZExperimentParser.m */; };
 		76E2DA9F190E96C90048069D /* JSONBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 76E2DA9E190E96C90048069D /* JSONBuilder.m */; };
 		76F638D8190FD99300F0F4BF /* XYZExperiment.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F638D7190FD99300F0F4BF /* XYZExperiment.m */; };
 		76F638DB190FDD9D00F0F4BF /* XYZExperimentFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F638DA190FDD9D00F0F4BF /* XYZExperimentFile.m */; };
@@ -62,6 +63,8 @@
 /* Begin PBXFileReference section */
 		6484A2F2190E8F160071BB23 /* ServerConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerConnection.h; sourceTree = "<group>"; };
 		6484A2F3190E8F160071BB23 /* ServerConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerConnection.m; sourceTree = "<group>"; };
+		649778E91910EC9D000FD14F /* XYZExperimentParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZExperimentParser.h; sourceTree = "<group>"; };
+		649778EA1910EC9D000FD14F /* XYZExperimentParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZExperimentParser.m; sourceTree = "<group>"; };
 		76E2DA9D190E96C90048069D /* JSONBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSONBuilder.h; path = ../JSONBuilder.h; sourceTree = "<group>"; };
 		76E2DA9E190E96C90048069D /* JSONBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSONBuilder.m; path = ../JSONBuilder.m; sourceTree = "<group>"; };
 		76F638D6190FD99200F0F4BF /* XYZExperiment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZExperiment.h; sourceTree = "<group>"; };
@@ -181,6 +184,8 @@
 				DE821D1A190F9C0000EEAFE3 /* XYZSearchMother.m */,
 				76F638D6190FD99200F0F4BF /* XYZExperiment.h */,
 				76F638D7190FD99300F0F4BF /* XYZExperiment.m */,
+				649778E91910EC9D000FD14F /* XYZExperimentParser.h */,
+				649778EA1910EC9D000FD14F /* XYZExperimentParser.m */,
 				76F638D9190FDD9D00F0F4BF /* XYZExperimentFile.h */,
 				76F638DA190FDD9D00F0F4BF /* XYZExperimentFile.m */,
 			);
@@ -435,6 +440,7 @@
 				DEEF6AF419094F8A00A2CD8C /* main.m in Sources */,
 				DE25D8021910D72A0084BDDC /* XYZDataFileViewController.m in Sources */,
 				DE821D18190F982F00EEAFE3 /* XYZSearchResult.m in Sources */,
+				649778EB1910EC9D000FD14F /* XYZExperimentParser.m in Sources */,
 				DEEF6B1B1909553C00A2CD8C /* XYZLogInViewController.m in Sources */,
 				DED1228D190E966200D8E530 /* XYZInLogger.m in Sources */,
 			);

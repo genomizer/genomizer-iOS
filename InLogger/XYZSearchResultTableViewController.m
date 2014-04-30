@@ -40,8 +40,8 @@
 - (NSMutableArray *) defaultResults
 {
     NSMutableArray *results = [[NSMutableArray alloc] init];
-    [results addObject:[XYZExperiment defaultExperiment]];
-    [results addObject:[XYZExperiment defaultExperiment]];
+ //   [results addObject:[XYZExperiment defaultExperiment]];
+   // [results addObject:[XYZExperiment defaultExperiment]];
     return results;
 }
 

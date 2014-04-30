@@ -8,7 +8,7 @@
 
 #import "ServerConnection.h"
 #import "JSONBuilder.h"
-#import "XYZExperiment.h"
+#import "XYZExperimentParser.h"
 
 
 @implementation ServerConnection
@@ -43,6 +43,7 @@ NSString *token;
   //  token = [json objectForKey:@"token"];
     NSLog(@"req %@", json);
     NSLog(@"Header: %ld", (long)httpResp.statusCode);
+   
     
     return httpResp.statusCode;
 }
@@ -59,12 +60,9 @@ NSString *token;
     NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
     
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:POSTReply options: NSJSONReadingMutableContainers error:nil];
-
-  
-  //  NSLog(@"search head: %ld", (long)httpResp.statusCode);
-    NSArray *annotationsArray = [[json valueForKey:@"annotations"]objectAtIndex:0];
-   NSLog(@"search names %@", annotationsArray);
-    NSLog(@"search names %@", [json valueForKey:@"created by"]);
+    NSLog(@"req %@", json);
+ [XYZExperimentParser expParser:json];
+    
     return json;
 }
 
