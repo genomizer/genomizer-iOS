@@ -22,17 +22,19 @@
 @implementation XYZLogInViewController
 
 - (void)validate {
-    int httpResponse = [ServerConnection login:self.userField.text withPassword:self.passwordField.text];
-    if (httpResponse == 200) {
-        [ServerConnection logout];
+    NSError *error;
+    [ServerConnection login:self.userField.text withPassword:self.passwordField.text error:&error];
+    if ([error localizedDescription] == nil) {
+        [ServerConnection logout:&error];
+        NSDictionary *ns = [ServerConnection search:nil error:&error];
      //   NSString *annotations=@"annotations=?<annotation1>&<annotation2>";
         
         [self performSegueWithIdentifier:@"loginSegue" sender:self];
     } else {
-        [self showMessage];
+        [self showMessage:error];
+       // NSLog(@"errormessage %@",[error localizedDescription]);
     }
     
-    NSDictionary *ns = [ServerConnection search:nil];
   //  XYZSearchMother *s = [[XYZSearchMother alloc] init:ns];
 }
 
@@ -41,16 +43,15 @@
     [self validate];
 }
 
-- (IBAction)showMessage
+- (IBAction)showMessage:(NSError*) error
 {
     UIAlertView *loginFailed = [[UIAlertView alloc]
-                                initWithTitle:@"" message:@"Wrong username or password."
+                                initWithTitle:@"" message:[error localizedDescription]
                                 delegate:nil cancelButtonTitle:@"Try again"
                                 otherButtonTitles:nil];
     
     [loginFailed show];
 }
-
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
