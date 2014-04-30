@@ -31,8 +31,7 @@
         
         [self performSegueWithIdentifier:@"loginSegue" sender:self];
     } else {
-        [self showMessage:error];
-       // NSLog(@"errormessage %@",[error localizedDescription]);
+        [self showMessage:[error localizedDescription]];
     }
     
   //  XYZSearchMother *s = [[XYZSearchMother alloc] init:ns];
@@ -43,10 +42,10 @@
     [self validate];
 }
 
-- (IBAction)showMessage:(NSError*) error
+- (IBAction)showMessage:(NSString*) error
 {
     UIAlertView *loginFailed = [[UIAlertView alloc]
-                                initWithTitle:@"" message:[error localizedDescription]
+                                initWithTitle:@"" message:error
                                 delegate:nil cancelButtonTitle:@"Try again"
                                 otherButtonTitles:nil];
     
