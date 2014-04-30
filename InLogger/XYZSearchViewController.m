@@ -27,7 +27,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.searchFields = [self createSearchFields ];
+    self.searchFields = [self createSearchFields];
     [self.tableView reloadData];
     self.searchValues = [NSMutableDictionary dictionary];
     self.selectedFields = [[NSMutableArray alloc] init];
@@ -108,7 +108,8 @@
 }
 
 - (void) textFieldDidEndEditing:(UITextField *)textField {
-       if(textField.text.length > 0){
+    
+    if(textField.text.length > 0){
         [self.searchValues setObject:textField.text forKey:textField.placeholder];
     }
     else {
@@ -120,9 +121,16 @@
 - (void) switched: (id) sender {
     UISwitch * currentSwitch = (UISwitch *) sender;
     NSString *placeholder = [self.searchFields objectAtIndex:currentSwitch.tag];
-    if(currentSwitch.on && ![self.selectedFields containsObject:placeholder]) {
+  
+    if(currentSwitch.on && ![self.selectedFields containsObject:placeholder])
+    {
         [self.selectedFields addObject:placeholder];
-        NSLog(@"text %@", self.selectedFields);
+        NSLog(@"add %@", self.selectedFields);
+    }
+    else if(!currentSwitch.on && [self.selectedFields containsObject:placeholder])
+    {
+        [self.selectedFields removeObject:placeholder];
+        NSLog(@"remove %@", self.selectedFields);
     }
 }
 

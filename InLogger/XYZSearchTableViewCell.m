@@ -28,9 +28,6 @@
         self.switchButton.on = false;
         self.switchButton.enabled = false;
     } else {
-        if(!self.switchButton.enabled) {
-            self.switchButton.on = true;
-        }
         self.switchButton.enabled = true;
     }
 }
@@ -39,6 +36,10 @@
     [self.superview endEditing:YES];
     [super touchesBegan:touches withEvent:event];
     
+}
+
+- (void)setButtonOn{
+    self.switchButton.on = true;
 }
 
 
