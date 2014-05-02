@@ -43,9 +43,10 @@
 {
     NSString *annotationString = @"/search/annotations=?";
     NSString *annotationsStringComplete = [annotationString stringByAppendingString:annotations];
+    NSString *encodedAnnotations = [annotationsStringComplete stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSLog(@"hej %@",annotationsStringComplete);
     NSMutableURLRequest *request =  [self basicRequest:@"GET" withToken:token];
-    [request setURL:[NSURL URLWithString: [[self getServerURL] stringByAppendingString:annotationString]]];
+    [request setURL:[NSURL URLWithString: [[self getServerURL] stringByAppendingString:encodedAnnotations]]];
     return request;
 }
 
