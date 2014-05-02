@@ -14,5 +14,6 @@
 - (void) addAnnotation: (NSString *) annotation;
 - (void) removeAnnotation: (NSString *) annotation;
 - (NSString *) getDescriptionOf: (XYZExperiment*) experiment;
++ (NSString *) formatAnnotation : (NSString *) annotation;
 
 @end

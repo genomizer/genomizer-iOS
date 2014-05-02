@@ -10,15 +10,17 @@
 #import "XYZSearchTableViewCell.h"
 #import "XYZSearchResultTableViewController.h"
 #import "ServerConnection.h"
+#import "XYZExperimentDescriber.h"
 
 @interface XYZSearchViewController ()
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property NSMutableArray *selectedFields;
-@property NSMutableArray *searchFields;
+@property NSArray *searchFields;
 @property NSMutableArray *searchResults;
 @property NSMutableDictionary *searchValues;
+@property NSMutableArray *tableCells;
 
 @end
 
@@ -29,15 +31,16 @@
     [super viewDidLoad];
     self.searchFields = [self createSearchFields];
     [self.tableView reloadData];
-    self.searchValues = [NSMutableDictionary dictionary];
     self.selectedFields = [[NSMutableArray alloc] init];
+    self.tableCells = [[NSMutableArray alloc] init];
     
 }
 
-- (NSMutableArray *) createSearchFields
+- (NSArray *) createSearchFields
 {
-    
-    return [NSMutableArray arrayWithObjects:@"Experiment ID", @"Publication ID" , @"Type of data", @"Species", @"Genom release", @"Cell-line", @"Developmental stage", @"Sex", @"Tissue", @"Processing", @"Asd", nil];
+    NSError *error;
+    return [ServerConnection getAvailableAnnotations:&error];
+    //return [NSMutableArray arrayWithObjects:@"experimentID", @"pubmedId" , @"Type of data", @"Species", @"Genom release", @"Cell-line", @"Developmental stage", @"Sex", @"Tissue", @"Processing", nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -65,13 +68,14 @@
     static NSString *CellIdentifier = @"ListPrototypeCell";
     XYZSearchTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     NSString *annotation = [self.searchFields objectAtIndex:indexPath.row];
-    cell.inputField.placeholder = annotation;
+    cell.inputField.placeholder = [XYZExperimentDescriber formatAnnotation: annotation];
+    cell.annotation = annotation;
     cell.inputField.tag = indexPath.row;
     cell.switchButton.enabled = false;
     cell.switchButton.on = false;
     cell.switchButton.tag = indexPath.row;
-    [cell.switchButton addTarget:self action:@selector(switched:) forControlEvents:UIControlEventValueChanged];
     cell.inputField.delegate = self;
+    [_tableCells addObject:cell];
     return cell;
 }
 
@@ -99,7 +103,14 @@
 }
 - (IBAction)searchButton:(id)sender {
     NSError *error;
-    self.searchResults = [ServerConnection search:[self createAnnotationsSearch] error:&error];
+    _searchValues = [NSMutableDictionary dictionary];
+    for (XYZSearchTableViewCell *cell in _tableCells) {
+        if (cell.switchButton.on) {
+            [_searchValues setObject:cell.inputField.text forKey:cell.annotation];
+        }
+    }
+    NSLog(@"asd: %@", _searchValues);
+    self.searchResults = [ServerConnection search:nil error:&error];
    [self performSegueWithIdentifier:@"searchResult" sender:self.searchResults];
 }
 
@@ -123,38 +134,6 @@
     [self.view endEditing:YES];
 
     return NO;
-}
-
-- (void) textFieldDidBeginEditing:(UITextField *)textField {
-   // XYZSearchTableViewCell *cell = [_tableView cellForRowAtIndexPath:0];
-  //  cell.switchButton.on=true;
-}
-
-- (void) textFieldDidEndEditing:(UITextField *)textField {
-    
-    if(textField.text.length > 0){
-        [self.searchValues setObject:textField.text forKey:textField.placeholder];
-    }
-    else {
-        [self.searchValues removeObjectForKey:textField.placeholder];
-    }
-    
-    
-}
-- (void) switched: (id) sender {
-    UISwitch * currentSwitch = (UISwitch *) sender;
-    NSString *placeholder = [self.searchFields objectAtIndex:currentSwitch.tag];
-  
-    if(currentSwitch.on && ![self.selectedFields containsObject:placeholder])
-    {
-        [self.selectedFields addObject:placeholder];
-        NSLog(@"add %@", self.selectedFields);
-    }
-    else if(!currentSwitch.on && [self.selectedFields containsObject:placeholder])
-    {
-        [self.selectedFields removeObject:placeholder];
-        NSLog(@"remove %@", self.selectedFields);
-    }
 }
 
 - (IBAction)touchUpInsideSwitch:(id)sender {
