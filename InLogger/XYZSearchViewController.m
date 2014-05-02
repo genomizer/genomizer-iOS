@@ -49,6 +49,33 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)textFieldDidBeginEditing:(UITextField *)textField
+{
+    _tableView.contentInset = UIEdgeInsetsMake(0, 0, 117, 0);
+    UITableViewCell *cell;
+    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
+        // Load resources for iOS 6.1 or earlier
+        cell = (UITableViewCell *) textField.superview.superview;
+        
+    } else {
+        // Load resources for iOS 7 or later
+        cell = (UITableViewCell *) textField.superview.superview.superview;
+        // TextField -> UITableVieCellContentView -> (in iOS 7!)ScrollView -> Cell!
+    }
+    [_tableView scrollToRowAtIndexPath:[_tableView indexPathForCell:cell] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+
+}
+
+/*
+- (IBAction)annotationInputFieldEditingDidBegin:(id)sender {
+    //_tableView.contentInset = UIEdgeInsetsMake(0, 0, 300, 0);
+    CGPoint buttonPosition = [sender convertPoint:CGPointZero toView:self.tableView];
+    NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:buttonPosition];
+   // UITextField *textField = (UITextField *)(sender);
+   // XYZSearchTableViewCell *cell = (XYZSearchTableViewCell *)[textField superview];
+    //[_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath inSection: 2] animated:YES];
+    [_tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionNone animated:YES];
+}*/
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -70,11 +97,12 @@
     NSString *annotation = [self.searchFields objectAtIndex:indexPath.row];
     cell.inputField.placeholder = [XYZExperimentDescriber formatAnnotation: annotation];
     cell.annotation = annotation;
-    cell.inputField.tag = indexPath.row;
-    cell.switchButton.enabled = false;
-    cell.switchButton.on = false;
-    cell.switchButton.tag = indexPath.row;
+    if(cell.inputField.text.length == 0) {
+        cell.switchButton.enabled = false;
+        cell.switchButton.on = false;
+    }
     cell.inputField.delegate = self;
+    cell.controller = self;
     [_tableCells addObject:cell];
     return cell;
 }
@@ -131,14 +159,18 @@
 
 
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+- (void)hideKeyboardAndAdjustTable {
     [self.view endEditing:YES];
+    _tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+}
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self hideKeyboardAndAdjustTable];
     return NO;
 }
 
 - (IBAction)touchUpInsideSwitch:(id)sender {
-    [self.view endEditing:YES];
+    [self hideKeyboardAndAdjustTable];
 }
 
 

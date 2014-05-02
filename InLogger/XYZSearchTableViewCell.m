@@ -34,7 +34,7 @@
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    [self.superview endEditing:YES];
+    [_controller hideKeyboardAndAdjustTable];
     [super touchesBegan:touches withEvent:event];
     
 }

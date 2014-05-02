@@ -7,12 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XYZSearchViewController.h"
 
 @interface XYZSearchTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UITextField *inputField;
 @property (weak, nonatomic) IBOutlet UISwitch *switchButton;
 @property NSString *annotation;
+@property XYZSearchViewController *controller;
+
 
 - (void)setButtonOn;
 

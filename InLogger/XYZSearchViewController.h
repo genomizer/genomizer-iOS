@@ -10,4 +10,6 @@
 
 @interface XYZSearchViewController : UIViewController<UITextFieldDelegate>
 
+- (void)hideKeyboardAndAdjustTable;
+
 @end
