@@ -29,6 +29,7 @@
         self.switchButton.enabled = false;
     } else {
         self.switchButton.enabled = true;
+        self.switchButton.on = true;
     }
 }
 

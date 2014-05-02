@@ -12,6 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *inputField;
 @property (weak, nonatomic) IBOutlet UISwitch *switchButton;
+@property NSString *annotation;
 
 - (void)setButtonOn;
 
