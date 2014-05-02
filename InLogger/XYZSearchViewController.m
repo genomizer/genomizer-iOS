@@ -74,9 +74,32 @@
     cell.inputField.delegate = self;
     return cell;
 }
+
+-(NSString*)createAnnotationsSearch{
+    int numberOfAnnotations = self.searchValues.count;
+    int annotationsDone = 0;
+     NSString *annoSearch = @"";
+    for(int i=0;i < numberOfAnnotations-1;i++) {
+        annoSearch = [annoSearch stringByAppendingString:@"("];
+    }
+    for(id key in self.searchValues){
+        annotationsDone ++;
+        NSString* value = [self.searchValues objectForKey:key];
+        annoSearch = [annoSearch stringByAppendingString:value];
+        annoSearch = [annoSearch stringByAppendingString:@"["];
+        annoSearch = [annoSearch stringByAppendingString:key];
+        if(annotationsDone == numberOfAnnotations) {
+            annoSearch = [annoSearch stringByAppendingString:@"]"];
+        } else {
+            annoSearch = [annoSearch stringByAppendingString:@"]) AND "];
+        }
+    }
+    return annoSearch;
+    
+}
 - (IBAction)searchButton:(id)sender {
     NSError *error;
-    self.searchResults = [ServerConnection search:nil error:&error];
+    self.searchResults = [ServerConnection search:[self createAnnotationsSearch] error:&error];
    [self performSegueWithIdentifier:@"searchResult" sender:self.searchResults];
 }
 

@@ -68,7 +68,7 @@ NSString *token;
 }
 
  
-+(NSMutableArray*)search:(NSArray*)annotations error:(NSError**) error
++(NSMutableArray*)search:(NSString*)annotations error:(NSError**) error
 {
     NSError *internalError;
    
