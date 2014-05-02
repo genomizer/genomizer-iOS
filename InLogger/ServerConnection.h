@@ -15,4 +15,5 @@
 + (NSMutableArray*)search:(NSArray *) annotations error:(NSError**) error;
 + (void)convert:(NSArray*)fileIDs error:(NSError**)error;
 + (NSDictionary*)parseJSONToDictionary:(NSData*)POSTReply error:(NSError**)error;
++ (NSArray*)getAvailableAnnotations:(NSError**)error;
 @end
