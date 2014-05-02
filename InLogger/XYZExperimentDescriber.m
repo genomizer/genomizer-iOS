@@ -21,7 +21,7 @@ static NSDictionary *ANNOTATION_DICTIONARY;
 + (NSDictionary *) initDictionary
 {
     //return [NSDictionary dictionaryWithObjectsAndKeys:@"pubmedId", @"Publication ID", @"experimentID", @"Experiment ID", @"fileName", @"File Name", nil];
-    return [NSDictionary dictionaryWithObjectsAndKeys:@"Publication ID", @"pubmedId", @"Experiment ID", @"experimentID", @"File Name", @"fileName", nil];
+    return [NSDictionary dictionaryWithObjectsAndKeys:@"Publication ID", @"pubmedId", @"Experiment ID", @"experimentID", @"File Name", @"fileName", @"Species", @"specie", nil];
 }
 
 - (XYZExperimentDescriber *) init
