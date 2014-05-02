@@ -55,6 +55,16 @@
     return request;
 }
 
++(NSMutableURLRequest*)getAvailableAnnotationsJSON:(NSString *) token
+{
+    NSMutableURLRequest *request = [self basicRequest:@"GET" withToken:token];
+    [request setURL:[NSURL URLWithString: [[self getServerURL] stringByAppendingString: @"/annotation"]]];
+    
+    return request;
+}
+
+
+
 + (NSMutableURLRequest*) basicRequest:(NSString*) requestType withToken:(NSString*) token
 {
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
