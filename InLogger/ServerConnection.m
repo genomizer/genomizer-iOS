@@ -114,6 +114,21 @@ NSString *token;
     return nil;
 }
 
++(void)convert:(NSArray*)fileIDs error:(NSError**)error
+{
+    NSError *internalError;
+    NSLog(@"convert: %d", [fileIDs count]);
+
+    for(NSString *fileID in fileIDs)
+    {
+        NSMutableURLRequest *request = [JSONBuilder getConversionJSON:fileID withToken:token];
+        NSHTTPURLResponse *httpResp;
+        [NSURLConnection sendSynchronousRequest:request returningResponse:&httpResp error:&internalError];
+        NSLog(@"**** %@", [internalError localizedDescription]);
+    }
+}
+
+
 +(NSDictionary*)parseJSONToDictionary:(NSData*)POSTReply error:(NSError**)error
 {
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:POSTReply options:kNilOptions error:error];

@@ -14,10 +14,8 @@
 +(XYZExperiment*) expParser:(NSDictionary*) json{
     
     XYZExperiment *exp = [[XYZExperiment alloc] init];
-    //NSLog(@"adsadsads %@", [json valueForKey:@"name"][0]);
-    exp.name = [json valueForKey:@"name"][0];
-    exp.createdByUser = [json valueForKey:@"created by"][0];
-    
+    exp.name = [json objectForKey:@"name"];
+    exp.createdByUser = [json objectForKey:@"created by"];
     // add annotations
     NSArray *annotationsArray = [json  valueForKey:@"annotations"];
     NSLog(@"*******2 %@", [json objectForKey:@"created by"]);
