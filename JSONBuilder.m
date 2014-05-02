@@ -39,9 +39,11 @@
     return request;
 }
 
-+(NSMutableURLRequest*) getSearchJSON:(NSArray*) annotations withToken:(NSString *) token
++(NSMutableURLRequest*) getSearchJSON:(NSString*) annotations withToken:(NSString *) token
 {
     NSString *annotationString = @"/search/annotations=?";
+    NSString *annotationsStringComplete = [annotationString stringByAppendingString:annotations];
+    NSLog(@"hej %@",annotationsStringComplete);
     NSMutableURLRequest *request =  [self basicRequest:@"GET" withToken:token];
     [request setURL:[NSURL URLWithString: [[self getServerURL] stringByAppendingString:annotationString]]];
     return request;

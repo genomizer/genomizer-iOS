@@ -12,7 +12,7 @@
 
 +(NSMutableURLRequest*)getLoginJSON:(NSString *) username withPassword: (NSString *) password;
 +(NSMutableURLRequest*)getLogoutJSON:(NSString *)token;
-+(NSMutableURLRequest*)getSearchJSON:(NSArray *)annotations withToken:(NSString *)token;
++(NSMutableURLRequest*)getSearchJSON:(NSString *)annotations withToken:(NSString *)token;
 +(NSMutableURLRequest*)getConversionJSON:(NSString*)fileID withToken:(NSString *)token;
 +(NSMutableURLRequest*)getAvailableAnnotationsJSON:(NSString *) token;
 @end

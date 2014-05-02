@@ -12,7 +12,7 @@
 
 + (int)login:(NSString *)username withPassword:(NSString *)password error:(NSError**) error;
 + (int)logout:(NSError**) error;
-+ (NSMutableArray*)search:(NSArray *) annotations error:(NSError**) error;
++ (NSMutableArray*)search:(NSString *) annotations error:(NSError**) error;
 + (void)convert:(NSArray*)fileIDs error:(NSError**)error;
 + (NSDictionary*)parseJSONToDictionary:(NSData*)POSTReply error:(NSError**)error;
 + (NSArray*)getAvailableAnnotations:(NSError**)error;

@@ -24,7 +24,7 @@
     NSError *error;
     [ServerConnection login:self.userField.text withPassword:self.passwordField.text error:&error];
     if ([error localizedDescription] == nil) {
-        NSDictionary *ns = [ServerConnection search:nil error:&error];
+    
      //   NSString *annotations=@"annotations=?<annotation1>&<annotation2>";
         
         [self performSegueWithIdentifier:@"loginSegue" sender:self];
