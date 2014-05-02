@@ -117,18 +117,41 @@ NSInteger sortFunc(id id1, id id2, void *context)
     }
 }
 
+- (void)showPopupWithMessage: (NSString *) message{
+    UIAlertView *popup = [[UIAlertView alloc]
+                          initWithTitle:@"" message:message
+                          delegate:nil cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil];
+    [popup show];
+}
+
 - (IBAction)convertToProfileOnTouchUpInside:(id)sender {
     //TODO - Send to server.
     NSMutableArray *fileIDs = [[NSMutableArray alloc] init];
     NSLog(@"Raw cells: %d", [_rawCells count]);
+    NSInteger numOfOn = 0;
     for (NSInteger i = 0; i < [_rawCells count]; i++) {
         XYZDataFileTableViewCell *cell = [_rawCells objectAtIndex:i];
         if (cell.switchButton.on) {
             [fileIDs addObject:cell.fileID];
+            numOfOn ++;
         }
     }
-    NSError *error;
-    [ServerConnection convert:fileIDs error:&error];
+    
+    if (numOfOn > 0) {
+        NSError *error;
+        [ServerConnection convert:fileIDs error:&error];
+        [self showPopupWithMessage:@"Convert order sent to server"];
+    } else {
+        [self showPopupWithMessage:@"Please select files to convert!"];
+    }
+    
+    
+    
+    for (XYZDataFileTableViewCell *cell in _rawCells) {
+        cell.switchButton.on = NO;
+    }
+    
     
 }
 

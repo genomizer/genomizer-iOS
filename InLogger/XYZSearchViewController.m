@@ -79,7 +79,8 @@
     return cell;
 }
 
--(NSString*)createAnnotationsSearch{
+-(NSString*)createAnnotationsSearch
+{
     int numberOfAnnotations = self.searchValues.count;
     int annotationsDone = 0;
      NSString *annoSearch = @"";
@@ -99,8 +100,8 @@
         }
     }
     return annoSearch;
-    
 }
+
 - (IBAction)searchButton:(id)sender {
     NSError *error;
     _searchValues = [NSMutableDictionary dictionary];
@@ -110,7 +111,7 @@
         }
     }
     NSLog(@"asd: %@", _searchValues);
-    self.searchResults = [ServerConnection search:nil error:&error];
+    self.searchResults = [ServerConnection search:[self createAnnotationsSearch] error:&error];
    [self performSegueWithIdentifier:@"searchResult" sender:self.searchResults];
 }
 
