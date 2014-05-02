@@ -27,17 +27,19 @@ NSString *token;
     {
         NSDictionary *json = [self parseJSONToDictionary:POSTReply error:&internalError];
         
-        if(internalError == nil){
+        if(internalError == nil)
+        {
             token = [json objectForKey:@"token"];
             NSLog(@"login token %@", token);
             NSLog(@"Header: %ld", (long)httpResp.statusCode);
             
-            if(httpResp.statusCode == 401){
-                NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-                [dict setObject:@"Incorrect Username/Password" forKey:NSLocalizedDescriptionKey];
-                *error = [NSError errorWithDomain:@"Login" code:0 userInfo:dict];
+            if(httpResp.statusCode != 200)
+            {
+                *error = [self generateErrorObjectFromHTTPError:httpResp.statusCode];
             }
-        } else{
+        }
+        else
+        {
             NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
             [dict setObject:@"Server sent incorrectly formatted data, talk to admin" forKey:NSLocalizedDescriptionKey];
             *error = [NSError errorWithDomain:@"Servererror" code:2 userInfo:dict];
@@ -99,10 +101,7 @@ NSString *token;
         }
         else
         {
-            NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-            [dict setObject:@"Insufficient permissions" forKey:NSLocalizedDescriptionKey];
-            *error = [NSError errorWithDomain:@"Authorization" code:0 userInfo:dict];
-            
+            *error = [self generateErrorObjectFromHTTPError:httpResp.statusCode];
         }
     }
     else{
@@ -153,13 +152,12 @@ NSString *token;
                 NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
                 [dict setObject:@"Server sent incorrectly formatted data, talk to admin" forKey:NSLocalizedDescriptionKey];
                 *error = [NSError errorWithDomain:@"Servererror" code:2 userInfo:dict];
+
             }
         }
         else
         {
-            NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-            [dict setObject:@"Insufficient permissions" forKey:NSLocalizedDescriptionKey];
-            *error = [NSError errorWithDomain:@"Authorization" code:0 userInfo:dict];
+            *error = [self generateErrorObjectFromHTTPError:httpResp.statusCode];
             
         }
     }
@@ -186,4 +184,47 @@ NSString *token;
     return json;
 }
 
++(NSError*)generateErrorObjectFromHTTPError:(NSInteger)errorCode
+{
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+    NSError* error;
+
+    switch(errorCode)
+    {
+        case 204:
+            [dict setObject:@"Empty response from server" forKey:NSLocalizedDescriptionKey];
+            error = [NSError errorWithDomain:@"Empty response" code:0 userInfo:dict];
+            break;
+        case 400:
+            [dict setObject:@"Bad request, talk to the admin" forKey:NSLocalizedDescriptionKey];
+            error = [NSError errorWithDomain:@"Bad request" code:0 userInfo:dict];
+            break;
+        case 401:
+            [dict setObject:@"Insufficient permissions" forKey:NSLocalizedDescriptionKey];
+            error = [NSError errorWithDomain:@"Authorization" code:0 userInfo:dict];
+            break;
+        case 403:
+            [dict setObject:@"Access denied" forKey:NSLocalizedDescriptionKey];
+            error = [NSError errorWithDomain:@"Authorization" code:0 userInfo:dict];
+            break;
+        case 404:
+            [dict setObject:@"Resource not found" forKey:NSLocalizedDescriptionKey];
+            error = [NSError errorWithDomain:@"Resource not found" code:0 userInfo:dict];
+            break;
+        case 405:
+            [dict setObject:@"Action not allowed for chosen files" forKey:NSLocalizedDescriptionKey];
+            error = [NSError errorWithDomain:@"User error" code:0 userInfo:dict];
+            break;
+        case 429:
+            [dict setObject:@"Too many requests, wait a minute and try again" forKey:NSLocalizedDescriptionKey];
+            error = [NSError errorWithDomain:@"Server overloaded" code:0 userInfo:dict];
+            break;
+        case 503:
+            [dict setObject:@"Server down for maintenance, try again later" forKey:NSLocalizedDescriptionKey];
+            error = [NSError errorWithDomain:@"Server maintenance" code:0 userInfo:dict];
+            break;
+    }
+    
+    return error;
+}
 @end
