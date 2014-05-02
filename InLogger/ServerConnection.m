@@ -85,7 +85,7 @@ NSString *token;
                 NSMutableArray *experiments = [[NSMutableArray alloc] init];
                 for(NSDictionary *json in array)
                 {
-                    NSLog(@"****** %@", json);
+                    //NSLog(@"****** %@", json);
                     [experiments addObject:[XYZExperimentParser expParser:json]];
                 }
                 return experiments;
@@ -126,6 +126,51 @@ NSString *token;
         [NSURLConnection sendSynchronousRequest:request returningResponse:&httpResp error:&internalError];
         NSLog(@"**** %@", [internalError localizedDescription]);
     }
+}
+
++ (NSArray*)getAvailableAnnotations:(NSError**)error
+{
+    NSError *internalError;
+    NSHTTPURLResponse *httpResp;
+    
+    NSMutableURLRequest *request = [JSONBuilder getAvailableAnnotationsJSON:token];
+    NSData *POSTReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&httpResp error:&internalError];
+    if(internalError == nil)
+    {
+        if(httpResp.statusCode == 200){
+            NSArray *array = [NSJSONSerialization JSONObjectWithData:POSTReply options: NSJSONReadingMutableContainers error:&internalError];
+            if(internalError == nil)
+            {
+                NSMutableArray *annotations = [[NSMutableArray alloc] init];
+                for(NSDictionary *json in array)
+                {
+                    [annotations addObject:[json objectForKey:@"name"]];
+                }
+                return annotations;
+            }
+            else
+            {
+                NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+                [dict setObject:@"Server sent incorrectly formatted data, talk to admin" forKey:NSLocalizedDescriptionKey];
+                *error = [NSError errorWithDomain:@"Servererror" code:2 userInfo:dict];
+            }
+        }
+        else
+        {
+            NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+            [dict setObject:@"Insufficient permissions" forKey:NSLocalizedDescriptionKey];
+            *error = [NSError errorWithDomain:@"Authorization" code:0 userInfo:dict];
+            
+        }
+    }
+    else{
+        NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+        [dict setObject:@"Could not connect to server" forKey:NSLocalizedDescriptionKey];
+        [dict setObject:internalError forKey:NSUnderlyingErrorKey];
+        *error = [NSError errorWithDomain:@"Connection" code:1 userInfo:dict];
+    }
+    return nil;
+
 }
 
 
