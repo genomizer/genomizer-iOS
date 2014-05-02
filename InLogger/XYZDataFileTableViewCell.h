@@ -12,5 +12,6 @@
 
 @property (weak, nonatomic) IBOutlet UISwitch *switchButton;
 @property (weak, nonatomic) IBOutlet UILabel *textField;
+@property NSString *fileID;
 
 @end

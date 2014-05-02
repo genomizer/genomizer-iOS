@@ -11,6 +11,7 @@
 #import "XYZExperimentFile.h"
 #import "XYZTitleTableViewCell.h"
 #import "XYZDataFileTableViewCell.h"
+#import "ServerConnection.h"
 
 @interface XYZDataFileViewController ()
 
@@ -19,14 +20,6 @@
 @end
 
 @implementation XYZDataFileViewController
-
-- (XYZDataFileViewController *) init
-{
-    self = [super init];
-    _rawCells = [[NSMutableArray alloc] init];
-    
-    return self;
-}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -40,6 +33,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    _rawCells = [[NSMutableArray alloc] init];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -92,6 +86,7 @@ NSInteger sortFunc(id id1, id id2, void *context)
     XYZDataFileTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     cell.textField.text = [file getDescription];
     cell.switchButton.on = NO;
+    cell.fileID = file.idFile;
     if (file.type == RAW) {
         [_rawCells addObject:cell];
     } else {
@@ -124,12 +119,17 @@ NSInteger sortFunc(id id1, id id2, void *context)
 
 - (IBAction)convertToProfileOnTouchUpInside:(id)sender {
     //TODO - Send to server.
+    NSMutableArray *fileIDs = [[NSMutableArray alloc] init];
+    NSLog(@"Raw cells: %d", [_rawCells count]);
     for (NSInteger i = 0; i < [_rawCells count]; i++) {
         XYZDataFileTableViewCell *cell = [_rawCells objectAtIndex:i];
         if (cell.switchButton.on) {
-            
+            [fileIDs addObject:cell.fileID];
         }
     }
+    NSError *error;
+    [ServerConnection convert:fileIDs error:&error];
+    
 }
 
 
