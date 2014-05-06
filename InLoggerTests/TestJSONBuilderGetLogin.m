@@ -29,17 +29,17 @@
     [super tearDown];
 }
 
-- (void)testGetLoginJSONShouldReturnsObject
+- (void)testShouldReturnsObject
 {
     XCTAssertNotNil(self.req);
 }
 
-- (void)testGetLoginJSONShouldReturnNSMutableURLRequest
+- (void)testShouldReturnNSMutableURLRequest
 {
     XCTAssertEqual([NSMutableURLRequest class], [[JSONBuilder getLoginJSON:@"Username" withPassword:@"Password"] class]);
 }
 
-- (void) testGetLoginJSONBodyShouldParseWithoutError
+- (void) testShouldParseWithoutError
 {
     NSData *postData = [self.req HTTPBody];
     NSError *error;
@@ -47,13 +47,13 @@
     XCTAssertNil(error);
 }
 
-- (void) testGetLoginJSONShouldContainBody
+- (void) testShouldContainBody
 {
     NSData *postData = [self.req HTTPBody];
     XCTAssertNotNil(postData);
 }
 
-- (void) testGetLoginJSONBodyShouldContainUsername
+- (void) testBodyShouldContainUsername
 {
     NSData *postData = [self.req HTTPBody];
     NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:postData options:0 error:nil];
@@ -61,7 +61,7 @@
     XCTAssertEqualObjects(username, @"Username");
 }
 
-- (void) testGetLoginJSONBodyShouldNotContainUSERNAME
+- (void) testBodyShouldNotContainUSERNAME
 {
     NSData *postData = [self.req HTTPBody];
     NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:postData options:0 error:nil];
@@ -69,7 +69,7 @@
     XCTAssertNotEqualObjects(username, @"USERNAME");
 }
 
-- (void) testGetLoginJSONBodyShouldContainPassword
+- (void) testBodyShouldContainPassword
 {
     NSData *postData = [self.req HTTPBody];
     NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:postData options:0 error:nil];
@@ -77,7 +77,7 @@
     XCTAssertEqualObjects(password, @"Password");
 }
 
-- (void) testGetLoginJSONBodyShouldNotContainPASSWORD
+- (void) testBodyShouldNotContainPASSWORD
 {
     NSData *postData = [self.req HTTPBody];
     NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:postData options:0 error:nil];
@@ -86,19 +86,19 @@
 }
 
 
-- (void) testGetLoginJSONShouldReportCorrectBodySize
+- (void) testShouldReportCorrectBodySize
 {
     NSData *postData = [self.req HTTPBody];
     NSString *lengthFromReq = [self.req valueForHTTPHeaderField:@"Content-Length"];
     XCTAssertEqual(postData.length, [lengthFromReq intValue]);
 }
 
-- (void) testGetLoginJSONSHTTPMethodShouldBePost
+- (void) testHTTPMethodShouldBePost
 {
     XCTAssertEqualObjects(self.req.HTTPMethod, @"POST");
 }
 
-- (void) testGetLoginJSONShouldHandleEmptyLoginAndPassword
+- (void) testShouldHandleEmptyLoginAndPassword
 {
     NSMutableURLRequest *testReq = [JSONBuilder getLoginJSON:nil withPassword:nil];
     NSData *body = [testReq HTTPBody];

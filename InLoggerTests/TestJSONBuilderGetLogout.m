@@ -28,16 +28,21 @@
     [super tearDown];
 }
 
-- (void)testJSONBuilderGetLogoutJSONShouldNotReturnNil
+- (void)testShouldNotReturnNil
 {
     XCTAssertNotNil(self.req);
 }
 
-- (void)testJSONBuilderGetLogoutJSONShouldHaveLoginURL
+- (void)testShouldHaveLoginURL
 {
     NSURL *url = [self.req URL];
     XCTAssertEqualObjects([url absoluteString], @"http://genomizer.apiary-mock.com/login");
 }
 
+- (void)testShouldHaveHTTPMethodDELETE
+{
+    NSString *httpMethod = self.req.HTTPMethod;
+    XCTAssertEqualObjects(httpMethod, @"DELETE");
+}
 
 @end

@@ -7,10 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		210BED2A1918C36A00A8E690 /* TestJSONBuilderGetLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = 210BED291918C36A00A8E690 /* TestJSONBuilderGetLogin.m */; };
 		210BED2D1918D85000A8E690 /* TestJSONBuilderGetRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 210BED2C1918D85000A8E690 /* TestJSONBuilderGetRequest.m */; };
 		210BED2F1918DCD500A8E690 /* TestJSONBuilderGetLogout.m in Sources */ = {isa = PBXBuildFile; fileRef = 210BED2E1918DCD500A8E690 /* TestJSONBuilderGetLogout.m */; };
-		210BED311918DFC800A8E690 /* TestJSONBuilderGetSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 210BED301918DFC800A8E690 /* TestJSONBuilderGetSearch.m */; };
+		210BED331918E32900A8E690 /* TestJSONBuilderGetSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 210BED321918E32900A8E690 /* TestJSONBuilderGetSearch.m */; };
+		21277BCC1918E67C005FB7FD /* testJSONBuilderGetConversionJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 21277BCB1918E67C005FB7FD /* testJSONBuilderGetConversionJSON.m */; };
+		21277BCE19190036005FB7FD /* TestJSONBuilderGetLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = 21277BCD19190036005FB7FD /* TestJSONBuilderGetLogin.m */; };
 		6484A2F4190E8F160071BB23 /* ServerConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6484A2F3190E8F160071BB23 /* ServerConnection.m */; };
 		649778EB1910EC9D000FD14F /* XYZExperimentParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 649778EA1910EC9D000FD14F /* XYZExperimentParser.m */; };
 		649778EF191119FB000FD14F /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 649778ED191119FB000FD14F /* MoreViewController.m */; };
@@ -72,10 +73,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		210BED291918C36A00A8E690 /* TestJSONBuilderGetLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestJSONBuilderGetLogin.m; sourceTree = "<group>"; };
 		210BED2C1918D85000A8E690 /* TestJSONBuilderGetRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestJSONBuilderGetRequest.m; sourceTree = "<group>"; };
 		210BED2E1918DCD500A8E690 /* TestJSONBuilderGetLogout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestJSONBuilderGetLogout.m; sourceTree = "<group>"; };
-		210BED301918DFC800A8E690 /* TestJSONBuilderGetSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestJSONBuilderGetSearch.m; sourceTree = "<group>"; };
+		210BED321918E32900A8E690 /* TestJSONBuilderGetSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestJSONBuilderGetSearch.m; sourceTree = "<group>"; };
+		21277BCB1918E67C005FB7FD /* testJSONBuilderGetConversionJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testJSONBuilderGetConversionJSON.m; sourceTree = "<group>"; };
+		21277BCD19190036005FB7FD /* TestJSONBuilderGetLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestJSONBuilderGetLogin.m; sourceTree = "<group>"; };
 		6484A2F2190E8F160071BB23 /* ServerConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerConnection.h; sourceTree = "<group>"; };
 		6484A2F3190E8F160071BB23 /* ServerConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerConnection.m; sourceTree = "<group>"; };
 		649778E91910EC9D000FD14F /* XYZExperimentParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZExperimentParser.h; sourceTree = "<group>"; };
@@ -177,10 +179,11 @@
 		210BED2B1918D83400A8E690 /* TestJSONBuilder */ = {
 			isa = PBXGroup;
 			children = (
-				210BED291918C36A00A8E690 /* TestJSONBuilderGetLogin.m */,
+				21277BCD19190036005FB7FD /* TestJSONBuilderGetLogin.m */,
 				210BED2C1918D85000A8E690 /* TestJSONBuilderGetRequest.m */,
 				210BED2E1918DCD500A8E690 /* TestJSONBuilderGetLogout.m */,
-				210BED301918DFC800A8E690 /* TestJSONBuilderGetSearch.m */,
+				210BED321918E32900A8E690 /* TestJSONBuilderGetSearch.m */,
+				21277BCB1918E67C005FB7FD /* testJSONBuilderGetConversionJSON.m */,
 			);
 			name = TestJSONBuilder;
 			sourceTree = "<group>";
@@ -345,7 +348,6 @@
 				DE9A3EF81918CFDC00F7C33B /* TestExperimentDescriber.m */,
 				DEEF6B0C19094F8B00A2CD8C /* InLoggerTests.m */,
 				DEEF6B0719094F8B00A2CD8C /* Supporting Files */,
-				210BED291918C36A00A8E690 /* JSONBuilderTest.m */,
 				DEF812901918D90A00A88173 /* TestExperiment.m */,
 				DEF812921918DE1C00A88173 /* TestExperimentFile.m */,
 			);
@@ -502,10 +504,11 @@
 				DE9A3EF91918CFDC00F7C33B /* TestExperimentDescriber.m in Sources */,
 				210BED2F1918DCD500A8E690 /* TestJSONBuilderGetLogout.m in Sources */,
 				210BED2D1918D85000A8E690 /* TestJSONBuilderGetRequest.m in Sources */,
+				21277BCE19190036005FB7FD /* TestJSONBuilderGetLogin.m in Sources */,
+				21277BCC1918E67C005FB7FD /* testJSONBuilderGetConversionJSON.m in Sources */,
+				210BED331918E32900A8E690 /* TestJSONBuilderGetSearch.m in Sources */,
 				DEEF6B0D19094F8B00A2CD8C /* InLoggerTests.m in Sources */,
 				DEF812931918DE1C00A88173 /* TestExperimentFile.m in Sources */,
-				210BED311918DFC800A8E690 /* TestJSONBuilderGetSearch.m in Sources */,
-				210BED2A1918C36A00A8E690 /* TestJSONBuilderGetLogin.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
