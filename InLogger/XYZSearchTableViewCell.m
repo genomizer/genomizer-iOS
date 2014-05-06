@@ -39,12 +39,4 @@
     
 }
 
-- (void)setButtonOn{
-    self.switchButton.on = true;
-}
-
-
-
-
-
 @end
