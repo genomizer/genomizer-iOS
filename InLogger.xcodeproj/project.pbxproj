@@ -23,6 +23,11 @@
 		DE25D8061910E1500084BDDC /* XYZExperimentDescriber.m in Sources */ = {isa = PBXBuildFile; fileRef = DE25D8051910E1500084BDDC /* XYZExperimentDescriber.m */; };
 		DE403ACD190A8A3E003D21F5 /* XYZSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE403ACC190A8A3E003D21F5 /* XYZSearchViewController.m */; };
 		DE821D18190F982F00EEAFE3 /* XYZSearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = DE821D17190F982F00EEAFE3 /* XYZSearchResult.m */; };
+		DE9A3EEF1918CAA100F7C33B /* XYZAnnotationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DE9A3EED1918CAA100F7C33B /* XYZAnnotationTableViewCell.m */; };
+		DE9A3EF01918CAA100F7C33B /* XYZAnnotationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE9A3EEE1918CAA100F7C33B /* XYZAnnotationTableViewCell.xib */; };
+		DE9A3EF41918CB4600F7C33B /* XYZAnnotationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE9A3EF21918CB4600F7C33B /* XYZAnnotationTableViewController.m */; };
+		DE9A3EF51918CB4600F7C33B /* XYZAnnotationTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE9A3EF31918CB4600F7C33B /* XYZAnnotationTableViewController.xib */; };
+		DE9A3EF71918CE3000F7C33B /* TestExperimentDescriber.m in Sources */ = {isa = PBXBuildFile; fileRef = DE9A3EF61918CE3000F7C33B /* TestExperimentDescriber.m */; };
 		DED1228D190E966200D8E530 /* XYZInLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = DED12280190E966200D8E530 /* XYZInLogger.m */; };
 		DED1228E190E966200D8E530 /* XYZSearchResultTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DED12282190E966200D8E530 /* XYZSearchResultTableViewCell.m */; };
 		DED1228F190E966200D8E530 /* XYZSearchResultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DED12283190E966200D8E530 /* XYZSearchResultTableViewCell.xib */; };
@@ -90,6 +95,13 @@
 		DE403ACC190A8A3E003D21F5 /* XYZSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZSearchViewController.m; sourceTree = "<group>"; };
 		DE821D16190F982F00EEAFE3 /* XYZSearchResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZSearchResult.h; sourceTree = "<group>"; };
 		DE821D17190F982F00EEAFE3 /* XYZSearchResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZSearchResult.m; sourceTree = "<group>"; };
+		DE9A3EEC1918CAA100F7C33B /* XYZAnnotationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZAnnotationTableViewCell.h; sourceTree = "<group>"; };
+		DE9A3EED1918CAA100F7C33B /* XYZAnnotationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZAnnotationTableViewCell.m; sourceTree = "<group>"; };
+		DE9A3EEE1918CAA100F7C33B /* XYZAnnotationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XYZAnnotationTableViewCell.xib; sourceTree = "<group>"; };
+		DE9A3EF11918CB4600F7C33B /* XYZAnnotationTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZAnnotationTableViewController.h; sourceTree = "<group>"; };
+		DE9A3EF21918CB4600F7C33B /* XYZAnnotationTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZAnnotationTableViewController.m; sourceTree = "<group>"; };
+		DE9A3EF31918CB4600F7C33B /* XYZAnnotationTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XYZAnnotationTableViewController.xib; sourceTree = "<group>"; };
+		DE9A3EF61918CE3000F7C33B /* TestExperimentDescriber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestExperimentDescriber.m; sourceTree = "<group>"; };
 		DED1227F190E966200D8E530 /* XYZInLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZInLogger.h; sourceTree = "<group>"; };
 		DED12280190E966200D8E530 /* XYZInLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZInLogger.m; sourceTree = "<group>"; };
 		DED12281190E966200D8E530 /* XYZSearchResultTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZSearchResultTableViewCell.h; sourceTree = "<group>"; };
@@ -195,6 +207,12 @@
 		DED12297190E9C5700D8E530 /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				DE9A3EEC1918CAA100F7C33B /* XYZAnnotationTableViewCell.h */,
+				DE9A3EED1918CAA100F7C33B /* XYZAnnotationTableViewCell.m */,
+				DE9A3EEE1918CAA100F7C33B /* XYZAnnotationTableViewCell.xib */,
+				DE9A3EF11918CB4600F7C33B /* XYZAnnotationTableViewController.h */,
+				DE9A3EF21918CB4600F7C33B /* XYZAnnotationTableViewController.m */,
+				DE9A3EF31918CB4600F7C33B /* XYZAnnotationTableViewController.xib */,
 				DED12287190E966200D8E530 /* XYZSearchTableViewCell.h */,
 				DED12288190E966200D8E530 /* XYZSearchTableViewCell.m */,
 				DED12289190E966200D8E530 /* XYZSearchTableViewCell.xib */,
@@ -307,6 +325,7 @@
 			children = (
 				DEEF6B0C19094F8B00A2CD8C /* InLoggerTests.m */,
 				DEEF6B0719094F8B00A2CD8C /* Supporting Files */,
+				DE9A3EF61918CE3000F7C33B /* TestExperimentDescriber.m */,
 			);
 			path = InLoggerTests;
 			sourceTree = "<group>";
@@ -401,9 +420,11 @@
 				DE25D7F81910D6630084BDDC /* XYZDataFileTableViewCell.xib in Resources */,
 				DEEF6B1C1909553C00A2CD8C /* XYZLogInViewController.xib in Resources */,
 				DED12291190E966200D8E530 /* XYZSearchResultTableViewController.xib in Resources */,
+				DE9A3EF01918CAA100F7C33B /* XYZAnnotationTableViewCell.xib in Resources */,
 				649778F0191119FB000FD14F /* MoreViewController.xib in Resources */,
 				DED1228F190E966200D8E530 /* XYZSearchResultTableViewCell.xib in Resources */,
 				DEEF6AFA19094F8A00A2CD8C /* Images.xcassets in Resources */,
+				DE9A3EF51918CB4600F7C33B /* XYZAnnotationTableViewController.xib in Resources */,
 				DED12293190E966200D8E530 /* XYZSearchTableViewCell.xib in Resources */,
 				DE25D7FD1910D6840084BDDC /* XYZTitleTableViewCell.xib in Resources */,
 				DE25D8031910D72A0084BDDC /* XYZDataFileViewController.xib in Resources */,
@@ -436,9 +457,11 @@
 				DED1228E190E966200D8E530 /* XYZSearchResultTableViewCell.m in Sources */,
 				649778EF191119FB000FD14F /* MoreViewController.m in Sources */,
 				DE25D7FC1910D6840084BDDC /* XYZTitleTableViewCell.m in Sources */,
+				DE9A3EEF1918CAA100F7C33B /* XYZAnnotationTableViewCell.m in Sources */,
 				DE25D8061910E1500084BDDC /* XYZExperimentDescriber.m in Sources */,
 				DED12294190E966200D8E530 /* XYZSelectedFilesViewController.m in Sources */,
 				76F638DB190FDD9D00F0F4BF /* XYZExperimentFile.m in Sources */,
+				DE9A3EF41918CB4600F7C33B /* XYZAnnotationTableViewController.m in Sources */,
 				76F638D8190FD99300F0F4BF /* XYZExperiment.m in Sources */,
 				DE25D7F71910D6630084BDDC /* XYZDataFileTableViewCell.m in Sources */,
 				DEEF6AF419094F8A00A2CD8C /* main.m in Sources */,
@@ -454,6 +477,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE9A3EF71918CE3000F7C33B /* TestExperimentDescriber.m in Sources */,
 				DEEF6B0D19094F8B00A2CD8C /* InLoggerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
