@@ -7,8 +7,11 @@
 //
 
 #import <XCTest/XCTest.h>
+#import "XYZExperimentDescriber.h"
 
 @interface TestExperimentDescriber : XCTestCase
+
+@property XYZExperimentDescriber *describer;
 
 @end
 
@@ -17,6 +20,7 @@
 - (void)setUp
 {
     [super setUp];
+    _describer = [[XYZExperimentDescriber alloc] init];
     // Put setup code here. This method is called before the invocation of each test method in the class.
 }
 
@@ -24,6 +28,7 @@
 {
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
+    _describer = nil;
 }
 
 - (void)testExample
