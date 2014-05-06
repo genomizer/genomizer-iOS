@@ -62,7 +62,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     XYZAnnotationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ListPrototypeCell2" forIndexPath:indexPath];
-    cell.label.text = [XYZExperimentDescriber formatAnnotation: [_annotations objectAtIndex: indexPath.row]];    
+    cell.label.text = [XYZExperimentDescriber formatAnnotation: [_annotations objectAtIndex: indexPath.row]];
+    cell.switchButton.on = NO;
     return cell;
 }
 
