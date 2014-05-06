@@ -55,6 +55,7 @@
 		DEEF7D94190A55D1005EDB8E /* XYZTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEEF7D92190A55D1005EDB8E /* XYZTabViewController.m */; };
 		DEEF7D95190A55D1005EDB8E /* XYZTabViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DEEF7D93190A55D1005EDB8E /* XYZTabViewController.xib */; };
 		DEF812911918D90A00A88173 /* TestExperiment.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF812901918D90A00A88173 /* TestExperiment.m */; };
+		DEF812931918DE1C00A88173 /* TestExperimentFile.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF812921918DE1C00A88173 /* TestExperimentFile.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -140,6 +141,7 @@
 		DEEF7D92190A55D1005EDB8E /* XYZTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XYZTabViewController.m; path = ../XYZTabViewController.m; sourceTree = "<group>"; };
 		DEEF7D93190A55D1005EDB8E /* XYZTabViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = XYZTabViewController.xib; path = ../XYZTabViewController.xib; sourceTree = "<group>"; };
 		DEF812901918D90A00A88173 /* TestExperiment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestExperiment.m; sourceTree = "<group>"; };
+		DEF812921918DE1C00A88173 /* TestExperimentFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestExperimentFile.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -327,6 +329,7 @@
 				DEEF6B0719094F8B00A2CD8C /* Supporting Files */,
 				210BED291918C36A00A8E690 /* JSONBuilderTest.m */,
 				DEF812901918D90A00A88173 /* TestExperiment.m */,
+				DEF812921918DE1C00A88173 /* TestExperimentFile.m */,
 			);
 			path = InLoggerTests;
 			sourceTree = "<group>";
@@ -481,6 +484,7 @@
 				DE9A3EF91918CFDC00F7C33B /* TestExperimentDescriber.m in Sources */,
 				DEEF6B0D19094F8B00A2CD8C /* InLoggerTests.m in Sources */,
 				210BED2A1918C36A00A8E690 /* JSONBuilderTest.m in Sources */,
+				DEF812931918DE1C00A88173 /* TestExperimentFile.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

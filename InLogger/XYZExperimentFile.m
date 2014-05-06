@@ -9,19 +9,6 @@
 #import "XYZExperimentFile.h"
 
 @implementation XYZExperimentFile
-/*
-+ (void) createExperimentFile:(NSDictionary*)file{
-    
-    idFile = [file valueForKey:@"id"];
-    type = [file valueForKey:@"type"];
-    name = [file valueForKey:@"name"];
-    uploadedBy = [file valueForKey:@"uploadedBy"];
-    date = [file valueForKey:@"date"];
-    size = [file valueForKey:@"size"];
-    URL = [file valueForKey:@"URL"];
-    
-}
-*/
 
 + (XYZExperimentFile *) defaultFileWithType: (FileType) type
 {
@@ -46,27 +33,15 @@
     return string;
 }
 
-- (NSComparisonResult) compareTo: (XYZExperimentFile *) experiment;
-{
-    if (_type == experiment.type) {
-        return (NSComparisonResult)NSOrderedSame;
-    } else if (_type == RAW || experiment.type == REGION){
-        return (NSComparisonResult)NSOrderedAscending;
-    } else if (experiment.type == RAW || _type == REGION) {
-        return (NSComparisonResult)NSOrderedDescending;
-    } else {
-        return (NSComparisonResult)NSOrderedSame;
-    }
-}
-
 
 + (FileType) NSStringFileTypeToEnumFileType: (NSString *) type
 {
-    if ([type compare:@"raw"]) {
+    type = [type lowercaseString];
+    if ([type isEqualToString:@"raw"]) {
         return RAW;
-    } else if ([type compare:@"region"]) {
+    } else if ([type isEqualToString:@"region"]) {
         return REGION;
-    } else if ([type compare:@"profile"]) {
+    } else if ([type isEqualToString:@"profile"]) {
         return PROFILE;
     } else {
         return OTHER;
