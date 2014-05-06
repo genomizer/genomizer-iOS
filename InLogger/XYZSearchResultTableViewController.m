@@ -24,9 +24,9 @@
 
 - (void)viewDidLoad
 {
-    NSError *error;
+   // NSError *error;
     [super viewDidLoad];
-    NSArray* annotations;
+    //NSArray* annotations;
 //    NSDictionary * allResults= [ServerConnection search:annotations error:&error];
  
     _tableCellHeight = 120;

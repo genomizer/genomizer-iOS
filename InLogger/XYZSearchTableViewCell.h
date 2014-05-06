@@ -16,7 +16,4 @@
 @property NSString *annotation;
 @property XYZSearchViewController *controller;
 
-
-- (void)setButtonOn;
-
 @end
