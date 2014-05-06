@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		646F06AE1918D46000C959CA /* pickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 646F06AD1918D46000C959CA /* pickerView.m */; };
 		6484A2F4190E8F160071BB23 /* ServerConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6484A2F3190E8F160071BB23 /* ServerConnection.m */; };
 		649778EB1910EC9D000FD14F /* XYZExperimentParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 649778EA1910EC9D000FD14F /* XYZExperimentParser.m */; };
 		649778EF191119FB000FD14F /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 649778ED191119FB000FD14F /* MoreViewController.m */; };
@@ -62,6 +63,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		646F06AC1918D46000C959CA /* pickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pickerView.h; sourceTree = "<group>"; };
+		646F06AD1918D46000C959CA /* pickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = pickerView.m; sourceTree = "<group>"; };
 		6484A2F2190E8F160071BB23 /* ServerConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerConnection.h; sourceTree = "<group>"; };
 		6484A2F3190E8F160071BB23 /* ServerConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerConnection.m; sourceTree = "<group>"; };
 		649778E91910EC9D000FD14F /* XYZExperimentParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZExperimentParser.h; sourceTree = "<group>"; };
@@ -200,6 +203,8 @@
 				DED12289190E966200D8E530 /* XYZSearchTableViewCell.xib */,
 				DE403ACB190A8A3E003D21F5 /* XYZSearchViewController.h */,
 				DE403ACC190A8A3E003D21F5 /* XYZSearchViewController.m */,
+				646F06AC1918D46000C959CA /* pickerView.h */,
+				646F06AD1918D46000C959CA /* pickerView.m */,
 			);
 			name = Search;
 			sourceTree = "<group>";
@@ -430,6 +435,7 @@
 				76E2DA9F190E96C90048069D /* JSONBuilder.m in Sources */,
 				DED12290190E966200D8E530 /* XYZSearchResultTableViewController.m in Sources */,
 				6484A2F4190E8F160071BB23 /* ServerConnection.m in Sources */,
+				646F06AE1918D46000C959CA /* pickerView.m in Sources */,
 				DEEF7D94190A55D1005EDB8E /* XYZTabViewController.m in Sources */,
 				DEEF6AF819094F8A00A2CD8C /* AppDelegate.m in Sources */,
 				DED12292190E966200D8E530 /* XYZSearchTableViewCell.m in Sources */,
