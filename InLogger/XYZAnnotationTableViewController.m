@@ -7,9 +7,13 @@
 //
 
 #import "XYZAnnotationTableViewController.h"
+#import "XYZAnnotationTableViewCell.h"
 #import "ServerConnection.h"
+#import "XYZExperimentDescriber.h"
 
 @interface XYZAnnotationTableViewController ()
+
+@property NSArray *annotations;
 
 @end
 
@@ -18,7 +22,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    _annotations = [self getAnnotationsFromServer];
+    NSLog(@"asdasda %@", _annotations);
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -49,21 +54,18 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return [_annotations count];
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
+    XYZAnnotationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ListPrototypeCell2" forIndexPath:indexPath];
+    cell.label.text = [XYZExperimentDescriber formatAnnotation: [_annotations objectAtIndex: indexPath.row]];    
     return cell;
 }
-*/
+
 
 /*
 // Override to support conditional editing of the table view.

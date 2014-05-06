@@ -201,6 +201,12 @@
 		DED12296190E9C2F00D8E530 /* SearchResult */ = {
 			isa = PBXGroup;
 			children = (
+				DE9A3EEC1918CAA100F7C33B /* XYZAnnotationTableViewCell.h */,
+				DE9A3EED1918CAA100F7C33B /* XYZAnnotationTableViewCell.m */,
+				DE9A3EEE1918CAA100F7C33B /* XYZAnnotationTableViewCell.xib */,
+				DE9A3EF11918CB4600F7C33B /* XYZAnnotationTableViewController.h */,
+				DE9A3EF21918CB4600F7C33B /* XYZAnnotationTableViewController.m */,
+				DE9A3EF31918CB4600F7C33B /* XYZAnnotationTableViewController.xib */,
 				DE25D7FF1910D72A0084BDDC /* XYZDataFileViewController.h */,
 				DE25D8001910D72A0084BDDC /* XYZDataFileViewController.m */,
 				DE25D8011910D72A0084BDDC /* XYZDataFileViewController.xib */,
@@ -228,12 +234,6 @@
 		DED12297190E9C5700D8E530 /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				DE9A3EEC1918CAA100F7C33B /* XYZAnnotationTableViewCell.h */,
-				DE9A3EED1918CAA100F7C33B /* XYZAnnotationTableViewCell.m */,
-				DE9A3EEE1918CAA100F7C33B /* XYZAnnotationTableViewCell.xib */,
-				DE9A3EF11918CB4600F7C33B /* XYZAnnotationTableViewController.h */,
-				DE9A3EF21918CB4600F7C33B /* XYZAnnotationTableViewController.m */,
-				DE9A3EF31918CB4600F7C33B /* XYZAnnotationTableViewController.xib */,
 				DED12287190E966200D8E530 /* XYZSearchTableViewCell.h */,
 				DED12288190E966200D8E530 /* XYZSearchTableViewCell.m */,
 				DED12289190E966200D8E530 /* XYZSearchTableViewCell.xib */,
