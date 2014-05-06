@@ -41,47 +41,5 @@
 }
 
 
--(void) testMakeUnknownAnnotationToCapitalFirstLetter
-{
-    NSString *result = [XYZExperimentDescriber formatAnnotation:@"unknown"];
-    XCTAssertEqualObjects(@"Unknown", result);
-    
-}
-
--(void) testTwoWordUnknownAnnotation
-{
-    NSString *result = [XYZExperimentDescriber formatAnnotation:@"unknown knownun"];
-    XCTAssertEqualObjects(@"Unknown Knownun", result);
-    
-}
-
--(void) testFormatKnownAnnotation
-{
-    NSString *result = [XYZExperimentDescriber formatAnnotation:@"pubmedId"];
-    XCTAssertEqualObjects(@"Publication ID", result);
-}
-
--(void) testGetDescriptionOfWithDefaultAnnotations
-{
-    NSString *description = [_describer getDescriptionOf:_experiment];
-    NSString *correctDescription = @"Name: Experiment name\nCreated By: Yuri Yuri\nType: raw\nSpecies: human";
-    XCTAssertEqualObjects(description, correctDescription);
-}
-
--(void) testAddAnnotation
-{
-    [_describer addAnnotation:@"pubmedId"];
-    NSString *description = [_describer getDescriptionOf:_experiment];
-    NSString *correctDescription = @"Name: Experiment name\nCreated By: Yuri Yuri\nType: raw\nSpecies: human\nPublication ID: abc123";
-    XCTAssertEqualObjects(description, correctDescription);
-}
-
--(void) testRemoveAnnotation
-{
-    [_describer removeAnnotation:@"type"];
-    NSString *description = [_describer getDescriptionOf:_experiment];
-    NSString *correctDescription = @"Name: Experiment name\nCreated By: Yuri Yuri\nSpecies: human";
-    XCTAssertEqualObjects(description, correctDescription);
-}
 
 @end
