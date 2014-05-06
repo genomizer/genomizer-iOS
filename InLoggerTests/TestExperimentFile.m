@@ -48,6 +48,8 @@
     
     NSString *result = [_experimentFile getDescription];
     NSString *correct = @"Datafile.wig  2014-04-01  Yuri";
+    
+    XCTAssertEqualObjects(result, correct);
 }
 
 @end

@@ -503,8 +503,9 @@
 				210BED2F1918DCD500A8E690 /* TestJSONBuilderGetLogout.m in Sources */,
 				210BED2D1918D85000A8E690 /* TestJSONBuilderGetRequest.m in Sources */,
 				DEEF6B0D19094F8B00A2CD8C /* InLoggerTests.m in Sources */,
-				210BED2A1918C36A00A8E690 /* JSONBuilderTest.m in Sources */,
 				DEF812931918DE1C00A88173 /* TestExperimentFile.m in Sources */,
+				210BED311918DFC800A8E690 /* TestJSONBuilderGetSearch.m in Sources */,
+				210BED2A1918C36A00A8E690 /* TestJSONBuilderGetLogin.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
