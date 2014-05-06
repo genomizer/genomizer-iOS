@@ -35,8 +35,9 @@
 
 - (void)testShouldHaveLoginURL
 {
-    NSURL *url = [self.req URL];
-    XCTAssertEqualObjects([url absoluteString], @"http://genomizer.apiary-mock.com/login");
+    NSString *url = [[self.req URL] absoluteString];
+
+    XCTAssertEqualObjects(url, [[JSONBuilder getServerURL] stringByAppendingString:@"/login"]);
 }
 
 - (void)testShouldHaveHTTPMethodDELETE

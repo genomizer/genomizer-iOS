@@ -11,7 +11,7 @@
 #import "XYZSearchResultTableViewController.h"
 #import "ServerConnection.h"
 #import "XYZExperimentDescriber.h"
-
+#import "pickerView.h"
 @interface XYZSearchViewController ()
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -49,8 +49,56 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+  //  UITextField *responder = textField;
+ //    for (XYZSearchTableViewCell *cell in _tableCells) {
+   if ([textField.placeholder isEqual:@"Sex"]) {
+          pickerView *myPickerView = [[pickerView alloc] initWithFrame:CGRectMake(0, 0, 120, 20)];
+       myPickerView.tag = 1;
+       
+       NSMutableArray* hej = [NSMutableArray
+                              arrayWithObjects:@"Male", @"Female", @"Unknown",  nil];
+       
+     
+       myPickerView.dataPicker = hej;
+       
+       
+       myPickerView.delegate = myPickerView.self;
+       myPickerView.backgroundColor = [UIColor colorWithRed:242/255.0f green:242/255.0f blue:244/255.0f alpha:1.0f];
+       myPickerView.dataSource = myPickerView.self;
+       myPickerView.showsSelectionIndicator = YES;
+       [self.view addSubview:myPickerView];
+       myPickerView.tableCells = self.tableCells;
+        textField.inputView = myPickerView;
+    }
+    
+    if ([textField.placeholder isEqual:@"Species"]) {
+        pickerView *myPickerView = [[pickerView alloc] initWithFrame:CGRectMake(0, 0, 320, 80)];
+        myPickerView.tag = 2;
+        
+           NSMutableArray* hej = [NSMutableArray arrayWithObjects:@"Fly", @"Human", @"Rat",  nil];
+        myPickerView.dataPicker = hej;
+         myPickerView.backgroundColor = [UIColor colorWithRed:242/255.0f green:242/255.0f blue:244/255.0f alpha:1.0f];
+        myPickerView.delegate = myPickerView.self;
+        myPickerView.dataSource = myPickerView.self;
+        myPickerView.tableCells = self.tableCells;
+        
+        myPickerView.showsSelectionIndicator = NO;
+        [self.view addSubview:myPickerView];
+        
+        textField.inputView = myPickerView;
+    }
+    
+    return YES;
+}
+
+
 - (IBAction)textFieldDidBeginEditing:(UITextField *)textField
+
+
 {
+    
+    
     _tableView.contentInset = UIEdgeInsetsMake(0, 0, 117, 0);
     UITableViewCell *cell;
     if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
@@ -96,6 +144,7 @@
     XYZSearchTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     NSString *annotation = [self.searchFields objectAtIndex:indexPath.row];
     cell.inputField.placeholder = [XYZExperimentDescriber formatAnnotation: annotation];
+    
     cell.annotation = annotation;
     if(cell.inputField.text.length == 0) {
         cell.switchButton.enabled = false;
@@ -142,8 +191,36 @@
     self.searchResults = [ServerConnection search:[self createAnnotationsSearch] error:&error];
    [self performSegueWithIdentifier:@"searchResult" sender:self.searchResults];
 }
+- (void)setDataInCells:(NSString *)data taggen:(NSInteger)tagg{
+    
+    if(tagg==2){
+        NSLog(@"sdfh0 %@", data);
+        for (XYZSearchTableViewCell *cell in _tableCells) {
+            NSLog(@"sdfh1 %@", data);
+            if([cell.inputField.placeholder isEqual:@"Species"]){
+                cell.inputField.text = @"Specissses";
+                NSLog(@"sdfh2 %@", data);
+            }
+            
+        }
+    
+}
+}
+/*
+-(void) setDataInCells2:(NSString *)data taggen:(NSInteger)tagg{
+    if(tagg==2){
+        for (XYZSearchTableViewCell *cell in _tableCells) {
+            if([cell.inputField.placeholder isEqual:@"Species"]){
+                cell.inputField.text = @"Specissses";
+            }
+            
+        }
+        NSLog(@"sdfh %@", data);
+    }
 
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+}
+   */
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     
     if ([segue.identifier isEqualToString:@"searchResult"]) {

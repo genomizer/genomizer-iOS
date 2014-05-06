@@ -12,6 +12,9 @@
 		210BED331918E32900A8E690 /* TestJSONBuilderGetSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 210BED321918E32900A8E690 /* TestJSONBuilderGetSearch.m */; };
 		21277BCC1918E67C005FB7FD /* testJSONBuilderGetConversionJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 21277BCB1918E67C005FB7FD /* testJSONBuilderGetConversionJSON.m */; };
 		21277BCE19190036005FB7FD /* TestJSONBuilderGetLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = 21277BCD19190036005FB7FD /* TestJSONBuilderGetLogin.m */; };
+		21277BD019190095005FB7FD /* testJSONBuilderTestAvailableAnnotations.m in Sources */ = {isa = PBXBuildFile; fileRef = 21277BCF19190095005FB7FD /* testJSONBuilderTestAvailableAnnotations.m */; };
+		646F06AE1918D46000C959CA /* (null) in Sources */ = {isa = PBXBuildFile; };
+		646F06B1191908CB00C959CA /* pickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 646F06B0191908CB00C959CA /* pickerView.m */; };
 		6484A2F4190E8F160071BB23 /* ServerConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6484A2F3190E8F160071BB23 /* ServerConnection.m */; };
 		649778EB1910EC9D000FD14F /* XYZExperimentParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 649778EA1910EC9D000FD14F /* XYZExperimentParser.m */; };
 		649778EF191119FB000FD14F /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 649778ED191119FB000FD14F /* MoreViewController.m */; };
@@ -78,6 +81,9 @@
 		210BED321918E32900A8E690 /* TestJSONBuilderGetSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestJSONBuilderGetSearch.m; sourceTree = "<group>"; };
 		21277BCB1918E67C005FB7FD /* testJSONBuilderGetConversionJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testJSONBuilderGetConversionJSON.m; sourceTree = "<group>"; };
 		21277BCD19190036005FB7FD /* TestJSONBuilderGetLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestJSONBuilderGetLogin.m; sourceTree = "<group>"; };
+		21277BCF19190095005FB7FD /* testJSONBuilderTestAvailableAnnotations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testJSONBuilderTestAvailableAnnotations.m; sourceTree = "<group>"; };
+		646F06AF191908CB00C959CA /* pickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pickerView.h; sourceTree = "<group>"; };
+		646F06B0191908CB00C959CA /* pickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = pickerView.m; sourceTree = "<group>"; };
 		6484A2F2190E8F160071BB23 /* ServerConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerConnection.h; sourceTree = "<group>"; };
 		6484A2F3190E8F160071BB23 /* ServerConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerConnection.m; sourceTree = "<group>"; };
 		649778E91910EC9D000FD14F /* XYZExperimentParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZExperimentParser.h; sourceTree = "<group>"; };
@@ -184,6 +190,7 @@
 				210BED2E1918DCD500A8E690 /* TestJSONBuilderGetLogout.m */,
 				210BED321918E32900A8E690 /* TestJSONBuilderGetSearch.m */,
 				21277BCB1918E67C005FB7FD /* testJSONBuilderGetConversionJSON.m */,
+				21277BCF19190095005FB7FD /* testJSONBuilderTestAvailableAnnotations.m */,
 			);
 			name = TestJSONBuilder;
 			sourceTree = "<group>";
@@ -475,6 +482,7 @@
 				76E2DA9F190E96C90048069D /* JSONBuilder.m in Sources */,
 				DED12290190E966200D8E530 /* XYZSearchResultTableViewController.m in Sources */,
 				6484A2F4190E8F160071BB23 /* ServerConnection.m in Sources */,
+				646F06AE1918D46000C959CA /* (null) in Sources */,
 				DEEF7D94190A55D1005EDB8E /* XYZTabViewController.m in Sources */,
 				DEEF6AF819094F8A00A2CD8C /* AppDelegate.m in Sources */,
 				DED12292190E966200D8E530 /* XYZSearchTableViewCell.m in Sources */,
@@ -486,6 +494,7 @@
 				DED12294190E966200D8E530 /* XYZSelectedFilesViewController.m in Sources */,
 				76F638DB190FDD9D00F0F4BF /* XYZExperimentFile.m in Sources */,
 				DE9A3EF41918CB4600F7C33B /* XYZAnnotationTableViewController.m in Sources */,
+				646F06B1191908CB00C959CA /* pickerView.m in Sources */,
 				76F638D8190FD99300F0F4BF /* XYZExperiment.m in Sources */,
 				DE25D7F71910D6630084BDDC /* XYZDataFileTableViewCell.m in Sources */,
 				DEEF6AF419094F8A00A2CD8C /* main.m in Sources */,
@@ -508,6 +517,7 @@
 				21277BCC1918E67C005FB7FD /* testJSONBuilderGetConversionJSON.m in Sources */,
 				210BED331918E32900A8E690 /* TestJSONBuilderGetSearch.m in Sources */,
 				DEEF6B0D19094F8B00A2CD8C /* InLoggerTests.m in Sources */,
+				21277BD019190095005FB7FD /* testJSONBuilderTestAvailableAnnotations.m in Sources */,
 				DEF812931918DE1C00A88173 /* TestExperimentFile.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
