@@ -23,7 +23,6 @@
 		DE25D8031910D72A0084BDDC /* XYZDataFileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE25D8011910D72A0084BDDC /* XYZDataFileViewController.xib */; };
 		DE25D8061910E1500084BDDC /* XYZExperimentDescriber.m in Sources */ = {isa = PBXBuildFile; fileRef = DE25D8051910E1500084BDDC /* XYZExperimentDescriber.m */; };
 		DE403ACD190A8A3E003D21F5 /* XYZSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE403ACC190A8A3E003D21F5 /* XYZSearchViewController.m */; };
-		DE821D18190F982F00EEAFE3 /* XYZSearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = DE821D17190F982F00EEAFE3 /* XYZSearchResult.m */; };
 		DE9A3EEF1918CAA100F7C33B /* XYZAnnotationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DE9A3EED1918CAA100F7C33B /* XYZAnnotationTableViewCell.m */; };
 		DE9A3EF01918CAA100F7C33B /* XYZAnnotationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE9A3EEE1918CAA100F7C33B /* XYZAnnotationTableViewCell.xib */; };
 		DE9A3EF41918CB4600F7C33B /* XYZAnnotationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE9A3EF21918CB4600F7C33B /* XYZAnnotationTableViewController.m */; };
@@ -55,6 +54,7 @@
 		DEEF6B1C1909553C00A2CD8C /* XYZLogInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DEEF6B1A1909553C00A2CD8C /* XYZLogInViewController.xib */; };
 		DEEF7D94190A55D1005EDB8E /* XYZTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEEF7D92190A55D1005EDB8E /* XYZTabViewController.m */; };
 		DEEF7D95190A55D1005EDB8E /* XYZTabViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DEEF7D93190A55D1005EDB8E /* XYZTabViewController.xib */; };
+		DEF812911918D90A00A88173 /* TestExperiment.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF812901918D90A00A88173 /* TestExperiment.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,8 +95,6 @@
 		DE25D8051910E1500084BDDC /* XYZExperimentDescriber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZExperimentDescriber.m; sourceTree = "<group>"; };
 		DE403ACB190A8A3E003D21F5 /* XYZSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZSearchViewController.h; sourceTree = "<group>"; };
 		DE403ACC190A8A3E003D21F5 /* XYZSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZSearchViewController.m; sourceTree = "<group>"; };
-		DE821D16190F982F00EEAFE3 /* XYZSearchResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZSearchResult.h; sourceTree = "<group>"; };
-		DE821D17190F982F00EEAFE3 /* XYZSearchResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZSearchResult.m; sourceTree = "<group>"; };
 		DE9A3EEC1918CAA100F7C33B /* XYZAnnotationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZAnnotationTableViewCell.h; sourceTree = "<group>"; };
 		DE9A3EED1918CAA100F7C33B /* XYZAnnotationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZAnnotationTableViewCell.m; sourceTree = "<group>"; };
 		DE9A3EEE1918CAA100F7C33B /* XYZAnnotationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XYZAnnotationTableViewCell.xib; sourceTree = "<group>"; };
@@ -141,6 +139,7 @@
 		DEEF7D91190A55D1005EDB8E /* XYZTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XYZTabViewController.h; path = ../XYZTabViewController.h; sourceTree = "<group>"; };
 		DEEF7D92190A55D1005EDB8E /* XYZTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XYZTabViewController.m; path = ../XYZTabViewController.m; sourceTree = "<group>"; };
 		DEEF7D93190A55D1005EDB8E /* XYZTabViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = XYZTabViewController.xib; path = ../XYZTabViewController.xib; sourceTree = "<group>"; };
+		DEF812901918D90A00A88173 /* TestExperiment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestExperiment.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,8 +193,6 @@
 				DE25D8041910E1500084BDDC /* XYZExperimentDescriber.h */,
 				DE25D8051910E1500084BDDC /* XYZExperimentDescriber.m */,
 				DED12286190E966200D8E530 /* XYZSearchResultTableViewController.xib */,
-				DE821D16190F982F00EEAFE3 /* XYZSearchResult.h */,
-				DE821D17190F982F00EEAFE3 /* XYZSearchResult.m */,
 				76F638D6190FD99200F0F4BF /* XYZExperiment.h */,
 				76F638D7190FD99300F0F4BF /* XYZExperiment.m */,
 				649778E91910EC9D000FD14F /* XYZExperimentParser.h */,
@@ -329,6 +326,7 @@
 				DEEF6B0C19094F8B00A2CD8C /* InLoggerTests.m */,
 				DEEF6B0719094F8B00A2CD8C /* Supporting Files */,
 				210BED291918C36A00A8E690 /* JSONBuilderTest.m */,
+				DEF812901918D90A00A88173 /* TestExperiment.m */,
 			);
 			path = InLoggerTests;
 			sourceTree = "<group>";
@@ -469,7 +467,6 @@
 				DE25D7F71910D6630084BDDC /* XYZDataFileTableViewCell.m in Sources */,
 				DEEF6AF419094F8A00A2CD8C /* main.m in Sources */,
 				DE25D8021910D72A0084BDDC /* XYZDataFileViewController.m in Sources */,
-				DE821D18190F982F00EEAFE3 /* XYZSearchResult.m in Sources */,
 				649778EB1910EC9D000FD14F /* XYZExperimentParser.m in Sources */,
 				DEEF6B1B1909553C00A2CD8C /* XYZLogInViewController.m in Sources */,
 				DED1228D190E966200D8E530 /* XYZInLogger.m in Sources */,
@@ -480,6 +477,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DEF812911918D90A00A88173 /* TestExperiment.m in Sources */,
 				DE9A3EF91918CFDC00F7C33B /* TestExperimentDescriber.m in Sources */,
 				DEEF6B0D19094F8B00A2CD8C /* InLoggerTests.m in Sources */,
 				210BED2A1918C36A00A8E690 /* JSONBuilderTest.m in Sources */,
