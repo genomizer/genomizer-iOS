@@ -50,15 +50,6 @@
     NSLog(@"Unwind: %d", [_experiment numberOfFiles]);
 }
 
-NSInteger sortFunc(id id1, id id2, void *context)
-{
-    // Sort Function
-    XYZExperimentFile *file1 = (XYZExperimentFile *)id1;
-    XYZExperimentFile *file2 = (XYZExperimentFile *)id2;
-    
-    return [file1 compareTo:file2];
-}
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

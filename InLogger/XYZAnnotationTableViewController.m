@@ -1,49 +1,36 @@
 //
-//  XYZSearchResultTableViewController.m
+//  XYZAnnotationTableViewController.m
 //  InLogger
 //
-//  Created by Joel Viklund on 28/04/14.
+//  Created by Joel Viklund on 06/05/14.
 //  Copyright (c) 2014 Joel Viklund. All rights reserved.
 //
 
-#import "XYZSearchResultTableViewController.h"
+#import "XYZAnnotationTableViewController.h"
 #import "ServerConnection.h"
-#import "XYZSearchResultTableViewCell.h"
-#import "XYZExperimentDescriber.h"
-#import "XYZDataFileViewController.h"
 
-@interface XYZSearchResultTableViewController ()
-
-
-@property CGFloat tableCellHeight;
-@property XYZExperimentDescriber *experimentDescriber;
+@interface XYZAnnotationTableViewController ()
 
 @end
 
-@implementation XYZSearchResultTableViewController
+@implementation XYZAnnotationTableViewController
 
 - (void)viewDidLoad
 {
-   // NSError *error;
     [super viewDidLoad];
-    //NSArray* annotations;
-//    NSDictionary * allResults= [ServerConnection search:annotations error:&error];
- 
-    _tableCellHeight = 120;
- //   self.searchFields = [self createSearchFields ];
-  //  [self.tableView reloadData];
-     //NSLog(@"text %@", self.searchResults1);
-    _experimentDescriber = [[XYZExperimentDescriber alloc] init];
-    //_searchResults1 = [self defaultResults ];
     
+    // Uncomment the following line to preserve selection between presentations.
+    // self.clearsSelectionOnViewWillAppear = NO;
+    
+    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
-- (NSMutableArray *) defaultResults
+- (NSArray *) getAnnotationsFromServer
 {
-    NSMutableArray *results = [[NSMutableArray alloc] init];
-    [results addObject:[XYZExperiment defaultExperiment]];
-    [results addObject:[XYZExperiment defaultExperiment]];
-    return results;
+    NSError *error;
+    return [ServerConnection getAvailableAnnotations:&error];
+    //return [NSMutableArray arrayWithObjects:@"experimentID", @"pubmedId" , @"Type of data", @"Species", @"Genom release", @"Cell-line", @"Developmental stage", @"Sex", @"Tissue", @"Processing", nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -51,10 +38,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (NSMutableArray *) createSearchFields
-{
-    return [NSMutableArray arrayWithObjects:@"Experiment ID", @"Publication ID" , nil];
-}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -65,38 +49,21 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.searchResults1 count];
+#warning Incomplete method implementation.
+    // Return the number of rows in the section.
+    return 0;
 }
 
-
+/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"ListPrototypeCell";
-    XYZSearchResultTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    XYZExperiment *experiment = [_searchResults1 objectAtIndex: indexPath.row];
-    NSLog(@"asdasdads%@", experiment.createdByUser);
-    [cell setTextFieldText: [_experimentDescriber getDescriptionOf: experiment]];
-    _tableCellHeight = cell.frame.size.height;
-    cell.index = indexPath.row;
-    cell.experiement = experiment;
-    cell.controller = self;
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    
+    // Configure the cell...
     
     return cell;
 }
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return _tableCellHeight;
-}
-
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    
-    if ([segue.identifier isEqualToString:@"toFileList"]) {
-        XYZDataFileViewController *nextVC = (XYZDataFileViewController *)[segue destinationViewController];
-        nextVC.experiment = _selectedExperiment;
-    }
-}
+*/
 
 /*
 // Override to support conditional editing of the table view.

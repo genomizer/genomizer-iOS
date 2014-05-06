@@ -22,7 +22,7 @@ NSString *token;
     NSMutableURLRequest *request = [JSONBuilder getLoginJSON:username withPassword:password];
     NSHTTPURLResponse *httpResp;
     NSData *POSTReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&httpResp error:&internalError];
-
+    
     if (internalError == nil)
     {
         NSDictionary *json = [self parseJSONToDictionary:POSTReply error:&internalError];

@@ -9,19 +9,6 @@
 #import "XYZExperimentFile.h"
 
 @implementation XYZExperimentFile
-/*
-+ (void) createExperimentFile:(NSDictionary*)file{
-    
-    idFile = [file valueForKey:@"id"];
-    type = [file valueForKey:@"type"];
-    name = [file valueForKey:@"name"];
-    uploadedBy = [file valueForKey:@"uploadedBy"];
-    date = [file valueForKey:@"date"];
-    size = [file valueForKey:@"size"];
-    URL = [file valueForKey:@"URL"];
-    
-}
-*/
 
 + (XYZExperimentFile *) defaultFileWithType: (FileType) type
 {
@@ -38,35 +25,45 @@
 - (NSString *) getDescription
 {
     NSMutableString *string = [[NSMutableString alloc] init];
-    [string appendString: _name];
-    [string appendString:@"  "];
-    [string appendString: _date];
-    [string appendString:@"  "];
-    [string appendString: _uploadedBy];
+    [string appendString: [self format: _name]];
+    [string appendString: [self fillWithSpaces:string untilLength:14]];
+    [string appendString: [self format: _date]];
+    [string appendString: [self fillWithSpaces:string untilLength:26]];
+    [string appendString: [self format: _uploadedBy]];
     return string;
 }
 
-- (NSComparisonResult) compareTo: (XYZExperimentFile *) experiment;
+- (NSString *) format: (NSString *) string
 {
-    if (_type == experiment.type) {
-        return (NSComparisonResult)NSOrderedSame;
-    } else if (_type == RAW || experiment.type == REGION){
-        return (NSComparisonResult)NSOrderedAscending;
-    } else if (experiment.type == RAW || _type == REGION) {
-        return (NSComparisonResult)NSOrderedDescending;
+    if (string == nil) {
+        return @"?";
     } else {
-        return (NSComparisonResult)NSOrderedSame;
+        return string;
     }
+}
+
+- (NSString *) fillWithSpaces: (NSString *) string untilLength: (int) length
+{
+    NSMutableString *result = [[NSMutableString alloc] init];
+    int numOfSpaces = length - [string length];
+    if(numOfSpaces <= 0) {
+        numOfSpaces = 2;
+    }
+    for(int i = 0; i < numOfSpaces; i++) {
+        [result appendString: @" "];
+    }
+    return result;
 }
 
 
 + (FileType) NSStringFileTypeToEnumFileType: (NSString *) type
 {
-    if ([type compare:@"raw"]) {
+    type = [type lowercaseString];
+    if ([type isEqualToString:@"raw"]) {
         return RAW;
-    } else if ([type compare:@"region"]) {
+    } else if ([type isEqualToString:@"region"]) {
         return REGION;
-    } else if ([type compare:@"profile"]) {
+    } else if ([type isEqualToString:@"profile"]) {
         return PROFILE;
     } else {
         return OTHER;

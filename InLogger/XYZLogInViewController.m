@@ -20,28 +20,24 @@
 
 @implementation XYZLogInViewController
 
-- (void)validate {
+- (void)validateWithUser:(NSString*) login andPassword: (NSString*) password {
     NSError *error;
-    [ServerConnection login:self.userField.text withPassword:self.passwordField.text error:&error];
-    if ([error localizedDescription] == nil) {
     
-     //   NSString *annotations=@"annotations=?<annotation1>&<annotation2>";
-        
-        [self performSegueWithIdentifier:@"loginSegue" sender:self];
-    } else {
-        [self showMessage:[error localizedDescription]];
+    if((login.length > 1) && (password.length > 2)) {
+        [ServerConnection login:self.userField.text withPassword:self.passwordField.text error:&error];
+   
+        if ([error localizedDescription] == nil) {
+            [self performSegueWithIdentifier:@"loginSegue" sender:self];
+        } else {
+            [self showMessage:[error localizedDescription]];
+        }
+    } else{
+        [self showMessage:@"Username or password is too short."];
     }
-    
-  //  XYZSearchMother *s = [[XYZSearchMother alloc] init:ns];
 }
 
 - (IBAction)SignInButtonTouchDOwn:(id)sender {
-    if((self.userField.text.length > 1) && (self.passwordField.text.length > 2)) {
-        [self validate];
-    }
-    else{
-        [self showMessage:@"Username or password is too short."];
-    }
+    [self validateWithUser: self.userField.text andPassword: self.passwordField.text];
 }
 
 - (IBAction)showMessage:(NSString*) error
@@ -105,7 +101,7 @@
         [self centerFrameView];
         if((self.userField.text.length > 1) && (self.passwordField.text.length > 2)) {
             NSLog(@"boriz");
-            [self validate];
+            [self validateWithUser: self.userField.text andPassword: self.passwordField.text];
         }
         else{
             [self showMessage:@"Username or password is too short."];

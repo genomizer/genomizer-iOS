@@ -15,4 +15,6 @@
 +(NSMutableURLRequest*)getSearchJSON:(NSString *)annotations withToken:(NSString *)token;
 +(NSMutableURLRequest*)getConversionJSON:(NSString*)fileID withToken:(NSString *)token;
 +(NSMutableURLRequest*)getAvailableAnnotationsJSON:(NSString *) token;
++(NSMutableURLRequest*)getRequest:(NSString*) requestType withToken:(NSString*) token;
++(NSString*)getServerURL;
 @end

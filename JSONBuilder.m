@@ -33,8 +33,7 @@
 
 +(NSMutableURLRequest*)getLogoutJSON:(NSString *)token
 {
-   
-    NSMutableURLRequest *request = [self basicRequest:@"DELETE" withToken:token];
+    NSMutableURLRequest *request = [self getRequest:@"DELETE" withToken:token];
     [request setURL:[NSURL URLWithString:[[self getServerURL] stringByAppendingString:@"/login"]]];
     return request;
 }
@@ -45,7 +44,7 @@
     NSString *annotationsStringComplete = [annotationString stringByAppendingString:annotations];
     NSString *encodedAnnotations = [annotationsStringComplete stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSLog(@"hej %@",annotationsStringComplete);
-    NSMutableURLRequest *request =  [self basicRequest:@"GET" withToken:token];
+    NSMutableURLRequest *request =  [self getRequest:@"GET" withToken:token];
     [request setURL:[NSURL URLWithString: [[self getServerURL] stringByAppendingString:encodedAnnotations]]];
     return request;
 }
@@ -53,22 +52,20 @@
 +(NSMutableURLRequest*)getConversionJSON:(NSString*)fileID withToken:(NSString *)token
 {
     NSString *conversionString = [@"/process/rawtoprofile/" stringByAppendingString:fileID];
-    NSMutableURLRequest *request = [self basicRequest:@"PUT" withToken:token];
+    NSMutableURLRequest *request = [self getRequest:@"PUT" withToken:token];
     [request setURL:[NSURL URLWithString: [[self getServerURL] stringByAppendingString:conversionString]]];
     return request;
 }
 
 +(NSMutableURLRequest*)getAvailableAnnotationsJSON:(NSString *) token
 {
-    NSMutableURLRequest *request = [self basicRequest:@"GET" withToken:token];
+    NSMutableURLRequest *request = [self getRequest:@"GET" withToken:token];
     [request setURL:[NSURL URLWithString: [[self getServerURL] stringByAppendingString: @"/annotation"]]];
     
     return request;
 }
 
-
-
-+ (NSMutableURLRequest*) basicRequest:(NSString*) requestType withToken:(NSString*) token
++ (NSMutableURLRequest*) getRequest:(NSString*) requestType withToken:(NSString*) token
 {
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setHTTPMethod:requestType];
