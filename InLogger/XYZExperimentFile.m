@@ -26,9 +26,9 @@
 {
     NSMutableString *string = [[NSMutableString alloc] init];
     [string appendString: [self format: _name]];
-    [string appendString:@"  "];
+    [string appendString: [self fillWithSpaces:string untilLength:14]];
     [string appendString: [self format: _date]];
-    [string appendString:@"  "];
+    [string appendString: [self fillWithSpaces:string untilLength:26]];
     [string appendString: [self format: _uploadedBy]];
     return string;
 }
@@ -40,6 +40,19 @@
     } else {
         return string;
     }
+}
+
+- (NSString *) fillWithSpaces: (NSString *) string untilLength: (int) length
+{
+    NSMutableString *result = [[NSMutableString alloc] init];
+    int numOfSpaces = length - [string length];
+    if(numOfSpaces <= 0) {
+        numOfSpaces = 2;
+    }
+    for(int i = 0; i < numOfSpaces; i++) {
+        [result appendString: @" "];
+    }
+    return result;
 }
 
 
