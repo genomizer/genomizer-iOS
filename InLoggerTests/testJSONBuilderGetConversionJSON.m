@@ -38,7 +38,7 @@
 - (void)testShouldHaveCorrectURL
 {
     NSString *url = [[self.req URL] absoluteString];
-    XCTAssertEqualObjects(url, @"http://genomizer.apiary-mock.com/process/rawtoprofile/fileID");
+    XCTAssertEqualObjects(url, [[JSONBuilder getServerURL] stringByAppendingString:@"/process/rawtoprofile/fileID"]);
 }
 
 - (void)testShouldHaveHTTPMethodPUT
