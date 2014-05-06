@@ -9,13 +9,13 @@
 #import <XCTest/XCTest.h>
 #import "JSONBuilder.h"
 
-@interface TestJSONBuilderLogout : XCTestCase
+@interface TestJSONBuilderGetRequest : XCTestCase
 
 @property NSMutableURLRequest *req;
 
 @end
 
-@implementation TestJSONBuilderLogout
+@implementation TestJSONBuilderGetRequest
 
 - (void)setUp
 {
@@ -28,30 +28,30 @@
     [super tearDown];
 }
 
-- (void) testJSONBuilderGetRequestShouldNotReturnNil
+- (void) testShouldNotReturnNil
 {
     XCTAssertNotNil(self.req);
 }
 
-- (void) testJSONBuilderGetRequestShouldHaveEmptyBody
+- (void) testShouldHaveEmptyBody
 {
     NSData *body = [self.req HTTPBody];
     XCTAssertNil(body);
 }
 
-- (void) testJSONBuilderGetRequestShouldHaveContentLengthZero
+- (void) testShouldHaveContentLengthZero
 {
     NSString *length = [self.req valueForHTTPHeaderField:@"Content-Length"];
     XCTAssertEqual([length intValue], 0);
 }
 
-- (void) testJSONBuilderGetRequestShouldContainRequestType
+- (void) testShouldContainRequestType
 {
     NSMutableURLRequest *tempReq = [JSONBuilder getRequest:@"PUT" withToken:@"token"];
     XCTAssertEqualObjects([tempReq HTTPMethod], @"PUT");
 }
 
-- (void) testJSONBuilderGetRequestShouldContainToken
+- (void) testShouldContainToken
 {
     NSMutableURLRequest *tempReq = [JSONBuilder getRequest:@"PUT" withToken:@"token"];
     NSString *token = [tempReq valueForHTTPHeaderField:@"Authorization"];
