@@ -25,12 +25,21 @@
 - (NSString *) getDescription
 {
     NSMutableString *string = [[NSMutableString alloc] init];
-    [string appendString: _name];
+    [string appendString: [self format: _name]];
     [string appendString:@"  "];
-    [string appendString: _date];
+    [string appendString: [self format: _date]];
     [string appendString:@"  "];
-    [string appendString: _uploadedBy];
+    [string appendString: [self format: _uploadedBy]];
     return string;
+}
+
+- (NSString *) format: (NSString *) string
+{
+    if (string == nil) {
+        return @"?";
+    } else {
+        return string;
+    }
 }
 
 
