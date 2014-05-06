@@ -8,12 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "XYZExperiment.h"
+#import "XYZExperimentDescriber.h"
 
 @interface XYZSearchResultTableViewController : UITableViewController
 
 @property XYZExperiment * selectedExperiment;
 @property XYZExperiment *selectedFiles;
 @property NSMutableArray *searchResults1;
+@property XYZExperimentDescriber *experimentDescriber;
 
 - (NSMutableArray *) createSearchFields;
 

@@ -33,6 +33,8 @@
     [self.tableView reloadData];
     self.selectedFields = [[NSMutableArray alloc] init];
     self.tableCells = [[NSMutableArray alloc] init];
+    _experimentDescriber = [[XYZExperimentDescriber alloc] init];
+
     
 }
 
@@ -226,6 +228,7 @@
     if ([segue.identifier isEqualToString:@"searchResult"]) {
         XYZSearchResultTableViewController *nextVC = (XYZSearchResultTableViewController *)[segue destinationViewController];
         nextVC.searchResults1 = self.searchResults;
+        nextVC.experimentDescriber = _experimentDescriber;
     }
 }
 

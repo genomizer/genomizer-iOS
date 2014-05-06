@@ -8,8 +8,8 @@
 
 #import "XYZAnnotationTableViewController.h"
 #import "XYZAnnotationTableViewCell.h"
+#import "XYZSearchResultTableViewController.h"
 #import "ServerConnection.h"
-#import "XYZExperimentDescriber.h"
 
 @interface XYZAnnotationTableViewController ()
 
@@ -23,7 +23,7 @@
 {
     [super viewDidLoad];
     _annotations = [self getAnnotationsFromServer];
-    NSLog(@"asdasda %@", _annotations);
+    NSLog(@"ANNOTATIONS DID LOAD %@", _annotations);
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -63,10 +63,21 @@
 {
     XYZAnnotationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ListPrototypeCell2" forIndexPath:indexPath];
     cell.label.text = [XYZExperimentDescriber formatAnnotation: [_annotations objectAtIndex: indexPath.row]];
-    cell.switchButton.on = NO;
+    cell.switchButton.on = [_describer containsAnnotation: [_annotations objectAtIndex: indexPath.row]];
+    cell.switchButton.tag = indexPath.row;
     return cell;
 }
 
+- (IBAction)switchButtonValueChanged:(UISwitch *)sender
+{
+    NSString *annotation = [_annotations objectAtIndex:sender.tag];
+
+    if( sender.on) {
+        [_describer addAnnotation: annotation];
+    } else {
+        [_describer removeAnnotation:annotation];
+    }
+}
 
 /*
 // Override to support conditional editing of the table view.

@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XYZExperimentDescriber.h"
 
 @interface XYZAnnotationTableViewController : UITableViewController
+
+@property XYZExperimentDescriber *describer;
+
 
 @end
