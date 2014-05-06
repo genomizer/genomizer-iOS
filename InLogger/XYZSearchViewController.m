@@ -32,10 +32,8 @@
     self.searchFields = [self createSearchFields];
     [self.tableView reloadData];
     self.selectedFields = [[NSMutableArray alloc] init];
-    self.tableCells = [[NSMutableArray alloc] init];
+    self.tableCells = [[NSMutableArray alloc] initWithCapacity:[_searchFields count]];
     _experimentDescriber = [[XYZExperimentDescriber alloc] init];
-
-    
 }
 
 - (NSArray *) createSearchFields
@@ -154,7 +152,8 @@
     }
     cell.inputField.delegate = self;
     cell.controller = self;
-    [_tableCells addObject:cell];
+    [_tableCells setObject:cell atIndexedSubscript:indexPath.row];
+    NSLog(@"ASDASD %lu", (unsigned long)[_tableCells count]);
     return cell;
 }
 
@@ -185,14 +184,15 @@
     NSError *error;
     _searchValues = [NSMutableDictionary dictionary];
     for (XYZSearchTableViewCell *cell in _tableCells) {
-        if (cell.switchButton.on) {
+        if (cell != nil && cell.switchButton.on) {
             [_searchValues setObject:cell.inputField.text forKey:cell.annotation];
         }
     }
-    NSLog(@"asd: %@", _searchValues);
+    NSLog(@"asd: %lu %@", (unsigned long)[_tableCells count], _searchValues);
     self.searchResults = [ServerConnection search:[self createAnnotationsSearch] error:&error];
    [self performSegueWithIdentifier:@"searchResult" sender:self.searchResults];
 }
+
 - (void)setDataInCells:(NSString *)data taggen:(NSInteger)tagg{
     
     if(tagg==2){
