@@ -34,48 +34,75 @@
     XCTAssertNotNil(self.req);
 }
 
-- (void)testGetLoginJSONShouldReturnNSMutableURLRequest {
+- (void)testGetLoginJSONShouldReturnNSMutableURLRequest
+{
     XCTAssertEqual([NSMutableURLRequest class], [[JSONBuilder getLoginJSON:@"Username" withPassword:@"Password"] class]);
 }
 
-- (void) testGetLoginJSONShouldContainBody{
-    NSData *postData = [self.req HTTPBody];
-    XCTAssertNotNil(postData);
-}
-
-- (void) testGetLoginJSONBodyShouldParseWithoutError{
+- (void) testGetLoginJSONBodyShouldParseWithoutError
+{
     NSData *postData = [self.req HTTPBody];
     NSError *error;
     [NSJSONSerialization JSONObjectWithData:postData options:0 error:&error];
     XCTAssertNil(error);
 }
 
-- (void) testGetLoginJSONBodyShouldContainUsername{
+- (void) testGetLoginJSONShouldContainBody
+{
+    NSData *postData = [self.req HTTPBody];
+    XCTAssertNotNil(postData);
+}
+
+- (void) testGetLoginJSONBodyShouldContainUsername
+{
     NSData *postData = [self.req HTTPBody];
     NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:postData options:0 error:nil];
     NSString *username = [dict objectForKey:@"username"];
     XCTAssertEqualObjects(username, @"Username");
 }
 
-- (void) testGetLoginJSONBodyShouldNotContainUSERNAME{
+- (void) testGetLoginJSONBodyShouldNotContainUSERNAME
+{
     NSData *postData = [self.req HTTPBody];
     NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:postData options:0 error:nil];
     NSString *username = [dict objectForKey:@"username"];
     XCTAssertNotEqualObjects(username, @"USERNAME");
 }
 
-- (void) testGetLoginJSONBodyShouldContainPassword{
+- (void) testGetLoginJSONBodyShouldContainPassword
+{
     NSData *postData = [self.req HTTPBody];
     NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:postData options:0 error:nil];
     NSString *password = [dict objectForKey:@"password"];
     XCTAssertEqualObjects(password, @"Password");
 }
 
-- (void) testGetLoginJSONBodyShouldNotContainPASSWORD{
+- (void) testGetLoginJSONBodyShouldNotContainPASSWORD
+{
     NSData *postData = [self.req HTTPBody];
     NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:postData options:0 error:nil];
     NSString *password = [dict objectForKey:@"password"];
     XCTAssertNotEqualObjects(password, @"PASSWORD");
+}
+
+
+- (void) testGetLoginJSONShouldReportCorrectBodySize
+{
+    NSData *postData = [self.req HTTPBody];
+    NSString *lengthFromReq = [self.req valueForHTTPHeaderField:@"Content-Length"];
+    XCTAssertEqual(postData.length, [lengthFromReq intValue]);
+}
+
+- (void) testGetLoginJSONSHTTPMethodShouldBePost
+{
+    XCTAssertEqualObjects(self.req.HTTPMethod, @"POST");
+}
+
+- (void) testGetLoginJSONShouldHandleEmptyLoginAndPassword
+{
+    NSMutableURLRequest *testReq = [JSONBuilder getLoginJSON:nil withPassword:nil];
+    NSData *body = [testReq HTTPBody];
+    XCTAssertNotNil(body);
 }
 
 @end
