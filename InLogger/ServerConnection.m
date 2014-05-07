@@ -42,6 +42,8 @@ NSString *token;
 {
     NSError *internalError;
 
+    //TODO fix exception handling for incorrect JSON response
+    
     NSMutableURLRequest *request = [JSONBuilder getLoginJSON:username withPassword:password];
     NSHTTPURLResponse *httpResp;
     NSData *POSTReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&httpResp error:&internalError];
@@ -49,7 +51,7 @@ NSString *token;
     if (internalError == nil)
     {
         NSDictionary *json = [self parseJSONToDictionary:POSTReply error:&internalError];
-        
+
         if(internalError == nil)
         {
             token = [json objectForKey:@"token"];
