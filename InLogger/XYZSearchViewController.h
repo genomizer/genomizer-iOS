@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "XYZExperimentDescriber.h";
+#import "XYZExperimentDescriber.h"
 
 @interface XYZSearchViewController : UIViewController<UITextFieldDelegate, UIPickerViewDelegate>
 

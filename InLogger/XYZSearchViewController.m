@@ -63,9 +63,9 @@
        myPickerView.dataPicker = hej;
        
        
-       myPickerView.delegate = myPickerView.self;
+       myPickerView.delegate = (id)myPickerView.self;
        myPickerView.backgroundColor = [UIColor colorWithRed:242/255.0f green:242/255.0f blue:244/255.0f alpha:1.0f];
-       myPickerView.dataSource = myPickerView.self;
+       myPickerView.dataSource = (id)myPickerView.self;
        myPickerView.showsSelectionIndicator = YES;
        [self.view addSubview:myPickerView];
        myPickerView.tableCells = self.tableCells;
@@ -79,8 +79,8 @@
            NSMutableArray* hej = [NSMutableArray arrayWithObjects:@"Fly", @"Human", @"Rat",  nil];
         myPickerView.dataPicker = hej;
          myPickerView.backgroundColor = [UIColor colorWithRed:242/255.0f green:242/255.0f blue:244/255.0f alpha:1.0f];
-        myPickerView.delegate = myPickerView.self;
-        myPickerView.dataSource = myPickerView.self;
+        myPickerView.delegate = (id)myPickerView.self;
+        myPickerView.dataSource = (id)myPickerView.self;
         myPickerView.tableCells = self.tableCells;
         
         myPickerView.showsSelectionIndicator = NO;
