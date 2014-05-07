@@ -162,10 +162,12 @@ NSString *token;
  
     NSMutableURLRequest *request = [JSONBuilder getAvailableAnnotationsJSON:token];
     NSData *POSTReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&httpResp error:&internalError];
+       NSLog(@"query %@", POSTReply);
     if(internalError == nil)
     {
         if(httpResp.statusCode == 200){
             NSArray *array = [NSJSONSerialization JSONObjectWithData:POSTReply options: NSJSONReadingMutableContainers error:&internalError];
+         
             if(internalError == nil)
             {
                 NSMutableDictionary *annotations = [[NSMutableDictionary alloc] init];

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="x1l-HJ-QPz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="x1l-HJ-QPz">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -90,8 +90,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fs2-qC-anS">
+                                <rect key="frame" x="25" y="478" width="151" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Advanced Search">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="advancedSearchButton:" destination="auJ-fT-xa1" eventType="touchUpInside" id="m6o-Ta-QEI"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EJL-DW-KHM">
-                                <rect key="frame" x="20" y="475" width="280" height="32"/>
+                                <rect key="frame" x="184" y="477" width="124" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="P5n-X7-U37"/>
@@ -103,19 +113,19 @@
                                     <action selector="searchButton:" destination="auJ-fT-xa1" eventType="touchUpInside" id="sXT-KG-WU7"/>
                                 </connections>
                             </button>
-                            <tableView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="h4D-dx-Mqj">
+                            <tableView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="15" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="h4D-dx-Mqj">
                                 <rect key="frame" x="2" y="67" width="316" height="400"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ListPrototypeCell" id="Tig-61-Fif" customClass="XYZSearchTableViewCell">
-                                        <rect key="frame" x="0.0" y="22" width="316" height="44"/>
+                                        <rect key="frame" x="0.0" y="15" width="316" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Tig-61-Fif" id="5qA-D1-t1n">
                                             <rect key="frame" x="0.0" y="0.0" width="316" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="InputField" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Experiment ID" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cuH-Be-R19">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="InputField" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Experiment ID" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cuH-Be-R19">
                                                     <rect key="frame" x="20" y="7" width="223" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -125,11 +135,19 @@
                                                         <action selector="textFieldDidBeginEditing:" destination="auJ-fT-xa1" eventType="editingDidBegin" id="9rX-n1-Q5F"/>
                                                     </connections>
                                                 </textField>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vgg-C9-vRK">
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vgg-C9-vRK">
                                                     <rect key="frame" x="251" y="6" width="51" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </switch>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="vgg-C9-vRK" firstAttribute="centerY" secondItem="5qA-D1-t1n" secondAttribute="centerY" id="5bT-WK-tuk"/>
+                                                <constraint firstItem="vgg-C9-vRK" firstAttribute="leading" secondItem="cuH-Be-R19" secondAttribute="trailing" constant="8" symbolic="YES" id="F11-5F-3D0"/>
+                                                <constraint firstItem="cuH-Be-R19" firstAttribute="bottom" secondItem="vgg-C9-vRK" secondAttribute="bottom" id="ZVq-Zk-auB"/>
+                                                <constraint firstItem="cuH-Be-R19" firstAttribute="top" secondItem="5qA-D1-t1n" secondAttribute="top" constant="7" id="m5G-G0-hWe"/>
+                                                <constraint firstAttribute="trailing" secondItem="vgg-C9-vRK" secondAttribute="trailing" constant="16" id="svo-NO-Vgj"/>
+                                                <constraint firstItem="cuH-Be-R19" firstAttribute="leading" secondItem="5qA-D1-t1n" secondAttribute="leading" constant="20" symbolic="YES" id="wyp-Gy-TCE"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="inputField" destination="cuH-Be-R19" id="EwY-NA-LWE"/>
@@ -143,20 +161,66 @@
                                     <outlet property="delegate" destination="auJ-fT-xa1" id="DLf-Fu-Xg9"/>
                                 </connections>
                             </tableView>
+                            <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="advancedView" translatesAutoresizingMaskIntoConstraints="NO" id="sRN-He-MEm">
+                                <rect key="frame" x="10" y="75" width="300" height="181"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y7h-DZ-3NX">
+                                        <rect key="frame" x="5" y="32" width="290" height="117"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="search"/>
+                                    </textView>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Enter search query" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xEx-CC-Q2W">
+                                        <rect key="frame" x="89" y="6" width="123" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ACQ-rw-Z41">
+                                        <rect key="frame" x="237" y="150" width="56" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Search">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="SearchQueryButtonTouched:" destination="auJ-fT-xa1" eventType="touchUpInside" id="ZEp-Dq-Zh3"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IV3-57-csz">
+                                        <rect key="frame" x="9" y="150" width="46" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Close">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="closeAdvancedSearch:" destination="auJ-fT-xa1" eventType="touchUpInside" id="1jz-Pd-72W"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.96059782608695654" green="0.96059782608695654" blue="0.96059782608695654" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="EJL-DW-KHM" firstAttribute="top" secondItem="h4D-dx-Mqj" secondAttribute="bottom" constant="8" id="6ps-bZ-1zb"/>
+                            <constraint firstItem="EJL-DW-KHM" firstAttribute="leading" secondItem="fs2-qC-anS" secondAttribute="trailing" constant="8" symbolic="YES" id="30S-J6-CaE"/>
+                            <constraint firstItem="EJL-DW-KHM" firstAttribute="top" secondItem="h4D-dx-Mqj" secondAttribute="bottom" constant="10" id="6ps-bZ-1zb"/>
                             <constraint firstItem="h4D-dx-Mqj" firstAttribute="leading" secondItem="Ueq-zr-MCQ" secondAttribute="leading" constant="2" id="9PJ-eS-71h"/>
                             <constraint firstAttribute="trailing" secondItem="h4D-dx-Mqj" secondAttribute="trailing" constant="2" id="C3s-Lh-0KP"/>
-                            <constraint firstItem="EJL-DW-KHM" firstAttribute="leading" secondItem="Ueq-zr-MCQ" secondAttribute="leading" constant="20" id="FJx-Nc-h8r"/>
-                            <constraint firstAttribute="trailing" secondItem="EJL-DW-KHM" secondAttribute="trailing" constant="20" id="XWQ-oH-xht"/>
+                            <constraint firstItem="EJL-DW-KHM" firstAttribute="leading" secondItem="Ueq-zr-MCQ" secondAttribute="leading" constant="184" id="FJx-Nc-h8r"/>
+                            <constraint firstItem="fs2-qC-anS" firstAttribute="leading" secondItem="h4D-dx-Mqj" secondAttribute="leading" constant="23" id="LVK-8a-xab"/>
+                            <constraint firstAttribute="trailing" secondItem="EJL-DW-KHM" secondAttribute="trailing" constant="12" id="XWQ-oH-xht"/>
+                            <constraint firstItem="fs2-qC-anS" firstAttribute="baseline" secondItem="EJL-DW-KHM" secondAttribute="baseline" id="b1a-xi-YIc"/>
                             <constraint firstItem="h4D-dx-Mqj" firstAttribute="top" secondItem="xmV-wZ-3gY" secondAttribute="bottom" constant="3" id="faf-4d-4Ug"/>
-                            <constraint firstItem="Fmb-oU-3Ov" firstAttribute="top" secondItem="EJL-DW-KHM" secondAttribute="bottom" constant="12" id="lqp-zn-7CW"/>
+                            <constraint firstItem="Fmb-oU-3Ov" firstAttribute="top" secondItem="EJL-DW-KHM" secondAttribute="bottom" constant="10" id="lqp-zn-7CW"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Search" id="NmL-cM-W02"/>
                     <connections>
+                        <outlet property="advancedView" destination="sRN-He-MEm" id="76w-JE-lPi"/>
+                        <outlet property="pumedSearch" destination="y7h-DZ-3NX" id="pXl-Di-o6A"/>
                         <outlet property="tableView" destination="h4D-dx-Mqj" id="fPB-Z7-tcO"/>
                         <segue destination="ggw-44-oMv" kind="push" identifier="searchResult" id="1cQ-o4-QSo"/>
                     </connections>

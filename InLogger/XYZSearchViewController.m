@@ -12,9 +12,11 @@
 #import "ServerConnection.h"
 #import "XYZExperimentDescriber.h"
 #import "pickerView.h"
+#import <QuartzCore/QuartzCore.h>
 @interface XYZSearchViewController ()
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIView *advancedView;
 
 @property NSMutableArray *selectedFields;
 @property NSArray *searchFields;
@@ -24,6 +26,7 @@
 @property NSMutableDictionary *dict;
 @property NSMutableArray *pickerViews;
 @property XYZExperimentDescriber* experimentDescriber;
+@property (weak, nonatomic) IBOutlet UITextView *pumedSearch;
 
 @end
 
@@ -181,6 +184,37 @@
    [self performSegueWithIdentifier:@"searchResult" sender:self.searchResults];
 }
 
+- (IBAction)closeAdvancedSearch:(id)sender {
+    _advancedView.hidden = YES;
+    [_pumedSearch endEditing:YES];
+}
+- (IBAction)SearchQueryButtonTouched:(id)sender {
+    NSError *error;
+    self.searchResults = [ServerConnection search:_pumedSearch.text error:&error];
+    
+    [self performSegueWithIdentifier:@"searchResult" sender:self.searchResults];
+
+}
+
+- (IBAction)advancedSearchButton:(id)sender {
+    _advancedView.hidden = NO;
+    _advancedView.layer.cornerRadius = 5;
+    _advancedView.layer.masksToBounds = YES;
+    _tableView.editing = NO;
+    [self.tableView endEditing:YES];
+   // _tableView.alpha = 0.5;
+    //_tableView.opaque = YES;
+    _advancedView.layer.borderWidth = 0.4;
+    _advancedView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    _pumedSearch.layer.cornerRadius = 5;
+    _pumedSearch.layer.masksToBounds = YES;
+    _pumedSearch.layer.borderWidth = 0.2;
+    _pumedSearch.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    _pumedSearch.delegate = (id)self;
+    [self.view bringSubviewToFront:_advancedView];
+    [_pumedSearch becomeFirstResponder ];
+    
+}
 
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -191,6 +225,19 @@
         nextVC.experimentDescriber = _experimentDescriber;
     }
 }
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    
+    if([text isEqualToString:@"\n"]) {
+        NSError *error;
+        self.searchResults = [ServerConnection search:_pumedSearch.text error:&error];
+        
+        [self performSegueWithIdentifier:@"searchResult" sender:self.searchResults];
+        return NO;
+    }
+    return YES;
+}
+
+
 
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
