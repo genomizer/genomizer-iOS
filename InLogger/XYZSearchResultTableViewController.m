@@ -55,8 +55,6 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    [self.searchResults1 addObject:[XYZExperiment defaultExperiment]];
-    NSLog(@"search results count: %d", [self.searchResults1 count]);
     return [self.searchResults1 count];
 }
 
@@ -94,10 +92,10 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    NSLog(@"PREPARIGNG DOREE SEGHAHHAE");
-    
-    if ([segue.identifier isEqualToString:@"toFileList"]) {
+    NSLog(@"identifier %@", segue.identifier);
+    if ([segue.identifier isEqualToString:@"toFileList1"] || [segue.identifier isEqualToString:@"toFileList2"]) {
         XYZDataFileViewController *nextVC = (XYZDataFileViewController *)[segue destinationViewController];
+        NSLog(@"INSIDE MAN");
         nextVC.experiment = _selectedExperiment;
     } else if ([segue.identifier isEqualToString:@"toEditDisplay"]) {
         XYZAnnotationTableViewController *nextVC = (XYZAnnotationTableViewController *)[segue destinationViewController];

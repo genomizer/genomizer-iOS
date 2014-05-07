@@ -40,7 +40,11 @@
 - (IBAction)experimentTouchDownInside:(id)sender
 {
     _controller.selectedExperiment = _experiement;
-    NSLog(@"ASD: %d", [_experiement numberOfFiles]);
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    _controller.selectedExperiment = _experiement;
+    [super touchesBegan:touches withEvent:event];
 }
 
 - (CGSize)textFieldSize
