@@ -57,9 +57,7 @@
             myPickerView.tableView = self.tableView;
             myPickerView.showsSelectionIndicator = YES;
             [_pickerViews addObject:myPickerView];
-           
         }
-        
     }
 }
 

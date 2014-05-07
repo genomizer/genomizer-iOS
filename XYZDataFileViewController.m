@@ -57,6 +57,7 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
+    NSLog(@"ASDASDASDASDASDASDASDASDASDASDASDASDADSSAD");
     return 4;
 }
 
@@ -68,7 +69,7 @@
             return @"Profile data";
         case 2:
             return @"Region data";
-        case 4:
+        case 3:
             return @"Other";
     }
     return nil;
@@ -76,28 +77,16 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    NSLog(@"number of rows: %d", [[self arrayFromSection:section] count]);
     return [[self arrayFromSection:section] count];
 }
 
-- (XYZDataFileTableViewCell *)createDataFileCell:(NSIndexPath *)indexPath tableView:(UITableView *)tableView withFile:(XYZExperimentFile *) file atIndex: (NSInteger)index
-{
-    NSString *cellIdentifier = @"DataFilePrototypeCell";
-    XYZDataFileTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
-    cell.textField.text = [file getDescription];
-    cell.switchButton.on = NO;
-    cell.fileID = file.idFile;
-    cell.tag = file.type;
-    NSLog(@"Size; %d, %d", [_cells count], index);
-    [_cells setObject:cell atIndexedSubscript:index];
-    
-    return cell;
-}
 
-- (NSInteger) rowsBeforSection: (NSInteger) section
+- (NSInteger) rowsBeforeSection: (NSInteger) section
 {
     NSInteger rows = 0;
     for (int i = 0; i < section; i++) {
-        rows += 0;
+        rows += [[self arrayFromSection:i] count];
     }
     return rows;
 }
@@ -125,7 +114,8 @@
     cell.switchButton.on = NO;
     cell.fileID = file.idFile;
     cell.tag = file.type;
-    [_cells setObject:cell atIndexedSubscript:indexPath.row];
+    NSLog(@"section %d row %d", indexPath.section, indexPath.row);
+    [_cells setObject:cell atIndexedSubscript:[self rowsBeforeSection:indexPath.section] + indexPath.row];
     
     return cell;
 }
