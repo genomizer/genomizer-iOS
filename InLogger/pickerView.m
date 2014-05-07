@@ -7,7 +7,6 @@
 //
 
 #import "pickerView.h"
-#import "XYZSearchViewController.h"
 #import "XYZSearchTableViewCell.h"
 
 @implementation pickerView
@@ -16,64 +15,37 @@
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
-    }
     return self;
 }
-
-/*
- // Only override drawRect: if you perform custom drawing.
- // An empty implementation adversely affects performance during animation.
- - (void)drawRect:(CGRect)rect
- {
- // Drawing code
- }
- 
- */
 
 
 -(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
-    return 1; // For one column
+    return 1;
 }
 
 -(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    
-    return self.dataPicker.count; // Numbers of rows
+    return self.dataPicker.count;
 }
 
 -(NSArray *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    
     return [self.dataPicker objectAtIndex:row];
-    
 }
 
 - (void)pickerView:(UIPickerView *)pickerView1 didSelectRow: (NSInteger)row inComponent:(NSInteger)component {
     NSInteger selectedRow = [pickerView1 selectedRowInComponent:0];
     NSString *selectedPickerRow=[self.dataPicker objectAtIndex:selectedRow];
-    
-    if(pickerView1.tag==2){
         for (XYZSearchTableViewCell *cell in _tableCells) {
-            if([cell.inputField.placeholder isEqual:@"Species"]){
-                cell.inputField.text = selectedPickerRow;
-          
-                    cell.switchButton.on = true;
-                cell.switchButton.enabled = true;
-  
-            }
-        }
-    }
-    if(pickerView1.tag==1){
-        for (XYZSearchTableViewCell *cell in _tableCells) {
-            if([cell.inputField.placeholder isEqual:@"Sex"]){
+            if([[_annotationsDict allKeys][pickerView1.tag] isEqual:cell.inputField.placeholder]){
                 cell.inputField.text = selectedPickerRow;
                 cell.switchButton.on = true;
                 cell.switchButton.enabled = true;
+                [cell.inputField resignFirstResponder];
+                _tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
             }
+          
         }
-    }
-}
+  }
 @end

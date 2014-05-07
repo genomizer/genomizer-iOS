@@ -31,7 +31,7 @@ NSString *token;
         {
             token = [json objectForKey:@"token"];
             NSLog(@"login token %@", token);
-            NSLog(@"Header: %ld", (long)httpResp.statusCode);
+            NSLog(@"Header login: %ld", (long)httpResp.statusCode);
             
             if(httpResp.statusCode != 200)
             {
@@ -127,7 +127,7 @@ NSString *token;
     }
 }
 
-+ (NSArray*)getAvailableAnnotations:(NSError**)error
++ (NSMutableDictionary*)getAvailableAnnotations:(NSError**)error
 {
     NSError *internalError;
     NSHTTPURLResponse *httpResp;
@@ -140,12 +140,14 @@ NSString *token;
             NSArray *array = [NSJSONSerialization JSONObjectWithData:POSTReply options: NSJSONReadingMutableContainers error:&internalError];
             if(internalError == nil)
             {
-                NSMutableArray *annotations = [[NSMutableArray alloc] init];
+                NSMutableDictionary *annotations = [[NSMutableDictionary alloc] init];
                 for(NSDictionary *json in array)
                 {
-                    [annotations addObject:[json objectForKey:@"name"]];
+                    [annotations setObject:[json objectForKey:@"value"] forKey:[json objectForKey:@"name"]];
                 }
+                NSLog(@"heeej %@", annotations);
                 return annotations;
+                
             }
             else
             {

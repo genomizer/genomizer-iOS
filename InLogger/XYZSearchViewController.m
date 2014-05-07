@@ -21,6 +21,8 @@
 @property NSMutableArray *searchResults;
 @property NSMutableDictionary *searchValues;
 @property NSMutableArray *tableCells;
+@property NSMutableDictionary *dict;
+@property NSMutableArray *pickerViews;
 
 @end
 
@@ -33,72 +35,49 @@
     [self.tableView reloadData];
     self.selectedFields = [[NSMutableArray alloc] init];
     self.tableCells = [[NSMutableArray alloc] init];
+    [self createPickerViews];
     
+    
+}
+- (void) createPickerViews{
+    _pickerViews = [[NSMutableArray alloc] init];
+    for(NSString *key in [_dict allKeys]){
+        if(![[_dict objectForKey:key][0] isEqual:@"freetext"]){
+            pickerView *myPickerView = [[pickerView alloc] initWithFrame:CGRectMake(0, 200, 100, 80)];
+            myPickerView.tag = [[_dict allKeys] indexOfObject:key];
+            myPickerView.dataPicker = [_dict objectForKey:key];
+            myPickerView.delegate = myPickerView.self;
+            myPickerView.backgroundColor = [UIColor colorWithRed:242/255.0f green:242/255.0f blue:244/255.0f    alpha:1.0f];
+            myPickerView.dataSource = myPickerView.self;
+            myPickerView.tableCells = self.tableCells;
+            myPickerView.annotationsDict = self.dict;
+            myPickerView.tableView = self.tableView;
+            myPickerView.showsSelectionIndicator = YES;
+            [_pickerViews addObject:myPickerView];
+            NSLog(@"eeee  %ld", (long)myPickerView.tag);
+        }
+        
+    }
 }
 
 - (NSArray *) createSearchFields
 {
     NSError *error;
-    return [ServerConnection getAvailableAnnotations:&error];
-    //return [NSMutableArray arrayWithObjects:@"experimentID", @"pubmedId" , @"Type of data", @"Species", @"Genom release", @"Cell-line", @"Developmental stage", @"Sex", @"Tissue", @"Processing", nil];
+   
+    _dict = [[NSMutableDictionary alloc] init];
+    _dict = [ServerConnection getAvailableAnnotations:&error];
+    return [_dict allKeys];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
-  //  UITextField *responder = textField;
- //    for (XYZSearchTableViewCell *cell in _tableCells) {
-   if ([textField.placeholder isEqual:@"Sex"]) {
-          pickerView *myPickerView = [[pickerView alloc] initWithFrame:CGRectMake(0, 0, 120, 20)];
-       myPickerView.tag = 1;
-       
-       NSMutableArray* hej = [NSMutableArray
-                              arrayWithObjects:@"Male", @"Female", @"Unknown",  nil];
-       
-     
-       myPickerView.dataPicker = hej;
-       
-       
-       myPickerView.delegate = myPickerView.self;
-       myPickerView.backgroundColor = [UIColor colorWithRed:242/255.0f green:242/255.0f blue:244/255.0f alpha:1.0f];
-       myPickerView.dataSource = myPickerView.self;
-       myPickerView.showsSelectionIndicator = YES;
-       [self.view addSubview:myPickerView];
-       myPickerView.tableCells = self.tableCells;
-        textField.inputView = myPickerView;
-    }
-    
-    if ([textField.placeholder isEqual:@"Species"]) {
-        pickerView *myPickerView = [[pickerView alloc] initWithFrame:CGRectMake(0, 0, 320, 80)];
-        myPickerView.tag = 2;
-        
-           NSMutableArray* hej = [NSMutableArray arrayWithObjects:@"Fly", @"Human", @"Rat",  nil];
-        myPickerView.dataPicker = hej;
-         myPickerView.backgroundColor = [UIColor colorWithRed:242/255.0f green:242/255.0f blue:244/255.0f alpha:1.0f];
-        myPickerView.delegate = myPickerView.self;
-        myPickerView.dataSource = myPickerView.self;
-        myPickerView.tableCells = self.tableCells;
-        
-        myPickerView.showsSelectionIndicator = NO;
-        [self.view addSubview:myPickerView];
-        
-        textField.inputView = myPickerView;
-    }
-    
-    return YES;
-}
 
 
 - (IBAction)textFieldDidBeginEditing:(UITextField *)textField
-
-
 {
-    
-    
     _tableView.contentInset = UIEdgeInsetsMake(0, 0, 117, 0);
     UITableViewCell *cell;
     if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
@@ -111,30 +90,18 @@
         // TextField -> UITableVieCellContentView -> (in iOS 7!)ScrollView -> Cell!
     }
     [_tableView scrollToRowAtIndexPath:[_tableView indexPathForCell:cell] atScrollPosition:UITableViewScrollPositionTop animated:YES];
-
 }
 
-/*
-- (IBAction)annotationInputFieldEditingDidBegin:(id)sender {
-    //_tableView.contentInset = UIEdgeInsetsMake(0, 0, 300, 0);
-    CGPoint buttonPosition = [sender convertPoint:CGPointZero toView:self.tableView];
-    NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:buttonPosition];
-   // UITextField *textField = (UITextField *)(sender);
-   // XYZSearchTableViewCell *cell = (XYZSearchTableViewCell *)[textField superview];
-    //[_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath inSection: 2] animated:YES];
-    [_tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionNone animated:YES];
-}*/
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
     return [self.searchFields count];
 }
 
@@ -143,8 +110,7 @@
     static NSString *CellIdentifier = @"ListPrototypeCell";
     XYZSearchTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     NSString *annotation = [self.searchFields objectAtIndex:indexPath.row];
-    cell.inputField.placeholder = [XYZExperimentDescriber formatAnnotation: annotation];
-    
+    cell.inputField.placeholder = [self.searchFields objectAtIndex:indexPath.row];
     cell.annotation = annotation;
     if(cell.inputField.text.length == 0) {
         cell.switchButton.enabled = false;
@@ -155,6 +121,26 @@
     [_tableCells addObject:cell];
     return cell;
 }
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    if (![[_dict objectForKey:textField.placeholder][0] isEqual:@"freetext"]) {
+      
+        int i = 0;
+        for (XYZSearchTableViewCell *cell in _tableCells) {
+            if([textField.placeholder isEqual:cell.inputField.placeholder]){
+                break;
+            }
+            i++;
+        }
+        for(pickerView *pick in _pickerViews) {
+            if(pick.tag == i) {
+                textField.inputView = pick;
+            }
+        }
+    }
+    return YES;
+}
+
 
 -(NSString*)createAnnotationsSearch
 {
@@ -187,42 +173,12 @@
             [_searchValues setObject:cell.inputField.text forKey:cell.annotation];
         }
     }
-    NSLog(@"asd: %@", _searchValues);
     self.searchResults = [ServerConnection search:[self createAnnotationsSearch] error:&error];
    [self performSegueWithIdentifier:@"searchResult" sender:self.searchResults];
 }
-- (void)setDataInCells:(NSString *)data taggen:(NSInteger)tagg{
-    
-    if(tagg==2){
-        NSLog(@"sdfh0 %@", data);
-        for (XYZSearchTableViewCell *cell in _tableCells) {
-            NSLog(@"sdfh1 %@", data);
-            if([cell.inputField.placeholder isEqual:@"Species"]){
-                cell.inputField.text = @"Specissses";
-                NSLog(@"sdfh2 %@", data);
-            }
-            
-        }
-    
-}
-}
-/*
--(void) setDataInCells2:(NSString *)data taggen:(NSInteger)tagg{
-    if(tagg==2){
-        for (XYZSearchTableViewCell *cell in _tableCells) {
-            if([cell.inputField.placeholder isEqual:@"Species"]){
-                cell.inputField.text = @"Specissses";
-            }
-            
-        }
-        NSLog(@"sdfh %@", data);
-    }
 
-}
-   */
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    
     if ([segue.identifier isEqualToString:@"searchResult"]) {
         XYZSearchResultTableViewController *nextVC = (XYZSearchResultTableViewController *)[segue destinationViewController];
         nextVC.searchResults1 = self.searchResults;
@@ -233,8 +189,6 @@
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesBegan:touches withEvent:event];
 }
-
-
 
 - (void)hideKeyboardAndAdjustTable {
     [self.view endEditing:YES];
