@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XYZSearchViewController.h"
 
 @interface pickerView : UIPickerView
 @property NSMutableArray *tableCells;
 @property NSArray *dataPicker;
-
+@property NSMutableDictionary *annotationsDict;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end

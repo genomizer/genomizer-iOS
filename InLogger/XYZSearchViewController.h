@@ -7,13 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "XYZExperimentDescriber.h";
+#import "XYZExperimentDescriber.h"
 
 @interface XYZSearchViewController : UIViewController<UITextFieldDelegate, UIPickerViewDelegate>
 
-@property XYZExperimentDescriber *experimentDescriber;
-
 - (void)hideKeyboardAndAdjustTable;
-- (void) setDataInCells:(NSString *)data taggen:(NSInteger)tagg;
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender;
+- (void) createPickerViews;
+
 @end
