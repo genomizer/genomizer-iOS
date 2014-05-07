@@ -66,9 +66,9 @@
 - (NSArray *) createSearchFields
 {
     NSError *error;
-   
     _dict = [[NSMutableDictionary alloc] init];
     _dict = [ServerConnection getAvailableAnnotations:&error];
+    
      NSLog(@"eeee  %@", _dict);
    return [_dict allKeys];
 }
@@ -192,10 +192,24 @@
 - (IBAction)SearchQueryButtonTouched:(id)sender {
     NSError *error;
     self.searchResults = [ServerConnection search:_pumedSearch.text error:&error];
-    
-    [self performSegueWithIdentifier:@"searchResult" sender:self.searchResults];
-
+    if(error){
+        [self showErrorMessage:@"Probably incorrect search query" title:error.domain];
+    }
+    else{
+        [self performSegueWithIdentifier:@"searchResult" sender:self.searchResults];
+    }
 }
+
+- (IBAction)showErrorMessage:(NSString*) error title:(NSString*) title
+{
+    UIAlertView *searchFailed = [[UIAlertView alloc]
+                                initWithTitle:title message:error
+                                delegate:nil cancelButtonTitle:@"Try again"
+                                otherButtonTitles:nil];
+    
+    [searchFailed show];
+}
+
 
 - (IBAction)advancedSearchButton:(id)sender {
     _advancedView.hidden = NO;
@@ -232,8 +246,12 @@
     if([text isEqualToString:@"\n"]) {
         NSError *error;
         self.searchResults = [ServerConnection search:_pumedSearch.text error:&error];
-        
-        [self performSegueWithIdentifier:@"searchResult" sender:self.searchResults];
+        if(error){
+            [self showErrorMessage:@"Probably incorrect search query" title:error.domain];
+        }
+        else{
+            [self performSegueWithIdentifier:@"searchResult" sender:self.searchResults];
+        }
         return NO;
     }
     return YES;
