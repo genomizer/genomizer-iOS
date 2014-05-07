@@ -100,9 +100,7 @@ NSString *token;
         NSMutableArray *experiments = [[NSMutableArray alloc] init];
         for(NSDictionary *json in array)
         {
-            //NSLog(@"****** %@", json);
-            for (int i = 0; i< 2; i++)
-                [experiments addObject:[XYZExperimentParser expParser:json]];
+            [experiments addObject:[XYZExperimentParser expParser:json]];
         }
         return experiments;
     }

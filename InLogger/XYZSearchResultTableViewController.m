@@ -25,15 +25,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _tableCellWidth = 237;
-    NSLog(@"%@",self.tableView.subviews);
-    self.searchResults1 = [self defaultResults];
+    XYZSearchResultTableViewCell *cell= [self.tableView dequeueReusableCellWithIdentifier:@"ListPrototypeCell"];
+    _tableCellWidth = cell.textFieldSize.width;
 }
 
 - (NSMutableArray *) defaultResults
 {
     NSMutableArray *results = [[NSMutableArray alloc] init];
-    [results addObject:[XYZExperiment defaultExperiment]];
     [results addObject:[XYZExperiment defaultExperiment]];
     return results;
 }
@@ -67,14 +65,12 @@
 {
     static NSString *CellIdentifier = @"ListPrototypeCell";
     XYZSearchResultTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    NSLog(@"cell reuse cell height %f", cell.bounds.size.height);
     XYZExperiment *experiment = [_searchResults1 objectAtIndex: indexPath.row];
     [cell setTextFieldText: [_experimentDescriber getDescriptionOf: experiment]];
-    //_tableCellWidth = [cell textFieldWidth];
+
     cell.index = indexPath.row;
     cell.experiement = experiment;
     cell.controller = self;
-    NSLog(@"tableView subviews %@",[self.tableView subviews]);
     return cell;
 }
 
@@ -82,19 +78,12 @@
 {
     XYZExperiment *experiment = [_searchResults1 objectAtIndex: indexPath.row];
     NSString *text = [_experimentDescriber getDescriptionOf: experiment];
-    UIFont *font = [UIFont systemFontOfSize:14]; //[UIFont fontWithName:@".HelveticaNeueInterface-Regular" size:15];
+    UIFont *font = [UIFont systemFontOfSize:14];
     
-    CGRect rect = [text boundingRectWithSize:CGSizeMake(self., CGFLOAT_MAX)
+    CGRect rect = [text boundingRectWithSize:CGSizeMake(self.tableCellWidth, CGFLOAT_MAX)
                                 options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
                              attributes:[NSDictionary dictionaryWithObjectsAndKeys:font,NSFontAttributeName, nil] context:nil];
-    NSLog(@"rect size: height: %f\nwidth: %fpt",rect.size.height, rect.size.width);
-    
-    /*
-    CGSize size = [text sizeWithAttributes:[NSDictionary dictionaryWithObject:font forKey:NSFontAttributeName]];
-    CGFloat height = size.height;
-    NSLog(@"Height: %f\nWidth: %f",height, size.width);*/
-//    return _tableCellHeight;
-    return ceilf(rect.size.height);
+    return ceilf(rect.size.height+25);
 }
 
 - (void)viewWillAppear:(BOOL)animated

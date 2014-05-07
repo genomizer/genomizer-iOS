@@ -35,19 +35,6 @@
 - (void) setTextFieldText: (NSString *) text
 {
     _textView.text = text;
-    [self updatetextFieldHeight];
-    //[_textField sizeThatFits:self.frame.size];
-
-    /*CGSize maximumLabelSize = CGSizeMake(296, FLT_MAX);
-    CGSize expectedLabelSize = [text sizeWithFont:_textField.font constrainedToSize:maximumLabelSize lineBreakMode:_textField.lineBreakMode];
-*/
-}
-
-- (void) updatetextFieldHeight
-{
-    CGRect frame = _textView.frame;
-    frame.size.height = 300; //_textField.contentSize.height;
-    _textView.frame = frame;
 }
 
 - (IBAction)experimentTouchDownInside:(id)sender
@@ -56,9 +43,9 @@
     NSLog(@"ASD: %d", [_experiement numberOfFiles]);
 }
 
-- (CGFloat)textFieldWidth
+- (CGSize)textFieldSize
 {
-    return self.textView.bounds.size.width;
+    return self.textView.bounds.size;
 }
 
 @end

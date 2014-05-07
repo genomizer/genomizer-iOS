@@ -115,7 +115,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="316" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" restorationIdentifier="InputField" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Experiment ID" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cuH-Be-R19">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="InputField" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Experiment ID" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cuH-Be-R19">
                                                     <rect key="frame" x="20" y="7" width="223" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -125,15 +125,18 @@
                                                         <action selector="textFieldDidBeginEditing:" destination="auJ-fT-xa1" eventType="editingDidBegin" id="9rX-n1-Q5F"/>
                                                     </connections>
                                                 </textField>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vgg-C9-vRK">
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vgg-C9-vRK">
                                                     <rect key="frame" x="251" y="6" width="51" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </switch>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="vgg-C9-vRK" firstAttribute="leading" secondItem="cuH-Be-R19" secondAttribute="trailing" constant="8" id="4ps-DH-5Tj"/>
-                                                <constraint firstItem="cuH-Be-R19" firstAttribute="leading" secondItem="5qA-D1-t1n" secondAttribute="leading" constant="20" id="5nP-cf-Ash"/>
-                                                <constraint firstAttribute="trailing" secondItem="vgg-C9-vRK" secondAttribute="trailing" constant="20" id="z7Y-7y-os6"/>
+                                                <constraint firstItem="vgg-C9-vRK" firstAttribute="centerY" secondItem="5qA-D1-t1n" secondAttribute="centerY" id="5bT-WK-tuk"/>
+                                                <constraint firstItem="vgg-C9-vRK" firstAttribute="leading" secondItem="cuH-Be-R19" secondAttribute="trailing" constant="8" symbolic="YES" id="F11-5F-3D0"/>
+                                                <constraint firstItem="cuH-Be-R19" firstAttribute="bottom" secondItem="vgg-C9-vRK" secondAttribute="bottom" id="ZVq-Zk-auB"/>
+                                                <constraint firstItem="cuH-Be-R19" firstAttribute="top" secondItem="5qA-D1-t1n" secondAttribute="top" constant="7" id="m5G-G0-hWe"/>
+                                                <constraint firstAttribute="trailing" secondItem="vgg-C9-vRK" secondAttribute="trailing" constant="16" id="svo-NO-Vgj"/>
+                                                <constraint firstItem="cuH-Be-R19" firstAttribute="leading" secondItem="5qA-D1-t1n" secondAttribute="leading" constant="20" symbolic="YES" id="wyp-Gy-TCE"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
