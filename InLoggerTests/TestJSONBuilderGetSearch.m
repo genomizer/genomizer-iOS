@@ -37,28 +37,28 @@
 {
     self.req = [JSONBuilder getSearchJSON:@"Anno" withToken:@"token"];
     NSString *url = [[self.req URL] absoluteString];
-    XCTAssertEqualObjects(url, [[JSONBuilder getServerURL] stringByAppendingString:@"/search/annotations=?Anno"]);
+    XCTAssertEqualObjects(url, [[JSONBuilder getServerURL] stringByAppendingString:@"/search/?annotations=Anno"]);
 }
 
 - (void)testShouldHandleSpaces
 {
     self.req = [JSONBuilder getSearchJSON:@"Anno test" withToken:@"token"];
     NSString *url = [[self.req URL] absoluteString];
-    XCTAssertEqualObjects(url, [[JSONBuilder getServerURL] stringByAppendingString:@"/search/annotations=?Anno%20test"]);
+    XCTAssertEqualObjects(url, [[JSONBuilder getServerURL] stringByAppendingString:@"/search/?annotations=Anno%20test"]);
 }
 
 - (void)testShouldHandleBrackets
 {
     self.req = [JSONBuilder getSearchJSON:@"[Anno]" withToken:@"token"];
     NSString *url = [[self.req URL] absoluteString];
-    XCTAssertEqualObjects(url, [[JSONBuilder getServerURL] stringByAppendingString:@"/search/annotations=?%5BAnno%5D"]);
+    XCTAssertEqualObjects(url, [[JSONBuilder getServerURL] stringByAppendingString:@"/search/?annotations=%5BAnno%5D"]);
 }
 
 - (void)testShouldHandleParenthesis
 {
     self.req = [JSONBuilder getSearchJSON:@"(Anno)" withToken:@"token"];
     NSString *url = [[self.req URL] absoluteString];
-    XCTAssertEqualObjects(url, [[JSONBuilder getServerURL] stringByAppendingString:@"/search/annotations=?(Anno)"]);
+    XCTAssertEqualObjects(url, [[JSONBuilder getServerURL] stringByAppendingString:@"/search/?annotations=(Anno)"]);
 }
 
 - (void)testShouldHaveHTTPMethodGET
