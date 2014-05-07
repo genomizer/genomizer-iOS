@@ -46,9 +46,9 @@
             pickerView *myPickerView = [[pickerView alloc] initWithFrame:CGRectMake(0, 200, 100, 80)];
             myPickerView.tag = [[_dict allKeys] indexOfObject:key];
             myPickerView.dataPicker = [_dict objectForKey:key];
-            myPickerView.delegate = myPickerView.self;
+            myPickerView.delegate = (id)myPickerView.self;
             myPickerView.backgroundColor = [UIColor colorWithRed:242/255.0f green:242/255.0f blue:244/255.0f    alpha:1.0f];
-            myPickerView.dataSource = myPickerView.self;
+            myPickerView.dataSource = (id)myPickerView.self;
             myPickerView.tableCells = self.tableCells;
             myPickerView.annotationsDict = self.dict;
             myPickerView.tableView = self.tableView;
@@ -112,7 +112,7 @@
     static NSString *CellIdentifier = @"ListPrototypeCell";
     XYZSearchTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     NSString *annotation = [self.searchFields objectAtIndex:indexPath.row];
-    cell.inputField.placeholder = [self.searchFields objectAtIndex:indexPath.row];
+    cell.inputField.placeholder = [XYZExperimentDescriber formatAnnotation:[self.searchFields objectAtIndex:indexPath.row]];
     cell.annotation = annotation;
     if(cell.inputField.text.length == 0) {
         cell.switchButton.enabled = false;

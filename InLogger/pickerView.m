@@ -38,7 +38,7 @@
     NSInteger selectedRow = [pickerView1 selectedRowInComponent:0];
     NSString *selectedPickerRow=[self.dataPicker objectAtIndex:selectedRow];
         for (XYZSearchTableViewCell *cell in _tableCells) {
-            if([[_annotationsDict allKeys][pickerView1.tag] isEqual:cell.inputField.placeholder]){
+            if([[_annotationsDict allKeys][pickerView1.tag] isEqual:cell.annotation]){
                 cell.inputField.text = selectedPickerRow;
                 cell.switchButton.on = true;
                 cell.switchButton.enabled = true;
