@@ -186,6 +186,7 @@
 
 - (IBAction)closeAdvancedSearch:(id)sender {
     _advancedView.hidden = YES;
+     _tableView.userInteractionEnabled = YES;
     [_pumedSearch endEditing:YES];
 }
 - (IBAction)SearchQueryButtonTouched:(id)sender {
@@ -212,6 +213,7 @@
     _pumedSearch.layer.borderColor = [UIColor lightGrayColor].CGColor;
     _pumedSearch.delegate = (id)self;
     [self.view bringSubviewToFront:_advancedView];
+    _tableView.userInteractionEnabled = NO;
     [_pumedSearch becomeFirstResponder ];
     
 }
