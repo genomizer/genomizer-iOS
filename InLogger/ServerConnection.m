@@ -159,7 +159,7 @@ NSString *token;
 {
     NSError *internalError;
     NSHTTPURLResponse *httpResp;
-    
+ 
     NSMutableURLRequest *request = [JSONBuilder getAvailableAnnotationsJSON:token];
     NSData *POSTReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&httpResp error:&internalError];
     if(internalError == nil)
@@ -173,7 +173,7 @@ NSString *token;
                 {
                     [annotations setObject:[json objectForKey:@"value"] forKey:[json objectForKey:@"name"]];
                 }
-                NSLog(@"heeej %@", annotations);
+             
                 return annotations;
                 
             }

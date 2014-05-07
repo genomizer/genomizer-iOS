@@ -23,6 +23,7 @@
 @property NSMutableArray *tableCells;
 @property NSMutableDictionary *dict;
 @property NSMutableArray *pickerViews;
+@property XYZExperimentDescriber* experimentDescriber;
 
 @end
 
@@ -34,10 +35,9 @@
     self.searchFields = [self createSearchFields];
     [self.tableView reloadData];
     self.selectedFields = [[NSMutableArray alloc] init];
-    self.tableCells = [[NSMutableArray alloc] init];
+    self.tableCells = [[NSMutableArray alloc] initWithCapacity:[_searchFields count]];
+    _experimentDescriber = [[XYZExperimentDescriber alloc] init];
     [self createPickerViews];
-    
-    
 }
 - (void) createPickerViews{
     _pickerViews = [[NSMutableArray alloc] init];
@@ -54,7 +54,7 @@
             myPickerView.tableView = self.tableView;
             myPickerView.showsSelectionIndicator = YES;
             [_pickerViews addObject:myPickerView];
-            NSLog(@"eeee  %ld", (long)myPickerView.tag);
+           
         }
         
     }
@@ -66,13 +66,15 @@
    
     _dict = [[NSMutableDictionary alloc] init];
     _dict = [ServerConnection getAvailableAnnotations:&error];
-    return [_dict allKeys];
+     NSLog(@"eeee  %@", _dict);
+   return [_dict allKeys];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
 }
+
 
 
 
@@ -174,9 +176,12 @@
             [_searchValues setObject:cell.inputField.text forKey:cell.annotation];
         }
     }
+    NSLog(@"asd: %lu %@", (unsigned long)[_tableCells count], _searchValues);
     self.searchResults = [ServerConnection search:[self createAnnotationsSearch] error:&error];
    [self performSegueWithIdentifier:@"searchResult" sender:self.searchResults];
 }
+
+
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
