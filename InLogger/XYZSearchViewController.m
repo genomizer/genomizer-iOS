@@ -75,9 +75,6 @@
     [super didReceiveMemoryWarning];
 }
 
-
-
-
 - (IBAction)textFieldDidBeginEditing:(UITextField *)textField
 {
     _tableView.contentInset = UIEdgeInsetsMake(0, 0, 117, 0);

@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface XYZSelectedFilesViewController : UIViewController <UIPickerViewDataSource,UIPickerViewDelegate>
-
-@property (strong, nonatomic) IBOutlet UIPickerView *picker;
+@interface XYZSelectedFilesViewController : UIViewController 
 
 @end

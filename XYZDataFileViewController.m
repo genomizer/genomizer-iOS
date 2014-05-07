@@ -15,7 +15,7 @@
 
 @interface XYZDataFileViewController ()
 
-@property NSMutableArray *rawCells;
+@property NSMutableArray *cells;
 
 @end
 
@@ -33,7 +33,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _rawCells = [[NSMutableArray alloc] init];
+    _cells = [[NSMutableArray alloc] initWithCapacity:3];
+
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -43,11 +44,12 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)unwindToList:(UIStoryboardSegue *)segue
+- (void)setExperiment:(XYZExperiment *)experiment
 {
-    XYZSearchResultTableViewController *source = [segue sourceViewController];
-    _experiment = source.selectedExperiment;
-    NSLog(@"Unwind: %d", [_experiment numberOfFiles]);
+    NSLog(@"ASDASDASDASDÖ LAKSDÖL KAÖSLDK ");
+    _experiment = experiment;
+   // _cells = [[NSMutableArray alloc] initWithCapacity:[_experiment numberOfFiles]];
+    NSLog(@"Count: %d %d", [_cells count], [_experiment numberOfFiles]);
 }
 
 #pragma mark - Table view data source
@@ -55,57 +57,77 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 1;
+    return 4;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    switch (section) {
+        case 0:
+            return @"Raw data";
+        case 1:
+            return @"Profile data";
+        case 2:
+            return @"Region data";
+        case 4:
+            return @"Other";
+    }
+    return nil;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [_experiment numberOfFiles] + 4;
+    return [[self arrayFromSection:section] count];
 }
 
-- (XYZTitleTableViewCell *)createTitleCell:(NSIndexPath *)indexPath tableView:(UITableView *)tableView withTitle:(NSString *) title
-{
-    NSString *cellIdentifier = @"TitlePrototypeCell";
-    XYZTitleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
-    cell.textField.text = title;
-    return cell;
-}
-
-- (XYZDataFileTableViewCell *)createDataFileCell:(NSIndexPath *)indexPath tableView:(UITableView *)tableView withFile:(XYZExperimentFile *) file
+- (XYZDataFileTableViewCell *)createDataFileCell:(NSIndexPath *)indexPath tableView:(UITableView *)tableView withFile:(XYZExperimentFile *) file atIndex: (NSInteger)index
 {
     NSString *cellIdentifier = @"DataFilePrototypeCell";
     XYZDataFileTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     cell.textField.text = [file getDescription];
     cell.switchButton.on = NO;
     cell.fileID = file.idFile;
-    if (file.type == RAW) {
-        [_rawCells addObject:cell];
-    } else {
-        cell.switchButton.hidden = YES;
-    }
+    cell.tag = file.type;
+    NSLog(@"Size; %d, %d", [_cells count], index);
+    [_cells setObject:cell atIndexedSubscript:index];
+    
     return cell;
+}
+
+- (NSInteger) rowsBeforSection: (NSInteger) section
+{
+    NSInteger rows = 0;
+    for (int i = 0; i < section; i++) {
+        rows += 0;
+    }
+    return rows;
+}
+
+- (NSArray *) arrayFromSection : (NSInteger)section
+{
+    switch (section) {
+        case 0:
+            return _experiment.rawFiles;
+        case 1:
+            return _experiment.profileFiles;
+        case 2:
+            return _experiment.regionFiles;
+        case 3:
+            return _experiment.otherFiles;
+    }
+    return nil;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"%d", indexPath.row);
-    if (indexPath.row == 0) {
-        return [self createTitleCell:indexPath tableView:tableView withTitle: @"Raw Data"];
-    } else if (indexPath.row < [_experiment.rawFiles count] + 1) {
-        return [self createDataFileCell:indexPath tableView:tableView withFile:[_experiment.rawFiles objectAtIndex:indexPath.row-1]];
-    } else if (indexPath.row == [_experiment.rawFiles count] + 1) {
-        return [self createTitleCell:indexPath tableView:tableView withTitle:@"Profile Data"];
-    } else if (indexPath.row < [_experiment.rawFiles count] + [_experiment.profileFiles count] + 2) {
-        return [self createDataFileCell:indexPath tableView:tableView withFile:[_experiment.profileFiles objectAtIndex:indexPath.row-[_experiment.rawFiles count]-2]];
-    } else if (indexPath.row == [_experiment.rawFiles count] + [_experiment.profileFiles count] + 2) {
-        return [self createTitleCell:indexPath tableView:tableView withTitle:@"Region Data"];
-    } else if (indexPath.row < [_experiment.rawFiles count] + [_experiment.profileFiles count] + [_experiment.regionFiles count] + 3) {
-        return [self createDataFileCell:indexPath tableView:tableView withFile:[_experiment.regionFiles objectAtIndex:indexPath.row-[_experiment.rawFiles count]-[_experiment.profileFiles count]-3]];
-    } else if (indexPath.row == [_experiment.rawFiles count] + [_experiment.profileFiles count] + [_experiment.regionFiles count] + 3) {
-        return [self createTitleCell:indexPath tableView:tableView withTitle:@"Other Files"];
-    } else {
-        return [self createDataFileCell:indexPath tableView:tableView withFile:[_experiment.otherFiles objectAtIndex:indexPath.row-[_experiment.rawFiles count]-[_experiment.profileFiles count]-[_experiment.regionFiles count]-4]];
-    }
+    XYZDataFileTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DataFilePrototypeCell" forIndexPath:indexPath];
+    XYZExperimentFile *file = [[self arrayFromSection: indexPath.section] objectAtIndex:indexPath.row];
+    cell.textField.text = [file getDescription];
+    cell.switchButton.on = NO;
+    cell.fileID = file.idFile;
+    cell.tag = file.type;
+    [_cells setObject:cell atIndexedSubscript:indexPath.row];
+    
+    return cell;
 }
 
 - (void)showPopupWithMessage: (NSString *) message{
@@ -116,34 +138,64 @@
     [popup show];
 }
 
-- (IBAction)convertToProfileOnTouchUpInside:(id)sender {
+- (IBAction)addFilesToWorkspaceOnTouchUpInside:(UIButton *)sender
+{
     //TODO - Send to server.
     NSMutableArray *fileIDs = [[NSMutableArray alloc] init];
-    NSLog(@"Raw cells: %d", [_rawCells count]);
-    NSInteger numOfOn = 0;
-    for (NSInteger i = 0; i < [_rawCells count]; i++) {
-        XYZDataFileTableViewCell *cell = [_rawCells objectAtIndex:i];
+    NSLog(@"Raw cells: %d", [_cells count]);
+    for (NSInteger i = 0; i < [_cells count]; i++) {
+        XYZDataFileTableViewCell *cell = [_cells objectAtIndex:i];
         if (cell.switchButton.on) {
             [fileIDs addObject:cell.fileID];
-            numOfOn ++;
         }
     }
     
-    if (numOfOn > 0) {
-        NSError *error;
-        [ServerConnection convert:fileIDs error:&error];
-        [self showPopupWithMessage:@"Convert order sent to server"];
+    if ([fileIDs count] > 0) {
+        [self showPopupWithMessage:@"Files added to workspace."];
+        
     } else {
-        [self showPopupWithMessage:@"Please select files to convert!"];
+        [self showPopupWithMessage:@"Please select files to add to workspace."];
     }
     
-    
-    
-    for (XYZDataFileTableViewCell *cell in _rawCells) {
+    for (XYZDataFileTableViewCell *cell in _cells) {
         cell.switchButton.on = NO;
     }
+}
+
+- (IBAction)convertToProfileOnTouchUpInside:(id)sender
+{
+    //TODO - Send to server.
+    NSMutableArray *fileIDs = [[NSMutableArray alloc] init];
+    FileType type = OTHER;
+    NSLog(@"Raw cells: %d", [_cells count]);
+    for (NSInteger i = 0; i < [_cells count]; i++) {
+        XYZDataFileTableViewCell *cell = [_cells objectAtIndex:i];
+        if (cell.switchButton.on ) {
+            if (type == OTHER) {
+                type = cell.tag;
+            } else if (type != cell.tag){
+                [self showPopupWithMessage:@"Ambiguous file types selected."];
+                return;
+            }
+            [fileIDs addObject:cell.fileID];
+        }
+    }
     
+    if ([fileIDs count] > 0) {
+        if (type != RAW && type != PROFILE) {
+            [self showPopupWithMessage:@"Please select raw or profile files."];
+            return;
+        }
+        NSError *error;
+        [ServerConnection convert:fileIDs error:&error];
+        [self showPopupWithMessage:@"Convert order sent to server."];
+    } else {
+        [self showPopupWithMessage:@"Please select files to convert."];
+    }
     
+    for (XYZDataFileTableViewCell *cell in _cells) {
+        cell.switchButton.on = NO;
+    }
 }
 
 

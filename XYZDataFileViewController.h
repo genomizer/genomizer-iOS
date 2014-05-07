@@ -11,6 +11,6 @@
 
 @interface XYZDataFileViewController : UIViewController
 
-@property XYZExperiment *experiment;
+@property (nonatomic) XYZExperiment *experiment;
 
 @end
