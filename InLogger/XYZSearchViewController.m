@@ -12,9 +12,11 @@
 #import "ServerConnection.h"
 #import "XYZExperimentDescriber.h"
 #import "pickerView.h"
+#import <QuartzCore/QuartzCore.h>
 @interface XYZSearchViewController ()
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIView *advancedView;
 
 @property NSMutableArray *selectedFields;
 @property NSArray *searchFields;
@@ -24,6 +26,7 @@
 @property NSMutableDictionary *dict;
 @property NSMutableArray *pickerViews;
 @property XYZExperimentDescriber* experimentDescriber;
+@property (weak, nonatomic) IBOutlet UITextView *pumedSearch;
 
 @end
 
@@ -46,26 +49,24 @@
             pickerView *myPickerView = [[pickerView alloc] initWithFrame:CGRectMake(0, 200, 100, 80)];
             myPickerView.tag = [[_dict allKeys] indexOfObject:key];
             myPickerView.dataPicker = [_dict objectForKey:key];
-            myPickerView.delegate = myPickerView.self;
+            myPickerView.delegate = (id)myPickerView.self;
             myPickerView.backgroundColor = [UIColor colorWithRed:242/255.0f green:242/255.0f blue:244/255.0f    alpha:1.0f];
-            myPickerView.dataSource = myPickerView.self;
+            myPickerView.dataSource = (id)myPickerView.self;
             myPickerView.tableCells = self.tableCells;
             myPickerView.annotationsDict = self.dict;
             myPickerView.tableView = self.tableView;
             myPickerView.showsSelectionIndicator = YES;
             [_pickerViews addObject:myPickerView];
-           
         }
-        
     }
 }
 
 - (NSArray *) createSearchFields
 {
     NSError *error;
-   
     _dict = [[NSMutableDictionary alloc] init];
     _dict = [ServerConnection getAvailableAnnotations:&error];
+    
      NSLog(@"eeee  %@", _dict);
    return [_dict allKeys];
 }
@@ -74,9 +75,6 @@
 {
     [super didReceiveMemoryWarning];
 }
-
-
-
 
 - (IBAction)textFieldDidBeginEditing:(UITextField *)textField
 {
@@ -112,7 +110,7 @@
     static NSString *CellIdentifier = @"ListPrototypeCell";
     XYZSearchTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     NSString *annotation = [self.searchFields objectAtIndex:indexPath.row];
-    cell.inputField.placeholder = [self.searchFields objectAtIndex:indexPath.row];
+    cell.inputField.placeholder = [XYZExperimentDescriber formatAnnotation:[self.searchFields objectAtIndex:indexPath.row]];
     cell.annotation = annotation;
     if(cell.inputField.text.length == 0) {
         cell.switchButton.enabled = false;
@@ -182,6 +180,60 @@
    [self performSegueWithIdentifier:@"searchResult" sender:self.searchResults];
 }
 
+- (IBAction)closeAdvancedSearch:(id)sender {
+    _advancedView.hidden = YES;
+     _tableView.userInteractionEnabled = YES;
+    [_pumedSearch endEditing:YES];
+}
+- (IBAction)SearchQueryButtonTouched:(id)sender {
+    NSError *error;
+    self.searchResults = [ServerConnection search:_pumedSearch.text error:&error];
+    if(error){
+        [self showErrorMessage:@"Probably incorrect search query" title:error.domain];
+    }
+    else{
+        [self performSegueWithIdentifier:@"searchResult" sender:self.searchResults];
+    }
+}
+
+- (IBAction)showErrorMessage:(NSString*) error title:(NSString*) title
+{
+    UIAlertView *searchFailed = [[UIAlertView alloc]
+                                initWithTitle:title message:error
+                                delegate:nil cancelButtonTitle:@"Try again"
+                                otherButtonTitles:nil];
+    
+    [searchFailed show];
+}
+
+
+- (IBAction)advancedSearchButton:(id)sender {
+    _advancedView.hidden = NO;
+    _advancedView.layer.cornerRadius = 5;
+    _advancedView.layer.masksToBounds = YES;
+    _tableView.editing = NO;
+    [self.tableView endEditing:YES];
+   // _tableView.alpha = 0.5;
+    //_tableView.opaque = YES;
+    _advancedView.layer.borderWidth = 0.4;
+    _advancedView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    _pumedSearch.layer.cornerRadius = 5;
+    _pumedSearch.layer.masksToBounds = YES;
+    _pumedSearch.layer.borderWidth = 0.2;
+    _pumedSearch.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    _pumedSearch.delegate = (id)self;
+    [self.view bringSubviewToFront:_advancedView];
+    _tableView.userInteractionEnabled = NO;
+    _searchValues = [NSMutableDictionary dictionary];
+    for (XYZSearchTableViewCell *cell in _tableCells) {
+        if (cell != nil && cell.switchButton.on) {
+            [_searchValues setObject:cell.inputField.text forKey:cell.annotation];
+        }
+    }
+    _pumedSearch.text = [self createAnnotationsSearch];
+    [_pumedSearch becomeFirstResponder ];
+    
+}
 
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -192,6 +244,23 @@
         nextVC.experimentDescriber = _experimentDescriber;
     }
 }
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    
+    if([text isEqualToString:@"\n"]) {
+        NSError *error;
+        self.searchResults = [ServerConnection search:_pumedSearch.text error:&error];
+        if(error){
+            [self showErrorMessage:@"Probably incorrect search query" title:error.domain];
+        }
+        else{
+            [self performSegueWithIdentifier:@"searchResult" sender:self.searchResults];
+        }
+        return NO;
+    }
+    return YES;
+}
+
+
 
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {

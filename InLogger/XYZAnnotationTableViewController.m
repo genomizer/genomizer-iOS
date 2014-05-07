@@ -34,7 +34,7 @@
 - (NSArray *) getAnnotationsFromServer
 {
     NSError *error;
-    return [ServerConnection getAvailableAnnotations:&error];
+    return [[ServerConnection getAvailableAnnotations:&error] allKeys];
     //return [NSMutableArray arrayWithObjects:@"experimentID", @"pubmedId" , @"Type of data", @"Species", @"Genom release", @"Cell-line", @"Developmental stage", @"Sex", @"Tissue", @"Processing", nil];
 }
 
@@ -62,6 +62,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     XYZAnnotationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ListPrototypeCell2" forIndexPath:indexPath];
+
     cell.label.text = [XYZExperimentDescriber formatAnnotation: [_annotations objectAtIndex: indexPath.row]];
     cell.switchButton.on = [_describer containsAnnotation: [_annotations objectAtIndex: indexPath.row]];
     cell.switchButton.tag = indexPath.row;

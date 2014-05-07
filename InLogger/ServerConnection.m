@@ -163,16 +163,19 @@ NSString *token;
  
     NSMutableURLRequest *request = [JSONBuilder getAvailableAnnotationsJSON:token];
     NSData *POSTReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&httpResp error:&internalError];
+    
     if(internalError == nil)
     {
         if(httpResp.statusCode == 200){
             NSArray *array = [NSJSONSerialization JSONObjectWithData:POSTReply options: NSJSONReadingMutableContainers error:&internalError];
+            NSLog(@"quesssry %@", array);
             if(internalError == nil)
             {
                 NSMutableDictionary *annotations = [[NSMutableDictionary alloc] init];
                 for(NSDictionary *json in array)
                 {
-                    [annotations setObject:[json objectForKey:@"value"] forKey:[json objectForKey:@"name"]];
+                    NSLog(@"quesssry %@", array);
+                    [annotations setObject:[json objectForKey:@"values"] forKey:[json objectForKey:@"name"]];
                 }
              
                 return annotations;
@@ -239,7 +242,7 @@ NSString *token;
             error = [NSError errorWithDomain:@"Authorization" code:0 userInfo:dict];
             break;
         case 404:
-            [dict setObject:@"Resource not found" forKey:NSLocalizedDescriptionKey];
+            [dict setObject:@"Resource not found!" forKey:NSLocalizedDescriptionKey];
             error = [NSError errorWithDomain:@"Resource not found" code:0 userInfo:dict];
             break;
         case 405:
