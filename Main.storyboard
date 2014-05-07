@@ -125,7 +125,7 @@
                                                         <action selector="textFieldDidBeginEditing:" destination="auJ-fT-xa1" eventType="editingDidBegin" id="9rX-n1-Q5F"/>
                                                     </connections>
                                                 </textField>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vgg-C9-vRK">
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vgg-C9-vRK">
                                                     <rect key="frame" x="251" y="6" width="51" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </switch>
@@ -186,7 +186,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="79"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Experiment ID: 1231 Publication ID: 1231" translatesAutoresizingMaskIntoConstraints="NO" id="ulx-fv-OET">
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Experiment ID: 1231 Publication ID: 1231" translatesAutoresizingMaskIntoConstraints="NO" id="ulx-fv-OET">
                                             <rect key="frame" x="15" y="7" width="237" height="87"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -212,8 +212,12 @@
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="iaL-ew-KsV" secondAttribute="trailing" id="6Do-hV-E7h"/>
                                         <constraint firstAttribute="bottom" secondItem="iaL-ew-KsV" secondAttribute="bottom" id="9lR-ji-YCg"/>
+                                        <constraint firstAttribute="trailing" secondItem="ulx-fv-OET" secondAttribute="trailing" constant="68" id="Srj-lw-FBO"/>
+                                        <constraint firstItem="ulx-fv-OET" firstAttribute="leading" secondItem="8cF-Af-bhw" secondAttribute="leading" constant="15" id="UuL-Ng-anP"/>
+                                        <constraint firstItem="ulx-fv-OET" firstAttribute="top" secondItem="8cF-Af-bhw" secondAttribute="top" constant="7" id="YPt-lr-LDR"/>
                                         <constraint firstItem="iaL-ew-KsV" firstAttribute="top" secondItem="8cF-Af-bhw" secondAttribute="top" id="btd-Jq-K8k"/>
                                         <constraint firstItem="iaL-ew-KsV" firstAttribute="leading" secondItem="8cF-Af-bhw" secondAttribute="leading" id="dfb-4S-NgG"/>
+                                        <constraint firstAttribute="bottom" secondItem="ulx-fv-OET" secondAttribute="bottom" constant="-15" id="f8f-mC-4cb"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>

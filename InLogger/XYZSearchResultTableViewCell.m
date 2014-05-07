@@ -56,4 +56,9 @@
     NSLog(@"ASD: %d", [_experiement numberOfFiles]);
 }
 
+- (CGFloat)textFieldWidth
+{
+    return self.textView.bounds.size.width;
+}
+
 @end

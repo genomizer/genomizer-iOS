@@ -52,23 +52,27 @@ static NSDictionary *ANNOTATION_DICTIONARY;
     NSMutableString *description = [[NSMutableString alloc] init];
     
     [description appendString: [self createRowForAnnotation:@"Name" withValue:experiment.name andNewLine:YES]];
-    [description appendString: [self createRowForAnnotation:@"Created by" withValue:experiment.createdByUser andNewLine:[_annotations count] > 0]];
-    [description appendString: [self createRowForAnnotation:@"Created by" withValue:experiment.createdByUser andNewLine:[_annotations count] > 0]];
-    [description appendString: [self createRowForAnnotation:@"Created by" withValue:experiment.createdByUser andNewLine:[_annotations count] > 0]];
-    [description appendString: [self createRowForAnnotation:@"Created by" withValue:experiment.createdByUser andNewLine:[_annotations count] > 0]];
-    [description appendString: [self createRowForAnnotation:@"Created by" withValue:experiment.createdByUser andNewLine:[_annotations count] > 0]];
-    [description appendString: [self createRowForAnnotation:@"Created by" withValue:experiment.createdByUser andNewLine:[_annotations count] > 0]];
-    [description appendString: [self createRowForAnnotation:@"Created by" withValue:experiment.createdByUser andNewLine:[_annotations count] > 0]];
-    [description appendString: [self createRowForAnnotation:@"Created by" withValue:experiment.createdByUser andNewLine:[_annotations count] > 0]];
-    [description appendString: [self createRowForAnnotation:@"Created by" withValue:experiment.createdByUser andNewLine:[_annotations count] > 0]];
-    [description appendString: [self createRowForAnnotation:@"Created by" withValue:experiment.createdByUser andNewLine:[_annotations count] > 0]];
+    [description appendString: [self createRowForAnnotation:@"Created by" withValue:experiment.createdByUser andNewLine:YES]];
+    [description appendString: [self createRowForAnnotation:@"Created by" withValue:experiment.createdByUser andNewLine:NO]];
+    [description appendString: [self createRowForAnnotation:@"Created by" withValue:experiment.createdByUser andNewLine:NO]];
+    [description appendString: [self createRowForAnnotation:@"Created by" withValue:experiment.createdByUser andNewLine:NO]];
+    [description appendString: [self createRowForAnnotation:@"Created by" withValue:experiment.createdByUser andNewLine:NO]];
+    [description appendString: [self createRowForAnnotation:@"Created by" withValue:experiment.createdByUser andNewLine:NO]];
+    [description appendString: [self createRowForAnnotation:@"Created by" withValue:experiment.createdByUser andNewLine:NO]];
+    [description appendString: [self createRowForAnnotation:@"Created by" withValue:experiment.createdByUser andNewLine:NO]];
+    [description appendString: [self createRowForAnnotation:@"Created by" withValue:experiment.createdByUser andNewLine:NO]];
+    [description appendString: [self createRowForAnnotation:@"Created by" withValue:experiment.createdByUser andNewLine:YES]];[description appendString: [self createRowForAnnotation:@"Created by" withValue:experiment.createdByUser andNewLine:YES]];[description appendString: [self createRowForAnnotation:@"Created by" withValue:experiment.createdByUser andNewLine:YES]];[description appendString: [self createRowForAnnotation:@"Created by" withValue:experiment.createdByUser andNewLine:YES]];[description appendString: [self createRowForAnnotation:@"Created by" withValue:experiment.createdByUser andNewLine:YES]];[description appendString: [self createRowForAnnotation:@"Created by" withValue:experiment.createdByUser andNewLine:YES]];[description appendString: [self createRowForAnnotation:@"Created by" withValue:experiment.createdByUser andNewLine:YES]];[description appendString: [self createRowForAnnotation:@"Created by" withValue:experiment.createdByUser andNewLine:YES]];[description appendString: [self createRowForAnnotation:@"Created by" withValue:experiment.createdByUser andNewLine:YES]];[description appendString: [self createRowForAnnotation:@"Created by" withValue:experiment.createdByUser andNewLine:YES]];[description appendString: [self createRowForAnnotation:@"Created by" withValue:experiment.createdByUser andNewLine:YES]];[description appendString: [self createRowForAnnotation:@"Created by" withValue:experiment.createdByUser andNewLine:YES]];[description appendString: [self createRowForAnnotation:@"Created by" withValue:experiment.createdByUser andNewLine:YES]];[description appendString: [self createRowForAnnotation:@"Created by" withValue:experiment.createdByUser andNewLine:YES]];[description appendString: [self createRowForAnnotation:@"Created by" withValue:experiment.createdByUser andNewLine:YES]];[description appendString: [self createRowForAnnotation:@"Created by" withValue:experiment.createdByUser andNewLine:YES]];[description appendString: [self createRowForAnnotation:@"Created by" withValue:experiment.createdByUser andNewLine:YES]];[description appendString: [self createRowForAnnotation:@"Created by" withValue:experiment.createdByUser andNewLine:YES]];
+        [description appendString: @"End of string"];
     
+     
+    //[description appendString: [self createRowForAnnotation:@"Created by" withValue:experiment.createdByUser andNewLine:[_annotations count] > 0]];
+    /*
      for (NSInteger i = 0; i < [_annotations count]; i++) {
         [description appendString: [self createRowForAnnotation:_annotations[i]
                                                      withValue:[experiment getValueForAnnotation:[_annotations objectAtIndex:i]]
                                                      andNewLine:i != [_annotations count] -1]];
     }
-    
+    */
     return description;
 }
 

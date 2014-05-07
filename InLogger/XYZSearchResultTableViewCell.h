@@ -18,5 +18,6 @@
 @property XYZSearchResultTableViewController *controller;
 
 - (void) setTextFieldText: (NSString *) text;
+- (CGFloat)textFieldFont;
 
 @end
