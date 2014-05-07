@@ -451,20 +451,33 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AeG-tu-3ad">
-                                <rect key="frame" x="20" y="483" width="280" height="27"/>
+                                <rect key="frame" x="214" y="480" width="86" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="27" id="EZb-4B-ZLc"/>
+                                    <constraint firstAttribute="height" constant="30" id="EZb-4B-ZLc"/>
                                 </constraints>
-                                <state key="normal" title="Convert to profile">
+                                <state key="normal" title="Convert files">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="convertToProfileOnTouchUpInside:" destination="y6w-6T-HLO" eventType="touchUpInside" id="s7o-uN-tiE"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XpI-0C-liy">
+                                <rect key="frame" x="20" y="480" width="127" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="goM-5v-AA4"/>
+                                </constraints>
+                                <state key="normal" title="Add to Workspace">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="convertToProfileOnTouchUpInside:" destination="y6w-6T-HLO" eventType="touchUpInside" id="soh-p0-R6V"/>
+                                </connections>
+                            </button>
                             <tableView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="tXm-QS-c3z">
-                                <rect key="frame" x="0.0" y="64" width="320" height="411"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="408"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -528,16 +541,25 @@
                                     <outlet property="delegate" destination="y6w-6T-HLO" id="wFM-HX-8gp"/>
                                 </connections>
                             </tableView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="|" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jJU-fj-blQ">
+                                <rect key="frame" x="176" y="474" width="8" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="AeG-tu-3ad" firstAttribute="leading" secondItem="QhI-82-drl" secondAttribute="leading" constant="20" id="2sb-vN-fAr"/>
                             <constraint firstItem="tXm-QS-c3z" firstAttribute="top" secondItem="hh9-fK-Ke2" secondAttribute="bottom" id="6Lp-9X-4pf"/>
                             <constraint firstItem="tXm-QS-c3z" firstAttribute="top" secondItem="hh9-fK-Ke2" secondAttribute="bottom" id="IUm-lj-9Ff"/>
                             <constraint firstItem="tXm-QS-c3z" firstAttribute="leading" secondItem="QhI-82-drl" secondAttribute="leading" id="McL-iA-7Dt"/>
+                            <constraint firstItem="XpI-0C-liy" firstAttribute="leading" secondItem="QhI-82-drl" secondAttribute="leading" constant="20" id="QLo-J1-YMG"/>
                             <constraint firstAttribute="trailing" secondItem="AeG-tu-3ad" secondAttribute="trailing" constant="20" id="Tuo-WW-NO0"/>
+                            <constraint firstItem="XpI-0C-liy" firstAttribute="top" secondItem="tXm-QS-c3z" secondAttribute="bottom" constant="8" id="bJH-vL-hvs"/>
                             <constraint firstAttribute="trailing" secondItem="tXm-QS-c3z" secondAttribute="trailing" id="gVN-SJ-JwB"/>
                             <constraint firstItem="AeG-tu-3ad" firstAttribute="top" secondItem="tXm-QS-c3z" secondAttribute="bottom" constant="8" id="htC-1l-lsR"/>
+                            <constraint firstItem="5W2-Ws-6aa" firstAttribute="top" secondItem="XpI-0C-liy" secondAttribute="bottom" constant="9" id="jBT-tc-bdo"/>
                             <constraint firstItem="5W2-Ws-6aa" firstAttribute="top" secondItem="AeG-tu-3ad" secondAttribute="bottom" constant="9" id="wNz-kJ-3DO"/>
                         </constraints>
                     </view>
