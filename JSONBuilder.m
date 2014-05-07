@@ -10,6 +10,7 @@
 
 @implementation JSONBuilder
 
+
 +(NSMutableURLRequest*)getLoginJSON:(NSString *)username withPassword:(NSString *)password
 {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
@@ -78,7 +79,7 @@
 + (NSString*) getServerURL
 {
     return @"http://genomizer.apiary-mock.com";
-   // return @"http://scratchy.cs.umu.se:7000";
+    //return @"http://scratchy.cs.umu.se:7000";
 }
 
 @end
