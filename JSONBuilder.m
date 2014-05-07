@@ -40,7 +40,7 @@
 
 +(NSMutableURLRequest*) getSearchJSON:(NSString*) annotations withToken:(NSString *) token
 {
-    NSString *annotationString = @"/search/annotations=?";
+    NSString *annotationString = @"/search/?annotations=";
     NSString *annotationsStringComplete = [annotationString stringByAppendingString:annotations];
     NSString *encodedAnnotations = [annotationsStringComplete stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSLog(@"hej %@",annotationsStringComplete);
