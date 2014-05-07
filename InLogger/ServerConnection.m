@@ -83,7 +83,8 @@ NSString *token;
         for(NSDictionary *json in array)
         {
             //NSLog(@"****** %@", json);
-            [experiments addObject:[XYZExperimentParser expParser:json]];
+            for (int i = 0; i< 2; i++)
+                [experiments addObject:[XYZExperimentParser expParser:json]];
         }
         return experiments;
     }

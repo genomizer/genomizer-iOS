@@ -60,21 +60,29 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog(@"asdasdasd fel i tabellen %d", [self.searchResults1 count]);
     static NSString *CellIdentifier = @"ListPrototypeCell";
     XYZSearchResultTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     XYZExperiment *experiment = [_searchResults1 objectAtIndex: indexPath.row];
     [cell setTextFieldText: [_experimentDescriber getDescriptionOf: experiment]];
-    _tableCellHeight = cell.frame.size.height;
+    //_tableCellHeight = cell.frame.size.height;
     cell.index = indexPath.row;
     cell.experiement = experiment;
     cell.controller = self;
-    
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return _tableCellHeight;
+    XYZExperiment *experiment = [_searchResults1 objectAtIndex: indexPath.row];
+    NSString *text = [_experimentDescriber getDescriptionOf: experiment];
+    UIFont *font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+    CGSize size = [text sizeWithAttributes:[NSDictionary dictionaryWithObject:font forKey:NSFontAttributeName]];
+    CGFloat height = size.height;
+    NSLog(@"Height: %f\nWidth: %f",height, size.width);
+//    return _tableCellHeight;
+    return height;
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated

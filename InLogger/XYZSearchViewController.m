@@ -190,6 +190,7 @@
     }
     NSLog(@"asd: %lu %@", (unsigned long)[_tableCells count], _searchValues);
     self.searchResults = [ServerConnection search:[self createAnnotationsSearch] error:&error];
+    [self.searchResults addObject:[XYZExperiment defaultExperiment]];
    [self performSegueWithIdentifier:@"searchResult" sender:self.searchResults];
 }
 
