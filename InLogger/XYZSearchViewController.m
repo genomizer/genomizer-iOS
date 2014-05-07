@@ -223,6 +223,13 @@
     _pumedSearch.delegate = (id)self;
     [self.view bringSubviewToFront:_advancedView];
     _tableView.userInteractionEnabled = NO;
+    _searchValues = [NSMutableDictionary dictionary];
+    for (XYZSearchTableViewCell *cell in _tableCells) {
+        if (cell != nil && cell.switchButton.on) {
+            [_searchValues setObject:cell.inputField.text forKey:cell.annotation];
+        }
+    }
+    _pumedSearch.text = [self createAnnotationsSearch];
     [_pumedSearch becomeFirstResponder ];
     
 }

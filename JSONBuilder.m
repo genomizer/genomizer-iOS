@@ -46,7 +46,7 @@
     NSString *encodedAnnotations = [annotationsStringComplete stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSLog(@"hej %@",annotationsStringComplete);
     NSMutableURLRequest *request =  [self getRequest:@"GET" withToken:token];
-    [request setURL:[NSURL URLWithString: [[self getServerURL] stringByAppendingString:encodedAnnotations]]];
+    [request setURL:[NSURL URLWithString: [[self getServerURL] stringByAppendingString:encodedAnnotations]]];   
     return request;
 }
 
@@ -78,8 +78,8 @@
                                   
 + (NSString*) getServerURL
 {
-    return @"http://genomizer.apiary-mock.com";
-    //return @"http://scratchy.cs.umu.se:7000";
+    //return @"http://genomizer.apiary-mock.com";
+    return @"http://scratchy.cs.umu.se:7000";
 }
 
 @end
