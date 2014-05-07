@@ -14,10 +14,33 @@
 @implementation ServerConnection
 NSString *token;
 
-+ (int)login:(NSString *)username withPassword:(NSString *)password error:(NSError**) error
++ (void)handleLoginPostReply: (NSData *)POSTReply httpResp:(NSHTTPURLResponse *)httpResp error:(NSError **)error{
+    
+    NSError *internalError;
+    NSDictionary *json = [self parseJSONToDictionary:POSTReply error:&internalError];
+    
+    if(internalError == nil)
+    {
+        token = [json objectForKey:@"token"];
+        NSLog(@"login token %@", token);
+        NSLog(@"Header: %ld", (long)httpResp.statusCode);
+        
+        if(httpResp.statusCode != 200)
+        {
+            *error = [self generateErrorObjectFromHTTPError:httpResp.statusCode];
+        }
+    }
+    else
+    {
+        NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+        [dict setObject:@"Server sent incorrectly formatted data, talk to admin" forKey:NSLocalizedDescriptionKey];
+        *error = [NSError errorWithDomain:@"Servererror" code:2 userInfo:dict];
+    }
+}
+
++ (void)login:(NSString *)username withPassword:(NSString *)password error:(NSError**) error
 {
     NSError *internalError;
-
 
     NSMutableURLRequest *request = [JSONBuilder getLoginJSON:username withPassword:password];
     NSHTTPURLResponse *httpResp;
@@ -52,7 +75,6 @@ NSString *token;
         [dict setObject:internalError forKey:NSUnderlyingErrorKey];
         *error = [NSError errorWithDomain:@"Connection" code:1 userInfo:dict];
     }
-    return -1;
 }
 
 + (int)logout:(NSError**)error;
@@ -70,6 +92,28 @@ NSString *token;
 }
 
  
++ (NSMutableArray*)handleSearchPostReply:(NSError *)internalError POSTReply:(NSData *)POSTReply error:(NSError **)error
+{
+    NSArray *array = [NSJSONSerialization JSONObjectWithData:POSTReply options: NSJSONReadingMutableContainers error:&internalError];
+    if(internalError == nil)
+    {
+        NSMutableArray *experiments = [[NSMutableArray alloc] init];
+        for(NSDictionary *json in array)
+        {
+            //NSLog(@"****** %@", json);
+            [experiments addObject:[XYZExperimentParser expParser:json]];
+        }
+        return experiments;
+    }
+    else
+    {
+        NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+        [dict setObject:@"Server sent incorrectly formatted data, talk to admin" forKey:NSLocalizedDescriptionKey];
+        *error = [NSError errorWithDomain:@"Servererror" code:2 userInfo:dict];
+    }
+    return nil;
+}
+
 +(NSMutableArray*)search:(NSString*)annotations error:(NSError**) error
 {
     NSError *internalError;
@@ -81,23 +125,7 @@ NSString *token;
     if(internalError == nil)
     {
         if(httpResp.statusCode == 200){
-            NSArray *array = [NSJSONSerialization JSONObjectWithData:POSTReply options: NSJSONReadingMutableContainers error:&internalError];
-            if(internalError == nil)
-            {
-                NSMutableArray *experiments = [[NSMutableArray alloc] init];
-                for(NSDictionary *json in array)
-                {
-                    //NSLog(@"****** %@", json);
-                    [experiments addObject:[XYZExperimentParser expParser:json]];
-                }
-                return experiments;
-            }
-            else
-            {
-                NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-                [dict setObject:@"Server sent incorrectly formatted data, talk to admin" forKey:NSLocalizedDescriptionKey];
-                *error = [NSError errorWithDomain:@"Servererror" code:2 userInfo:dict];
-            }
+            return [self handleSearchPostReply:internalError POSTReply:POSTReply error:error];
         }
         else
         {

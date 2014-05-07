@@ -41,5 +41,64 @@
 }
 
 
+-(void) testMakeUnknownAnnotationToCapitalFirstLetter
+{
+    NSString *result = [XYZExperimentDescriber formatAnnotation:@"unknown"];
+    XCTAssertEqualObjects(@"Unknown", result);
+    
+}
+
+-(void) testTwoWordUnknownAnnotation
+{
+    NSString *result = [XYZExperimentDescriber formatAnnotation:@"unknown knownun"];
+    XCTAssertEqualObjects(@"Unknown Knownun", result);
+    
+}
+
+-(void) testFormatKnownAnnotation
+{
+    NSString *result = [XYZExperimentDescriber formatAnnotation:@"pubmedId"];
+    XCTAssertEqualObjects(@"Publication ID", result);
+}
+
+-(void) testGetDescriptionOfWithDefaultAnnotations
+{
+    NSString *description = [_describer getDescriptionOf:_experiment];
+    NSString *correctDescription = @"Name: Experiment name\nCreated By: Yuri Yuri";
+    XCTAssertEqualObjects(description, correctDescription);
+}
+
+-(void) testAddAnnotation
+{
+    [_describer addAnnotation:@"pubmedId"];
+    NSString *description = [_describer getDescriptionOf:_experiment];
+    NSString *correctDescription = @"Name: Experiment name\nCreated By: Yuri Yuri\nPublication ID: abc123";
+    XCTAssertEqualObjects(description, correctDescription);
+}
+
+-(void) testRemoveAnnotation
+{
+    [_describer addAnnotation:@"pubmedId"];
+    [_describer removeAnnotation:@"pubmedId"];
+    NSString *description = [_describer getDescriptionOf:_experiment];
+    NSString *correctDescription = @"Name: Experiment name\nCreated By: Yuri Yuri";
+    XCTAssertEqualObjects(description, correctDescription);
+}
+
+-(void) testAddSameAnnotationTwice
+{
+    [_describer addAnnotation:@"pubmedId"];
+    [_describer addAnnotation:@"pubmedId"];
+    NSString *description = [_describer getDescriptionOf:_experiment];
+    NSString *correctDescription = @"Name: Experiment name\nCreated By: Yuri Yuri\nPublication ID: abc123";
+    XCTAssertEqualObjects(description, correctDescription);
+}
+
+-(void) testContainsAnnotation
+{
+    XCTAssertFalse([_describer containsAnnotation: @"pubmedId"]);
+    [_describer addAnnotation: @"pubmedId"];
+    XCTAssertTrue([_describer containsAnnotation: @"pubmedId"]);
+}
 
 @end

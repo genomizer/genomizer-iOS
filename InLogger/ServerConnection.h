@@ -10,7 +10,7 @@
 
 @interface ServerConnection : NSObject
 
-+ (int)login:(NSString *)username withPassword:(NSString *)password error:(NSError**) error;
++ (void)login:(NSString *)username withPassword:(NSString *)password error:(NSError**) error;
 + (int)logout:(NSError**) error;
 + (NSMutableArray*)search:(NSString *) annotations error:(NSError**) error;
 + (void)convert:(NSArray*)fileIDs error:(NSError**)error;

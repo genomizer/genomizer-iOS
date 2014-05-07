@@ -9,14 +9,13 @@
 #import "XYZSearchResultTableViewController.h"
 #import "ServerConnection.h"
 #import "XYZSearchResultTableViewCell.h"
-#import "XYZExperimentDescriber.h"
 #import "XYZDataFileViewController.h"
+#import "XYZAnnotationTableViewController.h"
 
 @interface XYZSearchResultTableViewController ()
 
 
 @property CGFloat tableCellHeight;
-@property XYZExperimentDescriber *experimentDescriber;
 
 @end
 
@@ -24,18 +23,8 @@
 
 - (void)viewDidLoad
 {
-   // NSError *error;
     [super viewDidLoad];
-    //NSArray* annotations;
-//    NSDictionary * allResults= [ServerConnection search:annotations error:&error];
- 
     _tableCellHeight = 120;
- //   self.searchFields = [self createSearchFields ];
-  //  [self.tableView reloadData];
-     //NSLog(@"text %@", self.searchResults1);
-    _experimentDescriber = [[XYZExperimentDescriber alloc] init];
-    //_searchResults1 = [self defaultResults ];
-    
 }
 
 - (NSMutableArray *) defaultResults
@@ -74,7 +63,6 @@
     static NSString *CellIdentifier = @"ListPrototypeCell";
     XYZSearchResultTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     XYZExperiment *experiment = [_searchResults1 objectAtIndex: indexPath.row];
-    NSLog(@"asdasdads%@", experiment.createdByUser);
     [cell setTextFieldText: [_experimentDescriber getDescriptionOf: experiment]];
     _tableCellHeight = cell.frame.size.height;
     cell.index = indexPath.row;
@@ -89,12 +77,22 @@
     return _tableCellHeight;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.tableView reloadData];
+}
+
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    NSLog(@"PREPARIGNG DOREE SEGHAHHAE");
     
     if ([segue.identifier isEqualToString:@"toFileList"]) {
         XYZDataFileViewController *nextVC = (XYZDataFileViewController *)[segue destinationViewController];
         nextVC.experiment = _selectedExperiment;
+    } else if ([segue.identifier isEqualToString:@"toEditDisplay"]) {
+        XYZAnnotationTableViewController *nextVC = (XYZAnnotationTableViewController *)[segue destinationViewController];
+        nextVC.describer = _experimentDescriber;
     }
 }
 

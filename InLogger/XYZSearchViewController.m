@@ -118,7 +118,8 @@
     }
     cell.inputField.delegate = self;
     cell.controller = self;
-    [_tableCells addObject:cell];
+    [_tableCells setObject:cell atIndexedSubscript:indexPath.row];
+    NSLog(@"ASDASD %lu", (unsigned long)[_tableCells count]);
     return cell;
 }
 
@@ -169,7 +170,7 @@
     NSError *error;
     _searchValues = [NSMutableDictionary dictionary];
     for (XYZSearchTableViewCell *cell in _tableCells) {
-        if (cell.switchButton.on) {
+        if (cell != nil && cell.switchButton.on) {
             [_searchValues setObject:cell.inputField.text forKey:cell.annotation];
         }
     }
@@ -182,6 +183,7 @@
     if ([segue.identifier isEqualToString:@"searchResult"]) {
         XYZSearchResultTableViewController *nextVC = (XYZSearchResultTableViewController *)[segue destinationViewController];
         nextVC.searchResults1 = self.searchResults;
+        nextVC.experimentDescriber = _experimentDescriber;
     }
 }
 
