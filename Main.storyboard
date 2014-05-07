@@ -516,8 +516,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0BI-rU-IZB">
-                                <rect key="frame" x="136" y="196" width="49" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0BI-rU-IZB">
+                                <rect key="frame" x="136" y="463" width="49" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Logout">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -527,8 +527,43 @@
                                     <segue destination="x1l-HJ-QPz" kind="modal" id="bDh-8s-HKm"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo1.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="zk8-In-Xqi">
+                                <rect key="frame" x="0.0" y="64" width="321" height="198"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="198" id="3Ca-4X-0Kd"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="The development team behind " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o9Y-2h-pVR">
+                                <rect key="frame" x="20" y="270" width="280" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="37" id="yfq-R9-A9o"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="this wounderful application!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GAJ-Ks-sWX">
+                                <rect key="frame" x="20" y="299" width="280" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="o9Y-2h-pVR" firstAttribute="top" secondItem="zk8-In-Xqi" secondAttribute="bottom" constant="8" symbolic="YES" id="DLK-nU-fMe"/>
+                            <constraint firstItem="0BI-rU-IZB" firstAttribute="centerX" secondItem="zk8-In-Xqi" secondAttribute="centerX" id="Fr5-xb-lsE"/>
+                            <constraint firstItem="0BI-rU-IZB" firstAttribute="centerX" secondItem="8R4-FB-D6k" secondAttribute="centerX" id="Jni-6S-vD7"/>
+                            <constraint firstItem="o9Y-2h-pVR" firstAttribute="leading" secondItem="GAJ-Ks-sWX" secondAttribute="leading" id="Jz0-gc-DoK"/>
+                            <constraint firstItem="zk8-In-Xqi" firstAttribute="leading" secondItem="8R4-FB-D6k" secondAttribute="leading" id="ULN-vZ-Azb"/>
+                            <constraint firstItem="o9Y-2h-pVR" firstAttribute="trailing" secondItem="GAJ-Ks-sWX" secondAttribute="trailing" id="bID-DU-gbA"/>
+                            <constraint firstItem="zk8-In-Xqi" firstAttribute="top" secondItem="9Yp-85-UEo" secondAttribute="bottom" id="dKn-z3-QfE"/>
+                            <constraint firstItem="ZPy-QJ-wXB" firstAttribute="top" secondItem="0BI-rU-IZB" secondAttribute="bottom" constant="26" id="j8E-HQ-s5X"/>
+                            <constraint firstItem="GAJ-Ks-sWX" firstAttribute="top" secondItem="zk8-In-Xqi" secondAttribute="bottom" constant="37" id="naQ-g3-p1B"/>
+                            <constraint firstItem="o9Y-2h-pVR" firstAttribute="leading" secondItem="8R4-FB-D6k" secondAttribute="leading" constant="20" symbolic="YES" id="tT0-fb-wLE"/>
+                            <constraint firstItem="o9Y-2h-pVR" firstAttribute="centerX" secondItem="0BI-rU-IZB" secondAttribute="centerX" id="y9q-y4-7ps"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="mLW-PV-yvc"/>
                 </viewController>
@@ -647,6 +682,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="photo1.jpg" width="3264" height="2448"/>
         <image name="taco" width="392" height="372"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

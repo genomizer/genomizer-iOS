@@ -14,6 +14,7 @@
 		21277BCE19190036005FB7FD /* TestJSONBuilderGetLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = 21277BCD19190036005FB7FD /* TestJSONBuilderGetLogin.m */; };
 		21277BD019190095005FB7FD /* testJSONBuilderTestAvailableAnnotations.m in Sources */ = {isa = PBXBuildFile; fileRef = 21277BCF19190095005FB7FD /* testJSONBuilderTestAvailableAnnotations.m */; };
 		646F06AE1918D46000C959CA /* (null) in Sources */ = {isa = PBXBuildFile; };
+		646F06B3191A5E1300C959CA /* photo1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 646F06B2191A5E1300C959CA /* photo1.jpg */; };
 		6484A2F4190E8F160071BB23 /* ServerConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6484A2F3190E8F160071BB23 /* ServerConnection.m */; };
 		649778EB1910EC9D000FD14F /* XYZExperimentParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 649778EA1910EC9D000FD14F /* XYZExperimentParser.m */; };
 		649778EF191119FB000FD14F /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 649778ED191119FB000FD14F /* MoreViewController.m */; };
@@ -82,6 +83,7 @@
 		21277BCB1918E67C005FB7FD /* testJSONBuilderGetConversionJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testJSONBuilderGetConversionJSON.m; sourceTree = "<group>"; };
 		21277BCD19190036005FB7FD /* TestJSONBuilderGetLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestJSONBuilderGetLogin.m; sourceTree = "<group>"; };
 		21277BCF19190095005FB7FD /* testJSONBuilderTestAvailableAnnotations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testJSONBuilderTestAvailableAnnotations.m; sourceTree = "<group>"; };
+		646F06B2191A5E1300C959CA /* photo1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = photo1.jpg; path = ../../../Downloads/photo1.jpg; sourceTree = "<group>"; };
 		6484A2F2190E8F160071BB23 /* ServerConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerConnection.h; sourceTree = "<group>"; };
 		6484A2F3190E8F160071BB23 /* ServerConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerConnection.m; sourceTree = "<group>"; };
 		649778E91910EC9D000FD14F /* XYZExperimentParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZExperimentParser.h; sourceTree = "<group>"; };
@@ -332,6 +334,7 @@
 				DEEF6AF619094F8A00A2CD8C /* AppDelegate.h */,
 				DEEF6AF719094F8A00A2CD8C /* AppDelegate.m */,
 				DEEF6AF919094F8A00A2CD8C /* Images.xcassets */,
+				646F06B2191A5E1300C959CA /* photo1.jpg */,
 				DEEF6AEE19094F8A00A2CD8C /* Supporting Files */,
 				6484A2F2190E8F160071BB23 /* ServerConnection.h */,
 				6484A2F3190E8F160071BB23 /* ServerConnection.m */,
@@ -451,6 +454,7 @@
 				DEEF6B1719094FA000A2CD8C /* Main.storyboard in Resources */,
 				DEEF6AF219094F8A00A2CD8C /* InfoPlist.strings in Resources */,
 				DE25D7F81910D6630084BDDC /* XYZDataFileTableViewCell.xib in Resources */,
+				646F06B3191A5E1300C959CA /* photo1.jpg in Resources */,
 				DEEF6B1C1909553C00A2CD8C /* XYZLogInViewController.xib in Resources */,
 				DED12291190E966200D8E530 /* XYZSearchResultTableViewController.xib in Resources */,
 				DE9A3EF01918CAA100F7C33B /* XYZAnnotationTableViewCell.xib in Resources */,
