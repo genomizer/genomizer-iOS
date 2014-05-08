@@ -522,7 +522,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="as3-LL-FKw">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SelectTaskCellPrototype" id="as3-LL-FKw">
                                 <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="as3-LL-FKw" id="bz5-Ka-tga">
@@ -545,6 +545,7 @@
                         <barButtonItem key="rightBarButtonItem" enabled="NO" title="Execute" id="Uoe-Qf-EFf">
                             <connections>
                                 <action selector="executeButtonPressed:" destination="0GK-lv-S7R" id="qSF-Vp-y6t"/>
+                                <segue destination="08w-tF-q50" kind="push" id="Hic-2g-t3c"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -556,6 +557,25 @@
                 <exit id="1Di-Sa-PtS" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3980" y="-225"/>
+        </scene>
+        <!--View Controller - Convert to Profile-->
+        <scene sceneID="3GY-Il-QyJ">
+            <objects>
+                <viewController id="08w-tF-q50" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fbM-gw-fVD"/>
+                        <viewControllerLayoutGuide type="bottom" id="v38-ne-jgN"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="KOW-0a-EZI">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Convert to Profile" id="xrS-Rd-SA5"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8xS-uw-IpZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4518" y="-227"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="TmL-84-z13">
