@@ -32,9 +32,7 @@ NSString *token;
     }
     else
     {
-        NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-        [dict setObject:@"Server sent incorrectly formatted data, talk to admin" forKey:NSLocalizedDescriptionKey];
-        *error = [NSError errorWithDomain:@"Servererror" code:2 userInfo:dict];
+        *error = [self generateError:@"Server sent incorrectly formatted data, talk to admin" withErrorDomain:@"ServerError" withUnderlyingError:nil];
     }
 }
 
@@ -65,17 +63,12 @@ NSString *token;
         }
         else
         {
-            NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-            [dict setObject:@"Server sent incorrectly formatted data, talk to admin" forKey:NSLocalizedDescriptionKey];
-            *error = [NSError errorWithDomain:@"Servererror" code:2 userInfo:dict];
+            *error = [self generateError:@"Server sent incorrectly formatted data, talk to admin" withErrorDomain:@"ServerError" withUnderlyingError:nil];
         }
     }
     else
     {
-        NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-        [dict setObject:@"Could not connect to server" forKey:NSLocalizedDescriptionKey];
-        [dict setObject:internalError forKey:NSUnderlyingErrorKey];
-        *error = [NSError errorWithDomain:@"Connection" code:1 userInfo:dict];
+        *error = [self generateError:@"Could not connect to server" withErrorDomain:@"Connection" withUnderlyingError:internalError];
     }
 }
 
@@ -89,7 +82,6 @@ NSString *token;
     NSLog(@"logout token %@", token);
     NSLog(@"Header: %ld", (long)httpResp.statusCode);
    
-    
     return httpResp.statusCode;
 }
 
@@ -108,9 +100,7 @@ NSString *token;
     }
     else
     {
-        NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-        [dict setObject:@"Server sent incorrectly formatted data, talk to admin" forKey:NSLocalizedDescriptionKey];
-        *error = [NSError errorWithDomain:@"Servererror" code:2 userInfo:dict];
+        *error = [self generateError:@"Server sent incorrectly formatted data, talk to admin" withErrorDomain:@"ServerError" withUnderlyingError:nil];
     }
     return nil;
 }
@@ -134,10 +124,7 @@ NSString *token;
         }
     }
     else{
-        NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-        [dict setObject:@"Could not connect to server" forKey:NSLocalizedDescriptionKey];
-        [dict setObject:internalError forKey:NSUnderlyingErrorKey];
-        *error = [NSError errorWithDomain:@"Connection" code:1 userInfo:dict];
+        *error = [self generateError:@"Could not connect to server" withErrorDomain:@"Connection" withUnderlyingError:internalError];
     }
     return nil;
 }
@@ -183,10 +170,7 @@ NSString *token;
             }
             else
             {
-                NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-                [dict setObject:@"Server sent incorrectly formatted data, talk to admin" forKey:NSLocalizedDescriptionKey];
-                *error = [NSError errorWithDomain:@"Servererror" code:2 userInfo:dict];
-
+                *error = [self generateError:@"Server sent incorrectly formatted data, talk to admin" withErrorDomain:@"ServerError" withUnderlyingError:nil];
             }
         }
         else
@@ -196,13 +180,9 @@ NSString *token;
         }
     }
     else{
-        NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-        [dict setObject:@"Could not connect to server" forKey:NSLocalizedDescriptionKey];
-        [dict setObject:internalError forKey:NSUnderlyingErrorKey];
-        *error = [NSError errorWithDomain:@"Connection" code:1 userInfo:dict];
+        *error = [self generateError:@"Could not connect to server" withErrorDomain:@"Connection" withUnderlyingError:internalError];
     }
     return nil;
-
 }
 
 
@@ -261,4 +241,15 @@ NSString *token;
     
     return error;
 }
+
++ (NSError*) generateError: (NSString*) errorDescription withErrorDomain: (NSString*) errorDomain withUnderlyingError: (NSError*) underlyingError{
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+    [dict setObject: errorDescription forKey:NSLocalizedDescriptionKey];
+    
+    if(underlyingError != nil){
+        [dict setObject:underlyingError forKey:NSUnderlyingErrorKey];
+    }
+    return [NSError errorWithDomain:errorDomain code:1 userInfo:dict];
+}
+
 @end
