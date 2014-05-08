@@ -13,6 +13,7 @@
 		21277BCC1918E67C005FB7FD /* testJSONBuilderGetConversionJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 21277BCB1918E67C005FB7FD /* testJSONBuilderGetConversionJSON.m */; };
 		21277BCE19190036005FB7FD /* TestJSONBuilderGetLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = 21277BCD19190036005FB7FD /* TestJSONBuilderGetLogin.m */; };
 		21277BD019190095005FB7FD /* testJSONBuilderTestAvailableAnnotations.m in Sources */ = {isa = PBXBuildFile; fileRef = 21277BCF19190095005FB7FD /* testJSONBuilderTestAvailableAnnotations.m */; };
+		21BFD1DB191B6A2A00F8E02F /* XYZPopupGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BFD1DA191B6A2A00F8E02F /* XYZPopupGenerator.m */; };
 		646F06AE1918D46000C959CA /* (null) in Sources */ = {isa = PBXBuildFile; };
 		6484A2F4190E8F160071BB23 /* ServerConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6484A2F3190E8F160071BB23 /* ServerConnection.m */; };
 		649778EB1910EC9D000FD14F /* XYZExperimentParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 649778EA1910EC9D000FD14F /* XYZExperimentParser.m */; };
@@ -83,6 +84,8 @@
 		21277BCB1918E67C005FB7FD /* testJSONBuilderGetConversionJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testJSONBuilderGetConversionJSON.m; sourceTree = "<group>"; };
 		21277BCD19190036005FB7FD /* TestJSONBuilderGetLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestJSONBuilderGetLogin.m; sourceTree = "<group>"; };
 		21277BCF19190095005FB7FD /* testJSONBuilderTestAvailableAnnotations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testJSONBuilderTestAvailableAnnotations.m; sourceTree = "<group>"; };
+		21BFD1D9191B6A2A00F8E02F /* XYZPopupGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZPopupGenerator.h; sourceTree = "<group>"; };
+		21BFD1DA191B6A2A00F8E02F /* XYZPopupGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZPopupGenerator.m; sourceTree = "<group>"; };
 		6484A2F2190E8F160071BB23 /* ServerConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerConnection.h; sourceTree = "<group>"; };
 		6484A2F3190E8F160071BB23 /* ServerConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerConnection.m; sourceTree = "<group>"; };
 		649778E91910EC9D000FD14F /* XYZExperimentParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZExperimentParser.h; sourceTree = "<group>"; };
@@ -203,6 +206,8 @@
 				DE25D7FA1910D6840084BDDC /* XYZTitleTableViewCell.m */,
 				DE25D7FB1910D6840084BDDC /* XYZTitleTableViewCell.xib */,
 				DE25D7F91910D6840084BDDC /* XYZTitleTableViewCell.h */,
+				21BFD1D9191B6A2A00F8E02F /* XYZPopupGenerator.h */,
+				21BFD1DA191B6A2A00F8E02F /* XYZPopupGenerator.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -502,6 +507,7 @@
 				DE9A3EF41918CB4600F7C33B /* XYZAnnotationTableViewController.m in Sources */,
 				76F638D8190FD99300F0F4BF /* XYZExperiment.m in Sources */,
 				DE25D7F71910D6630084BDDC /* XYZDataFileTableViewCell.m in Sources */,
+				21BFD1DB191B6A2A00F8E02F /* XYZPopupGenerator.m in Sources */,
 				DEEF6AF419094F8A00A2CD8C /* main.m in Sources */,
 				DE25D8021910D72A0084BDDC /* XYZDataFileViewController.m in Sources */,
 				649778EB1910EC9D000FD14F /* XYZExperimentParser.m in Sources */,

@@ -13,6 +13,8 @@
 #import "XYZExperimentDescriber.h"
 #import "pickerView.h"
 #import <QuartzCore/QuartzCore.h>
+#import "XYZPopupGenerator.h"
+
 @interface XYZSearchViewController ()
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -44,8 +46,10 @@
 }
 - (void) createPickerViews{
     _pickerViews = [[NSMutableArray alloc] init];
-    for(NSString *key in [_dict allKeys]){
-        if(![[_dict objectForKey:key][0] isEqual:@"freetext"]){
+    for(NSString *key in [_dict allKeys])
+    {
+        if(![[_dict objectForKey:key][0] isEqual:@"freetext"])
+        {
             pickerView *myPickerView = [[pickerView alloc] initWithFrame:CGRectMake(0, 200, 100, 80)];
             myPickerView.tag = [[_dict allKeys] indexOfObject:key];
             myPickerView.dataPicker = [_dict objectForKey:key];
@@ -64,11 +68,24 @@
 - (NSArray *) createSearchFields
 {
     NSError *error;
-    _dict = [[NSMutableDictionary alloc] init];
+    //_dict = [[NSMutableDictionary alloc] init];
     _dict = [ServerConnection getAvailableAnnotations:&error];
+   
+    if(error != nil)
+    {
+        [XYZPopupGenerator showPopupWithMessage:@"Server did not return list of annotations"];
+    }
     
-     NSLog(@"eeee  %@", _dict);
-   return [_dict allKeys];
+    NSLog(@"eeee  %@", _dict);
+  
+    if (_dict != nil)
+    {
+        return [_dict allKeys];
+    }
+    else
+    {
+        return nil;
+    }
 }
 
 - (void)didReceiveMemoryWarning

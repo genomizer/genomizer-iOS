@@ -12,6 +12,7 @@
 #import "XYZTitleTableViewCell.h"
 #import "XYZDataFileTableViewCell.h"
 #import "ServerConnection.h"
+#import "XYZPopupGenerator.h"
 
 @interface XYZDataFileViewController ()
 
@@ -120,14 +121,6 @@
     return cell;
 }
 
-- (void)showPopupWithMessage: (NSString *) message{
-    UIAlertView *popup = [[UIAlertView alloc]
-                          initWithTitle:@"" message:message
-                          delegate:nil cancelButtonTitle:@"OK"
-                          otherButtonTitles:nil];
-    [popup show];
-}
-
 - (IBAction)addFilesToWorkspaceOnTouchUpInside:(UIButton *)sender
 {
     //TODO - Send to server.
@@ -141,10 +134,10 @@
     }
     
     if ([fileIDs count] > 0) {
-        [self showPopupWithMessage:@"Files added to workspace."];
+        [XYZPopupGenerator showPopupWithMessage:@"Files added to workspace."];
         
     } else {
-        [self showPopupWithMessage:@"Please select files to add to workspace."];
+        [XYZPopupGenerator showPopupWithMessage:@"Please select files to add to workspace."];
     }
     
     for (XYZDataFileTableViewCell *cell in _cells) {
@@ -164,7 +157,7 @@
             if (type == OTHER) {
                 type = cell.tag;
             } else if (type != cell.tag){
-                [self showPopupWithMessage:@"Ambiguous file types selected."];
+                [XYZPopupGenerator showPopupWithMessage:@"Ambiguous file types selected."];
                 return;
             }
             [fileIDs addObject:cell.fileID];
@@ -173,14 +166,14 @@
     
     if ([fileIDs count] > 0) {
         if (type != RAW && type != PROFILE) {
-            [self showPopupWithMessage:@"Please select raw or profile files."];
+            [XYZPopupGenerator showPopupWithMessage:@"Please select raw or profile files."];
             return;
         }
         NSError *error;
         [ServerConnection convert:fileIDs error:&error];
-        [self showPopupWithMessage:@"Convert order sent to server."];
+        [XYZPopupGenerator showPopupWithMessage:@"Convert order sent to server."];
     } else {
-        [self showPopupWithMessage:@"Please select files to convert."];
+        [XYZPopupGenerator showPopupWithMessage:@"Please select files to convert."];
     }
     
     for (XYZDataFileTableViewCell *cell in _cells) {
