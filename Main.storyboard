@@ -457,27 +457,14 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AJg-7s-7TC">
-                                <rect key="frame" x="20" y="477" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gsj-ed-p9I">
-                                <rect key="frame" x="137" y="477" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PR2-ub-M4f">
-                                <rect key="frame" x="254" y="477" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
+                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5IW-eG-qbf">
+                                <rect key="frame" x="0.0" y="412" width="320" height="162"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="OaH-dG-5KC" id="fEm-yV-DP1"/>
+                                    <outlet property="delegate" destination="OaH-dG-5KC" id="Zue-cP-dS3"/>
+                                </connections>
+                            </pickerView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="grey_line" translatesAutoresizingMaskIntoConstraints="NO" id="Xms-3l-o79">
                                 <rect key="frame" x="0.0" y="463" width="320" height="3"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -487,34 +474,34 @@
                                     <constraint firstAttribute="height" constant="3" id="bmB-RV-0Aa"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mgj-Qf-BcH">
+                                <rect key="frame" x="270" y="478" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="OK">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.97639142335766427" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Mgj-Qf-BcH" secondAttribute="trailing" constant="20" id="5FR-hi-8jB"/>
                             <constraint firstAttribute="trailing" secondItem="2ha-Gv-y76" secondAttribute="trailing" constant="20" id="5V8-0e-oqh"/>
-                            <constraint firstAttribute="trailing" secondItem="PR2-ub-M4f" secondAttribute="trailing" constant="20" id="7cc-CE-jzF"/>
                             <constraint firstAttribute="trailing" secondItem="6pb-Wh-CBJ" secondAttribute="trailing" id="9B7-64-Kln"/>
                             <constraint firstAttribute="trailing" secondItem="KyP-h8-6M9" secondAttribute="trailing" id="BRZ-E9-8Vu"/>
-                            <constraint firstItem="AJg-7s-7TC" firstAttribute="leading" secondItem="xtR-Jh-0nM" secondAttribute="leading" constant="20" id="Ego-lz-sCi"/>
                             <constraint firstItem="ddK-Rf-71f" firstAttribute="top" secondItem="2ha-Gv-y76" secondAttribute="bottom" constant="9" id="It0-Rg-AHk"/>
                             <constraint firstAttribute="trailing" secondItem="Xms-3l-o79" secondAttribute="trailing" id="J0e-SB-qls"/>
-                            <constraint firstAttribute="trailing" secondItem="gsj-ed-p9I" secondAttribute="trailing" constant="137" id="JE4-gR-g4C"/>
                             <constraint firstItem="6pb-Wh-CBJ" firstAttribute="top" secondItem="ddK-Rf-71f" secondAttribute="bottom" id="Ydd-q4-RKV"/>
+                            <constraint firstItem="pFH-yY-7BM" firstAttribute="top" secondItem="Mgj-Qf-BcH" secondAttribute="bottom" constant="11" id="c6m-DX-6w7"/>
                             <constraint firstItem="2ha-Gv-y76" firstAttribute="top" secondItem="M5h-G1-RIW" secondAttribute="bottom" constant="10" id="cFs-Qg-FsX"/>
                             <constraint firstItem="2ha-Gv-y76" firstAttribute="leading" secondItem="xtR-Jh-0nM" secondAttribute="leading" constant="20" id="ep7-Ry-1WJ"/>
                             <constraint firstItem="KyP-h8-6M9" firstAttribute="leading" secondItem="xtR-Jh-0nM" secondAttribute="leading" id="fTX-YQ-58V"/>
-                            <constraint firstItem="gsj-ed-p9I" firstAttribute="top" secondItem="Xms-3l-o79" secondAttribute="bottom" constant="11" id="fct-tH-UE2"/>
-                            <constraint firstItem="pFH-yY-7BM" firstAttribute="top" secondItem="gsj-ed-p9I" secondAttribute="bottom" constant="12" id="hNm-sG-Fpp"/>
                             <constraint firstItem="6pb-Wh-CBJ" firstAttribute="leading" secondItem="xtR-Jh-0nM" secondAttribute="leading" id="ngm-oH-dSk"/>
-                            <constraint firstItem="pFH-yY-7BM" firstAttribute="top" secondItem="AJg-7s-7TC" secondAttribute="bottom" constant="12" id="pdk-PG-45H"/>
                             <constraint firstItem="Xms-3l-o79" firstAttribute="top" secondItem="6pb-Wh-CBJ" secondAttribute="bottom" constant="-2" id="pnd-Jq-CfE"/>
                             <constraint firstAttribute="trailing" secondItem="ddK-Rf-71f" secondAttribute="trailing" id="q0n-5M-EF6"/>
                             <constraint firstItem="Xms-3l-o79" firstAttribute="leading" secondItem="xtR-Jh-0nM" secondAttribute="leading" id="qji-dX-dRU"/>
-                            <constraint firstItem="AJg-7s-7TC" firstAttribute="top" secondItem="Xms-3l-o79" secondAttribute="bottom" constant="11" id="r4c-uz-66e"/>
-                            <constraint firstItem="pFH-yY-7BM" firstAttribute="top" secondItem="PR2-ub-M4f" secondAttribute="bottom" constant="12" id="sII-8u-eAt"/>
                             <constraint firstItem="KyP-h8-6M9" firstAttribute="top" secondItem="Xms-3l-o79" secondAttribute="bottom" id="uHX-6t-vIc"/>
-                            <constraint firstItem="gsj-ed-p9I" firstAttribute="leading" secondItem="xtR-Jh-0nM" secondAttribute="leading" constant="137" id="uSQ-iH-M2U"/>
                             <constraint firstItem="pFH-yY-7BM" firstAttribute="top" secondItem="KyP-h8-6M9" secondAttribute="bottom" id="wzr-jO-TKe"/>
-                            <constraint firstItem="PR2-ub-M4f" firstAttribute="top" secondItem="Xms-3l-o79" secondAttribute="bottom" constant="11" id="y9h-u4-2iA"/>
+                            <constraint firstItem="Mgj-Qf-BcH" firstAttribute="top" secondItem="Xms-3l-o79" secondAttribute="bottom" constant="12" id="xpp-9Z-mDp"/>
                             <constraint firstItem="ddK-Rf-71f" firstAttribute="leading" secondItem="xtR-Jh-0nM" secondAttribute="leading" id="zwu-C3-WTi"/>
                         </constraints>
                     </view>
@@ -522,9 +509,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="trash" id="S8B-s2-ee7"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="centerButton" destination="gsj-ed-p9I" id="iW6-n1-UZC"/>
-                        <outlet property="leftButton" destination="AJg-7s-7TC" id="THD-ZW-KEp"/>
-                        <outlet property="rightButton" destination="PR2-ub-M4f" id="8Kl-wl-WHq"/>
+                        <outlet property="pickerView" destination="5IW-eG-qbf" id="IvL-Ip-LWH"/>
                         <outlet property="segmentedControl" destination="2ha-Gv-y76" id="Fv9-71-dHz"/>
                         <outlet property="tableView" destination="6pb-Wh-CBJ" id="5ch-FP-JXM"/>
                     </connections>

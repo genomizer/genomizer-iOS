@@ -11,12 +11,11 @@
 
 @interface XYZSelectedFilesViewController ()
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
-@property (weak, nonatomic) IBOutlet UIButton *leftButton;
-@property (weak, nonatomic) IBOutlet UIButton *centerButton;
-@property (weak, nonatomic) IBOutlet UIButton *rightButton;
+@property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property NSMutableArray *selectedFiles;
+@property NSArray *pickerViewFields;
 
 @end
 
@@ -46,48 +45,41 @@ static XYZExperiment * SELECTED_FILES = nil;
 }
 - (IBAction)segmentedControlValueChanged:(UISegmentedControl *)sender
 {
-    switch (sender.selectedSegmentIndex) {
+    [self updateTableViewAndButtons];
+
+}
+
+- (void) updateTableViewAndButtons
+{
+    switch (_segmentedControl.selectedSegmentIndex) {
         case 0:
             _selectedFiles = SELECTED_FILES.rawFiles;
-            _leftButton.hidden = YES;
-            _centerButton.hidden = NO;
-            _centerButton.titleLabel.text = @"Convert to profile";
-            _rightButton.hidden = YES;
+           
             break;
         case 1:
             _selectedFiles = SELECTED_FILES.profileFiles;
-            _leftButton.hidden =  NO;
-            _leftButton.titleLabel.text = @"Convert to region";
-            _centerButton.hidden = YES;
-            _rightButton.hidden = NO;
-            _rightButton.titleLabel.text = @"Change genom release";
             break;
         case 2:
             _selectedFiles = SELECTED_FILES.regionFiles;
-            _leftButton.hidden = YES;
-            _centerButton.hidden = YES;
-            _rightButton.hidden = YES;
             break;
         case 3:
             _selectedFiles = SELECTED_FILES.otherFiles;
-            _leftButton.hidden = YES;
-            _centerButton.hidden = YES;
-            _rightButton.hidden = YES;
             break;
     }
     [_tableView reloadData];
-    
+
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [_tableView reloadData];
+    [self updateTableViewAndButtons];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     _selectedFiles = SELECTED_FILES.rawFiles;
+    _pickerViewFields = [[NSArray alloc] initWithObjects:@"Ett",@"Two", @"Three", nil];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -126,6 +118,27 @@ static XYZExperiment * SELECTED_FILES = nil;
     [_cells setObject:cell atIndexedSubscript:[self rowsBeforeSection:indexPath.section] + indexPath.row];
     */
     return cell;
+}
+
+-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+
+-(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return [_pickerViewFields count];
+}
+
+-(NSArray *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    return [_pickerViewFields objectAtIndex:row];
+   // return [[NSArray alloc] initWithObjects:@"Jek", nil];
+    
+}
+
+- (void)pickerView:(UIPickerView *)pickerView1 didSelectRow: (NSInteger)row inComponent:(NSInteger)component {
+    NSLog(@"ROW SELECTED: %d", row);
 }
 
 
