@@ -17,7 +17,7 @@
     [dict setValue:password forKey:@"password"];
     [dict setValue:username forKey:@"username"];
    
-    NSError *error = nil;
+    NSError *error;
     NSData *postData = [NSJSONSerialization dataWithJSONObject:dict
                                                        options:NSJSONWritingPrettyPrinted
                                                          error:&error];
@@ -78,8 +78,8 @@
                                   
 + (NSString*) getServerURL
 {
-    return @"http://genomizer.apiary-mock.com";
-    //return @"http://scratchy.cs.umu.se:7000";
+   // return @"http://genomizer.apiary-mock.com";
+    return @"http://scratchy.cs.umu.se:8000";
 }
 
 @end

@@ -18,6 +18,7 @@
 		649778EB1910EC9D000FD14F /* XYZExperimentParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 649778EA1910EC9D000FD14F /* XYZExperimentParser.m */; };
 		649778EF191119FB000FD14F /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 649778ED191119FB000FD14F /* MoreViewController.m */; };
 		649778F0191119FB000FD14F /* MoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 649778EE191119FB000FD14F /* MoreViewController.xib */; };
+		7624B1C4191A6B4400420EBE /* TestExperimentParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 7624B1C3191A6B4400420EBE /* TestExperimentParser.m */; };
 		76E2DA9F190E96C90048069D /* JSONBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 76E2DA9E190E96C90048069D /* JSONBuilder.m */; };
 		76F638D8190FD99300F0F4BF /* XYZExperiment.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F638D7190FD99300F0F4BF /* XYZExperiment.m */; };
 		76F638DB190FDD9D00F0F4BF /* XYZExperimentFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F638DA190FDD9D00F0F4BF /* XYZExperimentFile.m */; };
@@ -89,6 +90,7 @@
 		649778EC191119FB000FD14F /* MoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreViewController.h; sourceTree = "<group>"; };
 		649778ED191119FB000FD14F /* MoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreViewController.m; sourceTree = "<group>"; };
 		649778EE191119FB000FD14F /* MoreViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoreViewController.xib; sourceTree = "<group>"; };
+		7624B1C3191A6B4400420EBE /* TestExperimentParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestExperimentParser.m; sourceTree = "<group>"; };
 		76E2DA9D190E96C90048069D /* JSONBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSONBuilder.h; path = ../JSONBuilder.h; sourceTree = "<group>"; };
 		76E2DA9E190E96C90048069D /* JSONBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSONBuilder.m; path = ../JSONBuilder.m; sourceTree = "<group>"; };
 		76F638D6190FD99200F0F4BF /* XYZExperiment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZExperiment.h; sourceTree = "<group>"; };
@@ -359,6 +361,7 @@
 				DEEF6B0719094F8B00A2CD8C /* Supporting Files */,
 				DEF812901918D90A00A88173 /* TestExperiment.m */,
 				DEF812921918DE1C00A88173 /* TestExperimentFile.m */,
+				7624B1C3191A6B4400420EBE /* TestExperimentParser.m */,
 			);
 			path = InLoggerTests;
 			sourceTree = "<group>";
@@ -512,6 +515,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DEF812911918D90A00A88173 /* TestExperiment.m in Sources */,
+				7624B1C4191A6B4400420EBE /* TestExperimentParser.m in Sources */,
 				DE9A3EF91918CFDC00F7C33B /* TestExperimentDescriber.m in Sources */,
 				210BED2F1918DCD500A8E690 /* TestJSONBuilderGetLogout.m in Sources */,
 				210BED2D1918D85000A8E690 /* TestJSONBuilderGetRequest.m in Sources */,
