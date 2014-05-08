@@ -189,12 +189,13 @@ NSString *token;
 +(NSDictionary*)parseJSONToDictionary:(NSData*)POSTReply error:(NSError**)error
 {
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:POSTReply options:kNilOptions error:error];
-    
+    /*
     if([*error localizedDescription] != nil)
     {
         NSLog(@"parsing json %@",[*error localizedDescription]);
         [NSException raise:@"Error parsing JSON" format:@"Error parsing JSON"];
     }
+    */
     return json;
 }
 
