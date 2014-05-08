@@ -12,6 +12,7 @@
 #import "XYZTitleTableViewCell.h"
 #import "XYZDataFileTableViewCell.h"
 #import "ServerConnection.h"
+#import "XYZSelectedFilesViewController.h"
 #import "XYZPopupGenerator.h"
 
 @interface XYZDataFileViewController ()
@@ -47,10 +48,7 @@
 
 - (void)setExperiment:(XYZExperiment *)experiment
 {
-    NSLog(@"ASDASDASDASDÖ LAKSDÖL KAÖSLDK ");
     _experiment = experiment;
-   // _cells = [[NSMutableArray alloc] initWithCapacity:[_experiment numberOfFiles]];
-    NSLog(@"Count: %d %d", [_cells count], [_experiment numberOfFiles]);
 }
 
 #pragma mark - Table view data source
@@ -58,7 +56,6 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    NSLog(@"ASDASDASDASDASDASDASDASDASDASDASDASDADSSAD");
     return 4;
 }
 
@@ -113,7 +110,7 @@
     XYZExperimentFile *file = [[self arrayFromSection: indexPath.section] objectAtIndex:indexPath.row];
     cell.textField.text = [file getDescription];
     cell.switchButton.on = NO;
-    cell.fileID = file.idFile;
+    cell.file = file;
     cell.tag = file.type;
     NSLog(@"section %d row %d", indexPath.section, indexPath.row);
     [_cells setObject:cell atIndexedSubscript:[self rowsBeforeSection:indexPath.section] + indexPath.row];
@@ -124,18 +121,18 @@
 - (IBAction)addFilesToWorkspaceOnTouchUpInside:(UIButton *)sender
 {
     //TODO - Send to server.
-    NSMutableArray *fileIDs = [[NSMutableArray alloc] init];
+    BOOL cellOn = false;
     NSLog(@"Raw cells: %d", [_cells count]);
     for (NSInteger i = 0; i < [_cells count]; i++) {
         XYZDataFileTableViewCell *cell = [_cells objectAtIndex:i];
         if (cell.switchButton.on) {
-            [fileIDs addObject:cell.fileID];
+            cellOn = YES;
+            [XYZSelectedFilesViewController addExperimentFile: cell.file];
         }
     }
     
-    if ([fileIDs count] > 0) {
+    if (cellOn){
         [XYZPopupGenerator showPopupWithMessage:@"Files added to workspace."];
-        
     } else {
         [XYZPopupGenerator showPopupWithMessage:@"Please select files to add to workspace."];
     }
@@ -160,7 +157,7 @@
                 [XYZPopupGenerator showPopupWithMessage:@"Ambiguous file types selected."];
                 return;
             }
-            [fileIDs addObject:cell.fileID];
+            [fileIDs addObject:cell.file.idFile];
         }
     }
     
