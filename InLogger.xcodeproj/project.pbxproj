@@ -23,6 +23,7 @@
 		76E2DA9F190E96C90048069D /* JSONBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 76E2DA9E190E96C90048069D /* JSONBuilder.m */; };
 		76F638D8190FD99300F0F4BF /* XYZExperiment.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F638D7190FD99300F0F4BF /* XYZExperiment.m */; };
 		76F638DB190FDD9D00F0F4BF /* XYZExperimentFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F638DA190FDD9D00F0F4BF /* XYZExperimentFile.m */; };
+		DE032D72191BCDC4006AC257 /* XYZSelectTaskTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE032D71191BCDC4006AC257 /* XYZSelectTaskTableViewController.m */; };
 		DE25D7F71910D6630084BDDC /* XYZDataFileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DE25D7F51910D6630084BDDC /* XYZDataFileTableViewCell.m */; };
 		DE25D7F81910D6630084BDDC /* XYZDataFileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE25D7F61910D6630084BDDC /* XYZDataFileTableViewCell.xib */; };
 		DE25D7FC1910D6840084BDDC /* XYZTitleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DE25D7FA1910D6840084BDDC /* XYZTitleTableViewCell.m */; };
@@ -100,6 +101,8 @@
 		76F638D7190FD99300F0F4BF /* XYZExperiment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZExperiment.m; sourceTree = "<group>"; };
 		76F638D9190FDD9D00F0F4BF /* XYZExperimentFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZExperimentFile.h; sourceTree = "<group>"; };
 		76F638DA190FDD9D00F0F4BF /* XYZExperimentFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZExperimentFile.m; sourceTree = "<group>"; };
+		DE032D70191BCDC4006AC257 /* XYZSelectTaskTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZSelectTaskTableViewController.h; sourceTree = "<group>"; };
+		DE032D71191BCDC4006AC257 /* XYZSelectTaskTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZSelectTaskTableViewController.m; sourceTree = "<group>"; };
 		DE25D7F41910D6630084BDDC /* XYZDataFileTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZDataFileTableViewCell.h; sourceTree = "<group>"; };
 		DE25D7F51910D6630084BDDC /* XYZDataFileTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZDataFileTableViewCell.m; sourceTree = "<group>"; };
 		DE25D7F61910D6630084BDDC /* XYZDataFileTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XYZDataFileTableViewCell.xib; sourceTree = "<group>"; };
@@ -265,6 +268,8 @@
 				DED1228A190E966200D8E530 /* XYZSelectedFilesViewController.h */,
 				DED1228B190E966200D8E530 /* XYZSelectedFilesViewController.m */,
 				DED1228C190E966200D8E530 /* XYZSelectedFilesViewController.xib */,
+				DE032D70191BCDC4006AC257 /* XYZSelectTaskTableViewController.h */,
+				DE032D71191BCDC4006AC257 /* XYZSelectTaskTableViewController.m */,
 			);
 			name = SelectedFiles;
 			sourceTree = "<group>";
@@ -512,6 +517,7 @@
 				DE25D8021910D72A0084BDDC /* XYZDataFileViewController.m in Sources */,
 				649778EB1910EC9D000FD14F /* XYZExperimentParser.m in Sources */,
 				DEEF6B1B1909553C00A2CD8C /* XYZLogInViewController.m in Sources */,
+				DE032D72191BCDC4006AC257 /* XYZSelectTaskTableViewController.m in Sources */,
 				DED1228D190E966200D8E530 /* XYZInLogger.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
