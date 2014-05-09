@@ -7,6 +7,7 @@
 //
 
 #import "XYZSelectTaskTableViewController.h"
+#import "RawConvertViewController.h"
 
 @interface XYZSelectTaskTableViewController ()
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *executeButton;
@@ -76,8 +77,15 @@
 }
 - (IBAction)executeButtonPressed:(UIBarButtonItem *)sender
 {
+      [self performSegueWithIdentifier:@"executeTask" sender:_experimentFiles];
     
-    
+}
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"executeTask"]) {
+        RawConvertViewController *nextVC = (RawConvertViewController *)[segue destinationViewController];
+        nextVC.experimentFiles = _experimentFiles;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

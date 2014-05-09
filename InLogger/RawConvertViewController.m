@@ -150,7 +150,13 @@ return NO;
 
         }
     }
-     [self showErrorMessage:@"Convert request sent succuessfully to server" title:@"Convert request"];
+    UIAlertView *convertDoneMessage = [[UIAlertView alloc]
+                                   initWithTitle:@"Convert request" message:@"Convert request sent successfully to server"
+                                   delegate:nil cancelButtonTitle:@"Done"
+                                   otherButtonTitles:nil];
+    
+    [convertDoneMessage show];
+    
 }
 - (IBAction)showErrorMessage:(NSString*) error title:(NSString*)title
 {

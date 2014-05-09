@@ -159,7 +159,7 @@ static XYZExperiment * SELECTED_FILES = nil;
 - (IBAction)selectTaskButton:(id)sender {
     [self createExperimentFiles];
       NSLog(@"prep segue ");
- //    [self performSegueWithIdentifier:@"selectTask" sender:_experimentFiles];
+     [self performSegueWithIdentifier:@"convertTask" sender:_experimentFiles];
     
 }
 
@@ -176,13 +176,7 @@ static XYZExperiment * SELECTED_FILES = nil;
 }
 -(void) createExperimentFiles{
      _experimentFiles = [[NSMutableArray alloc] init];
-    NSMutableArray *checkedFiles = [[NSMutableArray alloc] init];
-    for(XYZDataFileTableViewCell *cell in _tableView){
-      //  if(cell.switchButton.on){
-     //       [checkedFiles addObject:cell.file];
-     //   }
-    }
-  /*  for(XYZExperimentFile *file in checkedFiles){
+  for(XYZExperimentFile *file in [self getFilesFromSelectedCells]){
         NSMutableDictionary * currentFile = [[NSMutableDictionary alloc] init];
         [currentFile setObject:file.name forKey:@"filename"];
         [currentFile setObject:file.idFile forKey:@"fileId"];
@@ -191,26 +185,18 @@ static XYZExperiment * SELECTED_FILES = nil;
         [currentFile setObject:file.metaData forKey:@"metadata"];
         [currentFile setObject:file.grVersion forKey:@"genomeRelease"];
         [currentFile setObject:file.author forKey:@"author"];
-     //   NSLog(@"currfile%@", currentFile);
+        NSLog(@"currfile%@", currentFile);
         [_experimentFiles addObject:currentFile];
-    }*/
+    }
 }
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
  //   XYZSelectTaskTableViewController *nextVC = (XYZSelectTaskTableViewController *)[[segue destinationViewController] topViewController];
 //    nextVC.fileType = _segmentedControl.selectedSegmentIndex;
-    if ([segue.identifier isEqualToString:@"selectTask"]) {
+    if ([segue.identifier isEqualToString:@"convertTask"]) {
         XYZSelectTaskTableViewController *nextVC = (XYZSelectTaskTableViewController *)[segue destinationViewController];
         nextVC.experimentFiles = _experimentFiles;
     }
-
-    /*
-    if ([segue.identifier isEqualToString:@"searchResult"]) {
-        XYZSearchResultTableViewController *nextVC = (XYZSearchResultTableViewController *)[segue destinationViewController];
-        nextVC.searchResults1 = self.searchResults;
-        nextVC.experimentDescriber = _experimentDescriber;
-    }
-     */
 }
 
 

@@ -550,37 +550,18 @@
                         <barButtonItem key="rightBarButtonItem" enabled="NO" title="Execute" id="Uoe-Qf-EFf">
                             <connections>
                                 <action selector="executeButtonPressed:" destination="0GK-lv-S7R" id="qSF-Vp-y6t"/>
-                                <segue destination="08w-tF-q50" kind="push" id="Hic-2g-t3c"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="executeButton" destination="Uoe-Qf-EFf" id="wwB-uq-1qe"/>
+                        <segue destination="1te-1O-aSA" kind="push" identifier="executeTask" id="NYU-yO-p97"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jqw-SR-ZeG" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="1Di-Sa-PtS" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3980" y="-225"/>
-        </scene>
-        <!--View Controller - Convert to Profile-->
-        <scene sceneID="3GY-Il-QyJ">
-            <objects>
-                <viewController id="08w-tF-q50" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="fbM-gw-fVD"/>
-                        <viewControllerLayoutGuide type="bottom" id="v38-ne-jgN"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="KOW-0a-EZI">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Convert to Profile" id="xrS-Rd-SA5"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8xS-uw-IpZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4518" y="-227"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="dvn-S2-uzd">
@@ -595,7 +576,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZB1-jI-yuu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4702" y="-1035"/>
+            <point key="canvasLocation" x="4626" y="-951"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="TmL-84-z13">
@@ -865,9 +846,9 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Otj-eY-xTS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3454" y="-225"/>
+            <point key="canvasLocation" x="3448" y="-225"/>
         </scene>
-        <!--Raw Convert View Controller - Raw Convert-->
+        <!--Raw Convert View Controller - Convert to profile-->
         <scene sceneID="p8P-ds-xv5">
             <objects>
                 <viewController id="1te-1O-aSA" customClass="RawConvertViewController" sceneMemberID="viewController">
@@ -961,7 +942,7 @@
                             <constraint firstItem="vYy-LX-INS" firstAttribute="top" secondItem="C0f-n0-aID" secondAttribute="bottom" constant="71" id="nGn-3Q-Bn3"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Raw Convert" id="HJu-hQ-DQg"/>
+                    <navigationItem key="navigationItem" title="Convert to profile" id="HJu-hQ-DQg"/>
                     <connections>
                         <outlet property="bowtie" destination="kAs-61-89y" id="9br-Ri-fTr"/>
                         <outlet property="bowtieSwitch" destination="vs1-ze-9N4" id="4o5-HZ-GNw"/>
@@ -975,7 +956,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WlO-jJ-3zU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5181" y="-993"/>
+            <point key="canvasLocation" x="4833" y="-225"/>
         </scene>
     </scenes>
     <resources>
@@ -991,8 +972,8 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Nis-OP-SD8"/>
         <segue reference="lHN-tn-48I"/>
-        <segue reference="EEf-C6-LfF"/>
+        <segue reference="n57-dz-5Jj"/>
+        <segue reference="NYU-yO-p97"/>
     </inferredMetricsTieBreakers>
 </document>
