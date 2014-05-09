@@ -54,6 +54,16 @@
     XCTAssertEqual([_experiment numberOfFiles], 1);
 }
 
+-(void) testAddSameFileTwice
+{
+    XCTAssertEqual([_experiment.rawFiles count], 0);
+    _experimentFile.type = RAW;
+    [_experiment addExperimentFile:_experimentFile];
+    [_experiment addExperimentFile:_experimentFile];
+    XCTAssertEqual([_experiment.rawFiles count], 1);
+    
+}
+
 -(void) testAddRAWFile
 {
     XCTAssertEqual([_experiment.rawFiles count], 0);
@@ -70,7 +80,7 @@
     _experimentFile.type = PROFILE;
     [_experiment addExperimentFile:_experimentFile];
     [_experiment addExperimentFile:_experimentFile];
-    XCTAssertEqual([_experiment.profileFiles count], 2);
+    XCTAssertEqual([_experiment.profileFiles count], 1);
     
 }
 
@@ -97,8 +107,15 @@
     _experimentFile.type = RAW;
     [_experiment addExperimentFile:_experimentFile];
     XCTAssertEqual([_experiment.rawFiles count], 1);
-    //[_experiment removeFile: _experimentFile];
+    [_experiment removeExperimentFile: _experimentFile];
     XCTAssertEqual([_experiment.rawFiles count], 0);
+    [_experiment addExperimentFile:_experimentFile];
+    [_experiment addExperimentFile:[[XYZExperimentFile alloc] init]];
+    XCTAssertEqual([_experiment.rawFiles count], 2);
+    [_experiment removeExperimentFile: _experimentFile];
+    XCTAssertEqual([_experiment.rawFiles count], 1);
+
+
 }
 
 @end

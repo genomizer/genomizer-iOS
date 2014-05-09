@@ -68,18 +68,32 @@
     return [_annotations valueForKey:annotation];
 }
 
-- (void) addExperimentFile: (XYZExperimentFile *) file
+- (NSMutableArray *) arrayOfFile: (XYZExperimentFile *) file
 {
     if (file.type == RAW) {
-        [_rawFiles addObject:file];
+        return _rawFiles;
     } else if (file.type == REGION) {
-        [_regionFiles addObject:file];
+        return _regionFiles;
     } else if (file.type == PROFILE) {
-        [_profileFiles addObject:file];
+        return _profileFiles;
     } else {
-        [_otherFiles addObject:file];
+        return _otherFiles;
     }
 }
+
+- (void) addExperimentFile: (XYZExperimentFile *) file
+{
+    NSMutableArray *filesArray = [self arrayOfFile:file];
+    if (![filesArray containsObject:file]) {
+        [filesArray addObject:file];
+    }
+}
+
+- (void) removeExperimentFile: (XYZExperimentFile *) file
+{
+    [[self arrayOfFile:file] removeObject:file];
+}
+
 
 - (NSInteger) numberOfFiles
 {
