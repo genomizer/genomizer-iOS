@@ -140,7 +140,16 @@ static XYZExperiment * SELECTED_FILES = nil;
 - (void)pickerView:(UIPickerView *)pickerView1 didSelectRow: (NSInteger)row inComponent:(NSInteger)component {
     NSLog(@"ROW SELECTED: %d", row);
 }
+- (IBAction)selectTaskButton:(id)sender {
+}
 
+/*- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"convertToRaw"]) {
+        RawConvertViewController *nextVC = (RawConvertViewController *)[segue destinationViewController];
+        nextVC.experimentFiles = _selectedFiles;
+    }
+}*/
 - (IBAction)unwindToList:(UIStoryboardSegue *)segue
 {
     
