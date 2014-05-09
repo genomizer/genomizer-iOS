@@ -507,6 +507,7 @@
                     <connections>
                         <outlet property="segmentedControl" destination="2ha-Gv-y76" id="Fv9-71-dHz"/>
                         <outlet property="tableView" destination="6pb-Wh-CBJ" id="5ch-FP-JXM"/>
+                        <segue destination="0GK-lv-S7R" kind="push" identifier="convertTask" id="Nis-OP-SD8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K6N-pd-6ui" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -848,6 +849,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7DC-Qk-dgr" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="HEg-5h-puW"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="HL5-4m-qdf">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -985,7 +987,8 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="EEf-C6-LfF"/>
+        <segue reference="Nis-OP-SD8"/>
         <segue reference="lHN-tn-48I"/>
+        <segue reference="EEf-C6-LfF"/>
     </inferredMetricsTieBreakers>
 </document>

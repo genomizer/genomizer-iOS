@@ -31,6 +31,7 @@
     [super viewDidLoad];
     NSLog(@"loaded");
     _tasks = [self tasksOfFileType:_fileType];
+    NSLog(@"expfile%@", _experimentFiles[0]);
     _selectedCellRow = -1;
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
