@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XYZSelectTaskTableViewController.h"
+#import "XYZExperimentFile.h"
 
 @interface XYZSelectTaskTableViewController : UITableViewController
+
+@property FileType fileType;
 
 @end

@@ -31,7 +31,7 @@
         XYZExperimentFile *expFile = [[XYZExperimentFile alloc] init];
         expFile.idFile = [file valueForKey:@"fileId"];
         expFile.type = [XYZExperimentFile NSStringFileTypeToEnumFileType:[file valueForKey:@"type"]];
-        expFile.name = (NSString *)[file valueForKey:@"fileName"];
+        expFile.name = (NSString *)[file valueForKey:@"filename"];
         expFile.uploadedBy = [file valueForKey:@"uploader"];
         expFile.date = @"2012-02-29"; //[file valueForKey:@"date"];
         [exp addExperimentFile:expFile];

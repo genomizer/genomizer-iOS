@@ -92,4 +92,13 @@
     XCTAssertEqual([_experiment.otherFiles count], 1);
 }
 
+-(void) testRemoveRawFile
+{
+    _experimentFile.type = RAW;
+    [_experiment addExperimentFile:_experimentFile];
+    XCTAssertEqual([_experiment.rawFiles count], 1);
+    //[_experiment removeFile: _experimentFile];
+    XCTAssertEqual([_experiment.rawFiles count], 0);
+}
+
 @end

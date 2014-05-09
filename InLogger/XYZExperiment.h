@@ -22,6 +22,7 @@
 - (void) setValue: (id) value forAnnotation: (NSString*) annotation;
 - (NSString *) getValueForAnnotation: (NSString *) annotation;
 - (void) addExperimentFile: (XYZExperimentFile *) file;
+- (void) addExperimentFile: (XYZExperimentFile *) file;
 - (NSInteger) numberOfFiles;
 + (XYZExperiment*) defaultExperiment;
 

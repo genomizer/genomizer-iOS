@@ -8,6 +8,7 @@
 
 #import "XYZSelectedFilesViewController.h"
 #import "XYZDataFileTableViewCell.h"
+#import "XYZSelectTaskTableViewController.h"
 
 @interface XYZSelectedFilesViewController ()
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
@@ -54,7 +55,6 @@ static XYZExperiment * SELECTED_FILES = nil;
     switch (_segmentedControl.selectedSegmentIndex) {
         case 0:
             _selectedFiles = SELECTED_FILES.rawFiles;
-           
             break;
         case 1:
             _selectedFiles = SELECTED_FILES.profileFiles;
@@ -137,13 +137,27 @@ static XYZExperiment * SELECTED_FILES = nil;
     
 }
 
-- (void)pickerView:(UIPickerView *)pickerView1 didSelectRow: (NSInteger)row inComponent:(NSInteger)component {
+- (void)pickerView:(UIPickerView *)pickerView1 didSelectRow: (NSInteger)row inComponent:(NSInteger)component
+{
     NSLog(@"ROW SELECTED: %d", row);
 }
 
 - (IBAction)unwindToList:(UIStoryboardSegue *)segue
 {
     
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    XYZSelectTaskTableViewController *nextVC = (XYZSelectTaskTableViewController *)[[segue destinationViewController] topViewController];
+    nextVC.fileType = _segmentedControl.selectedSegmentIndex;
+    /*
+    if ([segue.identifier isEqualToString:@"searchResult"]) {
+        XYZSearchResultTableViewController *nextVC = (XYZSearchResultTableViewController *)[segue destinationViewController];
+        nextVC.searchResults1 = self.searchResults;
+        nextVC.experimentDescriber = _experimentDescriber;
+    }
+     */
 }
 
 
