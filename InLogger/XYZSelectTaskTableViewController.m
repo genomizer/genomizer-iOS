@@ -8,6 +8,7 @@
 
 #import "XYZSelectTaskTableViewController.h"
 #import "RawConvertViewController.h"
+#import "XYZPopupGenerator.h"
 
 @interface XYZSelectTaskTableViewController ()
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *executeButton;
@@ -32,7 +33,7 @@
     [super viewDidLoad];
     NSLog(@"loaded");
     _tasks = [self tasksOfFileType:_fileType];
-    NSLog(@"expfile%@", _experimentFiles[0]);
+   // NSLog(@"expfile%@", _experimentFiles[0]);
     _selectedCellRow = -1;
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -47,9 +48,9 @@
         case RAW :
             return [[NSArray alloc] initWithObjects:@"Convert to profile", nil];
         case PROFILE:
-            return [[NSArray alloc] initWithObjects:@"Convert to region", @"Change genom release", nil];
+            return [[NSArray alloc] initWithObjects:@"Convert to region", @"Change genome release", nil];
         case REGION:
-            return [[NSArray alloc] initWithObjects:@"Change genom release", nil];
+            return [[NSArray alloc] initWithObjects:@"Change genome release", nil];
         case OTHER:
             return [[NSArray alloc] initWithObjects: nil];
 
@@ -77,8 +78,11 @@
 }
 - (IBAction)executeButtonPressed:(UIBarButtonItem *)sender
 {
-      [self performSegueWithIdentifier:@"executeTask" sender:_experimentFiles];
-    
+    if (_fileType == RAW) {
+        [self performSegueWithIdentifier:@"executeTask" sender:_experimentFiles];
+    } else {
+        [XYZPopupGenerator showPopupWithMessage:@"Not yet implemented!"];
+    }
 }
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {

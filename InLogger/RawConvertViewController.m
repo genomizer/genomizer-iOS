@@ -9,6 +9,7 @@
 #import "RawConvertViewController.h"
 #import "XYZExperimentFile.h"
 #import "ServerConnection.h"
+#import "XYZPopupGenerator.h"
 
 @interface RawConvertViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *bowtie;
@@ -40,7 +41,7 @@
     self.smoothing.delegate = self;
     self.step.delegate = self;
     self.originalCenter = self.view.center;
-    NSLog(@"files %@", _experimentFiles[0]);
+    //NSLog(@"files %@", _experimentFiles[0]);
     
     // Do any additional setup after loading the view.
 }
@@ -150,12 +151,14 @@ return NO;
 
         }
     }
-    UIAlertView *convertDoneMessage = [[UIAlertView alloc]
+    [XYZPopupGenerator showPopupWithMessage:@"Not yet implemented!"];
+    return;
+    /*UIAlertView *convertDoneMessage = [[UIAlertView alloc]
                                    initWithTitle:@"Convert request" message:@"Convert request sent successfully to server"
                                    delegate:nil cancelButtonTitle:@"Done"
                                    otherButtonTitles:nil];
     
-    [convertDoneMessage show];
+    [convertDoneMessage show];*/
     
 }
 - (IBAction)showErrorMessage:(NSString*) error title:(NSString*)title

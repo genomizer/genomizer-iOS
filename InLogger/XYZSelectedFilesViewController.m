@@ -191,11 +191,10 @@ static XYZExperiment * SELECTED_FILES = nil;
 }
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
- //   XYZSelectTaskTableViewController *nextVC = (XYZSelectTaskTableViewController *)[[segue destinationViewController] topViewController];
-//    nextVC.fileType = _segmentedControl.selectedSegmentIndex;
     if ([segue.identifier isEqualToString:@"convertTask"]) {
         XYZSelectTaskTableViewController *nextVC = (XYZSelectTaskTableViewController *)[segue destinationViewController];
         nextVC.experimentFiles = _experimentFiles;
+        nextVC.fileType = _segmentedControl.selectedSegmentIndex;
     }
 }
 
