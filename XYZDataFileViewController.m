@@ -120,7 +120,7 @@
     return cell;
 }
 
-- (IBAction)addFilesToWorkspaceOnTouchUpInside:(UIButton *)sender
+- (IBAction)addFilesToSelectedFilesOnTouchUpInside:(UIButton *)sender
 {
     //TODO - Send to server.
     BOOL cellOn = false;
@@ -134,9 +134,9 @@
     }
     
     if (cellOn){
-        [XYZPopupGenerator showPopupWithMessage:@"Files added to workspace."];
+        [XYZPopupGenerator showPopupWithMessage:@"Files added to Selected Files."];
     } else {
-        [XYZPopupGenerator showPopupWithMessage:@"Please select files to add to workspace."];
+        [XYZPopupGenerator showPopupWithMessage:@"Please select files to add to Selected Files"];
     }
     
     for (XYZDataFileTableViewCell *cell in _cells) {
