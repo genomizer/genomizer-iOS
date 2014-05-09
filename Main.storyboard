@@ -615,11 +615,11 @@
             </objects>
             <point key="canvasLocation" x="2433" y="-1297"/>
         </scene>
-        <!--Navigation Controller - Workspace-->
+        <!--Navigation Controller - Selected Files-->
         <scene sceneID="3eF-FV-YH1">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9IC-kd-hqg" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Workspace" id="8wV-4Y-jvX"/>
+                    <tabBarItem key="tabBarItem" title="Selected Files" id="8wV-4Y-jvX"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="kNi-i9-baF">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -749,12 +749,12 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XpI-0C-liy">
-                                <rect key="frame" x="20" y="480" width="127" height="30"/>
+                                <rect key="frame" x="20" y="480" width="142" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="goM-5v-AA4"/>
                                 </constraints>
-                                <state key="normal" title="Add to Workspace">
+                                <state key="normal" title="Add to Selected files">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
