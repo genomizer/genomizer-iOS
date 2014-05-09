@@ -502,7 +502,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Selected Files" id="ZJl-xb-5Xc">
-                        <barButtonItem key="rightBarButtonItem" systemItem="trash" id="S8B-s2-ee7"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="trash" id="S8B-s2-ee7">
+                            <connections>
+                                <action selector="removeFilesWhenTouchTrash:" destination="OaH-dG-5KC" id="1Hl-bb-NEj"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="segmentedControl" destination="2ha-Gv-y76" id="Fv9-71-dHz"/>
@@ -630,11 +634,11 @@
             </objects>
             <point key="canvasLocation" x="2433" y="-1297"/>
         </scene>
-        <!--Navigation Controller - Selected Files-->
+        <!--Navigation Controller-->
         <scene sceneID="3eF-FV-YH1">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9IC-kd-hqg" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Selected Files" id="8wV-4Y-jvX"/>
+                    <tabBarItem key="tabBarItem" systemItem="mostViewed" id="8wV-4Y-jvX"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="kNi-i9-baF">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -938,7 +942,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C0f-n0-aID">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C0f-n0-aID">
                                 <rect key="frame" x="133" y="467" width="55" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Convert">

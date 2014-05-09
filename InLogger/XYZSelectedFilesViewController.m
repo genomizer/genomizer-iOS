@@ -16,7 +16,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property NSMutableArray *selectedFiles;
-@property NSArray *pickerViewFields;
+@property NSMutableArray *cells;
 
 @end
 
@@ -31,10 +31,16 @@ static XYZExperiment * SELECTED_FILES = nil;
     }
 }
 
-+ (void)addExperimentFile:(XYZExperimentFile *) file
++ (void) addExperimentFile:(XYZExperimentFile *) file
 {
     [SELECTED_FILES addExperimentFile: file];
 }
+
++ (void) removeExperimentFile:(XYZExperimentFile *) file
+{
+    [SELECTED_FILES removeExperimentFile: file];
+}
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -47,7 +53,6 @@ static XYZExperiment * SELECTED_FILES = nil;
 - (IBAction)segmentedControlValueChanged:(UISegmentedControl *)sender
 {
     [self updateTableViewAndButtons];
-
 }
 
 - (void) updateTableViewAndButtons
@@ -66,6 +71,8 @@ static XYZExperiment * SELECTED_FILES = nil;
             _selectedFiles = SELECTED_FILES.otherFiles;
             break;
     }
+    
+    _cells = [[NSMutableArray alloc] initWithCapacity:[_selectedFiles count]];
     [_tableView reloadData];
 
 }
@@ -79,7 +86,6 @@ static XYZExperiment * SELECTED_FILES = nil;
 {
     [super viewDidLoad];
     _selectedFiles = SELECTED_FILES.rawFiles;
-    _pickerViewFields = [[NSArray alloc] initWithObjects:@"Ett",@"Two", @"Three", nil];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -107,6 +113,8 @@ static XYZExperiment * SELECTED_FILES = nil;
     XYZDataFileTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DataFilePrototypeCell" forIndexPath:indexPath];
     cell.textField.text = [[_selectedFiles objectAtIndex:indexPath.row] getDescription];
     cell.switchButton.on = YES;
+    cell.file = [_selectedFiles objectAtIndex:indexPath.row];
+    [_cells setObject:cell atIndexedSubscript:indexPath.row];
     NSLog(@"%d", [_selectedFiles count]);
     /*
     XYZExperimentFile *file = [[self arrayFromSection: indexPath.section] objectAtIndex:indexPath.row];
@@ -125,21 +133,26 @@ static XYZExperiment * SELECTED_FILES = nil;
     return 1;
 }
 
--(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
-{
-    return [_pickerViewFields count];
-}
 
--(NSArray *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+- (NSMutableArray *) getFilesFromSelectedCells
 {
-    return [_pickerViewFields objectAtIndex:row];
-   // return [[NSArray alloc] initWithObjects:@"Jek", nil];
+    NSMutableArray *files = [[NSMutableArray alloc] init];
+    for (XYZDataFileTableViewCell *cell in _cells) {
+        if (cell.switchButton.on) {
+            [files addObject:cell.file];
+        }
+    }
     
+    return files;
 }
 
-- (void)pickerView:(UIPickerView *)pickerView1 didSelectRow: (NSInteger)row inComponent:(NSInteger)component
+- (IBAction)removeFilesWhenTouchTrash:(UIBarButtonItem *)sender
 {
-    NSLog(@"ROW SELECTED: %d", row);
+    for (XYZExperimentFile *file in [self getFilesFromSelectedCells]) {
+        [SELECTED_FILES removeExperimentFile:file];
+    }
+    
+    [self updateTableViewAndButtons];
 }
 
 - (IBAction)unwindToList:(UIStoryboardSegue *)segue

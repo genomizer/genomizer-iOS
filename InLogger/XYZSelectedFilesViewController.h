@@ -12,7 +12,8 @@
 
 @interface XYZSelectedFilesViewController : UIViewController 
 
-+ (void)addExperimentFile:(XYZExperimentFile *) file;
-- (IBAction)unwindToList:(UIStoryboardSegue *)segue;
++ (void) addExperimentFile:(XYZExperimentFile *) file;
++ (void) removeExperimentFile:(XYZExperimentFile *) file;
+- (IBAction) unwindToList:(UIStoryboardSegue *)segue;
 
 @end
