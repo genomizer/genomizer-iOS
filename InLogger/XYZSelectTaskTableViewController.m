@@ -29,13 +29,29 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _tasks = [[NSArray alloc] initWithObjects:@"Convert to profile", @"Calculate stuff", nil];
+    NSLog(@"loaded");
+    _tasks = [self tasksOfFileType:_fileType];
     _selectedCellRow = -1;
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (NSArray *) tasksOfFileType: (FileType) fileType
+{
+    switch(fileType) {
+        case RAW :
+            return [[NSArray alloc] initWithObjects:@"Convert to profile", nil];
+        case PROFILE:
+            return [[NSArray alloc] initWithObjects:@"Convert to region", @"Change genom release", nil];
+        case REGION:
+            return [[NSArray alloc] initWithObjects:@"Change genom release", nil];
+        case OTHER:
+            return [[NSArray alloc] initWithObjects: nil];
+
+    }
 }
 
 - (void)didReceiveMemoryWarning

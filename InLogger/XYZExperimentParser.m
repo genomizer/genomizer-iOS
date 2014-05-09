@@ -33,7 +33,6 @@
         NSLog(@"fileID %@", expFile.idFile);
         expFile.type = [XYZExperimentFile NSStringFileTypeToEnumFileType:[file valueForKey:@"type"]];
         expFile.name = (NSString *)[file valueForKey:@"filename"];
-        NSLog(@"fileName %@", expFile.name);
         expFile.uploadedBy = [file valueForKey:@"uploader"];
         NSLog(@"uploadedBy %@", expFile.uploadedBy);
         expFile.expID = [file valueForKey:@"expId"];
