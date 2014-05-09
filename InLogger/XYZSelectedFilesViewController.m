@@ -154,7 +154,16 @@ static XYZExperiment * SELECTED_FILES = nil;
     
     [self updateTableViewAndButtons];
 }
+- (IBAction)selectTaskButton:(id)sender {
+}
 
+/*- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"convertToRaw"]) {
+        RawConvertViewController *nextVC = (RawConvertViewController *)[segue destinationViewController];
+        nextVC.experimentFiles = _selectedFiles;
+    }
+}*/
 - (IBAction)unwindToList:(UIStoryboardSegue *)segue
 {
     
