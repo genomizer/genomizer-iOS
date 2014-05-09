@@ -11,7 +11,7 @@
 #import "XYZExperimentFile.h"
 
 @interface XYZSelectTaskTableViewController : UITableViewController
-
+@property NSMutableArray* experimentFiles;
 @property FileType fileType;
 
 @end
