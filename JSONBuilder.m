@@ -50,12 +50,23 @@
     return request;
 }
 
-+(NSMutableURLRequest*)getConversionJSON:(NSString*)fileID withToken:(NSString *)token
-{
-    NSString *conversionString = [@"/process/rawtoprofile/" stringByAppendingString:fileID];
-    NSMutableURLRequest *request = [self getRequest:@"PUT" withToken:token];
-    [request setURL:[NSURL URLWithString: [[self getServerURL] stringByAppendingString:conversionString]]];
-    return request;
++(NSMutableURLRequest*)getRawToProfileJSON:(NSString *)token withDict:(NSMutableDictionary*)dict{
+    /* NSString *conversionString = [@"/process/rawtoprofile/" stringByAppendingString:fileID];
+     NSMutableURLRequest *request = [self getRequest:@"PUT" withToken:token];
+     [request setURL:[NSURL URLWithString: [[self getServerURL] stringByAppendingString:conversionString]]];
+     return request;*/
+    {
+        NSError *error;
+        NSData *postData = [NSJSONSerialization dataWithJSONObject:dict
+                                                           options:NSJSONWritingPrettyPrinted
+                                                             error:&error];
+        NSString *conversionString =@"/process";
+        NSMutableURLRequest *request = [self getRequest:@"PUT" withToken:token];
+        [request setHTTPBody:postData];
+        [request setURL:[NSURL URLWithString: [[self getServerURL] stringByAppendingString:conversionString]]];
+        
+        return request;
+    }
 }
 
 +(NSMutableURLRequest*)getAvailableAnnotationsJSON:(NSString *) token

@@ -578,6 +578,21 @@
             <point key="canvasLocation" x="4518" y="-227"/>
         </scene>
         <!--Navigation Controller-->
+        <scene sceneID="dvn-S2-uzd">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="UMV-y3-Qwu" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="KX9-XN-xxz">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="1te-1O-aSA" kind="relationship" relationship="rootViewController" id="lHr-hA-npT"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZB1-jI-yuu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4702" y="-1035"/>
+        </scene>
+        <!--Navigation Controller-->
         <scene sceneID="TmL-84-z13">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="x1l-HJ-QPz" sceneMemberID="viewController">
@@ -820,6 +835,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Files" id="mMZ-2V-ph4"/>
+                    <connections>
+                        <segue destination="1te-1O-aSA" kind="push" identifier="convertToRaw" id="EEf-C6-LfF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W0h-F8-FQI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -951,7 +969,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WlO-jJ-3zU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3969" y="515"/>
+            <point key="canvasLocation" x="5181" y="-993"/>
         </scene>
     </scenes>
     <resources>
@@ -967,6 +985,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="EEf-C6-LfF"/>
         <segue reference="lHN-tn-48I"/>
     </inferredMetricsTieBreakers>
 </document>

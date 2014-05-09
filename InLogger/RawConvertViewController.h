@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface RawConvertViewController : UIViewController<UITextFieldDelegate>
-@property NSMutableArray * experiments;
+@property NSMutableArray * experimentFiles;
 @end

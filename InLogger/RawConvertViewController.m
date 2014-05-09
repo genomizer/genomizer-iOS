@@ -8,6 +8,7 @@
 
 #import "RawConvertViewController.h"
 #import "XYZExperimentFile.h"
+#import "ServerConnection.h"
 
 @interface RawConvertViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *bowtie;
@@ -39,7 +40,7 @@
     self.smoothing.delegate = self;
     self.step.delegate = self;
     self.originalCenter = self.view.center;
-
+    NSLog(@"files %@", _experimentFiles[0]);
     
     // Do any additional setup after loading the view.
 }
@@ -134,7 +135,36 @@
 return NO;
 }
 - (IBAction)ConvertButtonPressed:(id)sender {
-    NSLog(@"HEJ: %lu", (unsigned long)_experiments.count);
+    NSMutableArray * parameters = [[NSMutableArray alloc] init];
+    [parameters addObject:_bowtie.text];
+    [parameters addObject:_genomeFile.text];
+    [parameters addObject:_smoothing.text];
+    [parameters addObject:_step.text];
+    NSError *error;
+
+    for(NSMutableDictionary *dict in _experimentFiles){
+        [dict setObject:parameters forKey:@"parameters"];
+        [ServerConnection convert:dict error:&error];
+        if(error){
+            [self showErrorMessage:[error.userInfo objectForKey:NSLocalizedDescriptionKey] title:error.domain];
+
+        }
+    }
+     [self showErrorMessage:@"Convert request sent succuessfully to server" title:@"Convert request"];
 }
+- (IBAction)showErrorMessage:(NSString*) error title:(NSString*)title
+{
+    UIAlertView *convertMessage = [[UIAlertView alloc]
+                                initWithTitle:title message:error
+                                delegate:nil cancelButtonTitle:@"Try again"
+                                otherButtonTitles:nil];
+        
+    [convertMessage show];
+}
+    
+    
+    
+
+
 
 @end
