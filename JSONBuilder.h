@@ -13,7 +13,7 @@
 +(NSMutableURLRequest*)getLoginJSON:(NSString *) username withPassword: (NSString *) password;
 +(NSMutableURLRequest*)getLogoutJSON:(NSString *)token;
 +(NSMutableURLRequest*)getSearchJSON:(NSString *)annotations withToken:(NSString *)token;
-+(NSMutableURLRequest*)getConversionJSON:(NSString*)fileID withToken:(NSString *)token;
++(NSMutableURLRequest*)getRawToProfileJSON:(NSString *)token withDict:(NSMutableDictionary*)dict;
 +(NSMutableURLRequest*)getAvailableAnnotationsJSON:(NSString *) token;
 +(NSMutableURLRequest*)getRequest:(NSString*) requestType withToken:(NSString*) token;
 +(NSString*)getServerURL;

@@ -14,10 +14,12 @@
 #import "ServerConnection.h"
 #import "XYZSelectedFilesViewController.h"
 #import "XYZPopupGenerator.h"
+#import "RawConvertViewController.h"
 
 @interface XYZDataFileViewController ()
 
 @property NSMutableArray *cells;
+@property NSMutableArray *selectedFiles;
 
 @end
 
@@ -118,7 +120,7 @@
     return cell;
 }
 
-- (IBAction)addFilesToWorkspaceOnTouchUpInside:(UIButton *)sender
+- (IBAction)addFilesToSelectedFilesOnTouchUpInside:(UIButton *)sender
 {
     //TODO - Send to server.
     BOOL cellOn = false;
@@ -132,9 +134,9 @@
     }
     
     if (cellOn){
-        [XYZPopupGenerator showPopupWithMessage:@"Files added to workspace."];
+        [XYZPopupGenerator showPopupWithMessage:@"Files added to Selected Files."];
     } else {
-        [XYZPopupGenerator showPopupWithMessage:@"Please select files to add to workspace."];
+        [XYZPopupGenerator showPopupWithMessage:@"Please select files to add to Selected Files"];
     }
     
     for (XYZDataFileTableViewCell *cell in _cells) {
@@ -144,8 +146,7 @@
 
 - (IBAction)convertToProfileOnTouchUpInside:(id)sender
 {
-    //TODO - Send to server.
-    NSMutableArray *fileIDs = [[NSMutableArray alloc] init];
+    _selectedFiles = [[NSMutableArray alloc] init];
     FileType type = OTHER;
     NSLog(@"Raw cells: %d", [_cells count]);
     for (NSInteger i = 0; i < [_cells count]; i++) {
@@ -153,30 +154,51 @@
         if (cell.switchButton.on ) {
             if (type == OTHER) {
                 type = cell.tag;
-            } else if (type != cell.tag){
-                [XYZPopupGenerator showPopupWithMessage:@"Ambiguous file types selected."];
-                return;
+                if(type == RAW) {
+                    NSMutableDictionary * currentFile = [[NSMutableDictionary alloc] init];
+                    [currentFile setObject:cell.file.name forKey:@"filename"];
+                    [currentFile setObject:cell.file.idFile forKey:@"fileId"];
+                    [currentFile setObject:cell.file.expID forKey:@"expid"];
+                    [currentFile setObject:@"rawtoprofile" forKey:@"processtype"];
+                    [currentFile setObject:cell.file.metaData forKey:@"metadata"];
+                    [currentFile setObject:cell.file.grVersion forKey:@"genomeRelease"];
+                     [currentFile setObject:cell.file.author forKey:@"author"];
+                    [_selectedFiles addObject:currentFile];
+          
+                }
             }
-            [fileIDs addObject:cell.file.idFile];
+        } else if (type != cell.tag){
+            [XYZPopupGenerator showPopupWithMessage:@"Ambiguous file types selected."];
+            return;
         }
+     
     }
     
-    if ([fileIDs count] > 0) {
+    if ([_selectedFiles count] > 0) {
         if (type != RAW && type != PROFILE) {
             [XYZPopupGenerator showPopupWithMessage:@"Please select raw or profile files."];
             return;
         }
-        NSError *error;
-        [ServerConnection convert:fileIDs error:&error];
-        [XYZPopupGenerator showPopupWithMessage:@"Convert order sent to server."];
-    } else {
+        if (type == RAW){
+            [self performSegueWithIdentifier:@"convertToRaw" sender:_selectedFiles];
+        }
+    }
+    else {
         [XYZPopupGenerator showPopupWithMessage:@"Please select files to convert."];
     }
-    
     for (XYZDataFileTableViewCell *cell in _cells) {
         cell.switchButton.on = NO;
     }
 }
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+    {
+        if ([segue.identifier isEqualToString:@"convertToRaw"]) {
+            RawConvertViewController *nextVC = (RawConvertViewController *)[segue destinationViewController];
+            nextVC.experimentFiles = _selectedFiles;
+        }
+}
+    
+
 
 
 @end

@@ -24,6 +24,11 @@ typedef NS_ENUM(NSInteger, FileType) {
 @property NSString *date;
 @property NSString *size;
 @property NSString *URL;
+@property NSString *expID;
+@property NSString *metaData;
+@property NSString *author;
+@property NSString *grVersion;
+
 
 //+ (void) createExperimentFile:(NSDictionary*)file;
 

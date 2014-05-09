@@ -29,11 +29,18 @@
     NSArray *filesArray = [json valueForKey:@"files"];
     for(NSDictionary *file in filesArray){
         XYZExperimentFile *expFile = [[XYZExperimentFile alloc] init];
-        expFile.idFile = [file valueForKey:@"fileId"];
+        expFile.idFile = [file valueForKey:@"id"];
+        NSLog(@"fileID %@", expFile.idFile);
         expFile.type = [XYZExperimentFile NSStringFileTypeToEnumFileType:[file valueForKey:@"type"]];
         expFile.name = (NSString *)[file valueForKey:@"filename"];
         expFile.uploadedBy = [file valueForKey:@"uploader"];
+        NSLog(@"uploadedBy %@", expFile.uploadedBy);
+        expFile.expID = [file valueForKey:@"expId"];
+        NSLog(@"expID %@", expFile.expID);
+        expFile.grVersion = @"genomevarsion"; //[file valueForKey:@"grVersion"];
+        expFile.author = [file valueForKey:@"author"];
         expFile.date = @"2012-02-29"; //[file valueForKey:@"date"];
+        expFile.metaData = @"astringofmeta";
         [exp addExperimentFile:expFile];
     }
     return exp;

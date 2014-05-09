@@ -22,7 +22,7 @@
 - (void)setUp
 {
     [super setUp];
-    self.req = [JSONBuilder getConversionJSON:@"fileID" withToken:@"token"];
+    self.req = [JSONBuilder getRawToProfileJSON:@"fileID" withToken:@"token"];
 }
 
 - (void)tearDown

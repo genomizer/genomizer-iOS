@@ -129,18 +129,16 @@ NSString *token;
     return nil;
 }
 
-+(void)convert:(NSArray*)fileIDs error:(NSError**)error
++(void)convert:(NSMutableDictionary*)dict error:(NSError**)error
 {
     NSError *internalError;
-    NSLog(@"convert: %d", [fileIDs count]);
-
-    for(NSString *fileID in fileIDs)
-    {
-        NSMutableURLRequest *request = [JSONBuilder getConversionJSON:fileID withToken:token];
-        NSHTTPURLResponse *httpResp;
-        [NSURLConnection sendSynchronousRequest:request returningResponse:&httpResp error:&internalError];
-        NSLog(@"**** %@", [internalError localizedDescription]);
-    }
+    
+    
+    NSMutableURLRequest *request = [JSONBuilder getRawToProfileJSON:token withDict:dict];
+    NSHTTPURLResponse *httpResp;
+    [NSURLConnection sendSynchronousRequest:request returningResponse:&httpResp error:&internalError];
+    NSLog(@"**** %@", [internalError localizedDescription]);
+    
 }
 
 + (NSMutableDictionary*)getAvailableAnnotations:(NSError**)error
