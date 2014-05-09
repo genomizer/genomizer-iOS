@@ -14,6 +14,7 @@
 		21277BCE19190036005FB7FD /* TestJSONBuilderGetLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = 21277BCD19190036005FB7FD /* TestJSONBuilderGetLogin.m */; };
 		21277BD019190095005FB7FD /* testJSONBuilderTestAvailableAnnotations.m in Sources */ = {isa = PBXBuildFile; fileRef = 21277BCF19190095005FB7FD /* testJSONBuilderTestAvailableAnnotations.m */; };
 		21BFD1DB191B6A2A00F8E02F /* XYZPopupGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BFD1DA191B6A2A00F8E02F /* XYZPopupGenerator.m */; };
+		641BC92E191CC827000E5254 /* RawConvertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 641BC92D191CC827000E5254 /* RawConvertViewController.m */; };
 		646F06AE1918D46000C959CA /* (null) in Sources */ = {isa = PBXBuildFile; };
 		6484A2F4190E8F160071BB23 /* ServerConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6484A2F3190E8F160071BB23 /* ServerConnection.m */; };
 		649778EB1910EC9D000FD14F /* XYZExperimentParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 649778EA1910EC9D000FD14F /* XYZExperimentParser.m */; };
@@ -87,6 +88,8 @@
 		21277BCF19190095005FB7FD /* testJSONBuilderTestAvailableAnnotations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testJSONBuilderTestAvailableAnnotations.m; sourceTree = "<group>"; };
 		21BFD1D9191B6A2A00F8E02F /* XYZPopupGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZPopupGenerator.h; sourceTree = "<group>"; };
 		21BFD1DA191B6A2A00F8E02F /* XYZPopupGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZPopupGenerator.m; sourceTree = "<group>"; };
+		641BC92C191CC827000E5254 /* RawConvertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawConvertViewController.h; sourceTree = "<group>"; };
+		641BC92D191CC827000E5254 /* RawConvertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawConvertViewController.m; sourceTree = "<group>"; };
 		6484A2F2190E8F160071BB23 /* ServerConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerConnection.h; sourceTree = "<group>"; };
 		6484A2F3190E8F160071BB23 /* ServerConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerConnection.m; sourceTree = "<group>"; };
 		649778E91910EC9D000FD14F /* XYZExperimentParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZExperimentParser.h; sourceTree = "<group>"; };
@@ -337,6 +340,8 @@
 				DED12298190E9C7400D8E530 /* SelectedFiles */,
 				DED12299190E9C8100D8E530 /* MainGUI */,
 				DEEF6B1619094FA000A2CD8C /* Main.storyboard */,
+				641BC92C191CC827000E5254 /* RawConvertViewController.h */,
+				641BC92D191CC827000E5254 /* RawConvertViewController.m */,
 				649778EC191119FB000FD14F /* MoreViewController.h */,
 				649778ED191119FB000FD14F /* MoreViewController.m */,
 				649778EE191119FB000FD14F /* MoreViewController.xib */,
@@ -509,6 +514,7 @@
 				DED12294190E966200D8E530 /* XYZSelectedFilesViewController.m in Sources */,
 				DE9BED6619190B4400D9C0CF /* pickerView.m in Sources */,
 				76F638DB190FDD9D00F0F4BF /* XYZExperimentFile.m in Sources */,
+				641BC92E191CC827000E5254 /* RawConvertViewController.m in Sources */,
 				DE9A3EF41918CB4600F7C33B /* XYZAnnotationTableViewController.m in Sources */,
 				76F638D8190FD99300F0F4BF /* XYZExperiment.m in Sources */,
 				DE25D7F71910D6630084BDDC /* XYZDataFileTableViewCell.m in Sources */,
