@@ -52,7 +52,14 @@
         {
             pickerView *myPickerView = [[pickerView alloc] initWithFrame:CGRectMake(0, 200, 100, 80)];
             myPickerView.tag = [[_dict allKeys] indexOfObject:key];
-            myPickerView.dataPicker = [_dict objectForKey:key];
+            
+            //add empty field to array
+            NSMutableArray *temp = [[NSMutableArray alloc] init];
+            [temp addObject:@""];
+            [temp addObjectsFromArray:[_dict objectForKey:key]];
+            
+            //setup pickerview
+            myPickerView.dataPicker = temp;
             myPickerView.delegate = (id)myPickerView.self;
             myPickerView.backgroundColor = [UIColor colorWithRed:242/255.0f green:242/255.0f blue:244/255.0f    alpha:1.0f];
             myPickerView.dataSource = (id)myPickerView.self;
