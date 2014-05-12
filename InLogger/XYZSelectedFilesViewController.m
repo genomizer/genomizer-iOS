@@ -133,15 +133,6 @@ static XYZExperiment * SELECTED_FILES = nil;
     cell.switchButton.on = YES;
     cell.file = [_selectedFiles objectAtIndex:indexPath.row];
     [_cells setObject:cell atIndexedSubscript:indexPath.row];
-    /*
-    XYZExperimentFile *file = [[self arrayFromSection: indexPath.section] objectAtIndex:indexPath.row];
-    cell.textField.text = [file getDescription];
-    cell.switchButton.on = NO;
-    cell.file = file;
-    cell.tag = file.type;
-    NSLog(@"section %d row %d", indexPath.section, indexPath.row);
-    [_cells setObject:cell atIndexedSubscript:[self rowsBeforeSection:indexPath.section] + indexPath.row];
-    */
     return cell;
 }
 
@@ -169,18 +160,11 @@ static XYZExperiment * SELECTED_FILES = nil;
         [SELECTED_FILES removeExperimentFile:file];
     }
     
-    [XYZPopupGenerator showPopupWithMessage:@"Files removed."];
+    [XYZPopupGenerator showPopupWithMessage:@"Files removed"];
     
     [self updateTableViewAndButtons];
 }
 
-/*- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([segue.identifier isEqualToString:@"convertToRaw"]) {
-        RawConvertViewController *nextVC = (RawConvertViewController *)[segue destinationViewController];
-        nextVC.experimentFiles = _selectedFiles;
-    }
-}*/
 - (IBAction)unwindToList:(UIStoryboardSegue *)segue
 {
     
