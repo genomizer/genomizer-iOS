@@ -148,11 +148,13 @@
 {
     _selectedFiles = [[NSMutableArray alloc] init];
     FileType type = OTHER;
+    BOOL asd = NO;
     NSLog(@"Raw cells: %d", [_cells count]);
     for (NSInteger i = 0; i < [_cells count]; i++) {
         XYZDataFileTableViewCell *cell = [_cells objectAtIndex:i];
         if (cell.switchButton.on ) {
-            if (type == OTHER) {
+            if (!asd || cell.tag == type) {
+            //if (type == OTHER) {
                 type = cell.tag;
                 if(type == RAW) {
                     NSMutableDictionary * currentFile = [[NSMutableDictionary alloc] init];
@@ -166,10 +168,15 @@
                     [_selectedFiles addObject:currentFile];
           
                 }
+            asd = YES;
+            } else {
+                [XYZPopupGenerator showPopupWithMessage:@"Ambiguous file types selected."];
+                return;
             }
-        } else if (type != cell.tag){
-            [XYZPopupGenerator showPopupWithMessage:@"Ambiguous file types selected."];
-            return;
+            /*} else if (type != cell.tag){
+                [XYZPopupGenerator showPopupWithMessage:@"Ambiguous file types selected."];
+                return;
+            }*/
         }
      
     }
