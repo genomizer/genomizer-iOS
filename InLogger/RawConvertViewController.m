@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UISwitch *smoothingSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *stepSwitch;
 @property CGPoint originalCenter;
+@property NSMutableArray *experimentFilesDictArr;
 
 
 @end
@@ -143,7 +144,8 @@ return NO;
     [parameters addObject:_step.text];
     NSError *error;
 
-    for(NSMutableDictionary *dict in _experimentFiles){
+    [self createExperimentFiles];
+    for(NSMutableDictionary *dict in _experimentFilesDictArr){
         [dict setObject:parameters forKey:@"parameters"];
         [ServerConnection convert:dict error:&error];
         if(error){
@@ -161,6 +163,23 @@ return NO;
     [convertDoneMessage show];*/
     
 }
+
+-(void) createExperimentFiles{
+    _experimentFilesDictArr = [[NSMutableArray alloc] init];
+    for(XYZExperimentFile *file in _experimentFiles){
+        NSMutableDictionary * currentFile = [[NSMutableDictionary alloc] init];
+        [currentFile setObject:file.name forKey:@"filename"];
+        [currentFile setObject:file.idFile forKey:@"fileId"];
+        [currentFile setObject:file.expID forKey:@"expid"];
+        [currentFile setObject:@"rawtoprofile" forKey:@"processtype"];
+        [currentFile setObject:file.metaData forKey:@"metadata"];
+        [currentFile setObject:file.grVersion forKey:@"genomeRelease"];
+        [currentFile setObject:file.author forKey:@"author"];
+        NSLog(@"currfile%@", currentFile);
+        [_experimentFiles addObject:currentFile];
+    }
+}
+
 - (IBAction)showErrorMessage:(NSString*) error title:(NSString*)title
 {
     UIAlertView *convertMessage = [[UIAlertView alloc]

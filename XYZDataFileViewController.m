@@ -14,7 +14,7 @@
 #import "ServerConnection.h"
 #import "XYZSelectedFilesViewController.h"
 #import "XYZPopupGenerator.h"
-#import "RawConvertViewController.h"
+#import "XYZSelectTaskTableViewController.h"
 
 @interface XYZDataFileViewController ()
 
@@ -164,7 +164,7 @@
                     [currentFile setObject:cell.file.metaData forKey:@"metadata"];
                     [currentFile setObject:cell.file.grVersion forKey:@"genomeRelease"];
                      [currentFile setObject:cell.file.author forKey:@"author"];
-                    [_selectedFiles addObject:currentFile];
+                    [_selectedFiles addObject:cell.file];
           
                 }
             asd = YES;
@@ -182,7 +182,7 @@
             return;
         }
         if (type == RAW){
-            [self performSegueWithIdentifier:@"convertToRaw" sender:_selectedFiles];
+            //[self performSegueWithIdentifier:@"toSelectTask" sender:_selectedFiles];
         }
     }
     else {
@@ -194,12 +194,12 @@
 }
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
     {
-        if ([segue.identifier isEqualToString:@"convertToRaw"]) {
-            RawConvertViewController *nextVC = (RawConvertViewController *)[segue destinationViewController];
+        if ([segue.identifier isEqualToString:@"toSelectTask"]) {
+            XYZSelectTaskTableViewController *nextVC = (XYZSelectTaskTableViewController *)[segue destinationViewController];
             nextVC.experimentFiles = _selectedFiles;
         }
 }
-    
+
 
 
 
