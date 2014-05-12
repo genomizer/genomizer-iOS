@@ -11,6 +11,8 @@
 
 @interface XYZDataFileViewController : UIViewController
 
+- (IBAction) unwindToList:(UIStoryboardSegue *)segue;
+
 @property (nonatomic) XYZExperiment *experiment;
 
 @end

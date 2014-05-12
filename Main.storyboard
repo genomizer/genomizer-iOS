@@ -429,6 +429,9 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qG7-lO-UOq">
                                                     <rect key="frame" x="256" y="4" width="51" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <action selector="fileSwitchValueChanged:" destination="OaH-dG-5KC" eventType="valueChanged" id="H6j-cY-FsA"/>
+                                                    </connections>
                                                 </switch>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Datafile1.wig  2014-01-27  Yuri" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Poq-c8-ohc">
                                                     <rect key="frame" x="27" y="9" width="221" height="21"/>
@@ -473,7 +476,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="selectTaskButton:" destination="OaH-dG-5KC" eventType="touchUpInside" id="Q7K-eK-XVO"/>
+                                    <segue destination="NVQ-fn-jnW" kind="modal" identifier="convertTask" id="1Lw-OZ-NPD"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -510,8 +513,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="segmentedControl" destination="2ha-Gv-y76" id="Fv9-71-dHz"/>
+                        <outlet property="selectTaskToPerformButton" destination="1mi-tr-fZm" id="Zmr-LS-Qju"/>
                         <outlet property="tableView" destination="6pb-Wh-CBJ" id="5ch-FP-JXM"/>
-                        <segue destination="NVQ-fn-jnW" kind="push" identifier="convertTask" id="Nis-OP-SD8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K6N-pd-6ui" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -729,7 +732,6 @@
                                 </state>
                                 <connections>
                                     <action selector="convertToProfileOnTouchUpInside:" destination="y6w-6T-HLO" eventType="touchUpInside" id="s7o-uN-tiE"/>
-                                    <segue destination="NVQ-fn-jnW" kind="modal" identifier="toSelectTask" id="v5E-Gl-OAN"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XpI-0C-liy">
@@ -813,6 +815,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Files" id="mMZ-2V-ph4"/>
+                    <connections>
+                        <segue destination="NVQ-fn-jnW" kind="modal" identifier="toSelectTask" id="cMg-uF-AiC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W0h-F8-FQI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -895,7 +900,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C0f-n0-aID">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C0f-n0-aID">
                                 <rect key="frame" x="133" y="467" width="55" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Convert">
@@ -961,7 +966,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="v5E-Gl-OAN"/>
+        <segue reference="1Lw-OZ-NPD"/>
         <segue reference="lHN-tn-48I"/>
     </inferredMetricsTieBreakers>
 </document>

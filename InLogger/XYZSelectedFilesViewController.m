@@ -9,16 +9,19 @@
 #import "XYZSelectedFilesViewController.h"
 #import "XYZDataFileTableViewCell.h"
 #import "XYZSelectTaskTableViewController.h"
+#import "XYZPopupGenerator.h"
 
 @interface XYZSelectedFilesViewController ()
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 @property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIButton *selectTaskToPerformButton;
 
 @property NSMutableArray *selectedFiles;
 @property NSMutableArray *experimentFiles;
 @property NSArray *pickerViewFields;
 @property NSMutableArray *cells;
+@property NSInteger numberOfButtonsOn;
 
 @end
 
@@ -57,6 +60,17 @@ static XYZExperiment * SELECTED_FILES = nil;
     [self updateTableViewAndButtons];
 }
 
+- (IBAction)fileSwitchValueChanged:(UISwitch *)sender
+{
+    if (sender.on) {
+        _numberOfButtonsOn ++;
+    } else {
+        _numberOfButtonsOn --;
+    }
+    
+    _selectTaskToPerformButton.enabled = (_numberOfButtonsOn > 0);
+}
+
 - (void) updateTableViewAndButtons
 {
     switch (_segmentedControl.selectedSegmentIndex) {
@@ -75,6 +89,8 @@ static XYZExperiment * SELECTED_FILES = nil;
     }
     
     _cells = [[NSMutableArray alloc] initWithCapacity:[_selectedFiles count]];
+    _numberOfButtonsOn = [_selectedFiles count];
+    _selectTaskToPerformButton.enabled = (_numberOfButtonsOn > 0);
     [_tableView reloadData];
 
 }
@@ -117,7 +133,6 @@ static XYZExperiment * SELECTED_FILES = nil;
     cell.switchButton.on = YES;
     cell.file = [_selectedFiles objectAtIndex:indexPath.row];
     [_cells setObject:cell atIndexedSubscript:indexPath.row];
-    NSLog(@"%d", [_selectedFiles count]);
     /*
     XYZExperimentFile *file = [[self arrayFromSection: indexPath.section] objectAtIndex:indexPath.row];
     cell.textField.text = [file getDescription];
@@ -154,12 +169,9 @@ static XYZExperiment * SELECTED_FILES = nil;
         [SELECTED_FILES removeExperimentFile:file];
     }
     
-    [self updateTableViewAndButtons];
-}
-- (IBAction)selectTaskButton:(id)sender {
-      NSLog(@"prep segue ");
-     [self performSegueWithIdentifier:@"convertTask" sender:_experimentFiles];
+    [XYZPopupGenerator showPopupWithMessage:@"Files removed."];
     
+    [self updateTableViewAndButtons];
 }
 
 /*- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -177,8 +189,9 @@ static XYZExperiment * SELECTED_FILES = nil;
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"convertTask"]) {
-        XYZSelectTaskTableViewController *nextVC = (XYZSelectTaskTableViewController *)[segue destinationViewController];
-        nextVC.experimentFiles = _experimentFiles;
+        UINavigationController *navController = segue.destinationViewController;
+        XYZSelectTaskTableViewController *nextVC = (XYZSelectTaskTableViewController *)(navController.viewControllers[0]);
+        nextVC.experimentFiles = [self getFilesFromSelectedCells];
         nextVC.fileType = _segmentedControl.selectedSegmentIndex;
     }
 }
