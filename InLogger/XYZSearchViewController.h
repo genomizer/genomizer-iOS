@@ -11,6 +11,7 @@
 
 @interface XYZSearchViewController : UIViewController<UITextFieldDelegate, UIPickerViewDelegate>
 
+
 - (void)hideKeyboardAndAdjustTable;
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender;
 - (void) createPickerViews;
