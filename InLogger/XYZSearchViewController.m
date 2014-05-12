@@ -67,7 +67,6 @@
             myPickerView.annotationsDict = self.dict;
             myPickerView.tableView = self.tableView;
             myPickerView.showsSelectionIndicator = YES;
-                        
             [_pickerViews addObject:myPickerView];
         }
     }
@@ -166,7 +165,6 @@
         }
         for(pickerView *pick in _pickerViews) {
             if(pick.tag == i) {
-                
                 textField.inputView = pick;
         
                 UIToolbar *toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, pick.bounds.size.width, 44)];
