@@ -154,7 +154,6 @@
         XYZDataFileTableViewCell *cell = [_cells objectAtIndex:i];
         if (cell.switchButton.on ) {
             if (!asd || cell.tag == type) {
-            //if (type == OTHER) {
                 type = cell.tag;
                 if(type == RAW) {
                     NSMutableDictionary * currentFile = [[NSMutableDictionary alloc] init];
@@ -173,10 +172,6 @@
                 [XYZPopupGenerator showPopupWithMessage:@"Ambiguous file types selected."];
                 return;
             }
-            /*} else if (type != cell.tag){
-                [XYZPopupGenerator showPopupWithMessage:@"Ambiguous file types selected."];
-                return;
-            }*/
         }
      
     }
