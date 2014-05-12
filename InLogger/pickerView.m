@@ -34,24 +34,15 @@
     return [self.dataPicker objectAtIndex:row];
 }
 
-- (void)pickerView:(UIPickerView *)pickerView1 didSelectRow: (NSInteger)row inComponent:(NSInteger)component {
+- (void)pickerView:(UIPickerView *)pickerView1 didSelectRow: (NSInteger)row inComponent:(NSInteger)component
+{
     NSInteger selectedRow = [pickerView1 selectedRowInComponent:0];
     NSString *selectedPickerRow=[self.dataPicker objectAtIndex:selectedRow];
-        for (XYZSearchTableViewCell *cell in _tableCells) {
-            if([[_annotationsDict allKeys][pickerView1.tag] isEqual:cell.annotation]){
-                cell.inputField.text = selectedPickerRow;
-                
-                if([selectedPickerRow length] > 0)
-                {
-                    cell.switchButton.on = true;
-                    cell.switchButton.enabled = true;
-
-                } else {
-                    cell.switchButton.on = false;
-                    cell.switchButton.enabled = false;
-                }
-            }
-          
+    for (XYZSearchTableViewCell *cell in _tableCells) {
+        if([[_annotationsDict allKeys][pickerView1.tag] isEqual:cell.annotation]){
+            cell.inputField.text = selectedPickerRow;
+            cell.switchButton.on = [selectedPickerRow length] > 0;
         }
-  }
+    }
+}
 @end
