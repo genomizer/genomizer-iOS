@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "XYZExperimentDescriber.h"
-#import "XYZSearchTableViewCell.h"
 
 @interface XYZSearchViewController : UIViewController<UITextFieldDelegate, UIPickerViewDelegate>
 

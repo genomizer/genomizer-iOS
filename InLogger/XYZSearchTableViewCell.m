@@ -24,19 +24,12 @@
     // Configure the view for the selected state
 }
 - (IBAction)inputFieldValueChanged:(id)sender {
-    if(self.inputField.text.length == 0) {
-        self.switchButton.on = false;
-        self.switchButton.enabled = false;
-    } else {
-        self.switchButton.enabled = true;
-        self.switchButton.on = true;
-    }
+    self.switchButton.on = self.inputField.text.length != 0;
 }
 
 - (IBAction)switchValueChanged:(UISwitch *)sender
 {
     if (sender.on) {
-        sender.on = NO;
         if ([_inputField.text length] == 0) {
             [_inputField becomeFirstResponder];
         }
@@ -46,12 +39,8 @@
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    if ([_inputField.text length] == 0) {
-        
-    }
     [_controller hideKeyboardAndAdjustTable];
     [super touchesBegan:touches withEvent:event];
-    
 }
 
 @end

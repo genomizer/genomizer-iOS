@@ -13,6 +13,8 @@
 #import "pickerView.h"
 #import <QuartzCore/QuartzCore.h>
 #import "XYZPopupGenerator.h"
+#import "XYZSearchTableViewCell.h"
+
 
 @interface XYZSearchViewController ()
 
@@ -299,6 +301,7 @@
 - (void)hideKeyboardAndAdjustTable {
     [self.view endEditing:YES];
     _tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    [_tableView reloadData];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {

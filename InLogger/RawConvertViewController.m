@@ -176,7 +176,7 @@ return NO;
         [currentFile setObject:file.grVersion forKey:@"genomeRelease"];
         [currentFile setObject:file.author forKey:@"author"];
         NSLog(@"currfile%@", currentFile);
-        [_experimentFiles addObject:currentFile];
+        [_experimentFilesDictArr addObject:currentFile];
     }
 }
 
