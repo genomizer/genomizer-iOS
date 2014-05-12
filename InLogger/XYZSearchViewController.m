@@ -67,9 +67,16 @@
             myPickerView.annotationsDict = self.dict;
             myPickerView.tableView = self.tableView;
             myPickerView.showsSelectionIndicator = YES;
+                        
             [_pickerViews addObject:myPickerView];
         }
     }
+}
+
+
+-(void)doneTouched:(UIBarButtonItem*)sender
+{
+   [self hideKeyboardAndAdjustTable];
 }
 
 - (NSArray *) createSearchFields
@@ -159,7 +166,14 @@
         }
         for(pickerView *pick in _pickerViews) {
             if(pick.tag == i) {
+                
                 textField.inputView = pick;
+        
+                UIToolbar *toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, pick.bounds.size.width, 44)];
+                
+                UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneTouched:)];
+                [toolBar setItems:[NSArray arrayWithObjects:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], doneButton, nil]];
+                textField.inputAccessoryView = toolBar;
             }
         }
     }

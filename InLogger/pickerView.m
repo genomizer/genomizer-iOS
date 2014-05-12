@@ -50,8 +50,6 @@
                     cell.switchButton.on = false;
                     cell.switchButton.enabled = false;
                 }
-                [cell.inputField resignFirstResponder];
-                _tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
             }
           
         }
