@@ -10,6 +10,7 @@
 #import "XYZDataFileTableViewCell.h"
 #import "XYZSelectTaskTableViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "XYZPopupGenerator.h"
 
 @interface XYZSelectedFilesViewController ()
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
@@ -19,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UITextView *infoFileTextField;
 @property (weak, nonatomic) IBOutlet UIView *dimView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *trashButton;
+@property (weak, nonatomic) IBOutlet UIButton *selectTaskToPerformButton;
 
 @property XYZExperimentFile *infoFile;
 @property NSMutableArray *selectedFiles;
@@ -180,6 +182,12 @@ static XYZExperimentFile * INFO_FILE = nil;
     
     [self updateTableViewAndButtons];
 }
+- (IBAction)selectTaskButton:(id)sender {
+  //  [self createExperimentFiles];
+      NSLog(@"prep segue ");
+     [self performSegueWithIdentifier:@"convertTask" sender:_experimentFiles];
+    
+}
 - (IBAction)infoFile:(UIButton*)sender {
       NSLog(@"prep segue %ld", (long)sender.tag);
     _dimView.hidden = NO;
@@ -192,6 +200,8 @@ static XYZExperimentFile * INFO_FILE = nil;
     _infoAboutFile.layer.borderWidth = 0.4;
     _infoAboutFile.layer.borderColor = [UIColor lightGrayColor].CGColor;
     _infoFileTextField.text = [[_selectedFiles objectAtIndex:sender.tag] getAllInfo];
+    [[_infoFileTextField layer] setBorderColor : [[UIColor lightGrayColor] CGColor]];
+    [[_infoFileTextField layer] setBorderWidth:0.4];
     
     
 }
