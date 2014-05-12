@@ -614,14 +614,8 @@
                                 <segue destination="1Di-Sa-PtS" kind="unwind" unwindAction="unwindToList:" id="dFu-9w-AKS"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Execute" id="Uoe-Qf-EFf">
-                            <connections>
-                                <action selector="executeButtonPressed:" destination="0GK-lv-S7R" id="qSF-Vp-y6t"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="executeButton" destination="Uoe-Qf-EFf" id="wwB-uq-1qe"/>
                         <segue destination="1te-1O-aSA" kind="push" identifier="executeTask" id="NYU-yO-p97"/>
                     </connections>
                 </tableViewController>
@@ -668,11 +662,11 @@
             </objects>
             <point key="canvasLocation" x="2433" y="-1297"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Navigation Controller - Selected Files-->
         <scene sceneID="3eF-FV-YH1">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9IC-kd-hqg" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="mostViewed" id="8wV-4Y-jvX"/>
+                    <tabBarItem key="tabBarItem" title="Selected Files" id="8wV-4Y-jvX"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="kNi-i9-baF">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
