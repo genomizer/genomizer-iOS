@@ -7,7 +7,6 @@
 //
 
 #import "XYZSearchResultTableViewController.h"
-#import "ServerConnection.h"
 #import "XYZSearchResultTableViewCell.h"
 #import "XYZDataFileViewController.h"
 #import "XYZAnnotationTableViewController.h"

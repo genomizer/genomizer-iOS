@@ -63,12 +63,12 @@ NSString *token;
         }
         else
         {
-            *error = [self generateError:@"Server sent incorrectly formatted data, talk to admin" withErrorDomain:@"ServerError" withUnderlyingError:nil];
+            *error = [self generateError:@"Server sent incorrectly formatted data" withErrorDomain:@"Server Error" withUnderlyingError:nil];
         }
     }
     else
     {
-        *error = [self generateError:@"Could not connect to server" withErrorDomain:@"Connection" withUnderlyingError:internalError];
+        *error = [self generateError:@"Could not connect to server" withErrorDomain:@"Connection Error" withUnderlyingError:internalError];
     }
 }
 
@@ -124,7 +124,7 @@ NSString *token;
         }
     }
     else{
-        *error = [self generateError:@"Could not connect to server" withErrorDomain:@"Connection" withUnderlyingError:internalError];
+        *error = [self generateError:@"Could not connect to server" withErrorDomain:@"Connection Error" withUnderlyingError:internalError];
     }
     return nil;
 }
@@ -132,12 +132,19 @@ NSString *token;
 +(void)convert:(NSMutableDictionary*)dict error:(NSError**)error
 {
     NSError *internalError;
-    
-    
     NSMutableURLRequest *request = [JSONBuilder getRawToProfileJSON:token withDict:dict];
     NSHTTPURLResponse *httpResp;
     [NSURLConnection sendSynchronousRequest:request returningResponse:&httpResp error:&internalError];
-    NSLog(@"**** %@", [internalError localizedDescription]);
+    if(internalError == nil)
+    {
+        if(!(httpResp.statusCode == 200)){
+             *error = [self generateErrorObjectFromHTTPError:httpResp.statusCode];
+        }
+    }
+    else{
+        *error = [self generateError:@"Could not connect to server" withErrorDomain:@"Connection Error" withUnderlyingError:internalError];
+    }
+
     
 }
 

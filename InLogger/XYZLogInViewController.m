@@ -26,13 +26,14 @@
     if((login.length > 1) && (password.length > 2)) {
         [ServerConnection login:self.userField.text withPassword:self.passwordField.text error:&error];
    
-        if ([error localizedDescription] == nil) {
-            [self performSegueWithIdentifier:@"loginSegue" sender:self];
+        if (error) {
+               [self showMessage:[error.userInfo objectForKey:NSLocalizedDescriptionKey]  title:error.domain];
+            
         } else {
-            [self showMessage:[error localizedDescription]];
+            [self performSegueWithIdentifier:@"loginSegue" sender:self];
         }
     } else{
-        [self showMessage:@"Username or password is too short."];
+        [self showMessage:@"Username or password is too short." title:@"Error"];
     }
 }
 
@@ -40,10 +41,10 @@
     [self validateWithUser: self.userField.text andPassword: self.passwordField.text];
 }
 
-- (IBAction)showMessage:(NSString*) error
+- (IBAction)showMessage:(NSString*) error title:(NSString*)title;
 {
     UIAlertView *loginFailed = [[UIAlertView alloc]
-                                initWithTitle:@"" message:error
+                                initWithTitle:title message:error
                                 delegate:nil cancelButtonTitle:@"Try again"
                                 otherButtonTitles:nil];
     
@@ -104,7 +105,7 @@
             [self validateWithUser: self.userField.text andPassword: self.passwordField.text];
         }
         else{
-            [self showMessage:@"Username or password is too short."];
+            [self showMessage:@"Username or password is too short." title:@"Error"];
         }
     }
     return NO;
