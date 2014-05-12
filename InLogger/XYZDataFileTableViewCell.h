@@ -14,6 +14,8 @@
 @property (weak, nonatomic) IBOutlet UISwitch *switchButton;
 @property (weak, nonatomic) IBOutlet UILabel *textField;
 @property (weak, nonatomic) IBOutlet UIButton *infoButton;
+@property (weak, nonatomic) IBOutlet UIButton *infoButtonFiles;
+
 @property XYZExperimentFile *file;
 
 @end

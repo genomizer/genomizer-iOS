@@ -15,8 +15,12 @@
 #import "XYZSelectedFilesViewController.h"
 #import "XYZPopupGenerator.h"
 #import "XYZSelectTaskTableViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface XYZDataFileViewController ()
+@property (weak, nonatomic) IBOutlet UIView *infoAboutFile;
+@property (weak, nonatomic) IBOutlet UITextView *infoFileTextField;
+@property (weak, nonatomic) IBOutlet UIView *dimView;
 
 @property NSMutableArray *cells;
 @property NSMutableArray *selectedFiles;
@@ -113,6 +117,7 @@
     cell.textField.text = [file getDescription];
     cell.switchButton.on = NO;
     cell.file = file;
+    cell.infoButtonFiles.tag = indexPath.row;
     cell.tag = file.type;
     NSLog(@"section %d row %d", indexPath.section, indexPath.row);
     [_cells setObject:cell atIndexedSubscript:[self rowsBeforeSection:indexPath.section] + indexPath.row];
@@ -184,6 +189,24 @@
     for (XYZDataFileTableViewCell *cell in _cells) {
         cell.switchButton.on = NO;
     }
+}
+- (IBAction)FileInfoButton:(UIButton*)sender {
+   
+    _dimView.hidden = NO;
+    _infoAboutFile.hidden = NO;
+    _infoAboutFile.layer.cornerRadius = 5;
+    _infoAboutFile.layer.masksToBounds = YES;
+
+    _infoAboutFile.layer.borderWidth = 0.4;
+    _infoAboutFile.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    _infoFileTextField.text = [[[_cells objectAtIndex:sender.tag] file] getAllInfo];
+    [[_infoFileTextField layer] setBorderColor : [[UIColor lightGrayColor] CGColor]];
+    [[_infoFileTextField layer] setBorderWidth:0.4];
+}
+- (IBAction)closeFileInfo:(id)sender {
+    _infoAboutFile.hidden = YES;
+    _dimView.hidden = YES;
+    
 }
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
