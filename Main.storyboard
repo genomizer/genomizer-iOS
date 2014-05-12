@@ -429,6 +429,9 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qG7-lO-UOq">
                                                     <rect key="frame" x="256" y="4" width="51" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <action selector="fileSwitchValueChanged:" destination="OaH-dG-5KC" eventType="valueChanged" id="H6j-cY-FsA"/>
+                                                    </connections>
                                                 </switch>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Datafile1.wig  2014-01-27  Yuri" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Poq-c8-ohc">
                                                     <rect key="frame" x="27" y="9" width="221" height="21"/>
@@ -473,7 +476,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="selectTaskButton:" destination="OaH-dG-5KC" eventType="touchUpInside" id="Q7K-eK-XVO"/>
+                                    <segue destination="NVQ-fn-jnW" kind="modal" identifier="convertTask" id="1Lw-OZ-NPD"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -510,8 +513,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="segmentedControl" destination="2ha-Gv-y76" id="Fv9-71-dHz"/>
+                        <outlet property="selectTaskToPerformButton" destination="1mi-tr-fZm" id="Zmr-LS-Qju"/>
                         <outlet property="tableView" destination="6pb-Wh-CBJ" id="5ch-FP-JXM"/>
-                        <segue destination="0GK-lv-S7R" kind="push" identifier="convertTask" id="Nis-OP-SD8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K6N-pd-6ui" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -561,22 +564,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jqw-SR-ZeG" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="1Di-Sa-PtS" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3980" y="-225"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="dvn-S2-uzd">
-            <objects>
-                <navigationController definesPresentationContext="YES" id="UMV-y3-Qwu" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="KX9-XN-xxz">
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="1te-1O-aSA" kind="relationship" relationship="rootViewController" id="lHr-hA-npT"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ZB1-jI-yuu" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4626" y="-951"/>
+            <point key="canvasLocation" x="4374" y="-225"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="TmL-84-z13">
@@ -828,31 +816,12 @@
                     </view>
                     <navigationItem key="navigationItem" title="Files" id="mMZ-2V-ph4"/>
                     <connections>
-                        <segue destination="1te-1O-aSA" kind="push" identifier="convertToRaw" id="EEf-C6-LfF"/>
+                        <segue destination="NVQ-fn-jnW" kind="modal" identifier="toSelectTask" id="cMg-uF-AiC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W0h-F8-FQI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4020" y="-868"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="eeG-fs-bdz">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7DC-Qk-dgr" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationItem key="navigationItem" id="HEg-5h-puW"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="HL5-4m-qdf">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="0GK-lv-S7R" kind="relationship" relationship="rootViewController" id="n57-dz-5Jj"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Otj-eY-xTS" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3448" y="-225"/>
         </scene>
         <!--Raw Convert View Controller - Convert to profile-->
         <scene sceneID="p8P-ds-xv5">
@@ -962,7 +931,26 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WlO-jJ-3zU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4833" y="-225"/>
+            <point key="canvasLocation" x="5359" y="-225"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="yzg-op-63V">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="NVQ-fn-jnW" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="sc3-zA-RPj"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Yit-kv-zId">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="0GK-lv-S7R" kind="relationship" relationship="rootViewController" id="evC-Li-ZiP"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MGo-wl-nLI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3682" y="-225"/>
         </scene>
     </scenes>
     <resources>
@@ -978,8 +966,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="1Lw-OZ-NPD"/>
         <segue reference="lHN-tn-48I"/>
-        <segue reference="n57-dz-5Jj"/>
-        <segue reference="NYU-yO-p97"/>
     </inferredMetricsTieBreakers>
 </document>
