@@ -33,6 +33,7 @@ typedef NS_ENUM(NSInteger, FileType) {
 //+ (void) createExperimentFile:(NSDictionary*)file;
 
 - (NSString *) getDescription;
+- (NSString *) getAllInfo;
 + (FileType) NSStringFileTypeToEnumFileType: (NSString *) type;
 + (XYZExperimentFile *) defaultFileWithType: (FileType) type;
 

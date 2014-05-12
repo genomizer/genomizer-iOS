@@ -7,6 +7,7 @@
 //
 
 #import "XYZDataFileTableViewCell.h"
+#import "XYZSelectedFilesViewController.h"
 
 @implementation XYZDataFileTableViewCell
 
@@ -20,6 +21,10 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+- (IBAction)infoFile:(id)sender {
+    [XYZSelectedFilesViewController addInfoFile:self.file];
+
 }
 
 @end

@@ -9,12 +9,18 @@
 #import "XYZSelectedFilesViewController.h"
 #import "XYZDataFileTableViewCell.h"
 #import "XYZSelectTaskTableViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface XYZSelectedFilesViewController ()
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 @property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIView *infoAboutFile;
+@property (weak, nonatomic) IBOutlet UITextView *infoFileTextField;
+@property (weak, nonatomic) IBOutlet UIView *dimView;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *trashButton;
 
+@property XYZExperimentFile *infoFile;
 @property NSMutableArray *selectedFiles;
 @property NSMutableArray *experimentFiles;
 @property NSArray *pickerViewFields;
@@ -25,17 +31,26 @@
 @implementation XYZSelectedFilesViewController
 
 static XYZExperiment * SELECTED_FILES = nil;
+static XYZExperimentFile * INFO_FILE = nil;
 
 + (void)initialize
 {
     if (SELECTED_FILES == nil) {
         SELECTED_FILES = [[XYZExperiment alloc] init];
     }
+    if (INFO_FILE == nil) {
+        INFO_FILE = [[XYZExperimentFile alloc] init];
+    }
 }
-
++ (void) addInfoFile:(XYZExperimentFile *) file{
+    INFO_FILE = file;
+    
+    NSLog(@"file added %@", file.uploadedBy);
+}
 + (void) addExperimentFile:(XYZExperimentFile *) file
 {
     [SELECTED_FILES addExperimentFile: file];
+    
 }
 
 + (void) removeExperimentFile:(XYZExperimentFile *) file
@@ -116,17 +131,10 @@ static XYZExperiment * SELECTED_FILES = nil;
     cell.textField.text = [[_selectedFiles objectAtIndex:indexPath.row] getDescription];
     cell.switchButton.on = YES;
     cell.file = [_selectedFiles objectAtIndex:indexPath.row];
+    cell.infoButton.tag = indexPath.row;
     [_cells setObject:cell atIndexedSubscript:indexPath.row];
     NSLog(@"%d", [_selectedFiles count]);
-    /*
-    XYZExperimentFile *file = [[self arrayFromSection: indexPath.section] objectAtIndex:indexPath.row];
-    cell.textField.text = [file getDescription];
-    cell.switchButton.on = NO;
-    cell.file = file;
-    cell.tag = file.type;
-    NSLog(@"section %d row %d", indexPath.section, indexPath.row);
-    [_cells setObject:cell atIndexedSubscript:[self rowsBeforeSection:indexPath.section] + indexPath.row];
-    */
+
     return cell;
 }
 
@@ -161,6 +169,26 @@ static XYZExperiment * SELECTED_FILES = nil;
       NSLog(@"prep segue ");
      [self performSegueWithIdentifier:@"convertTask" sender:_experimentFiles];
     
+}
+- (IBAction)infoFile:(UIButton*)sender {
+      NSLog(@"prep segue %ld", (long)sender.tag);
+    _dimView.hidden = NO;
+    _infoAboutFile.hidden = NO;
+    _infoAboutFile.layer.cornerRadius = 5;
+    _infoAboutFile.layer.masksToBounds = YES;
+    _tableView.editing = NO;
+    [self.tableView endEditing:YES];
+    _trashButton.enabled = NO;
+    _infoAboutFile.layer.borderWidth = 0.4;
+    _infoAboutFile.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    _infoFileTextField.text = [[_selectedFiles objectAtIndex:sender.tag] getAllInfo];
+    
+    
+}
+- (IBAction)closeInfoFile:(id)sender {
+    _infoAboutFile.hidden = YES;
+     _dimView.hidden = YES;
+    _trashButton.enabled =YES;
 }
 
 /*- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

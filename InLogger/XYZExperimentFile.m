@@ -33,6 +33,42 @@
     return string;
 }
 
+- (NSString *) getAllInfo{
+    NSMutableString *string = [[NSMutableString alloc] init];
+    [string appendString: @"Filename: "];
+    [string appendString: [self format: _name]];
+    [string appendString: @"\n"];
+    [string appendString: @"Date: "];
+    [string appendString: [self format: _date]];
+    [string appendString: @"\n"];
+    [string appendString: @"Uploaded by: "];
+    [string appendString: [self format: _uploadedBy]];
+    [string appendString: @"\n"];
+    [string appendString: @"Name: "];
+    [string appendString: [self format: _name]];
+    [string appendString: @"\n"];
+    [string appendString: @"size: "];
+    [string appendString: [self format: _size]];
+    [string appendString: @"\n"];
+    [string appendString: @"URL: "];
+    [string appendString: [self format: _URL]];
+    [string appendString: @"\n"];
+    [string appendString: @"Exp ID: "];
+    [string appendString: [self format: _expID]];
+    [string appendString: @"\n"];
+    [string appendString: @"Metadata: "];
+    [string appendString: [self format: _metaData]];
+    [string appendString: @"\n"];
+    [string appendString: @"Author: "];
+    [string appendString: [self format: _author]];
+    [string appendString: @"\n"];
+    [string appendString: @"GrVersion: "];
+    [string appendString: [self format: _grVersion]];
+    [string appendString: @"\n"];
+    return string;
+    
+}
+
 - (NSString *) format: (NSString *) string
 {
     if (string == nil) {
