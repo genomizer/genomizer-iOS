@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "XYZExperimentDescriber.h"
+#import "XYZSearchTableViewCell.h"
 
 @interface XYZSearchViewController : UIViewController<UITextFieldDelegate, UIPickerViewDelegate>
+
 
 - (void)hideKeyboardAndAdjustTable;
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender;

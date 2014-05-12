@@ -33,7 +33,22 @@
     }
 }
 
+- (IBAction)switchValueChanged:(UISwitch *)sender
+{
+    if (sender.on) {
+        sender.on = NO;
+        if ([_inputField.text length] == 0) {
+            [_inputField becomeFirstResponder];
+        }
+    } else {
+        [_inputField resignFirstResponder];
+    }
+}
+
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    if ([_inputField.text length] == 0) {
+        
+    }
     [_controller hideKeyboardAndAdjustTable];
     [super touchesBegan:touches withEvent:event];
     

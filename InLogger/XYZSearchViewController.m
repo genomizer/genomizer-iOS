@@ -7,7 +7,6 @@
 //
 
 #import "XYZSearchViewController.h"
-#import "XYZSearchTableViewCell.h"
 #import "XYZSearchResultTableViewController.h"
 #import "ServerConnection.h"
 #import "XYZExperimentDescriber.h"
@@ -50,7 +49,7 @@
     {
         if(![[_dict objectForKey:key][0] isEqual:@"freetext"])
         {
-            pickerView *myPickerView = [[pickerView alloc] initWithFrame:CGRectMake(0, 200, 100, 80)];
+            pickerView *myPickerView = [[pickerView alloc] initWithFrame:CGRectMake(0, 44, 44, 44)];
             myPickerView.tag = [[_dict allKeys] indexOfObject:key];
             
             //add empty field to array
@@ -61,7 +60,7 @@
             //setup pickerview
             myPickerView.dataPicker = temp;
             myPickerView.delegate = (id)myPickerView.self;
-            myPickerView.backgroundColor = [UIColor colorWithRed:242/255.0f green:242/255.0f blue:244/255.0f    alpha:1.0f];
+            myPickerView.backgroundColor = [UIColor colorWithRed:247.0/255.0f green:248.0/255.0f blue:247.0/255 alpha:1.0f];
             myPickerView.dataSource = (id)myPickerView.self;
             myPickerView.tableCells = self.tableCells;
             myPickerView.annotationsDict = self.dict;
@@ -143,7 +142,6 @@
     cell.inputField.placeholder = [XYZExperimentDescriber formatAnnotation:[self.searchFields objectAtIndex:indexPath.row]];
     cell.annotation = annotation;
     if(cell.inputField.text.length == 0) {
-        cell.switchButton.enabled = false;
         cell.switchButton.on = false;
     }
     cell.inputField.delegate = self;
@@ -177,7 +175,6 @@
     }
     return YES;
 }
-
 
 -(NSString*)createAnnotationsSearch
 {
@@ -294,9 +291,6 @@
     }
     return YES;
 }
-
-
-
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesBegan:touches withEvent:event];
