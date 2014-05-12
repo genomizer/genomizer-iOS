@@ -189,7 +189,7 @@ static XYZExperimentFile * INFO_FILE = nil;
     
 }
 - (IBAction)infoFile:(UIButton*)sender {
-      NSLog(@"prep segue %ld", (long)sender.tag);
+ 
     _dimView.hidden = NO;
     _infoAboutFile.hidden = NO;
     _infoAboutFile.layer.cornerRadius = 5;
@@ -202,7 +202,7 @@ static XYZExperimentFile * INFO_FILE = nil;
     _infoFileTextField.text = [[_selectedFiles objectAtIndex:sender.tag] getAllInfo];
     [[_infoFileTextField layer] setBorderColor : [[UIColor lightGrayColor] CGColor]];
     [[_infoFileTextField layer] setBorderWidth:0.4];
-    
+ 
     
 }
 - (IBAction)closeInfoFile:(id)sender {

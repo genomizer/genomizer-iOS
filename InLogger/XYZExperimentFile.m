@@ -26,10 +26,6 @@
 {
     NSMutableString *string = [[NSMutableString alloc] init];
     [string appendString: [self format: _name]];
-    [string appendString: [self fillWithSpaces:string untilLength:14]];
-    [string appendString: [self format: _date]];
-    [string appendString: [self fillWithSpaces:string untilLength:26]];
-    [string appendString: [self format: _uploadedBy]];
     return string;
 }
 
