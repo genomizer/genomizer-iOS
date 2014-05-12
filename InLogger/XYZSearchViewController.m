@@ -153,6 +153,7 @@
     return cell;
 }
 
+
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
     if (![[_dict objectForKey:textField.placeholder][0] isEqual:@"freetext"]) {
       

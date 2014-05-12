@@ -76,7 +76,8 @@
     // Return the number of rows in the section.
     return [_tasks count];
 }
-- (IBAction)executeButtonPressed:(UIBarButtonItem *)sender
+
+- (IBAction)touchUpInsideCell:(UIButton *)sender
 {
     if (_fileType == RAW) {
         [self performSegueWithIdentifier:@"executeTask" sender:_experimentFiles];
@@ -84,6 +85,7 @@
         [XYZPopupGenerator showPopupWithMessage:@"Not yet implemented!"];
     }
 }
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"executeTask"]) {

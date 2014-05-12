@@ -123,6 +123,7 @@
                                                     <connections>
                                                         <action selector="inputFieldValueChanged:" destination="Tig-61-Fif" eventType="editingChanged" id="Og2-QN-ue4"/>
                                                         <action selector="textFieldDidBeginEditing:" destination="auJ-fT-xa1" eventType="editingDidBegin" id="9rX-n1-Q5F"/>
+                                                        <action selector="textFieldEditingDidEnd:" destination="Tig-61-Fif" eventType="editingDidEnd" id="isI-Jz-dPq"/>
                                                     </connections>
                                                 </textField>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vgg-C9-vRK">
@@ -599,6 +600,18 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="as3-LL-FKw" id="bz5-Ka-tga">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0LH-vi-Bll">
+                                            <rect key="frame" x="0.0" y="7" width="315" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title=" ">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="touchUpInsideCell:" destination="0GK-lv-S7R" eventType="touchUpInside" id="kfh-yM-GjS"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -613,14 +626,8 @@
                                 <segue destination="1Di-Sa-PtS" kind="unwind" unwindAction="unwindToList:" id="dFu-9w-AKS"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Execute" id="Uoe-Qf-EFf">
-                            <connections>
-                                <action selector="executeButtonPressed:" destination="0GK-lv-S7R" id="qSF-Vp-y6t"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="executeButton" destination="Uoe-Qf-EFf" id="wwB-uq-1qe"/>
                         <segue destination="1te-1O-aSA" kind="push" identifier="executeTask" id="NYU-yO-p97"/>
                     </connections>
                 </tableViewController>
@@ -1051,7 +1058,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WlO-jJ-3zU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5359" y="-225"/>
+            <point key="canvasLocation" x="4895" y="-225"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="yzg-op-63V">

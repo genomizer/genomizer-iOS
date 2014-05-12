@@ -23,8 +23,19 @@
 
     // Configure the view for the selected state
 }
-- (IBAction)inputFieldValueChanged:(id)sender {
-    self.switchButton.on = self.inputField.text.length != 0;
+- (IBAction)inputFieldValueChanged:(id)sender
+{
+    [self updateSwitchButton];
+}
+
+- (IBAction)textFieldEditingDidEnd:(id)sender
+{
+    [self updateSwitchButton];
+}
+
+- (void) updateSwitchButton
+{
+    _switchButton.on = _inputField.text.length > 0;
 }
 
 - (IBAction)switchValueChanged:(UISwitch *)sender
