@@ -23,7 +23,7 @@
 - (void)validateWithUser:(NSString*) login andPassword: (NSString*) password {
     NSError *error;
     
-    if((login.length > 1) && (password.length > 2)) {
+    if((login.length > 1) && (password.length > 3)) {
         [ServerConnection login:self.userField.text withPassword:self.passwordField.text error:&error];
    
         if ([error localizedDescription] == nil) {
@@ -98,7 +98,7 @@
     } else if(textField == self.passwordField) {
         [self.passwordField resignFirstResponder];
         [self centerFrameView];
-        if((self.userField.text.length > 1) && (self.passwordField.text.length > 2)) {
+        if((self.userField.text.length > 1) && (self.passwordField.text.length > 3)) {
             NSLog(@"boriz");
             [self validateWithUser: self.userField.text andPassword: self.passwordField.text];
         }
