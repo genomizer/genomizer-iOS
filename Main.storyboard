@@ -123,6 +123,7 @@
                                                     <connections>
                                                         <action selector="inputFieldValueChanged:" destination="Tig-61-Fif" eventType="editingChanged" id="Og2-QN-ue4"/>
                                                         <action selector="textFieldDidBeginEditing:" destination="auJ-fT-xa1" eventType="editingDidBegin" id="9rX-n1-Q5F"/>
+                                                        <action selector="textFieldEditingDidEnd:" destination="Tig-61-Fif" eventType="editingDidEnd" id="isI-Jz-dPq"/>
                                                     </connections>
                                                 </textField>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vgg-C9-vRK">
