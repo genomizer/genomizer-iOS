@@ -210,9 +210,13 @@
             [_searchValues setObject:cell.inputField.text forKey:cell.annotation];
         }
     }
-    NSLog(@"asd: %lu %@", (unsigned long)[_tableCells count], _searchValues);
     self.searchResults = [ServerConnection search:[self createAnnotationsSearch] error:&error];
-   [self performSegueWithIdentifier:@"searchResult" sender:self.searchResults];
+    if(error){
+        [self showErrorMessage:[error.userInfo objectForKey:NSLocalizedDescriptionKey]  title:error.domain];
+    }
+    else{
+        [self performSegueWithIdentifier:@"searchResult" sender:self.searchResults];
+    }
 }
 
 - (IBAction)closeAdvancedSearch:(id)sender {
@@ -224,7 +228,7 @@
     NSError *error;
     self.searchResults = [ServerConnection search:_pumedSearch.text error:&error];
     if(error){
-        [self showErrorMessage:@"Probably incorrect search query" title:error.domain];
+        [self showErrorMessage:[error.userInfo objectForKey:NSLocalizedDescriptionKey]  title:error.domain];
     }
     else{
         [self performSegueWithIdentifier:@"searchResult" sender:self.searchResults];

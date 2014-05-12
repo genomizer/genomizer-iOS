@@ -170,7 +170,6 @@
                     [currentFile setObject:cell.file.grVersion forKey:@"genomeRelease"];
                      [currentFile setObject:cell.file.author forKey:@"author"];
                     [_selectedFiles addObject:cell.file];
-          
                 }
             asd = YES;
             } else {
