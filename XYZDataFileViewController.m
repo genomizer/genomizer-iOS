@@ -14,7 +14,7 @@
 #import "ServerConnection.h"
 #import "XYZSelectedFilesViewController.h"
 #import "XYZPopupGenerator.h"
-#import "RawConvertViewController.h"
+#import "XYZSelectTaskTableViewController.h"
 
 @interface XYZDataFileViewController ()
 
@@ -148,11 +148,12 @@
 {
     _selectedFiles = [[NSMutableArray alloc] init];
     FileType type = OTHER;
+    BOOL asd = NO;
     NSLog(@"Raw cells: %d", [_cells count]);
     for (NSInteger i = 0; i < [_cells count]; i++) {
         XYZDataFileTableViewCell *cell = [_cells objectAtIndex:i];
         if (cell.switchButton.on ) {
-            if (type == OTHER) {
+            if (!asd || cell.tag == type) {
                 type = cell.tag;
                 if(type == RAW) {
                     NSMutableDictionary * currentFile = [[NSMutableDictionary alloc] init];
@@ -163,27 +164,21 @@
                     [currentFile setObject:cell.file.metaData forKey:@"metadata"];
                     [currentFile setObject:cell.file.grVersion forKey:@"genomeRelease"];
                      [currentFile setObject:cell.file.author forKey:@"author"];
-                    [_selectedFiles addObject:currentFile];
+                    [_selectedFiles addObject:cell.file];
           
                 }
+            asd = YES;
+            } else {
+                [XYZPopupGenerator showPopupWithMessage:@"Please select files of same type."];
+                return;
             }
-        } else if (type != cell.tag){
-            [XYZPopupGenerator showPopupWithMessage:@"Ambiguous file types selected."];
-            return;
         }
      
     }
     
     if ([_selectedFiles count] > 0) {
-        if (type != RAW && type != PROFILE) {
-            [XYZPopupGenerator showPopupWithMessage:@"Please select raw or profile files."];
-            return;
-        }
-        if (type == RAW){
-            [self performSegueWithIdentifier:@"convertToRaw" sender:_selectedFiles];
-        }
-    }
-    else {
+        [self performSegueWithIdentifier:@"toSelectTask" sender:_selectedFiles];
+    } else {
         [XYZPopupGenerator showPopupWithMessage:@"Please select files to convert."];
     }
     for (XYZDataFileTableViewCell *cell in _cells) {
@@ -191,13 +186,21 @@
     }
 }
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-    {
-        if ([segue.identifier isEqualToString:@"convertToRaw"]) {
-            RawConvertViewController *nextVC = (RawConvertViewController *)[segue destinationViewController];
-            nextVC.experimentFiles = _selectedFiles;
-        }
+{
+    if ([segue.identifier isEqualToString:@"toSelectTask"]) {
+        UINavigationController *navController = segue.destinationViewController;
+        XYZSelectTaskTableViewController *nextVC = (XYZSelectTaskTableViewController *)(navController.viewControllers[0]);
+        nextVC.experimentFiles = _selectedFiles;
+        nextVC.fileType = [(XYZExperimentFile *)[_selectedFiles objectAtIndex:0] type];
+
+    }
 }
+
+- (IBAction) unwindToList:(UIStoryboardSegue *)segue
+{
     
+}
+
 
 
 

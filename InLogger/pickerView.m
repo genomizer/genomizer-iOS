@@ -40,10 +40,16 @@
         for (XYZSearchTableViewCell *cell in _tableCells) {
             if([[_annotationsDict allKeys][pickerView1.tag] isEqual:cell.annotation]){
                 cell.inputField.text = selectedPickerRow;
-                cell.switchButton.on = true;
-                cell.switchButton.enabled = true;
-                [cell.inputField resignFirstResponder];
-                _tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+                
+                if([selectedPickerRow length] > 0)
+                {
+                    cell.switchButton.on = true;
+                    cell.switchButton.enabled = true;
+
+                } else {
+                    cell.switchButton.on = false;
+                    cell.switchButton.enabled = false;
+                }
             }
           
         }

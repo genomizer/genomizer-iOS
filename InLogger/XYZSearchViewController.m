@@ -52,7 +52,14 @@
         {
             pickerView *myPickerView = [[pickerView alloc] initWithFrame:CGRectMake(0, 200, 100, 80)];
             myPickerView.tag = [[_dict allKeys] indexOfObject:key];
-            myPickerView.dataPicker = [_dict objectForKey:key];
+            
+            //add empty field to array
+            NSMutableArray *temp = [[NSMutableArray alloc] init];
+            [temp addObject:@""];
+            [temp addObjectsFromArray:[_dict objectForKey:key]];
+            
+            //setup pickerview
+            myPickerView.dataPicker = temp;
             myPickerView.delegate = (id)myPickerView.self;
             myPickerView.backgroundColor = [UIColor colorWithRed:242/255.0f green:242/255.0f blue:244/255.0f    alpha:1.0f];
             myPickerView.dataSource = (id)myPickerView.self;
@@ -63,6 +70,12 @@
             [_pickerViews addObject:myPickerView];
         }
     }
+}
+
+
+-(void)doneTouched:(UIBarButtonItem*)sender
+{
+   [self hideKeyboardAndAdjustTable];
 }
 
 - (NSArray *) createSearchFields
@@ -153,6 +166,12 @@
         for(pickerView *pick in _pickerViews) {
             if(pick.tag == i) {
                 textField.inputView = pick;
+        
+                UIToolbar *toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, pick.bounds.size.width, 44)];
+                
+                UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneTouched:)];
+                [toolBar setItems:[NSArray arrayWithObjects:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], doneButton, nil]];
+                textField.inputAccessoryView = toolBar;
             }
         }
     }

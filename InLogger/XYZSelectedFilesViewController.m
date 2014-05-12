@@ -25,6 +25,7 @@
 @property NSMutableArray *experimentFiles;
 @property NSArray *pickerViewFields;
 @property NSMutableArray *cells;
+@property NSInteger numberOfButtonsOn;
 
 @end
 
@@ -72,6 +73,17 @@ static XYZExperimentFile * INFO_FILE = nil;
     [self updateTableViewAndButtons];
 }
 
+- (IBAction)fileSwitchValueChanged:(UISwitch *)sender
+{
+    if (sender.on) {
+        _numberOfButtonsOn ++;
+    } else {
+        _numberOfButtonsOn --;
+    }
+    
+    _selectTaskToPerformButton.enabled = (_numberOfButtonsOn > 0);
+}
+
 - (void) updateTableViewAndButtons
 {
     switch (_segmentedControl.selectedSegmentIndex) {
@@ -90,6 +102,8 @@ static XYZExperimentFile * INFO_FILE = nil;
     }
     
     _cells = [[NSMutableArray alloc] initWithCapacity:[_selectedFiles count]];
+    _numberOfButtonsOn = [_selectedFiles count];
+    _selectTaskToPerformButton.enabled = (_numberOfButtonsOn > 0);
     [_tableView reloadData];
 
 }
@@ -162,13 +176,9 @@ static XYZExperimentFile * INFO_FILE = nil;
         [SELECTED_FILES removeExperimentFile:file];
     }
     
-    [self updateTableViewAndButtons];
-}
-- (IBAction)selectTaskButton:(id)sender {
-    [self createExperimentFiles];
-      NSLog(@"prep segue ");
-     [self performSegueWithIdentifier:@"convertTask" sender:_experimentFiles];
+    [XYZPopupGenerator showPopupWithMessage:@"Files removed"];
     
+    [self updateTableViewAndButtons];
 }
 - (IBAction)infoFile:(UIButton*)sender {
       NSLog(@"prep segue %ld", (long)sender.tag);
@@ -191,37 +201,17 @@ static XYZExperimentFile * INFO_FILE = nil;
     _trashButton.enabled =YES;
 }
 
-/*- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([segue.identifier isEqualToString:@"convertToRaw"]) {
-        RawConvertViewController *nextVC = (RawConvertViewController *)[segue destinationViewController];
-        nextVC.experimentFiles = _selectedFiles;
-    }
-}*/
 - (IBAction)unwindToList:(UIStoryboardSegue *)segue
 {
     
 }
--(void) createExperimentFiles{
-     _experimentFiles = [[NSMutableArray alloc] init];
-  for(XYZExperimentFile *file in [self getFilesFromSelectedCells]){
-        NSMutableDictionary * currentFile = [[NSMutableDictionary alloc] init];
-        [currentFile setObject:file.name forKey:@"filename"];
-        [currentFile setObject:file.idFile forKey:@"fileId"];
-        [currentFile setObject:file.expID forKey:@"expid"];
-        [currentFile setObject:@"rawtoprofile" forKey:@"processtype"];
-        [currentFile setObject:file.metaData forKey:@"metadata"];
-        [currentFile setObject:file.grVersion forKey:@"genomeRelease"];
-        [currentFile setObject:file.author forKey:@"author"];
-        NSLog(@"currfile%@", currentFile);
-        [_experimentFiles addObject:currentFile];
-    }
-}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"convertTask"]) {
-        XYZSelectTaskTableViewController *nextVC = (XYZSelectTaskTableViewController *)[segue destinationViewController];
-        nextVC.experimentFiles = _experimentFiles;
+        UINavigationController *navController = segue.destinationViewController;
+        XYZSelectTaskTableViewController *nextVC = (XYZSelectTaskTableViewController *)(navController.viewControllers[0]);
+        nextVC.experimentFiles = [self getFilesFromSelectedCells];
         nextVC.fileType = _segmentedControl.selectedSegmentIndex;
     }
 }

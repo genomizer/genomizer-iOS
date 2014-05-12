@@ -65,6 +65,7 @@
 		DEEF6B1C1909553C00A2CD8C /* XYZLogInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DEEF6B1A1909553C00A2CD8C /* XYZLogInViewController.xib */; };
 		DEEF7D94190A55D1005EDB8E /* XYZTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEEF7D92190A55D1005EDB8E /* XYZTabViewController.m */; };
 		DEEF7D95190A55D1005EDB8E /* XYZTabViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DEEF7D93190A55D1005EDB8E /* XYZTabViewController.xib */; };
+		DEF2F1231920BA6E00612570 /* TestPopupGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF2F1221920BA6E00612570 /* TestPopupGenerator.m */; };
 		DEF812911918D90A00A88173 /* TestExperiment.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF812901918D90A00A88173 /* TestExperiment.m */; };
 		DEF812931918DE1C00A88173 /* TestExperimentFile.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF812921918DE1C00A88173 /* TestExperimentFile.m */; };
 /* End PBXBuildFile section */
@@ -165,6 +166,7 @@
 		DEEF7D91190A55D1005EDB8E /* XYZTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XYZTabViewController.h; path = ../XYZTabViewController.h; sourceTree = "<group>"; };
 		DEEF7D92190A55D1005EDB8E /* XYZTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XYZTabViewController.m; path = ../XYZTabViewController.m; sourceTree = "<group>"; };
 		DEEF7D93190A55D1005EDB8E /* XYZTabViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = XYZTabViewController.xib; path = ../XYZTabViewController.xib; sourceTree = "<group>"; };
+		DEF2F1221920BA6E00612570 /* TestPopupGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestPopupGenerator.m; sourceTree = "<group>"; };
 		DEF812901918D90A00A88173 /* TestExperiment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestExperiment.m; sourceTree = "<group>"; };
 		DEF812921918DE1C00A88173 /* TestExperimentFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestExperimentFile.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -377,6 +379,7 @@
 				DEF812901918D90A00A88173 /* TestExperiment.m */,
 				DEF812921918DE1C00A88173 /* TestExperimentFile.m */,
 				7624B1C3191A6B4400420EBE /* TestExperimentParser.m */,
+				DEF2F1221920BA6E00612570 /* TestPopupGenerator.m */,
 			);
 			path = InLoggerTests;
 			sourceTree = "<group>";
@@ -542,6 +545,7 @@
 				210BED331918E32900A8E690 /* TestJSONBuilderGetSearch.m in Sources */,
 				DEEF6B0D19094F8B00A2CD8C /* InLoggerTests.m in Sources */,
 				21277BD019190095005FB7FD /* testJSONBuilderTestAvailableAnnotations.m in Sources */,
+				DEF2F1231920BA6E00612570 /* TestPopupGenerator.m in Sources */,
 				DEF812931918DE1C00A88173 /* TestExperimentFile.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
