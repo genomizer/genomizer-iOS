@@ -9,6 +9,7 @@
 #import "ServerConnection.h"
 #import "JSONBuilder.h"
 #import "XYZExperimentParser.h"
+#import "XYZAnnotation.h"
 
 
 @implementation ServerConnection
@@ -148,7 +149,7 @@ NSString *token;
     
 }
 
-+ (NSMutableDictionary*)getAvailableAnnotations:(NSError**)error
++ (NSArray *)getAvailableAnnotations:(NSError**)error
 {
     NSError *internalError;
     NSHTTPURLResponse *httpResp;
@@ -156,35 +157,27 @@ NSString *token;
     NSMutableURLRequest *request = [JSONBuilder getAvailableAnnotationsJSON:token];
     NSData *POSTReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&httpResp error:&internalError];
     
-    if(internalError == nil)
-    {
-        if(httpResp.statusCode == 200){
+    if (internalError == nil) {
+        if (httpResp.statusCode == 200) {
             NSArray *array = [NSJSONSerialization JSONObjectWithData:POSTReply options: NSJSONReadingMutableContainers error:&internalError];
-            NSLog(@"quesssry %@", array);
-            if(internalError == nil)
-            {
-                NSMutableDictionary *annotations = [[NSMutableDictionary alloc] init];
-                for(NSDictionary *json in array)
-                {
-                    NSLog(@"quesssry %@", array);
-                    [annotations setObject:[json objectForKey:@"values"] forKey:[json objectForKey:@"name"]];
+            if (internalError == nil) {
+                NSMutableArray *annotations = [[NSMutableArray alloc] init];
+                for (NSDictionary *json in array) {
+                    XYZAnnotation *annotation = [[XYZAnnotation alloc] init];
+                    annotation.name = [json objectForKey:@"name"];
+                    annotation.values = [json objectForKey:@"values"];
+                    [annotations addObject:annotation];
                 }
              
-                return annotations;
-                
-            }
-            else
-            {
+                return annotations; 
+            } else {
                 *error = [self generateError:@"Server sent incorrectly formatted data, talk to admin" withErrorDomain:@"ServerError" withUnderlyingError:nil];
             }
-        }
-        else
-        {
+        } else {
             *error = [self generateErrorObjectFromHTTPError:httpResp.statusCode];
             
         }
-    }
-    else{
+    } else {
         *error = [self generateError:@"Could not connect to server" withErrorDomain:@"Connection" withUnderlyingError:internalError];
     }
     return nil;

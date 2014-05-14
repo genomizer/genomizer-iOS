@@ -16,13 +16,6 @@
 
 @implementation XYZExperimentDescriber
 
-static NSDictionary *ANNOTATION_DICTIONARY;
-
-+ (NSDictionary *) initDictionary
-{
-    //return [NSDictionary dictionaryWithObjectsAndKeys:@"pubmedId", @"Publication ID", @"experimentID", @"Experiment ID", @"fileName", @"File Name", nil];
-    return [NSDictionary dictionaryWithObjectsAndKeys:@"Publication ID", @"pubmedId", @"Experiment ID", @"experimentID", @"File Name", @"fileName", @"Species", @"specie", nil];
-}
 
 - (XYZExperimentDescriber *) init
 {
@@ -66,7 +59,7 @@ static NSDictionary *ANNOTATION_DICTIONARY;
 - (NSString *) createRowForAnnotation: (NSString *) annotation withValue: (NSString *) value andNewLine: (BOOL) newLine
 {
     NSMutableString *description = [[NSMutableString alloc] init];
-    [description appendString: [XYZExperimentDescriber formatAnnotation: annotation]];
+    [description appendString: annotation];
     [description appendString: @": "];
     if(![value isKindOfClass:[NSString class]]) {
         [description appendString:@"?"];
@@ -77,20 +70,6 @@ static NSDictionary *ANNOTATION_DICTIONARY;
         [description appendString:@"\n"];
     }
     return description;
-}
-
-+ (NSString *) formatAnnotation : (NSString *) annotation
-{
-    if (ANNOTATION_DICTIONARY == nil) {
-        ANNOTATION_DICTIONARY = [XYZExperimentDescriber initDictionary];
-    }
-    NSString *text = [ANNOTATION_DICTIONARY valueForKey:annotation];
-    
-    if (text == nil) {
-        return [annotation capitalizedString];
-    } else {
-        return text;
-    }
 }
 
 @end

@@ -21,7 +21,6 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *advancedView;
 
-@property NSMutableArray *selectedFields;
 @property NSArray *searchFields;
 @property NSMutableArray *searchResults;
 @property NSMutableDictionary *searchValues;
@@ -40,7 +39,6 @@
     [super viewDidLoad];
     self.searchFields = [self createSearchFields];
     [self.tableView reloadData];
-    self.selectedFields = [[NSMutableArray alloc] init];
     self.tableCells = [[NSMutableArray alloc] initWithCapacity:[_searchFields count]];
     _experimentDescriber = [[XYZExperimentDescriber alloc] init];
     [self createPickerViews];
@@ -141,7 +139,7 @@
     static NSString *CellIdentifier = @"ListPrototypeCell";
     XYZSearchTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     NSString *annotation = [self.searchFields objectAtIndex:indexPath.row];
-    cell.inputField.placeholder = [XYZExperimentDescriber formatAnnotation:[self.searchFields objectAtIndex:indexPath.row]];
+    //cell.inputField.placeholder = [XYZExperimentDescriber formatAnnotation:[self.searchFields objectAtIndex:indexPath.row]];
     cell.annotation = annotation;
     if(cell.inputField.text.length == 0) {
         cell.switchButton.on = false;

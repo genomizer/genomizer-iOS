@@ -40,27 +40,6 @@
     _describer = nil;
 }
 
-
--(void) testMakeUnknownAnnotationToCapitalFirstLetter
-{
-    NSString *result = [XYZExperimentDescriber formatAnnotation:@"unknown"];
-    XCTAssertEqualObjects(@"Unknown", result);
-    
-}
-
--(void) testTwoWordUnknownAnnotation
-{
-    NSString *result = [XYZExperimentDescriber formatAnnotation:@"unknown knownun"];
-    XCTAssertEqualObjects(@"Unknown Knownun", result);
-    
-}
-
--(void) testFormatKnownAnnotation
-{
-    NSString *result = [XYZExperimentDescriber formatAnnotation:@"pubmedId"];
-    XCTAssertEqualObjects(@"Publication ID", result);
-}
-
 -(void) testGetDescriptionOfWithDefaultAnnotations
 {
     NSString *description = [_describer getDescriptionOf:_experiment];

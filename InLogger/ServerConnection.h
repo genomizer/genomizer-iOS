@@ -10,11 +10,9 @@
 
 @interface ServerConnection : NSObject
 
-+ (void)login:(NSString *)username withPassword:(NSString *)password error:(NSError**) error;
-+ (int)logout:(NSError**) error;
-+ (NSMutableArray*)search:(NSString *) annotations error:(NSError**) error;
-+(void)convert:(NSMutableDictionary*)dict error:(NSError**)error;
-+ (NSDictionary*)parseJSONToDictionary:(NSData*)POSTReply error:(NSError**)error;
-+ (NSMutableDictionary*)getAvailableAnnotations:(NSError**)error;
-+ (NSError*)generateErrorObjectFromHTTPError:(NSInteger)errorCode;
++ (void) login:(NSString *) username withPassword:(NSString *)password error:(NSError**) error;
++ (int) logout:(NSError **) error;
++ (NSMutableArray *) search:(NSString *) annotations error:(NSError **) error;
++ (void) convert:(NSMutableDictionary *) dict error:(NSError **) error;
++ (NSArray *) getAvailableAnnotations:(NSError **) error;
 @end

@@ -15,6 +15,5 @@
 - (void) removeAnnotation: (NSString *) annotation;
 - (NSString *) getDescriptionOf: (XYZExperiment*) experiment;
 - (BOOL) containsAnnotation: (NSString *) annotation;
-+ (NSString *) formatAnnotation : (NSString *) annotation;
 
 @end
