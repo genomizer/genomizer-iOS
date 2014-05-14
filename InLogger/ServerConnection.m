@@ -40,14 +40,11 @@ NSString *token;
 
 + (void)login:(NSString *)username withPassword:(NSString *)password error:(NSError**) error withContext: (XYZLogInViewController*) controller
 {
-    
     NSMutableURLRequest *request = [JSONBuilder getLoginJSON:username withPassword:password];
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler: ^(NSURLResponse *response, NSData *POSTReply, NSError *internalError)
      {
-         
-         [NSThread sleepForTimeInterval:4];
          NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
          NSError *error;
          
@@ -79,12 +76,19 @@ NSString *token;
      }];
 }
 
-+ (int)logout:(NSError**)error;
++ (int)logout:(NSError**)error withContext: (XYZLogInViewController) *controller;
 {
+    token = nil;
     NSMutableURLRequest *request = [JSONBuilder getLogoutJSON:token];
     
     NSHTTPURLResponse *httpResp;
-    [NSURLConnection sendSynchronousRequest:request returningResponse:&httpResp error:error];
+    //[NSURLConnection sendSynchronousRequest:request returningResponse:&httpResp error:error];
+    
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler: ^(NSURLResponse *response, NSData *POSTReply, NSError *internalError)
+    {
+        
+    }];
 
     NSLog(@"logout token %@", token);
     NSLog(@"Header: %ld", (long)httpResp.statusCode);
