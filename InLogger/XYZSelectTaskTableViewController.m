@@ -80,7 +80,7 @@
 - (IBAction)touchUpInsideCell:(UIButton *)sender
 {
     if (_fileType == RAW) {
-        [self performSegueWithIdentifier:@"executeTask" sender:_experimentFiles];
+        [self performSegueWithIdentifier:@"toConvertToProfile" sender:_experimentFiles];
     } else {
         [XYZPopupGenerator showPopupWithMessage:@"Not yet implemented!"];
     }
@@ -88,7 +88,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"executeTask"]) {
+    if ([segue.identifier isEqualToString:@"toConvertToProfile"]) {
         RawConvertViewController *nextVC = (RawConvertViewController *)[segue destinationViewController];
         nextVC.experimentFiles = _experimentFiles;
     }

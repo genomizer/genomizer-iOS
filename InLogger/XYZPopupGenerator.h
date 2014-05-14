@@ -11,5 +11,9 @@
 @interface XYZPopupGenerator : NSObject
 
 + (void)showPopupWithMessage: (NSString *) message;
++ (void)showPopupWithMessage: (NSString *) message withTitle: (NSString *) title;
++ (void)showPopupWithMessage: (NSString *) message withTitle: (NSString *) title
+       withCancelButtonTitle: (NSString *) cancelTitle;
++ (void) showErrorMessage: (NSError *) error;
 
 @end

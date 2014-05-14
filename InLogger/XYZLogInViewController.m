@@ -8,6 +8,7 @@
 
 #import "XYZLogInViewController.h"
 #import "ServerConnection.h"
+#import "XYZPopupGenerator.h"
 
 @interface XYZLogInViewController ()
 
@@ -19,7 +20,17 @@
 
 @implementation XYZLogInViewController
 
-- (void)validateWithUser:(NSString*) login andPassword: (NSString*) password {
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    _userField.delegate = self;
+    _passwordField.delegate = self;
+}
+
+- (void) tryToLogIn
+{
+    NSString *username = _userField.text;
+    NSString *password = _passwordField.text;
     NSError *error;
     
     if((login.length > 1) && (password.length > 3)) {
@@ -27,22 +38,17 @@
         [_spinner startAnimating];
         /*
         if (error) {
-               [self showMessage:[error.userInfo objectForKey:NSLocalizedDescriptionKey]  title:error.domain];
-            
+            [XYZPopupGenerator showErrorMessage:error];
         } else {
             [self performSegueWithIdentifier:@"loginSegue" sender:self];
         }
         */
     } else{
-        [self showMessage:@"Username or password is too short." title:@"Error"];
+        [XYZPopupGenerator showPopupWithMessage:@"Please enter username and password."];
     }
 }
 
-- (IBAction)SignInButtonTouchDOwn:(id)sender {
-    [self validateWithUser: self.userField.text andPassword: self.passwordField.text];
-}
-
-- (IBAction)showMessage:(NSString*) error title:(NSString*)title;
+- (IBAction)signInButtonTouchDown:(id)sender
 {
     UIAlertView *loginFailed = [[UIAlertView alloc]
                                 initWithTitle:title message:error
@@ -93,7 +99,7 @@
     [UIView commitAnimations];
 }
 
-- (void)viewDidLoad
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [super viewDidLoad];
     _spinner.hidesWhenStopped = YES;
@@ -107,27 +113,16 @@
     [super touchesBegan:touches withEvent:event];
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    if(textField == self.userField) {
-        [self.passwordField becomeFirstResponder];
-    } else if(textField == self.passwordField) {
-        [self.passwordField resignFirstResponder];
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if(textField == _userField) {
+        [_passwordField becomeFirstResponder];
+    } else if(textField == _passwordField) {
+        [_passwordField resignFirstResponder];
         [self centerFrameView];
-        if((self.userField.text.length > 1) && (self.passwordField.text.length > 3)) {
-            NSLog(@"boriz");
-            [self validateWithUser: self.userField.text andPassword: self.passwordField.text];
-        }
-        else{
-            [self showMessage:@"Username or password is too short." title:@"Error"];
-        }
+        [self tryToLogIn];
     }
     return NO;
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end
