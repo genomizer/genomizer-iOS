@@ -47,7 +47,7 @@
     _experimentFile.type = RAW;
     
     NSString *result = [_experimentFile getDescription];
-    NSString *correct = @"Datafile.wig  2014-04-01  Yuri";
+    NSString *correct = @"Datafile.wig";
     
     XCTAssertEqualObjects(result, correct);
 }
@@ -60,7 +60,7 @@
     _experimentFile.type = RAW;
     
     NSString *result = [_experimentFile getDescription];
-    NSString *correct = @"File.wig      2014-04-02  Yuri";
+    NSString *correct = @"File.wig";
     
     XCTAssertEqualObjects(result, correct);
 }
@@ -72,7 +72,7 @@
     _experimentFile.type = RAW;
     
     NSString *result = [_experimentFile getDescription];
-    NSString *correct = @"?             2014-04-01  Yuri";
+    NSString *correct = @"?";
     NSLog(@"%@", result);
     XCTAssertEqualObjects(result, correct);
 }
