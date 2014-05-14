@@ -14,4 +14,6 @@
 @property NSMutableArray* experimentFiles;
 @property FileType fileType;
 
+- (NSArray *) tasksOfFileType: (FileType) fileType;
+
 @end

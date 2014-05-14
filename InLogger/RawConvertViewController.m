@@ -16,12 +16,14 @@
 @property (weak, nonatomic) IBOutlet UITextField *genomeFile;
 @property (weak, nonatomic) IBOutlet UITextField *smoothing;
 @property (weak, nonatomic) IBOutlet UITextField *step;
-@property (weak, nonatomic) IBOutlet UISwitch *bowtieSwitch;
-@property (weak, nonatomic) IBOutlet UISwitch *genomeFileSwitch;
-@property (weak, nonatomic) IBOutlet UISwitch *smoothingSwitch;
-@property (weak, nonatomic) IBOutlet UISwitch *stepSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *samToGff;
+@property (weak, nonatomic) IBOutlet UISwitch *gffToSgr;
+@property (weak, nonatomic) IBOutlet UITextField *ratioCalc;
+@property (weak, nonatomic) IBOutlet UITextField *ratioCalcSmoothing;
+
 @property CGPoint originalCenter;
 @property NSMutableArray *experimentFilesDictArr;
+
 
 
 @end
@@ -42,8 +44,15 @@
     self.smoothing.delegate = self;
     self.step.delegate = self;
     self.originalCenter = self.view.center;
-    //NSLog(@"files %@", _experimentFiles[0]);
-    
+    self.genomeFile.enabled = NO;
+    self.samToGff.enabled = NO;
+    self.samToGff.on = NO;
+    self.gffToSgr.enabled = NO;
+    self.gffToSgr.on = NO;
+    self.smoothing.enabled = NO;
+    self.step.enabled = NO;
+    self.ratioCalc.enabled = NO;
+    self.ratioCalcSmoothing.enabled = NO;
     // Do any additional setup after loading the view.
 }
 
@@ -96,15 +105,27 @@
         [UIView setAnimationDuration:0.25];
         self.view.center = CGPointMake(self.originalCenter.x, self.originalCenter.y-55);
         [UIView commitAnimations];
-
+    }
+    else if(textField == self.ratioCalc) {
         
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:0.25];
+        self.view.center = CGPointMake(self.originalCenter.x, self.originalCenter.y-70);
+        [UIView commitAnimations];
+    }
+    else if(textField == self.ratioCalcSmoothing) {
+        
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:0.25];
+        self.view.center = CGPointMake(self.originalCenter.x, self.originalCenter.y-85);
+        [UIView commitAnimations];
     }
 
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    NSLog(@"sdafghjk");
     if(textField == self.bowtie) {
+        self.genomeFile.enabled = YES;
         [self.genomeFile becomeFirstResponder];
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0.25];
@@ -112,28 +133,49 @@
         [UIView commitAnimations];
        // [self centerFrameView];
     } else if(textField == self.genomeFile) {
+         self.samToGff.enabled = YES;
+        self.samToGff.on = NO;
+        [textField endEditing:YES];
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0.25];
               self.view.center = CGPointMake(self.originalCenter.x, self.originalCenter.y-35);
         [UIView commitAnimations];
-        [self.smoothing becomeFirstResponder];
+       
        // [self centerFrameView];
     }else if(textField == self.smoothing) {
+        self.step.enabled = YES;
         [self.step becomeFirstResponder];
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0.25];
-                self.view.center = CGPointMake(self.originalCenter.x, self.originalCenter.y-50);
+        self.view.center = CGPointMake(self.originalCenter.x, self.originalCenter.y-80);
         [UIView commitAnimations];
+  
     }
     else if(textField == self.step) {
-    [textField endEditing:YES];
+         self.ratioCalc.enabled = YES;
+        [self.ratioCalc becomeFirstResponder];
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:0.25];
+        self.view.center = CGPointMake(self.originalCenter.x, self.originalCenter.y-140);
+        NSLog(@"KUUUUUUUK");
+        [UIView commitAnimations];
+    }
+    else if(textField == self.ratioCalc) {
+        NSLog(@"KUUUUUUUK");
+        self.ratioCalcSmoothing.enabled = YES;
+        [self.ratioCalcSmoothing becomeFirstResponder];
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:0.25];
+        self.view.center = CGPointMake(self.originalCenter.x, self.originalCenter.y-170);
+        [UIView commitAnimations];
+    }
+    else if(textField == self.ratioCalcSmoothing) {
+        [textField endEditing:YES];
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0.25];
         self.view.center = CGPointMake(self.originalCenter.x, self.originalCenter.y);
         [UIView commitAnimations];
-        //  [self centerFrameView];
-   
-}
+    }
 return NO;
 }
 - (IBAction)ConvertButtonPressed:(id)sender {
@@ -167,7 +209,7 @@ return NO;
 -(void) createExperimentFiles{
     _experimentFilesDictArr = [[NSMutableArray alloc] init];
     for(XYZExperimentFile *file in _experimentFiles){
-        NSMutableDictionary * currentFile = [[NSMutableDictionary alloc] init];
+        NSMutableDictionary * currentFile =[[NSMutableDictionary alloc] init];
         [currentFile setObject:file.name forKey:@"filename"];
         [currentFile setObject:file.idFile forKey:@"fileId"];
         [currentFile setObject:file.expID forKey:@"expid"];
@@ -189,10 +231,28 @@ return NO;
         
     [convertMessage show];
 }
-    
-    
-    
-
-
+- (IBAction)samToGffChanged:(id)sender {
+    if (self.samToGff.on) {
+        self.gffToSgr.enabled = YES;
+        self.gffToSgr.on = NO;
+    } else {
+        self.gffToSgr.on = NO;
+        self.gffToSgr.enabled = NO;
+        self.smoothing.enabled = NO;
+        self.step.enabled = NO;
+        self.ratioCalc.enabled = NO;
+        self.ratioCalcSmoothing.enabled = NO;
+    }
+}
+- (IBAction)gffToSgrChanged:(id)sender {
+    if (self.gffToSgr.on) {
+        self.smoothing.enabled = YES;
+    } else {
+        self.smoothing.enabled = NO;
+        self.step.enabled = NO;
+        self.ratioCalc.enabled = NO;
+        self.ratioCalcSmoothing.enabled = NO;
+    }
+}
 
 @end

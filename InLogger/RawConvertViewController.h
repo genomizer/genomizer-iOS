@@ -10,4 +10,5 @@
 
 @interface RawConvertViewController : UIViewController<UITextFieldDelegate>
 @property NSMutableArray * experimentFiles;
+@property NSInteger * type;
 @end
