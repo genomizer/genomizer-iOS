@@ -13,6 +13,7 @@
 
 
 @implementation ServerConnection
+
 NSString *token;
 
 + (void)handleLoginPostReply: (NSData *)POSTReply httpResp:(NSHTTPURLResponse *)httpResp error:(NSError **)error{
@@ -37,40 +38,45 @@ NSString *token;
     }
 }
 
-+ (void)login:(NSString *)username withPassword:(NSString *)password error:(NSError**) error
++ (void)login:(NSString *)username withPassword:(NSString *)password error:(NSError**) error withContext: (XYZLogInViewController*) controller
 {
-    NSError *internalError;
-
-    //TODO fix exception handling for incorrect JSON response
     
     NSMutableURLRequest *request = [JSONBuilder getLoginJSON:username withPassword:password];
-    NSHTTPURLResponse *httpResp;
-    NSData *POSTReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&httpResp error:&internalError];
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     
-    if (internalError == nil)
-    {
-        NSDictionary *json = [self parseJSONToDictionary:POSTReply error:&internalError];
-
-        if(internalError == nil)
-        {
-            token = [json objectForKey:@"token"];
-            NSLog(@"login token %@", token);
-            NSLog(@"Header login: %ld", (long)httpResp.statusCode);
-            
-            if(httpResp.statusCode != 200)
-            {
-                *error = [self generateErrorObjectFromHTTPError:httpResp.statusCode];
-            }
-        }
-        else
-        {
-            *error = [self generateError:@"Server sent incorrectly formatted data" withErrorDomain:@"Server Error" withUnderlyingError:nil];
-        }
-    }
-    else
-    {
-        *error = [self generateError:@"Could not connect to server" withErrorDomain:@"Connection Error" withUnderlyingError:internalError];
-    }
+    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler: ^(NSURLResponse *response, NSData *POSTReply, NSError *internalError)
+     {
+         
+         [NSThread sleepForTimeInterval:4];
+         NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
+         NSError *error;
+         
+         if (internalError == nil)
+         {
+             NSDictionary *json = [self parseJSONToDictionary:POSTReply error:&internalError];
+             
+             if(internalError == nil)
+             {
+                 token = [json objectForKey:@"token"];
+                 NSLog(@"login token %@", token);
+                 NSLog(@"Header login: %ld", (long)httpResp.statusCode);
+                 
+                 if(httpResp.statusCode != 200)
+                 {
+                     error = [self generateErrorObjectFromHTTPError:httpResp.statusCode];
+                 }
+             }
+             else
+             {
+                 error = [self generateError:@"Server sent incorrectly formatted data" withErrorDomain:@"Server Error" withUnderlyingError:nil];
+             }
+         }
+         else
+         {
+             error = [self generateError:@"Could not connect to server" withErrorDomain:@"Connection Error" withUnderlyingError:internalError];
+         }
+         [controller reportLoginResult:error];
+     }];
 }
 
 + (int)logout:(NSError**)error;

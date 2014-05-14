@@ -14,6 +14,7 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *userField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
 
 @end
 
@@ -31,13 +32,17 @@
     NSString *username = _userField.text;
     NSString *password = _passwordField.text;
     NSError *error;
-    if(username.length > 0 && password.length > 0) {
-        [ServerConnection login:username withPassword:password error:&error];
+    
+    if((login.length > 1) && (password.length > 3)) {
+        [ServerConnection login:self.userField.text withPassword:self.passwordField.text error:&error withContext:self];
+        [_spinner startAnimating];
+        /*
         if (error) {
             [XYZPopupGenerator showErrorMessage:error];
         } else {
             [self performSegueWithIdentifier:@"loginSegue" sender:self];
         }
+        */
     } else{
         [XYZPopupGenerator showPopupWithMessage:@"Please enter username and password."];
     }
@@ -45,7 +50,34 @@
 
 - (IBAction)signInButtonTouchDown:(id)sender
 {
-    [self tryToLogIn];
+    UIAlertView *loginFailed = [[UIAlertView alloc]
+                                initWithTitle:title message:error
+                                delegate:nil cancelButtonTitle:@"Try again"
+                                otherButtonTitles:nil];
+    
+    [loginFailed show];
+}
+
+- (void) reportLoginResult: (NSError*) error {
+    [_spinner stopAnimating];
+    
+    if(error == nil){
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self performSegueWithIdentifier:@"loginSegue" sender:self];
+        });
+    } else
+    {
+        [self showMessage:[error.userInfo objectForKey:NSLocalizedDescriptionKey]  title:error.domain];
+    }
+}
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
@@ -69,6 +101,13 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    [super viewDidLoad];
+    _spinner.hidesWhenStopped = YES;
+    self.userField.delegate = self;
+    self.passwordField.delegate = self;
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];
     [self centerFrameView];
     [super touchesBegan:touches withEvent:event];

@@ -10,6 +10,7 @@
 		210BED2D1918D85000A8E690 /* TestJSONBuilderGetRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 210BED2C1918D85000A8E690 /* TestJSONBuilderGetRequest.m */; };
 		210BED2F1918DCD500A8E690 /* TestJSONBuilderGetLogout.m in Sources */ = {isa = PBXBuildFile; fileRef = 210BED2E1918DCD500A8E690 /* TestJSONBuilderGetLogout.m */; };
 		210BED331918E32900A8E690 /* TestJSONBuilderGetSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 210BED321918E32900A8E690 /* TestJSONBuilderGetSearch.m */; };
+		2114DA0E19235A3D002A88D9 /* TestServerConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 2114DA0D19235A3D002A88D9 /* TestServerConnection.m */; };
 		21277BCC1918E67C005FB7FD /* testJSONBuilderGetConversionJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 21277BCB1918E67C005FB7FD /* testJSONBuilderGetConversionJSON.m */; };
 		21277BCE19190036005FB7FD /* TestJSONBuilderGetLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = 21277BCD19190036005FB7FD /* TestJSONBuilderGetLogin.m */; };
 		21277BD019190095005FB7FD /* testJSONBuilderTestAvailableAnnotations.m in Sources */ = {isa = PBXBuildFile; fileRef = 21277BCF19190095005FB7FD /* testJSONBuilderTestAvailableAnnotations.m */; };
@@ -85,6 +86,7 @@
 		210BED2C1918D85000A8E690 /* TestJSONBuilderGetRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestJSONBuilderGetRequest.m; sourceTree = "<group>"; };
 		210BED2E1918DCD500A8E690 /* TestJSONBuilderGetLogout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestJSONBuilderGetLogout.m; sourceTree = "<group>"; };
 		210BED321918E32900A8E690 /* TestJSONBuilderGetSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestJSONBuilderGetSearch.m; sourceTree = "<group>"; };
+		2114DA0D19235A3D002A88D9 /* TestServerConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestServerConnection.m; sourceTree = "<group>"; };
 		21277BCB1918E67C005FB7FD /* testJSONBuilderGetConversionJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testJSONBuilderGetConversionJSON.m; sourceTree = "<group>"; };
 		21277BCD19190036005FB7FD /* TestJSONBuilderGetLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestJSONBuilderGetLogin.m; sourceTree = "<group>"; };
 		21277BCF19190095005FB7FD /* testJSONBuilderTestAvailableAnnotations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testJSONBuilderTestAvailableAnnotations.m; sourceTree = "<group>"; };
