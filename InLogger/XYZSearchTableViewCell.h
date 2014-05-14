@@ -8,12 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "XYZSearchViewController.h"
+#import "XYZAnnotation.h"
 
 @interface XYZSearchTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UITextField *inputField;
 @property (weak, nonatomic) IBOutlet UISwitch *switchButton;
-@property NSString *annotation;
+@property XYZAnnotation *annotation;
 @property XYZSearchViewController *controller;
 
 @end

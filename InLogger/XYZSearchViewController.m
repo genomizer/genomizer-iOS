@@ -11,9 +11,9 @@
 #import "ServerConnection.h"
 #import "XYZExperimentDescriber.h"
 #import "pickerView.h"
-#import <QuartzCore/QuartzCore.h>
 #import "XYZPopupGenerator.h"
 #import "XYZSearchTableViewCell.h"
+#import "XYZAnnotation.h"
 
 
 @interface XYZSearchViewController ()
@@ -21,7 +21,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *advancedView;
 
-@property NSArray *searchFields;
+@property NSArray *annotations;
 @property NSMutableArray *searchResults;
 @property NSMutableDictionary *searchValues;
 @property NSMutableArray *tableCells;
@@ -37,9 +37,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.searchFields = [self createSearchFields];
+    _annotations = [self getAnnotationsFromServer];
     [self.tableView reloadData];
-    self.tableCells = [[NSMutableArray alloc] initWithCapacity:[_searchFields count]];
+    self.tableCells = [[NSMutableArray alloc] initWithCapacity:[_annotations count]];
     _experimentDescriber = [[XYZExperimentDescriber alloc] init];
     [self createPickerViews];
 }
@@ -77,27 +77,17 @@
    [self hideKeyboardAndAdjustTable];
 }
 
-- (NSArray *) createSearchFields
+- (NSArray *) getAnnotationsFromServer
 {
     NSError *error;
-    //_dict = [[NSMutableDictionary alloc] init];
-    _dict = [ServerConnection getAvailableAnnotations:&error];
+    NSArray *annotations = [ServerConnection getAvailableAnnotations:&error];
    
-    if(error != nil)
-    {
+    if(error) {
         [XYZPopupGenerator showPopupWithMessage:@"Server did not return list of annotations"];
+        return [[NSArray alloc] init];
     }
     
-    NSLog(@"eeee  %@", _dict);
-  
-    if (_dict != nil)
-    {
-        return [_dict allKeys];
-    }
-    else
-    {
-        return nil;
-    }
+    return annotations;
 }
 
 - (void)didReceiveMemoryWarning
@@ -131,15 +121,15 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.searchFields count];
+    return [_annotations count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"ListPrototypeCell";
     XYZSearchTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    NSString *annotation = [self.searchFields objectAtIndex:indexPath.row];
-    //cell.inputField.placeholder = [XYZExperimentDescriber formatAnnotation:[self.searchFields objectAtIndex:indexPath.row]];
+    XYZAnnotation *annotation = [_annotations objectAtIndex: indexPath.row];
+    cell.inputField.placeholder = [annotation getFormatedName];
     cell.annotation = annotation;
     if(cell.inputField.text.length == 0) {
         cell.switchButton.on = false;
