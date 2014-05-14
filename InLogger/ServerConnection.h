@@ -7,14 +7,20 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MoreViewController.h"
+#import "XYZSearchViewController.h"
+#import "RawConvertViewController.h"
 
 @interface ServerConnection : NSObject
 
 + (void)login:(NSString *)username withPassword:(NSString *)password error:(NSError**) error withContext: (UIViewController*) controller;
 + (int)logout:(NSError**) error;
-+ (NSMutableArray*)search:(NSString *) annotations error:(NSError**) error;
-+(void)convert:(NSMutableDictionary*)dict error:(NSError**)error;
+
++ (void)search:(NSString *) annotations withContext: (XYZSearchViewController*) controller;
+
++ (void)convert:(NSMutableDictionary*)dict withContext: (RawConvertViewController*) controller;
 + (NSDictionary*)parseJSONToDictionary:(NSData*)POSTReply error:(NSError**)error;
+
 + (NSMutableDictionary*)getAvailableAnnotations:(NSError**)error;
 + (NSError*)generateErrorObjectFromHTTPError:(NSInteger)errorCode;
 @end

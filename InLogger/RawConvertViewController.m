@@ -96,8 +96,6 @@
         [UIView setAnimationDuration:0.25];
         self.view.center = CGPointMake(self.originalCenter.x, self.originalCenter.y-55);
         [UIView commitAnimations];
-
-        
     }
 
 }
@@ -142,16 +140,11 @@ return NO;
     [parameters addObject:_genomeFile.text];
     [parameters addObject:_smoothing.text];
     [parameters addObject:_step.text];
-    NSError *error;
 
     [self createExperimentFiles];
     for(NSMutableDictionary *dict in _experimentFilesDictArr){
         [dict setObject:parameters forKey:@"parameters"];
-        [ServerConnection convert:dict error:&error];
-        if(error){
-            [self showErrorMessage:[error.userInfo objectForKey:NSLocalizedDescriptionKey] title:error.domain];
-
-        }
+        [ServerConnection convert:dict withContext:self];
     }
     [XYZPopupGenerator showPopupWithMessage:@"Not yet implemented!"];
     return;
@@ -162,6 +155,13 @@ return NO;
     
     [convertDoneMessage show];*/
     
+}
+
+- (void) reportResult: (NSError*) error {
+    
+    if(error){
+        [self showErrorMessage:[error.userInfo objectForKey:NSLocalizedDescriptionKey] title:error.domain];
+    }
 }
 
 -(void) createExperimentFiles{

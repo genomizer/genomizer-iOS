@@ -10,4 +10,8 @@
 
 @interface RawConvertViewController : UIViewController<UITextFieldDelegate>
 @property NSMutableArray * experimentFiles;
+
+- (void) reportResult: (NSError*) error;
+
 @end
+

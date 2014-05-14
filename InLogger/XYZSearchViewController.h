@@ -15,5 +15,6 @@
 - (void)hideKeyboardAndAdjustTable;
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender;
 - (void) createPickerViews;
+- (void) reportSearchResult: (NSMutableArray*) result withParsingError: (NSError*) error;
 
 @end

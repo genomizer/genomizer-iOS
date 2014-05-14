@@ -20,6 +20,8 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *advancedView;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
+@property (weak, nonatomic) IBOutlet UIButton *searchButton;
 
 @property NSMutableArray *selectedFields;
 @property NSArray *searchFields;
@@ -43,6 +45,7 @@
     self.selectedFields = [[NSMutableArray alloc] init];
     self.tableCells = [[NSMutableArray alloc] initWithCapacity:[_searchFields count]];
     _experimentDescriber = [[XYZExperimentDescriber alloc] init];
+    _spinner.hidesWhenStopped = YES;
     [self createPickerViews];
 }
 - (void) createPickerViews{
@@ -160,17 +163,21 @@
 }
 
 
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
-    if (![[_dict objectForKey:textField.placeholder][0] isEqual:@"freetext"]) {
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    if (![[_dict objectForKey:textField.placeholder][0] isEqual:@"freetext"])
+    {
       
         int i = 0;
-        for (XYZSearchTableViewCell *cell in _tableCells) {
+        for (XYZSearchTableViewCell *cell in _tableCells)
+        {
             if([textField.placeholder isEqual:cell.inputField.placeholder]){
                 break;
             }
             i++;
         }
-        for(pickerView *pick in _pickerViews) {
+        for(pickerView *pick in _pickerViews)
+        {
             if(pick.tag == i) {
                 textField.inputView = pick;
         
@@ -189,19 +196,25 @@
 {
     int numberOfAnnotations = self.searchValues.count;
     int annotationsDone = 0;
-     NSString *annoSearch = @"";
-    for(int i=0;i < numberOfAnnotations-1;i++) {
+    NSString *annoSearch = @"";
+   
+    for(int i=0;i < numberOfAnnotations-1;i++)
+    {
         annoSearch = [annoSearch stringByAppendingString:@"("];
     }
+    
     for(id key in self.searchValues){
         annotationsDone ++;
         NSString* value = [self.searchValues objectForKey:key];
         annoSearch = [annoSearch stringByAppendingString:value];
         annoSearch = [annoSearch stringByAppendingString:@"["];
         annoSearch = [annoSearch stringByAppendingString:key];
-        if(annotationsDone == numberOfAnnotations) {
+        
+        if(annotationsDone == numberOfAnnotations)
+        {
             annoSearch = [annoSearch stringByAppendingString:@"]"];
-        } else {
+        } else
+        {
             annoSearch = [annoSearch stringByAppendingString:@"]) AND "];
         }
     }
@@ -209,36 +222,48 @@
 }
 
 - (IBAction)searchButton:(id)sender {
-    NSError *error;
+    _searchButton.enabled = NO;
+    _searchButton.hidden = YES;
+    [_spinner startAnimating];
+    
+    //[_sear]
     _searchValues = [NSMutableDictionary dictionary];
+    
     for (XYZSearchTableViewCell *cell in _tableCells) {
         if (cell != nil && cell.switchButton.on) {
             [_searchValues setObject:cell.inputField.text forKey:cell.annotation];
         }
     }
-    self.searchResults = [ServerConnection search:[self createAnnotationsSearch] error:&error];
-    if(error){
-        [self showErrorMessage:[error.userInfo objectForKey:NSLocalizedDescriptionKey]  title:error.domain];
-    }
-    else{
+    [ServerConnection search:[self createAnnotationsSearch] withContext:self];
+}
+
+- (void) reportSearchResult: (NSMutableArray*) result withParsingError: (NSError*) error
+{
+    [_spinner stopAnimating];
+    _searchButton.hidden = NO;
+    _searchButton.enabled = YES;
+    
+    if(error == nil)
+    {
+        _searchResults = result;
+        dispatch_async(dispatch_get_main_queue(), ^{
         [self performSegueWithIdentifier:@"searchResult" sender:self.searchResults];
+        });
+    } else
+    {
+        [self showErrorMessage:[error.userInfo objectForKey:NSLocalizedDescriptionKey] title:error.domain];
     }
 }
 
-- (IBAction)closeAdvancedSearch:(id)sender {
+- (IBAction)closeAdvancedSearch:(id)sender
+{
     _advancedView.hidden = YES;
      _tableView.userInteractionEnabled = YES;
     [_pumedSearch endEditing:YES];
 }
-- (IBAction)SearchQueryButtonTouched:(id)sender {
-    NSError *error;
-    self.searchResults = [ServerConnection search:_pumedSearch.text error:&error];
-    if(error){
-        [self showErrorMessage:[error.userInfo objectForKey:NSLocalizedDescriptionKey]  title:error.domain];
-    }
-    else{
-        [self performSegueWithIdentifier:@"searchResult" sender:self.searchResults];
-    }
+- (IBAction)SearchQueryButtonTouched:(id)sender
+{
+    [ServerConnection search:_pumedSearch.text withContext:self];
 }
 
 - (IBAction)showErrorMessage:(NSString*) error title:(NSString*) title
@@ -252,7 +277,8 @@
 }
 
 
-- (IBAction)advancedSearchButton:(id)sender {
+- (IBAction)advancedSearchButton:(id)sender
+{
     _advancedView.hidden = NO;
     _advancedView.layer.cornerRadius = 5;
     _advancedView.layer.masksToBounds = YES;
@@ -270,8 +296,10 @@
     [self.view bringSubviewToFront:_advancedView];
     _tableView.userInteractionEnabled = NO;
     _searchValues = [NSMutableDictionary dictionary];
-    for (XYZSearchTableViewCell *cell in _tableCells) {
-        if (cell != nil && cell.switchButton.on) {
+    for (XYZSearchTableViewCell *cell in _tableCells)
+    {
+        if (cell != nil && cell.switchButton.on)
+        {
             [_searchValues setObject:cell.inputField.text forKey:cell.annotation];
         }
     }
@@ -283,7 +311,8 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"searchResult"]) {
+    if ([segue.identifier isEqualToString:@"searchResult"])
+    {
         XYZSearchResultTableViewController *nextVC = (XYZSearchResultTableViewController *)[segue destinationViewController];
         nextVC.searchResults1 = self.searchResults;
         nextVC.experimentDescriber = _experimentDescriber;
@@ -291,15 +320,9 @@
 }
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     
-    if([text isEqualToString:@"\n"]) {
-        NSError *error;
-        self.searchResults = [ServerConnection search:_pumedSearch.text error:&error];
-        if(error){
-            [self showErrorMessage:@"Probably incorrect search query" title:error.domain];
-        }
-        else{
-            [self performSegueWithIdentifier:@"searchResult" sender:self.searchResults];
-        }
+    if([text isEqualToString:@"\n"])
+    {
+        [ServerConnection search:_pumedSearch.text withContext:self];
         return NO;
     }
     return YES;
