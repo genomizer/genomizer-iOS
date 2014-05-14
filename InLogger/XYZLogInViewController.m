@@ -13,10 +13,9 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *userField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
 
 @end
-
-
 
 @implementation XYZLogInViewController
 
@@ -24,14 +23,16 @@
     NSError *error;
     
     if((login.length > 1) && (password.length > 3)) {
-        [ServerConnection login:self.userField.text withPassword:self.passwordField.text error:&error];
-   
+        [ServerConnection login:self.userField.text withPassword:self.passwordField.text error:&error withContext:self];
+        [_spinner startAnimating];
+        /*
         if (error) {
                [self showMessage:[error.userInfo objectForKey:NSLocalizedDescriptionKey]  title:error.domain];
             
         } else {
             [self performSegueWithIdentifier:@"loginSegue" sender:self];
         }
+        */
     } else{
         [self showMessage:@"Username or password is too short." title:@"Error"];
     }
@@ -49,6 +50,19 @@
                                 otherButtonTitles:nil];
     
     [loginFailed show];
+}
+
+- (void) reportLoginResult: (NSError*) error {
+    [_spinner stopAnimating];
+    
+    if(error == nil){
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self performSegueWithIdentifier:@"loginSegue" sender:self];
+        });
+    } else
+    {
+        [self showMessage:[error.userInfo objectForKey:NSLocalizedDescriptionKey]  title:error.domain];
+    }
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -82,7 +96,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    _spinner.hidesWhenStopped = YES;
     self.userField.delegate = self;
     self.passwordField.delegate = self;
 }

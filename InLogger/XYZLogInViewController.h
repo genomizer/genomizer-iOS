@@ -10,4 +10,6 @@
 
 @interface XYZLogInViewController : UIViewController<UITextFieldDelegate>
 
+- (void) reportLoginResult: (NSError*) error;
+
 @end
