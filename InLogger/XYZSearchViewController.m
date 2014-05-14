@@ -148,6 +148,12 @@
     }
     cell.inputField.delegate = self;
     cell.controller = self;
+    if (indexPath.row < [_tableCells count]) {
+        XYZSearchTableViewCell *prevCell = [_tableCells objectAtIndex:indexPath.row];
+        if(prevCell != nil) {
+            cell.inputField.text = prevCell.inputField.text;
+        }
+    }
     [_tableCells setObject:cell atIndexedSubscript:indexPath.row];
     NSLog(@"ASDASD %lu", (unsigned long)[_tableCells count]);
     return cell;

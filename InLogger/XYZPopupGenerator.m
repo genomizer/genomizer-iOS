@@ -23,12 +23,29 @@
     
 }
 
-+ (void)showPopupWithMessage: (NSString *) message{
++ (void)showPopupWithMessage: (NSString *) message {
+    [XYZPopupGenerator showPopupWithMessage:message withTitle:@""];
+}
+
++ (void)showPopupWithMessage: (NSString *) message withTitle: (NSString *) title
+{
+    [XYZPopupGenerator showPopupWithMessage:message withTitle:title withCancelButtonTitle:@"OK"];
+}
+
++ (void)showPopupWithMessage: (NSString *) message withTitle: (NSString *) title
+             withCancelButtonTitle: (NSString *) cancelTitle
+{
     UIAlertView *popup = [[UIAlertView alloc]
-                          initWithTitle:@"" message: [XYZPopupGenerator formatMessage:message]
-                          delegate:nil cancelButtonTitle:@"OK"
+                          initWithTitle:title message: [XYZPopupGenerator formatMessage:message]
+                          delegate:nil cancelButtonTitle:cancelTitle
                           otherButtonTitles:nil];
     [popup show];
+}
+
++ (void) showErrorMessage:(NSError *)error
+{
+    NSString * errorMsg = [error.userInfo objectForKey:NSLocalizedDescriptionKey];
+    [XYZPopupGenerator showPopupWithMessage:errorMsg withTitle:error.domain];
 }
 
 @end

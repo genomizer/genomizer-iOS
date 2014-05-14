@@ -97,7 +97,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"executeTask"]) {
+    if ([segue.identifier isEqualToString:@"toConvertToProfile"]) {
         RawConvertViewController *nextVC = (RawConvertViewController *)[segue destinationViewController];
         nextVC.experimentFiles = _experimentFiles;
     }
