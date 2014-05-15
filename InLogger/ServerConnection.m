@@ -47,8 +47,6 @@ NSString *token;
     
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler: ^(NSURLResponse *response, NSData *POSTReply, NSError *internalError)
      {
-         
-         [NSThread sleepForTimeInterval:4];
          NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
          NSError *error;
          

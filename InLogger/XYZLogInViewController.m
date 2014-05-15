@@ -33,7 +33,7 @@
     NSString *password = _passwordField.text;
     NSError *error;
     
-    if(username.length > 0 && password.length > 0) {
+    if((username.length > 1) && (password.length > 3)) {
         [ServerConnection login:self.userField.text withPassword:self.passwordField.text error:&error withContext:self];
         [_spinner startAnimating];
         /*

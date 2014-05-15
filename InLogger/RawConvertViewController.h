@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RawConvertViewController : UIViewController<UITextFieldDelegate>
+@interface RawConvertViewController : UITableViewController<UITextFieldDelegate>
 @property NSMutableArray * experimentFiles;
 @property NSInteger * type;
+@property BOOL ratio;
 @end

@@ -51,11 +51,7 @@
 }
 
 +(NSMutableURLRequest*)getRawToProfileJSON:(NSString *)token withDict:(NSMutableDictionary*)dict{
-    /* NSString *conversionString = [@"/process/rawtoprofile/" stringByAppendingString:fileID];
-     NSMutableURLRequest *request = [self getRequest:@"PUT" withToken:token];
-     [request setURL:[NSURL URLWithString: [[self getServerURL] stringByAppendingString:conversionString]]];
-     return request;*/
-    {
+    
         NSError *error;
         NSData *postData = [NSJSONSerialization dataWithJSONObject:dict
                                                            options:NSJSONWritingPrettyPrinted
@@ -66,7 +62,7 @@
         [request setURL:[NSURL URLWithString: [[self getServerURL] stringByAppendingString:conversionString]]];
         
         return request;
-    }
+    
 }
 
 +(NSMutableURLRequest*)getAvailableAnnotationsJSON:(NSString *) token

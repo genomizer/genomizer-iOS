@@ -149,20 +149,20 @@
 		DED1228A190E966200D8E530 /* XYZSelectedFilesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZSelectedFilesViewController.h; sourceTree = "<group>"; };
 		DED1228B190E966200D8E530 /* XYZSelectedFilesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZSelectedFilesViewController.m; sourceTree = "<group>"; };
 		DED1228C190E966200D8E530 /* XYZSelectedFilesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XYZSelectedFilesViewController.xib; sourceTree = "<group>"; };
-		DEEF6AE419094F8A00A2CD8C /* InLogger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InLogger.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DEEF6AE419094F8A00A2CD8C /* Genomizer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Genomizer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEEF6AE719094F8A00A2CD8C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DEEF6AE919094F8A00A2CD8C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		DEEF6AEB19094F8A00A2CD8C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		DEEF6AEF19094F8A00A2CD8C /* InLogger-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "InLogger-Info.plist"; sourceTree = "<group>"; };
+		DEEF6AEF19094F8A00A2CD8C /* Genomizer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Genomizer-Info.plist"; sourceTree = "<group>"; };
 		DEEF6AF119094F8A00A2CD8C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DEEF6AF319094F8A00A2CD8C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		DEEF6AF519094F8A00A2CD8C /* InLogger-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "InLogger-Prefix.pch"; sourceTree = "<group>"; };
+		DEEF6AF519094F8A00A2CD8C /* Genomizer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Genomizer-Prefix.pch"; sourceTree = "<group>"; };
 		DEEF6AF619094F8A00A2CD8C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		DEEF6AF719094F8A00A2CD8C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		DEEF6AF919094F8A00A2CD8C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		DEEF6AFF19094F8B00A2CD8C /* InLoggerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InLoggerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DEEF6AFF19094F8B00A2CD8C /* GenomizerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GenomizerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEEF6B0019094F8B00A2CD8C /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		DEEF6B0819094F8B00A2CD8C /* InLoggerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "InLoggerTests-Info.plist"; sourceTree = "<group>"; };
+		DEEF6B0819094F8B00A2CD8C /* GenomizerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GenomizerTests-Info.plist"; sourceTree = "<group>"; };
 		DEEF6B0A19094F8B00A2CD8C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DEEF6B0C19094F8B00A2CD8C /* InLoggerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InLoggerTests.m; sourceTree = "<group>"; };
 		DEEF6B1619094FA000A2CD8C /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = ../Main.storyboard; sourceTree = "<group>"; };
@@ -326,8 +326,8 @@
 		DEEF6AE519094F8A00A2CD8C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DEEF6AE419094F8A00A2CD8C /* InLogger.app */,
-				DEEF6AFF19094F8B00A2CD8C /* InLoggerTests.xctest */,
+				DEEF6AE419094F8A00A2CD8C /* Genomizer.app */,
+				DEEF6AFF19094F8B00A2CD8C /* GenomizerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -376,10 +376,10 @@
 		DEEF6AEE19094F8A00A2CD8C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				DEEF6AEF19094F8A00A2CD8C /* InLogger-Info.plist */,
+				DEEF6AEF19094F8A00A2CD8C /* Genomizer-Info.plist */,
 				DEEF6AF019094F8A00A2CD8C /* InfoPlist.strings */,
 				DEEF6AF319094F8A00A2CD8C /* main.m */,
-				DEEF6AF519094F8A00A2CD8C /* InLogger-Prefix.pch */,
+				DEEF6AF519094F8A00A2CD8C /* Genomizer-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -403,7 +403,7 @@
 		DEEF6B0719094F8B00A2CD8C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				DEEF6B0819094F8B00A2CD8C /* InLoggerTests-Info.plist */,
+				DEEF6B0819094F8B00A2CD8C /* GenomizerTests-Info.plist */,
 				DEEF6B0919094F8B00A2CD8C /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
@@ -412,9 +412,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		DEEF6AE319094F8A00A2CD8C /* InLogger */ = {
+		DEEF6AE319094F8A00A2CD8C /* Genomizer */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DEEF6B1019094F8B00A2CD8C /* Build configuration list for PBXNativeTarget "InLogger" */;
+			buildConfigurationList = DEEF6B1019094F8B00A2CD8C /* Build configuration list for PBXNativeTarget "Genomizer" */;
 			buildPhases = (
 				DEEF6AE019094F8A00A2CD8C /* Sources */,
 				DEEF6AE119094F8A00A2CD8C /* Frameworks */,
@@ -424,14 +424,14 @@
 			);
 			dependencies = (
 			);
-			name = InLogger;
+			name = Genomizer;
 			productName = InLogger;
-			productReference = DEEF6AE419094F8A00A2CD8C /* InLogger.app */;
+			productReference = DEEF6AE419094F8A00A2CD8C /* Genomizer.app */;
 			productType = "com.apple.product-type.application";
 		};
-		DEEF6AFE19094F8B00A2CD8C /* InLoggerTests */ = {
+		DEEF6AFE19094F8B00A2CD8C /* GenomizerTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DEEF6B1319094F8B00A2CD8C /* Build configuration list for PBXNativeTarget "InLoggerTests" */;
+			buildConfigurationList = DEEF6B1319094F8B00A2CD8C /* Build configuration list for PBXNativeTarget "GenomizerTests" */;
 			buildPhases = (
 				DEEF6AFB19094F8B00A2CD8C /* Sources */,
 				DEEF6AFC19094F8B00A2CD8C /* Frameworks */,
@@ -442,9 +442,9 @@
 			dependencies = (
 				DEEF6B0519094F8B00A2CD8C /* PBXTargetDependency */,
 			);
-			name = InLoggerTests;
+			name = GenomizerTests;
 			productName = InLoggerTests;
-			productReference = DEEF6AFF19094F8B00A2CD8C /* InLoggerTests.xctest */;
+			productReference = DEEF6AFF19094F8B00A2CD8C /* GenomizerTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -461,7 +461,7 @@
 					};
 				};
 			};
-			buildConfigurationList = DEEF6ADF19094F8A00A2CD8C /* Build configuration list for PBXProject "InLogger" */;
+			buildConfigurationList = DEEF6ADF19094F8A00A2CD8C /* Build configuration list for PBXProject "Genomizer" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -473,8 +473,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				DEEF6AE319094F8A00A2CD8C /* InLogger */,
-				DEEF6AFE19094F8B00A2CD8C /* InLoggerTests */,
+				DEEF6AE319094F8A00A2CD8C /* Genomizer */,
+				DEEF6AFE19094F8B00A2CD8C /* GenomizerTests */,
 			);
 		};
 /* End PBXProject section */
@@ -573,7 +573,7 @@
 /* Begin PBXTargetDependency section */
 		DEEF6B0519094F8B00A2CD8C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = DEEF6AE319094F8A00A2CD8C /* InLogger */;
+			target = DEEF6AE319094F8A00A2CD8C /* Genomizer */;
 			targetProxy = DEEF6B0419094F8B00A2CD8C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -674,9 +674,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "InLogger/InLogger-Prefix.pch";
-				INFOPLIST_FILE = "InLogger/InLogger-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "InLogger/Genomizer-Prefix.pch";
+				INFOPLIST_FILE = "InLogger/Genomizer-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				PRODUCT_NAME = Genomizer;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -687,9 +688,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "InLogger/InLogger-Prefix.pch";
-				INFOPLIST_FILE = "InLogger/InLogger-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "InLogger/Genomizer-Prefix.pch";
+				INFOPLIST_FILE = "InLogger/Genomizer-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				PRODUCT_NAME = Genomizer;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -709,8 +711,8 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "InLoggerTests/InLoggerTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "InLoggerTests/GenomizerTests-Info.plist";
+				PRODUCT_NAME = GenomizerTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -727,8 +729,8 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "InLogger/InLogger-Prefix.pch";
-				INFOPLIST_FILE = "InLoggerTests/InLoggerTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "InLoggerTests/GenomizerTests-Info.plist";
+				PRODUCT_NAME = GenomizerTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -737,7 +739,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		DEEF6ADF19094F8A00A2CD8C /* Build configuration list for PBXProject "InLogger" */ = {
+		DEEF6ADF19094F8A00A2CD8C /* Build configuration list for PBXProject "Genomizer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DEEF6B0E19094F8B00A2CD8C /* Debug */,
@@ -746,7 +748,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DEEF6B1019094F8B00A2CD8C /* Build configuration list for PBXNativeTarget "InLogger" */ = {
+		DEEF6B1019094F8B00A2CD8C /* Build configuration list for PBXNativeTarget "Genomizer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DEEF6B1119094F8B00A2CD8C /* Debug */,
@@ -755,7 +757,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DEEF6B1319094F8B00A2CD8C /* Build configuration list for PBXNativeTarget "InLoggerTests" */ = {
+		DEEF6B1319094F8B00A2CD8C /* Build configuration list for PBXNativeTarget "GenomizerTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DEEF6B1419094F8B00A2CD8C /* Debug */,
