@@ -14,8 +14,6 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *executeButton;
 
 @property NSArray *tasks;
-@property NSInteger selectedCellRow;
-
 
 @end
 
@@ -36,7 +34,6 @@
     NSLog(@"loaded");
     _tasks = [self tasksOfFileType:_fileType];
    // NSLog(@"expfile%@", _experimentFiles[0]);
-    _selectedCellRow = -1;
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -84,12 +81,7 @@
     
  
     if (_fileType == RAW) {
-     //   if([sender.superview.subviews[1] valueForKey:@"tag"] == 0){
-        [self performSegueWithIdentifier:@"executeTask" sender:_experimentFiles];
-     //   }
-   /*     else{
-           [self performSegueWithIdentifier:@"executeTaskRatio" sender:_experimentFiles]; 
-        }*/
+        [self performSegueWithIdentifier:@"toConvertToProfile" sender:_experimentFiles];
     } else {
         [XYZPopupGenerator showPopupWithMessage:@"Not yet implemented!"];
     }
@@ -108,11 +100,6 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: @"SelectTaskCellPrototype" forIndexPath:indexPath];
     
     cell.textLabel.text = [_tasks objectAtIndex:indexPath.row];
-    if (_selectedCellRow == indexPath.row) {
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    } else {
-        cell.accessoryType = UITableViewCellAccessoryNone;
-    }
     cell.textLabel.tag = indexPath.row;
 
     // Configure the cell...
@@ -123,9 +110,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    _selectedCellRow = indexPath.row;
-    _executeButton.enabled = YES;
-   
     [tableView reloadData];
 }
 

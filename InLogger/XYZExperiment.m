@@ -68,22 +68,23 @@
     return [_annotations valueForKey:annotation];
 }
 
-- (NSMutableArray *) arrayOfFile: (XYZExperimentFile *) file
+- (NSMutableArray *) arrayOfFileType: (FileType) fileType
 {
-    if (file.type == RAW) {
-        return _rawFiles;
-    } else if (file.type == REGION) {
-        return _regionFiles;
-    } else if (file.type == PROFILE) {
-        return _profileFiles;
-    } else {
-        return _otherFiles;
+    switch (fileType) {
+        case RAW:
+            return _rawFiles;
+        case PROFILE:
+            return _profileFiles;
+        case REGION:
+            return _regionFiles;
+        default:
+            return _otherFiles;
     }
 }
 
 - (void) addExperimentFile: (XYZExperimentFile *) file
 {
-    NSMutableArray *filesArray = [self arrayOfFile:file];
+    NSMutableArray *filesArray = [self arrayOfFileType:file.type];
     if (![filesArray containsObject:file]) {
         [filesArray addObject:file];
     }
@@ -91,12 +92,36 @@
 
 - (void) removeExperimentFile: (XYZExperimentFile *) file
 {
-    [[self arrayOfFile:file] removeObject:file];
+    [[self arrayOfFileType: file.type] removeObject:file];
 }
 
 - (NSInteger) numberOfFiles
 {
     return [_rawFiles count] + [_profileFiles count] + [_regionFiles count] + [_otherFiles count];
+}
+
+- (NSMutableArray *) getSelectedFiles
+{
+    NSMutableArray *selectedFiles = [[NSMutableArray alloc] init];
+    
+    [selectedFiles addObjectsFromArray:[self getSelectedFiles:RAW]];
+    [selectedFiles addObjectsFromArray:[self getSelectedFiles:PROFILE]];
+    [selectedFiles addObjectsFromArray:[self getSelectedFiles:REGION]];
+    [selectedFiles addObjectsFromArray:[self getSelectedFiles:OTHER]];
+    
+    return selectedFiles;
+}
+
+- (NSMutableArray *) getSelectedFiles: (FileType) fileType
+{
+    NSArray *files = [self arrayOfFileType:fileType];
+    NSMutableArray *selectedFiles = [[NSMutableArray alloc] init];
+    for (XYZExperimentFile *file in files) {
+        if(file.selected) {
+            [selectedFiles addObject:file];
+        }
+    }
+    return selectedFiles;
 }
 
 @end

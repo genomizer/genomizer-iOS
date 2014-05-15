@@ -15,7 +15,6 @@
 
 @property XYZExperimentDescriber *experimentDescriber;
 @property CGFloat tableCellWidth;
-@property UIFont *cellFont;
 
 @end
 

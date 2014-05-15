@@ -14,7 +14,6 @@
 
 + (void) addExperimentFile:(XYZExperimentFile *) file;
 + (void) removeExperimentFile:(XYZExperimentFile *) file;
-+ (void) addInfoFile:(XYZExperimentFile *) file;
 - (IBAction) unwindToList:(UIStoryboardSegue *)segue;
 
 @end

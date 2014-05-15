@@ -26,14 +26,14 @@
 		76F638D8190FD99300F0F4BF /* XYZExperiment.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F638D7190FD99300F0F4BF /* XYZExperiment.m */; };
 		76F638DB190FDD9D00F0F4BF /* XYZExperimentFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F638DA190FDD9D00F0F4BF /* XYZExperimentFile.m */; };
 		DE032D72191BCDC4006AC257 /* XYZSelectTaskTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE032D71191BCDC4006AC257 /* XYZSelectTaskTableViewController.m */; };
-		DE25D7F71910D6630084BDDC /* XYZDataFileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DE25D7F51910D6630084BDDC /* XYZDataFileTableViewCell.m */; };
-		DE25D7F81910D6630084BDDC /* XYZDataFileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE25D7F61910D6630084BDDC /* XYZDataFileTableViewCell.xib */; };
 		DE25D7FC1910D6840084BDDC /* XYZTitleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DE25D7FA1910D6840084BDDC /* XYZTitleTableViewCell.m */; };
 		DE25D7FD1910D6840084BDDC /* XYZTitleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE25D7FB1910D6840084BDDC /* XYZTitleTableViewCell.xib */; };
 		DE25D8021910D72A0084BDDC /* XYZDataFileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE25D8001910D72A0084BDDC /* XYZDataFileViewController.m */; };
 		DE25D8031910D72A0084BDDC /* XYZDataFileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE25D8011910D72A0084BDDC /* XYZDataFileViewController.xib */; };
 		DE25D8061910E1500084BDDC /* XYZExperimentDescriber.m in Sources */ = {isa = PBXBuildFile; fileRef = DE25D8051910E1500084BDDC /* XYZExperimentDescriber.m */; };
 		DE403ACD190A8A3E003D21F5 /* XYZSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE403ACC190A8A3E003D21F5 /* XYZSearchViewController.m */; };
+		DE750AD51924BD3000F77FEC /* XYZDataFileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DE750AD31924BD3000F77FEC /* XYZDataFileTableViewCell.m */; };
+		DE750AD61924BD3000F77FEC /* XYZDataFileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE750AD41924BD3000F77FEC /* XYZDataFileTableViewCell.xib */; };
 		DE7C9C2519235F6C004A2492 /* XYZAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = DE7C9C2419235F6C004A2492 /* XYZAnnotation.m */; };
 		DE7C9C2719236044004A2492 /* TestAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = DE7C9C2619236044004A2492 /* TestAnnotation.m */; };
 		DE9A3EEF1918CAA100F7C33B /* XYZAnnotationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DE9A3EED1918CAA100F7C33B /* XYZAnnotationTableViewCell.m */; };
@@ -110,9 +110,6 @@
 		76F638DA190FDD9D00F0F4BF /* XYZExperimentFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZExperimentFile.m; sourceTree = "<group>"; };
 		DE032D70191BCDC4006AC257 /* XYZSelectTaskTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZSelectTaskTableViewController.h; sourceTree = "<group>"; };
 		DE032D71191BCDC4006AC257 /* XYZSelectTaskTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZSelectTaskTableViewController.m; sourceTree = "<group>"; };
-		DE25D7F41910D6630084BDDC /* XYZDataFileTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZDataFileTableViewCell.h; sourceTree = "<group>"; };
-		DE25D7F51910D6630084BDDC /* XYZDataFileTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZDataFileTableViewCell.m; sourceTree = "<group>"; };
-		DE25D7F61910D6630084BDDC /* XYZDataFileTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XYZDataFileTableViewCell.xib; sourceTree = "<group>"; };
 		DE25D7F91910D6840084BDDC /* XYZTitleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZTitleTableViewCell.h; sourceTree = "<group>"; };
 		DE25D7FA1910D6840084BDDC /* XYZTitleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZTitleTableViewCell.m; sourceTree = "<group>"; };
 		DE25D7FB1910D6840084BDDC /* XYZTitleTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XYZTitleTableViewCell.xib; sourceTree = "<group>"; };
@@ -123,6 +120,9 @@
 		DE25D8051910E1500084BDDC /* XYZExperimentDescriber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZExperimentDescriber.m; sourceTree = "<group>"; };
 		DE403ACB190A8A3E003D21F5 /* XYZSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZSearchViewController.h; sourceTree = "<group>"; };
 		DE403ACC190A8A3E003D21F5 /* XYZSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZSearchViewController.m; sourceTree = "<group>"; };
+		DE750AD21924BD3000F77FEC /* XYZDataFileTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZDataFileTableViewCell.h; sourceTree = "<group>"; };
+		DE750AD31924BD3000F77FEC /* XYZDataFileTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZDataFileTableViewCell.m; sourceTree = "<group>"; };
+		DE750AD41924BD3000F77FEC /* XYZDataFileTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XYZDataFileTableViewCell.xib; sourceTree = "<group>"; };
 		DE7C9C2319235F6C004A2492 /* XYZAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZAnnotation.h; sourceTree = "<group>"; };
 		DE7C9C2419235F6C004A2492 /* XYZAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZAnnotation.m; sourceTree = "<group>"; };
 		DE7C9C2619236044004A2492 /* TestAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestAnnotation.m; sourceTree = "<group>"; };
@@ -254,9 +254,9 @@
 				DE25D7FF1910D72A0084BDDC /* XYZDataFileViewController.h */,
 				DE25D8001910D72A0084BDDC /* XYZDataFileViewController.m */,
 				DE25D8011910D72A0084BDDC /* XYZDataFileViewController.xib */,
-				DE25D7F41910D6630084BDDC /* XYZDataFileTableViewCell.h */,
-				DE25D7F51910D6630084BDDC /* XYZDataFileTableViewCell.m */,
-				DE25D7F61910D6630084BDDC /* XYZDataFileTableViewCell.xib */,
+				DE750AD21924BD3000F77FEC /* XYZDataFileTableViewCell.h */,
+				DE750AD31924BD3000F77FEC /* XYZDataFileTableViewCell.m */,
+				DE750AD41924BD3000F77FEC /* XYZDataFileTableViewCell.xib */,
 				DED12281190E966200D8E530 /* XYZSearchResultTableViewCell.h */,
 				DED12282190E966200D8E530 /* XYZSearchResultTableViewCell.m */,
 				DED12283190E966200D8E530 /* XYZSearchResultTableViewCell.xib */,
@@ -486,8 +486,8 @@
 			files = (
 				DEEF7D95190A55D1005EDB8E /* XYZTabViewController.xib in Resources */,
 				DEEF6B1719094FA000A2CD8C /* Main.storyboard in Resources */,
+				DE750AD61924BD3000F77FEC /* XYZDataFileTableViewCell.xib in Resources */,
 				DEEF6AF219094F8A00A2CD8C /* InfoPlist.strings in Resources */,
-				DE25D7F81910D6630084BDDC /* XYZDataFileTableViewCell.xib in Resources */,
 				DEEF6B1C1909553C00A2CD8C /* XYZLogInViewController.xib in Resources */,
 				DED12291190E966200D8E530 /* XYZSearchResultTableViewController.xib in Resources */,
 				DE9A3EF01918CAA100F7C33B /* XYZAnnotationTableViewCell.xib in Resources */,
@@ -534,9 +534,9 @@
 				76F638DB190FDD9D00F0F4BF /* XYZExperimentFile.m in Sources */,
 				DE7C9C2519235F6C004A2492 /* XYZAnnotation.m in Sources */,
 				641BC92E191CC827000E5254 /* RawConvertViewController.m in Sources */,
+				DE750AD51924BD3000F77FEC /* XYZDataFileTableViewCell.m in Sources */,
 				DE9A3EF41918CB4600F7C33B /* XYZAnnotationTableViewController.m in Sources */,
 				76F638D8190FD99300F0F4BF /* XYZExperiment.m in Sources */,
-				DE25D7F71910D6630084BDDC /* XYZDataFileTableViewCell.m in Sources */,
 				21BFD1DB191B6A2A00F8E02F /* XYZPopupGenerator.m in Sources */,
 				DEEF6AF419094F8A00A2CD8C /* main.m in Sources */,
 				DE25D8021910D72A0084BDDC /* XYZDataFileViewController.m in Sources */,

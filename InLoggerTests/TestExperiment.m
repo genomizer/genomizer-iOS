@@ -118,4 +118,30 @@
 
 }
 
+-(void) testGetSelectedRAWFiles
+{
+    XYZExperimentFile *experimentFile2 = [[XYZExperimentFile alloc] init];
+    _experimentFile.type = RAW;
+    experimentFile2.type = RAW;
+    [_experiment addExperimentFile:_experimentFile];
+    [_experiment addExperimentFile: experimentFile2];
+    XCTAssertEqual([[_experiment getSelectedFiles:RAW] count], 0);
+    _experimentFile.selected = YES;
+    experimentFile2.selected = YES;
+    XCTAssertEqual([[_experiment getSelectedFiles:RAW] count], 2);
+}
+
+-(void) testGetSelectedFiles
+{
+    XYZExperimentFile *experimentFile2 = [[XYZExperimentFile alloc] init];
+    _experimentFile.type = REGION;
+    experimentFile2.type = RAW;
+    [_experiment addExperimentFile:_experimentFile];
+    [_experiment addExperimentFile: experimentFile2];
+    XCTAssertEqual([[_experiment getSelectedFiles] count], 0);
+    _experimentFile.selected = YES;
+    experimentFile2.selected = YES;
+    XCTAssertEqual([[_experiment getSelectedFiles] count], 2);
+}
+
 @end
