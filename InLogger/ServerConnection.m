@@ -112,35 +112,32 @@ NSString *token;
     return nil;
 }
 
-+(NSArray*)search:(NSString*)annotations error:(NSError**) error
++ (void)search:(NSString*)annotations withContext: (XYZSearchViewController*) controller
 {
    
     NSMutableURLRequest *request = [JSONBuilder getSearchJSON:annotations withToken: token];
-    NSHTTPURLResponse *httpResp;
     
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler: ^(NSURLResponse *response, NSData *POSTReply, NSError *internalError)
      {
-         [NSThread sleepForTimeInterval:3];
+         NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
+         NSMutableArray *array;
+         NSError *error;
+
          if(internalError == nil)
          {
              if(httpResp.statusCode == 200){
-                 //return [self handleSearchPostReply:internalError POSTReply:POSTReply error:error];
-                 NSError *error;
-                 NSMutableArray *array = [self handleSearchPostReply:internalError POSTReply:POSTReply error:&error];
-                 [controller reportSearchResult: array withParsingError:error];
+                 array = [self handleSearchPostReply:internalError POSTReply:POSTReply error:&error];
              }
              else
              {
-                  NSError *error = [self generateErrorObjectFromHTTPError:httpResp.statusCode];
-                 [controller reportSearchResult:nil withParsingError:error];
+                  error = [self generateErrorObjectFromHTTPError:httpResp.statusCode];
              }
          }
          else{
-             NSError *error;
              error = [self generateError:@"Could not connect to server" withErrorDomain:@"Connection Error" withUnderlyingError:internalError];
-             [controller reportSearchResult:nil withParsingError:error];
          }
+         [controller reportSearchResult:array withParsingError:error];
      }];
 }
 

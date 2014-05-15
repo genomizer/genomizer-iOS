@@ -14,5 +14,8 @@
 @property NSInteger * type;
 @property BOOL ratio;
 @property (nonatomic, copy) ProcessViewController *aReference;
+
+- (void) reportResult: (NSError*) error;
+
 @end
 
