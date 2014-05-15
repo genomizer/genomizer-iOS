@@ -47,8 +47,7 @@
         [XYZPopupGenerator showPopupWithMessage:@"Please enter username and password."];
     }
 }
-
-- (IBAction)signInButtonTouchDown:(id)sender
+- (IBAction)signInButtonTouchUp:(UIButton *)sender
 {
  /*   UIAlertView *loginFailed = [[UIAlertView alloc]
                                 initWithTitle:@"es" message:error
@@ -63,6 +62,7 @@
     
     if(error == nil){
         dispatch_async(dispatch_get_main_queue(), ^{
+            
             [self performSegueWithIdentifier:@"loginSegue" sender:self];
         });
     } else
@@ -111,6 +111,9 @@
     [self.view endEditing:YES];
     [self centerFrameView];
     [super touchesBegan:touches withEvent:event];
+    _spinner.hidesWhenStopped = YES;
+    self.userField.delegate = self;
+    self.passwordField.delegate = self;
 }
 */
 - (BOOL)textFieldShouldReturn:(UITextField *)textField

@@ -14,9 +14,7 @@
 
 @property XYZExperiment * selectedExperiment;
 @property XYZExperiment *selectedFiles;
-@property NSMutableArray *searchResults1;
-@property XYZExperimentDescriber *experimentDescriber;
+@property NSArray *searchResults;
 
-- (NSMutableArray *) createSearchFields;
 
 @end

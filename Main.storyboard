@@ -36,7 +36,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="signInButtonTouchDown:" destination="Csn-f6-9k9" eventType="touchUpInside" id="ZfY-WV-yOT"/>
+                                    <action selector="signInButtonTouchUp:" destination="Csn-f6-9k9" eventType="touchUpInside" id="ctX-x6-Jed"/>
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="80" verticalHuggingPriority="237" fixedFrame="YES" placeholderIntrinsicWidth="138" placeholderIntrinsicHeight="128" image="taco" translatesAutoresizingMaskIntoConstraints="NO" id="AtL-z1-FEd">
@@ -126,9 +126,10 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done"/>
                                                     <connections>
-                                                        <action selector="inputFieldValueChanged:" destination="Tig-61-Fif" eventType="editingChanged" id="Og2-QN-ue4"/>
-                                                        <action selector="textFieldDidBeginEditing:" destination="auJ-fT-xa1" eventType="editingDidBegin" id="9rX-n1-Q5F"/>
-                                                        <action selector="textFieldEditingDidEnd:" destination="Tig-61-Fif" eventType="editingDidEnd" id="isI-Jz-dPq"/>
+                                                        <action selector="inputFieldValueChanged:" destination="Tig-61-Fif" eventType="editingChanged" id="lz9-p2-GgL"/>
+                                                        <action selector="textFieldEditingDidBegin:" destination="Tig-61-Fif" eventType="editingDidBegin" id="0on-ml-EEZ"/>
+                                                        <action selector="textFieldEditingDidEnd:" destination="Tig-61-Fif" eventType="editingDidEnd" id="jOj-HV-qAc"/>
+                                                        <outlet property="delegate" destination="Tig-61-Fif" id="Gkr-gp-CyT"/>
                                                     </connections>
                                                 </textField>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vgg-C9-vRK">
@@ -149,7 +150,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="inputField" destination="cuH-Be-R19" id="EwY-NA-LWE"/>
+                                            <outlet property="inputField" destination="cuH-Be-R19" id="cBp-sO-Rc1"/>
                                             <outlet property="switchButton" destination="vgg-C9-vRK" id="Wwg-qT-D9V"/>
                                         </connections>
                                     </tableViewCell>
@@ -185,7 +186,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="SearchQueryButtonTouched:" destination="auJ-fT-xa1" eventType="touchUpInside" id="ZEp-Dq-Zh3"/>
+                                            <action selector="searchQueryButtonTouched:" destination="auJ-fT-xa1" eventType="touchUpInside" id="kuU-VR-0hB"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IV3-57-csz">
@@ -234,7 +235,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="advancedView" destination="sRN-He-MEm" id="76w-JE-lPi"/>
-                        <outlet property="pumedSearch" destination="y7h-DZ-3NX" id="pXl-Di-o6A"/>
+                        <outlet property="pubmedTextView" destination="y7h-DZ-3NX" id="HCb-F0-XP7"/>
                         <outlet property="tableView" destination="h4D-dx-Mqj" id="fPB-Z7-tcO"/>
                         <segue destination="ggw-44-oMv" kind="push" identifier="searchResult" id="1cQ-o4-QSo"/>
                     </connections>
@@ -326,7 +327,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ListPrototypeCell2" id="NEQ-6F-owQ" customClass="XYZAnnotationTableViewCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AnnotationPrototypeCell" id="NEQ-6F-owQ" customClass="XYZAnnotationTableViewCell">
                                 <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NEQ-6F-owQ" id="JMk-1o-c8q">

@@ -13,7 +13,7 @@
 
 @interface XYZSearchResultTableViewController ()
 
-
+@property XYZExperimentDescriber *experimentDescriber;
 @property CGFloat tableCellWidth;
 @property UIFont *cellFont;
 
@@ -26,24 +26,9 @@
     [super viewDidLoad];
     XYZSearchResultTableViewCell *cell= [self.tableView dequeueReusableCellWithIdentifier:@"ListPrototypeCell"];
     _tableCellWidth = cell.textFieldSize.width;
+    _experimentDescriber = [[XYZExperimentDescriber alloc] init];
 }
 
-- (NSMutableArray *) defaultResults
-{
-    NSMutableArray *results = [[NSMutableArray alloc] init];
-    [results addObject:[XYZExperiment defaultExperiment]];
-    return results;
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-- (NSMutableArray *) createSearchFields
-{
-    return [NSMutableArray arrayWithObjects:@"Experiment ID", @"Publication ID" , nil];
-}
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -54,7 +39,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.searchResults1 count];
+    return [self.searchResults count];
 }
 
 
@@ -62,7 +47,7 @@
 {
     static NSString *CellIdentifier = @"ListPrototypeCell";
     XYZSearchResultTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    XYZExperiment *experiment = [_searchResults1 objectAtIndex: indexPath.row];
+    XYZExperiment *experiment = [_searchResults objectAtIndex: indexPath.row];
     [cell setTextFieldText: [_experimentDescriber getDescriptionOf: experiment]];
 
     cell.index = indexPath.row;
@@ -73,7 +58,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    XYZExperiment *experiment = [_searchResults1 objectAtIndex: indexPath.row];
+    XYZExperiment *experiment = [_searchResults objectAtIndex: indexPath.row];
     NSString *text = [_experimentDescriber getDescriptionOf: experiment];
     UIFont *font = [UIFont systemFontOfSize:14];
     
@@ -91,70 +76,13 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    NSLog(@"identifier %@", segue.identifier);
     if ([segue.identifier isEqualToString:@"toFileList1"] || [segue.identifier isEqualToString:@"toFileList2"]) {
         XYZDataFileViewController *nextVC = (XYZDataFileViewController *)[segue destinationViewController];
-        NSLog(@"INSIDE MAN");
         nextVC.experiment = _selectedExperiment;
     } else if ([segue.identifier isEqualToString:@"toEditDisplay"]) {
         XYZAnnotationTableViewController *nextVC = (XYZAnnotationTableViewController *)[segue destinationViewController];
         nextVC.describer = _experimentDescriber;
     }
 }
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Table view delegate
-
-// In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Navigation logic may go here, for example:
-    // Create the next view controller.
-    <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:<#@"Nib name"#> bundle:nil];
-    
-    // Pass the selected object to the new view controller.
-    
-    // Push the view controller.
-    [self.navigationController pushViewController:detailViewController animated:YES];
-}
-*/
 
 @end

@@ -8,13 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import "XYZExperiment.h"
+#import "XYZAnnotation.h"
 
 @interface XYZExperimentDescriber : NSObject
 
-- (void) addAnnotation: (NSString *) annotation;
-- (void) removeAnnotation: (NSString *) annotation;
+- (void) addAnnotation: (XYZAnnotation *) annotation;
+- (void) removeAnnotation: (XYZAnnotation *) annotation;
 - (NSString *) getDescriptionOf: (XYZExperiment*) experiment;
-- (BOOL) containsAnnotation: (NSString *) annotation;
-+ (NSString *) formatAnnotation : (NSString *) annotation;
+- (BOOL) containsAnnotation: (XYZAnnotation *) annotation;
 
 @end

@@ -34,12 +34,14 @@
 		DE25D8031910D72A0084BDDC /* XYZDataFileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE25D8011910D72A0084BDDC /* XYZDataFileViewController.xib */; };
 		DE25D8061910E1500084BDDC /* XYZExperimentDescriber.m in Sources */ = {isa = PBXBuildFile; fileRef = DE25D8051910E1500084BDDC /* XYZExperimentDescriber.m */; };
 		DE403ACD190A8A3E003D21F5 /* XYZSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE403ACC190A8A3E003D21F5 /* XYZSearchViewController.m */; };
+		DE7C9C2519235F6C004A2492 /* XYZAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = DE7C9C2419235F6C004A2492 /* XYZAnnotation.m */; };
+		DE7C9C2719236044004A2492 /* TestAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = DE7C9C2619236044004A2492 /* TestAnnotation.m */; };
 		DE9A3EEF1918CAA100F7C33B /* XYZAnnotationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DE9A3EED1918CAA100F7C33B /* XYZAnnotationTableViewCell.m */; };
 		DE9A3EF01918CAA100F7C33B /* XYZAnnotationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE9A3EEE1918CAA100F7C33B /* XYZAnnotationTableViewCell.xib */; };
 		DE9A3EF41918CB4600F7C33B /* XYZAnnotationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE9A3EF21918CB4600F7C33B /* XYZAnnotationTableViewController.m */; };
 		DE9A3EF51918CB4600F7C33B /* XYZAnnotationTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE9A3EF31918CB4600F7C33B /* XYZAnnotationTableViewController.xib */; };
 		DE9A3EF91918CFDC00F7C33B /* TestExperimentDescriber.m in Sources */ = {isa = PBXBuildFile; fileRef = DE9A3EF81918CFDC00F7C33B /* TestExperimentDescriber.m */; };
-		DE9BED6619190B4400D9C0CF /* pickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = DE9BED6519190B4400D9C0CF /* pickerView.m */; };
+		DED034711923AD1B00E9EAF1 /* XYZPubMedBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = DED034701923AD1B00E9EAF1 /* XYZPubMedBuilder.m */; };
 		DED1228D190E966200D8E530 /* XYZInLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = DED12280190E966200D8E530 /* XYZInLogger.m */; };
 		DED1228E190E966200D8E530 /* XYZSearchResultTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DED12282190E966200D8E530 /* XYZSearchResultTableViewCell.m */; };
 		DED1228F190E966200D8E530 /* XYZSearchResultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DED12283190E966200D8E530 /* XYZSearchResultTableViewCell.xib */; };
@@ -66,7 +68,6 @@
 		DEEF6B1C1909553C00A2CD8C /* XYZLogInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DEEF6B1A1909553C00A2CD8C /* XYZLogInViewController.xib */; };
 		DEEF7D94190A55D1005EDB8E /* XYZTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEEF7D92190A55D1005EDB8E /* XYZTabViewController.m */; };
 		DEEF7D95190A55D1005EDB8E /* XYZTabViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DEEF7D93190A55D1005EDB8E /* XYZTabViewController.xib */; };
-		DEF2F1231920BA6E00612570 /* TestPopupGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF2F1221920BA6E00612570 /* TestPopupGenerator.m */; };
 		DEF812911918D90A00A88173 /* TestExperiment.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF812901918D90A00A88173 /* TestExperiment.m */; };
 		DEF812931918DE1C00A88173 /* TestExperimentFile.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF812921918DE1C00A88173 /* TestExperimentFile.m */; };
 /* End PBXBuildFile section */
@@ -122,6 +123,9 @@
 		DE25D8051910E1500084BDDC /* XYZExperimentDescriber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZExperimentDescriber.m; sourceTree = "<group>"; };
 		DE403ACB190A8A3E003D21F5 /* XYZSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZSearchViewController.h; sourceTree = "<group>"; };
 		DE403ACC190A8A3E003D21F5 /* XYZSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZSearchViewController.m; sourceTree = "<group>"; };
+		DE7C9C2319235F6C004A2492 /* XYZAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZAnnotation.h; sourceTree = "<group>"; };
+		DE7C9C2419235F6C004A2492 /* XYZAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZAnnotation.m; sourceTree = "<group>"; };
+		DE7C9C2619236044004A2492 /* TestAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestAnnotation.m; sourceTree = "<group>"; };
 		DE9A3EEC1918CAA100F7C33B /* XYZAnnotationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZAnnotationTableViewCell.h; sourceTree = "<group>"; };
 		DE9A3EED1918CAA100F7C33B /* XYZAnnotationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZAnnotationTableViewCell.m; sourceTree = "<group>"; };
 		DE9A3EEE1918CAA100F7C33B /* XYZAnnotationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XYZAnnotationTableViewCell.xib; sourceTree = "<group>"; };
@@ -129,8 +133,8 @@
 		DE9A3EF21918CB4600F7C33B /* XYZAnnotationTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZAnnotationTableViewController.m; sourceTree = "<group>"; };
 		DE9A3EF31918CB4600F7C33B /* XYZAnnotationTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XYZAnnotationTableViewController.xib; sourceTree = "<group>"; };
 		DE9A3EF81918CFDC00F7C33B /* TestExperimentDescriber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestExperimentDescriber.m; sourceTree = "<group>"; };
-		DE9BED6519190B4400D9C0CF /* pickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = pickerView.m; sourceTree = "<group>"; };
-		DE9BED6719190B4D00D9C0CF /* pickerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pickerView.h; sourceTree = "<group>"; };
+		DED0346F1923AD1B00E9EAF1 /* XYZPubMedBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZPubMedBuilder.h; sourceTree = "<group>"; };
+		DED034701923AD1B00E9EAF1 /* XYZPubMedBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZPubMedBuilder.m; sourceTree = "<group>"; };
 		DED1227F190E966200D8E530 /* XYZInLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZInLogger.h; sourceTree = "<group>"; };
 		DED12280190E966200D8E530 /* XYZInLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZInLogger.m; sourceTree = "<group>"; };
 		DED12281190E966200D8E530 /* XYZSearchResultTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZSearchResultTableViewCell.h; sourceTree = "<group>"; };
@@ -168,7 +172,6 @@
 		DEEF7D91190A55D1005EDB8E /* XYZTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XYZTabViewController.h; path = ../XYZTabViewController.h; sourceTree = "<group>"; };
 		DEEF7D92190A55D1005EDB8E /* XYZTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XYZTabViewController.m; path = ../XYZTabViewController.m; sourceTree = "<group>"; };
 		DEEF7D93190A55D1005EDB8E /* XYZTabViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = XYZTabViewController.xib; path = ../XYZTabViewController.xib; sourceTree = "<group>"; };
-		DEF2F1221920BA6E00612570 /* TestPopupGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestPopupGenerator.m; sourceTree = "<group>"; };
 		DEF812901918D90A00A88173 /* TestExperiment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestExperiment.m; sourceTree = "<group>"; };
 		DEF812921918DE1C00A88173 /* TestExperimentFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestExperimentFile.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -213,13 +216,30 @@
 		DE25D7FE1910D6A00084BDDC /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				DE25D8041910E1500084BDDC /* XYZExperimentDescriber.h */,
+				DE25D8051910E1500084BDDC /* XYZExperimentDescriber.m */,
 				DE25D7FA1910D6840084BDDC /* XYZTitleTableViewCell.m */,
 				DE25D7FB1910D6840084BDDC /* XYZTitleTableViewCell.xib */,
 				DE25D7F91910D6840084BDDC /* XYZTitleTableViewCell.h */,
 				21BFD1D9191B6A2A00F8E02F /* XYZPopupGenerator.h */,
 				21BFD1DA191B6A2A00F8E02F /* XYZPopupGenerator.m */,
+				DED0346F1923AD1B00E9EAF1 /* XYZPubMedBuilder.h */,
+				DED034701923AD1B00E9EAF1 /* XYZPubMedBuilder.m */,
 			);
 			name = Utilities;
+			sourceTree = "<group>";
+		};
+		DE7C9C2219235F2A004A2492 /* DataHolders */ = {
+			isa = PBXGroup;
+			children = (
+				76F638D6190FD99200F0F4BF /* XYZExperiment.h */,
+				76F638D7190FD99300F0F4BF /* XYZExperiment.m */,
+				76F638D9190FDD9D00F0F4BF /* XYZExperimentFile.h */,
+				76F638DA190FDD9D00F0F4BF /* XYZExperimentFile.m */,
+				DE7C9C2319235F6C004A2492 /* XYZAnnotation.h */,
+				DE7C9C2419235F6C004A2492 /* XYZAnnotation.m */,
+			);
+			name = DataHolders;
 			sourceTree = "<group>";
 		};
 		DED12296190E9C2F00D8E530 /* SearchResult */ = {
@@ -242,15 +262,9 @@
 				DED12283190E966200D8E530 /* XYZSearchResultTableViewCell.xib */,
 				DED12284190E966200D8E530 /* XYZSearchResultTableViewController.h */,
 				DED12285190E966200D8E530 /* XYZSearchResultTableViewController.m */,
-				DE25D8041910E1500084BDDC /* XYZExperimentDescriber.h */,
-				DE25D8051910E1500084BDDC /* XYZExperimentDescriber.m */,
 				DED12286190E966200D8E530 /* XYZSearchResultTableViewController.xib */,
-				76F638D6190FD99200F0F4BF /* XYZExperiment.h */,
-				76F638D7190FD99300F0F4BF /* XYZExperiment.m */,
 				649778E91910EC9D000FD14F /* XYZExperimentParser.h */,
 				649778EA1910EC9D000FD14F /* XYZExperimentParser.m */,
-				76F638D9190FDD9D00F0F4BF /* XYZExperimentFile.h */,
-				76F638DA190FDD9D00F0F4BF /* XYZExperimentFile.m */,
 			);
 			name = SearchResult;
 			sourceTree = "<group>";
@@ -258,8 +272,6 @@
 		DED12297190E9C5700D8E530 /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				DE9BED6719190B4D00D9C0CF /* pickerView.h */,
-				DE9BED6519190B4400D9C0CF /* pickerView.m */,
 				DED12287190E966200D8E530 /* XYZSearchTableViewCell.h */,
 				DED12288190E966200D8E530 /* XYZSearchTableViewCell.m */,
 				DED12289190E966200D8E530 /* XYZSearchTableViewCell.xib */,
@@ -338,6 +350,7 @@
 				76E2DA9E190E96C90048069D /* JSONBuilder.m */,
 				DED1227F190E966200D8E530 /* XYZInLogger.h */,
 				DED12280190E966200D8E530 /* XYZInLogger.m */,
+				DE7C9C2219235F2A004A2492 /* DataHolders */,
 				DED1229A190E9C9100D8E530 /* LogIn */,
 				DED12296190E9C2F00D8E530 /* SearchResult */,
 				DED12297190E9C5700D8E530 /* Search */,
@@ -381,8 +394,8 @@
 				DEF812901918D90A00A88173 /* TestExperiment.m */,
 				DEF812921918DE1C00A88173 /* TestExperimentFile.m */,
 				7624B1C3191A6B4400420EBE /* TestExperimentParser.m */,
-				DEF2F1221920BA6E00612570 /* TestPopupGenerator.m */,
 				2114DA0D19235A3D002A88D9 /* TestServerConnection.m */,
+				DE7C9C2619236044004A2492 /* TestAnnotation.m */,
 			);
 			path = InLoggerTests;
 			sourceTree = "<group>";
@@ -518,8 +531,8 @@
 				DE9A3EEF1918CAA100F7C33B /* XYZAnnotationTableViewCell.m in Sources */,
 				DE25D8061910E1500084BDDC /* XYZExperimentDescriber.m in Sources */,
 				DED12294190E966200D8E530 /* XYZSelectedFilesViewController.m in Sources */,
-				DE9BED6619190B4400D9C0CF /* pickerView.m in Sources */,
 				76F638DB190FDD9D00F0F4BF /* XYZExperimentFile.m in Sources */,
+				DE7C9C2519235F6C004A2492 /* XYZAnnotation.m in Sources */,
 				641BC92E191CC827000E5254 /* RawConvertViewController.m in Sources */,
 				DE9A3EF41918CB4600F7C33B /* XYZAnnotationTableViewController.m in Sources */,
 				76F638D8190FD99300F0F4BF /* XYZExperiment.m in Sources */,
@@ -528,6 +541,7 @@
 				DEEF6AF419094F8A00A2CD8C /* main.m in Sources */,
 				DE25D8021910D72A0084BDDC /* XYZDataFileViewController.m in Sources */,
 				649778EB1910EC9D000FD14F /* XYZExperimentParser.m in Sources */,
+				DED034711923AD1B00E9EAF1 /* XYZPubMedBuilder.m in Sources */,
 				DEEF6B1B1909553C00A2CD8C /* XYZLogInViewController.m in Sources */,
 				DE032D72191BCDC4006AC257 /* XYZSelectTaskTableViewController.m in Sources */,
 				DED1228D190E966200D8E530 /* XYZInLogger.m in Sources */,
@@ -546,9 +560,9 @@
 				21277BCE19190036005FB7FD /* TestJSONBuilderGetLogin.m in Sources */,
 				21277BCC1918E67C005FB7FD /* testJSONBuilderGetConversionJSON.m in Sources */,
 				210BED331918E32900A8E690 /* TestJSONBuilderGetSearch.m in Sources */,
+				DE7C9C2719236044004A2492 /* TestAnnotation.m in Sources */,
 				DEEF6B0D19094F8B00A2CD8C /* InLoggerTests.m in Sources */,
 				21277BD019190095005FB7FD /* testJSONBuilderTestAvailableAnnotations.m in Sources */,
-				DEF2F1231920BA6E00612570 /* TestPopupGenerator.m in Sources */,
 				2114DA0E19235A3D002A88D9 /* TestServerConnection.m in Sources */,
 				DEF812931918DE1C00A88173 /* TestExperimentFile.m in Sources */,
 			);
