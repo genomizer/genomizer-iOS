@@ -10,8 +10,9 @@
 #import "XYZExperimentFile.h"
 #import "ServerConnection.h"
 #import "XYZPopupGenerator.h"
-#import <QuartzCore/QuartzCore.h>
 
+#import <QuartzCore/QuartzCore.h>
+#import "ProcessViewController.h"
 @interface RawConvertViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *bowtie;
 @property (weak, nonatomic) IBOutlet UITextField *genomeFile;
@@ -38,6 +39,7 @@
 @implementation RawConvertViewController{
     __weak UIView *_staticView;
 }
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -192,53 +194,6 @@
     
 }
 
-- (void)textFieldDidBeginEditing:(UITextField *)textField
-{
-   /*
-    if(textField == self.bowtie) {
-        [UIView beginAnimations:nil context:NULL];
-        [UIView setAnimationDuration:0.25];
-        self.view.center = CGPointMake(self.originalCenter.x, self.originalCenter.y-0);
-        [UIView commitAnimations];
-    
-    } else if(textField == self.genomeFile) {
-        [UIView beginAnimations:nil context:NULL];
-        [UIView setAnimationDuration:0.25];
-        self.view.center = CGPointMake(self.originalCenter.x, self.originalCenter.y-25);
-        [UIView commitAnimations];
-  
-    }else if(textField == self.smoothing) {
-
-        [UIView beginAnimations:nil context:NULL];
-        [UIView setAnimationDuration:0.25];
-        self.view.center = CGPointMake(self.originalCenter.x, self.originalCenter.y-40);
-        [UIView commitAnimations];
-    }
-    else if(textField == self.step) {
-
-        [UIView beginAnimations:nil context:NULL];
-        [UIView setAnimationDuration:0.25];
-        self.view.center = CGPointMake(self.originalCenter.x, self.originalCenter.y-55);
-        [UIView commitAnimations];
-    }
-    else if(textField == self.ratioCalc) {
-        
-        [UIView beginAnimations:nil context:NULL];
-        [UIView setAnimationDuration:0.25];
-        self.view.center = CGPointMake(self.originalCenter.x, self.originalCenter.y-70);
-        [UIView commitAnimations];
-    }
-    else if(textField == self.ratioCalcSmoothing) {
-        
-        [UIView beginAnimations:nil context:NULL];
-        [UIView setAnimationDuration:0.25];
-        self.view.center = CGPointMake(self.originalCenter.x, self.originalCenter.y-85);
-        [UIView commitAnimations];
-    }
-    */
-
-}
-
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
 if(textField.text.length > 0 ){
     if(textField == self.bowtie) {
@@ -275,6 +230,7 @@ if(textField.text.length > 0 ){
 }
 return NO;
 }
+
 - (IBAction)convertButtonTouch:(id)sender
 {
     if(_bowtie.text.length == 0){
@@ -317,7 +273,10 @@ return NO;
                 
             }
         }
-         [XYZPopupGenerator showPopupWithMessage:@"Process sent to server"];
+        for(XYZExperimentFile *file in _experimentFiles){
+            [ProcessViewController addProcessingExperiment:file];
+        }
+        [XYZPopupGenerator showPopupWithMessage:@"Process sent to server"];
     }
     return;
     
