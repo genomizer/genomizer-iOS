@@ -12,7 +12,6 @@
 #import "XYZAnnotation.h"
 #import "XYZLogInViewController.h"
 
-
 @implementation ServerConnection
 
 NSString *token;
@@ -41,7 +40,6 @@ NSString *token;
 
 + (void)login:(NSString *)username withPassword:(NSString *)password error:(NSError**) error withContext: (XYZLogInViewController*) controller
 {
-    
     NSMutableURLRequest *request = [JSONBuilder getLoginJSON:username withPassword:password];
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     
@@ -78,12 +76,15 @@ NSString *token;
      }];
 }
 
-+ (int)logout:(NSError**)error;
++ (int)logout:(NSError**)error
 {
+    token = nil;
     NSMutableURLRequest *request = [JSONBuilder getLogoutJSON:token];
     
     NSHTTPURLResponse *httpResp;
-    [NSURLConnection sendSynchronousRequest:request returningResponse:&httpResp error:error];
+
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler: nil];
 
     NSLog(@"logout token %@", token);
     NSLog(@"Header: %ld", (long)httpResp.statusCode);
@@ -113,45 +114,59 @@ NSString *token;
 
 +(NSArray*)search:(NSString*)annotations error:(NSError**) error
 {
-    NSError *internalError;
    
     NSMutableURLRequest *request = [JSONBuilder getSearchJSON:annotations withToken: token];
     NSHTTPURLResponse *httpResp;
     
-    NSData *POSTReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&httpResp error:&internalError];
-    if(internalError == nil)
-    {
-        if(httpResp.statusCode == 200){
-            return [self handleSearchPostReply:internalError POSTReply:POSTReply error:error];
-        }
-        else
-        {
-            *error = [self generateErrorObjectFromHTTPError:httpResp.statusCode];
-        }
-    }
-    else{
-        *error = [self generateError:@"Could not connect to server" withErrorDomain:@"Connection Error" withUnderlyingError:internalError];
-    }
-    return nil;
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler: ^(NSURLResponse *response, NSData *POSTReply, NSError *internalError)
+     {
+         [NSThread sleepForTimeInterval:3];
+         if(internalError == nil)
+         {
+             if(httpResp.statusCode == 200){
+                 //return [self handleSearchPostReply:internalError POSTReply:POSTReply error:error];
+                 NSError *error;
+                 NSMutableArray *array = [self handleSearchPostReply:internalError POSTReply:POSTReply error:&error];
+                 [controller reportSearchResult: array withParsingError:error];
+             }
+             else
+             {
+                  NSError *error = [self generateErrorObjectFromHTTPError:httpResp.statusCode];
+                 [controller reportSearchResult:nil withParsingError:error];
+             }
+         }
+         else{
+             NSError *error;
+             error = [self generateError:@"Could not connect to server" withErrorDomain:@"Connection Error" withUnderlyingError:internalError];
+             [controller reportSearchResult:nil withParsingError:error];
+         }
+     }];
 }
 
-+(void)convert:(NSMutableDictionary*)dict error:(NSError**)error
++(void)convert:(NSMutableDictionary*)dict withContext: (RawConvertViewController*) controller
 {
-    NSError *internalError;
     NSMutableURLRequest *request = [JSONBuilder getRawToProfileJSON:token withDict:dict];
     NSHTTPURLResponse *httpResp;
-    [NSURLConnection sendSynchronousRequest:request returningResponse:&httpResp error:&internalError];
-    if(internalError == nil)
-    {
-        if(!(httpResp.statusCode == 200)){
-             *error = [self generateErrorObjectFromHTTPError:httpResp.statusCode];
-        }
-    }
-    else{
-        *error = [self generateError:@"Could not connect to server" withErrorDomain:@"Connection Error" withUnderlyingError:internalError];
-    }
-
+   // [NSURLConnection sendSynchronousRequest:request returningResponse:&httpResp error:&internalError];
     
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler: ^(NSURLResponse *response, NSData *POSTReply, NSError *internalError)
+    {
+    
+        if(internalError == nil)
+        {
+            if(!(httpResp.statusCode == 200))
+            {
+                NSError *error = [self generateErrorObjectFromHTTPError:httpResp.statusCode];
+                [controller reportResult:error];
+            }
+        } else
+        {
+            NSError *error = [self generateError:@"Could not connect to server" withErrorDomain:@"Connection Error" withUnderlyingError:internalError];
+            [controller reportResult:error];
+        }
+    }];
 }
 
 + (NSArray *)getAvailableAnnotations:(NSError**)error

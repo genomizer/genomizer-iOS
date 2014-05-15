@@ -7,6 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MoreViewController.h"
+#import "XYZSearchViewController.h"
+#import "RawConvertViewController.h"
 
 @interface ServerConnection : NSObject
 

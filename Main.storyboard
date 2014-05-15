@@ -51,7 +51,7 @@
                                 <color key="highlightedColor" red="0.071601144374781031" green="0.21912855349169111" blue="0.39514690896739135" alpha="1" colorSpace="calibratedRGB"/>
                             </label>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="4jH-cK-PI1">
-                                <rect key="frame" x="150" y="403" width="20" height="20"/>
+                                <rect key="frame" x="150" y="370" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </activityIndicatorView>
                         </subviews>
@@ -166,7 +166,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y7h-DZ-3NX">
-                                        <rect key="frame" x="5" y="32" width="290" height="117"/>
+                                        <rect key="frame" x="0.0" y="59" width="290" height="117"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -211,6 +211,10 @@
                                     <constraint firstAttribute="height" constant="3" id="3Gj-Mi-I3C"/>
                                 </constraints>
                             </imageView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="d5u-df-mTm">
+                                <rect key="frame" x="150" y="479" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -218,10 +222,13 @@
                             <constraint firstItem="h4D-dx-Mqj" firstAttribute="leading" secondItem="Ueq-zr-MCQ" secondAttribute="leading" id="9PJ-eS-71h"/>
                             <constraint firstAttribute="trailing" secondItem="h4D-dx-Mqj" secondAttribute="trailing" id="C3s-Lh-0KP"/>
                             <constraint firstItem="EJL-DW-KHM" firstAttribute="leading" secondItem="Ueq-zr-MCQ" secondAttribute="leading" constant="98" id="FJx-Nc-h8r"/>
+                            <constraint firstAttribute="trailing" secondItem="d5u-df-mTm" secondAttribute="trailing" constant="150" id="OUp-uX-ueu"/>
                             <constraint firstAttribute="trailing" secondItem="EJL-DW-KHM" secondAttribute="trailing" constant="98" id="XWQ-oH-xht"/>
                             <constraint firstItem="e0R-iQ-a4q" firstAttribute="leading" secondItem="Ueq-zr-MCQ" secondAttribute="leading" id="asp-UR-BVe"/>
+                            <constraint firstItem="Fmb-oU-3Ov" firstAttribute="top" secondItem="d5u-df-mTm" secondAttribute="bottom" constant="20" id="bUZ-PG-iSl"/>
                             <constraint firstItem="e0R-iQ-a4q" firstAttribute="top" secondItem="h4D-dx-Mqj" secondAttribute="bottom" constant="-1" id="f2P-Bp-gDC"/>
                             <constraint firstItem="h4D-dx-Mqj" firstAttribute="top" secondItem="xmV-wZ-3gY" secondAttribute="bottom" constant="1" id="faf-4d-4Ug"/>
+                            <constraint firstItem="d5u-df-mTm" firstAttribute="leading" secondItem="Ueq-zr-MCQ" secondAttribute="leading" constant="150" id="lAc-em-4fj"/>
                             <constraint firstItem="Fmb-oU-3Ov" firstAttribute="top" secondItem="EJL-DW-KHM" secondAttribute="bottom" constant="14" id="lqp-zn-7CW"/>
                             <constraint firstAttribute="trailing" secondItem="e0R-iQ-a4q" secondAttribute="trailing" id="t5Y-Gu-iBa"/>
                         </constraints>

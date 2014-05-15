@@ -102,7 +102,8 @@
     return selectedAnnotations;
 }
 
-- (IBAction)closeAdvancedSearch:(id)sender {
+- (IBAction)closeAdvancedSearch:(id)sender
+{
     _advancedView.hidden = YES;
      _tableView.userInteractionEnabled = YES;
     [_pubmedTextView endEditing:YES];
@@ -140,7 +141,8 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"searchResult"]) {
+    if ([segue.identifier isEqualToString:@"searchResult"])
+    {
         XYZSearchResultTableViewController *nextVC = (XYZSearchResultTableViewController *)[segue destinationViewController];
         nextVC.searchResults = sender;
     }

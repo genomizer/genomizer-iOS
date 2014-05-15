@@ -15,3 +15,4 @@
 @property BOOL ratio;
 @property (nonatomic, copy) ProcessViewController *aReference;
 @end
+

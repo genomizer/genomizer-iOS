@@ -25,6 +25,8 @@
     [super viewDidLoad];
     _userField.delegate = self;
     _passwordField.delegate = self;
+    _spinner.hidden = YES;
+    _spinner.hidesWhenStopped = YES;
 }
 
 - (void) tryToLogIn
@@ -36,13 +38,6 @@
     if((username.length > 1) && (password.length > 3)) {
         [ServerConnection login:self.userField.text withPassword:self.passwordField.text error:&error withContext:self];
         [_spinner startAnimating];
-        /*
-        if (error) {
-            [XYZPopupGenerator showErrorMessage:error];
-        } else {
-            [self performSegueWithIdentifier:@"loginSegue" sender:self];
-        }
-        */
     } else{
         [XYZPopupGenerator showPopupWithMessage:@"Please enter username and password."];
     }
@@ -56,6 +51,7 @@
 
 - (void) reportLoginResult: (NSError*) error {
     [_spinner stopAnimating];
+    _spinner.hidden = NO;
     
     if(error == nil){
         dispatch_async(dispatch_get_main_queue(), ^{
