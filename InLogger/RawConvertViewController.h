@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ProcessViewController.h"
 
 @interface RawConvertViewController : UITableViewController<UITextFieldDelegate>
 @property NSMutableArray * experimentFiles;
 @property NSInteger * type;
 @property BOOL ratio;
+@property (nonatomic, copy) ProcessViewController *aReference;
 @end
