@@ -33,7 +33,7 @@
     NSString *password = _passwordField.text;
     NSError *error;
     
-    if((login.length > 1) && (password.length > 3)) {
+    if((username.length > 1) && (password.length > 3)) {
         [ServerConnection login:self.userField.text withPassword:self.passwordField.text error:&error withContext:self];
         [_spinner startAnimating];
         /*
@@ -50,12 +50,12 @@
 
 - (IBAction)signInButtonTouchDown:(id)sender
 {
-    UIAlertView *loginFailed = [[UIAlertView alloc]
-                                initWithTitle:title message:error
+ /*   UIAlertView *loginFailed = [[UIAlertView alloc]
+                                initWithTitle:@"es" message:error
                                 delegate:nil cancelButtonTitle:@"Try again"
                                 otherButtonTitles:nil];
     
-    [loginFailed show];
+    [loginFailed show];*/
 }
 
 - (void) reportLoginResult: (NSError*) error {
@@ -67,7 +67,7 @@
         });
     } else
     {
-        [self showMessage:[error.userInfo objectForKey:NSLocalizedDescriptionKey]  title:error.domain];
+     //   [self showMessage:[error.userInfo objectForKey:NSLocalizedDescriptionKey]  title:error.domain];
     }
 }
 
@@ -106,13 +106,13 @@
     self.userField.delegate = self;
     self.passwordField.delegate = self;
 }
-
+/*
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];
     [self centerFrameView];
     [super touchesBegan:touches withEvent:event];
 }
-
+*/
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     if(textField == _userField) {

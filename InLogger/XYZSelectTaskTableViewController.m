@@ -85,7 +85,7 @@
  
     if (_fileType == RAW) {
      //   if([sender.superview.subviews[1] valueForKey:@"tag"] == 0){
-        [self performSegueWithIdentifier:@"executeTask" sender:_experimentFiles];
+        [self performSegueWithIdentifier:@"toConvertToProfile" sender:_experimentFiles];
      //   }
    /*     else{
            [self performSegueWithIdentifier:@"executeTaskRatio" sender:_experimentFiles]; 

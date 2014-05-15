@@ -10,6 +10,7 @@
 #import "XYZExperimentFile.h"
 #import "ServerConnection.h"
 #import "XYZPopupGenerator.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface RawConvertViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *bowtie;
@@ -20,6 +21,9 @@
 @property (weak, nonatomic) IBOutlet UISwitch *gffToSgr;
 @property (weak, nonatomic) IBOutlet UITextField *ratioCalc;
 @property (weak, nonatomic) IBOutlet UITextField *ratioCalcSmoothing;
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
+
+
 
 @property CGPoint originalCenter;
 @property NSMutableArray *experimentFilesDictArr;
@@ -28,7 +32,9 @@
 
 @end
 
-@implementation RawConvertViewController
+@implementation RawConvertViewController{
+    __weak UIView *_staticView;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -43,6 +49,8 @@
     self.genomeFile.delegate = self;
     self.smoothing.delegate = self;
     self.step.delegate = self;
+    self.ratioCalc.delegate = self;
+    self.ratioCalcSmoothing.delegate = self;
     self.originalCenter = self.view.center;
     self.genomeFile.enabled = NO;
     self.samToGff.enabled = NO;
@@ -54,21 +62,55 @@
     self.ratioCalc.enabled = NO;
     self.ratioCalcSmoothing.enabled = NO;
     // Do any additional setup after loading the view.
+    UIView *staticView = [[UIView alloc] initWithFrame:CGRectMake(0, self.tableView.bounds.size.height-50, self.tableView.bounds.size.width, 50)];
+    staticView.backgroundColor = [UIColor lightGrayColor];
+    UIButton *button=[UIButton buttonWithType:UIButtonTypeRoundedRect] ;
+    [button setTitle:@"Convert" forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(button:) forControlEvents:UIControlEventTouchUpInside];
+   // [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];//set the color this is may be different for iOS 7
+    button.frame=CGRectMake(self.tableView.bounds.size.width/2-65, 10, 130, 30); //set some large width to ur title
+    [staticView addSubview:button];
+    
+    [self.tableView addSubview:staticView];
+    
+    _staticView = staticView;
+   
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 50, 0);
 }
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    _staticView.transform = CGAffineTransformMakeTranslation(0, scrollView.contentOffset.y);
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // this is needed to prevent cells from being displayed above our static view
+    [self.tableView bringSubviewToFront:_staticView];
+}
+
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (void)centerFrameView
-{
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.25];
-    self.view.frame = CGRectMake(0,0,self.view.frame.size.width,self.view.frame.size.height);
-    [UIView commitAnimations];
+/*
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    
+    return 60;
+    
 }
-
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    
+    UIView *footer=[[UIView alloc] initWithFrame:CGRectMake(0,0,320.0,50.0)];
+    footer.backgroundColor =[UIColor orangeColor];
+    
+    return footer;
+    
+    
+}
+*/
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];
     [UIView beginAnimations:nil context:NULL];
@@ -78,8 +120,71 @@
     [super touchesBegan:touches withEvent:event];
 }
 
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if(textField.text.length == 0){
+        if(textField == self.bowtie) {
+            self.genomeFile.enabled = NO;
+            self.genomeFile.text = @"";
+            self.smoothing.enabled = NO;
+            self.smoothing.text = @"";
+            self.samToGff.enabled = NO;
+            self.samToGff.on = NO;
+            self.gffToSgr.enabled = NO;
+            self.gffToSgr.on = NO;
+            self.step.enabled = NO;
+            self.step.text = @"";
+            self.ratioCalc.enabled = NO;
+            self.ratioCalc.text = @"";
+            self.ratioCalcSmoothing.enabled = NO;
+            self.ratioCalcSmoothing.text = @"";
+        
+        } else if(textField == self.genomeFile) {
+            self.smoothing.enabled = NO;
+            self.smoothing.text = @"";
+            self.samToGff.enabled = NO;
+            self.samToGff.on = NO;
+            self.gffToSgr.enabled = NO;
+            self.gffToSgr.on = NO;
+            self.step.enabled = NO;
+            self.step.text = @"";
+            self.ratioCalc.enabled = NO;
+            self.ratioCalc.text = @"";
+            self.ratioCalcSmoothing.enabled = NO;
+            self.ratioCalcSmoothing.text = @"";
+        
+        }else if(textField == self.smoothing) {
+        
+            self.samToGff.enabled = NO;
+            self.samToGff.on = NO;
+            self.gffToSgr.enabled = NO;
+            self.gffToSgr.on = NO;
+            self.step.enabled = NO;
+            self.step.text = @"";
+            self.ratioCalc.enabled = NO;
+            self.ratioCalc.text = @"";
+            self.ratioCalcSmoothing.enabled = NO;
+            self.ratioCalcSmoothing.text = @"";
+        }
+        else if(textField == self.step) {
+            self.ratioCalc.enabled = NO;
+            self.ratioCalc.text = @"";
+            self.ratioCalcSmoothing.enabled = NO;
+            self.ratioCalcSmoothing.text = @"";
+        }
+        else if(textField == self.ratioCalc) {
+        
+            self.ratioCalcSmoothing.enabled = NO;
+            self.ratioCalcSmoothing.text = @"";
+        }
+    }
+
+    
+}
+
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
+    
     if(textField == self.bowtie) {
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0.25];
@@ -120,10 +225,12 @@
         self.view.center = CGPointMake(self.originalCenter.x, self.originalCenter.y-85);
         [UIView commitAnimations];
     }
+    
 
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if(textField.text.length > 0 ){
     if(textField == self.bowtie) {
         self.genomeFile.enabled = YES;
         [self.genomeFile becomeFirstResponder];
@@ -175,6 +282,7 @@
         [UIView setAnimationDuration:0.25];
         self.view.center = CGPointMake(self.originalCenter.x, self.originalCenter.y);
         [UIView commitAnimations];
+    }
     }
 return NO;
 }
@@ -231,6 +339,7 @@ return NO;
         
     [convertMessage show];
 }
+
 - (IBAction)samToGffChanged:(id)sender {
     if (self.samToGff.on) {
         self.gffToSgr.enabled = YES;
