@@ -79,7 +79,14 @@
 - (IBAction)touchUpInsideCell:(UIButton *)sender
 {
     if (_fileType == RAW) {
-        [self performSegueWithIdentifier:@"toConvertToProfile" sender:_experimentFiles];
+        if([[sender.superview.subviews[1] valueForKey:@"text"] isEqualToString:@"Convert to profile"]){
+            NSLog(@"toConvertToProfile %@", [sender.superview.subviews[1] valueForKey:@"tag"]);
+            [self performSegueWithIdentifier:@"toConvertToProfile" sender:_experimentFiles];
+        }
+        else{
+            NSLog(@"executeTaskRatio");
+            [self performSegueWithIdentifier:@"executeTaskRatio" sender:_experimentFiles];
+        }
     } else {
         [XYZPopupGenerator showPopupWithMessage:@"Not yet implemented!"];
     }
