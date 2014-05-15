@@ -24,19 +24,19 @@
     return self;
 }
 
-- (void) addAnnotation: (NSString *) annotation
+- (void) addAnnotation: (XYZAnnotation *) annotation
 {
     if( ![_annotations containsObject:annotation]) {
         [_annotations addObject:annotation];
     }
 }
 
-- (void) removeAnnotation: (NSString *) annotation
+- (void) removeAnnotation: (XYZAnnotation *) annotation
 {
     [_annotations removeObject:annotation];
 }
 
-- (BOOL) containsAnnotation: (NSString *) annotation {
+- (BOOL) containsAnnotation: (XYZAnnotation *) annotation {
     return [_annotations containsObject:annotation];
 }
 
@@ -48,8 +48,9 @@
     [description appendString: [self createRowForAnnotation:@"Created by" withValue:experiment.createdByUser andNewLine:[_annotations count] > 0]];
     
      for (NSInteger i = 0; i < [_annotations count]; i++) {
-        [description appendString: [self createRowForAnnotation:_annotations[i]
-                                                     withValue:[experiment getValueForAnnotation:[_annotations objectAtIndex:i]]
+         XYZAnnotation *annotation = _annotations[i];
+        [description appendString: [self createRowForAnnotation:[annotation getFormatedName]
+                                                     withValue:[experiment getValueForAnnotation:annotation.name]
                                                      andNewLine:i != [_annotations count] -1]];
     }
     

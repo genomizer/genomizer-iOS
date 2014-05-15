@@ -9,11 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "XYZExperimentDescriber.h"
 
-@interface XYZSearchViewController : UIViewController<UITextFieldDelegate, UIPickerViewDelegate>
+@interface XYZSearchViewController : UIViewController<UITextFieldDelegate>
 
 
-- (void)hideKeyboardAndAdjustTable;
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender;
-- (void) createPickerViews;
+- (void) hideKeyboardAndAdjustTable;
+- (void)scrollToCell: (UITableViewCell *) cell;
 
 @end

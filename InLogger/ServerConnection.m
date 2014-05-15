@@ -10,6 +10,7 @@
 #import "JSONBuilder.h"
 #import "XYZExperimentParser.h"
 #import "XYZAnnotation.h"
+#import "XYZLogInViewController.h"
 
 
 @implementation ServerConnection
@@ -112,7 +113,7 @@ NSString *token;
     return nil;
 }
 
-+(NSMutableArray*)search:(NSString*)annotations error:(NSError**) error
++(NSArray*)search:(NSString*)annotations error:(NSError**) error
 {
     NSError *internalError;
    
@@ -171,7 +172,7 @@ NSString *token;
                 for (NSDictionary *json in array) {
                     XYZAnnotation *annotation = [[XYZAnnotation alloc] init];
                     annotation.name = [json objectForKey:@"name"];
-                    annotation.values = [json objectForKey:@"values"];
+                    annotation.possibleValues = [json objectForKey:@"values"];
                     [annotations addObject:annotation];
                 }
              

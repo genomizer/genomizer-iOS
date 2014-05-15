@@ -11,7 +11,9 @@
 @interface XYZAnnotation : NSObject
 
 @property NSString *name;
-@property NSArray *values;
+@property NSArray *possibleValues;
+@property NSString *value;
+@property BOOL selected;
 
 -(BOOL) isFreeText;
 - (NSString *) getFormatedName;

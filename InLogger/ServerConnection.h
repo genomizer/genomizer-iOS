@@ -10,9 +10,9 @@
 
 @interface ServerConnection : NSObject
 
-+ (void) login:(NSString *) username withPassword:(NSString *)password error:(NSError**) error;
++ (void)login:(NSString *)username withPassword:(NSString *)password error:(NSError**) error withContext: (UIViewController*) controller;
 + (int) logout:(NSError **) error;
-+ (NSMutableArray *) search:(NSString *) annotations error:(NSError **) error;
++ (NSArray *) search:(NSString *) annotations error:(NSError **) error;
 + (void) convert:(NSMutableDictionary *) dict error:(NSError **) error;
 + (NSArray *) getAvailableAnnotations:(NSError **) error;
 @end

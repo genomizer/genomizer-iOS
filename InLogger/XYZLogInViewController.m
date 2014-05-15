@@ -33,7 +33,7 @@
     NSString *password = _passwordField.text;
     NSError *error;
     
-    if((login.length > 1) && (password.length > 3)) {
+    if(username.length > 0 && password.length > 0) {
         [ServerConnection login:self.userField.text withPassword:self.passwordField.text error:&error withContext:self];
         [_spinner startAnimating];
         /*
@@ -47,15 +47,11 @@
         [XYZPopupGenerator showPopupWithMessage:@"Please enter username and password."];
     }
 }
-
-- (IBAction)signInButtonTouchDown:(id)sender
+- (IBAction)signInButtonTouchUp:(UIButton *)sender
 {
-    UIAlertView *loginFailed = [[UIAlertView alloc]
-                                initWithTitle:title message:error
-                                delegate:nil cancelButtonTitle:@"Try again"
-                                otherButtonTitles:nil];
-    
-    [loginFailed show];
+    [self.view endEditing:YES];
+    [self centerFrameView];
+    [self tryToLogIn];
 }
 
 - (void) reportLoginResult: (NSError*) error {
@@ -63,11 +59,11 @@
     
     if(error == nil){
         dispatch_async(dispatch_get_main_queue(), ^{
+            
             [self performSegueWithIdentifier:@"loginSegue" sender:self];
         });
-    } else
-    {
-        [self showMessage:[error.userInfo objectForKey:NSLocalizedDescriptionKey]  title:error.domain];
+    } else {
+        [XYZPopupGenerator showErrorMessage:error];
     }
 }
 
@@ -101,16 +97,12 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    [super viewDidLoad];
-    _spinner.hidesWhenStopped = YES;
-    self.userField.delegate = self;
-    self.passwordField.delegate = self;
-}
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];
     [self centerFrameView];
     [super touchesBegan:touches withEvent:event];
+    _spinner.hidesWhenStopped = YES;
+    self.userField.delegate = self;
+    self.passwordField.delegate = self;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField

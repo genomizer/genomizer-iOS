@@ -119,7 +119,6 @@
     cell.file = file;
     cell.infoButtonFiles.tag = indexPath.row;
     cell.tag = file.type;
-    NSLog(@"section %d row %d", indexPath.section, indexPath.row);
     [_cells setObject:cell atIndexedSubscript:[self rowsBeforeSection:indexPath.section] + indexPath.row];
     
     return cell;
@@ -129,7 +128,6 @@
 {
     //TODO - Send to server.
     BOOL cellOn = false;
-    NSLog(@"Raw cells: %d", [_cells count]);
     for (NSInteger i = 0; i < [_cells count]; i++) {
         XYZDataFileTableViewCell *cell = [_cells objectAtIndex:i];
         if (cell.switchButton.on) {

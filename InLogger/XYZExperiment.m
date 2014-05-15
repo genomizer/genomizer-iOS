@@ -94,32 +94,9 @@
     [[self arrayOfFile:file] removeObject:file];
 }
 
-
 - (NSInteger) numberOfFiles
 {
     return [_rawFiles count] + [_profileFiles count] + [_regionFiles count] + [_otherFiles count];
 }
-
-
-
-//:::::::::: SAFE, IGNORE :::::::::
-/*
- NSArray *json = [NSJSONSerialization JSONObjectWithData:POSTReply options:0 error:&rr];
- NSLog(@"mrMan: %@", rr);
- NSLog(@"%d", [POSTReply length]);
- 
- for(NSString *a in json){
- NSLog(@"lol: %@", a);
- }
- 
- NSMutableArray *arrayOfResults = [[NSMutableArray alloc] init];
- 
- NSLog(@"Header: %ld", (long)httpResp.statusCode);
- for (NSString *b in json){
- [arrayOfResults addObject:b];
- }
- NSLog(@"test%@", [json valueForKey:@"URL"]);
- return json;*/
-//NSLog(@"%@", [jsonDataArray ]);
 
 @end

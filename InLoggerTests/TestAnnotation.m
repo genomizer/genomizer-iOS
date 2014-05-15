@@ -31,13 +31,13 @@
 
 - (void)testIsFreeText
 {
-    _annotation.values = [[NSArray alloc] initWithObjects:@"freetext", nil];
+    _annotation.possibleValues = [[NSArray alloc] initWithObjects:@"freetext", nil];
     XCTAssertTrue([_annotation isFreeText]);
 }
 
 - (void)testIsNotFreeText
 {
-    _annotation.values = [[NSArray alloc] initWithObjects:@"notfreetext", nil];
+    _annotation.possibleValues = [[NSArray alloc] initWithObjects:@"notfreetext", nil];
     XCTAssertFalse([_annotation isFreeText]);
 }
 

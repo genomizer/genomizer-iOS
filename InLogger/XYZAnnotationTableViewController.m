@@ -25,7 +25,7 @@
 {
     [super viewDidLoad];
     _annotations = [self getAnnotationsFromServer];
-    self.clearsSelectionOnViewWillAppear = NO;
+    //self.clearsSelectionOnViewWillAppear = NO;
 }
 
 - (NSArray *) getAnnotationsFromServer
@@ -55,17 +55,16 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     XYZAnnotationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AnnotationPrototypeCell" forIndexPath:indexPath];
-
     XYZAnnotation *annotation = [_annotations objectAtIndex:indexPath.row];
     cell.label.text = [annotation getFormatedName];
-    
-    //cell.switchButton.on = [_describer containsAnnotation: [_annotations objectAtIndex: indexPath.row]];
+    cell.switchButton.tag = indexPath.row;
+    cell.switchButton.on = [_describer containsAnnotation: [_annotations objectAtIndex: indexPath.row]];
     return cell;
 }
 
 - (IBAction)switchButtonValueChanged:(UISwitch *)sender
 {
-    NSString *annotation = [_annotations objectAtIndex:sender.tag];
+    XYZAnnotation *annotation = [_annotations objectAtIndex:sender.tag];
 
     if( sender.on) {
         [_describer addAnnotation: annotation];

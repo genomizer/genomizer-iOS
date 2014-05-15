@@ -20,7 +20,7 @@ static NSDictionary *ANNOTATION_DICTIONARY;
 
 -(BOOL) isFreeText
 {
-    return _values != nil && [_values count] == 1 && [[_values objectAtIndex:0] isEqualToString:@"freetext"];
+    return _possibleValues != nil && [_possibleValues count] == 1 && [[_possibleValues objectAtIndex:0] isEqualToString:@"freetext"];
 }
 
 - (NSString *) getFormatedName
@@ -40,5 +40,20 @@ static NSDictionary *ANNOTATION_DICTIONARY;
         return text;
     }
 }
+
+- (BOOL) isEqual:(id)object
+{
+    if (![object isKindOfClass:[XYZAnnotation class]]) {
+        return NO;
+    }
+    return [_name isEqualToString: ((XYZAnnotation *)object).name];
+}
+
+- (NSUInteger) hash
+{
+    return [_name hash];
+}
+
+
 
 @end
