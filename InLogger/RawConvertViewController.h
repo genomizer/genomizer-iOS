@@ -11,4 +11,5 @@
 @interface RawConvertViewController : UITableViewController<UITextFieldDelegate>
 @property NSMutableArray * experimentFiles;
 @property NSInteger * type;
+@property BOOL ratio;
 @end
