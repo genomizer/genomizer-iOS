@@ -12,8 +12,10 @@
 
 @interface XYZSelectTaskTableViewController ()
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *executeButton;
+
 @property NSArray *tasks;
 @property NSInteger selectedCellRow;
+
 
 @end
 
@@ -46,7 +48,7 @@
 {
     switch(fileType) {
         case RAW :
-            return [[NSArray alloc] initWithObjects:@"Convert to profile", nil];
+            return [[NSArray alloc] initWithObjects:@"Convert to profile", @"Convert to profile with ratio calc.", nil];
         case PROFILE:
             return [[NSArray alloc] initWithObjects:@"Convert to region", @"Change genome release", nil];
         case REGION:
@@ -79,8 +81,15 @@
 
 - (IBAction)touchUpInsideCell:(UIButton *)sender
 {
+    
+ 
     if (_fileType == RAW) {
-        [self performSegueWithIdentifier:@"toConvertToProfile" sender:_experimentFiles];
+     //   if([sender.superview.subviews[1] valueForKey:@"tag"] == 0){
+        [self performSegueWithIdentifier:@"executeTask" sender:_experimentFiles];
+     //   }
+   /*     else{
+           [self performSegueWithIdentifier:@"executeTaskRatio" sender:_experimentFiles]; 
+        }*/
     } else {
         [XYZPopupGenerator showPopupWithMessage:@"Not yet implemented!"];
     }
@@ -97,13 +106,15 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: @"SelectTaskCellPrototype" forIndexPath:indexPath];
+    
     cell.textLabel.text = [_tasks objectAtIndex:indexPath.row];
     if (_selectedCellRow == indexPath.row) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     } else {
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
-    
+    cell.textLabel.tag = indexPath.row;
+
     // Configure the cell...
     
     return cell;
@@ -114,6 +125,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     _selectedCellRow = indexPath.row;
     _executeButton.enabled = YES;
+   
     [tableView reloadData];
 }
 
