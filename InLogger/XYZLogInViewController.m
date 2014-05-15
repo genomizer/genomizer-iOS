@@ -49,12 +49,9 @@
 }
 - (IBAction)signInButtonTouchUp:(UIButton *)sender
 {
- /*   UIAlertView *loginFailed = [[UIAlertView alloc]
-                                initWithTitle:@"es" message:error
-                                delegate:nil cancelButtonTitle:@"Try again"
-                                otherButtonTitles:nil];
-    
-    [loginFailed show];*/
+    [self.view endEditing:YES];
+    [self centerFrameView];
+    [self tryToLogIn];
 }
 
 - (void) reportLoginResult: (NSError*) error {
@@ -65,9 +62,8 @@
             
             [self performSegueWithIdentifier:@"loginSegue" sender:self];
         });
-    } else
-    {
-     //   [self showMessage:[error.userInfo objectForKey:NSLocalizedDescriptionKey]  title:error.domain];
+    } else {
+        [XYZPopupGenerator showErrorMessage:error];
     }
 }
 
@@ -101,13 +97,6 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    [super viewDidLoad];
-    _spinner.hidesWhenStopped = YES;
-    self.userField.delegate = self;
-    self.passwordField.delegate = self;
-}
-/*
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];
     [self centerFrameView];
     [super touchesBegan:touches withEvent:event];
@@ -115,7 +104,7 @@
     self.userField.delegate = self;
     self.passwordField.delegate = self;
 }
-*/
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     if(textField == _userField) {
