@@ -38,9 +38,6 @@
 
 - (void) viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
-   // [_spinner stopAnimating];
-  //  _searchButton.enabled = YES;
- //   _searchButton.hidden = NO;
 }
 
 - (void) reportAnnotationResult: (NSArray*) result error: (NSError*) error {
@@ -56,21 +53,6 @@
      [XYZPopupGenerator showErrorMessage:error];
     }
 }
-
-/*
-- (NSArray *) getAnnotationsFromServer
-{
-    NSError *error;
-    NSArray *annotations = [ServerConnection getAvailableAnnotations:&error];
-   
-    if(error) {
-        [XYZPopupGenerator showPopupWithMessage:@"Server did not return list of annotations"];
-        return [[NSArray alloc] init];
-    }
-    
-    return annotations;
-}
- */
 
 - (void)scrollToCell: (UITableViewCell *) cell
 {
@@ -105,10 +87,7 @@
 }
 
 - (IBAction)searchButton:(id)sender {
-    _spinner.hidden = NO;
-    [_spinner startAnimating];
-    _searchButton.enabled = NO;
-    _searchButton.hidden = YES;
+    [self showLoading];
     NSArray *selectedAnnotations = [self getSelectedAnnotations];
     [ServerConnection search:[XYZPubMedBuilder createAnnotationsSearch: selectedAnnotations] withContext:self];
 }
@@ -118,17 +97,13 @@
     if(error)
     {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [_spinner stopAnimating];
-            _searchButton.enabled = YES;
-            _searchButton.hidden = NO;
+            [self hideLoading];
             [XYZPopupGenerator showErrorMessage:error];
         });
     } else
     {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [_spinner stopAnimating];
-            _searchButton.enabled = YES;
-            _searchButton.hidden = NO;
+            [self hideLoading];
             [self performSegueWithIdentifier:@"searchResult" sender:result];
         });
     }
@@ -153,11 +128,7 @@
 
 - (IBAction)searchQueryButtonTouched:(id)sender {
     
-    //show loading
-    _spinner.hidden = NO;
-    [_spinner startAnimating];
-    _searchButton.enabled = NO;
-    _searchButton.hidden = YES;
+    [self showLoading];
     
     //send search
     [ServerConnection search:_pubmedTextView.text withContext:self];
@@ -186,6 +157,20 @@
     [_pubmedTextView becomeFirstResponder];
 }
 
+- (void) showLoading
+{
+    _spinner.hidden = NO;
+    [_spinner startAnimating];
+    _searchButton.enabled = NO;
+    _searchButton.hidden = YES;
+}
+
+- (void) hideLoading {
+    [_spinner stopAnimating];
+    _searchButton.enabled = YES;
+    _searchButton.hidden = NO;
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"searchResult"]) {
@@ -197,6 +182,8 @@
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     
     if([text isEqualToString:@"\n"]) {
+        [self showLoading];
+        [self closeAdvancedSearch:nil];
         [ServerConnection search:_pubmedTextView.text withContext:self];
         return NO;
     }
