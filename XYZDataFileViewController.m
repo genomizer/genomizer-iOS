@@ -127,38 +127,6 @@
     if (type == RAW) {
         [self performSegueWithIdentifier:@"toSelectTask" sender:selectedFiles];
     }
-    
-    /*for (NSInteger i = 0; i < [_cells count]; i++) {
-        XYZDataFileTableViewCell *cell = [_cells objectAtIndex:i];
-        if (cell.switchButton.on ) {
-            if (!asd || cell.tag == type) {
-                type = cell.tag;
-                if(type == RAW) {
-                    NSMutableDictionary * currentFile = [[NSMutableDictionary alloc] init];
-                    [currentFile setObject:cell.file.name forKey:@"filename"];
-                    [currentFile setObject:cell.file.idFile forKey:@"fileId"];
-                    [currentFile setObject:cell.file.expID forKey:@"expid"];
-                    [currentFile setObject:@"rawtoprofile" forKey:@"processtype"];
-                    [currentFile setObject:cell.file.metaData forKey:@"metadata"];
-                    [currentFile setObject:cell.file.grVersion forKey:@"genomeRelease"];
-                     [currentFile setObject:cell.file.author forKey:@"author"];
-                    [_selectedFiles addObject:cell.file];
-                }
-            asd = YES;
-            } else {
-                return;
-            }
-        }
-     
-    }
-    
-    
-    if ([selectedFiles count] > 0) {
-    } else {
-    }
-    for (XYZDataFileTableViewCell *cell in _cells) {
-        cell.switchButton.on = NO;
-    }*/
 }
 
 - (void) showInfoAbout: (XYZExperimentFile *) file
@@ -194,8 +162,5 @@
 {
     
 }
-
-
-
 
 @end

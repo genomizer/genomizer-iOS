@@ -36,8 +36,6 @@
     [self.tableView reloadData];
 }
 
-
-
 - (void) viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     [_spinner stopAnimating];
@@ -102,19 +100,15 @@
 
 - (void) reportSearchResult: (NSMutableArray*) result withParsingError: (NSError*) error
 {
-    if(error)
-    {
+    if(error) {
         [XYZPopupGenerator showErrorMessage:error];
-    }
-    else
-    {
+    } else {
         dispatch_async(dispatch_get_main_queue(), ^{
             [_spinner stopAnimating];
             [self performSegueWithIdentifier:@"searchResult" sender:result];
         });
     }
 }
-
 
 - (NSArray *) getSelectedAnnotations
 {

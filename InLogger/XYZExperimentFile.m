@@ -35,9 +35,7 @@
     }
     
     return NO;
-    
 }
-
 
 - (NSString *) getDescription
 {

@@ -15,21 +15,11 @@
 
 @end
 
-
 @implementation XYZSearchResultTableViewCell
 
 - (void)awakeFromNib
 {
     self.textLabel.numberOfLines = 10;
-   // [//self.text]
-    // Initialization code
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 - (void) setTextFieldText: (NSString *) text

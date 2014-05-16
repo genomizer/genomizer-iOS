@@ -30,7 +30,6 @@
     return self;
 }
 
-
 + (XYZExperiment*) defaultExperiment
 {
     XYZExperiment *exp = [[XYZExperiment alloc] init];
@@ -50,11 +49,8 @@
     [exp addExperimentFile:[XYZExperimentFile defaultFileWithType:REGION]];
 
     [exp addExperimentFile:[XYZExperimentFile defaultFileWithType:OTHER]];
-    
-    NSLog(@"Number: %d", [exp numberOfFiles]);
-    
+        
     return exp;
-    
 }
 
 - (void) setValue: (id) value forAnnotation: (NSString*) annotation

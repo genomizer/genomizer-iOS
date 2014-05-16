@@ -113,12 +113,6 @@ static XYZExperiment * SELECTED_FILES = nil;
     // Do any additional setup after loading the view from its nib.
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -204,6 +198,5 @@ static XYZExperiment * SELECTED_FILES = nil;
         nextVC.fileType = _segmentedControl.selectedSegmentIndex;
     }
 }
-
 
 @end

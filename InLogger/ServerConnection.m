@@ -145,7 +145,6 @@ NSString *token;
 {
     NSMutableURLRequest *request = [JSONBuilder getRawToProfileJSON:token withDict:dict];
     NSHTTPURLResponse *httpResp;
-   // [NSURLConnection sendSynchronousRequest:request returningResponse:&httpResp error:&internalError];
     
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler: ^(NSURLResponse *response, NSData *POSTReply, NSError *internalError)
@@ -204,13 +203,6 @@ NSString *token;
 +(NSDictionary*)parseJSONToDictionary:(NSData*)POSTReply error:(NSError**)error
 {
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:POSTReply options:kNilOptions error:error];
-    /*
-    if([*error localizedDescription] != nil)
-    {
-        NSLog(@"parsing json %@",[*error localizedDescription]);
-        [NSException raise:@"Error parsing JSON" format:@"Error parsing JSON"];
-    }
-    */
     return json;
 }
 
@@ -219,8 +211,7 @@ NSString *token;
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
     NSError* error;
 
-    switch(errorCode)
-    {
+    switch(errorCode) {
         case 204:
             [dict setObject:@"Empty response from server" forKey:NSLocalizedDescriptionKey];
             error = [NSError errorWithDomain:@"Empty response" code:0 userInfo:dict];
@@ -262,7 +253,7 @@ NSString *token;
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
     [dict setObject: errorDescription forKey:NSLocalizedDescriptionKey];
     
-    if(underlyingError != nil){
+    if (underlyingError != nil) {
         [dict setObject:underlyingError forKey:NSUnderlyingErrorKey];
     }
     return [NSError errorWithDomain:errorDomain code:1 userInfo:dict];

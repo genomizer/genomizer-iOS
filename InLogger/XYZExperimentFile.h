@@ -30,9 +30,6 @@ typedef NS_ENUM(NSInteger, FileType) {
 @property NSString *grVersion;
 @property BOOL selected;
 
-
-//+ (void) createExperimentFile:(NSDictionary*)file;
-
 - (NSString *) getDescription;
 - (NSString *) getAllInfo;
 + (FileType) NSStringFileTypeToEnumFileType: (NSString *) type;
