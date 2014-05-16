@@ -39,4 +39,5 @@
     NSError * error;
     [ServerConnection logout:&error];
 }
+
 @end
