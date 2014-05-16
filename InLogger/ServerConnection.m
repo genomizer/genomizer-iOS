@@ -201,7 +201,7 @@ NSString *token;
 }
 
 
-//TODO fix view controller type
+//TODO fix view controller type and add method to ServerConnection.h
 + (void) getProcessStatus:(UIViewController*) controller
 {
     NSMutableURLRequest *request = [JSONBuilder getProcessStatusJSON:token];
