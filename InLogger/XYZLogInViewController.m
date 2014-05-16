@@ -38,6 +38,8 @@
     
     if((username.length > 1) && (password.length > 3)) {
         [ServerConnection login:self.userField.text withPassword:self.passwordField.text error:&error withContext:self];
+        
+        
         [_spinner startAnimating];
         _loginButton.enabled = NO;
         _loginButton.hidden = YES;
@@ -53,9 +55,6 @@
 }
 
 - (void) reportLoginResult: (NSError*) error {
-    [_spinner stopAnimating];
-    _loginButton.enabled = NO;
-    _loginButton.hidden = YES;
     
     if(error == nil)
     {
@@ -64,7 +63,12 @@
         });
     } else
     {
-        [XYZPopupGenerator showErrorMessage:error];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [_spinner stopAnimating];
+            _loginButton.enabled = YES;
+            _loginButton.hidden = NO;
+            [XYZPopupGenerator showErrorMessage:error];
+        });
     }
 }
 

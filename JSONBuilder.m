@@ -60,7 +60,7 @@
         NSData *postData = [NSJSONSerialization dataWithJSONObject:dict
                                                            options:NSJSONWritingPrettyPrinted
                                                              error:&error];
-        NSString *conversionString =@"/process";
+        NSString *conversionString =@"/process/rawtoprofile";
         NSMutableURLRequest *request = [self getRequest:@"PUT" withToken:token];
         [request setHTTPBody:postData];
         [request setURL:[NSURL URLWithString: [[self getServerURL] stringByAppendingString:conversionString]]];
@@ -77,6 +77,15 @@
     return request;
 }
 
++ (NSMutableURLRequest*) getProcessStatusJSON:(NSString *) token
+{
+    NSMutableURLRequest *request = [self getRequest:@"GET" withToken:token];
+    [request setURL:[NSURL URLWithString: [[self getServerURL] stringByAppendingString:@"process"]]];
+    
+    return request;
+}
+
+
 + (NSMutableURLRequest*) getRequest:(NSString*) requestType withToken:(NSString*) token
 {
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
@@ -86,7 +95,7 @@
     [request setValue:token forHTTPHeaderField:@"Authorization"];
     return request;
 }
-                                  
+
 + (NSString*) getServerURL
 {
 return @"http://genomizer.apiary-mock.com";

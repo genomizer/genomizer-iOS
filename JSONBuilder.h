@@ -15,6 +15,6 @@
 +(NSMutableURLRequest*)getSearchJSON:(NSString *)annotations withToken:(NSString *)token;
 +(NSMutableURLRequest*)getRawToProfileJSON:(NSString *)token withDict:(NSMutableDictionary*)dict;
 +(NSMutableURLRequest*)getAvailableAnnotationsJSON:(NSString *) token;
-+(NSMutableURLRequest*)getRequest:(NSString*) requestType withToken:(NSString*) token;
++ (NSMutableURLRequest*) getProcessStatusJSON:(NSString *) token;
 +(NSString*)getServerURL;
 @end
