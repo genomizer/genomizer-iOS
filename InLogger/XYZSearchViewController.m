@@ -22,8 +22,6 @@
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
 @property (weak, nonatomic) IBOutlet UIButton *searchButton;
 
-@property NSArray *annotations;
-
 @end
 
 @implementation XYZSearchViewController
@@ -32,8 +30,10 @@
 {
     [super viewDidLoad];
     _spinner.hidesWhenStopped = YES;
-    _annotations = [self getAnnotationsFromServer];
-    [self.tableView reloadData];
+}
+
+- (void) viewWillAppear:(BOOL)animated {
+    [ServerConnection getAvailableAnnotations:self];
 }
 
 - (void) viewDidDisappear:(BOOL)animated {
@@ -43,7 +43,21 @@
     _searchButton.hidden = NO;
 }
 
+- (void) reportAnnotationResult: (NSArray*) result error: (NSError*) error {
+    
+    if(error == nil)
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            _annotations = result;
+            [self.tableView reloadData];
+        });
+    } else
+    {
+     [XYZPopupGenerator showErrorMessage:error];
+    }
+}
 
+/*
 - (NSArray *) getAnnotationsFromServer
 {
     NSError *error;
@@ -56,6 +70,7 @@
     
     return annotations;
 }
+ */
 
 - (void)scrollToCell: (UITableViewCell *) cell
 {

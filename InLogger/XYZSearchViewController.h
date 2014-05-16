@@ -11,9 +11,11 @@
 
 @interface XYZSearchViewController : UIViewController<UITextFieldDelegate>
 
+@property NSArray *annotations;
 
 - (void) hideKeyboardAndAdjustTable;
 - (void) scrollToCell: (UITableViewCell *) cell;
 - (void) reportSearchResult: (NSMutableArray*) result withParsingError: (NSError*) error;
+- (void) reportAnnotationResult: (NSArray*) result error: (NSError*) error;
 
 @end

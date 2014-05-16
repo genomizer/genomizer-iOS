@@ -24,9 +24,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _annotations = [self getAnnotationsFromServer];
+   // _annotations = [self getAnnotationsFromServer];
 }
 
+/*
 - (NSArray *) getAnnotationsFromServer
 {
     NSError *error;
@@ -37,6 +38,7 @@
     }
     return annotations;
 }
+*/
 
 #pragma mark - Table view data source
 
