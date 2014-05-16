@@ -129,7 +129,7 @@ NSString *token;
          else{
              error = [self generateError:@"Could not connect to server" withErrorDomain:@"Connection Error" withUnderlyingError:internalError];
          }
-         [controller reportSearchResult:array withParsingError:error];
+         [controller reportSearchResult:array error:error];
      }];
 }
 
