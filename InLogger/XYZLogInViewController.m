@@ -57,11 +57,13 @@
     _loginButton.enabled = NO;
     _loginButton.hidden = YES;
     
-    if(error == nil){
+    if(error == nil)
+    {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self performSegueWithIdentifier:@"loginSegue" sender:self];
         });
-    } else {
+    } else
+    {
         [XYZPopupGenerator showErrorMessage:error];
     }
 }

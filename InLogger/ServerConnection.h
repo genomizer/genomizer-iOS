@@ -10,6 +10,7 @@
 #import "MoreViewController.h"
 #import "XYZSearchViewController.h"
 #import "RawConvertViewController.h"
+#import "XYZLogInViewController.h"
 
 @interface ServerConnection : NSObject
 
@@ -21,6 +22,6 @@
 + (void)convert:(NSMutableDictionary*)dict withContext: (RawConvertViewController*) controller;
 + (NSDictionary*)parseJSONToDictionary:(NSData*)POSTReply error:(NSError**)error;
 
-+ (NSArray *) getAvailableAnnotations:(NSError **) error;
++ (void) getAvailableAnnotations:(XYZSearchViewController*) controller;
 + (NSError*)generateErrorObjectFromHTTPError:(NSInteger)errorCode;
 @end

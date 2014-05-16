@@ -10,7 +10,6 @@
 #import "JSONBuilder.h"
 #import "XYZExperimentParser.h"
 #import "XYZAnnotation.h"
-#import "XYZLogInViewController.h"
 
 @implementation ServerConnection
 
@@ -165,39 +164,74 @@ NSString *token;
     }];
 }
 
-+ (NSArray *)getAvailableAnnotations:(NSError**)error
++ (void)getAvailableAnnotations:(XYZSearchViewController*) controller
 {
-    NSError *internalError;
-    NSHTTPURLResponse *httpResp;
  
     NSMutableURLRequest *request = [JSONBuilder getAvailableAnnotationsJSON:token];
-    NSData *POSTReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&httpResp error:&internalError];
-    
-    if (internalError == nil) {
-        if (httpResp.statusCode == 200) {
-            NSArray *array = [NSJSONSerialization JSONObjectWithData:POSTReply options: NSJSONReadingMutableContainers error:&internalError];
-            if (internalError == nil) {
-                NSMutableArray *annotations = [[NSMutableArray alloc] init];
-                for (NSDictionary *json in array) {
-                    XYZAnnotation *annotation = [[XYZAnnotation alloc] init];
-                    annotation.name = [json objectForKey:@"name"];
-                    annotation.possibleValues = [json objectForKey:@"values"];
-                    [annotations addObject:annotation];
+    //NSData *POSTReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&httpResp error:&internalError];
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler: ^(NSURLResponse *response, NSData *POSTReply, NSError *internalError) {
+        NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
+        NSError *error;
+        NSMutableArray *annotations;
+        
+        if (internalError == nil)
+        {
+            if (httpResp.statusCode == 200)
+            {
+                NSArray *array = [NSJSONSerialization JSONObjectWithData:POSTReply options: NSJSONReadingMutableContainers error:&internalError];
+                if (internalError == nil)
+                {
+                    annotations = [[NSMutableArray alloc] init];
+                    for (NSDictionary *json in array)
+                    {
+                        XYZAnnotation *annotation = [[XYZAnnotation alloc] init];
+                        annotation.name = [json objectForKey:@"name"];
+                        annotation.possibleValues = [json objectForKey:@"values"];
+                        [annotations addObject:annotation];
+                    }
+                    
+                    //   return annotations;
+                } else
+                {
+                    error = [self generateError:@"Server sent incorrectly formatted data, talk to admin" withErrorDomain:@"ServerError" withUnderlyingError:nil];
                 }
-             
-                return annotations; 
-            } else {
-                *error = [self generateError:@"Server sent incorrectly formatted data, talk to admin" withErrorDomain:@"ServerError" withUnderlyingError:nil];
+            } else
+            {
+                error = [self generateErrorObjectFromHTTPError:httpResp.statusCode];
             }
         } else {
-            *error = [self generateErrorObjectFromHTTPError:httpResp.statusCode];
-            
+            error = [self generateError:@"Could not connect to server" withErrorDomain:@"Connection" withUnderlyingError:internalError];
         }
-    } else {
-        *error = [self generateError:@"Could not connect to server" withErrorDomain:@"Connection" withUnderlyingError:internalError];
-    }
-    return nil;
+        [controller reportAnnotationResult:annotations error:error];
+    }];
 }
+
+/*
+ if (internalError == nil) {
+ if (httpResp.statusCode == 200) {
+ NSArray *array = [NSJSONSerialization JSONObjectWithData:POSTReply options: NSJSONReadingMutableContainers error:&internalError];
+ if (internalError == nil) {
+ NSMutableArray *annotations = [[NSMutableArray alloc] init];
+ for (NSDictionary *json in array) {
+ XYZAnnotation *annotation = [[XYZAnnotation alloc] init];
+ annotation.name = [json objectForKey:@"name"];
+ annotation.possibleValues = [json objectForKey:@"values"];
+ [annotations addObject:annotation];
+ }
+ 
+ //   return annotations;
+ } else {
+ *error = [self generateError:@"Server sent incorrectly formatted data, talk to admin" withErrorDomain:@"ServerError" withUnderlyingError:nil];
+ }
+ } else {
+ *error = [self generateErrorObjectFromHTTPError:httpResp.statusCode];
+ 
+ }
+ } else {
+ *error = [self generateError:@"Could not connect to server" withErrorDomain:@"Connection" withUnderlyingError:internalError];
+ }
+ */
 
 
 +(NSDictionary*)parseJSONToDictionary:(NSData*)POSTReply error:(NSError**)error
