@@ -262,16 +262,10 @@ return NO;
             [parameters addObject:@""];
         }
         
-        NSError *error;
-        
         [self createExperimentFiles];
         for(NSMutableDictionary *dict in _experimentFilesDictArr){
             [dict setObject:parameters forKey:@"parameters"];
-            [ServerConnection convert:dict error:&error];
-            if(error){
-                [self showErrorMessage:[error.userInfo objectForKey:NSLocalizedDescriptionKey] title:error.domain];
-                
-            }
+            [ServerConnection convert:dict withContext:self];
         }
         for(XYZExperimentFile *file in _experimentFiles){
             [ProcessViewController addProcessingExperiment:file];
@@ -281,6 +275,14 @@ return NO;
     return;
     
 }
+
+- (void) reportResult: (NSError*) error {
+    
+    if(error){
+        [self showErrorMessage:[error.userInfo objectForKey:NSLocalizedDescriptionKey] title:error.domain];
+    }
+}
+
 -(void) createExperimentFiles{
     _experimentFilesDictArr = [[NSMutableArray alloc] init];
     for(XYZExperimentFile *file in _experimentFiles){

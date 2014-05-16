@@ -21,6 +21,21 @@
     return defaultFile;
 }
 
++ (BOOL) ambigousFileTypes: (NSArray *) files
+{
+    if ([files count] == 0) {
+        return NO;
+    }
+    FileType type = ((XYZExperimentFile *)files[0]).type;
+    
+    for (XYZExperimentFile *file in files) {
+        if (file.type != type) {
+            return YES;
+        }
+    }
+    
+    return NO;
+}
 
 - (NSString *) getDescription
 {

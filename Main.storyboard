@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="x1l-HJ-QPz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="x1l-HJ-QPz">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -51,7 +51,7 @@
                                 <color key="highlightedColor" red="0.071601144374781031" green="0.21912855349169111" blue="0.39514690896739135" alpha="1" colorSpace="calibratedRGB"/>
                             </label>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="4jH-cK-PI1">
-                                <rect key="frame" x="150" y="403" width="20" height="20"/>
+                                <rect key="frame" x="150" y="370" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </activityIndicatorView>
                         </subviews>
@@ -73,6 +73,7 @@
                         <barButtonItem key="backBarButtonItem" title="Log out" id="SqI-io-Ybi"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="loginButton" destination="iwx-tD-EHi" id="Dgz-80-npe"/>
                         <outlet property="passwordField" destination="qhR-JL-4yB" id="cF6-pX-4sq"/>
                         <outlet property="spinner" destination="4jH-cK-PI1" id="yx9-nL-ENx"/>
                         <outlet property="userField" destination="heV-ix-3Xk" id="mmF-vM-aAf"/>
@@ -166,7 +167,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y7h-DZ-3NX">
-                                        <rect key="frame" x="5" y="32" width="290" height="117"/>
+                                        <rect key="frame" x="0.0" y="59" width="290" height="117"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -211,6 +212,10 @@
                                     <constraint firstAttribute="height" constant="3" id="3Gj-Mi-I3C"/>
                                 </constraints>
                             </imageView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="d5u-df-mTm">
+                                <rect key="frame" x="150" y="479" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -218,10 +223,13 @@
                             <constraint firstItem="h4D-dx-Mqj" firstAttribute="leading" secondItem="Ueq-zr-MCQ" secondAttribute="leading" id="9PJ-eS-71h"/>
                             <constraint firstAttribute="trailing" secondItem="h4D-dx-Mqj" secondAttribute="trailing" id="C3s-Lh-0KP"/>
                             <constraint firstItem="EJL-DW-KHM" firstAttribute="leading" secondItem="Ueq-zr-MCQ" secondAttribute="leading" constant="98" id="FJx-Nc-h8r"/>
+                            <constraint firstAttribute="trailing" secondItem="d5u-df-mTm" secondAttribute="trailing" constant="150" id="OUp-uX-ueu"/>
                             <constraint firstAttribute="trailing" secondItem="EJL-DW-KHM" secondAttribute="trailing" constant="98" id="XWQ-oH-xht"/>
                             <constraint firstItem="e0R-iQ-a4q" firstAttribute="leading" secondItem="Ueq-zr-MCQ" secondAttribute="leading" id="asp-UR-BVe"/>
+                            <constraint firstItem="Fmb-oU-3Ov" firstAttribute="top" secondItem="d5u-df-mTm" secondAttribute="bottom" constant="20" id="bUZ-PG-iSl"/>
                             <constraint firstItem="e0R-iQ-a4q" firstAttribute="top" secondItem="h4D-dx-Mqj" secondAttribute="bottom" constant="-1" id="f2P-Bp-gDC"/>
                             <constraint firstItem="h4D-dx-Mqj" firstAttribute="top" secondItem="xmV-wZ-3gY" secondAttribute="bottom" constant="1" id="faf-4d-4Ug"/>
+                            <constraint firstItem="d5u-df-mTm" firstAttribute="leading" secondItem="Ueq-zr-MCQ" secondAttribute="leading" constant="150" id="lAc-em-4fj"/>
                             <constraint firstItem="Fmb-oU-3Ov" firstAttribute="top" secondItem="EJL-DW-KHM" secondAttribute="bottom" constant="14" id="lqp-zn-7CW"/>
                             <constraint firstAttribute="trailing" secondItem="e0R-iQ-a4q" secondAttribute="trailing" id="t5Y-Gu-iBa"/>
                         </constraints>
@@ -236,6 +244,8 @@
                     <connections>
                         <outlet property="advancedView" destination="sRN-He-MEm" id="76w-JE-lPi"/>
                         <outlet property="pubmedTextView" destination="y7h-DZ-3NX" id="HCb-F0-XP7"/>
+                        <outlet property="searchButton" destination="EJL-DW-KHM" id="s5q-u1-Y7t"/>
+                        <outlet property="spinner" destination="d5u-df-mTm" id="XyO-4n-bS9"/>
                         <outlet property="tableView" destination="h4D-dx-Mqj" id="fPB-Z7-tcO"/>
                         <segue destination="ggw-44-oMv" kind="push" identifier="searchResult" id="1cQ-o4-QSo"/>
                     </connections>
@@ -1003,6 +1013,9 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gjd-uV-yNJ">
                                                     <rect key="frame" x="256" y="4" width="51" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <action selector="switchValueChanged:" destination="byj-CI-98u" eventType="valueChanged" id="fFl-S6-kXY"/>
+                                                    </connections>
                                                 </switch>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Datafile1.wig " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7wx-f0-h80">
                                                     <rect key="frame" x="46" y="9" width="206" height="21"/>
@@ -1017,24 +1030,16 @@
                                                     <state key="normal">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V74-sV-wXL">
-                                                    <rect key="frame" x="0.0" y="5" width="250" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal">
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
                                                     <connections>
-                                                        <action selector="FileInfoButton:" destination="y6w-6T-HLO" eventType="touchUpInside" id="ktS-Bh-kb5"/>
+                                                        <action selector="infoButtonTouchUpInside:" destination="byj-CI-98u" eventType="touchUpInside" id="Ar4-f9-Swr"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
-                                            <outlet property="infoButtonFiles" destination="V74-sV-wXL" id="hqP-He-z7I"/>
-                                            <outlet property="switchButton" destination="gjd-uV-yNJ" id="XlX-IZ-Cuc"/>
-                                            <outlet property="textField" destination="7wx-f0-h80" id="gpF-lj-NTp"/>
+                                            <outlet property="switchButton" destination="gjd-uV-yNJ" id="9nF-6D-5xB"/>
+                                            <outlet property="textField" destination="7wx-f0-h80" id="D4f-gv-N5h"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1110,6 +1115,7 @@
                         <outlet property="dimView" destination="fIs-Qi-2kD" id="mfD-Tg-FMz"/>
                         <outlet property="infoAboutFile" destination="45H-5h-NPD" id="fky-tw-PH7"/>
                         <outlet property="infoFileTextField" destination="y99-Vg-vyc" id="qBa-Cc-JYz"/>
+                        <outlet property="tableView" destination="Zt8-vB-cTV" id="4wh-zp-uhu"/>
                         <segue destination="NVQ-fn-jnW" kind="modal" identifier="toSelectTask" id="cMg-uF-AiC"/>
                     </connections>
                 </viewController>
@@ -1454,5 +1460,7 @@
         <segue reference="cMg-uF-AiC"/>
         <segue reference="Nis-OP-SD8"/>
         <segue reference="dRf-EC-VtU"/>
+        <segue reference="lHN-tn-48I"/>
+        <segue reference="cMg-uF-AiC"/>
     </inferredMetricsTieBreakers>
 </document>

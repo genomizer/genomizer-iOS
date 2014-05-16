@@ -2,29 +2,22 @@
 //  XYZDataFileTableViewCell.m
 //  InLogger
 //
-//  Created by Joel Viklund on 30/04/14.
+//  Created by Joel Viklund on 15/05/14.
 //  Copyright (c) 2014 Joel Viklund. All rights reserved.
 //
 
 #import "XYZDataFileTableViewCell.h"
-#import "XYZSelectedFilesViewController.h"
 
 @implementation XYZDataFileTableViewCell
 
-- (void)awakeFromNib
+- (IBAction)switchValueChanged:(UISwitch *)sender
 {
-    // Initialization code
+    _file.selected = _switchButton.on;
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+- (IBAction)infoButtonTouchUpInside:(UIButton *)sender
 {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
-}
-- (IBAction)infoFile:(id)sender {
-    [XYZSelectedFilesViewController addInfoFile:self.file];
-
+    [_controller showInfoAbout:_file];
 }
 
 @end

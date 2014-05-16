@@ -16,5 +16,4 @@
 @property XYZExperiment *selectedFiles;
 @property NSArray *searchResults;
 
-
 @end

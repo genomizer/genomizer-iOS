@@ -14,34 +14,15 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *executeButton;
 
 @property NSArray *tasks;
-@property NSInteger selectedCellRow;
-
 
 @end
 
 @implementation XYZSelectTaskTableViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSLog(@"loaded");
     _tasks = [self tasksOfFileType:_fileType];
-   // NSLog(@"expfile%@", _experimentFiles[0]);
-    _selectedCellRow = -1;
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (NSArray *) tasksOfFileType: (FileType) fileType
@@ -59,23 +40,15 @@
     }
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
     return [_tasks count];
 }
 
@@ -118,14 +91,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: @"SelectTaskCellPrototype" forIndexPath:indexPath];
     
     cell.textLabel.text = [_tasks objectAtIndex:indexPath.row];
-    if (_selectedCellRow == indexPath.row) {
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    } else {
-        cell.accessoryType = UITableViewCellAccessoryNone;
-    }
     cell.textLabel.tag = indexPath.row;
-
-    // Configure the cell...
     
     return cell;
 }
@@ -133,9 +99,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    _selectedCellRow = indexPath.row;
-    _executeButton.enabled = YES;
-   
     [tableView reloadData];
 }
 

@@ -17,7 +17,6 @@ static NSDictionary *ANNOTATION_DICTIONARY;
     return [NSDictionary dictionaryWithObjectsAndKeys:@"Publication ID", @"pubmedId", @"Experiment ID", @"experimentID", @"File Name", @"fileName", @"Species", @"specie", nil];
 }
 
-
 -(BOOL) isFreeText
 {
     return _possibleValues != nil && [_possibleValues count] == 1 && [[_possibleValues objectAtIndex:0] isEqualToString:@"freetext"];

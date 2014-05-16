@@ -12,6 +12,7 @@
 @interface XYZDataFileViewController : UIViewController
 
 - (IBAction) unwindToList:(UIStoryboardSegue *)segue;
+- (void) showInfoAbout: (XYZExperimentFile *) file;
 
 @property (nonatomic) XYZExperiment *experiment;
 

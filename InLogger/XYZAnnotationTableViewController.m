@@ -25,7 +25,6 @@
 {
     [super viewDidLoad];
     _annotations = [self getAnnotationsFromServer];
-    //self.clearsSelectionOnViewWillAppear = NO;
 }
 
 - (NSArray *) getAnnotationsFromServer
@@ -66,7 +65,7 @@
 {
     XYZAnnotation *annotation = [_annotations objectAtIndex:sender.tag];
 
-    if( sender.on) {
+    if (sender.on) {
         [_describer addAnnotation: annotation];
     } else {
         [_describer removeAnnotation:annotation];

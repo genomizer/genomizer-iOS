@@ -19,6 +19,8 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *advancedView;
 @property (weak, nonatomic) IBOutlet UITextView *pubmedTextView;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
+@property (weak, nonatomic) IBOutlet UIButton *searchButton;
 
 @property NSArray *annotations;
 
@@ -28,11 +30,19 @@
 
 - (void)viewDidLoad
 {
-    
     [super viewDidLoad];
+    _spinner.hidesWhenStopped = YES;
     _annotations = [self getAnnotationsFromServer];
     [self.tableView reloadData];
 }
+
+- (void) viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [_spinner stopAnimating];
+    _searchButton.enabled = YES;
+    _searchButton.hidden = NO;
+}
+
 
 - (NSArray *) getAnnotationsFromServer
 {
@@ -80,14 +90,23 @@
 }
 
 - (IBAction)searchButton:(id)sender {
-    NSError *error;
+    _spinner.hidden = NO;
+    [_spinner startAnimating];
+    _searchButton.enabled = NO;
+    _searchButton.hidden = YES;
     NSArray *selectedAnnotations = [self getSelectedAnnotations];
-    NSArray *searchResults = [ServerConnection search:[XYZPubMedBuilder createAnnotationsSearch: selectedAnnotations] error:&error];
-    if(error){
+    [ServerConnection search:[XYZPubMedBuilder createAnnotationsSearch: selectedAnnotations] withContext:self];
+}
+
+- (void) reportSearchResult: (NSMutableArray*) result withParsingError: (NSError*) error
+{
+    if(error) {
         [XYZPopupGenerator showErrorMessage:error];
-    }
-    else{
-        [self performSegueWithIdentifier:@"searchResult" sender:searchResults];
+    } else {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [_spinner stopAnimating];
+            [self performSegueWithIdentifier:@"searchResult" sender:result];
+        });
     }
 }
 
@@ -109,13 +128,7 @@
 }
 
 - (IBAction)searchQueryButtonTouched:(id)sender {
-    NSError *error;
-    NSArray *searchResults = [ServerConnection search:_pubmedTextView.text error:&error];
-    if(error){
-        [XYZPopupGenerator showErrorMessage:error];
-    } else{
-        [self performSegueWithIdentifier:@"searchResult" sender:searchResults];
-    }
+    [ServerConnection search:_pubmedTextView.text withContext:self];
 }
 
 - (IBAction)advancedSearchButton:(id)sender {
@@ -147,14 +160,9 @@
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    
     if([text isEqualToString:@"\n"]) {
-        NSError *error;
-        NSArray *searchResults = [ServerConnection search:_pubmedTextView.text error:&error];
-        if(error) {
-            [XYZPopupGenerator showPopupWithMessage: @"Probably incorrect search query." withTitle:error.domain];
-        } else {
-            [self performSegueWithIdentifier:@"searchResult" sender:searchResults];
-        }
+        [ServerConnection search:_pubmedTextView.text withContext:self];
         return NO;
     }
     return YES;

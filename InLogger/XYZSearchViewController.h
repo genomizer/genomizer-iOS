@@ -13,6 +13,7 @@
 
 
 - (void) hideKeyboardAndAdjustTable;
-- (void)scrollToCell: (UITableViewCell *) cell;
+- (void) scrollToCell: (UITableViewCell *) cell;
+- (void) reportSearchResult: (NSMutableArray*) result withParsingError: (NSError*) error;
 
 @end

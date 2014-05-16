@@ -23,6 +23,8 @@
 - (NSString *) getValueForAnnotation: (NSString *) annotation;
 - (void) addExperimentFile: (XYZExperimentFile *) file;
 - (void) removeExperimentFile: (XYZExperimentFile *) file;
+- (NSMutableArray *) getSelectedFiles;
+- (NSMutableArray *) getSelectedFiles: (FileType) fileType;
 - (NSInteger) numberOfFiles;
 + (XYZExperiment*) defaultExperiment;
 

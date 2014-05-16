@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *userField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
+@property (weak, nonatomic) IBOutlet UIButton *loginButton;
 
 @end
 
@@ -25,6 +26,8 @@
     [super viewDidLoad];
     _userField.delegate = self;
     _passwordField.delegate = self;
+    _spinner.hidden = YES;
+    _spinner.hidesWhenStopped = YES;
 }
 
 - (void) tryToLogIn
@@ -36,13 +39,8 @@
     if((username.length > 1) && (password.length > 3)) {
         [ServerConnection login:self.userField.text withPassword:self.passwordField.text error:&error withContext:self];
         [_spinner startAnimating];
-        /*
-        if (error) {
-            [XYZPopupGenerator showErrorMessage:error];
-        } else {
-            [self performSegueWithIdentifier:@"loginSegue" sender:self];
-        }
-        */
+        _loginButton.enabled = NO;
+        _loginButton.hidden = YES;
     } else{
         [XYZPopupGenerator showPopupWithMessage:@"Please enter username and password."];
     }
@@ -56,24 +54,16 @@
 
 - (void) reportLoginResult: (NSError*) error {
     [_spinner stopAnimating];
+    _loginButton.enabled = NO;
+    _loginButton.hidden = YES;
     
     if(error == nil){
         dispatch_async(dispatch_get_main_queue(), ^{
-            
             [self performSegueWithIdentifier:@"loginSegue" sender:self];
         });
     } else {
         [XYZPopupGenerator showErrorMessage:error];
     }
-}
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
@@ -100,9 +90,6 @@
     [self.view endEditing:YES];
     [self centerFrameView];
     [super touchesBegan:touches withEvent:event];
-    _spinner.hidesWhenStopped = YES;
-    self.userField.delegate = self;
-    self.passwordField.delegate = self;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField

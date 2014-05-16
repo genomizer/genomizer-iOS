@@ -28,13 +28,12 @@ typedef NS_ENUM(NSInteger, FileType) {
 @property NSString *metaData;
 @property NSString *author;
 @property NSString *grVersion;
-
-
-//+ (void) createExperimentFile:(NSDictionary*)file;
+@property BOOL selected;
 
 - (NSString *) getDescription;
 - (NSString *) getAllInfo;
 + (FileType) NSStringFileTypeToEnumFileType: (NSString *) type;
 + (XYZExperimentFile *) defaultFileWithType: (FileType) type;
++ (BOOL) ambigousFileTypes: (NSArray *) files;
 
 @end
