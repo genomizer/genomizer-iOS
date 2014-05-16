@@ -285,8 +285,8 @@ return NO;
     _experimentFilesDictArr = [[NSMutableArray alloc] init];
     for(XYZExperimentFile *file in _experimentFiles){
         NSMutableDictionary * currentFile =[[NSMutableDictionary alloc] init];
-        [currentFile setObject:file.name forKey:@"filename"];
-        [currentFile setObject:file.idFile forKey:@"fileId"];
+    //    [currentFile setObject:file.name forKey:@"filename"];
+    //    [currentFile setObject:file.idFile forKey:@"fileId"];
         [currentFile setObject:file.expID forKey:@"expid"];
         [currentFile setObject:@"rawtoprofile" forKey:@"processtype"];
         [currentFile setObject:file.metaData forKey:@"metadata"];
