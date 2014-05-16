@@ -38,9 +38,9 @@
 
 - (void) viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
-    [_spinner stopAnimating];
-    _searchButton.enabled = YES;
-    _searchButton.hidden = NO;
+   // [_spinner stopAnimating];
+  //  _searchButton.enabled = YES;
+ //   _searchButton.hidden = NO;
 }
 
 - (void) reportAnnotationResult: (NSArray*) result error: (NSError*) error {
@@ -115,11 +115,20 @@
 
 - (void) reportSearchResult: (NSMutableArray*) result withParsingError: (NSError*) error
 {
-    if(error) {
-        [XYZPopupGenerator showErrorMessage:error];
-    } else {
+    if(error)
+    {
         dispatch_async(dispatch_get_main_queue(), ^{
             [_spinner stopAnimating];
+            _searchButton.enabled = YES;
+            _searchButton.hidden = NO;
+            [XYZPopupGenerator showErrorMessage:error];
+        });
+    } else
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [_spinner stopAnimating];
+            _searchButton.enabled = YES;
+            _searchButton.hidden = NO;
             [self performSegueWithIdentifier:@"searchResult" sender:result];
         });
     }
@@ -143,7 +152,18 @@
 }
 
 - (IBAction)searchQueryButtonTouched:(id)sender {
+    
+    //show loading
+    _spinner.hidden = NO;
+    [_spinner startAnimating];
+    _searchButton.enabled = NO;
+    _searchButton.hidden = YES;
+    
+    //send search
     [ServerConnection search:_pubmedTextView.text withContext:self];
+    _advancedView.hidden = YES;
+    _tableView.userInteractionEnabled = YES;
+    [_pubmedTextView endEditing:YES];
 }
 
 - (IBAction)advancedSearchButton:(id)sender {

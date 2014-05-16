@@ -15,7 +15,7 @@
 @interface ServerConnection : NSObject
 
 + (void)login:(NSString *)username withPassword:(NSString *)password error:(NSError**) error withContext: (UIViewController*) controller;
-+ (int)logout:(NSError**) error;
++ (void)logout:(NSError**) error;
 
 + (void)search:(NSString *) annotations withContext: (XYZSearchViewController*) controller;
 
@@ -23,5 +23,5 @@
 + (NSDictionary*)parseJSONToDictionary:(NSData*)POSTReply error:(NSError**)error;
 
 + (void) getAvailableAnnotations:(XYZSearchViewController*) controller;
-+ (NSError*)generateErrorObjectFromHTTPError:(NSInteger)errorCode;
+
 @end

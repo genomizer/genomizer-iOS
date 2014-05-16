@@ -75,20 +75,13 @@ NSString *token;
      }];
 }
 
-+ (int)logout:(NSError**)error
++ (void)logout:(NSError**)error
 {
     token = nil;
     NSMutableURLRequest *request = [JSONBuilder getLogoutJSON:token];
     
-    NSHTTPURLResponse *httpResp;
-
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler: nil];
-
-    NSLog(@"logout token %@", token);
-    NSLog(@"Header: %ld", (long)httpResp.statusCode);
-   
-    return httpResp.statusCode;
+    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler: nil];   
 }
 
  
@@ -119,7 +112,7 @@ NSString *token;
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler: ^(NSURLResponse *response, NSData *POSTReply, NSError *internalError)
      {
-         NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
+            NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
          NSMutableArray *array;
          NSError *error;
 
