@@ -230,7 +230,10 @@ NSString *token;
         } else {
             error = [self generateError:@"Could not connect to server" withErrorDomain:@"Connection" withUnderlyingError:internalError];
         }
-        [controller reportProcessStatusResult:processStatusResults error:error];
+        
+        //TODO uncomment before use
+        
+        //[controller reportProcessStatusResult:processStatusResults error:error];
     }];
 }
 
