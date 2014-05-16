@@ -200,6 +200,41 @@ NSString *token;
     }];
 }
 
+
+//TODO fix view controller type
++ (void) getProcessStatus:(UIViewController*) controller
+{
+    NSMutableURLRequest *request = [JSONBuilder getProcessStatusJSON:token];
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler: ^(NSURLResponse *response, NSData *POSTReply, NSError *internalError) {
+        NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
+        NSError *error;
+        NSArray *processStatusResults;
+        
+        if (internalError == nil)
+        {
+            if (httpResp.statusCode == 200)
+            {
+                NSArray *array = [NSJSONSerialization JSONObjectWithData:POSTReply options: NSJSONReadingMutableContainers error:&internalError];
+                if (internalError == nil)
+                {
+                    processStatusResults = array;
+                } else
+                {
+                    error = [self generateError:@"Server sent incorrectly formatted data, talk to admin" withErrorDomain:@"ServerError" withUnderlyingError:nil];
+                }
+            } else
+            {
+                error = [self generateErrorObjectFromHTTPError:httpResp.statusCode];
+            }
+        } else {
+            error = [self generateError:@"Could not connect to server" withErrorDomain:@"Connection" withUnderlyingError:internalError];
+        }
+        [controller reportProcessStatusResult:processStatusResults error:error];
+    }];
+}
+
+
 /*
  if (internalError == nil) {
  if (httpResp.statusCode == 200) {
