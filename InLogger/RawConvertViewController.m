@@ -279,7 +279,7 @@ return NO;
 - (void) reportResult: (NSError*) error {
     
     if(error){
-        [self showErrorMessage:[error.userInfo objectForKey:NSLocalizedDescriptionKey] title:error.domain];
+        [XYZPopupGenerator showErrorMessage:error];
     }
 }
 
@@ -297,16 +297,6 @@ return NO;
         NSLog(@"currfile%@", currentFile);
         [_experimentFilesDictArr addObject:currentFile];
     }
-}
-
-- (IBAction)showErrorMessage:(NSString*) error title:(NSString*)title
-{
-    UIAlertView *convertMessage = [[UIAlertView alloc]
-                                initWithTitle:title message:error
-                                delegate:nil cancelButtonTitle:@"Try again"
-                                otherButtonTitles:nil];
-        
-    [convertMessage show];
 }
 
 - (IBAction)samToGffChanged:(id)sender {
