@@ -38,9 +38,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UITableViewCell *ratioCalcCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *ratioCalcSmoothingCell;
-
-
-
+@property UIButton *doneButton;
 
 @property CGPoint originalCenter;
 @property NSMutableArray *experimentFilesDictArr;
@@ -135,6 +133,12 @@
     _staticView = staticView;
    
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 50, 0);
+    
+    _doneButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    _doneButton.frame = CGRectMake(0,[[UIScreen mainScreen] bounds].size.height-53, 104, 53);
+    _doneButton.adjustsImageWhenHighlighted = NO;
+    [_doneButton setImage:[UIImage imageNamed:@"NextButtonNumberPad.png"] forState:UIControlStateNormal];
+    [_doneButton setImage:[UIImage imageNamed:@"NextButtonNumberPadClicked.png"] forState:UIControlStateHighlighted];
 }
 
 - (void)handleSingleTap:(UITapGestureRecognizer *) sender
@@ -170,38 +174,24 @@
 }
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    NSLog(@"fgfd");
+    if(textField == self.smoothingWindowSize){
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
                                                  name:UIKeyboardWillShowNotification
                                                object:nil];
+    }
 }
 - (void)keyboardWillShow:(NSNotification *)note {
-    // create custom button
-    UIButton *doneButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    doneButton.frame = CGRectMake(0,[[UIScreen mainScreen] bounds].size.height-53, 106, 53);
-    doneButton.adjustsImageWhenHighlighted = NO;
-    [doneButton setImage:[UIImage imageNamed:@"NextButtonNumberPad.png"] forState:UIControlStateNormal];
-    [doneButton setImage:[UIImage imageNamed:@"NextButtonNumberPadClicked.png"] forState:UIControlStateHighlighted];
-    //[doneButton addTarget:self action:@selector(doneButton:) forControlEvents:UIControlEventTouchUpInside];
-    
-    // locate keyboard view
-  //  NSLog(@"HEEEJ %@" , [tempWindow.subviews objectAtIndex:i]);
-    [[[[UIApplication sharedApplication] windows] objectAtIndex:1] addSubview:doneButton];
-    UIWindow* tempWindow = [[[UIApplication sharedApplication] windows] objectAtIndex:0];
-    UIView* keyboard;
-    for(int i=0; i<[tempWindow.subviews count]; i++) {
-        keyboard = [tempWindow.subviews objectAtIndex:i];
-        // keyboard view found; add the custom button to it
-        if([[keyboard description] hasPrefix:@"UIKeyboard"] == YES) {
-            [keyboard addSubview:doneButton];
-            [keyboard bringSubviewToFront:doneButton];
-        }
-    }
-    
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:3];
+    _doneButton.hidden = NO;
+    [[[[UIApplication sharedApplication] windows] objectAtIndex:1] addSubview:_doneButton];
+    [UIView commitAnimations];
+
 }
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
+    
     if(textField.text.length == 0){
         if(textField == self.bowtie) {
             self.genomeFile.enabled = NO;
@@ -336,7 +326,14 @@
             self.ratioCalcSmoothingPrintZeros.enabled = NO;
             self.ratioCalcSmoothingPrintZeros.on = NO;
         }
+    } else{
+        if(textField == self.smoothingWindowSize){
+            NSLog(@"saddsad");
+            [[NSNotificationCenter defaultCenter] removeObserver:self];
+            
+        }
     }
+    _doneButton.hidden = YES;
 
     
 }
@@ -353,6 +350,7 @@ if(textField.text.length > 0 ){
 
     }else if(textField == self.smoothingWindowSize) {
         self.smoothingSmoothTypeSwitch.enabled = YES;
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
         [textField endEditing:YES];
   
     }else if(textField == self.smoothingMinimumStep) {
