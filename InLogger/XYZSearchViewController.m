@@ -191,6 +191,8 @@
     if ([segue.identifier isEqualToString:@"searchResult"]) {
         XYZSearchResultTableViewController *nextVC = (XYZSearchResultTableViewController *)[segue destinationViewController];
         nextVC.searchResults = sender;
+        nextVC.experimentDescriber = [[XYZExperimentDescriber alloc] init];
+        nextVC.experimentDescriber.annotations = _annotations;
     }
 }
 

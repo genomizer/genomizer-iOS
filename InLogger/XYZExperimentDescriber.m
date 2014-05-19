@@ -10,7 +10,7 @@
 
 @interface XYZExperimentDescriber()
 
-@property NSMutableArray *annotations;
+@property NSMutableArray *visibleAnnotations;
 
 @end
 
@@ -20,24 +20,24 @@
 - (XYZExperimentDescriber *) init
 {
     self = [super init];
-    _annotations = [[NSMutableArray alloc] init];
+    _visibleAnnotations = [[NSMutableArray alloc] init];
     return self;
 }
 
-- (void) addAnnotation: (XYZAnnotation *) annotation
+- (void) showAnnotation: (XYZAnnotation *) annotation
 {
-    if( ![_annotations containsObject:annotation]) {
-        [_annotations addObject:annotation];
+    if( ![_visibleAnnotations containsObject:annotation]) {
+        [_visibleAnnotations addObject:annotation];
     }
 }
 
-- (void) removeAnnotation: (XYZAnnotation *) annotation
+- (void) hideAnnotation: (XYZAnnotation *) annotation
 {
-    [_annotations removeObject:annotation];
+    [_visibleAnnotations removeObject:annotation];
 }
 
-- (BOOL) containsAnnotation: (XYZAnnotation *) annotation {
-    return [_annotations containsObject:annotation];
+- (BOOL) showsAnnotation: (XYZAnnotation *) annotation {
+    return [_visibleAnnotations containsObject:annotation];
 }
 
 - (NSString *) getDescriptionOf: (XYZExperiment*) experiment
@@ -45,13 +45,13 @@
     NSMutableString *description = [[NSMutableString alloc] init];
     
     [description appendString: [self createRowForAnnotation:@"Name" withValue:experiment.name andNewLine:YES]];
-    [description appendString: [self createRowForAnnotation:@"Created by" withValue:experiment.createdByUser andNewLine:[_annotations count] > 0]];
+    [description appendString: [self createRowForAnnotation:@"Created by" withValue:experiment.createdByUser andNewLine:[_visibleAnnotations count] > 0]];
     
-     for (NSInteger i = 0; i < [_annotations count]; i++) {
-         XYZAnnotation *annotation = _annotations[i];
+     for (NSInteger i = 0; i < [_visibleAnnotations count]; i++) {
+         XYZAnnotation *annotation = _visibleAnnotations[i];
         [description appendString: [self createRowForAnnotation:[annotation getFormatedName]
                                                      withValue:[experiment getValueForAnnotation:annotation.name]
-                                                     andNewLine:i != [_annotations count] -1]];
+                                                     andNewLine:i != [_visibleAnnotations count] -1]];
     }
     
     return description;

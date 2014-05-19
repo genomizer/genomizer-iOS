@@ -13,7 +13,6 @@
 
 @interface XYZSearchResultTableViewController ()
 
-@property XYZExperimentDescriber *experimentDescriber;
 @property CGFloat tableCellWidth;
 
 @end
@@ -25,7 +24,6 @@
     [super viewDidLoad];
     XYZSearchResultTableViewCell *cell= [self.tableView dequeueReusableCellWithIdentifier:@"ListPrototypeCell"];
     _tableCellWidth = cell.textFieldSize.width;
-    _experimentDescriber = [[XYZExperimentDescriber alloc] init];
 }
 
 #pragma mark - Table view data source

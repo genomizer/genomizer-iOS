@@ -121,7 +121,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" restorationIdentifier="InputField" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Experiment ID" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cuH-Be-R19">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="InputField" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Experiment ID" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cuH-Be-R19">
                                                     <rect key="frame" x="20" y="7" width="223" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -133,7 +133,7 @@
                                                         <outlet property="delegate" destination="Tig-61-Fif" id="KH5-fb-6OM"/>
                                                     </connections>
                                                 </textField>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vgg-C9-vRK">
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vgg-C9-vRK">
                                                     <rect key="frame" x="251" y="6" width="51" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <connections>
@@ -146,7 +146,7 @@
                                                 <constraint firstItem="vgg-C9-vRK" firstAttribute="leading" secondItem="cuH-Be-R19" secondAttribute="trailing" constant="8" symbolic="YES" id="F11-5F-3D0"/>
                                                 <constraint firstItem="cuH-Be-R19" firstAttribute="bottom" secondItem="vgg-C9-vRK" secondAttribute="bottom" id="ZVq-Zk-auB"/>
                                                 <constraint firstItem="cuH-Be-R19" firstAttribute="top" secondItem="5qA-D1-t1n" secondAttribute="top" constant="7" id="m5G-G0-hWe"/>
-                                                <constraint firstAttribute="trailing" secondItem="vgg-C9-vRK" secondAttribute="trailing" constant="16" id="svo-NO-Vgj"/>
+                                                <constraint firstAttribute="trailing" secondItem="vgg-C9-vRK" secondAttribute="trailing" constant="20" id="svo-NO-Vgj"/>
                                                 <constraint firstItem="cuH-Be-R19" firstAttribute="leading" secondItem="5qA-D1-t1n" secondAttribute="leading" constant="20" symbolic="YES" id="wyp-Gy-TCE"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -434,7 +434,7 @@
                                     <constraint firstAttribute="height" constant="1" id="Lb4-ad-Jiq"/>
                                 </constraints>
                             </imageView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="6pb-Wh-CBJ">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="6pb-Wh-CBJ">
                                 <rect key="frame" x="0.0" y="113" width="320" height="353"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -557,12 +557,12 @@
                             <constraint firstItem="ddK-Rf-71f" firstAttribute="top" secondItem="2ha-Gv-y76" secondAttribute="bottom" constant="9" id="It0-Rg-AHk"/>
                             <constraint firstAttribute="trailing" secondItem="Xms-3l-o79" secondAttribute="trailing" id="J0e-SB-qls"/>
                             <constraint firstItem="pFH-yY-7BM" firstAttribute="top" secondItem="1mi-tr-fZm" secondAttribute="bottom" constant="11" id="JtM-NR-JdN"/>
-                            <constraint firstItem="6pb-Wh-CBJ" firstAttribute="top" secondItem="ddK-Rf-71f" secondAttribute="bottom" id="Ydd-q4-RKV"/>
+                            <constraint firstItem="6pb-Wh-CBJ" firstAttribute="top" secondItem="ddK-Rf-71f" secondAttribute="bottom" constant="1" id="Ydd-q4-RKV"/>
                             <constraint firstItem="2ha-Gv-y76" firstAttribute="top" secondItem="M5h-G1-RIW" secondAttribute="bottom" constant="10" id="cFs-Qg-FsX"/>
                             <constraint firstItem="2ha-Gv-y76" firstAttribute="leading" secondItem="xtR-Jh-0nM" secondAttribute="leading" constant="20" id="ep7-Ry-1WJ"/>
                             <constraint firstItem="KyP-h8-6M9" firstAttribute="leading" secondItem="xtR-Jh-0nM" secondAttribute="leading" id="fTX-YQ-58V"/>
                             <constraint firstItem="6pb-Wh-CBJ" firstAttribute="leading" secondItem="xtR-Jh-0nM" secondAttribute="leading" id="ngm-oH-dSk"/>
-                            <constraint firstItem="Xms-3l-o79" firstAttribute="top" secondItem="6pb-Wh-CBJ" secondAttribute="bottom" constant="-2" id="pnd-Jq-CfE"/>
+                            <constraint firstItem="Xms-3l-o79" firstAttribute="top" secondItem="6pb-Wh-CBJ" secondAttribute="bottom" constant="-3" id="pnd-Jq-CfE"/>
                             <constraint firstAttribute="trailing" secondItem="ddK-Rf-71f" secondAttribute="trailing" id="q0n-5M-EF6"/>
                             <constraint firstItem="Xms-3l-o79" firstAttribute="leading" secondItem="xtR-Jh-0nM" secondAttribute="leading" id="qji-dX-dRU"/>
                             <constraint firstItem="KyP-h8-6M9" firstAttribute="top" secondItem="Xms-3l-o79" secondAttribute="bottom" id="uHX-6t-vIc"/>
@@ -1699,9 +1699,9 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Nis-OP-SD8"/>
         <segue reference="lHN-tn-48I"/>
-        <segue reference="cMg-uF-AiC"/>
+        <segue reference="1Lw-OZ-NPD"/>
+        <segue reference="Nis-OP-SD8"/>
         <segue reference="dRf-EC-VtU"/>
     </inferredMetricsTieBreakers>
 </document>
