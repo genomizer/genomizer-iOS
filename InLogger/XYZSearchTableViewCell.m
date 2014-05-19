@@ -10,21 +10,27 @@
 
 @interface XYZSearchTableViewCell ()
 
-@property UIPickerView *pickerView;
-
 @end
 
 @implementation XYZSearchTableViewCell
 
 - (IBAction)inputFieldValueChanged:(id)sender
 {
-    [self updateSwitchButton];
+    _switchButton.on = _inputField.text.length > 0;
+    _annotation.selected = _switchButton.on;
 }
 
 - (IBAction)textFieldEditingDidEnd:(id)sender
 {
-    _annotation.value = _inputField.text;
-    [self updateSwitchButton];
+    if(_inputField.text.length == 0) {
+        _annotation.value = nil;
+    } else {
+        _annotation.value = _inputField.text;
+    }
+    if (_inputField.text.length == 0) {
+        _switchButton.on = NO;
+        _annotation.selected = NO;
+    }
 }
 
 - (void) updateSwitchButton
@@ -50,18 +56,6 @@
     [super touchesBegan:touches withEvent:event];
 }
 
-- (UIPickerView *) createPickerView
-{
-    UIPickerView *pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 44, 44, 44)];
-    
-    pickerView.delegate = self;
-    pickerView.backgroundColor = [UIColor colorWithRed:247.0/255.0f green:248.0/255.0f
-                                                  blue:247.0/255 alpha:1.0f];
-    pickerView.dataSource = self;
-    pickerView.showsSelectionIndicator = YES;
-    return pickerView;
-}
-
 -(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
     return 1;
@@ -69,46 +63,50 @@
 
 -(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return [_annotation.possibleValues count];
+    return [_annotation.possibleValues count] + 1;
 }
 
--(NSArray *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+-(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    return [_annotation.possibleValues objectAtIndex:row];
+    if (row == 0) {
+        return @"";
+    } else {
+        return [_annotation.possibleValues objectAtIndex:row-1];
+    }
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow: (NSInteger)row inComponent:(NSInteger)component
 {
-    NSString *selectedValue = [_annotation.possibleValues objectAtIndex:row];
-    _inputField.text = selectedValue;
-    _switchButton.on = [selectedValue length] > 0;
+    if (row == 0) {
+        _inputField.text = @"";
+        _switchButton.on = NO;
+    } else {
+        _inputField.text = [_annotation.possibleValues objectAtIndex:row - 1];
+        _switchButton.on = YES;
+    }
+    _annotation.selected = _switchButton.on;
 }
 
 - (IBAction)textFieldEditingDidBegin:(UITextField *)sender
 {
     if (![_annotation isFreeText]) {
-        if (_pickerView == nil) {
-            _pickerView = [self createPickerView];
-            _inputField.inputView = _pickerView;
+        _controller.pickerView.delegate = self;
+        _controller.pickerView.dataSource = self;
+        if (_annotation.value == nil || ![_annotation.possibleValues containsObject:_annotation.value]) {
+            [_controller.pickerView selectRow:0 inComponent: 0 animated:NO];
+        } else {
+            [_controller.pickerView selectRow:[_annotation.possibleValues indexOfObject: _annotation.value] + 1 inComponent: 0 animated:NO];
         }
-        
-        UIToolbar *toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, _pickerView.bounds.size.width, 44)];
-        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneTouched:)];
-        [toolBar setItems:[NSArray arrayWithObjects:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], doneButton, nil]];
-        _inputField.inputAccessoryView = toolBar;
+    } else {
+        _controller.pickerView.delegate = nil;
+        _controller.pickerView.dataSource = nil;
     }
-    
     [_controller scrollToCell:self];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [_controller hideKeyboardAndAdjustTable];
     return NO;
-}
-
--(void)doneTouched:(UIBarButtonItem*)sender
-{
-    [_controller hideKeyboardAndAdjustTable];
 }
 
 @end

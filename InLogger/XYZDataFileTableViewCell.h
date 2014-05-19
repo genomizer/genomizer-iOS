@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *textField;
 @property (weak, nonatomic) IBOutlet UIButton *infoButton;
 
+
 @property XYZExperimentFile *file;
 @property XYZDataFileViewController* controller;
 

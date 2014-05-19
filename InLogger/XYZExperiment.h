@@ -6,27 +6,18 @@
 //  Copyright (c) 2014 Patrik Nordström. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import "XYZExperimentFile.h"
+#import "XYZFileContainer.h"
 
 @interface XYZExperiment : NSObject
 
 @property NSString *name;
 @property NSString *createdByUser;
-@property NSMutableArray *rawFiles;
-@property NSMutableArray *profileFiles;
-@property NSMutableArray *regionFiles;
-@property NSMutableArray *otherFiles;
+@property XYZFileContainer *files;
 @property NSMutableDictionary *annotations;
 
 - (void) setValue: (id) value forAnnotation: (NSString*) annotation;
 - (NSString *) getValueForAnnotation: (NSString *) annotation;
-- (void) addExperimentFile: (XYZExperimentFile *) file;
-- (void) removeExperimentFile: (XYZExperimentFile *) file;
-- (NSMutableArray *) getSelectedFiles;
-- (NSMutableArray *) getSelectedFiles: (FileType) fileType;
-- (NSInteger) numberOfFiles;
 + (XYZExperiment*) defaultExperiment;
 
 @end
-

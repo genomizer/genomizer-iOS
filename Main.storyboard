@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="x1l-HJ-QPz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="x1l-HJ-QPz">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -127,17 +127,17 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done"/>
                                                     <connections>
-                                                        <action selector="inputFieldValueChanged:" destination="Tig-61-Fif" eventType="editingChanged" id="lz9-p2-GgL"/>
-                                                        <action selector="textFieldEditingDidBegin:" destination="Tig-61-Fif" eventType="editingDidBegin" id="0on-ml-EEZ"/>
-                                                        <action selector="textFieldEditingDidEnd:" destination="Tig-61-Fif" eventType="editingDidEnd" id="jOj-HV-qAc"/>
-                                                        <outlet property="delegate" destination="Tig-61-Fif" id="Gkr-gp-CyT"/>
+                                                        <action selector="inputFieldValueChanged:" destination="Tig-61-Fif" eventType="editingChanged" id="LBg-lu-Asa"/>
+                                                        <action selector="textFieldEditingDidBegin:" destination="Tig-61-Fif" eventType="editingDidBegin" id="ZUM-Ib-uET"/>
+                                                        <action selector="textFieldEditingDidEnd:" destination="Tig-61-Fif" eventType="editingDidEnd" id="YhI-ji-em2"/>
+                                                        <outlet property="delegate" destination="Tig-61-Fif" id="KH5-fb-6OM"/>
                                                     </connections>
                                                 </textField>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vgg-C9-vRK">
                                                     <rect key="frame" x="251" y="6" width="51" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <connections>
-                                                        <action selector="switchValueChanged:" destination="Tig-61-Fif" eventType="valueChanged" id="cIU-uM-8gr"/>
+                                                        <action selector="switchValueChanged:" destination="Tig-61-Fif" eventType="valueChanged" id="uqA-Vn-fk4"/>
                                                     </connections>
                                                 </switch>
                                             </subviews>
@@ -466,23 +466,15 @@
                                                     <state key="normal">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iA0-Zv-WMo">
-                                                    <rect key="frame" x="0.0" y="5" width="245" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal">
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
                                                     <connections>
-                                                        <action selector="infoFile:" destination="gku-GI-eqm" eventType="touchUpInside" id="Alb-xR-y9h"/>
-                                                        <action selector="infoFile:" destination="OaH-dG-5KC" eventType="touchUpInside" id="zrf-9N-fqY"/>
+                                                        <action selector="infoFile:" destination="OaH-dG-5KC" eventType="touchUpInside" id="jvh-an-hsB"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
-                                            <outlet property="infoButton" destination="iA0-Zv-WMo" id="htP-Sy-iWb"/>
+                                            <outlet property="infoButton" destination="ail-Zm-uSm" id="I44-80-fbo"/>
                                             <outlet property="switchButton" destination="qG7-lO-UOq" id="337-ON-tC3"/>
                                             <outlet property="textField" destination="Poq-c8-ohc" id="ueX-Bg-PDr"/>
                                         </connections>
@@ -1038,6 +1030,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
+                                            <outlet property="infoButton" destination="TxR-CQ-d7h" id="U0M-bZ-FwD"/>
                                             <outlet property="switchButton" destination="gjd-uV-yNJ" id="9nF-6D-5xB"/>
                                             <outlet property="textField" destination="7wx-f0-h80" id="D4f-gv-N5h"/>
                                         </connections>
@@ -1707,8 +1700,8 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="Nis-OP-SD8"/>
-        <segue reference="dRf-EC-VtU"/>
         <segue reference="lHN-tn-48I"/>
         <segue reference="cMg-uF-AiC"/>
+        <segue reference="dRf-EC-VtU"/>
     </inferredMetricsTieBreakers>
 </document>

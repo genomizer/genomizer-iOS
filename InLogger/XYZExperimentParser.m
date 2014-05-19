@@ -41,7 +41,7 @@
         expFile.author = [file valueForKey:@"author"];
         expFile.date = [file valueForKey:@"date"];
         expFile.metaData = @"astringofmeta";
-        [exp addExperimentFile:expFile];
+        [exp.files addExperimentFile:expFile];
     }
     return exp;
 }
