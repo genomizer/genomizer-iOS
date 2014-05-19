@@ -127,6 +127,12 @@
 
 - (void)handleSingleTap:(UITapGestureRecognizer *) sender
 {
+    if(self.bowtie.text.length > 0){
+        self.genomeFile.enabled = YES;
+    }
+    if(self.genomeFile.text.length > 0){
+        self.samToGff.enabled = YES;
+    }
     [self.view endEditing:YES];
     
 }
