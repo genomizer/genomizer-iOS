@@ -37,7 +37,7 @@
 }
 
 - (void) viewWillAppear:(BOOL)animated {
-    [ServerConnection getAvailableAnnotations:self];
+    //[ServerConnection getAvailableAnnotations:self];
 }
 
 - (void) viewDidDisappear:(BOOL)animated {

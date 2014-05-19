@@ -106,7 +106,6 @@ static XYZFileContainer * FILES = nil;
     cell.textField.text = [file getDescription];
     cell.switchButton.on = [_selectedFiles containsFile:file];
     //cell.file = [_selectedFiles objectAtIndex:indexPath.row];
-    cell.infoButton.tag = indexPath.row;
     cell.switchButton.tag = indexPath.row;
     return cell;
 }

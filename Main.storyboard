@@ -466,22 +466,15 @@
                                                     <state key="normal">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iA0-Zv-WMo">
-                                                    <rect key="frame" x="0.0" y="5" width="245" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal">
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
                                                     <connections>
-                                                        <action selector="infoFile:" destination="OaH-dG-5KC" eventType="touchUpInside" id="zrf-9N-fqY"/>
+                                                        <action selector="infoFile:" destination="OaH-dG-5KC" eventType="touchUpInside" id="jvh-an-hsB"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
-                                            <outlet property="infoButton" destination="iA0-Zv-WMo" id="htP-Sy-iWb"/>
+                                            <outlet property="infoButton" destination="ail-Zm-uSm" id="I44-80-fbo"/>
                                             <outlet property="switchButton" destination="qG7-lO-UOq" id="337-ON-tC3"/>
                                             <outlet property="textField" destination="Poq-c8-ohc" id="ueX-Bg-PDr"/>
                                         </connections>
@@ -1037,6 +1030,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
+                                            <outlet property="infoButton" destination="TxR-CQ-d7h" id="U0M-bZ-FwD"/>
                                             <outlet property="switchButton" destination="gjd-uV-yNJ" id="9nF-6D-5xB"/>
                                             <outlet property="textField" destination="7wx-f0-h80" id="D4f-gv-N5h"/>
                                         </connections>
@@ -1726,9 +1720,9 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="lHN-tn-48I"/>
-        <segue reference="1Lw-OZ-NPD"/>
         <segue reference="Nis-OP-SD8"/>
+        <segue reference="lHN-tn-48I"/>
+        <segue reference="cMg-uF-AiC"/>
         <segue reference="dRf-EC-VtU"/>
     </inferredMetricsTieBreakers>
 </document>
