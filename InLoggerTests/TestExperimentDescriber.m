@@ -58,7 +58,7 @@
 
 -(void) testAddAnnotation
 {
-    [_describer addAnnotation:_annotation];
+    [_describer showAnnotation:_annotation];
     NSString *description = [_describer getDescriptionOf:_experiment];
     NSString *correctDescription = @"Name: Experiment name\nCreated by: Yuri Yuri\nPublication ID: abc123";
     XCTAssertEqualObjects(description, correctDescription);
@@ -66,8 +66,8 @@
 
 -(void) testAddTwoAnnotations
 {
-    [_describer addAnnotation:_annotation];
-    [_describer addAnnotation: _annotation2];
+    [_describer showAnnotation:_annotation];
+    [_describer showAnnotation: _annotation2];
     NSString *description = [_describer getDescriptionOf:_experiment];
     NSString *correctDescription = @"Name: Experiment name\nCreated by: Yuri Yuri\nPublication ID: abc123\nType: raw";
     XCTAssertEqualObjects(description, correctDescription);
@@ -75,8 +75,8 @@
 
 -(void) testRemoveAnnotation
 {
-    [_describer addAnnotation:_annotation];
-    [_describer removeAnnotation:_annotation];
+    [_describer showAnnotation:_annotation];
+    [_describer hideAnnotation:_annotation];
     NSString *description = [_describer getDescriptionOf:_experiment];
     NSString *correctDescription = @"Name: Experiment name\nCreated by: Yuri Yuri";
     XCTAssertEqualObjects(description, correctDescription);
@@ -85,8 +85,8 @@
 -(void) testAddSameAnnotationTwice
 {
     _annotation2.name = _annotation.name;
-    [_describer addAnnotation:_annotation];
-    [_describer addAnnotation:_annotation2];
+    [_describer showAnnotation:_annotation];
+    [_describer showAnnotation:_annotation2];
     NSString *description = [_describer getDescriptionOf:_experiment];
     NSString *correctDescription = @"Name: Experiment name\nCreated by: Yuri Yuri\nPublication ID: abc123";
     XCTAssertEqualObjects(description, correctDescription);
@@ -95,7 +95,7 @@
 -(void) testContainsAnnotation
 {
     XCTAssertFalse([_describer containsAnnotation: _annotation]);
-    [_describer addAnnotation: _annotation];
+    [_describer showAnnotation: _annotation];
     XCTAssertTrue([_describer containsAnnotation: _annotation]);
 }
 

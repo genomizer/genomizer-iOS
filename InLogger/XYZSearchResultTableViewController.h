@@ -12,6 +12,7 @@
 
 @interface XYZSearchResultTableViewController : UITableViewController
 
+@property XYZExperimentDescriber *experimentDescriber;
 @property XYZExperiment * selectedExperiment;
 @property XYZExperiment *selectedFiles;
 @property NSArray *searchResults;

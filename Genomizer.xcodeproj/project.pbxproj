@@ -45,6 +45,8 @@
 		DE9A3EF41918CB4600F7C33B /* XYZAnnotationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE9A3EF21918CB4600F7C33B /* XYZAnnotationTableViewController.m */; };
 		DE9A3EF51918CB4600F7C33B /* XYZAnnotationTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE9A3EF31918CB4600F7C33B /* XYZAnnotationTableViewController.xib */; };
 		DE9A3EF91918CFDC00F7C33B /* TestExperimentDescriber.m in Sources */ = {isa = PBXBuildFile; fileRef = DE9A3EF81918CFDC00F7C33B /* TestExperimentDescriber.m */; };
+		DEB9EBE01929F00E00BD051B /* TestFileSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = DEB9EBDF1929F00E00BD051B /* TestFileSelector.m */; };
+		DEB9EBE31929F83E00BD051B /* XYZFileContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = DEB9EBE21929F83E00BD051B /* XYZFileContainer.m */; };
 		DED034711923AD1B00E9EAF1 /* XYZPubMedBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = DED034701923AD1B00E9EAF1 /* XYZPubMedBuilder.m */; };
 		DED1228D190E966200D8E530 /* XYZInLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = DED12280190E966200D8E530 /* XYZInLogger.m */; };
 		DED1228E190E966200D8E530 /* XYZSearchResultTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DED12282190E966200D8E530 /* XYZSearchResultTableViewCell.m */; };
@@ -144,6 +146,9 @@
 		DE9A3EF21918CB4600F7C33B /* XYZAnnotationTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZAnnotationTableViewController.m; sourceTree = "<group>"; };
 		DE9A3EF31918CB4600F7C33B /* XYZAnnotationTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XYZAnnotationTableViewController.xib; sourceTree = "<group>"; };
 		DE9A3EF81918CFDC00F7C33B /* TestExperimentDescriber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestExperimentDescriber.m; sourceTree = "<group>"; };
+		DEB9EBDF1929F00E00BD051B /* TestFileSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestFileSelector.m; sourceTree = "<group>"; };
+		DEB9EBE11929F83E00BD051B /* XYZFileContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZFileContainer.h; sourceTree = "<group>"; };
+		DEB9EBE21929F83E00BD051B /* XYZFileContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZFileContainer.m; sourceTree = "<group>"; };
 		DED0346F1923AD1B00E9EAF1 /* XYZPubMedBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZPubMedBuilder.h; sourceTree = "<group>"; };
 		DED034701923AD1B00E9EAF1 /* XYZPubMedBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZPubMedBuilder.m; sourceTree = "<group>"; };
 		DED1227F190E966200D8E530 /* XYZInLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZInLogger.h; sourceTree = "<group>"; };
@@ -251,6 +256,8 @@
 				2173DFC41929F1EA0040A336 /* ProcessStatusDescriptor.m */,
 				DE7C9C2319235F6C004A2492 /* XYZAnnotation.h */,
 				DE7C9C2419235F6C004A2492 /* XYZAnnotation.m */,
+				DEB9EBE11929F83E00BD051B /* XYZFileContainer.h */,
+				DEB9EBE21929F83E00BD051B /* XYZFileContainer.m */,
 			);
 			name = DataHolders;
 			sourceTree = "<group>";
@@ -268,8 +275,8 @@
 				DE25D8001910D72A0084BDDC /* XYZDataFileViewController.m */,
 				DE25D8011910D72A0084BDDC /* XYZDataFileViewController.xib */,
 				DE750AD21924BD3000F77FEC /* XYZDataFileTableViewCell.h */,
-				DE750AD31924BD3000F77FEC /* XYZDataFileTableViewCell.m */,
 				DE750AD41924BD3000F77FEC /* XYZDataFileTableViewCell.xib */,
+				DE750AD31924BD3000F77FEC /* XYZDataFileTableViewCell.m */,
 				DED12281190E966200D8E530 /* XYZSearchResultTableViewCell.h */,
 				DED12282190E966200D8E530 /* XYZSearchResultTableViewCell.m */,
 				DED12283190E966200D8E530 /* XYZSearchResultTableViewCell.xib */,
@@ -330,7 +337,7 @@
 			isa = PBXGroup;
 			children = (
 				DEEF6AED19094F8A00A2CD8C /* InLogger */,
-				DEEF6B0619094F8B00A2CD8C /* InLoggerTests */,
+				DEEF6B0619094F8B00A2CD8C /* GenomizerTests */,
 				DEEF6AE619094F8A00A2CD8C /* Frameworks */,
 				DEEF6AE519094F8A00A2CD8C /* Products */,
 			);
@@ -401,7 +408,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		DEEF6B0619094F8B00A2CD8C /* InLoggerTests */ = {
+		DEEF6B0619094F8B00A2CD8C /* GenomizerTests */ = {
 			isa = PBXGroup;
 			children = (
 				2173DFC61929F2160040A336 /* TestProcessStatusDescriptor.m */,
@@ -414,7 +421,9 @@
 				7624B1C3191A6B4400420EBE /* TestExperimentParser.m */,
 				2114DA0D19235A3D002A88D9 /* TestServerConnection.m */,
 				DE7C9C2619236044004A2492 /* TestAnnotation.m */,
+				DEB9EBDF1929F00E00BD051B /* TestFileSelector.m */,
 			);
+			name = GenomizerTests;
 			path = InLoggerTests;
 			sourceTree = "<group>";
 		};
@@ -565,6 +574,7 @@
 				DEEF6AF419094F8A00A2CD8C /* main.m in Sources */,
 				DE25D8021910D72A0084BDDC /* XYZDataFileViewController.m in Sources */,
 				649778EB1910EC9D000FD14F /* XYZExperimentParser.m in Sources */,
+				DEB9EBE31929F83E00BD051B /* XYZFileContainer.m in Sources */,
 				DED034711923AD1B00E9EAF1 /* XYZPubMedBuilder.m in Sources */,
 				DEEF6B1B1909553C00A2CD8C /* XYZLogInViewController.m in Sources */,
 				DE032D72191BCDC4006AC257 /* XYZSelectTaskTableViewController.m in Sources */,
@@ -578,6 +588,7 @@
 			files = (
 				DEF812911918D90A00A88173 /* TestExperiment.m in Sources */,
 				7624B1C4191A6B4400420EBE /* TestExperimentParser.m in Sources */,
+				DEB9EBE01929F00E00BD051B /* TestFileSelector.m in Sources */,
 				DE9A3EF91918CFDC00F7C33B /* TestExperimentDescriber.m in Sources */,
 				210BED2F1918DCD500A8E690 /* TestJSONBuilderGetLogout.m in Sources */,
 				210BED2D1918D85000A8E690 /* TestJSONBuilderGetRequest.m in Sources */,

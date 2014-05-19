@@ -77,7 +77,6 @@
     [string appendString: [self format: _grVersion]];
     [string appendString: @"\n"];
     return string;
-    
 }
 
 - (NSString *) format: (NSString *) string

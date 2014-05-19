@@ -28,7 +28,6 @@ typedef NS_ENUM(NSInteger, FileType) {
 @property NSString *metaData;
 @property NSString *author;
 @property NSString *grVersion;
-@property BOOL selected;
 
 - (NSString *) getDescription;
 - (NSString *) getAllInfo;

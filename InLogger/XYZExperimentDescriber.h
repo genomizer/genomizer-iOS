@@ -12,9 +12,11 @@
 
 @interface XYZExperimentDescriber : NSObject
 
-- (void) addAnnotation: (XYZAnnotation *) annotation;
-- (void) removeAnnotation: (XYZAnnotation *) annotation;
+@property NSArray *annotations;
+
+- (void) showAnnotation: (XYZAnnotation *) annotation;
+- (void) hideAnnotation: (XYZAnnotation *) annotation;
 - (NSString *) getDescriptionOf: (XYZExperiment*) experiment;
-- (BOOL) containsAnnotation: (XYZAnnotation *) annotation;
+- (BOOL) showsAnnotation: (XYZAnnotation *) annotation;
 
 @end

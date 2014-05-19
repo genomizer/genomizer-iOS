@@ -15,7 +15,7 @@
 #import "XYZSelectedFilesViewController.h"
 #import "XYZPopupGenerator.h"
 #import "XYZSelectTaskTableViewController.h"
-#import <QuartzCore/QuartzCore.h>
+#import "XYZFileContainer.h"
 
 @interface XYZDataFileViewController ()
 
@@ -27,6 +27,13 @@
 @end
 
 @implementation XYZDataFileViewController
+
+- (void) viewDidLoad
+{
+    [super viewDidLoad];
+    
+    _selectedFiles = [[XYZFileContainer alloc] init];
+}
 
 - (void)setExperiment:(XYZExperiment *)experiment
 {
@@ -56,7 +63,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[self arrayFromSection:section] count];
+    return [[_experiment.files getFiles: section] count];
 }
 
 
@@ -64,32 +71,17 @@
 {
     NSInteger rows = 0;
     for (int i = 0; i < section; i++) {
-        rows += [[self arrayFromSection:i] count];
+        rows += [[_experiment.files getFiles: i] count];
     }
     return rows;
-}
-
-- (NSArray *) arrayFromSection : (NSInteger)section
-{
-    switch (section) {
-        case 0:
-            return _experiment.rawFiles;
-        case 1:
-            return _experiment.profileFiles;
-        case 2:
-            return _experiment.regionFiles;
-        case 3:
-            return _experiment.otherFiles;
-    }
-    return nil;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     XYZDataFileTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DataFilePrototypeCell" forIndexPath:indexPath];
-    XYZExperimentFile *file = [[self arrayFromSection: indexPath.section] objectAtIndex:indexPath.row];
+    XYZExperimentFile *file = [[_experiment.files getFiles: indexPath.section] objectAtIndex:indexPath.row];
     cell.textField.text = [file getDescription];
-    cell.switchButton.on = file.selected;
+    cell.switchButton.on = [_selectedFiles containsFile:file];
     cell.file = file;
     cell.controller = self;
     return cell;
@@ -97,11 +89,12 @@
 
 - (IBAction)addFilesToSelectedFilesOnTouchUpInside:(UIButton *)sender
 {
-    //TODO - Send to server.
-    NSArray *selectedFiles = [_experiment getSelectedFiles];
-    for (XYZExperimentFile *file in selectedFiles) {
+    NSArray *selectedFiles = [_selectedFiles getFiles];
+    NSLog(@"%d", [selectedFiles count]);
+    for (NSInteger i = [selectedFiles count]; i > 0; i--) {
+        XYZExperimentFile *file = [selectedFiles objectAtIndex:i-1];
         [XYZSelectedFilesViewController addExperimentFile: file];
-        file.selected = NO;
+        [_selectedFiles removeExperimentFile:file];
     }
     
     if ([selectedFiles count] > 0){
@@ -115,7 +108,7 @@
 
 - (IBAction)convertToProfileOnTouchUpInside:(id)sender
 {
-    NSArray *selectedFiles = [_experiment getSelectedFiles];
+    NSArray *selectedFiles = [_selectedFiles getFiles];
     if ([selectedFiles count] == 0) {
         [XYZPopupGenerator showPopupWithMessage:@"Please select files to convert."];
         return;

@@ -30,10 +30,14 @@
 {
     [super viewDidLoad];
     _spinner.hidesWhenStopped = YES;
+    [ServerConnection getAvailableAnnotations:self];
+    _pickerView = [self createPickerView];
+    _toolBar = [self createPickerViewToolBar:_pickerView];
+    [self.tableView reloadData];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
-    [ServerConnection getAvailableAnnotations:self];
+    //[ServerConnection getAvailableAnnotations:self];
 }
 
 - (void) viewDidDisappear:(BOOL)animated {
@@ -76,13 +80,24 @@
 {
     static NSString *CellIdentifier = @"ListPrototypeCell";
     XYZSearchTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    XYZAnnotation *annotation = [_annotations objectAtIndex: indexPath.row];
+    XYZAnnotation *annotation = [_annotations objectAtIndex:indexPath.row];
     cell.inputField.placeholder = [annotation getFormatedName];
-    cell.inputField.text = annotation.value;
-    cell.switchButton.on = annotation.selected;
-    cell.controller = self;
-    cell.tag = indexPath.row;
     cell.annotation = annotation;
+    cell.controller = self;
+    cell.switchButton.on = annotation.selected;
+    if (annotation.value == nil) {
+        cell.inputField.text = @"";
+    } else {
+        cell.inputField.text = annotation.value;
+    }
+    
+    if (![annotation isFreeText]) {
+        cell.inputField.inputView = _pickerView;
+        cell.inputField.inputAccessoryView = _toolBar;
+    } else {
+        cell.inputField.inputView = nil;
+        cell.inputField.inputAccessoryView = nil;
+    }
     return cell;
 }
 
@@ -176,6 +191,8 @@
     if ([segue.identifier isEqualToString:@"searchResult"]) {
         XYZSearchResultTableViewController *nextVC = (XYZSearchResultTableViewController *)[segue destinationViewController];
         nextVC.searchResults = sender;
+        nextVC.experimentDescriber = [[XYZExperimentDescriber alloc] init];
+        nextVC.experimentDescriber.annotations = _annotations;
     }
 }
 
@@ -193,7 +210,30 @@
 - (void)hideKeyboardAndAdjustTable {
     [self.view endEditing:YES];
     _tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    _pickerView.delegate = nil;
+    _pickerView.dataSource = nil;
     [_tableView reloadData];
+}
+
+- (UIToolbar *) createPickerViewToolBar: (UIPickerView *) pickerView
+{
+    UIToolbar *toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, pickerView.bounds.size.width, 44)];
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneTouched:)];
+    [toolBar setItems:[NSArray arrayWithObjects:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], doneButton, nil]];
+    return toolBar;
+}
+- (UIPickerView *) createPickerView
+{
+    UIPickerView *pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 44, 44, 44)];
+    pickerView.backgroundColor = [UIColor colorWithRed:247.0/255.0f green:248.0/255.0f
+                                                  blue:247.0/255 alpha:1.0f];
+    pickerView.showsSelectionIndicator = YES;
+    return pickerView;
+}
+
+-(void)doneTouched:(UIBarButtonItem*)sender
+{
+    [self hideKeyboardAndAdjustTable];
 }
 
 @end

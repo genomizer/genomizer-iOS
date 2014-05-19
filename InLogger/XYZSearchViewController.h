@@ -11,6 +11,8 @@
 
 @interface XYZSearchViewController : UIViewController<UITextFieldDelegate>
 
+@property UIPickerView *pickerView;
+@property UIToolbar *toolBar;
 @property NSArray *annotations;
 
 - (void) hideKeyboardAndAdjustTable;

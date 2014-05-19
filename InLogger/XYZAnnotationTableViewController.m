@@ -15,8 +15,6 @@
 
 @interface XYZAnnotationTableViewController ()
 
-@property NSArray *annotations;
-
 @end
 
 @implementation XYZAnnotationTableViewController
@@ -49,28 +47,28 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [_annotations count];
+    return [_describer.annotations count];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     XYZAnnotationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AnnotationPrototypeCell" forIndexPath:indexPath];
-    XYZAnnotation *annotation = [_annotations objectAtIndex:indexPath.row];
+    XYZAnnotation *annotation = [_describer.annotations objectAtIndex:indexPath.row];
     cell.label.text = [annotation getFormatedName];
     cell.switchButton.tag = indexPath.row;
-    cell.switchButton.on = [_describer containsAnnotation: [_annotations objectAtIndex: indexPath.row]];
+    cell.switchButton.on = [_describer showsAnnotation: [_describer.annotations objectAtIndex: indexPath.row]];
     return cell;
 }
 
 - (IBAction)switchButtonValueChanged:(UISwitch *)sender
 {
-    XYZAnnotation *annotation = [_annotations objectAtIndex:sender.tag];
+    XYZAnnotation *annotation = [_describer.annotations objectAtIndex:sender.tag];
 
     if (sender.on) {
-        [_describer addAnnotation: annotation];
+        [_describer showAnnotation: annotation];
     } else {
-        [_describer removeAnnotation:annotation];
+        [_describer hideAnnotation:annotation];
     }
 }
 
