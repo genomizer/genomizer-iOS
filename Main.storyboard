@@ -738,6 +738,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Processes" id="24w-df-1qk"/>
+                    <connections>
+                        <outlet property="tableView" destination="rqm-V2-jrZ" id="XLI-Jp-Xjp"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2At-SN-6Fe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

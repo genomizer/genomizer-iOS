@@ -246,9 +246,9 @@
 				76F638D6190FD99200F0F4BF /* XYZExperiment.h */,
 				76F638D7190FD99300F0F4BF /* XYZExperiment.m */,
 				76F638D9190FDD9D00F0F4BF /* XYZExperimentFile.h */,
+				76F638DA190FDD9D00F0F4BF /* XYZExperimentFile.m */,
 				2173DFC31929F1EA0040A336 /* ProcessStatusDescriptor.h */,
 				2173DFC41929F1EA0040A336 /* ProcessStatusDescriptor.m */,
-				76F638DA190FDD9D00F0F4BF /* XYZExperimentFile.m */,
 				DE7C9C2319235F6C004A2492 /* XYZAnnotation.h */,
 				DE7C9C2419235F6C004A2492 /* XYZAnnotation.m */,
 			);
@@ -698,6 +698,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -716,6 +717,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -732,14 +734,14 @@
 		DEEF6B1419094F8B00A2CD8C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/InLogger.app/InLogger";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Genomizer.app/Genomizer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "InLogger/InLogger-Prefix.pch";
+				GCC_PREFIX_HEADER = "InLogger/Genomizer-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -754,14 +756,14 @@
 		DEEF6B1519094F8B00A2CD8C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/InLogger.app/InLogger";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Genomizer.app/Genomizer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "InLogger/InLogger-Prefix.pch";
+				GCC_PREFIX_HEADER = "InLogger/Genomizer-Prefix.pch";
 				INFOPLIST_FILE = "InLoggerTests/GenomizerTests-Info.plist";
 				PRODUCT_NAME = GenomizerTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";

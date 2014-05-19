@@ -9,9 +9,10 @@
 #import "ProcessViewController.h"
 #import "ProcessTableViewCell.h"
 #import "RawConvertViewController.h"
-#import "XYZExperimentFile.h"
 #import "ServerConnection.h"
 #import "XYZPopupGenerator.h"
+#import "ProcessStatusDescriptor.h"
+
 @interface ProcessViewController ()
 
 @end
@@ -27,7 +28,7 @@ static NSMutableArray * processingExperimentFiles;
     }
 }
 
-- (void) addProcessingExperiment:(XYZExperimentFile *) file {
+- (void) addProcessingExperiment:(ProcessStatusDescriptor *) file {
 
     if(![processingExperimentFiles containsObject:file]){
          [processingExperimentFiles addObject:file];
@@ -75,9 +76,20 @@ static NSMutableArray * processingExperimentFiles;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ProcessTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"processCell" forIndexPath:indexPath];
-    cell.file.text = [[processingExperimentFiles objectAtIndex:indexPath.row] name];
-    NSLog(@"started : %@", processingExperimentFiles);
-    [cell.activityIndicator startAnimating];   
+    ProcessStatusDescriptor *temp = [processingExperimentFiles objectAtIndex:indexPath.row];
+    
+    cell.file.text = temp.experimentName;
+    cell.status.text = temp.status;
+    //NSLog(@"started : %@", processingExperimentFiles);
+    
+    if([temp.status isEqualToString:@"running"])
+    {
+        [cell.activityIndicator startAnimating];
+        cell.activityIndicator.hidden = NO;
+    } else
+    {
+        cell.activityIndicator.hidden = YES;
+    }
     
     return cell;
 }
@@ -85,28 +97,22 @@ static NSMutableArray * processingExperimentFiles;
 - (void) reportProcessStatusResult: (NSArray*) result error: (NSError*) error {
     
     [self resetProcessingExperimentFiles];
-    if(error == nil){
+    if(error == nil)
+    {
         for(NSDictionary *processStatus in result)
         {
-            XYZExperimentFile *processStatusFile = [self parseProcessStatusDictionary: processStatus];
-            [self addProcessingExperiment:processStatusFile];
+            [self addProcessingExperiment:[[ProcessStatusDescriptor alloc] init: processStatus]];
         }
-        
+       
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [_tableView reloadData];
+        });
     } else
     {
         dispatch_async(dispatch_get_main_queue(), ^{
             [XYZPopupGenerator showErrorMessage:error];
         });
     }
-}
-
-- (XYZExperimentFile*) parseProcessStatusDictionary: (NSDictionary*) processStatusDictionary
-{
-    XYZExperimentFile *processStatusFile = [[XYZExperimentFile alloc] init];
-    processStatusFile.author = [processStatusDictionary objectForKey:@"author"];
-    processStatusFile.expID = [processStatusDictionary objectForKey:@"experimentName"];
-    
-    return processStatusFile;
 }
 
 @end

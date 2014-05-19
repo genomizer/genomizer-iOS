@@ -107,7 +107,7 @@ NSString *token;
 
 + (void)search:(NSString*)annotations withContext: (XYZSearchViewController*) controller
 {
-   
+   NSLog(@"search");
     NSMutableURLRequest *request = [JSONBuilder getSearchJSON:annotations withToken: token];
     
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
@@ -132,6 +132,7 @@ NSString *token;
              error = [self generateError:@"Could not connect to server" withErrorDomain:@"Connection Error" withUnderlyingError:internalError];
          }
          [controller reportSearchResult:array error:error];
+         NSLog(@"searched");
      }];
 }
 
@@ -161,7 +162,7 @@ NSString *token;
 
 + (void)getAvailableAnnotations:(XYZSearchViewController*) controller
 {
- 
+    NSLog(@"getAnno");
     NSMutableURLRequest *request = [JSONBuilder getAvailableAnnotationsJSON:token];
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler: ^(NSURLResponse *response, NSData *POSTReply, NSError *internalError)
@@ -198,6 +199,7 @@ NSString *token;
             error = [self generateError:@"Could not connect to server" withErrorDomain:@"Connection" withUnderlyingError:internalError];
         }
         [controller reportAnnotationResult:annotations error:error];
+        NSLog(@"reported");
     }];
 }
 
