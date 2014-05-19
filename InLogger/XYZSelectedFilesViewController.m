@@ -9,8 +9,8 @@
 #import "XYZSelectedFilesViewController.h"
 #import "XYZDataFileTableViewCell.h"
 #import "XYZSelectTaskTableViewController.h"
-#import <QuartzCore/QuartzCore.h>
 #import "XYZPopupGenerator.h"
+#import "XYZFileContainer.h"
 
 @interface XYZSelectedFilesViewController ()
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
@@ -22,45 +22,33 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *trashButton;
 @property (weak, nonatomic) IBOutlet UIButton *selectTaskToPerformButton;
 
-@property XYZExperimentFile *infoFile;
-@property NSMutableArray *selectedFiles;
-@property NSMutableArray *experimentFiles;
-@property NSArray *pickerViewFields;
-@property NSMutableArray *cells;
-@property NSInteger numberOfButtonsOn;
+@property NSMutableArray *filesToDisplay;
+@property XYZFileContainer *selectedFiles;
 
 @end
 
 @implementation XYZSelectedFilesViewController
 
-static XYZExperiment * SELECTED_FILES = nil;
+static XYZFileContainer * FILES = nil;
 
 + (void)initialize
 {
-    if (SELECTED_FILES == nil) {
-        SELECTED_FILES = [[XYZExperiment alloc] init];
+    if (FILES == nil) {
+        FILES = [[XYZFileContainer alloc] init];
     }
 }
 
 + (void) addExperimentFile:(XYZExperimentFile *) file
 {
-    [SELECTED_FILES addExperimentFile: file];
-    
+    NSLog(@"File Added");
+    [FILES addExperimentFile: file];
 }
 
 + (void) removeExperimentFile:(XYZExperimentFile *) file
 {
-    [SELECTED_FILES removeExperimentFile: file];
+    [FILES removeExperimentFile: file];
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 - (IBAction)segmentedControlValueChanged:(UISegmentedControl *)sender
 {
     [self updateTableViewAndButtons];
@@ -68,35 +56,21 @@ static XYZExperiment * SELECTED_FILES = nil;
 
 - (IBAction)fileSwitchValueChanged:(UISwitch *)sender
 {
+    XYZExperimentFile *file = [_filesToDisplay objectAtIndex:sender.tag];
     if (sender.on) {
-        _numberOfButtonsOn ++;
+        [_selectedFiles addExperimentFile:file];
     } else {
-        _numberOfButtonsOn --;
+        [_selectedFiles removeExperimentFile:file];
     }
     
-    _selectTaskToPerformButton.enabled = (_numberOfButtonsOn > 0);
+    _selectTaskToPerformButton.enabled = ([_selectedFiles numberOfFilesWithType:_segmentedControl.selectedSegmentIndex] > 0);
 }
 
 - (void) updateTableViewAndButtons
 {
-    switch (_segmentedControl.selectedSegmentIndex) {
-        case 0:
-            _selectedFiles = SELECTED_FILES.rawFiles;
-            break;
-        case 1:
-            _selectedFiles = SELECTED_FILES.profileFiles;
-            break;
-        case 2:
-            _selectedFiles = SELECTED_FILES.regionFiles;
-            break;
-        case 3:
-            _selectedFiles = SELECTED_FILES.otherFiles;
-            break;
-    }
+    _filesToDisplay = [FILES getFiles:_segmentedControl.selectedSegmentIndex];
     
-    _cells = [[NSMutableArray alloc] initWithCapacity:[_selectedFiles count]];
-    _numberOfButtonsOn = [_selectedFiles count];
-    _selectTaskToPerformButton.enabled = (_numberOfButtonsOn > 0);
+    _selectTaskToPerformButton.enabled = ([_selectedFiles numberOfFilesWithType:_segmentedControl.selectedSegmentIndex] > 0);
     [_tableView reloadData];
 
 }
@@ -109,32 +83,31 @@ static XYZExperiment * SELECTED_FILES = nil;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _selectedFiles = SELECTED_FILES.rawFiles;
-    // Do any additional setup after loading the view from its nib.
+    _filesToDisplay = [FILES getFiles:RAW];
+    _selectedFiles = [[XYZFileContainer alloc] init];
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [_selectedFiles count];
+    return [_filesToDisplay count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     XYZDataFileTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DataFilePrototypeCell" forIndexPath:indexPath];
-    XYZExperimentFile *file = [_selectedFiles objectAtIndex:indexPath.row];
+    XYZExperimentFile *file = [_filesToDisplay objectAtIndex:indexPath.row];
     cell.textField.text = [file getDescription];
-    cell.switchButton.on = file.selected;
+    cell.switchButton.on = [_selectedFiles containsFile:file];
     //cell.file = [_selectedFiles objectAtIndex:indexPath.row];
     cell.infoButton.tag = indexPath.row;
-    [_cells setObject:cell atIndexedSubscript:indexPath.row];
+    cell.switchButton.tag = indexPath.row;
     return cell;
 }
 
@@ -150,8 +123,11 @@ static XYZExperiment * SELECTED_FILES = nil;
 
 - (IBAction)removeFilesWhenTouchTrash:(UIBarButtonItem *)sender
 {
-    for (XYZExperimentFile *file in [SELECTED_FILES getSelectedFiles: [self getSelectedFileType]]) {
-        [SELECTED_FILES removeExperimentFile:file];
+    NSArray *files = [_selectedFiles getFiles: [self getSelectedFileType]];
+    for (NSInteger i = [files count]; i > 0; i--) {
+        XYZExperimentFile *file = [files objectAtIndex:i-1];
+        [FILES removeExperimentFile:file];
+        [_selectedFiles removeExperimentFile:file];
     }
     
     [XYZPopupGenerator showPopupWithMessage:@"Files removed"];
@@ -160,7 +136,7 @@ static XYZExperiment * SELECTED_FILES = nil;
 }
 
 - (IBAction)selectTaskButton:(id)sender {
-     [self performSegueWithIdentifier:@"convertTask" sender:_experimentFiles];
+     [self performSegueWithIdentifier:@"convertTask" sender:self];
 }
 
 - (IBAction)infoFile:(UIButton*)sender {
@@ -173,7 +149,7 @@ static XYZExperiment * SELECTED_FILES = nil;
     _trashButton.enabled = NO;
     _infoAboutFile.layer.borderWidth = 0.4;
     _infoAboutFile.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    _infoFileTextField.text = [[_selectedFiles objectAtIndex:sender.tag] getAllInfo];
+    _infoFileTextField.text = [[_filesToDisplay objectAtIndex:sender.tag] getAllInfo];
     [[_infoFileTextField layer] setBorderColor : [[UIColor lightGrayColor] CGColor]];
     [[_infoFileTextField layer] setBorderWidth:0.4];
 }
@@ -194,7 +170,7 @@ static XYZExperiment * SELECTED_FILES = nil;
     if ([segue.identifier isEqualToString:@"convertTask"]) {
         UINavigationController *navController = segue.destinationViewController;
         XYZSelectTaskTableViewController *nextVC = (XYZSelectTaskTableViewController *)(navController.viewControllers[0]);
-        nextVC.experimentFiles = [SELECTED_FILES getSelectedFiles:[self getSelectedFileType]];
+        nextVC.experimentFiles = [FILES getFiles:[self getSelectedFileType]];
         nextVC.fileType = _segmentedControl.selectedSegmentIndex;
     }
 }

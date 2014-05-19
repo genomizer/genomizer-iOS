@@ -474,7 +474,6 @@
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="infoFile:" destination="gku-GI-eqm" eventType="touchUpInside" id="Alb-xR-y9h"/>
                                                         <action selector="infoFile:" destination="OaH-dG-5KC" eventType="touchUpInside" id="zrf-9N-fqY"/>
                                                     </connections>
                                                 </button>
@@ -1727,9 +1726,9 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="lHN-tn-48I"/>
+        <segue reference="1Lw-OZ-NPD"/>
         <segue reference="Nis-OP-SD8"/>
         <segue reference="dRf-EC-VtU"/>
-        <segue reference="lHN-tn-48I"/>
-        <segue reference="cMg-uF-AiC"/>
     </inferredMetricsTieBreakers>
 </document>

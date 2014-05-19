@@ -12,7 +12,12 @@
 
 - (IBAction)switchValueChanged:(UISwitch *)sender
 {
-    _file.selected = _switchButton.on;
+    NSLog(@"SWITCH");
+    if (_switchButton.on) {
+        [_controller.selectedFiles addExperimentFile:_file];
+    } else {
+        [_controller.selectedFiles removeExperimentFile:_file];
+    }
 }
 
 - (IBAction)infoButtonTouchUpInside:(UIButton *)sender
