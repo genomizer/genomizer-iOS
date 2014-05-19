@@ -14,20 +14,31 @@
 #import <QuartzCore/QuartzCore.h>
 #import "ProcessViewController.h"
 @interface RawConvertViewController ()
+
 @property (weak, nonatomic) IBOutlet UITextField *bowtie;
 @property (weak, nonatomic) IBOutlet UITextField *genomeFile;
-@property (weak, nonatomic) IBOutlet UITextField *smoothing;
+@property (weak, nonatomic) IBOutlet UITextField *smoothingWindowSize;
+@property (weak, nonatomic) IBOutlet UISwitch *smoothingSmoothTypeSwitch;
+@property (weak, nonatomic) IBOutlet UITextField *smoothingMinimumStep;
+@property (weak, nonatomic) IBOutlet UISwitch *smoothingPrintMean;
+@property (weak, nonatomic) IBOutlet UISwitch *smoothingPrintZeros;
+@property (weak, nonatomic) IBOutlet UISwitch *stepCreateStep;
 @property (weak, nonatomic) IBOutlet UITextField *step;
 @property (weak, nonatomic) IBOutlet UISwitch *samToGff;
 @property (weak, nonatomic) IBOutlet UISwitch *gffToSgr;
-@property (weak, nonatomic) IBOutlet UITextField *ratioCalc;
-@property (weak, nonatomic) IBOutlet UITextField *ratioCalcSmoothing;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *ratioCalcDoubleSingle;
+@property (weak, nonatomic) IBOutlet UITextField *ratioCalcInputReads;
+@property (weak, nonatomic) IBOutlet UITextField *ratioCalcChromosomes;
+@property (weak, nonatomic) IBOutlet UITextField *ratioCalcSmoothingWindowSize;
+@property (weak, nonatomic) IBOutlet UISwitch *ratioCalcSmoothingSmoothType;
+@property (weak, nonatomic) IBOutlet UITextField *ratioCalcSmoothingMinimumStep;
+@property (weak, nonatomic) IBOutlet UISwitch *ratioCalcSmoothingPrintMean;
+@property (weak, nonatomic) IBOutlet UISwitch *ratioCalcSmoothingPrintZeros;
+
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UITableViewCell *ratioCalcCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *ratioCalcSmoothingCell;
-
-
-
+@property UIButton *doneButton;
 
 @property CGPoint originalCenter;
 @property NSMutableArray *experimentFilesDictArr;
@@ -56,20 +67,44 @@
     [self.view addGestureRecognizer:_tapper];
     self.bowtie.delegate = self;
     self.genomeFile.delegate = self;
-    self.smoothing.delegate = self;
-    self.step.delegate = self;
-    self.ratioCalc.delegate = self;
-    self.ratioCalcSmoothing.delegate = self;
-    self.originalCenter = self.view.center;
     self.genomeFile.enabled = NO;
+    self.smoothingWindowSize.delegate = self;
+    self.smoothingWindowSize.enabled = NO;
+    self.smoothingSmoothTypeSwitch.enabled = NO;
+    self.smoothingSmoothTypeSwitch.on = NO;
+    self.smoothingMinimumStep.delegate = self;
+    self.smoothingMinimumStep.enabled = NO;
+    self.smoothingPrintMean.enabled = NO;
+    self.smoothingPrintMean.on = NO;
+    self.smoothingPrintZeros.enabled = NO;
+    self.smoothingPrintZeros.on = NO;
+    self.stepCreateStep.enabled = NO;
+    self.stepCreateStep.on = NO;
+    self.step.delegate = self;
+    self.step.enabled = NO;
+    self.ratioCalcDoubleSingle.enabled = NO;
+    self.ratioCalcInputReads.delegate = self;
+    self.ratioCalcInputReads.enabled = NO;
+    self.ratioCalcChromosomes.delegate = self;
+    self.ratioCalcChromosomes.enabled = NO;
+    self.ratioCalcSmoothingWindowSize.delegate = self;
+    self.ratioCalcSmoothingWindowSize.enabled = NO;
+    self.ratioCalcSmoothingSmoothType.enabled = NO;
+    self.ratioCalcSmoothingSmoothType.on = NO;
+    self.ratioCalcSmoothingMinimumStep.delegate = self;
+    self.ratioCalcSmoothingMinimumStep.enabled = NO;
+    self.ratioCalcSmoothingPrintMean.enabled = NO;
+    self.ratioCalcSmoothingPrintMean.on = NO;
+    self.ratioCalcSmoothingPrintZeros.enabled = NO;
+    self.ratioCalcSmoothingPrintZeros.on = NO;
+ 
+    self.originalCenter = self.view.center;
+
     self.samToGff.enabled = NO;
     self.samToGff.on = NO;
     self.gffToSgr.enabled = NO;
     self.gffToSgr.on = NO;
-    self.smoothing.enabled = NO;
-    self.step.enabled = NO;
-    self.ratioCalc.enabled = NO;
-    self.ratioCalcSmoothing.enabled = NO;
+
     if(_ratio){
         _ratioCalcCell.hidden = NO;
         _ratioCalcSmoothingCell.hidden = NO;
@@ -98,6 +133,12 @@
     _staticView = staticView;
    
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 50, 0);
+    
+    _doneButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    _doneButton.frame = CGRectMake(0,[[UIScreen mainScreen] bounds].size.height-53, 104, 53);
+    _doneButton.adjustsImageWhenHighlighted = NO;
+    [_doneButton setImage:[UIImage imageNamed:@"NextButtonNumberPad.png"] forState:UIControlStateNormal];
+    [_doneButton setImage:[UIImage imageNamed:@"NextButtonNumberPadClicked.png"] forState:UIControlStateHighlighted];
 }
 
 - (void)handleSingleTap:(UITapGestureRecognizer *) sender
@@ -131,65 +172,168 @@
     [UIView commitAnimations];
     [super touchesBegan:touches withEvent:event];
 }
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    if(textField == self.smoothingWindowSize){
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    }
+}
+- (void)keyboardWillShow:(NSNotification *)note {
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:3];
+    _doneButton.hidden = NO;
+    [[[[UIApplication sharedApplication] windows] objectAtIndex:1] addSubview:_doneButton];
+    [UIView commitAnimations];
 
+}
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
+    
     if(textField.text.length == 0){
         if(textField == self.bowtie) {
             self.genomeFile.enabled = NO;
             self.genomeFile.text = @"";
-            self.smoothing.enabled = NO;
-            self.smoothing.text = @"";
             self.samToGff.enabled = NO;
             self.samToGff.on = NO;
             self.gffToSgr.enabled = NO;
             self.gffToSgr.on = NO;
+            self.smoothingWindowSize.enabled = NO;
+             self.smoothingWindowSize.text = @"";
+            self.smoothingSmoothTypeSwitch.enabled = NO;
+            self.smoothingSmoothTypeSwitch.on = NO;
+            self.smoothingMinimumStep.enabled = NO;
+            self.smoothingMinimumStep.text = @"";
+            self.smoothingPrintMean.enabled = NO;
+            self.smoothingPrintMean.on = NO;
+            self.smoothingPrintZeros.enabled = NO;
+            self.smoothingPrintZeros.on = NO;
+            
+            self.stepCreateStep.enabled = NO;
+            self.stepCreateStep.on = NO;
             self.step.enabled = NO;
             self.step.text = @"";
-            self.ratioCalc.enabled = NO;
-            self.ratioCalc.text = @"";
-            self.ratioCalcSmoothing.enabled = NO;
-            self.ratioCalcSmoothing.text = @"";
+
+            self.ratioCalcDoubleSingle.enabled = NO;
+            self.ratioCalcInputReads.enabled = NO;
+            self.ratioCalcInputReads.text = @"";
+            self.ratioCalcChromosomes.enabled = NO;
+            self.ratioCalcChromosomes.text = @"";
+            
+            self.ratioCalcSmoothingWindowSize.enabled = NO;
+            self.ratioCalcSmoothingWindowSize.text = @"";
+            self.ratioCalcSmoothingSmoothType.enabled = NO;
+            self.ratioCalcSmoothingSmoothType.on = NO;
+            self.ratioCalcSmoothingMinimumStep.enabled = NO;
+            self.ratioCalcSmoothingMinimumStep.text = @"";
+            self.ratioCalcSmoothingPrintMean.enabled = NO;
+            self.ratioCalcSmoothingPrintMean.on = NO;
+            self.ratioCalcSmoothingPrintZeros.enabled = NO;
+            self.ratioCalcSmoothingPrintZeros.on = NO;
         
         } else if(textField == self.genomeFile) {
-            self.smoothing.enabled = NO;
-            self.smoothing.text = @"";
             self.samToGff.enabled = NO;
             self.samToGff.on = NO;
             self.gffToSgr.enabled = NO;
             self.gffToSgr.on = NO;
+            self.smoothingWindowSize.enabled = NO;
+            self.smoothingWindowSize.text = @"";
+            self.smoothingSmoothTypeSwitch.enabled = NO;
+            self.smoothingSmoothTypeSwitch.on = NO;
+            self.smoothingMinimumStep.enabled = NO;
+            self.smoothingMinimumStep.text = @"";
+            self.smoothingPrintMean.enabled = NO;
+            self.smoothingPrintMean.on = NO;
+            self.smoothingPrintZeros.enabled = NO;
+            self.smoothingPrintZeros.on = NO;
+            
+            self.stepCreateStep.enabled = NO;
+            self.stepCreateStep.on = NO;
             self.step.enabled = NO;
             self.step.text = @"";
-            self.ratioCalc.enabled = NO;
-            self.ratioCalc.text = @"";
-            self.ratioCalcSmoothing.enabled = NO;
-            self.ratioCalcSmoothing.text = @"";
+            
+            self.ratioCalcDoubleSingle.enabled = NO;
+            self.ratioCalcInputReads.enabled = NO;
+            self.ratioCalcInputReads.text = @"";
+            self.ratioCalcChromosomes.enabled = NO;
+            self.ratioCalcChromosomes.text = @"";
+            
+            self.ratioCalcSmoothingWindowSize.enabled = NO;
+            self.ratioCalcSmoothingWindowSize.text = @"";
+            self.ratioCalcSmoothingSmoothType.enabled = NO;
+            self.ratioCalcSmoothingSmoothType.on = NO;
+            self.ratioCalcSmoothingMinimumStep.enabled = NO;
+            self.ratioCalcSmoothingMinimumStep.text = @"";
+            self.ratioCalcSmoothingPrintMean.enabled = NO;
+            self.ratioCalcSmoothingPrintMean.on = NO;
+            self.ratioCalcSmoothingPrintZeros.enabled = NO;
+            self.ratioCalcSmoothingPrintZeros.on = NO;
         
-        }else if(textField == self.smoothing) {
+        }else if((textField == self.smoothingMinimumStep || textField == self.smoothingWindowSize) && ((self.smoothingWindowSize.text.length == 0) || (self.smoothingMinimumStep.text.length == 0) || (!self.smoothingPrintMean.enabled) || (!self.smoothingPrintZeros.enabled) || (!self.smoothingSmoothTypeSwitch.enabled))) {
         
-            self.samToGff.enabled = NO;
-            self.samToGff.on = NO;
-            self.gffToSgr.enabled = NO;
-            self.gffToSgr.on = NO;
+            self.stepCreateStep.enabled = NO;
+            self.stepCreateStep.on = NO;
             self.step.enabled = NO;
             self.step.text = @"";
-            self.ratioCalc.enabled = NO;
-            self.ratioCalc.text = @"";
-            self.ratioCalcSmoothing.enabled = NO;
-            self.ratioCalcSmoothing.text = @"";
+            
+            self.ratioCalcDoubleSingle.enabled = NO;
+            self.ratioCalcInputReads.enabled = NO;
+            self.ratioCalcInputReads.text = @"";
+            self.ratioCalcChromosomes.enabled = NO;
+            self.ratioCalcChromosomes.text = @"";
+            
+            self.ratioCalcSmoothingWindowSize.enabled = NO;
+            self.ratioCalcSmoothingWindowSize.text = @"";
+            self.ratioCalcSmoothingSmoothType.enabled = NO;
+            self.ratioCalcSmoothingSmoothType.on = NO;
+            self.ratioCalcSmoothingMinimumStep.enabled = NO;
+            self.ratioCalcSmoothingMinimumStep.text = @"";
+            self.ratioCalcSmoothingPrintMean.enabled = NO;
+            self.ratioCalcSmoothingPrintMean.on = NO;
+            self.ratioCalcSmoothingPrintZeros.enabled = NO;
+            self.ratioCalcSmoothingPrintZeros.on = NO;
         }
         else if(textField == self.step) {
-            self.ratioCalc.enabled = NO;
-            self.ratioCalc.text = @"";
-            self.ratioCalcSmoothing.enabled = NO;
-            self.ratioCalcSmoothing.text = @"";
+            self.ratioCalcDoubleSingle.enabled = NO;
+            self.ratioCalcInputReads.enabled = NO;
+            self.ratioCalcInputReads.text = @"";
+            self.ratioCalcChromosomes.enabled = NO;
+            self.ratioCalcChromosomes.text = @"";
+            
+            self.ratioCalcSmoothingWindowSize.enabled = NO;
+            self.ratioCalcSmoothingWindowSize.text = @"";
+            self.ratioCalcSmoothingSmoothType.enabled = NO;
+            self.ratioCalcSmoothingSmoothType.on = NO;
+            self.ratioCalcSmoothingMinimumStep.enabled = NO;
+            self.ratioCalcSmoothingMinimumStep.text = @"";
+            self.ratioCalcSmoothingPrintMean.enabled = NO;
+            self.ratioCalcSmoothingPrintMean.on = NO;
+            self.ratioCalcSmoothingPrintZeros.enabled = NO;
+            self.ratioCalcSmoothingPrintZeros.on = NO;
         }
-        else if(_ratio && (textField == self.ratioCalc)) {
-        
-            self.ratioCalcSmoothing.enabled = NO;
-            self.ratioCalcSmoothing.text = @"";
+        else if((textField == self.ratioCalcInputReads || textField == self.ratioCalcChromosomes) && ((self.ratioCalcInputReads.text.length == 0) || (self.ratioCalcChromosomes.text.length == 0))) {
+            
+            self.ratioCalcSmoothingWindowSize.enabled = NO;
+            self.ratioCalcSmoothingWindowSize.text = @"";
+            self.ratioCalcSmoothingSmoothType.enabled = NO;
+            self.ratioCalcSmoothingSmoothType.on = NO;
+            self.ratioCalcSmoothingMinimumStep.enabled = NO;
+            self.ratioCalcSmoothingMinimumStep.text = @"";
+            self.ratioCalcSmoothingPrintMean.enabled = NO;
+            self.ratioCalcSmoothingPrintMean.on = NO;
+            self.ratioCalcSmoothingPrintZeros.enabled = NO;
+            self.ratioCalcSmoothingPrintZeros.on = NO;
+        }
+    } else{
+        if(textField == self.smoothingWindowSize){
+            NSLog(@"saddsad");
+            [[NSNotificationCenter defaultCenter] removeObserver:self];
+            
         }
     }
+    _doneButton.hidden = YES;
 
     
 }
@@ -202,30 +346,38 @@ if(textField.text.length > 0 ){
 
     } else if(textField == self.genomeFile) {
         self.samToGff.enabled = YES;
-        self.samToGff.on = NO;
         [textField endEditing:YES];
 
-    }else if(textField == self.smoothing) {
-        self.step.enabled = YES;
-        [self.step becomeFirstResponder];
+    }else if(textField == self.smoothingWindowSize) {
+        self.smoothingSmoothTypeSwitch.enabled = YES;
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
+        [textField endEditing:YES];
   
+    }else if(textField == self.smoothingMinimumStep) {
+        self.smoothingPrintMean.enabled = YES;
+        [textField endEditing:YES];
+        
     }else if(textField == self.step) {
         if(_ratio){
-            self.ratioCalc.enabled = YES;
-            [self.ratioCalc becomeFirstResponder];
-
+            self.ratioCalcDoubleSingle.enabled = YES;
+            [textField endEditing:YES];
         }else{
             [textField endEditing:YES];
             [self.tableView setContentOffset:CGPointMake(0, 25) animated:YES];
         }
-    }else if(textField == self.ratioCalc) {
-        self.ratioCalcSmoothing.enabled = YES;
-        [self.ratioCalcSmoothing becomeFirstResponder];
+    }else if(textField == self.ratioCalcInputReads) {
+        self.ratioCalcChromosomes.enabled = YES;
+        [self.ratioCalcChromosomes becomeFirstResponder];
     
-    }else if(textField == self.ratioCalcSmoothing) {
+    }else if(textField == self.ratioCalcChromosomes) {
+        self.ratioCalcSmoothingWindowSize.enabled = YES;
+        [self.ratioCalcSmoothingWindowSize becomeFirstResponder];
+    }else if(textField == self.ratioCalcSmoothingWindowSize) {
+        self.ratioCalcSmoothingSmoothType.enabled = YES;
         [textField endEditing:YES];
-        [self.tableView setContentOffset:CGPointMake(0, 140) animated:YES];
-      //  [self.tableView setContentOffset:CGPointZero animated:YES];
+    }else if(textField == self.ratioCalcSmoothingMinimumStep) {
+        self.ratioCalcSmoothingPrintMean.enabled = YES;
+        [textField endEditing:YES];
     }
 }
 return NO;
@@ -233,7 +385,7 @@ return NO;
 
 - (IBAction)convertButtonTouch:(id)sender
 {
-    if(_bowtie.text.length == 0){
+ /*   if(_bowtie.text.length == 0){
             [XYZPopupGenerator showPopupWithMessage:@"Fill in desired fields to process"];
     }else{
         NSMutableArray * parameters = [[NSMutableArray alloc] init];
@@ -271,7 +423,7 @@ return NO;
             [ProcessViewController addProcessingExperiment:file];
         }
         [XYZPopupGenerator showPopupWithMessage:@"Process sent to server"];
-    }
+    }*/
     return;
     
 }
@@ -304,23 +456,200 @@ return NO;
         self.gffToSgr.enabled = YES;
         self.gffToSgr.on = NO;
     } else {
-        self.gffToSgr.on = NO;
         self.gffToSgr.enabled = NO;
-        self.smoothing.enabled = NO;
+        self.gffToSgr.on = NO;
+        self.smoothingWindowSize.enabled = NO;
+        self.smoothingSmoothTypeSwitch.enabled = NO;
+        self.smoothingSmoothTypeSwitch.on = NO;
+        self.smoothingMinimumStep.enabled = NO;
+        self.smoothingPrintMean.enabled = NO;
+        self.smoothingPrintMean.on = NO;
+        self.smoothingPrintZeros.enabled = NO;
+        self.smoothingPrintZeros.on = NO;
+        
+        self.stepCreateStep.enabled = NO;
+        self.stepCreateStep.on = NO;
         self.step.enabled = NO;
-        self.ratioCalc.enabled = NO;
-        self.ratioCalcSmoothing.enabled = NO;
+        
+        self.ratioCalcDoubleSingle.enabled = NO;
+        self.ratioCalcInputReads.enabled = NO;
+        self.ratioCalcChromosomes.enabled = NO;
+        
+        self.ratioCalcSmoothingWindowSize.enabled = NO;
+        self.ratioCalcSmoothingSmoothType.enabled = NO;
+        self.ratioCalcSmoothingSmoothType.on = NO;
+        self.ratioCalcSmoothingMinimumStep.enabled = NO;
+        self.ratioCalcSmoothingPrintMean.enabled = NO;
+        self.ratioCalcSmoothingPrintMean.on = NO;
+        self.ratioCalcSmoothingPrintZeros.enabled = NO;
+        self.ratioCalcSmoothingPrintZeros.on = NO;
     }
 }
 - (IBAction)gffToSgrChanged:(id)sender {
     if (self.gffToSgr.on) {
-        self.smoothing.enabled = YES;
+        self.smoothingWindowSize.enabled = YES;
     } else {
-        self.smoothing.enabled = NO;
+        self.smoothingWindowSize.enabled = NO;
+        self.smoothingSmoothTypeSwitch.enabled = NO;
+        self.smoothingSmoothTypeSwitch.on = NO;
+        self.smoothingMinimumStep.enabled = NO;
+        self.smoothingPrintMean.enabled = NO;
+        self.smoothingPrintMean.on = NO;
+        self.smoothingPrintZeros.enabled = NO;
+        self.smoothingPrintZeros.on = NO;
+        
+        self.stepCreateStep.enabled = NO;
+        self.stepCreateStep.on = NO;
         self.step.enabled = NO;
-        self.ratioCalc.enabled = NO;
-        self.ratioCalcSmoothing.enabled = NO;
+        
+        self.ratioCalcDoubleSingle.enabled = NO;
+        self.ratioCalcInputReads.enabled = NO;
+        self.ratioCalcChromosomes.enabled = NO;
+        
+        self.ratioCalcSmoothingWindowSize.enabled = NO;
+        self.ratioCalcSmoothingSmoothType.enabled = NO;
+        self.ratioCalcSmoothingSmoothType.on = NO;
+        self.ratioCalcSmoothingMinimumStep.enabled = NO;
+        self.ratioCalcSmoothingPrintMean.enabled = NO;
+        self.ratioCalcSmoothingPrintMean.on = NO;
+        self.ratioCalcSmoothingPrintZeros.enabled = NO;
+        self.ratioCalcSmoothingPrintZeros.on = NO;
     }
 }
+- (IBAction)smoothTypeSwitchChanged:(id)sender {
+    if (self.smoothingSmoothTypeSwitch.on) {
+        self.smoothingMinimumStep.enabled = YES;
+    } else {
+        self.smoothingMinimumStep.enabled = NO;
+        self.smoothingPrintMean.enabled = NO;
+        self.smoothingPrintMean.on = NO;
+        self.smoothingPrintZeros.enabled = NO;
+        self.smoothingPrintZeros.on = NO;
+        
+        self.stepCreateStep.enabled = NO;
+        self.stepCreateStep.on = NO;
+        self.step.enabled = NO;
+        
+        self.ratioCalcDoubleSingle.enabled = NO;
+        self.ratioCalcInputReads.enabled = NO;
+        self.ratioCalcChromosomes.enabled = NO;
+        
+        self.ratioCalcSmoothingWindowSize.enabled = NO;
+        self.ratioCalcSmoothingSmoothType.enabled = NO;
+        self.ratioCalcSmoothingSmoothType.on = NO;
+        self.ratioCalcSmoothingMinimumStep.enabled = NO;
+        self.ratioCalcSmoothingPrintMean.enabled = NO;
+        self.ratioCalcSmoothingPrintMean.on = NO;
+        self.ratioCalcSmoothingPrintZeros.enabled = NO;
+        self.ratioCalcSmoothingPrintZeros.on = NO;
+    }
+}
+- (IBAction)smoothPrintMeanSwitchChanged:(id)sender {
+    if (self.smoothingPrintMean.on) {
+        self.smoothingPrintZeros.enabled = YES;
+    } else {
+        self.smoothingPrintZeros.enabled = NO;
+        self.smoothingPrintZeros.on = NO;
+        
+        self.stepCreateStep.enabled = NO;
+        self.stepCreateStep.on = NO;
+        self.step.enabled = NO;
+        
+        self.ratioCalcDoubleSingle.enabled = NO;
+        self.ratioCalcInputReads.enabled = NO;
+        self.ratioCalcChromosomes.enabled = NO;
+        
+        self.ratioCalcSmoothingWindowSize.enabled = NO;
+        self.ratioCalcSmoothingSmoothType.enabled = NO;
+        self.ratioCalcSmoothingSmoothType.on = NO;
+        self.ratioCalcSmoothingMinimumStep.enabled = NO;
+        self.ratioCalcSmoothingPrintMean.enabled = NO;
+        self.ratioCalcSmoothingPrintMean.on = NO;
+        self.ratioCalcSmoothingPrintZeros.enabled = NO;
+        self.ratioCalcSmoothingPrintZeros.on = NO;
+    }
+}
+- (IBAction)smoothPrintZerosSwitchChanged:(id)sender {
+    if (self.smoothingPrintZeros.on) {
+        self.stepCreateStep.enabled = YES;
+    } else {
+        self.stepCreateStep.enabled = NO;
+        self.stepCreateStep.on = NO;
+        self.step.enabled = NO;
+        
+        self.ratioCalcDoubleSingle.enabled = NO;
+        self.ratioCalcInputReads.enabled = NO;
+        self.ratioCalcChromosomes.enabled = NO;
+        
+        self.ratioCalcSmoothingWindowSize.enabled = NO;
+        self.ratioCalcSmoothingSmoothType.enabled = NO;
+        self.ratioCalcSmoothingSmoothType.on = NO;
+        self.ratioCalcSmoothingMinimumStep.enabled = NO;
+        self.ratioCalcSmoothingPrintMean.enabled = NO;
+        self.ratioCalcSmoothingPrintMean.on = NO;
+        self.ratioCalcSmoothingPrintZeros.enabled = NO;
+        self.ratioCalcSmoothingPrintZeros.on = NO;
+    }
+}
+- (IBAction)stepCreateStepChanged:(id)sender {
+    if (self.stepCreateStep.on) {
+        self.step.enabled = YES;
+    } else {
+        self.step.enabled = NO;
+        
+        self.ratioCalcDoubleSingle.enabled = NO;
+        self.ratioCalcInputReads.enabled = NO;
+        self.ratioCalcChromosomes.enabled = NO;
+        
+        self.ratioCalcSmoothingWindowSize.enabled = NO;
+        self.ratioCalcSmoothingSmoothType.enabled = NO;
+        self.ratioCalcSmoothingSmoothType.on = NO;
+        self.ratioCalcSmoothingMinimumStep.enabled = NO;
+        self.ratioCalcSmoothingPrintMean.enabled = NO;
+        self.ratioCalcSmoothingPrintMean.on = NO;
+        self.ratioCalcSmoothingPrintZeros.enabled = NO;
+        self.ratioCalcSmoothingPrintZeros.on = NO;
+    }
+}
+/*- (IBAction)ratioSingleDoubleChanged:(id)sender {
+    if (self.ratioCalcDoubleSingle.on) {
+        self.ratioCalcInputReads.enabled;
+    } else {
+        self.ratioCalcInputReads.enabled = NO;
+        self.ratioCalcChromosomes.enabled = NO;
+        
+        self.ratioCalcSmoothingWindowSize.enabled = NO;
+        self.ratioCalcSmoothingSmoothType.enabled = NO;
+        self.ratioCalcSmoothingSmoothType.on = NO;
+        self.ratioCalcSmoothingMinimumStep.enabled = NO;
+        self.ratioCalcSmoothingPrintMean.enabled = NO;
+        self.ratioCalcSmoothingPrintMean.on = NO;
+        self.ratioCalcSmoothingPrintZeros.enabled = NO;
+        self.ratioCalcSmoothingPrintZeros.on = NO;
+    }
+}*/
+- (IBAction)ratioCalcSmoothSmoothTypeChanged:(id)sender {
+    if (self.ratioCalcSmoothingSmoothType.on) {
+        self.ratioCalcSmoothingMinimumStep.enabled = YES;
+    } else {
+        self.ratioCalcSmoothingMinimumStep.enabled = NO;
+        self.ratioCalcSmoothingPrintMean.enabled = NO;
+        self.ratioCalcSmoothingPrintMean.on = NO;
+        self.ratioCalcSmoothingPrintZeros.enabled = NO;
+        self.ratioCalcSmoothingPrintZeros.on = NO;
+    }
+}
+- (IBAction)ratioSmoothPrintMean:(id)sender {
+    if (self.ratioCalcSmoothingPrintMean.on) {
+        self.ratioCalcSmoothingPrintZeros.enabled = YES;
+    } else {
+        self.ratioCalcSmoothingPrintZeros.enabled = NO;
+        self.ratioCalcSmoothingPrintZeros.on = NO;
+    }
+}
+- (IBAction)ratioSmoothPrintZeros:(id)sender {
+    [self.tableView setContentOffset:CGPointMake(0, 140) animated:YES];
+}
+
 
 @end
