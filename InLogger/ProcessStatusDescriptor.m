@@ -58,9 +58,8 @@ NSArray *expectedInformation;
 
 - (bool) statusDictionaryIsValid: (NSDictionary*) status
 {
- 
-    for(NSString *string in expectedInformation) {
-        
+    for(NSString *string in expectedInformation)
+    {
         if([status objectForKey:string] == nil)
         {
             return NO;
