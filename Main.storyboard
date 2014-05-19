@@ -1334,23 +1334,14 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NF0-tq-enO">
                                                     <rect key="frame" x="251" y="116" width="51" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <connections>
-                                                        <action selector="smoothPrintMeanSwitchChanged:" destination="ipQ-X4-59G" eventType="valueChanged" id="NlB-Zc-G3o"/>
-                                                    </connections>
                                                 </switch>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kgY-8b-5vT">
                                                     <rect key="frame" x="251" y="150" width="51" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <connections>
-                                                        <action selector="smoothPrintZerosSwitchChanged:" destination="ipQ-X4-59G" eventType="valueChanged" id="Vnp-2r-wSS"/>
-                                                    </connections>
                                                 </switch>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BZ8-q4-yAt">
                                                     <rect key="frame" x="251" y="51" width="51" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <connections>
-                                                        <action selector="smoothTypeSwitchChanged:" destination="ipQ-X4-59G" eventType="valueChanged" id="NTx-Vz-xfN"/>
-                                                    </connections>
                                                 </switch>
                                             </subviews>
                                             <constraints>
@@ -1414,9 +1405,6 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bZh-zB-AIV">
                                                     <rect key="frame" x="251" y="15" width="51" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <connections>
-                                                        <action selector="stepCreateStepChanged:" destination="ipQ-X4-59G" eventType="valueChanged" id="Hog-5p-8T2"/>
-                                                    </connections>
                                                 </switch>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create step or not:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Fm-8X-v7A">
                                                     <rect key="frame" x="20" y="20" width="134" height="21"/>
@@ -1482,9 +1470,6 @@
                                                         <segment title="Single"/>
                                                         <segment title="Double"/>
                                                     </segments>
-                                                    <connections>
-                                                        <action selector="ratioSingleDoubleChanged:" destination="ipQ-X4-59G" eventType="valueChanged" id="raa-WG-P5f"/>
-                                                    </connections>
                                                 </segmentedControl>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Double or single: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kcY-Ig-gx9">
                                                     <rect key="frame" x="20" y="20" width="135" height="21"/>
@@ -1566,9 +1551,6 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ajI-GA-SOA">
                                                     <rect key="frame" x="251" y="51" width="51" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <connections>
-                                                        <action selector="ratioCalcSmoothSmoothTypeChanged:" destination="ipQ-X4-59G" eventType="valueChanged" id="2BN-Fe-q5y"/>
-                                                    </connections>
                                                 </switch>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sti-fJ-Vxq">
                                                     <rect key="frame" x="251" y="84" width="49" height="30"/>
@@ -1616,16 +1598,10 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fmd-ON-NQH">
                                                     <rect key="frame" x="251" y="117" width="51" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <connections>
-                                                        <action selector="ratioSmoothPrintMean:" destination="ipQ-X4-59G" eventType="valueChanged" id="Vke-G3-uYv"/>
-                                                    </connections>
                                                 </switch>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1cx-aA-tCl">
                                                     <rect key="frame" x="251" y="151" width="51" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <connections>
-                                                        <action selector="ratioSmoothPrintZeros:" destination="ipQ-X4-59G" eventType="valueChanged" id="KkV-NH-kwJ"/>
-                                                    </connections>
                                                 </switch>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Print zeros or not:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8NY-gV-RQ5">
                                                     <rect key="frame" x="20" y="154" width="126" height="21"/>
