@@ -10,6 +10,6 @@
 #import "XYZExperimentFIle.h"
 @interface ProcessViewController : UIViewController
 
-+ (void) addProcessingExperiment:(XYZExperimentFile *) file;
+- (void) reportProcessStatusResult: (NSArray*) result error: (NSError*) error;
 
 @end

@@ -88,6 +88,7 @@ NSString *token;
 + (NSMutableArray*)handleSearchPostReply:(NSError *)internalError POSTReply:(NSData *)POSTReply error:(NSError **)error
 {
     NSArray *array = [NSJSONSerialization JSONObjectWithData:POSTReply options: NSJSONReadingMutableContainers error:&internalError];
+   
     if(internalError == nil)
     {
         NSMutableArray *experiments = [[NSMutableArray alloc] init];
@@ -118,7 +119,8 @@ NSString *token;
 
          if(internalError == nil)
          {
-             if(httpResp.statusCode == 200){
+             if(httpResp.statusCode == 200)
+             {
                  array = [self handleSearchPostReply:internalError POSTReply:POSTReply error:&error];
              }
              else
@@ -183,8 +185,6 @@ NSString *token;
                         annotation.possibleValues = [json objectForKey:@"values"];
                         [annotations addObject:annotation];
                     }
-                    
-                    //   return annotations;
                 } else
                 {
                     error = [self generateError:@"Server sent incorrectly formatted data, talk to admin" withErrorDomain:@"ServerError" withUnderlyingError:nil];
@@ -193,7 +193,8 @@ NSString *token;
             {
                 error = [self generateErrorObjectFromHTTPError:httpResp.statusCode];
             }
-        } else {
+        } else
+        {
             error = [self generateError:@"Could not connect to server" withErrorDomain:@"Connection" withUnderlyingError:internalError];
         }
         [controller reportAnnotationResult:annotations error:error];
@@ -201,14 +202,14 @@ NSString *token;
 }
 
 
-//TODO fix view controller type and add method to ServerConnection.h
-+ (void) getProcessStatus:(UIViewController*) controller
++ (void) getProcessStatus:(ProcessViewController*) controller
 {
     NSMutableURLRequest *request = [JSONBuilder getProcessStatusJSON:token];
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler: ^(NSURLResponse *response, NSData *POSTReply, NSError *internalError)
     {
         NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
+        NSLog(@"HTTPRESP status: %d", httpResp.statusCode);
         NSError *error;
         NSArray *processStatusResults;
         
@@ -228,12 +229,11 @@ NSString *token;
             {
                 error = [self generateErrorObjectFromHTTPError:httpResp.statusCode];
             }
-        } else {
+        } else
+        {
             error = [self generateError:@"Could not connect to server" withErrorDomain:@"Connection" withUnderlyingError:internalError];
         }
-        
-        //TODO uncomment before use
-        //[controller reportProcessStatusResult:processStatusResults error:error];
+        [controller reportProcessStatusResult:processStatusResults error:error];
     }];
 }
 
@@ -282,16 +282,21 @@ NSString *token;
             [dict setObject:@"Server down for maintenance, try again later" forKey:NSLocalizedDescriptionKey];
             error = [NSError errorWithDomain:@"Server maintenance" code:0 userInfo:dict];
             break;
+        default:
+            [dict setObject:@"Unrecognised error, talk to developers" forKey:NSLocalizedDescriptionKey];
+            error = [NSError errorWithDomain:@"Coding error" code:0 userInfo:dict];
+            break;
     }
-    
     return error;
 }
 
-+ (NSError*) generateError: (NSString*) errorDescription withErrorDomain: (NSString*) errorDomain withUnderlyingError: (NSError*) underlyingError{
++ (NSError*) generateError: (NSString*) errorDescription withErrorDomain: (NSString*) errorDomain withUnderlyingError: (NSError*) underlyingError
+{
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
     [dict setObject: errorDescription forKey:NSLocalizedDescriptionKey];
     
-    if (underlyingError != nil) {
+    if (underlyingError != nil)
+    {
         [dict setObject:underlyingError forKey:NSUnderlyingErrorKey];
     }
     return [NSError errorWithDomain:errorDomain code:1 userInfo:dict];
