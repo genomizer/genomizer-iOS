@@ -82,7 +82,7 @@ static NSMutableArray * processingExperimentFiles;
     cell.status.text = temp.status;
     //NSLog(@"started : %@", processingExperimentFiles);
     
-    if([temp.status isEqualToString:@"running"])
+    if([temp.status isEqualToString:@"Started"])
     {
         [cell.activityIndicator startAnimating];
         cell.activityIndicator.hidden = NO;

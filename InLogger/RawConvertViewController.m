@@ -380,9 +380,7 @@ return NO;
             [dict setObject:parameters forKey:@"parameters"];
             [ServerConnection convert:dict withContext:self];
         }
-        for(XYZExperimentFile *file in _experimentFiles){
-            [ProcessViewController addProcessingExperiment:file];
-        }
+        
         [XYZPopupGenerator showPopupWithMessage:@"Process sent to server"];
     }
     return;
