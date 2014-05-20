@@ -47,7 +47,6 @@
 
 - (void) addExperimentFile: (XYZExperimentFile *) file
 {
-    NSLog(@"File added %d", [[self arrayOfFileType:file.type] count]);
     NSMutableArray *filesArray = [self arrayOfFileType:file.type];
     if (![filesArray containsObject:file]) {
         [filesArray addObject:file];
