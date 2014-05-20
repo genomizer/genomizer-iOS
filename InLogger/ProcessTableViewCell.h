@@ -13,5 +13,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *process;
 @property (weak, nonatomic) IBOutlet UILabel *status;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (weak, nonatomic) IBOutlet UILabel *added;
+@property (weak, nonatomic) IBOutlet UILabel *started;
+@property (weak, nonatomic) IBOutlet UILabel *finished;
 
 @end
