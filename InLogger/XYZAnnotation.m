@@ -31,7 +31,9 @@ static NSDictionary *ANNOTATION_DICTIONARY;
     if (ANNOTATION_DICTIONARY == nil) {
         ANNOTATION_DICTIONARY = [XYZAnnotation initDictionary];
     }
-    NSString *text = [ANNOTATION_DICTIONARY valueForKey:_name];
+
+    NSString *text;
+    text = ANNOTATION_DICTIONARY[_name];
     
     if (text == nil) {
         return [_name capitalizedString];

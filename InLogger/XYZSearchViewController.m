@@ -54,7 +54,7 @@
         });
     } else
     {
-     [XYZPopupGenerator showErrorMessage:error];
+        [XYZPopupGenerator showErrorMessage:error];
     }
 }
 
