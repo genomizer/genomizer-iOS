@@ -224,7 +224,6 @@
         else if(textField == self.step){
             if(_ratio){
                 self.ratioCalcDoubleSingle.enabled = YES;
-                [self.ratioCalcDoubleSingle becomeFirstResponder];
                 self.ratioCalcInputReads.enabled = YES;
                 self.ratioCalcChromosomes.enabled = YES;
             }else{
@@ -245,38 +244,24 @@
 if(textField.text.length > 0 ){
     if(textField == self.bowtie) {
         self.genomeFile.enabled = YES;
-        [self.genomeFile becomeFirstResponder];
-
     } else if(textField == self.genomeFile) {
         self.samToGff.enabled = YES;
-        [textField endEditing:YES];
-
     }else if((textField == self.smoothingWindowSize) && (self.smoothingMinimumStep.text.length > 0)) {
-        [textField endEditing:YES];
-  
+        
     }else if(textField == self.smoothingMinimumStep) {
         self.smoothingPrintMean.enabled = YES;
-        [textField endEditing:YES];
-        
     }else if(textField == self.step) {
        self.ratioCalcDoubleSingle.enabled = YES;
-        [textField endEditing:YES];
-        NSLog(@"eeeee");
-
     }else if(textField == self.ratioCalcInputReads) {
         self.ratioCalcChromosomes.enabled = YES;
-        [self.ratioCalcChromosomes becomeFirstResponder];
-    
     }else if(textField == self.ratioCalcChromosomes) {
         self.ratioCalcSmoothingWindowSize.enabled = YES;
-        [self.ratioCalcSmoothingWindowSize becomeFirstResponder];
     }else if(textField == self.ratioCalcSmoothingWindowSize) {
         self.ratioCalcSmoothingSmoothType.enabled = YES;
-        [textField endEditing:YES];
     }else if(textField == self.ratioCalcSmoothingMinimumStep) {
         self.ratioCalcSmoothingPrintMean.enabled = YES;
-        [textField endEditing:YES];
     }
+    [textField endEditing:YES];
 }
 return NO;
 }
