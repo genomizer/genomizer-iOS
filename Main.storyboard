@@ -586,7 +586,6 @@
                         <outlet property="selectTaskToPerformButton" destination="1mi-tr-fZm" id="Zmr-LS-Qju"/>
                         <outlet property="tableView" destination="6pb-Wh-CBJ" id="5ch-FP-JXM"/>
                         <outlet property="trashButton" destination="S8B-s2-ee7" id="O3J-9v-2cu"/>
-                        <segue destination="0GK-lv-S7R" kind="push" identifier="convertTask" id="Nis-OP-SD8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K6N-pd-6ui" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -636,7 +635,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="Z73-An-P8q" kind="push" id="ytz-6m-u9e"/>
+                        <segue destination="Z73-An-P8q" kind="push" identifier="toConvertGenomRelease" id="ytz-6m-u9e"/>
                         <segue destination="ipQ-X4-59G" kind="push" identifier="toConvertToProfile" id="ovH-C4-m4G"/>
                         <segue destination="ipQ-X4-59G" kind="push" identifier="executeTaskRatio" id="dRf-EC-VtU"/>
                     </connections>
@@ -894,7 +893,7 @@
                                 </state>
                                 <connections>
                                     <action selector="logoutButtonTouched:" destination="p2d-tC-kAj" eventType="touchUpInside" id="cCZ-Bb-X8W"/>
-                                    <segue destination="x1l-HJ-QPz" kind="modal" id="bDh-8s-HKm"/>
+                                    <segue destination="x1l-HJ-QPz" kind="modal" identifier="toLoginScreen" id="bDh-8s-HKm"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo1" translatesAutoresizingMaskIntoConstraints="NO" id="zk8-In-Xqi">
@@ -1705,9 +1704,8 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="lHN-tn-48I"/>
         <segue reference="1Lw-OZ-NPD"/>
-        <segue reference="Nis-OP-SD8"/>
         <segue reference="dRf-EC-VtU"/>
+        <segue reference="lHN-tn-48I"/>
     </inferredMetricsTieBreakers>
 </document>
