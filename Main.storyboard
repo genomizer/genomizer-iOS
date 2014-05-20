@@ -638,7 +638,6 @@
                     <connections>
                         <segue destination="Z73-An-P8q" kind="push" identifier="toConvertGenomRelease" id="ytz-6m-u9e"/>
                         <segue destination="ipQ-X4-59G" kind="push" identifier="toConvertToProfile" id="ovH-C4-m4G"/>
-                        <segue destination="ipQ-X4-59G" kind="push" identifier="executeTaskRatio" id="dRf-EC-VtU"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jqw-SR-ZeG" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1713,8 +1712,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="1Lw-OZ-NPD"/>
-        <segue reference="dRf-EC-VtU"/>
         <segue reference="lHN-tn-48I"/>
+        <segue reference="1Lw-OZ-NPD"/>
     </inferredMetricsTieBreakers>
 </document>

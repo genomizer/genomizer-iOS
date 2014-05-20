@@ -29,7 +29,7 @@
 {
     switch(fileType) {
         case RAW :
-            return [[NSArray alloc] initWithObjects:@"Convert to profile", @"Convert to profile with ratio calc.", nil];
+            return [[NSArray alloc] initWithObjects:@"Convert to profile", nil];
         case PROFILE:
             return [[NSArray alloc] initWithObjects:@"Convert to region", @"Change genome release", nil];
         case REGION:
@@ -74,15 +74,8 @@
           NSLog(@"prepConvertToProfile");
         RawConvertViewController *nextVC = (RawConvertViewController *)[segue destinationViewController];
         nextVC.experimentFiles = _experimentFiles;
-        nextVC.ratio = false;
- 
-    }
-    if ([segue.identifier isEqualToString:@"executeTaskRatio"]) {
-      
-        RawConvertViewController *nextVC = (RawConvertViewController *)[segue destinationViewController];
-        nextVC.experimentFiles = _experimentFiles;
         nextVC.ratio = true;
-        
+ 
     }
 }
 
