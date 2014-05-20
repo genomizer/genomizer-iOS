@@ -28,7 +28,7 @@ NSString *token;
         
         if(httpResp.statusCode != 200)
         {
-            *error = [self generateErrorObjectFromHTTPError:httpResp.statusCode];
+            *error = [self generateErrorObjectFromHTTPError:httpResp.statusCode errorMessage:@"Login failed"];
         }
     }
     else
@@ -46,7 +46,7 @@ NSString *token;
      {
          NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
          NSError *error;
-         
+         NSLog(@"internal %@", internalError);
          if (internalError == nil)
          {
              NSDictionary *json = [self parseJSONToDictionary:POSTReply error:&internalError];
@@ -59,7 +59,8 @@ NSString *token;
                  
                  if(httpResp.statusCode != 200)
                  {
-                     error = [self generateErrorObjectFromHTTPError:httpResp.statusCode];
+                     NSString *errorMessage = [[self parseJSONToDictionary:POSTReply error:&internalError] objectForKey:@"message"];
+                     error = [self generateErrorObjectFromHTTPError:httpResp.statusCode errorMessage:errorMessage];
                  }
              }
              else
@@ -116,7 +117,7 @@ NSString *token;
             NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
          NSMutableArray *array;
          NSError *error;
-
+        
          if(internalError == nil)
          {
              if(httpResp.statusCode == 200)
@@ -125,7 +126,8 @@ NSString *token;
              }
              else
              {
-                  error = [self generateErrorObjectFromHTTPError:httpResp.statusCode];
+                 NSString *errorMessage = [[self parseJSONToDictionary:POSTReply error:&internalError] objectForKey:@"message"];
+                 error = [self generateErrorObjectFromHTTPError:httpResp.statusCode errorMessage:errorMessage];
              }
          }
          else{
@@ -140,16 +142,18 @@ NSString *token;
 {
     NSMutableURLRequest *request = [JSONBuilder getRawToProfileJSON:token withDict:dict];
     NSHTTPURLResponse *httpResp;
-    
+     
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler: ^(NSURLResponse *response, NSData *POSTReply, NSError *internalError)
     {
-    
+      //  NSArray *array = [NSJSONSerialization JSONObjectWithData:POSTReply options: NSJSONReadingMutableContainers error:&internalError];
+      //  NSLog(@"array: %@", array);
         if(internalError == nil)
         {
             if(!(httpResp.statusCode == 200))
             {
-                NSError *error = [self generateErrorObjectFromHTTPError:httpResp.statusCode];
+                NSString *errorMessage = [[self parseJSONToDictionary:POSTReply error:&internalError] objectForKey:@"message"];
+                NSError *error = [self generateErrorObjectFromHTTPError:httpResp.statusCode errorMessage:errorMessage];
                 [controller reportResult:error];
             }
         } else
@@ -170,12 +174,13 @@ NSString *token;
         NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
         NSError *error;
         NSMutableArray *annotations;
-        
+      
         if (internalError == nil)
         {
             if (httpResp.statusCode == 200)
             {
                 NSArray *array = [NSJSONSerialization JSONObjectWithData:POSTReply options: NSJSONReadingMutableContainers error:&internalError];
+         
                 if (internalError == nil)
                 {
                     annotations = [[NSMutableArray alloc] init];
@@ -192,7 +197,8 @@ NSString *token;
                 }
             } else
             {
-                error = [self generateErrorObjectFromHTTPError:httpResp.statusCode];
+                NSString *errorMessage = [[self parseJSONToDictionary:POSTReply error:&internalError] objectForKey:@"message"];
+                error = [self generateErrorObjectFromHTTPError:httpResp.statusCode errorMessage:errorMessage];
             }
         } else
         {
@@ -207,6 +213,7 @@ NSString *token;
 + (void) getProcessStatus:(ProcessViewController*) controller
 {
     NSMutableURLRequest *request = [JSONBuilder getProcessStatusJSON:token];
+  
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler: ^(NSURLResponse *response, NSData *POSTReply, NSError *internalError)
     {
@@ -214,7 +221,8 @@ NSString *token;
         NSLog(@"HTTPRESP status: %d", httpResp.statusCode);
         NSError *error;
         NSArray *processStatusResults;
-        
+        NSArray *array = [NSJSONSerialization JSONObjectWithData:POSTReply options: NSJSONReadingMutableContainers error:&internalError];
+        NSLog(@"array: %@", array);
         if (internalError == nil)
         {
             if (httpResp.statusCode == 200)
@@ -229,7 +237,8 @@ NSString *token;
                 }
             } else
             {
-                error = [self generateErrorObjectFromHTTPError:httpResp.statusCode];
+                NSString *errorMessage = [[self parseJSONToDictionary:POSTReply error:&internalError] objectForKey:@"message"];
+                error = [self generateErrorObjectFromHTTPError:httpResp.statusCode errorMessage:errorMessage];
             }
         } else
         {
@@ -245,7 +254,7 @@ NSString *token;
     return json;
 }
 
-+(NSError*)generateErrorObjectFromHTTPError:(NSInteger)errorCode
++(NSError*)generateErrorObjectFromHTTPError:(NSInteger)errorCode errorMessage:(NSString *)errorMessage
 {
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
     NSError* error;
@@ -253,35 +262,35 @@ NSString *token;
     switch(errorCode)
     {
         case 204:
-            [dict setObject:@"Empty response from server" forKey:NSLocalizedDescriptionKey];
+            [dict setObject:errorMessage forKey:NSLocalizedDescriptionKey];
             error = [NSError errorWithDomain:@"Empty response" code:0 userInfo:dict];
             break;
         case 400:
-            [dict setObject:@"Bad request, talk to the admin" forKey:NSLocalizedDescriptionKey];
+            [dict setObject:errorMessage forKey:NSLocalizedDescriptionKey];
             error = [NSError errorWithDomain:@"Bad request" code:0 userInfo:dict];
             break;
         case 401:
-            [dict setObject:@"Insufficient permissions" forKey:NSLocalizedDescriptionKey];
+            [dict setObject:errorMessage forKey:NSLocalizedDescriptionKey];
             error = [NSError errorWithDomain:@"Authorization" code:0 userInfo:dict];
             break;
         case 403:
-            [dict setObject:@"Access denied" forKey:NSLocalizedDescriptionKey];
+            [dict setObject:errorMessage forKey:NSLocalizedDescriptionKey];
             error = [NSError errorWithDomain:@"Authorization" code:0 userInfo:dict];
             break;
         case 404:
-            [dict setObject:@"Resource not found!" forKey:NSLocalizedDescriptionKey];
+            [dict setObject:errorMessage forKey:NSLocalizedDescriptionKey];
             error = [NSError errorWithDomain:@"Resource not found" code:0 userInfo:dict];
             break;
         case 405:
-            [dict setObject:@"Action not allowed for chosen files" forKey:NSLocalizedDescriptionKey];
+            [dict setObject:errorMessage forKey:NSLocalizedDescriptionKey];
             error = [NSError errorWithDomain:@"User error" code:0 userInfo:dict];
             break;
         case 429:
-            [dict setObject:@"Too many requests, wait a minute and try again" forKey:NSLocalizedDescriptionKey];
+            [dict setObject:errorMessage forKey:NSLocalizedDescriptionKey];
             error = [NSError errorWithDomain:@"Server overloaded" code:0 userInfo:dict];
             break;
         case 503:
-            [dict setObject:@"Server down for maintenance, try again later" forKey:NSLocalizedDescriptionKey];
+            [dict setObject:errorMessage forKey:NSLocalizedDescriptionKey];
             error = [NSError errorWithDomain:@"Server maintenance" code:0 userInfo:dict];
             break;
         default:

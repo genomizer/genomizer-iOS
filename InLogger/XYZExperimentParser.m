@@ -30,14 +30,16 @@
     for(NSDictionary *file in filesArray){
         XYZExperimentFile *expFile = [[XYZExperimentFile alloc] init];
         expFile.idFile = [file valueForKey:@"id"];
-        NSLog(@"fileID %@", expFile.idFile);
+      
         expFile.type = [XYZExperimentFile NSStringFileTypeToEnumFileType:[file valueForKey:@"type"]];
         expFile.name = (NSString *)[file valueForKey:@"filename"];
-        expFile.uploadedBy = @"genomevddddddarsion";//[file valueForKey:@"uploader"];
-        NSLog(@"uploadedBy %@", expFile.uploadedBy);
+         NSLog(@"name %@",  expFile.name);
+        expFile.uploadedBy = [file valueForKey:@"uploader"];
+      
         expFile.expID = [file valueForKey:@"expId"];
-        NSLog(@"expID %@", expFile.expID);
-        expFile.grVersion = @"genomevarsion"; //[file valueForKey:@"grVersion"];
+        NSLog(@"expid %@",  expFile.expID);
+        expFile.grVersion = [file valueForKey:@"grVersion"];
+        NSLog(@"geVersion %@",  expFile.grVersion);
         expFile.author = [file valueForKey:@"author"];
         expFile.date = [file valueForKey:@"date"];
         expFile.metaData = @"astringofmeta";

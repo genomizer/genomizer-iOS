@@ -380,7 +380,6 @@ return NO;
             [dict setObject:parameters forKey:@"parameters"];
             [ServerConnection convert:dict withContext:self];
         }
-        
         [XYZPopupGenerator showPopupWithMessage:@"Process sent to server"];
     }
     return;

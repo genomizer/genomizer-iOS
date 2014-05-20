@@ -53,7 +53,7 @@
 }
 
 +(NSMutableURLRequest*)getRawToProfileJSON:(NSString *)token withDict:(NSMutableDictionary*)dict{
-    
+    NSLog(@"dict %@", dict);
         NSData *postData = [NSJSONSerialization dataWithJSONObject:dict
                                                            options:0
                                                              error:nil];
@@ -61,7 +61,7 @@
         NSMutableURLRequest *request = [self getRequest:@"PUT" withToken:token];
         [request setHTTPBody:postData];
         [request setURL:[NSURL URLWithString: [[self getServerURL] stringByAppendingString:conversionString]]];
-        
+        NSLog(@"req %@", request);
         return request;
     
 }

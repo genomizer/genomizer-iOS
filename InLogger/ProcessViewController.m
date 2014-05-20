@@ -82,20 +82,32 @@ static NSMutableArray * processingExperimentFiles;
 {
     ProcessTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"processCell" forIndexPath:indexPath];
     ProcessStatusDescriptor *temp = [processingExperimentFiles objectAtIndex:indexPath.row];
+    NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
     
     cell.file.text = temp.experimentName;
     cell.status.text = temp.status;
-    //NSLog(@"started : %@", processingExperimentFiles);
-    
+    cell.added.text =  [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:temp.timeAdded]];
+    cell.started.text = @"Not started";
+    cell.finished.text = @"Not finished";
     if([temp.status isEqualToString:@"Started"])
     {
+        cell.started.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:temp.timeStarted]];
         [cell.activityIndicator startAnimating];
         cell.activityIndicator.hidden = NO;
     } else
     {
         cell.activityIndicator.hidden = YES;
     }
-    
+    if([temp.status isEqualToString:@"Finished"])
+    {
+        cell.started.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:temp.timeStarted]];
+        cell.finished.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:temp.timeFinished]];
+    }
+    if([temp.status isEqualToString:@"Crashed"])
+    {
+        cell.started.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:temp.timeStarted]];
+    }
     return cell;
 }
 
