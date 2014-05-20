@@ -176,6 +176,7 @@ NSString *token;
             if (httpResp.statusCode == 200)
             {
                 NSArray *array = [NSJSONSerialization JSONObjectWithData:POSTReply options: NSJSONReadingMutableContainers error:&internalError];
+                NSLog(@"Annotations: %@", array);
                 if (internalError == nil)
                 {
                     annotations = [[NSMutableArray alloc] init];
@@ -183,7 +184,14 @@ NSString *token;
                     {
                         XYZAnnotation *annotation = [[XYZAnnotation alloc] init];
                         annotation.name = [json objectForKey:@"name"];
-                        annotation.possibleValues = [json objectForKey:@"values"];
+                    
+                        NSArray* values = [json objectForKey:@"values"];
+                        if (values == nil)
+                        {
+                            values = [[NSArray alloc] initWithObjects:@"freetext", nil];
+                        }
+                        annotation.possibleValues = values;
+                        
                         [annotations addObject:annotation];
                     }
                 } else
@@ -257,7 +265,7 @@ NSString *token;
             error = [NSError errorWithDomain:@"Empty response" code:0 userInfo:dict];
             break;
         case 400:
-            [dict setObject:@"Bad request, talk to the admin" forKey:NSLocalizedDescriptionKey];
+            [dict setObject:@"Bad request, fill in more information" forKey:NSLocalizedDescriptionKey];
             error = [NSError errorWithDomain:@"Bad request" code:0 userInfo:dict];
             break;
         case 401:
