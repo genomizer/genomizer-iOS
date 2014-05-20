@@ -32,7 +32,7 @@
 - (void)testShouldHaveCorrectURL
 {
     NSString *url = [[self.req URL] absoluteString];
-    XCTAssertEqualObjects(url, [[JSONBuilder getServerURL] stringByAppendingString:@"/annotation"]);
+    XCTAssertEqualObjects(url, [[JSONBuilder getServerURL] stringByAppendingString:@"annotation"]);
 }
 
 - (void)testShouldHaveHTTPMethodGET

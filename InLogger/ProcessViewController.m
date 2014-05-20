@@ -9,7 +9,10 @@
 #import "ProcessViewController.h"
 #import "ProcessTableViewCell.h"
 #import "RawConvertViewController.h"
-#import "XYZExperimentFile.h"
+#import "ServerConnection.h"
+#import "XYZPopupGenerator.h"
+#import "ProcessStatusDescriptor.h"
+
 @interface ProcessViewController ()
 
 @end
@@ -18,20 +21,23 @@
 
 static NSMutableArray * processingExperimentFiles;
 
-+ (void)initialize
+- (void)initialize
 {
     if (processingExperimentFiles == nil) {
         processingExperimentFiles = [[NSMutableArray alloc] init];
     }
 }
 
-+ (void) addProcessingExperiment:(XYZExperimentFile *) file {
+- (void) addProcessingExperiment:(ProcessStatusDescriptor *) file {
 
     if(![processingExperimentFiles containsObject:file]){
          [processingExperimentFiles addObject:file];
     }
-   
-    
+}
+
+- (void) resetProcessingExperimentFiles
+{
+    [processingExperimentFiles removeAllObjects];
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -46,8 +52,8 @@ static NSMutableArray * processingExperimentFiles;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-
+    [self initialize];
+    [ServerConnection getProcessStatus:self];
 }
 
 - (void)didReceiveMemoryWarning
@@ -70,14 +76,43 @@ static NSMutableArray * processingExperimentFiles;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ProcessTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"processCell" forIndexPath:indexPath];
-    cell.file.text = [[processingExperimentFiles objectAtIndex:indexPath.row] name];
-    NSLog(@"started : %@", processingExperimentFiles);
-    [cell.activityIndicator startAnimating];   
+    ProcessStatusDescriptor *temp = [processingExperimentFiles objectAtIndex:indexPath.row];
+    
+    cell.file.text = temp.experimentName;
+    cell.status.text = temp.status;
+    //NSLog(@"started : %@", processingExperimentFiles);
+    
+    if([temp.status isEqualToString:@"Started"])
+    {
+        [cell.activityIndicator startAnimating];
+        cell.activityIndicator.hidden = NO;
+    } else
+    {
+        cell.activityIndicator.hidden = YES;
+    }
     
     return cell;
 }
 
-
-
+- (void) reportProcessStatusResult: (NSArray*) result error: (NSError*) error {
+    
+    [self resetProcessingExperimentFiles];
+    if(error == nil)
+    {
+        for(NSDictionary *processStatus in result)
+        {
+            [self addProcessingExperiment:[[ProcessStatusDescriptor alloc] init: processStatus]];
+        }
+       
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [_tableView reloadData];
+        });
+    } else
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [XYZPopupGenerator showErrorMessage:error];
+        });
+    }
+}
 
 @end

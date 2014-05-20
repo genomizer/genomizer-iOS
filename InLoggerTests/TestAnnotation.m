@@ -41,14 +41,14 @@
     XCTAssertFalse([_annotation isFreeText]);
 }
 
--(void) testMakeUnknownAnnotationToCapitalFirstLetter
+- (void) testMakeUnknownAnnotationToCapitalFirstLetter
 {
     _annotation.name = @"unknown";
     NSString *result = [_annotation getFormatedName];
     XCTAssertEqualObjects(@"Unknown", result);
 }
 
--(void) testTwoWordUnknownAnnotation
+- (void) testTwoWordUnknownAnnotation
 {
     _annotation.name = @"unknown known";
     NSString *result = [_annotation getFormatedName];
@@ -56,18 +56,17 @@
     
 }
 
--(void) testFormatKnownAnnotation
+- (void) testFormatKnownAnnotation
 {
     _annotation.name = @"pubmedId";
     NSString *result = [_annotation getFormatedName];
     XCTAssertEqualObjects(@"Publication ID", result);
 }
 
--(void) testFormatUnsetAnnotationName
+- (void) testFormatUnsetAnnotationName
 {
     NSString *result = [_annotation getFormatedName];
     XCTAssertEqualObjects(@"?", result);
 }
-
 
 @end

@@ -37,7 +37,7 @@
 {
     NSString *url = [[self.req URL] absoluteString];
 
-    XCTAssertEqualObjects(url, [[JSONBuilder getServerURL] stringByAppendingString:@"/login"]);
+    XCTAssertEqualObjects(url, [[JSONBuilder getServerURL] stringByAppendingString:@"login"]);
 }
 
 - (void)testShouldHaveHTTPMethodDELETE

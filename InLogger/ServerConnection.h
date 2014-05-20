@@ -11,6 +11,7 @@
 #import "XYZSearchViewController.h"
 #import "RawConvertViewController.h"
 #import "XYZLogInViewController.h"
+#import "ProcessViewController.h"
 
 @interface ServerConnection : NSObject
 
@@ -23,5 +24,6 @@
 + (NSDictionary*)parseJSONToDictionary:(NSData*)POSTReply error:(NSError**)error;
 
 + (void) getAvailableAnnotations:(XYZSearchViewController*) controller;
++ (void) getProcessStatus:(ProcessViewController*) controller;
 
 @end

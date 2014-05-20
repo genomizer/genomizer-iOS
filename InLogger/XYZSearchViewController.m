@@ -107,7 +107,7 @@
     [ServerConnection search:[XYZPubMedBuilder createAnnotationsSearch: selectedAnnotations] withContext:self];
 }
 
-- (void) reportSearchResult: (NSMutableArray*) result withParsingError: (NSError*) error
+- (void) reportSearchResult: (NSMutableArray*) result error: (NSError*) error
 {
     if(error)
     {

@@ -10,6 +10,8 @@
 #import "XYZExperimentFIle.h"
 @interface ProcessViewController : UIViewController
 
-+ (void) addProcessingExperiment:(XYZExperimentFile *) file;
+@property (nonatomic, weak) IBOutlet UITableView *tableView;
+
+- (void) reportProcessStatusResult: (NSArray*) result error: (NSError*) error;
 
 @end
