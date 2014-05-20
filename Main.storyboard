@@ -393,7 +393,8 @@
                     <connections>
                         <segue destination="90g-6s-d5P" kind="relationship" relationship="viewControllers" id="6fB-Nh-3g5"/>
                         <segue destination="9IC-kd-hqg" kind="relationship" relationship="viewControllers" id="2JJ-ai-Wpd"/>
-                        <segue destination="Tiy-o2-5Ke" kind="relationship" relationship="viewControllers" id="v1d-Co-H93"/>
+                        <segue destination="axL-bg-48q" kind="relationship" relationship="viewControllers" id="dhr-6v-ZfB"/>
+                        <segue destination="Tiy-o2-5Ke" kind="relationship" relationship="viewControllers" id="iq3-31-JDq"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hGO-4C-7lf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -735,7 +736,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2At-SN-6Fe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5447" y="1008"/>
+            <point key="canvasLocation" x="2959" y="998"/>
         </scene>
         <!--View Controller - Convert Genome Release-->
         <scene sceneID="LfB-4V-g9h">
@@ -855,7 +856,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rqa-sC-xTB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2433" y="989"/>
+            <point key="canvasLocation" x="2439" y="1773"/>
         </scene>
         <!--More View Controller-->
         <scene sceneID="CYu-Ig-EHi">
@@ -902,20 +903,9 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XOK-x7-C6V">
-                                <rect key="frame" x="98" y="425" width="125" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Processing Status">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="COp-9N-Txb" kind="push" identifier="processView" id="D3K-V3-beY"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="XOK-x7-C6V" secondAttribute="trailing" constant="97" id="CvZ-VQ-Hqo"/>
                             <constraint firstItem="o9Y-2h-pVR" firstAttribute="top" secondItem="zk8-In-Xqi" secondAttribute="bottom" constant="8" symbolic="YES" id="DLK-nU-fMe"/>
                             <constraint firstItem="0BI-rU-IZB" firstAttribute="centerX" secondItem="zk8-In-Xqi" secondAttribute="centerX" id="Fr5-xb-lsE"/>
                             <constraint firstItem="0BI-rU-IZB" firstAttribute="centerX" secondItem="8R4-FB-D6k" secondAttribute="centerX" id="Jni-6S-vD7"/>
@@ -923,14 +913,12 @@
                             <constraint firstItem="zk8-In-Xqi" firstAttribute="leading" secondItem="8R4-FB-D6k" secondAttribute="leading" id="ULN-vZ-Azb"/>
                             <constraint firstItem="o9Y-2h-pVR" firstAttribute="trailing" secondItem="GAJ-Ks-sWX" secondAttribute="trailing" id="bID-DU-gbA"/>
                             <constraint firstItem="zk8-In-Xqi" firstAttribute="top" secondItem="9Yp-85-UEo" secondAttribute="bottom" id="dKn-z3-QfE"/>
-                            <constraint firstItem="0BI-rU-IZB" firstAttribute="top" secondItem="XOK-x7-C6V" secondAttribute="bottom" constant="8" id="iYJ-Fg-thx"/>
                             <constraint firstItem="ZPy-QJ-wXB" firstAttribute="top" secondItem="0BI-rU-IZB" secondAttribute="bottom" constant="26" id="j8E-HQ-s5X"/>
                             <constraint firstAttribute="trailing" secondItem="o9Y-2h-pVR" secondAttribute="trailing" constant="20" id="kNS-83-IFg"/>
                             <constraint firstAttribute="trailing" secondItem="GAJ-Ks-sWX" secondAttribute="trailing" constant="20" id="mLQ-Hk-5YO"/>
                             <constraint firstItem="GAJ-Ks-sWX" firstAttribute="top" secondItem="zk8-In-Xqi" secondAttribute="bottom" constant="37" id="naQ-g3-p1B"/>
                             <constraint firstItem="o9Y-2h-pVR" firstAttribute="leading" secondItem="8R4-FB-D6k" secondAttribute="leading" constant="20" symbolic="YES" id="tT0-fb-wLE"/>
                             <constraint firstItem="GAJ-Ks-sWX" firstAttribute="leading" secondItem="8R4-FB-D6k" secondAttribute="leading" constant="20" id="wLr-hC-JTN"/>
-                            <constraint firstItem="XOK-x7-C6V" firstAttribute="leading" secondItem="8R4-FB-D6k" secondAttribute="leading" constant="98" id="wYC-mO-hyq"/>
                             <constraint firstItem="o9Y-2h-pVR" firstAttribute="centerX" secondItem="0BI-rU-IZB" secondAttribute="centerX" id="y9q-y4-7ps"/>
                         </constraints>
                     </view>
@@ -938,7 +926,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nhz-aV-3zZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4360" y="578"/>
+            <point key="canvasLocation" x="4088" y="1050"/>
         </scene>
         <!--Data File View Controller - Files-->
         <scene sceneID="Zof-6r-61V">
@@ -1690,6 +1678,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MGo-wl-nLI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3682" y="-225"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="nxs-he-Ele">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="axL-bg-48q" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" systemItem="history" id="Zmr-ID-HTR"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ref-vw-pc1">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="COp-9N-Txb" kind="relationship" relationship="rootViewController" id="QZj-xg-dKg"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OAR-d4-QW0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2433" y="998"/>
         </scene>
     </scenes>
     <resources>
