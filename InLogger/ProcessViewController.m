@@ -21,6 +21,11 @@
 
 static NSMutableArray * processingExperimentFiles;
 
+- (void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [ServerConnection getProcessStatus:self];
+}
+
 - (void)initialize
 {
     if (processingExperimentFiles == nil) {
