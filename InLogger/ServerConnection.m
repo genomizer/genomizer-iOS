@@ -285,7 +285,7 @@ NSString *token;
             error = [NSError errorWithDomain:@"Server maintenance" code:0 userInfo:dict];
             break;
         default:
-            [dict setObject:@"Unrecognised error, talk to developers" forKey:NSLocalizedDescriptionKey];
+            [dict setObject: [NSString stringWithFormat:@"Unrecognised error, talk to developers. Error: %d", errorCode] forKey:NSLocalizedDescriptionKey];
             error = [NSError errorWithDomain:@"Coding error" code:0 userInfo:dict];
             break;
     }
