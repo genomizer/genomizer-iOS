@@ -41,6 +41,13 @@
     return request;
 }
 
++(NSMutableURLRequest*)getgenomeReleaseJSON:(NSString *)token
+{
+    NSMutableURLRequest *request = [self getRequest:@"GET" withToken:token];
+    [request setURL:[NSURL URLWithString:[[self getServerURL] stringByAppendingString:@"genomeRelease"]]];
+    return request;
+}
+
 +(NSMutableURLRequest*) getSearchJSON:(NSString*) annotations withToken:(NSString *) token
 {
     NSString *annotationString = @"search/?annotations=";
@@ -94,8 +101,8 @@
 
 + (NSString*) getServerURL
 {
-//return @"http://genomizer.apiary-mock.com/";
-   return @"http://itchy.cs.umu.se:7000/";
+return @"http://genomizer.apiary-mock.com/";
+  // return @"http://itchy.cs.umu.se:7000/";
 }
 
 @end

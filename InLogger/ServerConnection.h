@@ -25,5 +25,5 @@
 
 + (void) getAvailableAnnotations:(XYZSearchViewController*) controller;
 + (void) getProcessStatus:(ProcessViewController*) controller;
-
++ (void)genomeRelease: (RawConvertViewController*) controller;
 @end
