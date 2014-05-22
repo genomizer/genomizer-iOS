@@ -268,8 +268,8 @@ return NO;
 
 - (IBAction)convertButtonTouch:(id)sender
 {
-    if(_bowtie.text.length == 0){
-            [XYZPopupGenerator showPopupWithMessage:@"Fill in desired fields to process"];
+    if((_bowtie.text.length == 0) || (_genomeFile.text.length == 0)){
+            [XYZPopupGenerator showPopupWithMessage:@"Fill in at least \"bowtie\" and \"genome file\" to start a process"];
     }else{
         NSMutableArray * parameters = [[NSMutableArray alloc] init];
         [parameters addObject:_bowtie.text];
