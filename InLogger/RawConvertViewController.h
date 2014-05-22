@@ -16,6 +16,6 @@
 @property (nonatomic, copy) ProcessViewController *aReference;
 
 - (void) reportResult: (NSError*) error;
-
+- (void) reportGenomeResult:(NSMutableArray*) genomeReleases withError:(NSError*) error;
 @end
 

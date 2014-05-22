@@ -45,7 +45,9 @@
 @property NSMutableArray *experimentFilesDictArr;
 @property UIGestureRecognizer *tapper;
 
-
+@property UIPickerView *pickerView;
+@property UIToolbar *toolBar;
+@property NSMutableArray* genomeReleases;
 @end
 
 @implementation RawConvertViewController{
@@ -63,6 +65,9 @@
 {
     
     [super viewDidLoad];
+    [ServerConnection genomeRelease:self];
+    _pickerView = [self createPickerView];
+    _toolBar = [self createPickerViewToolBar:_pickerView];
     self.numpadFields = [[NSMutableArray alloc] init];
     [self.numpadFields addObject:self.smoothingWindowSize];
     [self.numpadFields addObject:self.smoothingMinimumStep];
@@ -96,11 +101,15 @@
     _tapper = [[UITapGestureRecognizer alloc]
               initWithTarget:self action:@selector(handleSingleTap:)];
     _tapper.cancelsTouchesInView = NO;
-    
+    self.ratioCalcDoubleSingle.enabled = NO;
     [self.view addGestureRecognizer:_tapper];
     self.bowtie.delegate = self;
     self.genomeFile.delegate = self;
     self.genomeFile.enabled = NO;
+    self.genomeFile.inputView = _pickerView;
+    self.genomeFile.inputAccessoryView = _toolBar;
+    _pickerView.delegate = (id)self;
+    _pickerView.dataSource = (id)self;
     self.originalCenter = self.view.center;
     if(_ratio){
         _ratioCalcCell.hidden = NO;
@@ -122,7 +131,59 @@
     [staticView.layer addSublayer:rightBorder];
     [self.tableView addSubview:staticView];
     _staticView = staticView;
+  
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 50, 0);
+}
+-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+
+-(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return [_genomeReleases count]+1;
+}
+
+-(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    if (row == 0) {
+        return @"";
+    } else {
+        return [_genomeReleases objectAtIndex:row-1];
+    }
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow: (NSInteger)row inComponent:(NSInteger)component
+{
+    if (row == 0) {
+        self.genomeFile.text = @"";
+    } else {
+         self.genomeFile.text = [_genomeReleases objectAtIndex:row-1];
+    }
+}
+
+- (UIToolbar *) createPickerViewToolBar: (UIPickerView *) pickerView
+{
+    UIToolbar *toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, pickerView.bounds.size.width, 44)];
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneTouched:)];
+    [toolBar setItems:[NSArray arrayWithObjects:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], doneButton, nil]];
+    return toolBar;
+}
+
+- (UIPickerView *) createPickerView
+{
+    UIPickerView *pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 44, 44, 44)];
+    pickerView.backgroundColor = [UIColor colorWithRed:247.0/255.0f green:248.0/255.0f
+                                                  blue:247.0/255 alpha:1.0f];
+    pickerView.showsSelectionIndicator = YES;
+    return pickerView;
+}
+
+-(void)doneTouched:(UIBarButtonItem*)sender
+{
+    [self.view endEditing:YES];
+  //  self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    [self.tableView reloadData];
 }
 
 - (void)handleSingleTap:(UITapGestureRecognizer *) sender
@@ -155,6 +216,9 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+
+
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     if(textField.text.length == 0){
@@ -169,6 +233,7 @@
                 switches.enabled = NO;
                 switches.on = NO;
             }
+            self.ratioCalcDoubleSingle.enabled = NO;
         
         } else if(textField == self.genomeFile) {
             for(UITextField *text in self.numpadFields){
@@ -179,6 +244,7 @@
                 switches.enabled = NO;
                 switches.on = NO;
             }
+            self.ratioCalcDoubleSingle.enabled = NO;
         
         }else if((textField == self.smoothingMinimumStep || textField == self.smoothingWindowSize) && ((self.smoothingWindowSize.text.length == 0) || (self.smoothingMinimumStep.text.length == 0) || (!self.smoothingPrintMean.enabled) || (!self.smoothingPrintZeros.enabled) || (!self.smoothingSmoothTypeSwitch.enabled))) {
             for(int i = 2; i < self.numpadFields.count; i++){
@@ -191,6 +257,7 @@
                 switchen.enabled = NO;
                 switchen.on = NO;
             }
+            self.ratioCalcDoubleSingle.enabled = NO;
         }
         else if(textField == self.step) {
             for(int i = 3; i < self.numpadFields.count; i++){
@@ -203,6 +270,7 @@
                 switchen.enabled = NO;
                 switchen.on = NO;
             }
+            self.ratioCalcDoubleSingle.enabled = NO;
         }
         else if((textField == self.ratioCalcInputReads || textField == self.ratioCalcChromosomes) && ((self.ratioCalcInputReads.text.length == 0) || (self.ratioCalcChromosomes.text.length == 0))) {
             for(int i = 5; i < self.numpadFields.count; i++){
@@ -269,11 +337,12 @@ return NO;
 - (IBAction)convertButtonTouch:(id)sender
 {
     if((_bowtie.text.length == 0) || (_genomeFile.text.length == 0)){
-            [XYZPopupGenerator showPopupWithMessage:@"Fill in at least \"bowtie\" and \"genome file\" to start a process"];
+            [XYZPopupGenerator showPopupWithMessage:@"Fill in at least the fields \"Bowtie parameters\" and \"Genome file\" to start a process"];
     }else{
         NSMutableArray * parameters = [[NSMutableArray alloc] init];
         [parameters addObject:_bowtie.text];
-        [parameters addObject:_genomeFile.text];
+        [parameters addObject:@""];
+      
         if(_samToGff.on){
             [parameters addObject:@"y"];
         }
@@ -363,6 +432,7 @@ return NO;
         [self createExperimentFiles];
         for(NSMutableDictionary *dict in _experimentFilesDictArr){
             [dict setObject:parameters forKey:@"parameters"];
+            [dict setObject:_genomeFile.text forKey:@"genomeVersion"];
             [ServerConnection convert:dict withContext:self];
         }
         [XYZPopupGenerator showPopupWithMessage:@"Process sent to server"];
@@ -376,12 +446,17 @@ return NO;
         [XYZPopupGenerator showErrorMessage:error];
     }
 }
-
+- (void) reportGenomeResult:(NSMutableArray*) genomeReleases withError:(NSError*) error {
+    if(error){
+        [XYZPopupGenerator showErrorMessage:error];
+    }
+    _genomeReleases = genomeReleases;
+}
 -(void) createExperimentFiles{
     _experimentFilesDictArr = [[NSMutableArray alloc] init];
     for(XYZExperimentFile *file in _experimentFiles){
         NSMutableDictionary * currentFile =[[NSMutableDictionary alloc] init];
-        [currentFile setObject:file.grVersion forKey:@"genomeVersion"];
+        
         [currentFile setObject:file.expID forKey:@"expid"];
         [currentFile setObject:file.metaData forKey:@"metadata"];
         [currentFile setObject:file.author forKey:@"author"];

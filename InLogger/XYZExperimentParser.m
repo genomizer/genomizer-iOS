@@ -38,7 +38,11 @@
       
         expFile.expID = [file valueForKey:@"expId"];
         NSLog(@"expid %@",  expFile.expID);
-        expFile.grVersion = [file valueForKey:@"grVersion"];
+        if([file valueForKey:@"grVersion"] != nil){
+            expFile.grVersion = [file valueForKey:@"grVersion"];
+        }else{
+            expFile.grVersion = @"notset";
+        }
         NSLog(@"geVersion %@",  expFile.grVersion);
         expFile.author = [file valueForKey:@"author"];
         expFile.date = [file valueForKey:@"date"];

@@ -43,6 +43,13 @@ static NSString *SERVER_URL = nil;
     return request;
 }
 
++(NSMutableURLRequest*)getgenomeReleaseJSON:(NSString *)token
+{
+    NSMutableURLRequest *request = [self getRequest:@"GET" withToken:token];
+    [request setURL:[NSURL URLWithString:[[self getServerURL] stringByAppendingString:@"genomeRelease"]]];
+    return request;
+}
+
 +(NSMutableURLRequest*) getSearchJSON:(NSString*) annotations withToken:(NSString *) token
 {
     NSString *annotationString = @"search/?annotations=";

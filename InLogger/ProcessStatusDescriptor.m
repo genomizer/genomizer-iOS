@@ -37,11 +37,14 @@ NSArray *expectedInformation;
     {
         self = [self init];
         self.experimentName = [status objectForKey:@"experimentName"];
-        self.timeFinished = [NSDate dateWithTimeIntervalSince1970:[[status objectForKey:@"timeFinished"] intValue]];
+       
+    
         self.status = [status objectForKey:@"status"];
         self.author = [status objectForKey:@"author"];
-        self.timeStarted = [NSDate dateWithTimeIntervalSince1970:[[status objectForKey:@"timeStarted"] intValue]];
-        self.timeAdded = [NSDate dateWithTimeIntervalSince1970:[[status objectForKey:@"timeAdded"] intValue]];
+      
+        self.timeStarted = [[NSDate alloc] initWithTimeIntervalSince1970:[[status objectForKey:@"timeStarted"] doubleValue]/1000];
+        self.timeAdded = [NSDate dateWithTimeIntervalSince1970:[[status objectForKey:@"timeAdded"] doubleValue]/1000];
+        self.timeFinished = [NSDate dateWithTimeIntervalSince1970:[[status objectForKey:@"timeFinished"] doubleValue]/1000];
         
         NSArray *files = [status objectForKey:@"outputFiles"];
         for(NSString *file in files)
