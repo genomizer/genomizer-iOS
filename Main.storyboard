@@ -1786,11 +1786,11 @@
             </objects>
             <point key="canvasLocation" x="3682" y="-225"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Navigation Controller - Processes-->
         <scene sceneID="nxs-he-Ele">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="axL-bg-48q" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="history" id="Zmr-ID-HTR"/>
+                    <tabBarItem key="tabBarItem" title="Processes" image="processIcon" id="Zmr-ID-HTR"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ref-vw-pc1">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1810,7 +1810,8 @@
         <image name="grey_line" width="64" height="6"/>
         <image name="grey_line_no_white" width="64" height="2"/>
         <image name="photo1" width="3264" height="2448"/>
-        <image name="selectedFiles" width="65" height="65"/>
+        <image name="processIcon" width="56" height="56"/>
+        <image name="selectedFiles" width="64" height="64"/>
         <image name="square" width="10" height="10"/>
         <image name="taco" width="392" height="372"/>
     </resources>
