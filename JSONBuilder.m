@@ -110,7 +110,11 @@ static NSString *SERVER_URL = nil;
 
 + (void) setServerURLToString: (NSString *) url
 {
-    SERVER_URL = url;
+    NSMutableString *urlString = [[NSMutableString alloc] initWithString:url];
+    if ([urlString characterAtIndex:urlString.length - 1] != '/') {
+        [urlString appendString:@"/"];
+    }
+    SERVER_URL = urlString;
 }
 
 @end
