@@ -54,6 +54,16 @@
                                 <rect key="frame" x="150" y="370" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hDh-dc-e63">
+                                <rect key="frame" x="270" y="518" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="O">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="settingsButtonPressed:" destination="Csn-f6-9k9" eventType="touchUpInside" id="dfz-uJ-DdQ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.98121178668478259" green="0.98121178668478259" blue="0.98121178668478259" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -61,9 +71,11 @@
                             <constraint firstItem="heV-ix-3Xk" firstAttribute="leading" secondItem="4hb-dP-mX9" secondAttribute="leading" constant="70" id="0e6-iK-3VZ"/>
                             <constraint firstItem="iwx-tD-EHi" firstAttribute="top" secondItem="qhR-JL-4yB" secondAttribute="bottom" constant="23" id="18L-e1-aWA"/>
                             <constraint firstItem="qhR-JL-4yB" firstAttribute="leading" secondItem="4hb-dP-mX9" secondAttribute="leading" constant="70" id="B6y-bO-U7V"/>
+                            <constraint firstItem="HyT-5x-azN" firstAttribute="top" secondItem="hDh-dc-e63" secondAttribute="bottom" constant="20" id="H5s-sd-bza"/>
                             <constraint firstItem="heV-ix-3Xk" firstAttribute="top" secondItem="GTu-al-233" secondAttribute="bottom" constant="231" id="JbR-qT-BAO"/>
                             <constraint firstAttribute="trailing" secondItem="iwx-tD-EHi" secondAttribute="trailing" constant="136" id="UFf-sA-vNk"/>
                             <constraint firstAttribute="trailing" secondItem="heV-ix-3Xk" secondAttribute="trailing" constant="70" id="UHe-za-YpW"/>
+                            <constraint firstAttribute="trailing" secondItem="hDh-dc-e63" secondAttribute="trailing" constant="20" id="bEe-Jf-gQ7"/>
                             <constraint firstItem="iwx-tD-EHi" firstAttribute="leading" secondItem="4hb-dP-mX9" secondAttribute="leading" constant="137" id="bLH-ao-LcZ"/>
                             <constraint firstAttribute="trailing" secondItem="qhR-JL-4yB" secondAttribute="trailing" constant="70" id="hga-iH-Qyh"/>
                             <constraint firstItem="qhR-JL-4yB" firstAttribute="top" secondItem="heV-ix-3Xk" secondAttribute="bottom" constant="31" id="luW-bA-jU0"/>
@@ -508,7 +520,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="NVQ-fn-jnW" kind="push" identifier="convertTask" id="1Lw-OZ-NPD"/>
+                                    <segue destination="NVQ-fn-jnW" kind="modal" identifier="convertTask" id="1Lw-OZ-NPD"/>
                                 </connections>
                             </button>
                             <view hidden="YES" alpha="0.39999999999999963" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0r3-La-QJb">

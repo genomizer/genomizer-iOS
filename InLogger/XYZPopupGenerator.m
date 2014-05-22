@@ -42,6 +42,15 @@
     [popup show];
 }
 
++ (void) showInputPopupWithMessage: (NSString *) message withTitle: (NSString *) title withText: (NSString *) text withDelegate: (id) delegate
+{
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:delegate cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    UITextField *textField = [alert textFieldAtIndex:0];
+    textField.text = text;
+    [alert show];
+}
+
 + (void) showErrorMessage:(NSError *)error
 {
     NSString * errorMsg = [error.userInfo objectForKey:NSLocalizedDescriptionKey];

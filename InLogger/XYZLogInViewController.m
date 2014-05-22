@@ -9,6 +9,9 @@
 #import "XYZLogInViewController.h"
 #import "ServerConnection.h"
 #import "XYZPopupGenerator.h"
+#import "XYZSettingsPopupDelegate.h"
+#import "JSONBuilder.h"
+#import "XYZFileHandler.h"
 
 @interface XYZLogInViewController ()
 
@@ -16,6 +19,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
+
+@property XYZSettingsPopupDelegate *delegate;
+
 
 @end
 
@@ -28,6 +34,9 @@
     _passwordField.delegate = self;
     _spinner.hidden = YES;
     _spinner.hidesWhenStopped = YES;
+    _delegate = [[XYZSettingsPopupDelegate alloc] init];
+    [JSONBuilder setServerURLToString: [XYZFileHandler readFromFile:SERVER_URL_FILE_NAME
+                                                    withDefaultData:@"http://genomizer.apiary-mock.com/"]];
 }
 
 - (void) tryToLogIn
@@ -109,5 +118,11 @@
     }
     return NO;
 }
+
+- (IBAction)settingsButtonPressed:(id)sender
+{
+    [XYZPopupGenerator showInputPopupWithMessage:@"Enter server URL:" withTitle:@"" withText: [JSONBuilder getServerURL] withDelegate:_delegate];
+}
+
 
 @end
