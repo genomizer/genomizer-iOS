@@ -10,6 +10,8 @@
 
 @implementation JSONBuilder
 
+static NSString *SERVER_URL = nil;
+
 +(NSMutableURLRequest*)getLoginJSON:(NSString *)username withPassword:(NSString *)password
 {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
