@@ -341,7 +341,8 @@ return NO;
     }else{
         NSMutableArray * parameters = [[NSMutableArray alloc] init];
         [parameters addObject:_bowtie.text];
-        [parameters addObject:_genomeFile.text];
+        [parameters addObject:@""];
+      
         if(_samToGff.on){
             [parameters addObject:@"y"];
         }
@@ -431,6 +432,7 @@ return NO;
         [self createExperimentFiles];
         for(NSMutableDictionary *dict in _experimentFilesDictArr){
             [dict setObject:parameters forKey:@"parameters"];
+            [dict setObject:_genomeFile.text forKey:@"genomeVersion"];
             [ServerConnection convert:dict withContext:self];
         }
         [XYZPopupGenerator showPopupWithMessage:@"Process sent to server"];
@@ -454,7 +456,7 @@ return NO;
     _experimentFilesDictArr = [[NSMutableArray alloc] init];
     for(XYZExperimentFile *file in _experimentFiles){
         NSMutableDictionary * currentFile =[[NSMutableDictionary alloc] init];
-        [currentFile setObject:file.grVersion forKey:@"genomeVersion"];
+        
         [currentFile setObject:file.expID forKey:@"expid"];
         [currentFile setObject:file.metaData forKey:@"metadata"];
         [currentFile setObject:file.author forKey:@"author"];
