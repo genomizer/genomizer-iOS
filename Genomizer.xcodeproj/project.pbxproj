@@ -10,6 +10,7 @@
 		210BED2D1918D85000A8E690 /* TestJSONBuilderGetRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 210BED2C1918D85000A8E690 /* TestJSONBuilderGetRequest.m */; };
 		210BED2F1918DCD500A8E690 /* TestJSONBuilderGetLogout.m in Sources */ = {isa = PBXBuildFile; fileRef = 210BED2E1918DCD500A8E690 /* TestJSONBuilderGetLogout.m */; };
 		210BED331918E32900A8E690 /* TestJSONBuilderGetSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 210BED321918E32900A8E690 /* TestJSONBuilderGetSearch.m */; };
+		210C0796192DE30D005D78E6 /* TestAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 210C0795192DE30D005D78E6 /* TestAppDelegate.m */; };
 		2114DA0E19235A3D002A88D9 /* TestServerConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 2114DA0D19235A3D002A88D9 /* TestServerConnection.m */; };
 		21277BCC1918E67C005FB7FD /* testJSONBuilderGetConversionJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 21277BCB1918E67C005FB7FD /* testJSONBuilderGetConversionJSON.m */; };
 		21277BCE19190036005FB7FD /* TestJSONBuilderGetLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = 21277BCD19190036005FB7FD /* TestJSONBuilderGetLogin.m */; };
@@ -45,7 +46,6 @@
 		DE9A3EF41918CB4600F7C33B /* XYZAnnotationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE9A3EF21918CB4600F7C33B /* XYZAnnotationTableViewController.m */; };
 		DE9A3EF51918CB4600F7C33B /* XYZAnnotationTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE9A3EF31918CB4600F7C33B /* XYZAnnotationTableViewController.xib */; };
 		DE9A3EF91918CFDC00F7C33B /* TestExperimentDescriber.m in Sources */ = {isa = PBXBuildFile; fileRef = DE9A3EF81918CFDC00F7C33B /* TestExperimentDescriber.m */; };
-		DEB9EBE01929F00E00BD051B /* TestFileSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = DEB9EBDF1929F00E00BD051B /* TestFileSelector.m */; };
 		DEB9EBE31929F83E00BD051B /* XYZFileContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = DEB9EBE21929F83E00BD051B /* XYZFileContainer.m */; };
 		DED034711923AD1B00E9EAF1 /* XYZPubMedBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = DED034701923AD1B00E9EAF1 /* XYZPubMedBuilder.m */; };
 		DED1228D190E966200D8E530 /* XYZInLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = DED12280190E966200D8E530 /* XYZInLogger.m */; };
@@ -92,6 +92,7 @@
 		210BED2C1918D85000A8E690 /* TestJSONBuilderGetRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestJSONBuilderGetRequest.m; sourceTree = "<group>"; };
 		210BED2E1918DCD500A8E690 /* TestJSONBuilderGetLogout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestJSONBuilderGetLogout.m; sourceTree = "<group>"; };
 		210BED321918E32900A8E690 /* TestJSONBuilderGetSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestJSONBuilderGetSearch.m; sourceTree = "<group>"; };
+		210C0795192DE30D005D78E6 /* TestAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestAppDelegate.m; sourceTree = "<group>"; };
 		2114DA0D19235A3D002A88D9 /* TestServerConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestServerConnection.m; sourceTree = "<group>"; };
 		21277BCB1918E67C005FB7FD /* testJSONBuilderGetConversionJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testJSONBuilderGetConversionJSON.m; sourceTree = "<group>"; };
 		21277BCD19190036005FB7FD /* TestJSONBuilderGetLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestJSONBuilderGetLogin.m; sourceTree = "<group>"; };
@@ -146,7 +147,6 @@
 		DE9A3EF21918CB4600F7C33B /* XYZAnnotationTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZAnnotationTableViewController.m; sourceTree = "<group>"; };
 		DE9A3EF31918CB4600F7C33B /* XYZAnnotationTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XYZAnnotationTableViewController.xib; sourceTree = "<group>"; };
 		DE9A3EF81918CFDC00F7C33B /* TestExperimentDescriber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestExperimentDescriber.m; sourceTree = "<group>"; };
-		DEB9EBDF1929F00E00BD051B /* TestFileSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestFileSelector.m; sourceTree = "<group>"; };
 		DEB9EBE11929F83E00BD051B /* XYZFileContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZFileContainer.h; sourceTree = "<group>"; };
 		DEB9EBE21929F83E00BD051B /* XYZFileContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZFileContainer.m; sourceTree = "<group>"; };
 		DED0346F1923AD1B00E9EAF1 /* XYZPubMedBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZPubMedBuilder.h; sourceTree = "<group>"; };
@@ -227,6 +227,13 @@
 				21277BCF19190095005FB7FD /* testJSONBuilderTestAvailableAnnotations.m */,
 			);
 			name = TestJSONBuilder;
+			sourceTree = "<group>";
+		};
+		210C0797192E206C005D78E6 /* UITests */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = UITests;
 			sourceTree = "<group>";
 		};
 		DE25D7FE1910D6A00084BDDC /* Utilities */ = {
@@ -411,6 +418,7 @@
 		DEEF6B0619094F8B00A2CD8C /* GenomizerTests */ = {
 			isa = PBXGroup;
 			children = (
+				210C0797192E206C005D78E6 /* UITests */,
 				2173DFC61929F2160040A336 /* TestProcessStatusDescriptor.m */,
 				210BED2B1918D83400A8E690 /* TestJSONBuilder */,
 				DE9A3EF81918CFDC00F7C33B /* TestExperimentDescriber.m */,
@@ -421,7 +429,7 @@
 				7624B1C3191A6B4400420EBE /* TestExperimentParser.m */,
 				2114DA0D19235A3D002A88D9 /* TestServerConnection.m */,
 				DE7C9C2619236044004A2492 /* TestAnnotation.m */,
-				DEB9EBDF1929F00E00BD051B /* TestFileSelector.m */,
+				210C0795192DE30D005D78E6 /* TestAppDelegate.m */,
 			);
 			name = GenomizerTests;
 			path = InLoggerTests;
@@ -588,12 +596,12 @@
 			files = (
 				DEF812911918D90A00A88173 /* TestExperiment.m in Sources */,
 				7624B1C4191A6B4400420EBE /* TestExperimentParser.m in Sources */,
-				DEB9EBE01929F00E00BD051B /* TestFileSelector.m in Sources */,
 				DE9A3EF91918CFDC00F7C33B /* TestExperimentDescriber.m in Sources */,
 				210BED2F1918DCD500A8E690 /* TestJSONBuilderGetLogout.m in Sources */,
 				210BED2D1918D85000A8E690 /* TestJSONBuilderGetRequest.m in Sources */,
 				21277BCE19190036005FB7FD /* TestJSONBuilderGetLogin.m in Sources */,
 				21277BCC1918E67C005FB7FD /* testJSONBuilderGetConversionJSON.m in Sources */,
+				210C0796192DE30D005D78E6 /* TestAppDelegate.m in Sources */,
 				210BED331918E32900A8E690 /* TestJSONBuilderGetSearch.m in Sources */,
 				DE7C9C2719236044004A2492 /* TestAnnotation.m in Sources */,
 				DEEF6B0D19094F8B00A2CD8C /* InLoggerTests.m in Sources */,

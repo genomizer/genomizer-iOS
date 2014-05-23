@@ -10,9 +10,10 @@
 #import "XYZExperimentFile.h"
 #import "ServerConnection.h"
 #import "XYZPopupGenerator.h"
-
 #import <QuartzCore/QuartzCore.h>
 #import "ProcessViewController.h"
+#import "AppDelegate.h"
+
 @interface RawConvertViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextField *bowtie;
@@ -123,6 +124,10 @@
     [self.tableView addSubview:staticView];
     _staticView = staticView;
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 50, 0);
+    
+    //add self to appDelegate
+    AppDelegate *app = [UIApplication sharedApplication].delegate;
+    [app addController:self];
 }
 
 - (void)handleSingleTap:(UITapGestureRecognizer *) sender

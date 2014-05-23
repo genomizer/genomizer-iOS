@@ -13,6 +13,7 @@
 #import "XYZSearchTableViewCell.h"
 #import "XYZAnnotation.h"
 #import "XYZPubMedBuilder.h"
+#import "AppDelegate.h"
 
 @interface XYZSearchViewController ()
 
@@ -34,6 +35,10 @@
     _pickerView = [self createPickerView];
     _toolBar = [self createPickerViewToolBar:_pickerView];
     [self.tableView reloadData];
+    
+    //add self to appDelegate
+    AppDelegate *app = [UIApplication sharedApplication].delegate;
+    [app addController:self];
 }
 
 - (void) viewWillAppear:(BOOL)animated {

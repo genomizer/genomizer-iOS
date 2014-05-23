@@ -9,6 +9,7 @@
 #import "XYZLogInViewController.h"
 #import "ServerConnection.h"
 #import "XYZPopupGenerator.h"
+#import "AppDelegate.h"
 
 @interface XYZLogInViewController ()
 
@@ -28,6 +29,10 @@
     _passwordField.delegate = self;
     _spinner.hidden = YES;
     _spinner.hidesWhenStopped = YES;
+    
+    //add self to appDelegate
+    AppDelegate *app = [UIApplication sharedApplication].delegate;
+    [app addController:self];
 }
 
 - (void) tryToLogIn

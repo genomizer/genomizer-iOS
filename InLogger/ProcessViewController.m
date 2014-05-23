@@ -12,6 +12,7 @@
 #import "ServerConnection.h"
 #import "XYZPopupGenerator.h"
 #import "ProcessStatusDescriptor.h"
+#import "AppDelegate.h"
 
 @interface ProcessViewController ()
 
@@ -59,6 +60,10 @@ static NSMutableArray * processingExperimentFiles;
     [super viewDidLoad];
     [self initialize];
     [ServerConnection getProcessStatus:self];
+    
+    //add self to appDelegate
+    AppDelegate *app = [UIApplication sharedApplication].delegate;
+    [app addController:self];
 }
 
 - (void)didReceiveMemoryWarning

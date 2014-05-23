@@ -47,6 +47,7 @@
     XCTAssertEqualObjects(result, @"value");
 }
 
+/*
 -(void) testAddFile
 {
     XCTAssertEqual([_experiment numberOfFiles], 0);
@@ -143,5 +144,6 @@
     experimentFile2.selected = YES;
     XCTAssertEqual([[_experiment getSelectedFiles] count], 2);
 }
+*/
 
 @end

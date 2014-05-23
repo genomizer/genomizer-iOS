@@ -11,6 +11,7 @@
 #import "XYZSelectTaskTableViewController.h"
 #import "XYZPopupGenerator.h"
 #import "XYZFileContainer.h"
+#import "AppDelegate.h"
 
 @interface XYZSelectedFilesViewController ()
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
@@ -85,6 +86,10 @@ static XYZFileContainer * FILES = nil;
     [super viewDidLoad];
     _filesToDisplay = [FILES getFiles:RAW];
     _selectedFiles = [[XYZFileContainer alloc] init];
+    
+    //add self to appDelegate
+    AppDelegate *app = [UIApplication sharedApplication].delegate;
+    [app addController:self];
 }
 
 #pragma mark - Table view data source

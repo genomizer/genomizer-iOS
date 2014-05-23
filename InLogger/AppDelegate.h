@@ -12,4 +12,16 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
+- (int) getNumberOfControllers;
+
+- (void) restart;
+
+- (void) addController: (UIViewController*) controller;
+
+- (void) popController;
+
+- (UIViewController*) getController: (int) index;
+
+- (void) killControllers;
+
 @end

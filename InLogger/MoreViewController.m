@@ -8,6 +8,8 @@
 
 #import "MoreViewController.h"
 #import "ServerConnection.h"
+#import "AppDelegate.h"
+
 @interface MoreViewController ()
 
 @end
@@ -17,12 +19,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    
+    //add self to appDelegate
+    AppDelegate *app = [UIApplication sharedApplication].delegate;
+    [app addController:self];
 }
 
 - (IBAction)logoutButtonTouched:(id)sender {
     NSError * error;
     [ServerConnection logout:&error];
+    AppDelegate *app = [UIApplication sharedApplication].delegate;
+    [app killControllers];
+    [app restart];
 }
 
 @end
