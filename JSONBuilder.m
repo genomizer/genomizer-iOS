@@ -103,8 +103,18 @@ static NSString *SERVER_URL = nil;
 
 + (NSString*) getServerURL
 {
-    return @"http://genomizer.apiary-mock.com/";
-   // return @"http://itchy.cs.umu.se:7000/";
+//return @"http://genomizer.apiary-mock.com/";
+//return @"http://scratchy.cs.umu.se:7000/";
+    return SERVER_URL;
+}
+
++ (void) setServerURLToString: (NSString *) url
+{
+    NSMutableString *urlString = [[NSMutableString alloc] initWithString:url];
+    if ([urlString characterAtIndex:urlString.length - 1] != '/') {
+        [urlString appendString:@"/"];
+    }
+    SERVER_URL = urlString;
 }
 
 @end

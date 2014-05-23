@@ -12,6 +12,7 @@
 #import "AppDelegate.h"
 #import "XYZSettingsPopupDelegate.h"
 #import "JSONBuilder.h"
+#import "XYZFileHandler.h"
 
 @interface XYZLogInViewController ()
 
@@ -34,6 +35,9 @@
     _passwordField.delegate = self;
     _spinner.hidden = YES;
     _spinner.hidesWhenStopped = YES;
+    _delegate = [[XYZSettingsPopupDelegate alloc] init];
+    
+    [JSONBuilder setServerURLToString: [XYZFileHandler readFromFile: SERVER_URL_FILE_NAME withDefaultData:MOCK_URL]];
     
     //add self to appDelegate
     AppDelegate *app = [UIApplication sharedApplication].delegate;
