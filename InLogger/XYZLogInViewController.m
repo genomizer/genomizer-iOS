@@ -10,6 +10,8 @@
 #import "ServerConnection.h"
 #import "XYZPopupGenerator.h"
 #import "AppDelegate.h"
+#import "XYZSettingsPopupDelegate.h"
+#import "JSONBuilder.h"
 
 @interface XYZLogInViewController ()
 
