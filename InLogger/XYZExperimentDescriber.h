@@ -14,9 +14,11 @@
 
 @property NSArray *annotations;
 
+- (XYZExperimentDescriber *) initWithAnnotations: (NSArray *) annotations;
 - (void) showAnnotation: (XYZAnnotation *) annotation;
 - (void) hideAnnotation: (XYZAnnotation *) annotation;
 - (NSString *) getDescriptionOf: (XYZExperiment*) experiment;
 - (BOOL) showsAnnotation: (XYZAnnotation *) annotation;
+- (void) saveAnnotationsToFile;
 
 @end

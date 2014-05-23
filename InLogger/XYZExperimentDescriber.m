@@ -7,6 +7,9 @@
 //
 
 #import "XYZExperimentDescriber.h"
+#import "XYZFileHandler.h"
+#define FILE_NAME @"annotations.asd"
+#define DELIMITER @","
 
 @interface XYZExperimentDescriber()
 
@@ -17,10 +20,11 @@
 @implementation XYZExperimentDescriber
 
 
-- (XYZExperimentDescriber *) init
+- (XYZExperimentDescriber *) initWithAnnotations: (NSArray *) annotations
 {
     self = [super init];
-    _visibleAnnotations = [[NSMutableArray alloc] init];
+    _annotations = annotations;
+    _visibleAnnotations = [self loadAnnotationsFromFile];
     return self;
 }
 
@@ -71,6 +75,40 @@
         [description appendString:@"\n"];
     }
     return description;
+}
+
+- (void) saveAnnotationsToFile
+{
+    NSMutableString *data = [[NSMutableString alloc] init];
+    for (NSInteger i = 0; i < _visibleAnnotations.count; i++) {
+        XYZAnnotation *annotation = _visibleAnnotations[i];
+        [data appendString: annotation.name];
+        if (i < _visibleAnnotations.count - 1) {
+            [data appendString: DELIMITER];
+        }
+    }
+    [XYZFileHandler writeData: data toFile:FILE_NAME];
+}
+
+- (NSMutableArray *) loadAnnotationsFromFile
+{
+    NSMutableArray *result = [[NSMutableArray alloc] init];
+    NSString *data = [XYZFileHandler readFromFile:FILE_NAME withDefaultData:@""];
+    if ([data isEqualToString:@""]) {
+        return result;
+    }
+    NSArray *seperated = [data componentsSeparatedByString:DELIMITER];
+
+    for (NSString *name in seperated) {
+        for (XYZAnnotation *annotation in _annotations) {
+            if ([annotation.name isEqualToString:name]) {
+                [result addObject:annotation];
+                break;
+            }
+        }
+    }
+    
+    return result;
 }
 
 @end

@@ -61,6 +61,11 @@
     return cell;
 }
 
+-(void) viewWillDisappear:(BOOL)animated
+{
+    [_describer saveAnnotationsToFile];
+}
+
 - (IBAction)switchButtonValueChanged:(UISwitch *)sender
 {
     XYZAnnotation *annotation = [_describer.annotations objectAtIndex:sender.tag];
