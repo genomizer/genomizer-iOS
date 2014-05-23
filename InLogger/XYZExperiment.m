@@ -24,7 +24,6 @@
 {
     XYZExperiment *exp = [[XYZExperiment alloc] init];
     exp.name = @"Experiment name";
-    exp.createdByUser = @"Yuri Yuri";
     [exp.annotations setValue: @"abc123" forKey:@"pubmedId"];
     [exp.annotations setValue: @"raw" forKey:@"type"];
     [exp.annotations setValue: @"specie" forKey:@"human"];
