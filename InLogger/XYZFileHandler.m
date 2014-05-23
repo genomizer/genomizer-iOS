@@ -15,23 +15,12 @@
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *filePath = [NSString stringWithFormat:@"%@/%@", documentsDirectory, fileName];
-    NSLog(@"filePath %@", filePath);
-    
     if (![[NSFileManager defaultManager] fileExistsAtPath:filePath]) { // if file is not exist, create it.
         NSError *error;
         [data writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:&error];
         return data;
     }
-    NSLog(@"reading from file");
     return [NSString stringWithContentsOfFile: filePath encoding:NSUTF8StringEncoding error:nil];
-   // NSString *data2 = [[[NSString alloc] init]];
-    //[data2 readFromFile]
-   /*
-    if ([[NSFileManager defaultManager] isWritableFileAtPath:filePath]) {
-        return @"Writable":
-    } else {
-        return @"Not Writable";
-    }*/
 }
 
 + (void) writeData: (NSString *) data toFile: (NSString *) fileName
@@ -41,14 +30,6 @@
     NSString *filePath = [NSString stringWithFormat:@"%@/%@", documentsDirectory, fileName];
     NSError *error;
     [data writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:&error];
-    // NSString *data2 = [[[NSString alloc] init]];
-    //[data2 readFromFile]
-    /*
-     if ([[NSFileManager defaultManager] isWritableFileAtPath:filePath]) {
-     return @"Writable":
-     } else {
-     return @"Not Writable";
-     }*/
 }
 
 @end

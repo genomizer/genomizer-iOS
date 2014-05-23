@@ -12,6 +12,7 @@
 #import "ServerConnection.h"
 #import "XYZPopupGenerator.h"
 #import "ProcessStatusDescriptor.h"
+#import "AppDelegate.h"
 
 @interface ProcessViewController ()
 @property  NSTimer *timer;

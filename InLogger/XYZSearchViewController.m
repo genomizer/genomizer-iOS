@@ -13,6 +13,7 @@
 #import "XYZSearchTableViewCell.h"
 #import "XYZAnnotation.h"
 #import "XYZPubMedBuilder.h"
+#import "AppDelegate.h"
 
 @interface XYZSearchViewController ()
 
@@ -34,6 +35,10 @@
     _pickerView = [self createPickerView];
     _toolBar = [self createPickerViewToolBar:_pickerView];
     [self.tableView reloadData];
+    
+    //add self to appDelegate
+    AppDelegate *app = [UIApplication sharedApplication].delegate;
+    [app addController:self];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -191,8 +196,7 @@
     if ([segue.identifier isEqualToString:@"searchResult"]) {
         XYZSearchResultTableViewController *nextVC = (XYZSearchResultTableViewController *)[segue destinationViewController];
         nextVC.searchResults = sender;
-        nextVC.experimentDescriber = [[XYZExperimentDescriber alloc] init];
-        nextVC.experimentDescriber.annotations = _annotations;
+        nextVC.experimentDescriber = [[XYZExperimentDescriber alloc] initWithAnnotations: _annotations];
     }
 }
 

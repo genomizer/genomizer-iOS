@@ -91,12 +91,12 @@
     NSString *correctDescription = @"Name: Experiment name\nCreated by: Yuri Yuri\nPublication ID: abc123";
     XCTAssertEqualObjects(description, correctDescription);
 }
-
+/*
 -(void) testContainsAnnotation
 {
     XCTAssertFalse([_describer containsAnnotation: _annotation]);
     [_describer showAnnotation: _annotation];
     XCTAssertTrue([_describer containsAnnotation: _annotation]);
 }
-
+*/
 @end

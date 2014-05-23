@@ -12,6 +12,7 @@
 #import "ServerConnection.h"
 #import "XYZPopupGenerator.h"
 #import "XYZAnnotation.h"
+#import "AppDelegate.h"
 
 @interface XYZAnnotationTableViewController ()
 
@@ -22,6 +23,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    //add self to appDelegate
+    AppDelegate *app = [UIApplication sharedApplication].delegate;
+    [app addController:self];
    // _annotations = [self getAnnotationsFromServer];
 }
 
@@ -59,6 +64,11 @@
     cell.switchButton.tag = indexPath.row;
     cell.switchButton.on = [_describer showsAnnotation: [_describer.annotations objectAtIndex: indexPath.row]];
     return cell;
+}
+
+-(void) viewWillDisappear:(BOOL)animated
+{
+    [_describer saveAnnotationsToFile];
 }
 
 - (IBAction)switchButtonValueChanged:(UISwitch *)sender

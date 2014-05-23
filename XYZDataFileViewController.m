@@ -16,6 +16,7 @@
 #import "XYZPopupGenerator.h"
 #import "XYZSelectTaskTableViewController.h"
 #import "XYZFileContainer.h"
+#import "AppDelegate.h"
 
 @interface XYZDataFileViewController ()
 
@@ -31,8 +32,11 @@
 - (void) viewDidLoad
 {
     [super viewDidLoad];
-    
     _selectedFiles = [[XYZFileContainer alloc] init];
+  
+    //add self to appDelegate
+    AppDelegate *app = [UIApplication sharedApplication].delegate;
+    [app addController:self];
 }
 
 - (void)setExperiment:(XYZExperiment *)experiment

@@ -915,7 +915,7 @@
         <!--Navigation Controller-->
         <scene sceneID="TmL-84-z13">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="x1l-HJ-QPz" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="loginView" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="x1l-HJ-QPz" sceneMemberID="viewController">
                     <toolbarItems/>
                     <nil key="simulatedTopBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="jhx-ej-kQC">
@@ -1008,7 +1008,6 @@
                                 </state>
                                 <connections>
                                     <action selector="logoutButtonTouched:" destination="p2d-tC-kAj" eventType="touchUpInside" id="cCZ-Bb-X8W"/>
-                                    <segue destination="x1l-HJ-QPz" kind="modal" identifier="toLoginScreen" id="bDh-8s-HKm"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo1" translatesAutoresizingMaskIntoConstraints="NO" id="zk8-In-Xqi">
