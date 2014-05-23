@@ -14,7 +14,7 @@
 #import "ProcessStatusDescriptor.h"
 
 @interface ProcessViewController ()
-
+@property  NSTimer *timer;
 @end
 
 @implementation ProcessViewController
@@ -24,6 +24,12 @@ static NSMutableArray * processingExperimentFiles;
 - (void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [ServerConnection getProcessStatus:self];
+    self.timer = [NSTimer timerWithTimeInterval:1.0
+                                         target:self
+                                       selector:@selector(timerDidTick:)
+                                       userInfo:nil repeats:YES];
+    [[NSRunLoop mainRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
+    
 }
 
 - (void)initialize
@@ -34,9 +40,9 @@ static NSMutableArray * processingExperimentFiles;
 }
 
 - (void) addProcessingExperiment:(ProcessStatusDescriptor *) file {
-
+    
     if(![processingExperimentFiles containsObject:file]){
-         [processingExperimentFiles addObject:file];
+        [processingExperimentFiles addObject:file];
     }
 }
 
@@ -59,8 +65,19 @@ static NSMutableArray * processingExperimentFiles;
     [super viewDidLoad];
     [self initialize];
     [ServerConnection getProcessStatus:self];
+    
+    
+}
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [self.timer invalidate];
 }
 
+-(void) timerDidTick:(NSTimer*) theTimer{
+    NSLog(@"timer ");
+    [ServerConnection getProcessStatus:self];
+    
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -120,7 +137,7 @@ static NSMutableArray * processingExperimentFiles;
         {
             [self addProcessingExperiment:[[ProcessStatusDescriptor alloc] init: processStatus]];
         }
-       
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             [_tableView reloadData];
         });

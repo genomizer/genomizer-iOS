@@ -99,7 +99,7 @@
     }
     
     _tapper = [[UITapGestureRecognizer alloc]
-              initWithTarget:self action:@selector(handleSingleTap:)];
+               initWithTarget:self action:@selector(handleSingleTap:)];
     _tapper.cancelsTouchesInView = NO;
     self.ratioCalcDoubleSingle.enabled = NO;
     [self.view addGestureRecognizer:_tapper];
@@ -115,7 +115,7 @@
         _ratioCalcCell.hidden = NO;
         _ratioCalcSmoothingCell.hidden = NO;
     }
-   
+    
     UIView *staticView = [[UIView alloc] initWithFrame:CGRectMake(0, self.tableView.bounds.size.height-50, self.tableView.bounds.size.width, 50)];
     staticView.backgroundColor = [UIColor whiteColor];
     UIButton *button=[UIButton buttonWithType:UIButtonTypeRoundedRect] ;
@@ -131,7 +131,7 @@
     [staticView.layer addSublayer:rightBorder];
     [self.tableView addSubview:staticView];
     _staticView = staticView;
-  
+    
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 50, 0);
 }
 -(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
@@ -158,7 +158,7 @@
     if (row == 0) {
         self.genomeFile.text = @"";
     } else {
-         self.genomeFile.text = [_genomeReleases objectAtIndex:row-1];
+        self.genomeFile.text = [_genomeReleases objectAtIndex:row-1];
     }
 }
 
@@ -182,7 +182,6 @@
 -(void)doneTouched:(UIBarButtonItem*)sender
 {
     [self.view endEditing:YES];
-  //  self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     [self.tableView reloadData];
 }
 
@@ -213,11 +212,7 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
-
-
-
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
@@ -234,7 +229,7 @@
                 switches.on = NO;
             }
             self.ratioCalcDoubleSingle.enabled = NO;
-        
+            
         } else if(textField == self.genomeFile) {
             for(UITextField *text in self.numpadFields){
                 text.enabled = NO;
@@ -245,7 +240,7 @@
                 switches.on = NO;
             }
             self.ratioCalcDoubleSingle.enabled = NO;
-        
+            
         }else if((textField == self.smoothingMinimumStep || textField == self.smoothingWindowSize) && ((self.smoothingWindowSize.text.length == 0) || (self.smoothingMinimumStep.text.length == 0) || (!self.smoothingPrintMean.enabled) || (!self.smoothingPrintZeros.enabled) || (!self.smoothingSmoothTypeSwitch.enabled))) {
             for(int i = 2; i < self.numpadFields.count; i++){
                 UITextField *text = [self.numpadFields objectAtIndex:i];
@@ -309,40 +304,40 @@
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-if(textField.text.length > 0 ){
-    if(textField == self.bowtie) {
-        self.genomeFile.enabled = YES;
-    } else if(textField == self.genomeFile) {
-        self.samToGff.enabled = YES;
-    }else if((textField == self.smoothingWindowSize) && (self.smoothingMinimumStep.text.length > 0)) {
-        
-    }else if(textField == self.smoothingMinimumStep) {
-        self.smoothingPrintMean.enabled = YES;
-    }else if(textField == self.step) {
-       self.ratioCalcDoubleSingle.enabled = YES;
-    }else if(textField == self.ratioCalcInputReads) {
-        self.ratioCalcChromosomes.enabled = YES;
-    }else if(textField == self.ratioCalcChromosomes) {
-        self.ratioCalcSmoothingWindowSize.enabled = YES;
-    }else if(textField == self.ratioCalcSmoothingWindowSize) {
-        self.ratioCalcSmoothingSmoothType.enabled = YES;
-    }else if(textField == self.ratioCalcSmoothingMinimumStep) {
-        self.ratioCalcSmoothingPrintMean.enabled = YES;
+    if(textField.text.length > 0 ){
+        if(textField == self.bowtie) {
+            self.genomeFile.enabled = YES;
+        } else if(textField == self.genomeFile) {
+            self.samToGff.enabled = YES;
+        }else if((textField == self.smoothingWindowSize) && (self.smoothingMinimumStep.text.length > 0)) {
+            
+        }else if(textField == self.smoothingMinimumStep) {
+            self.smoothingPrintMean.enabled = YES;
+        }else if(textField == self.step) {
+            self.ratioCalcDoubleSingle.enabled = YES;
+        }else if(textField == self.ratioCalcInputReads) {
+            self.ratioCalcChromosomes.enabled = YES;
+        }else if(textField == self.ratioCalcChromosomes) {
+            self.ratioCalcSmoothingWindowSize.enabled = YES;
+        }else if(textField == self.ratioCalcSmoothingWindowSize) {
+            self.ratioCalcSmoothingSmoothType.enabled = YES;
+        }else if(textField == self.ratioCalcSmoothingMinimumStep) {
+            self.ratioCalcSmoothingPrintMean.enabled = YES;
+        }
+        [textField endEditing:YES];
     }
-    [textField endEditing:YES];
-}
-return NO;
+    return NO;
 }
 
 - (IBAction)convertButtonTouch:(id)sender
 {
     if((_bowtie.text.length == 0) || (_genomeFile.text.length == 0)){
-            [XYZPopupGenerator showPopupWithMessage:@"Fill in at least the fields \"Bowtie parameters\" and \"Genome file\" to start a process"];
+        [XYZPopupGenerator showPopupWithMessage:@"Fill in at least the fields \"Bowtie parameters\" and \"Genome file\" to start a process"];
     }else{
         NSMutableArray * parameters = [[NSMutableArray alloc] init];
         [parameters addObject:_bowtie.text];
         [parameters addObject:@""];
-      
+        
         if(_samToGff.on){
             [parameters addObject:@"y"];
         }
@@ -377,7 +372,7 @@ return NO;
             }else{
                 text = [text stringByAppendingString:@"0"];
             }
-             [parameters addObject:text];
+            [parameters addObject:text];
         }else{
             [parameters addObject:@""];
         }
@@ -393,7 +388,7 @@ return NO;
         }
         
         if((self.step.text.length > 0) && (self.stepCreateStep.on) && (self.step.text > 0)){
-             NSString *text = @"y ";
+            NSString *text = @"y ";
             text = [text stringByAppendingString:self.step.text];
             text = [text stringByAppendingString:@" "];
             [parameters addObject:text];
@@ -401,29 +396,29 @@ return NO;
             [parameters addObject:@""];
         }
         
-       if((self.ratioCalcSmoothingWindowSize.text.length > 0) && (self.ratioCalcSmoothingMinimumStep.text.length > 0) && ( [self.ratioCalcSmoothingWindowSize.text intValue] > 0)){
-           NSString *text = self.ratioCalcSmoothingWindowSize.text;
-           text = [text stringByAppendingString:@" "];
-           if (self.ratioCalcSmoothingSmoothType.on){
-               text = [text stringByAppendingString:@"1"];
-           }else{
-               text = [text stringByAppendingString:@"0"];
-           }
-           text = [text stringByAppendingString:@" "];
-           text = [text stringByAppendingString:self.ratioCalcSmoothingMinimumStep.text];
-           text = [text stringByAppendingString:@" "];
-           if (self.ratioCalcSmoothingPrintMean.on){
-               text = [text stringByAppendingString:@"1"];
-           }else{
-               text = [text stringByAppendingString:@"0"];
-           }
-           text = [text stringByAppendingString:@" "];
-           if (self.ratioCalcSmoothingPrintZeros.on){
-               text = [text stringByAppendingString:@"1"];
-           }else{
-               text = [text stringByAppendingString:@"0"];
-           }
-           [parameters addObject:text];
+        if((self.ratioCalcSmoothingWindowSize.text.length > 0) && (self.ratioCalcSmoothingMinimumStep.text.length > 0) && ( [self.ratioCalcSmoothingWindowSize.text intValue] > 0)){
+            NSString *text = self.ratioCalcSmoothingWindowSize.text;
+            text = [text stringByAppendingString:@" "];
+            if (self.ratioCalcSmoothingSmoothType.on){
+                text = [text stringByAppendingString:@"1"];
+            }else{
+                text = [text stringByAppendingString:@"0"];
+            }
+            text = [text stringByAppendingString:@" "];
+            text = [text stringByAppendingString:self.ratioCalcSmoothingMinimumStep.text];
+            text = [text stringByAppendingString:@" "];
+            if (self.ratioCalcSmoothingPrintMean.on){
+                text = [text stringByAppendingString:@"1"];
+            }else{
+                text = [text stringByAppendingString:@"0"];
+            }
+            text = [text stringByAppendingString:@" "];
+            if (self.ratioCalcSmoothingPrintZeros.on){
+                text = [text stringByAppendingString:@"1"];
+            }else{
+                text = [text stringByAppendingString:@"0"];
+            }
+            [parameters addObject:text];
         }
         else{
             [parameters addObject:@""];

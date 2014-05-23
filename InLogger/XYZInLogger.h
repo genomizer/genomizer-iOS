@@ -1,15 +1,15 @@
+////
+////  XYZInLogger.h
+////  InLogger
+////
+////  Created by Joel Viklund on 25/04/14.
+////  Copyright (c) 2014 Joel Viklund. All rights reserved.
+////
 //
-//  XYZInLogger.h
-//  InLogger
+//#import <Foundation/Foundation.h>
 //
-//  Created by Joel Viklund on 25/04/14.
-//  Copyright (c) 2014 Joel Viklund. All rights reserved.
+//@interface XYZInLogger : NSObject
 //
-
-#import <Foundation/Foundation.h>
-
-@interface XYZInLogger : NSObject
-
-+ (int)login:(NSString *)username withPassword:(NSString *)password;
-
-@end
+//+ (int)login:(NSString *)username withPassword:(NSString *)password;
+//
+//@end

@@ -22,8 +22,6 @@ typedef NS_ENUM(NSInteger, FileType) {
 @property NSString *name;
 @property NSString *uploadedBy;
 @property NSString *date;
-@property NSString *size;
-@property NSString *URL;
 @property NSString *expID;
 @property NSString *metaData;
 @property NSString *author;

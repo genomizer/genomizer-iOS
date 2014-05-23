@@ -58,13 +58,7 @@
     [string appendString: @"Name: "];
     [string appendString: [self format: _name]];
     [string appendString: @"\n"];
-    [string appendString: @"size: "];
-    [string appendString: [self format: _size]];
-    [string appendString: @"\n"];
-    [string appendString: @"URL: "];
-    [string appendString: [self format: _URL]];
-    [string appendString: @"\n"];
-    [string appendString: @"Exp ID: "];
+    [string appendString: @"Experiment ID: "];
     [string appendString: [self format: _expID]];
     [string appendString: @"\n"];
     [string appendString: @"Metadata: "];
@@ -73,7 +67,7 @@
     [string appendString: @"Author: "];
     [string appendString: [self format: _author]];
     [string appendString: @"\n"];
-    [string appendString: @"GrVersion: "];
+    [string appendString: @"Genome Version: "];
     [string appendString: [self format: _grVersion]];
     [string appendString: @"\n"];
     return string;
