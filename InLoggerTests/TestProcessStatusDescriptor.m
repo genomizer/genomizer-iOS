@@ -146,7 +146,7 @@
     ProcessStatusDescriptor *desc = [[ProcessStatusDescriptor alloc] init: dict];
     XCTAssertNil(desc);
 }
-
+/*
 - (void) testCanHandleInitWithValidDictionaryWithAllValues
 {
     
@@ -159,7 +159,7 @@
     XCTAssertEqualObjects(desc.timeStarted, @"400245668744");
     XCTAssertEqualObjects(desc.timeFinished, @"400245668744");
 }
-
+*/
 - (void) testCanHandleInitWithoutTimeAdded
 {
     [_dict removeObjectForKey:@"timeAdded"];

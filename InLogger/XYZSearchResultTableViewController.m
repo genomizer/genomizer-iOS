@@ -10,6 +10,7 @@
 #import "XYZSearchResultTableViewCell.h"
 #import "XYZDataFileViewController.h"
 #import "XYZAnnotationTableViewController.h"
+#import "AppDelegate.h"
 
 @interface XYZSearchResultTableViewController ()
 
@@ -24,6 +25,10 @@
     [super viewDidLoad];
     XYZSearchResultTableViewCell *cell= [self.tableView dequeueReusableCellWithIdentifier:@"ListPrototypeCell"];
     _tableCellWidth = cell.textFieldSize.width;
+    
+    //add self to appDelegate
+    AppDelegate *app = [UIApplication sharedApplication].delegate;
+    [app addController:self];
 }
 
 #pragma mark - Table view data source

@@ -7,6 +7,7 @@
 //
 
 #import "XYZTabViewController.h"
+#import "AppDelegate.h"
 
 @interface XYZTabViewController ()
 
@@ -28,6 +29,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.hidesBackButton = YES;
+    
+    //add self to appDelegate
+    AppDelegate *app = [UIApplication sharedApplication].delegate;
+    [app addController:self];
 }
 
 - (void)didReceiveMemoryWarning

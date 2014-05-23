@@ -7,12 +7,59 @@
 //
 
 #import "AppDelegate.h"
+#import "XYZLogInViewController.h"
 
 @implementation AppDelegate
+
+NSMutableArray* controllers;
+
+- (AppDelegate*) init {
+    self = [super init];
+    controllers = [[NSMutableArray alloc] init];
+    return self;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     return YES;
+}
+
+- (void) restart {
+
+    UIStoryboard *storyboard =
+        [UIStoryboard storyboardWithName:[[NSBundle mainBundle].infoDictionary objectForKey:@"UIMainStoryboardFile"] bundle:[NSBundle mainBundle]];
+    XYZLogInViewController *viewController = (XYZLogInViewController *)[storyboard instantiateViewControllerWithIdentifier:@"loginView"];
+    [self.window setRootViewController:viewController];
+}
+
+- (int) getNumberOfControllers {
+    return [controllers count];
+}
+
+- (void) addController: (UIViewController*) controller {
+    [controllers addObject:controller];
+}
+
+- (void) popController {
+   // UIViewController *tempController =[controllers objectAtIndex:[controllers count] - 1];
+    //[tempController dismissViewControllerAnimated:NO completion:nil];
+    [controllers removeLastObject];
+}
+
+- (UIViewController*) getController: (int) index
+{
+    return [controllers objectAtIndex:index];
+}
+
+- (void) killControllers
+{
+    int length = [controllers count];
+    for(int i = 0; i < length; i++)
+    {
+        NSLog(@"asd");
+        [[controllers lastObject] dismissViewControllerAnimated:NO completion:nil];
+        [controllers removeObject:[controllers lastObject]];
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

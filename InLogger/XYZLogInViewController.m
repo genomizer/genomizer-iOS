@@ -9,9 +9,7 @@
 #import "XYZLogInViewController.h"
 #import "ServerConnection.h"
 #import "XYZPopupGenerator.h"
-#import "XYZSettingsPopupDelegate.h"
-#import "JSONBuilder.h"
-#import "XYZFileHandler.h"
+#import "AppDelegate.h"
 
 @interface XYZLogInViewController ()
 
@@ -34,9 +32,10 @@
     _passwordField.delegate = self;
     _spinner.hidden = YES;
     _spinner.hidesWhenStopped = YES;
-    _delegate = [[XYZSettingsPopupDelegate alloc] init];
-    [JSONBuilder setServerURLToString: [XYZFileHandler readFromFile:SERVER_URL_FILE_NAME
-                                                    withDefaultData:@"http://genomizer.apiary-mock.com/"]];
+    
+    //add self to appDelegate
+    AppDelegate *app = [UIApplication sharedApplication].delegate;
+    [app addController:self];
 }
 
 - (void) tryToLogIn

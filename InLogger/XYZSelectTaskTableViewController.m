@@ -9,6 +9,7 @@
 #import "XYZSelectTaskTableViewController.h"
 #import "RawConvertViewController.h"
 #import "XYZPopupGenerator.h"
+#import "AppDelegate.h"
 
 @interface XYZSelectTaskTableViewController ()
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *executeButton;
@@ -23,6 +24,10 @@
 {
     [super viewDidLoad];
     _tasks = [self tasksOfFileType:_fileType];
+    
+    //add self to appDelegate
+    AppDelegate *app = [UIApplication sharedApplication].delegate;
+    [app addController:self];
 }
 
 - (NSArray *) tasksOfFileType: (FileType) fileType
