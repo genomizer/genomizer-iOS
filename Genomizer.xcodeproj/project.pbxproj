@@ -37,6 +37,9 @@
 		DE25D8031910D72A0084BDDC /* XYZDataFileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE25D8011910D72A0084BDDC /* XYZDataFileViewController.xib */; };
 		DE25D8061910E1500084BDDC /* XYZExperimentDescriber.m in Sources */ = {isa = PBXBuildFile; fileRef = DE25D8051910E1500084BDDC /* XYZExperimentDescriber.m */; };
 		DE403ACD190A8A3E003D21F5 /* XYZSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE403ACC190A8A3E003D21F5 /* XYZSearchViewController.m */; };
+		DE6BC22E192DE12400B6D7AD /* XYZSettingsPopupDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6BC22C192DE12400B6D7AD /* XYZSettingsPopupDelegate.m */; };
+		DE6BC22F192DE12400B6D7AD /* XYZSettingsPopupDelegate.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE6BC22D192DE12400B6D7AD /* XYZSettingsPopupDelegate.xib */; };
+		DE6BC232192DE61400B6D7AD /* XYZFileHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6BC231192DE61400B6D7AD /* XYZFileHandler.m */; };
 		DE750AD51924BD3000F77FEC /* XYZDataFileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DE750AD31924BD3000F77FEC /* XYZDataFileTableViewCell.m */; };
 		DE750AD61924BD3000F77FEC /* XYZDataFileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE750AD41924BD3000F77FEC /* XYZDataFileTableViewCell.xib */; };
 		DE7C9C2519235F6C004A2492 /* XYZAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = DE7C9C2419235F6C004A2492 /* XYZAnnotation.m */; };
@@ -134,6 +137,11 @@
 		DE25D8051910E1500084BDDC /* XYZExperimentDescriber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZExperimentDescriber.m; sourceTree = "<group>"; };
 		DE403ACB190A8A3E003D21F5 /* XYZSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZSearchViewController.h; sourceTree = "<group>"; };
 		DE403ACC190A8A3E003D21F5 /* XYZSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZSearchViewController.m; sourceTree = "<group>"; };
+		DE6BC22B192DE12400B6D7AD /* XYZSettingsPopupDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZSettingsPopupDelegate.h; sourceTree = "<group>"; };
+		DE6BC22C192DE12400B6D7AD /* XYZSettingsPopupDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZSettingsPopupDelegate.m; sourceTree = "<group>"; };
+		DE6BC22D192DE12400B6D7AD /* XYZSettingsPopupDelegate.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XYZSettingsPopupDelegate.xib; sourceTree = "<group>"; };
+		DE6BC230192DE61400B6D7AD /* XYZFileHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZFileHandler.h; sourceTree = "<group>"; };
+		DE6BC231192DE61400B6D7AD /* XYZFileHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZFileHandler.m; sourceTree = "<group>"; };
 		DE750AD21924BD3000F77FEC /* XYZDataFileTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZDataFileTableViewCell.h; sourceTree = "<group>"; };
 		DE750AD31924BD3000F77FEC /* XYZDataFileTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZDataFileTableViewCell.m; sourceTree = "<group>"; };
 		DE750AD41924BD3000F77FEC /* XYZDataFileTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XYZDataFileTableViewCell.xib; sourceTree = "<group>"; };
@@ -248,6 +256,8 @@
 				21BFD1DA191B6A2A00F8E02F /* XYZPopupGenerator.m */,
 				DED0346F1923AD1B00E9EAF1 /* XYZPubMedBuilder.h */,
 				DED034701923AD1B00E9EAF1 /* XYZPubMedBuilder.m */,
+				DE6BC230192DE61400B6D7AD /* XYZFileHandler.h */,
+				DE6BC231192DE61400B6D7AD /* XYZFileHandler.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -336,6 +346,9 @@
 				DEEF6B181909553C00A2CD8C /* XYZLogInViewController.h */,
 				DEEF6B191909553C00A2CD8C /* XYZLogInViewController.m */,
 				DEEF6B1A1909553C00A2CD8C /* XYZLogInViewController.xib */,
+				DE6BC22B192DE12400B6D7AD /* XYZSettingsPopupDelegate.h */,
+				DE6BC22C192DE12400B6D7AD /* XYZSettingsPopupDelegate.m */,
+				DE6BC22D192DE12400B6D7AD /* XYZSettingsPopupDelegate.xib */,
 			);
 			name = LogIn;
 			sourceTree = "<group>";
@@ -530,6 +543,7 @@
 				DED12291190E966200D8E530 /* XYZSearchResultTableViewController.xib in Resources */,
 				DE9A3EF01918CAA100F7C33B /* XYZAnnotationTableViewCell.xib in Resources */,
 				649778F0191119FB000FD14F /* MoreViewController.xib in Resources */,
+				DE6BC22F192DE12400B6D7AD /* XYZSettingsPopupDelegate.xib in Resources */,
 				DED1228F190E966200D8E530 /* XYZSearchResultTableViewCell.xib in Resources */,
 				DEEF6AFA19094F8A00A2CD8C /* Images.xcassets in Resources */,
 				DE9A3EF51918CB4600F7C33B /* XYZAnnotationTableViewController.xib in Resources */,
@@ -568,6 +582,7 @@
 				DE25D7FC1910D6840084BDDC /* XYZTitleTableViewCell.m in Sources */,
 				DE9A3EEF1918CAA100F7C33B /* XYZAnnotationTableViewCell.m in Sources */,
 				DE25D8061910E1500084BDDC /* XYZExperimentDescriber.m in Sources */,
+				DE6BC22E192DE12400B6D7AD /* XYZSettingsPopupDelegate.m in Sources */,
 				2173DFC51929F1EA0040A336 /* ProcessStatusDescriptor.m in Sources */,
 				DED12294190E966200D8E530 /* XYZSelectedFilesViewController.m in Sources */,
 				76F638DB190FDD9D00F0F4BF /* XYZExperimentFile.m in Sources */,
@@ -584,6 +599,7 @@
 				649778EB1910EC9D000FD14F /* XYZExperimentParser.m in Sources */,
 				DEB9EBE31929F83E00BD051B /* XYZFileContainer.m in Sources */,
 				DED034711923AD1B00E9EAF1 /* XYZPubMedBuilder.m in Sources */,
+				DE6BC232192DE61400B6D7AD /* XYZFileHandler.m in Sources */,
 				DEEF6B1B1909553C00A2CD8C /* XYZLogInViewController.m in Sources */,
 				DE032D72191BCDC4006AC257 /* XYZSelectTaskTableViewController.m in Sources */,
 				DED1228D190E966200D8E530 /* XYZInLogger.m in Sources */,

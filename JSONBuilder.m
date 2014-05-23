@@ -10,6 +10,8 @@
 
 @implementation JSONBuilder
 
+static NSString *SERVER_URL = nil;
+
 +(NSMutableURLRequest*)getLoginJSON:(NSString *)username withPassword:(NSString *)password
 {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
@@ -38,6 +40,13 @@
 {
     NSMutableURLRequest *request = [self getRequest:@"DELETE" withToken:token];
     [request setURL:[NSURL URLWithString:[[self getServerURL] stringByAppendingString:@"login"]]];
+    return request;
+}
+
++(NSMutableURLRequest*)getgenomeReleaseJSON:(NSString *)token
+{
+    NSMutableURLRequest *request = [self getRequest:@"GET" withToken:token];
+    [request setURL:[NSURL URLWithString:[[self getServerURL] stringByAppendingString:@"genomeRelease"]]];
     return request;
 }
 

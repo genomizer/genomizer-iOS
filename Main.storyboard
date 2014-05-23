@@ -54,6 +54,21 @@
                                 <rect key="frame" x="150" y="370" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iV2-8Y-UUF">
+                                <rect key="frame" x="254" y="30" width="46" height="46"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="46" id="AeN-wi-JjG"/>
+                                    <constraint firstAttribute="width" constant="46" id="bOE-7a-4Vw"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <state key="normal" title="⚙">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="settingsButtonPressed:" destination="Csn-f6-9k9" eventType="touchUpInside" id="jOD-Nr-74b"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.98121178668478259" green="0.98121178668478259" blue="0.98121178668478259" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -61,12 +76,14 @@
                             <constraint firstItem="heV-ix-3Xk" firstAttribute="leading" secondItem="4hb-dP-mX9" secondAttribute="leading" constant="70" id="0e6-iK-3VZ"/>
                             <constraint firstItem="iwx-tD-EHi" firstAttribute="top" secondItem="qhR-JL-4yB" secondAttribute="bottom" constant="23" id="18L-e1-aWA"/>
                             <constraint firstItem="qhR-JL-4yB" firstAttribute="leading" secondItem="4hb-dP-mX9" secondAttribute="leading" constant="70" id="B6y-bO-U7V"/>
+                            <constraint firstItem="iV2-8Y-UUF" firstAttribute="top" secondItem="GTu-al-233" secondAttribute="bottom" constant="10" id="EXF-ND-1Rn"/>
                             <constraint firstItem="heV-ix-3Xk" firstAttribute="top" secondItem="GTu-al-233" secondAttribute="bottom" constant="231" id="JbR-qT-BAO"/>
                             <constraint firstAttribute="trailing" secondItem="iwx-tD-EHi" secondAttribute="trailing" constant="136" id="UFf-sA-vNk"/>
                             <constraint firstAttribute="trailing" secondItem="heV-ix-3Xk" secondAttribute="trailing" constant="70" id="UHe-za-YpW"/>
                             <constraint firstItem="iwx-tD-EHi" firstAttribute="leading" secondItem="4hb-dP-mX9" secondAttribute="leading" constant="137" id="bLH-ao-LcZ"/>
                             <constraint firstAttribute="trailing" secondItem="qhR-JL-4yB" secondAttribute="trailing" constant="70" id="hga-iH-Qyh"/>
                             <constraint firstItem="qhR-JL-4yB" firstAttribute="top" secondItem="heV-ix-3Xk" secondAttribute="bottom" constant="31" id="luW-bA-jU0"/>
+                            <constraint firstAttribute="trailing" secondItem="iV2-8Y-UUF" secondAttribute="trailing" constant="20" id="vvA-qS-O7U"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Genomixer" id="u7O-yS-ijM">
@@ -849,7 +866,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2At-SN-6Fe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4157" y="602"/>
+            <point key="canvasLocation" x="2959" y="998"/>
         </scene>
         <!--View Controller - Convert Genome Release-->
         <scene sceneID="LfB-4V-g9h">
@@ -1038,7 +1055,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nhz-aV-3zZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3492" y="622"/>
+            <point key="canvasLocation" x="4088" y="1050"/>
         </scene>
         <!--Data File View Controller - Files-->
         <scene sceneID="Zof-6r-61V">
@@ -1233,11 +1250,11 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="-a -m 1 --best -p 10 -v 2" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="kAs-61-89y">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="-a -m 1 --best -p 10 -v 2" borderStyle="roundedRect" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="kAs-61-89y">
                                                     <rect key="frame" x="20" y="27" width="280" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done"/>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -1266,7 +1283,7 @@
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="d_melanogaster_fb5_22" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hsD-yc-PUQ">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hsD-yc-PUQ">
                                                     <rect key="frame" x="20" y="24" width="280" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1360,7 +1377,7 @@
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="10" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wM6-wP-q47">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wM6-wP-q47">
                                                     <rect key="frame" x="251" y="18" width="49" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <constraints>
@@ -1478,7 +1495,7 @@
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="y 10" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mai-qU-9eH">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mai-qU-9eH">
                                                     <rect key="frame" x="251" y="52" width="49" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <constraints>
@@ -1785,11 +1802,11 @@
             </objects>
             <point key="canvasLocation" x="3682" y="-225"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Navigation Controller - Processes-->
         <scene sceneID="nxs-he-Ele">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="axL-bg-48q" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="history" id="Zmr-ID-HTR"/>
+                    <tabBarItem key="tabBarItem" title="Processes" image="processIcon" id="Zmr-ID-HTR"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ref-vw-pc1">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1809,7 +1826,8 @@
         <image name="grey_line" width="64" height="6"/>
         <image name="grey_line_no_white" width="64" height="2"/>
         <image name="photo1" width="3264" height="2448"/>
-        <image name="selectedFiles" width="65" height="65"/>
+        <image name="processIcon" width="56" height="56"/>
+        <image name="selectedFiles" width="64" height="64"/>
         <image name="square" width="10" height="10"/>
         <image name="taco" width="392" height="372"/>
     </resources>

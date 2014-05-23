@@ -138,6 +138,42 @@ NSString *token;
      }];
 }
 
++ (void)genomeRelease: (RawConvertViewController*) controller
+{
+    NSLog(@"genomeRelease");
+    NSMutableURLRequest *request = [JSONBuilder getgenomeReleaseJSON:token];
+    
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler: ^(NSURLResponse *response, NSData *POSTReply, NSError *internalError)
+     {
+         NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
+         NSError *error;
+         NSMutableArray* genomeReleases = [[NSMutableArray alloc] init];
+         if(internalError == nil)
+         {
+             if(httpResp.statusCode == 200)
+             {
+                 NSArray *array = [NSJSONSerialization JSONObjectWithData:POSTReply options: NSJSONReadingMutableContainers error:&internalError];
+                 for (NSDictionary *json in array)
+                 {
+                     [genomeReleases addObject:[json objectForKey:@"genomeVersion"]];
+                }
+             }
+             else
+             {
+                 NSString *errorMessage = [[self parseJSONToDictionary:POSTReply error:&internalError] objectForKey:@"message"];
+                 error = [self generateErrorObjectFromHTTPError:httpResp.statusCode errorMessage:errorMessage];
+             }
+         }
+         else{
+             error = [self generateError:@"Could not connect to server" withErrorDomain:@"Connection Error" withUnderlyingError:internalError];
+         }
+         [controller reportGenomeResult:genomeReleases withError:error];
+       
+     }];
+}
+
+
 +(void)convert:(NSMutableDictionary*)dict withContext: (RawConvertViewController*) controller
 {
     NSMutableURLRequest *request = [JSONBuilder getRawToProfileJSON:token withDict:dict];
@@ -146,8 +182,6 @@ NSString *token;
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler: ^(NSURLResponse *response, NSData *POSTReply, NSError *internalError)
     {
-      //  NSArray *array = [NSJSONSerialization JSONObjectWithData:POSTReply options: NSJSONReadingMutableContainers error:&internalError];
-      //  NSLog(@"array: %@", array);
         if(internalError == nil)
         {
             if(!(httpResp.statusCode == 200))

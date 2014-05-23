@@ -18,6 +18,9 @@
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
 
+@property XYZSettingsPopupDelegate *delegate;
+
+
 @end
 
 @implementation XYZLogInViewController
@@ -114,5 +117,11 @@
     }
     return NO;
 }
+
+- (IBAction)settingsButtonPressed:(id)sender
+{
+    [XYZPopupGenerator showInputPopupWithMessage:@"Enter server URL:" withTitle:@"" withText: [JSONBuilder getServerURL] withDelegate:_delegate];
+}
+
 
 @end

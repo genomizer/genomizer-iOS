@@ -12,11 +12,13 @@
 
 + (NSMutableURLRequest*) getLoginJSON:(NSString *) username withPassword: (NSString *) password;
 + (NSMutableURLRequest*) getLogoutJSON:(NSString *)token;
++ (NSMutableURLRequest*)getgenomeReleaseJSON:(NSString *)token;
 + (NSMutableURLRequest*) getSearchJSON:(NSString *)annotations withToken:(NSString *)token;
 + (NSMutableURLRequest*) getRawToProfileJSON:(NSString *)token withDict:(NSMutableDictionary*)dict;
 + (NSMutableURLRequest*) getAvailableAnnotationsJSON:(NSString *) token;
 + (NSMutableURLRequest*) getProcessStatusJSON:(NSString *) token;
 + (NSString*) getServerURL;
++ (void) setServerURLToString: (NSString *) url;
 + (NSMutableURLRequest*) getRequest:(NSString*) requestType withToken:(NSString*) token;
 
 @end
