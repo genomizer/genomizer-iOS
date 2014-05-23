@@ -140,7 +140,25 @@ static XYZFileContainer * FILES = nil;
 }
 
 - (IBAction)selectTaskButton:(id)sender {
-     [self performSegueWithIdentifier:@"convertTask" sender:self];
+   
+    XYZExperimentFile *firstFile = [self.selectedFiles getFiles:[self getSelectedFileType]][0];
+    NSString *specie = firstFile.species;
+     NSLog(@"specie1 %@", firstFile.species);
+    if([self.selectedFiles getFiles:[self getSelectedFileType]].count == 1) {
+        [self performSegueWithIdentifier:@"convertTask" sender:self];
+    } else {
+        for(int i = 1; i < [self.selectedFiles getFiles:[self getSelectedFileType]].count; i++){
+            NSLog(@"spiciers1 %@",[[self.selectedFiles getFiles:[self getSelectedFileType]][i] species]);
+            if(!([specie isEqualToString:[[self.selectedFiles getFiles:[self getSelectedFileType]][i] species]])){
+                [XYZPopupGenerator showPopupWithMessage:@"Files diffrent speices selected"];
+                break;
+            }
+            else if(i == [self.selectedFiles getFiles:[self getSelectedFileType]].count-1){
+                [self performSegueWithIdentifier:@"convertTask" sender:self];
+            }
+        }
+    }
+    
 }
 
 - (IBAction)infoFile:(UIButton*)sender {

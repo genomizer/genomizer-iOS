@@ -434,8 +434,8 @@
             [dict setObject:parameters forKey:@"parameters"];
             [dict setObject:_genomeFile.text forKey:@"genomeVersion"];
             [ServerConnection convert:dict withContext:self];
+            [XYZPopupGenerator showPopupWithMessage:@"Convert request sent to server"];
         }
-        [XYZPopupGenerator showPopupWithMessage:@"Process sent to server"];
     }
     return;
     
@@ -444,7 +444,7 @@
 - (void) reportResult: (NSError*) error {
     if(error){
         [XYZPopupGenerator showErrorMessage:error];
-    }
+    } 
 }
 - (void) reportGenomeResult:(NSMutableArray*) genomeReleases withError:(NSError*) error {
     if(error){
