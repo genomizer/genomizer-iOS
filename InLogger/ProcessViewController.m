@@ -67,7 +67,9 @@ static NSMutableArray * processingExperimentFiles;
     [self initialize];
     [ServerConnection getProcessStatus:self];
     
-    
+    //add self to appDelegate
+    AppDelegate *app = [UIApplication sharedApplication].delegate;
+    [app addController:self];
 }
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
