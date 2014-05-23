@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#define MOCK_URL @"http://genomizer.apiary-mock.com/"
+
 @interface JSONBuilder : NSObject
 
 + (NSMutableURLRequest*) getLoginJSON:(NSString *) username withPassword: (NSString *) password;
