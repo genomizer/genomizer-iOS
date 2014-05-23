@@ -24,7 +24,11 @@ static NSMutableArray * processingExperimentFiles;
 
 - (void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [ServerConnection getProcessStatus:self];
+    AppDelegate *app = [UIApplication sharedApplication].delegate;
+    
+    if([app threadIsAvailable]){
+        [ServerConnection getProcessStatus:self];
+    }
 }
 
 - (void)initialize
@@ -135,6 +139,9 @@ static NSMutableArray * processingExperimentFiles;
             [XYZPopupGenerator showErrorMessage:error];
         });
     }
+    
+    AppDelegate *app = [UIApplication sharedApplication].delegate;
+    [app threadFinished];
 }
 
 @end

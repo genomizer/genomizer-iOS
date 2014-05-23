@@ -16,6 +16,7 @@ NSMutableArray* controllers;
 - (AppDelegate*) init {
     self = [super init];
     controllers = [[NSMutableArray alloc] init];
+    _numberOfThreadsAlive = 0;
     return self;
 }
 
@@ -44,6 +45,23 @@ NSMutableArray* controllers;
    // UIViewController *tempController =[controllers objectAtIndex:[controllers count] - 1];
     //[tempController dismissViewControllerAnimated:NO completion:nil];
     [controllers removeLastObject];
+}
+
+- (bool) threadIsAvailable {
+    
+    if(_numberOfThreadsAlive >= 5)
+    {
+        _numberOfThreadsAlive++;
+        return YES;
+    } else
+    {
+        return NO;
+    }
+}
+
+- (void) threadFinished
+{
+    _numberOfThreadsAlive--;
 }
 
 - (UIViewController*) getController: (int) index

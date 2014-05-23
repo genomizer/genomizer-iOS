@@ -12,6 +12,8 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
+@property int numberOfThreadsAlive; 
+
 - (int) getNumberOfControllers;
 
 - (void) restart;
@@ -23,5 +25,9 @@
 - (UIViewController*) getController: (int) index;
 
 - (void) killControllers;
+
+- (bool) threadIsAvailable;
+
+- (void) threadFinished;
 
 @end
