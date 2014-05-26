@@ -30,6 +30,22 @@
     //add self to appDelegate
     AppDelegate *app = [UIApplication sharedApplication].delegate;
     [app addController:self];
+    [self initBackButton];
+}
+
+- (void)initBackButton {
+    UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleBordered target:self action:@selector(backButtonPressed:)];
+    self.navigationItem.backBarButtonItem=newBackButton;
+    //self.navigationItem.backBarButtonItem.action = @selector(backButtonPressed:);
+}
+
+
+
+-(void)backButtonPressed:(id)sender {
+    NSLog(@"BACK");
+    if (!_animating) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -38,7 +54,7 @@
 
 -(void) viewWillDisappear:(BOOL)animated {
     NSLog(@"VIEW WILL DISAPPEAR!");
-    _animating = YES;
+    //_animating = YES;
     [super viewWillDisappear:animated];
 }
 
