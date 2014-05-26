@@ -434,8 +434,8 @@
             [dict setObject:parameters forKey:@"parameters"];
             [dict setObject:_genomeFile.text forKey:@"genomeVersion"];
             [ServerConnection convert:dict withContext:self];
-            [XYZPopupGenerator showPopupWithMessage:@"Convert request sent to server"];
         }
+         [XYZPopupGenerator showPopupWithMessage:@"Convert request sent to server"];
     }
     return;
     

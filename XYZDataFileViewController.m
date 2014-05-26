@@ -34,7 +34,7 @@
 {
     [super viewDidLoad];
     _selectedFiles = [[XYZFileContainer alloc] init];
-  
+    
     //add self to appDelegate
     AppDelegate *app = [UIApplication sharedApplication].delegate;
     [app addController:self];
@@ -130,14 +130,20 @@
     if ([selectedFiles count] == 0) {
         [XYZPopupGenerator showPopupWithMessage:@"Please select files to convert."];
         return;
-    } else if([XYZExperimentFile ambigousFileTypes: selectedFiles]) {
+    } else if(![XYZExperimentFile ambigousFileTypes: selectedFiles]) {
+        FileType type = ((XYZExperimentFile *)selectedFiles[0]).type;
+        if (type == RAW) {
+            [self performSegueWithIdentifier:@"toSelectTask" sender:selectedFiles];
+        }else{
+            [XYZPopupGenerator showPopupWithMessage:@"Not yet implemented."];
+        }
+    }
+    else{
         [XYZPopupGenerator showPopupWithMessage:@"Please select files of same type."];
     }
     
-    FileType type = ((XYZExperimentFile *)selectedFiles[0]).type;
-    if (type == RAW) {
-        [self performSegueWithIdentifier:@"toSelectTask" sender:selectedFiles];
-    }
+    
+    
 }
 
 - (void) showInfoAbout: (XYZExperimentFile *) file
