@@ -51,7 +51,6 @@
 		DE9A3EF91918CFDC00F7C33B /* TestExperimentDescriber.m in Sources */ = {isa = PBXBuildFile; fileRef = DE9A3EF81918CFDC00F7C33B /* TestExperimentDescriber.m */; };
 		DEB9EBE31929F83E00BD051B /* XYZFileContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = DEB9EBE21929F83E00BD051B /* XYZFileContainer.m */; };
 		DED034711923AD1B00E9EAF1 /* XYZPubMedBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = DED034701923AD1B00E9EAF1 /* XYZPubMedBuilder.m */; };
-		DED1228D190E966200D8E530 /* XYZInLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = DED12280190E966200D8E530 /* XYZInLogger.m */; };
 		DED1228E190E966200D8E530 /* XYZSearchResultTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DED12282190E966200D8E530 /* XYZSearchResultTableViewCell.m */; };
 		DED1228F190E966200D8E530 /* XYZSearchResultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DED12283190E966200D8E530 /* XYZSearchResultTableViewCell.xib */; };
 		DED12290190E966200D8E530 /* XYZSearchResultTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DED12285190E966200D8E530 /* XYZSearchResultTableViewController.m */; };
@@ -159,8 +158,6 @@
 		DEB9EBE21929F83E00BD051B /* XYZFileContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZFileContainer.m; sourceTree = "<group>"; };
 		DED0346F1923AD1B00E9EAF1 /* XYZPubMedBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZPubMedBuilder.h; sourceTree = "<group>"; };
 		DED034701923AD1B00E9EAF1 /* XYZPubMedBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZPubMedBuilder.m; sourceTree = "<group>"; };
-		DED1227F190E966200D8E530 /* XYZInLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZInLogger.h; sourceTree = "<group>"; };
-		DED12280190E966200D8E530 /* XYZInLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZInLogger.m; sourceTree = "<group>"; };
 		DED12281190E966200D8E530 /* XYZSearchResultTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZSearchResultTableViewCell.h; sourceTree = "<group>"; };
 		DED12282190E966200D8E530 /* XYZSearchResultTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZSearchResultTableViewCell.m; sourceTree = "<group>"; };
 		DED12283190E966200D8E530 /* XYZSearchResultTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XYZSearchResultTableViewCell.xib; sourceTree = "<group>"; };
@@ -237,11 +234,45 @@
 			name = TestJSONBuilder;
 			sourceTree = "<group>";
 		};
-		210C0797192E206C005D78E6 /* UITests */ = {
+		642DEB81192F3615002234CD /* Process */ = {
 			isa = PBXGroup;
 			children = (
+				6453DD181924D4E400DDCA2D /* ProcessTableViewCell.h */,
+				6453DD191924D4E400DDCA2D /* ProcessTableViewCell.m */,
+				6453DD151924D4CC00DDCA2D /* ProcessViewController.h */,
+				6453DD161924D4CC00DDCA2D /* ProcessViewController.m */,
 			);
-			name = UITests;
+			name = Process;
+			sourceTree = "<group>";
+		};
+		642DEB82192F363D002234CD /* Convert */ = {
+			isa = PBXGroup;
+			children = (
+				641BC92C191CC827000E5254 /* RawConvertViewController.h */,
+				641BC92D191CC827000E5254 /* RawConvertViewController.m */,
+			);
+			name = Convert;
+			sourceTree = "<group>";
+		};
+		642DEB83192F367A002234CD /* ServerConnetion */ = {
+			isa = PBXGroup;
+			children = (
+				76E2DA9D190E96C90048069D /* JSONBuilder.h */,
+				76E2DA9E190E96C90048069D /* JSONBuilder.m */,
+				6484A2F2190E8F160071BB23 /* ServerConnection.h */,
+				6484A2F3190E8F160071BB23 /* ServerConnection.m */,
+			);
+			name = ServerConnetion;
+			sourceTree = "<group>";
+		};
+		642DEB84192F36A4002234CD /* More */ = {
+			isa = PBXGroup;
+			children = (
+				649778EC191119FB000FD14F /* MoreViewController.h */,
+				649778ED191119FB000FD14F /* MoreViewController.m */,
+				649778EE191119FB000FD14F /* MoreViewController.xib */,
+			);
+			name = More;
 			sourceTree = "<group>";
 		};
 		DE25D7FE1910D6A00084BDDC /* Utilities */ = {
@@ -356,7 +387,7 @@
 		DEEF6ADB19094F8A00A2CD8C = {
 			isa = PBXGroup;
 			children = (
-				DEEF6AED19094F8A00A2CD8C /* InLogger */,
+				DEEF6AED19094F8A00A2CD8C /* Genomizer */,
 				DEEF6B0619094F8B00A2CD8C /* GenomizerTests */,
 				DEEF6AE619094F8A00A2CD8C /* Frameworks */,
 				DEEF6AE519094F8A00A2CD8C /* Products */,
@@ -383,37 +414,27 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		DEEF6AED19094F8A00A2CD8C /* InLogger */ = {
+		DEEF6AED19094F8A00A2CD8C /* Genomizer */ = {
 			isa = PBXGroup;
 			children = (
-				76E2DA9D190E96C90048069D /* JSONBuilder.h */,
-				76E2DA9E190E96C90048069D /* JSONBuilder.m */,
-				DED1227F190E966200D8E530 /* XYZInLogger.h */,
-				DED12280190E966200D8E530 /* XYZInLogger.m */,
 				DE7C9C2219235F2A004A2492 /* DataHolders */,
+				642DEB83192F367A002234CD /* ServerConnetion */,
 				DED1229A190E9C9100D8E530 /* LogIn */,
 				DED12296190E9C2F00D8E530 /* SearchResult */,
 				DED12297190E9C5700D8E530 /* Search */,
 				DED12298190E9C7400D8E530 /* SelectedFiles */,
+				642DEB81192F3615002234CD /* Process */,
+				642DEB82192F363D002234CD /* Convert */,
 				DED12299190E9C8100D8E530 /* MainGUI */,
 				DEEF6B1619094FA000A2CD8C /* Main.storyboard */,
-				6453DD181924D4E400DDCA2D /* ProcessTableViewCell.h */,
-				6453DD191924D4E400DDCA2D /* ProcessTableViewCell.m */,
-				6453DD151924D4CC00DDCA2D /* ProcessViewController.h */,
-				6453DD161924D4CC00DDCA2D /* ProcessViewController.m */,
-				641BC92C191CC827000E5254 /* RawConvertViewController.h */,
-				641BC92D191CC827000E5254 /* RawConvertViewController.m */,
-				649778EC191119FB000FD14F /* MoreViewController.h */,
-				649778ED191119FB000FD14F /* MoreViewController.m */,
-				649778EE191119FB000FD14F /* MoreViewController.xib */,
+				642DEB84192F36A4002234CD /* More */,
 				DE25D7FE1910D6A00084BDDC /* Utilities */,
 				DEEF6AF619094F8A00A2CD8C /* AppDelegate.h */,
 				DEEF6AF719094F8A00A2CD8C /* AppDelegate.m */,
 				DEEF6AF919094F8A00A2CD8C /* Images.xcassets */,
 				DEEF6AEE19094F8A00A2CD8C /* Supporting Files */,
-				6484A2F2190E8F160071BB23 /* ServerConnection.h */,
-				6484A2F3190E8F160071BB23 /* ServerConnection.m */,
 			);
+			name = Genomizer;
 			path = InLogger;
 			sourceTree = "<group>";
 		};
@@ -602,7 +623,6 @@
 				DE6BC232192DE61400B6D7AD /* XYZFileHandler.m in Sources */,
 				DEEF6B1B1909553C00A2CD8C /* XYZLogInViewController.m in Sources */,
 				DE032D72191BCDC4006AC257 /* XYZSelectTaskTableViewController.m in Sources */,
-				DED1228D190E966200D8E530 /* XYZInLogger.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

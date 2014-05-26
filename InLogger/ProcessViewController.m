@@ -15,7 +15,7 @@
 #import "AppDelegate.h"
 
 @interface ProcessViewController ()
-
+@property  NSTimer *timer;
 @end
 
 @implementation ProcessViewController
@@ -24,7 +24,11 @@ static NSMutableArray * processingExperimentFiles;
 
 - (void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [ServerConnection getProcessStatus:self];
+    AppDelegate *app = [UIApplication sharedApplication].delegate;
+    
+    if([app threadIsAvailable]){
+        [ServerConnection getProcessStatus:self];
+    }
 }
 
 - (void)initialize
@@ -35,9 +39,9 @@ static NSMutableArray * processingExperimentFiles;
 }
 
 - (void) addProcessingExperiment:(ProcessStatusDescriptor *) file {
-
+    
     if(![processingExperimentFiles containsObject:file]){
-         [processingExperimentFiles addObject:file];
+        [processingExperimentFiles addObject:file];
     }
 }
 
@@ -65,7 +69,16 @@ static NSMutableArray * processingExperimentFiles;
     AppDelegate *app = [UIApplication sharedApplication].delegate;
     [app addController:self];
 }
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [self.timer invalidate];
+}
 
+-(void) timerDidTick:(NSTimer*) theTimer{
+    NSLog(@"timer ");
+    [ServerConnection getProcessStatus:self];
+    
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -125,7 +138,7 @@ static NSMutableArray * processingExperimentFiles;
         {
             [self addProcessingExperiment:[[ProcessStatusDescriptor alloc] init: processStatus]];
         }
-       
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             [_tableView reloadData];
         });
@@ -135,6 +148,9 @@ static NSMutableArray * processingExperimentFiles;
             [XYZPopupGenerator showErrorMessage:error];
         });
     }
+    
+    AppDelegate *app = [UIApplication sharedApplication].delegate;
+    [app threadFinished];
 }
 
 @end
