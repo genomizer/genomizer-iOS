@@ -43,6 +43,7 @@ NSString *token;
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler: ^(NSURLResponse *response, NSData *POSTReply, NSError *internalError)
      {
          NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
+         NSMutableDictionary *message = [NSJSONSerialization JSONObjectWithData:POSTReply options:kNilOptions error:error];
          NSError *error;
          if (internalError == nil)
          {
@@ -65,9 +66,12 @@ NSString *token;
                  error = [self generateError:@"Server sent incorrectly formatted data" withErrorDomain:@"Server Error" withUnderlyingError:nil];
              }
          }
+         else if([message objectForKey:@"message"] != nil){
+              error = [self generateError:[message objectForKey:@"message"] withErrorDomain:@"Connection Error" withUnderlyingError:internalError];
+         }
          else
          {
-             error = [self generateError:@"Could not connect to server" withErrorDomain:@"Connection Error" withUnderlyingError:internalError];
+             error = [self generateError:@"Connetion error" withErrorDomain:@"Connection Error" withUnderlyingError:internalError];
          }
          [controller reportLoginResult:error];
      }];
