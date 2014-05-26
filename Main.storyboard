@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="x1l-HJ-QPz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="x1l-HJ-QPz">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -334,12 +334,13 @@
                     <navigationItem key="navigationItem" title="Search Results" id="XMp-9t-wS1">
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="qUq-0d-Teb">
                             <connections>
-                                <segue destination="fQH-1E-MeM" kind="push" identifier="toEditDisplay" id="XUj-wu-5W2"/>
+                                <action selector="editButtonPressed:" destination="ggw-44-oMv" id="0GB-0n-Az9"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <segue destination="y6w-6T-HLO" kind="push" identifier="toFileList1" id="b3E-tb-Tdk"/>
+                        <segue destination="fQH-1E-MeM" kind="push" identifier="toEditDisplay" id="Nbk-Sp-m12"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g7t-tK-MF9" userLabel="First Responder" sceneMemberID="firstResponder"/>
