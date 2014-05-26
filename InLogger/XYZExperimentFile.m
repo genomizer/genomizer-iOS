@@ -116,5 +116,19 @@
     }
 }
 
+- (BOOL) isEqual:(id)object
+{
+    if (![object isKindOfClass:[XYZExperimentFile class]]) {
+        return NO;
+    }
+    return [_name isEqualToString: ((XYZExperimentFile *)object).idFile];
+}
+
+- (NSUInteger) hash
+{
+    return [_idFile hash];
+}
+
+
 @end
 

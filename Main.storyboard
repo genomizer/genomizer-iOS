@@ -287,7 +287,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="287" height="79"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Experiment ID: 1231 Publication ID: 1231" translatesAutoresizingMaskIntoConstraints="NO" id="ulx-fv-OET">
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Experiment ID: 1231 Publication ID: 1231" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ulx-fv-OET">
                                             <rect key="frame" x="15" y="7" width="237" height="87"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -306,7 +306,6 @@
                                             </state>
                                             <connections>
                                                 <action selector="experimentTouchDownInside:" destination="CwE-h2-EVG" eventType="touchDown" id="3Ke-p6-Vie"/>
-                                                <segue destination="y6w-6T-HLO" kind="push" identifier="toFileList1" id="x6z-Hk-ytI"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -323,7 +322,6 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="textView" destination="ulx-fv-OET" id="tDf-w1-dI2"/>
-                                    <segue destination="y6w-6T-HLO" kind="push" identifier="toFileList2" id="lHN-tn-48I"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -340,6 +338,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="y6w-6T-HLO" kind="push" identifier="toFileList1" id="b3E-tb-Tdk"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g7t-tK-MF9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1089,13 +1090,6 @@
                                     <action selector="addFilesToSelectedFilesOnTouchUpInside:" destination="y6w-6T-HLO" eventType="touchUpInside" id="SvQ-Nb-KBb"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="|" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jJU-fj-blQ">
-                                <rect key="frame" x="176" y="474" width="8" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <tableView clipsSubviews="YES" contentMode="center" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Zt8-vB-cTV">
                                 <rect key="frame" x="0.0" y="64" width="320" height="396"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1837,7 +1831,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="lHN-tn-48I"/>
-        <segue reference="1Lw-OZ-NPD"/>
+        <segue reference="cMg-uF-AiC"/>
     </inferredMetricsTieBreakers>
 </document>

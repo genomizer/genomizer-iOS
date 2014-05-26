@@ -15,6 +15,7 @@
 @interface XYZSearchResultTableViewController ()
 
 @property CGFloat tableCellWidth;
+@property BOOL unwinding;
 
 @end
 
@@ -29,6 +30,17 @@
     //add self to appDelegate
     AppDelegate *app = [UIApplication sharedApplication].delegate;
     [app addController:self];
+}
+
+- (void) viewDidAppear:(BOOL)animated {
+    _unwinding = NO;
+}
+
+-(void) viewWillDisappear:(BOOL)animated {
+    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
+        _unwinding = YES;
+    }
+    [super viewWillDisappear:animated];
 }
 
 #pragma mark - Table view data source
@@ -67,6 +79,20 @@
                                 options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
                              attributes:[NSDictionary dictionaryWithObjectsAndKeys:font,NSFontAttributeName, nil] context:nil];
     return ceilf(rect.size.height+25);
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self didSelectRow: indexPath.row];
+}
+
+-(void) didSelectRow: (NSInteger) row
+{
+    if (!_unwinding) {
+        _selectedExperiment = [_searchResults objectAtIndex: row];
+        [self performSegueWithIdentifier:@"toFileList1" sender:self];
+    }
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
