@@ -37,6 +37,7 @@
 }
 
 -(void) viewWillDisappear:(BOOL)animated {
+    NSLog(@"VIEW WILL DISAPPEAR!");
     _animating = YES;
     [super viewWillDisappear:animated];
 }
@@ -95,6 +96,7 @@
 - (IBAction)editButtonPressed:(id)sender
 {
     if (!_animating) {
+        NSLog(@"TO EDIT!");
         [self performSegueWithIdentifier:@"toEditDisplay" sender:self];
     }
 }
