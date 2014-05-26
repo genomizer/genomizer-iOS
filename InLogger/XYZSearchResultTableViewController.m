@@ -94,6 +94,13 @@
     }
 }
 
+- (IBAction)editButtonPressed:(id)sender
+{
+    if (!_unwinding) {
+        [self performSegueWithIdentifier:@"toEditDisplay" sender:self];
+    }
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
