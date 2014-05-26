@@ -18,7 +18,7 @@
     exp.createdByUser = [json objectForKey:@"created by"];
     // add annotations
     NSArray *annotationsArray = [json  valueForKey:@"annotations"];
-    NSLog(@"*******2 %@", [json objectForKey:@"created by"]);
+    NSLog(@"created BY: %@", [json objectForKey:@"created by"]);
     NSMutableDictionary* annonDict = [NSMutableDictionary dictionary];
     for(NSDictionary *annon in annotationsArray){
         [annonDict setObject:[annon objectForKey:@"value"] forKey:[annon objectForKey:@"name"]];
@@ -35,7 +35,8 @@
         expFile.name = (NSString *)[file valueForKey:@"filename"];
          NSLog(@"name %@",  expFile.name);
         expFile.uploadedBy = [file valueForKey:@"uploader"];
-      
+        expFile.species = [annonDict valueForKey:@"Species"];
+        NSLog(@"spicee parser %@",  expFile.species);
         expFile.expID = [file valueForKey:@"expId"];
         NSLog(@"expid %@",  expFile.expID);
         if([file valueForKey:@"grVersion"] != nil){

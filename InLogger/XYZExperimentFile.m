@@ -70,6 +70,9 @@
     [string appendString: @"Genome Version: "];
     [string appendString: [self format: _grVersion]];
     [string appendString: @"\n"];
+    [string appendString: @"Speice: "];
+    [string appendString: [self format: _species]];
+    [string appendString: @"\n"];
     return string;
 }
 
