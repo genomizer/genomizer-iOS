@@ -15,7 +15,7 @@
 @interface XYZSearchResultTableViewController ()
 
 @property CGFloat tableCellWidth;
-@property BOOL unwinding;
+@property BOOL animating;
 
 @end
 
@@ -33,13 +33,11 @@
 }
 
 - (void) viewDidAppear:(BOOL)animated {
-    _unwinding = NO;
+    _animating = NO;
 }
 
 -(void) viewWillDisappear:(BOOL)animated {
-    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
-        _unwinding = YES;
-    }
+    _animating = animated;
     [super viewWillDisappear:animated];
 }
 
@@ -88,7 +86,7 @@
 
 -(void) didSelectRow: (NSInteger) row
 {
-    if (!_unwinding) {
+    if (!_animating) {
         _selectedExperiment = [_searchResults objectAtIndex: row];
         [self performSegueWithIdentifier:@"toFileList1" sender:self];
     }
@@ -96,7 +94,7 @@
 
 - (IBAction)editButtonPressed:(id)sender
 {
-    if (!_unwinding) {
+    if (!_animating) {
         [self performSegueWithIdentifier:@"toEditDisplay" sender:self];
     }
 }
