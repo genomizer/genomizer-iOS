@@ -129,8 +129,10 @@
         XYZDataFileViewController *nextVC = (XYZDataFileViewController *)[segue destinationViewController];
         nextVC.experiment = _selectedExperiment;
     } else if ([segue.identifier isEqualToString:@"toEditDisplay"]) {
-        UINavigationController *navController = segue.destinationViewController;
+        XYZAnnotationTableViewController *nextVC = (XYZAnnotationTableViewController *)[segue destinationViewController];
+        /*UINavigationController *navController = segue.destinationViewController;
         XYZAnnotationTableViewController *nextVC = (XYZAnnotationTableViewController *)(navController.viewControllers[0]);
+         */
         nextVC.describer = _experimentDescriber;
     }
 }
