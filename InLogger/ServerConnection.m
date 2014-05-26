@@ -15,25 +15,25 @@
 
 NSString *token;
 
-+ (void)handleLoginPostReply: (NSData *)POSTReply httpResp:(NSHTTPURLResponse *)httpResp error:(NSError **)error{
-    
-    NSError *internalError;
-    NSDictionary *json = [self parseJSONToDictionary:POSTReply error:&internalError];
-    
-    if(internalError == nil)
-    {
-        NSLog(@"------- Login Token %@", [json objectForKey:@"token"]);
-        
-        if(httpResp.statusCode != 200)
-        {
-            *error = [self generateErrorObjectFromHTTPError:httpResp.statusCode errorMessage:@"Login failed"];
-        }
-    }
-    else
-    {
-        *error = [self generateError:@"Server sent incorrectly formatted data, talk to admin" withErrorDomain:@"ServerError" withUnderlyingError:nil];
-    }
-}
+//+ (void)handleLoginPostReply: (NSData *)POSTReply httpResp:(NSHTTPURLResponse *)httpResp error:(NSError **)error{
+//
+//    NSError *internalError;
+//    NSDictionary *json = [self parseJSONToDictionary:POSTReply error:&internalError];
+//
+//    if(internalError == nil)
+//    {
+//        NSLog(@"------- Login Token %@", [json objectForKey:@"token"]);
+//
+//        if(httpResp.statusCode != 200)
+//        {
+//            *error = [self generateErrorObjectFromHTTPError:httpResp.statusCode errorMessage:@"Login failed"];
+//        }
+//    }
+//    else
+//    {
+//        *error = [self generateError:@"Server sent incorrectly formatted data, talk to admin" withErrorDomain:@"ServerError" withUnderlyingError:nil];
+//    }
+//}
 
 + (void)login:(NSString *)username withPassword:(NSString *)password error:(NSError**) error withContext: (XYZLogInViewController*) controller
 {
@@ -43,6 +43,7 @@ NSString *token;
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler: ^(NSURLResponse *response, NSData *POSTReply, NSError *internalError)
      {
          NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
+         NSMutableDictionary *message = [NSJSONSerialization JSONObjectWithData:POSTReply options:kNilOptions error:error];
          NSError *error;
          if (internalError == nil)
          {
@@ -50,9 +51,11 @@ NSString *token;
              
              if(internalError == nil)
              {
-                 token = [json objectForKey:@"token"];
-                 NSLog(@"login token %@", token);
-                 NSLog(@"Header login: %ld", (long)httpResp.statusCode);
+                 if([json objectForKey:@"token"] != nil){
+                     token = [json objectForKey:@"token"];
+                 }else{
+                     error = [self generateError:@"Server sent incorrectly formatted data" withErrorDomain:@"Server Error" withUnderlyingError:nil];
+                 }
                  
                  if(httpResp.statusCode != 200)
                  {
@@ -65,9 +68,12 @@ NSString *token;
                  error = [self generateError:@"Server sent incorrectly formatted data" withErrorDomain:@"Server Error" withUnderlyingError:nil];
              }
          }
+         else if([message objectForKey:@"message"] != nil){
+             error = [self generateError:[message objectForKey:@"message"] withErrorDomain:@"Connection Error" withUnderlyingError:internalError];
+         }
          else
          {
-             error = [self generateError:@"Could not connect to server" withErrorDomain:@"Connection Error" withUnderlyingError:internalError];
+             error = [self generateError:@"Connetion error" withErrorDomain:@"Connection Error" withUnderlyingError:internalError];
          }
          [controller reportLoginResult:error];
      }];
@@ -75,10 +81,9 @@ NSString *token;
 
 + (void)logout:(NSError**)error
 {
-    token = nil;
     NSMutableURLRequest *request = [JSONBuilder getLogoutJSON:token];
-    
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    token = nil;
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler: nil];
 }
 
@@ -92,13 +97,19 @@ NSString *token;
         NSMutableArray *experiments = [[NSMutableArray alloc] init];
         for(NSDictionary *json in array)
         {
-            [experiments addObject:[XYZExperimentParser expParser:json]];
+            if([json objectForKey:@"name"] != nil){
+                [experiments addObject:[XYZExperimentParser expParser:json]];
+            }else{
+                *error = [self generateError:@"Server sent incorrectly formatted data" withErrorDomain:@"Server Error" withUnderlyingError:nil];
+            }
+            
+            
         }
         return experiments;
     }
     else
     {
-        *error = [self generateError:@"Server sent incorrectly formatted data, talk to admin" withErrorDomain:@"ServerError" withUnderlyingError:nil];
+        *error = [self generateError:@"Server sent incorrectly formatted data" withErrorDomain:@"ServerError" withUnderlyingError:nil];
     }
     return nil;
 }
@@ -122,7 +133,16 @@ NSString *token;
              }
              else
              {
-                 NSString *errorMessage = [[self parseJSONToDictionary:POSTReply error:&internalError] objectForKey:@"message"];
+                 NSDictionary *errorDict = [self parseJSONToDictionary:POSTReply error:&internalError];
+                 NSString *errorMessage;
+                 if([errorDict objectForKey:@"message"] != nil)
+                 {
+                     errorMessage = [[self parseJSONToDictionary:POSTReply error:&internalError] objectForKey:@"message"];
+                     
+                 }
+                 else{
+                     errorMessage =@"Server sent incorrectly formatted data";
+                 }
                  error = [self generateErrorObjectFromHTTPError:httpResp.statusCode errorMessage:errorMessage];
              }
          }
@@ -150,19 +170,30 @@ NSString *token;
                  NSArray *array = [NSJSONSerialization JSONObjectWithData:POSTReply options: NSJSONReadingMutableContainers error:&internalError];
                  for (NSDictionary *json in array)
                  {
-                     [genomeReleases addObject:[json objectForKey:@"genomeVersion"]];
+                     if([json objectForKey:@"genomeVersion"] != nil){
+                         [genomeReleases addObject:[json objectForKey:@"genomeVersion"]];
+                     }
                  }
              }
              else
              {
-                 NSString *errorMessage = [[self parseJSONToDictionary:POSTReply error:&internalError] objectForKey:@"message"];
+                 NSDictionary *errorDict = [self parseJSONToDictionary:POSTReply error:&internalError];
+                 NSString *errorMessage;
+                 if([errorDict objectForKey:@"message"] != nil)
+                 {
+                     errorMessage = [[self parseJSONToDictionary:POSTReply error:&internalError] objectForKey:@"message"];
+                     
+                 }
+                 else{
+                     errorMessage =@"Server sent incorrectly formatted data";
+                 }
                  error = [self generateErrorObjectFromHTTPError:httpResp.statusCode errorMessage:errorMessage];
              }
          }
          else{
              error = [self generateError:@"Could not connect to server" withErrorDomain:@"Connection Error" withUnderlyingError:internalError];
          }
-    
+         
          [controller reportGenomeResult:genomeReleases withError:error];
          
      }];
@@ -176,20 +207,31 @@ NSString *token;
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler: ^(NSURLResponse *response, NSData *POSTReply, NSError *internalError)
      {
+         NSError * error;
          NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
          if(internalError == nil)
          {
-             if(!(httpResp.statusCode == 200))
+             if(httpResp.statusCode != 200)
              {
-                 NSString *errorMessage = [[self parseJSONToDictionary:POSTReply error:&internalError] objectForKey:@"message"];
-                 NSError *error = [self generateErrorObjectFromHTTPError:httpResp.statusCode errorMessage:errorMessage];
+                 NSDictionary *errorDict = [self parseJSONToDictionary:POSTReply error:&internalError];
+                 NSString *errorMessage;
+                 if([errorDict objectForKey:@"message"] != nil)
+                 {
+                     errorMessage = [[self parseJSONToDictionary:POSTReply error:&internalError] objectForKey:@"message"];
+                     
+                 }
+                 else{
+                     errorMessage =@"Server sent incorrectly formatted data";
+                 }
+                 error = [self generateErrorObjectFromHTTPError:httpResp.statusCode errorMessage:errorMessage];
                  [controller reportResult:error];
              }
          } else
          {
-             NSError *error = [self generateError:@"Could not connect to server" withErrorDomain:@"Connection Error" withUnderlyingError:internalError];
+             error = [self generateError:@"Could not connect to server" withErrorDomain:@"Connection Error" withUnderlyingError:internalError];
              [controller reportResult:error];
          }
+         
      }];
 }
 
@@ -214,16 +256,17 @@ NSString *token;
                      for (NSDictionary *json in array)
                      {
                          XYZAnnotation *annotation = [[XYZAnnotation alloc] init];
-                         annotation.name = [json objectForKey:@"name"];
-                         
-                         NSArray* values = [json objectForKey:@"values"];
-                         if (values == nil)
-                         {
-                             values = [[NSArray alloc] initWithObjects:@"freetext", nil];
+                         if([json objectForKey:@"name"] != nil){
+                             annotation.name = [json objectForKey:@"name"];
+                             NSArray* values;
+                              if([json objectForKey:@"values"] != nil){
+                                   values = [json objectForKey:@"values"];
+                              }else{
+                                  values = [[NSArray alloc] initWithObjects:@"freetext", nil];
+                              }
+                             annotation.possibleValues = values;
+                             [annotations addObject:annotation];
                          }
-                         annotation.possibleValues = values;
-                         
-                         [annotations addObject:annotation];
                      }
                  } else
                  {
@@ -231,8 +274,18 @@ NSString *token;
                  }
              } else
              {
-                 NSString *errorMessage = [[self parseJSONToDictionary:POSTReply error:&internalError] objectForKey:@"message"];
+                 NSDictionary *errorDict = [self parseJSONToDictionary:POSTReply error:&internalError];
+                 NSString *errorMessage;
+                 if([errorDict objectForKey:@"message"] != nil)
+                 {
+                     errorMessage = [[self parseJSONToDictionary:POSTReply error:&internalError] objectForKey:@"message"];
+                     
+                 }
+                 else{
+                     errorMessage =@"Server sent incorrectly formatted data";
+                 }
                  error = [self generateErrorObjectFromHTTPError:httpResp.statusCode errorMessage:errorMessage];
+
              }
          } else
          {
@@ -252,22 +305,41 @@ NSString *token;
      {
          NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
          NSError *error;
-         NSArray *processStatusResults;
-        if (internalError == nil)
+         NSMutableArray *processStatusResults = [[NSMutableArray alloc] init];
+         if (internalError == nil)
          {
              if (httpResp.statusCode == 200)
              {
+                 
                  NSArray *array = [NSJSONSerialization JSONObjectWithData:POSTReply options: NSJSONReadingMutableContainers error:&internalError];
+                 NSLog(@"processes: %@", array);
                  if (internalError == nil)
                  {
-                     processStatusResults = array;
+                     
+      
+                     for(NSDictionary *json in array){
+                         if(([json objectForKey:@"experimentName"] != nil) && ([json objectForKey:@"status"] != nil) && ([json objectForKey:@"timeAdded"] != nil) && ([json objectForKey:@"timeStarted"] != nil) && ([json objectForKey:@"timeFinished"] != nil)){
+                            
+                             [processStatusResults addObject:json];
+                        }
+                     }
+                     
                  } else
                  {
                      error = [self generateError:@"Server sent incorrectly formatted data, talk to admin" withErrorDomain:@"ServerError" withUnderlyingError:nil];
                  }
              } else
              {
-                 NSString *errorMessage = [[self parseJSONToDictionary:POSTReply error:&internalError] objectForKey:@"message"];
+                 NSDictionary *errorDict = [self parseJSONToDictionary:POSTReply error:&internalError];
+                 NSString *errorMessage;
+                 if([errorDict objectForKey:@"message"] != nil)
+                 {
+                     errorMessage = [[self parseJSONToDictionary:POSTReply error:&internalError] objectForKey:@"message"];
+                     
+                 }
+                 else{
+                     errorMessage =@"Server sent incorrectly formatted data";
+                 }
                  error = [self generateErrorObjectFromHTTPError:httpResp.statusCode errorMessage:errorMessage];
              }
          } else

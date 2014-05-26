@@ -32,7 +32,6 @@ typedef NS_ENUM(NSInteger, FileType) {
 - (NSString *) getDescription;
 - (NSString *) getAllInfo;
 + (FileType) NSStringFileTypeToEnumFileType: (NSString *) type;
-+ (XYZExperimentFile *) defaultFileWithType: (FileType) type;
 + (BOOL) ambigousFileTypes: (NSArray *) files;
 
 @end

@@ -288,7 +288,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="287" height="79"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Experiment ID: 1231 Publication ID: 1231" translatesAutoresizingMaskIntoConstraints="NO" id="ulx-fv-OET">
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Experiment ID: 1231 Publication ID: 1231" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ulx-fv-OET">
                                             <rect key="frame" x="15" y="7" width="237" height="87"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -307,7 +307,6 @@
                                             </state>
                                             <connections>
                                                 <action selector="experimentTouchDownInside:" destination="CwE-h2-EVG" eventType="touchDown" id="3Ke-p6-Vie"/>
-                                                <segue destination="y6w-6T-HLO" kind="push" identifier="toFileList1" id="x6z-Hk-ytI"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -324,7 +323,6 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="textView" destination="ulx-fv-OET" id="tDf-w1-dI2"/>
-                                    <segue destination="y6w-6T-HLO" kind="push" identifier="toFileList2" id="lHN-tn-48I"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -337,10 +335,14 @@
                     <navigationItem key="navigationItem" title="Search Results" id="XMp-9t-wS1">
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="qUq-0d-Teb">
                             <connections>
-                                <segue destination="fQH-1E-MeM" kind="push" identifier="toEditDisplay" id="XUj-wu-5W2"/>
+                                <action selector="editButtonPressed:" destination="ggw-44-oMv" id="0GB-0n-Az9"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="y6w-6T-HLO" kind="push" identifier="toFileList1" id="b3E-tb-Tdk"/>
+                        <segue destination="fQH-1E-MeM" kind="push" identifier="toEditDisplay" id="3qT-cg-zzF"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g7t-tK-MF9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -390,11 +392,18 @@
                             <outlet property="delegate" destination="fQH-1E-MeM" id="NvM-v8-LNx"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Select annotations" id="LFg-vy-Gnb"/>
+                    <navigationItem key="navigationItem" title="Select annotations" id="LFg-vy-Gnb">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="RJm-Qg-YWE">
+                            <connections>
+                                <segue destination="AJf-gD-ybn" kind="unwind" unwindAction="unwindToList:" id="ING-kb-3ff"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CSf-AT-0Od" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="AJf-gD-ybn" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4020" y="-1570"/>
+            <point key="canvasLocation" x="4020" y="-1542"/>
         </scene>
         <!--Tab View Controller-->
         <scene sceneID="78e-7R-FRk">
@@ -553,7 +562,6 @@
                                         </state>
                                         <connections>
                                             <action selector="closeInfoFile:" destination="OaH-dG-5KC" eventType="touchUpInside" id="8On-2k-dgC"/>
-                                            <segue destination="NVQ-fn-jnW" kind="modal" identifier="convertTask" id="gFg-gU-lFq"/>
                                         </connections>
                                     </button>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Cn-8I-zsb">
@@ -606,6 +614,7 @@
                         <outlet property="selectTaskToPerformButton" destination="1mi-tr-fZm" id="Zmr-LS-Qju"/>
                         <outlet property="tableView" destination="6pb-Wh-CBJ" id="5ch-FP-JXM"/>
                         <outlet property="trashButton" destination="S8B-s2-ee7" id="O3J-9v-2cu"/>
+                        <segue destination="NVQ-fn-jnW" kind="modal" identifier="convertTask" id="Thg-Vs-Nk7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K6N-pd-6ui" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1091,13 +1100,6 @@
                                     <action selector="addFilesToSelectedFilesOnTouchUpInside:" destination="y6w-6T-HLO" eventType="touchUpInside" id="SvQ-Nb-KBb"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="|" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jJU-fj-blQ">
-                                <rect key="frame" x="176" y="474" width="8" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <tableView clipsSubviews="YES" contentMode="center" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Zt8-vB-cTV">
                                 <rect key="frame" x="0.0" y="64" width="320" height="396"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1181,7 +1183,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8f3-SG-uBu">
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8f3-SG-uBu">
                                         <rect key="frame" x="127" y="171" width="46" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Close">
@@ -1217,7 +1219,7 @@
                         <outlet property="infoAboutFile" destination="45H-5h-NPD" id="fky-tw-PH7"/>
                         <outlet property="infoFileTextField" destination="y99-Vg-vyc" id="qBa-Cc-JYz"/>
                         <outlet property="tableView" destination="Zt8-vB-cTV" id="4wh-zp-uhu"/>
-                        <segue destination="NVQ-fn-jnW" kind="modal" identifier="toSelectTask" id="cMg-uF-AiC"/>
+                        <segue destination="NVQ-fn-jnW" kind="modal" identifier="toSelectTask" id="mTu-BK-rMg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W0h-F8-FQI" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1839,7 +1841,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="lHN-tn-48I"/>
-        <segue reference="gFg-gU-lFq"/>
+        <segue reference="Thg-Vs-Nk7"/>
     </inferredMetricsTieBreakers>
 </document>

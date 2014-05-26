@@ -15,13 +15,13 @@
     
     XYZExperiment *exp = [[XYZExperiment alloc] init];
     exp.name = [json objectForKey:@"name"];
-    exp.createdByUser = [json objectForKey:@"created by"];
     // add annotations
     NSArray *annotationsArray = [json  valueForKey:@"annotations"];
-    NSLog(@"created BY: %@", [json objectForKey:@"created by"]);
     NSMutableDictionary* annonDict = [NSMutableDictionary dictionary];
     for(NSDictionary *annon in annotationsArray){
-        [annonDict setObject:[annon objectForKey:@"value"] forKey:[annon objectForKey:@"name"]];
+        if(([annon valueForKey:@"value"] != nil) && ([annon valueForKey:@"name"] != nil)){
+            [annonDict setObject:[annon objectForKey:@"value"] forKey:[annon objectForKey:@"name"]];
+        }
     }
     exp.annotations = annonDict;
     

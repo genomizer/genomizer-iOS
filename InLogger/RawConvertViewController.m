@@ -55,13 +55,6 @@
     __weak UIView *_staticView;
 }
 
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    return self;
-}
-
 - (void)viewDidLoad
 {
     
@@ -427,8 +420,8 @@
             [dict setObject:parameters forKey:@"parameters"];
             [dict setObject:_genomeFile.text forKey:@"genomeVersion"];
             [ServerConnection convert:dict withContext:self];
-            [XYZPopupGenerator showPopupWithMessage:@"Convert request sent to server"];
         }
+         [XYZPopupGenerator showPopupWithMessage:@"Convert request sent to server"];
     }
     return;
     

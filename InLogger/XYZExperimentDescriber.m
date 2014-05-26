@@ -48,8 +48,7 @@
 {
     NSMutableString *description = [[NSMutableString alloc] init];
     
-    [description appendString: [self createRowForAnnotation:@"Name" withValue:experiment.name andNewLine:YES]];
-    [description appendString: [self createRowForAnnotation:@"Created by" withValue:experiment.createdByUser andNewLine:[_visibleAnnotations count] > 0]];
+    [description appendString: [self createRowForAnnotation:@"Name" withValue:experiment.name andNewLine:[_visibleAnnotations count] > 0]];
     
      for (NSInteger i = 0; i < [_visibleAnnotations count]; i++) {
          XYZAnnotation *annotation = _visibleAnnotations[i];

@@ -15,6 +15,7 @@
 @interface XYZSearchResultTableViewController ()
 
 @property CGFloat tableCellWidth;
+@property BOOL animating;
 
 @end
 
@@ -29,6 +30,32 @@
     //add self to appDelegate
     AppDelegate *app = [UIApplication sharedApplication].delegate;
     [app addController:self];
+    [self initBackButton];
+}
+
+- (void)initBackButton {
+    UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleBordered target:self action:@selector(backButtonPressed:)];
+    self.navigationItem.backBarButtonItem=newBackButton;
+    //self.navigationItem.backBarButtonItem.action = @selector(backButtonPressed:);
+}
+
+
+
+-(void)backButtonPressed:(id)sender {
+    NSLog(@"BACK");
+    if (!_animating) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
+}
+
+- (void) viewDidAppear:(BOOL)animated {
+    _animating = NO;
+}
+
+-(void) viewWillDisappear:(BOOL)animated {
+    NSLog(@"VIEW WILL DISAPPEAR!");
+    //_animating = YES;
+    [super viewWillDisappear:animated];
 }
 
 #pragma mark - Table view data source
@@ -69,6 +96,27 @@
     return ceilf(rect.size.height+25);
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self didSelectRow: indexPath.row];
+}
+
+-(void) didSelectRow: (NSInteger) row
+{
+    if (!_animating) {
+        _selectedExperiment = [_searchResults objectAtIndex: row];
+        [self performSegueWithIdentifier:@"toFileList1" sender:self];
+    }
+}
+
+- (IBAction)editButtonPressed:(id)sender
+{
+    if (!_animating) {
+        NSLog(@"TO EDIT!");
+        [self performSegueWithIdentifier:@"toEditDisplay" sender:self];
+    }
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -81,9 +129,15 @@
         XYZDataFileViewController *nextVC = (XYZDataFileViewController *)[segue destinationViewController];
         nextVC.experiment = _selectedExperiment;
     } else if ([segue.identifier isEqualToString:@"toEditDisplay"]) {
-        XYZAnnotationTableViewController *nextVC = (XYZAnnotationTableViewController *)[segue destinationViewController];
+        UINavigationController *navController = segue.destinationViewController;
+        XYZAnnotationTableViewController *nextVC = (XYZAnnotationTableViewController *)(navController.viewControllers[0]);
         nextVC.describer = _experimentDescriber;
     }
+}
+
+- (IBAction)unwindToList:(UIStoryboardSegue *)segue
+{
+    
 }
 
 @end

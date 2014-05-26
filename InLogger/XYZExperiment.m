@@ -20,28 +20,6 @@
     return self;
 }
 
-+ (XYZExperiment *) defaultExperiment
-{
-    XYZExperiment *exp = [[XYZExperiment alloc] init];
-    exp.name = @"Experiment name";
-    exp.createdByUser = @"Yuri Yuri";
-    [exp.annotations setValue: @"abc123" forKey:@"pubmedId"];
-    [exp.annotations setValue: @"raw" forKey:@"type"];
-    [exp.annotations setValue: @"specie" forKey:@"human"];
-    
-    [exp.files addExperimentFile:[XYZExperimentFile defaultFileWithType:RAW]];
-    [exp.files addExperimentFile:[XYZExperimentFile defaultFileWithType:RAW]];
-    [exp.files addExperimentFile:[XYZExperimentFile defaultFileWithType:RAW]];
-
-    [exp.files addExperimentFile:[XYZExperimentFile defaultFileWithType:PROFILE]];
-    
-    [exp.files addExperimentFile:[XYZExperimentFile defaultFileWithType:REGION]];
-    [exp.files addExperimentFile:[XYZExperimentFile defaultFileWithType:REGION]];
-
-    [exp.files addExperimentFile:[XYZExperimentFile defaultFileWithType:OTHER]];
-        
-    return exp;
-}
 
 - (void) setValue: (id) value forAnnotation: (NSString*) annotation
 {

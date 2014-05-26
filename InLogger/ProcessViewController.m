@@ -57,21 +57,12 @@ static NSMutableArray * processingExperimentFiles;
     [processingExperimentFiles removeAllObjects];
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     [self initialize];
     [ServerConnection getProcessStatus:self];
-    
+   
     //add self to appDelegate
     AppDelegate *app = [UIApplication sharedApplication].delegate;
     [app addController:self];
@@ -138,7 +129,7 @@ static NSMutableArray * processingExperimentFiles;
     return cell;
 }
 
-- (void) reportProcessStatusResult: (NSArray*) result error: (NSError*) error {
+- (void) reportProcessStatusResult: (NSMutableArray*) result error: (NSError*) error {
     
     [self resetProcessingExperimentFiles];
     if(error == nil)

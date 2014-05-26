@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UITextView *infoFileTextField;
 @property (weak, nonatomic) IBOutlet UIView *dimView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property BOOL animating;
 
 @end
 
@@ -33,11 +34,21 @@
 {
     [super viewDidLoad];
     _selectedFiles = [[XYZFileContainer alloc] init];
-  
+    
     //add self to appDelegate
     AppDelegate *app = [UIApplication sharedApplication].delegate;
     [app addController:self];
 }
+
+- (void) viewDidAppear:(BOOL)animated {
+    _animating = NO;
+}
+
+-(void) viewWillDisappear:(BOOL)animated {
+    _animating = YES;
+    [super viewWillDisappear:animated];
+}
+
 
 - (void)setExperiment:(XYZExperiment *)experiment
 {
@@ -112,18 +123,27 @@
 
 - (IBAction)convertToProfileOnTouchUpInside:(id)sender
 {
+    if (_animating) {
+        return;
+    }
     NSArray *selectedFiles = [_selectedFiles getFiles];
     if ([selectedFiles count] == 0) {
         [XYZPopupGenerator showPopupWithMessage:@"Please select files to convert."];
         return;
-    } else if([XYZExperimentFile ambigousFileTypes: selectedFiles]) {
+    } else if(![XYZExperimentFile ambigousFileTypes: selectedFiles]) {
+        FileType type = ((XYZExperimentFile *)selectedFiles[0]).type;
+        if (type == RAW) {
+            [self performSegueWithIdentifier:@"toSelectTask" sender:selectedFiles];
+        }else{
+            [XYZPopupGenerator showPopupWithMessage:@"Not yet implemented."];
+        }
+    }
+    else{
         [XYZPopupGenerator showPopupWithMessage:@"Please select files of same type."];
     }
     
-    FileType type = ((XYZExperimentFile *)selectedFiles[0]).type;
-    if (type == RAW) {
-        [self performSegueWithIdentifier:@"toSelectTask" sender:selectedFiles];
-    }
+    
+    
 }
 
 - (void) showInfoAbout: (XYZExperimentFile *) file

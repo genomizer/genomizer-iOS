@@ -12,12 +12,10 @@
 @interface XYZExperiment : NSObject
 
 @property NSString *name;
-@property NSString *createdByUser;
 @property XYZFileContainer *files;
 @property NSMutableDictionary *annotations;
 
 - (void) setValue: (id) value forAnnotation: (NSString*) annotation;
 - (NSString *) getValueForAnnotation: (NSString *) annotation;
-+ (XYZExperiment*) defaultExperiment;
 
 @end
