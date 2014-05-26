@@ -27,34 +27,62 @@
     
     // add files
     NSArray *filesArray = [json valueForKey:@"files"];
-    for(NSDictionary *file in filesArray)
-    {
-      //  NSError *error = [self validateData:file];
-        
-      //  if(error == nil)
-      //  {
-            XYZExperimentFile *expFile = [[XYZExperimentFile alloc] init];
+    for(NSDictionary *file in filesArray){
+        XYZExperimentFile *expFile = [[XYZExperimentFile alloc] init];
+        if([file valueForKey:@"id"] != nil){
             expFile.idFile = [file valueForKey:@"id"];
-            
-            expFile.type = [XYZExperimentFile NSStringFileTypeToEnumFileType:[file valueForKey:@"type"]];
+        }else{
+            expFile.idFile = @"Not set!";
+        }
+        
+        if([file valueForKey:@"type"] != nil){
+            expFile.type = [XYZExperimentFile NSStringFileTypeToEnumFileType:[file valueForKey:@"type"]];;
+        }else{
+            expFile.type = [XYZExperimentFile NSStringFileTypeToEnumFileType:@"Other"];
+        }
+        
+        if([file valueForKey:@"filename"] != nil){
             expFile.name = (NSString *)[file valueForKey:@"filename"];
-            NSLog(@"name %@",  expFile.name);
+        }else{
+            expFile.name = @"Not set!";
+        }
+        
+        if([file valueForKey:@"uploader"] != nil){
             expFile.uploadedBy = [file valueForKey:@"uploader"];
+        }else{
+            expFile.uploadedBy = @"Not set!";
+        }
+        
+        if([annonDict valueForKey:@"Species"] != nil){
             expFile.species = [annonDict valueForKey:@"Species"];
-            NSLog(@"spicee parser %@",  expFile.species);
+        }else{
+            expFile.species = @"Not set!";
+        }
+        
+        if([file valueForKey:@"expId"] != nil){
             expFile.expID = [file valueForKey:@"expId"];
-            NSLog(@"expid %@",  expFile.expID);
-            if([file valueForKey:@"grVersion"] != nil){
-                expFile.grVersion = [file valueForKey:@"grVersion"];
-            }else{
-                expFile.grVersion = @"notset";
-            }
-            NSLog(@"geVersion %@",  expFile.grVersion);
+        }else{
+            expFile.expID = @"Not set!";
+        }
+        
+        if([file valueForKey:@"grVersion"] != nil){
+            expFile.grVersion = [file valueForKey:@"grVersion"];
+        }else{
+            expFile.grVersion = @"Not set!";
+        }
+        if([file valueForKey:@"author"] != nil){
             expFile.author = [file valueForKey:@"author"];
+        }else{
+            expFile.author = @"Not set!";
+        }
+        
+        if([file valueForKey:@"date"] != nil){
             expFile.date = [file valueForKey:@"date"];
-            expFile.metaData = @"astringofmeta";
-            [exp.files addExperimentFile:expFile];
-      //  }
+        }else{
+            expFile.date = @"Not set!";
+        }
+        expFile.metaData = @"astringofmeta"; // remove?
+        [exp.files addExperimentFile:expFile];
     }
     return exp;
 }

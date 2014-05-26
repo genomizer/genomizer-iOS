@@ -24,9 +24,14 @@ static NSMutableArray * processingExperimentFiles;
 
 - (void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    NSLog(@"appear");
-    
+
     [self updateProcessStatusFromServer];
+
+    _timer=  [NSTimer scheduledTimerWithTimeInterval:10
+                                              target:self
+                                            selector:@selector(timerDidTick:)
+                                            userInfo:nil
+                                             repeats:YES];
 }
 
 - (void)initialize
@@ -61,12 +66,11 @@ static NSMutableArray * processingExperimentFiles;
 {
     [super viewDidLoad];
     [self initialize];
-    [ServerConnection getProcessStatus:self];
-   
+    [self updateProcessStatusFromServer];
+    
     //add self to appDelegate
     AppDelegate *app = [UIApplication sharedApplication].delegate;
     [app addController:self];
-    //[self updateProcessStatusFromServer];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(updateProcessStatusFromServer)];
 }
 - (void)viewDidDisappear:(BOOL)animated {
