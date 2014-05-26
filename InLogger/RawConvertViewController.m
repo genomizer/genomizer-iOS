@@ -106,7 +106,7 @@
     [self.view addGestureRecognizer:_tapper];
     self.bowtie.delegate = self;
     self.genomeFile.delegate = self;
-    self.genomeFile.enabled = NO;
+    self.genomeFile.enabled = YES;
     self.genomeFile.inputView = _pickerView;
     self.genomeFile.inputAccessoryView = _toolBar;
     _pickerView.delegate = (id)self;
