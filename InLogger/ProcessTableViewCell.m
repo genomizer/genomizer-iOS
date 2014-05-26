@@ -10,12 +10,6 @@
 
 @implementation ProcessTableViewCell
 
-- (ProcessTableViewCell *) init
-{
-    self = [super init];
-    return self;
-}
-
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
