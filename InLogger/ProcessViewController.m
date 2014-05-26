@@ -24,12 +24,9 @@ static NSMutableArray * processingExperimentFiles;
 
 - (void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    AppDelegate *app = [UIApplication sharedApplication].delegate;
-    
-    if([app threadIsAvailable]){
-        [ServerConnection getProcessStatus:self];
-    }
-    
+
+    [ServerConnection getProcessStatus:self];
+
     _timer=  [NSTimer scheduledTimerWithTimeInterval:10
                                               target:self
                                             selector:@selector(timerDidTick:)
