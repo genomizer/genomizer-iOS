@@ -29,6 +29,12 @@ static NSMutableArray * processingExperimentFiles;
     if([app threadIsAvailable]){
         [ServerConnection getProcessStatus:self];
     }
+    
+    _timer=  [NSTimer scheduledTimerWithTimeInterval:10
+                                              target:self
+                                            selector:@selector(timerDidTick:)
+                                            userInfo:nil
+                                             repeats:YES];
 }
 
 - (void)initialize
@@ -55,7 +61,7 @@ static NSMutableArray * processingExperimentFiles;
     [super viewDidLoad];
     [self initialize];
     [ServerConnection getProcessStatus:self];
-    
+   
     //add self to appDelegate
     AppDelegate *app = [UIApplication sharedApplication].delegate;
     [app addController:self];
@@ -120,7 +126,7 @@ static NSMutableArray * processingExperimentFiles;
     return cell;
 }
 
-- (void) reportProcessStatusResult: (NSArray*) result error: (NSError*) error {
+- (void) reportProcessStatusResult: (NSMutableArray*) result error: (NSError*) error {
     
     [self resetProcessingExperimentFiles];
     if(error == nil)

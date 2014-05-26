@@ -17,6 +17,5 @@
 
 - (void) setValue: (id) value forAnnotation: (NSString*) annotation;
 - (NSString *) getValueForAnnotation: (NSString *) annotation;
-+ (XYZExperiment*) defaultExperiment;
 
 @end

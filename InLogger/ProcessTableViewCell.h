@@ -16,5 +16,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *added;
 @property (weak, nonatomic) IBOutlet UILabel *started;
 @property (weak, nonatomic) IBOutlet UILabel *finished;
+@property (weak, nonatomic) IBOutlet UILabel *noProcesses;
 
 @end
