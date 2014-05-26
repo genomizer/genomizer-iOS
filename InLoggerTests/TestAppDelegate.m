@@ -67,4 +67,20 @@ AppDelegate *appDelegate;
     XCTAssertEqual([appDelegate getNumberOfControllers], 0);
 }
 
+- (void) testMaxThreadsIsFive
+{
+    for(int i = 0; i <= 3; i++){
+        XCTAssertTrue([appDelegate threadIsAvailable]);
+    }
+    XCTAssertFalse([appDelegate threadIsAvailable]);
+}
+
+- (void) testRemoveOneThread {
+    for(int i = 0; i <= 3; i++){
+        [appDelegate threadIsAvailable];
+    }
+    [appDelegate threadFinished];
+    XCTAssertTrue([appDelegate threadIsAvailable]);
+}
+
 @end

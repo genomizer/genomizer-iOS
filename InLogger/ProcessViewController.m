@@ -24,22 +24,9 @@ static NSMutableArray * processingExperimentFiles;
 
 - (void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    NSLog(@"appear");
     
     [self updateProcessStatusFromServer];
-    /*
-    self.timer = [NSTimer timerWithTimeInterval:1.0
-                                         target:self
-                                       selector:@selector(timerDidTick:)
-                                       userInfo:nil repeats:YES];
-     
-    [[NSRunLoop mainRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
-     
-    AppDelegate *app = [UIApplication sharedApplication].delegate;
-    
-    if([app threadIsAvailable]){
-        [self updateProcessStatusFromServer];
-    }
-     */
 }
 
 - (void)initialize
@@ -51,7 +38,11 @@ static NSMutableArray * processingExperimentFiles;
 
 - (void) updateProcessStatusFromServer
 {
-    [ServerConnection getProcessStatus:self];
+    AppDelegate *app = [UIApplication sharedApplication].delegate;
+    if([app threadIsAvailable])
+    {
+        [ServerConnection getProcessStatus:self];
+    }
 }
 
 - (void) addProcessingExperiment:(ProcessStatusDescriptor *) file {
@@ -79,6 +70,11 @@ static NSMutableArray * processingExperimentFiles;
 {
     [super viewDidLoad];
     [self initialize];
+    [ServerConnection getProcessStatus:self];
+    
+    //add self to appDelegate
+    AppDelegate *app = [UIApplication sharedApplication].delegate;
+    [app addController:self];
     //[self updateProcessStatusFromServer];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(updateProcessStatusFromServer)];
 }
@@ -154,16 +150,17 @@ static NSMutableArray * processingExperimentFiles;
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [_tableView reloadData];
+            AppDelegate *app = [UIApplication sharedApplication].delegate;
+            [app threadFinished];
         });
     } else
     {
         dispatch_async(dispatch_get_main_queue(), ^{
             [XYZPopupGenerator showErrorMessage:error];
+            AppDelegate *app = [UIApplication sharedApplication].delegate;
+            [app threadFinished];
         });
     }
-    
-    AppDelegate *app = [UIApplication sharedApplication].delegate;
-    [app threadFinished];
 }
 
 @end

@@ -26,9 +26,10 @@
 }
 
 - (IBAction)logoutButtonTouched:(id)sender {
+    AppDelegate *app = [UIApplication sharedApplication].delegate;
+    app.userIsLoggingOut = YES;
     NSError * error;
     [ServerConnection logout:&error];
-    AppDelegate *app = [UIApplication sharedApplication].delegate;
     [app killControllers];
     [app restart];
 }

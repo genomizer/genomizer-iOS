@@ -106,7 +106,7 @@
     [self.view addGestureRecognizer:_tapper];
     self.bowtie.delegate = self;
     self.genomeFile.delegate = self;
-    self.genomeFile.enabled = NO;
+    self.genomeFile.enabled = YES;
     self.genomeFile.inputView = _pickerView;
     self.genomeFile.inputAccessoryView = _toolBar;
     _pickerView.delegate = (id)self;
@@ -146,25 +146,18 @@
 
 -(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return [_genomeReleases count]+1;
+    return [_genomeReleases count];
 }
 
 -(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    if (row == 0) {
-        return @"";
-    } else {
-        return [_genomeReleases objectAtIndex:row-1];
-    }
+    return [_genomeReleases objectAtIndex:row];
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow: (NSInteger)row inComponent:(NSInteger)component
 {
-    if (row == 0) {
-        self.genomeFile.text = @"";
-    } else {
-        self.genomeFile.text = [_genomeReleases objectAtIndex:row-1];
-    }
+    self.genomeFile.text = [_genomeReleases objectAtIndex:row];
+
 }
 
 - (UIToolbar *) createPickerViewToolBar: (UIPickerView *) pickerView
@@ -447,10 +440,21 @@
     } 
 }
 - (void) reportGenomeResult:(NSMutableArray*) genomeReleases withError:(NSError*) error {
+    NSLog(@"Selected Picker View Row: %d",[_pickerView selectedRowInComponent:0]);
     if(error){
         [XYZPopupGenerator showErrorMessage:error];
     }
-    _genomeReleases = genomeReleases;
+    else
+    {
+        _genomeReleases = genomeReleases;
+        if ([_pickerView selectedRowInComponent:0] == 0)
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [_pickerView selectRow:0 inComponent:0 animated:NO];
+                _genomeFile.text = _genomeReleases[[_pickerView selectedRowInComponent:0]];
+            });
+        }
+    }
 }
 -(void) createExperimentFiles{
     _experimentFilesDictArr = [[NSMutableArray alloc] init];
@@ -459,7 +463,12 @@
         
         [currentFile setObject:file.expID forKey:@"expid"];
         [currentFile setObject:file.metaData forKey:@"metadata"];
-        [currentFile setObject:file.author forKey:@"author"];
+        
+        if(file.author != nil)
+        {
+            [currentFile setObject:file.author forKey:@"author"];
+        }
+        
         [_experimentFilesDictArr addObject:currentFile];
     }
 }

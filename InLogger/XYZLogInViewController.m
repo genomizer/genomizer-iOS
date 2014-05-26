@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
+@property (weak, nonatomic) IBOutlet UIButton *settingsButton;
 
 @property XYZSettingsPopupDelegate *delegate;
 
@@ -50,17 +51,35 @@
     NSString *password = _passwordField.text;
     NSError *error;
     
-    if((username.length > 0) && (password.length > 0)) {
+    if((username.length > 0) && (password.length > 0))
+    {
         [ServerConnection login:self.userField.text withPassword:self.passwordField.text error:&error withContext:self];
-        
-        
         [_spinner startAnimating];
-        _loginButton.enabled = NO;
-        _loginButton.hidden = YES;
+        [self deactivateEverything];
+        
     } else{
         [XYZPopupGenerator showPopupWithMessage:@"Please enter username and password."];
     }
 }
+
+- (void) deactivateEverything
+{
+    _loginButton.enabled = NO;
+    _loginButton.hidden = YES;
+    _userField.enabled = NO;
+    _passwordField.enabled = NO;
+    _settingsButton.enabled = NO;
+}
+
+- (void) activateEverything
+{
+    _loginButton.enabled = YES;
+    _loginButton.hidden = NO;
+    _userField.enabled = YES;
+    _passwordField.enabled = YES;
+    _settingsButton.enabled = YES;
+}
+
 - (IBAction)signInButtonTouchUp:(UIButton *)sender
 {
     [self.view endEditing:YES];
@@ -73,14 +92,15 @@
     if(error == nil)
     {
         dispatch_async(dispatch_get_main_queue(), ^{
+            AppDelegate *app = [UIApplication sharedApplication].delegate;
+            app.userIsLoggingOut = NO;
             [self performSegueWithIdentifier:@"loginSegue" sender:self];
         });
     } else
     {
         dispatch_async(dispatch_get_main_queue(), ^{
             [_spinner stopAnimating];
-            _loginButton.enabled = YES;
-            _loginButton.hidden = NO;
+            [self activateEverything];
             [XYZPopupGenerator showErrorMessage:error];
         });
     }
