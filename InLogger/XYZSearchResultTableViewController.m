@@ -37,7 +37,7 @@
 }
 
 -(void) viewWillDisappear:(BOOL)animated {
-    _animating = animated;
+    _animating = YES;
     [super viewWillDisappear:animated];
 }
 

@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UITextView *infoFileTextField;
 @property (weak, nonatomic) IBOutlet UIView *dimView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property BOOL animating;
 
 @end
 
@@ -38,6 +39,16 @@
     AppDelegate *app = [UIApplication sharedApplication].delegate;
     [app addController:self];
 }
+
+- (void) viewDidAppear:(BOOL)animated {
+    _animating = NO;
+}
+
+-(void) viewWillDisappear:(BOOL)animated {
+    _animating = YES;
+    [super viewWillDisappear:animated];
+}
+
 
 - (void)setExperiment:(XYZExperiment *)experiment
 {
@@ -112,6 +123,9 @@
 
 - (IBAction)convertToProfileOnTouchUpInside:(id)sender
 {
+    if (_animating) {
+        return;
+    }
     NSArray *selectedFiles = [_selectedFiles getFiles];
     if ([selectedFiles count] == 0) {
         [XYZPopupGenerator showPopupWithMessage:@"Please select files to convert."];
