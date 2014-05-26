@@ -556,7 +556,6 @@
                                         </state>
                                         <connections>
                                             <action selector="closeInfoFile:" destination="OaH-dG-5KC" eventType="touchUpInside" id="8On-2k-dgC"/>
-                                            <segue destination="NVQ-fn-jnW" kind="modal" identifier="convertTask" id="gFg-gU-lFq"/>
                                         </connections>
                                     </button>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Cn-8I-zsb">
@@ -609,6 +608,7 @@
                         <outlet property="selectTaskToPerformButton" destination="1mi-tr-fZm" id="Zmr-LS-Qju"/>
                         <outlet property="tableView" destination="6pb-Wh-CBJ" id="5ch-FP-JXM"/>
                         <outlet property="trashButton" destination="S8B-s2-ee7" id="O3J-9v-2cu"/>
+                        <segue destination="NVQ-fn-jnW" kind="modal" identifier="convertTask" id="Thg-Vs-Nk7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K6N-pd-6ui" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1177,7 +1177,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8f3-SG-uBu">
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8f3-SG-uBu">
                                         <rect key="frame" x="127" y="171" width="46" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Close">
@@ -1213,7 +1213,7 @@
                         <outlet property="infoAboutFile" destination="45H-5h-NPD" id="fky-tw-PH7"/>
                         <outlet property="infoFileTextField" destination="y99-Vg-vyc" id="qBa-Cc-JYz"/>
                         <outlet property="tableView" destination="Zt8-vB-cTV" id="4wh-zp-uhu"/>
-                        <segue destination="NVQ-fn-jnW" kind="modal" identifier="toSelectTask" id="cMg-uF-AiC"/>
+                        <segue destination="NVQ-fn-jnW" kind="modal" identifier="toSelectTask" id="mTu-BK-rMg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W0h-F8-FQI" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1835,6 +1835,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="cMg-uF-AiC"/>
+        <segue reference="Thg-Vs-Nk7"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -73,7 +73,7 @@ static XYZFileContainer * FILES = nil;
     
     _selectTaskToPerformButton.enabled = ([_selectedFiles numberOfFilesWithType:_segmentedControl.selectedSegmentIndex] > 0);
     [_tableView reloadData];
-
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -140,17 +140,17 @@ static XYZFileContainer * FILES = nil;
 }
 
 - (IBAction)selectTaskButton:(id)sender {
-   
+    NSLog(@"knappen");
+    
     XYZExperimentFile *firstFile = [self.selectedFiles getFiles:[self getSelectedFileType]][0];
     NSString *specie = firstFile.species;
-     NSLog(@"specie1 %@", firstFile.species);
+    NSLog(@"specie1 %@", firstFile.species);
     if([self.selectedFiles getFiles:[self getSelectedFileType]].count == 1) {
         [self performSegueWithIdentifier:@"convertTask" sender:self];
     } else {
         for(int i = 1; i < [self.selectedFiles getFiles:[self getSelectedFileType]].count; i++){
-            NSLog(@"spiciers1 %@",[[self.selectedFiles getFiles:[self getSelectedFileType]][i] species]);
             if(!([specie isEqualToString:[[self.selectedFiles getFiles:[self getSelectedFileType]][i] species]])){
-                [XYZPopupGenerator showPopupWithMessage:@"Files diffrent speices selected"];
+                [XYZPopupGenerator showPopupWithMessage:@"Files with diffrent speices selected"];
                 break;
             }
             else if(i == [self.selectedFiles getFiles:[self getSelectedFileType]].count-1){
@@ -178,7 +178,7 @@ static XYZFileContainer * FILES = nil;
 
 - (IBAction)closeInfoFile:(id)sender {
     _infoAboutFile.hidden = YES;
-     _dimView.hidden = YES;
+    _dimView.hidden = YES;
     _trashButton.enabled =YES;
 }
 
