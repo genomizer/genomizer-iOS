@@ -15,7 +15,6 @@
     
     XYZExperiment *exp = [[XYZExperiment alloc] init];
     exp.name = [json objectForKey:@"name"];
-    exp.createdByUser = [json objectForKey:@"created by"];
     // add annotations
     NSArray *annotationsArray = [json  valueForKey:@"annotations"];
     NSLog(@"created BY: %@", [json objectForKey:@"created by"]);

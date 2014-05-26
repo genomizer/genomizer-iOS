@@ -42,6 +42,8 @@
 }
 
 - (void) viewWillAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    //asdasd
     //[ServerConnection getAvailableAnnotations:self];
 }
 

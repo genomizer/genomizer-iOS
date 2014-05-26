@@ -29,7 +29,9 @@
 
 - (IBAction)experimentTouchDownInside:(id)sender
 {
-    _controller.selectedExperiment = _experiement;
+    [_controller didSelectRow:_index];
+   // _controller.selectedExperiment = _experiement;
+    
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
