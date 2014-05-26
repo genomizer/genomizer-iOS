@@ -10,17 +10,6 @@
 
 @implementation XYZExperimentFile
 
-+ (XYZExperimentFile *) defaultFileWithType: (FileType) type
-{
-    XYZExperimentFile *defaultFile = [[XYZExperimentFile alloc] init];
-    defaultFile.name = @"Datafile.wig";
-    defaultFile.date = @"2014-04-01";
-    defaultFile.uploadedBy = @"Yuri";
-    defaultFile.type = type;
-    
-    return defaultFile;
-}
-
 + (BOOL) ambigousFileTypes: (NSArray *) files
 {
     if ([files count] == 0) {

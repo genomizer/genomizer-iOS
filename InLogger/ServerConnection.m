@@ -305,18 +305,23 @@ NSString *token;
      {
          NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
          NSError *error;
-         NSMutableArray *processStatusResults;
+         NSMutableArray *processStatusResults = [[NSMutableArray alloc] init];
          if (internalError == nil)
          {
              if (httpResp.statusCode == 200)
              {
+                 
                  NSArray *array = [NSJSONSerialization JSONObjectWithData:POSTReply options: NSJSONReadingMutableContainers error:&internalError];
+                 NSLog(@"processes: %@", array);
                  if (internalError == nil)
                  {
+                     
+      
                      for(NSDictionary *json in array){
                          if(([json objectForKey:@"experimentName"] != nil) && ([json objectForKey:@"status"] != nil) && ([json objectForKey:@"timeAdded"] != nil) && ([json objectForKey:@"timeStarted"] != nil) && ([json objectForKey:@"timeFinished"] != nil)){
+                            
                              [processStatusResults addObject:json];
-                         }
+                        }
                      }
                      
                  } else

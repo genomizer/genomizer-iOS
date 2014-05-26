@@ -30,9 +30,9 @@
     for(NSDictionary *file in filesArray){
         XYZExperimentFile *expFile = [[XYZExperimentFile alloc] init];
         if([file valueForKey:@"id"] != nil){
-             expFile.idFile = [file valueForKey:@"id"];
+            expFile.idFile = [file valueForKey:@"id"];
         }else{
-             expFile.idFile = @"Not set!";
+            expFile.idFile = @"Not set!";
         }
         
         if([file valueForKey:@"type"] != nil){
@@ -42,13 +42,13 @@
         }
         
         if([file valueForKey:@"filename"] != nil){
-           expFile.name = (NSString *)[file valueForKey:@"filename"];
+            expFile.name = (NSString *)[file valueForKey:@"filename"];
         }else{
             expFile.name = @"Not set!";
         }
         
         if([file valueForKey:@"uploader"] != nil){
-           expFile.uploadedBy = [file valueForKey:@"uploader"];
+            expFile.uploadedBy = [file valueForKey:@"uploader"];
         }else{
             expFile.uploadedBy = @"Not set!";
         }
@@ -75,7 +75,7 @@
         }else{
             expFile.author = @"Not set!";
         }
-
+        
         if([file valueForKey:@"date"] != nil){
             expFile.date = [file valueForKey:@"date"];
         }else{

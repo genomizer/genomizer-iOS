@@ -129,7 +129,7 @@ static NSMutableArray * processingExperimentFiles;
     return cell;
 }
 
-- (void) reportProcessStatusResult: (NSArray*) result error: (NSError*) error {
+- (void) reportProcessStatusResult: (NSMutableArray*) result error: (NSError*) error {
     
     [self resetProcessingExperimentFiles];
     if(error == nil)

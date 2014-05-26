@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="x1l-HJ-QPz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="x1l-HJ-QPz">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -809,6 +809,12 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="No processes" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g8p-gb-3fc">
+                                                    <rect key="frame" x="105" y="20" width="111" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="T7I-Br-ES3" firstAttribute="top" secondItem="FNL-Vx-njy" secondAttribute="bottom" constant="-2" id="0dK-Xl-c9z"/>
@@ -848,6 +854,7 @@
                                             <outlet property="added" destination="T7I-Br-ES3" id="dEZ-Z3-43H"/>
                                             <outlet property="file" destination="pig-0F-0yb" id="OVk-FI-Vbq"/>
                                             <outlet property="finished" destination="lRb-Jq-Irh" id="j3V-aS-8iY"/>
+                                            <outlet property="noProcesses" destination="g8p-gb-3fc" id="epY-8b-APm"/>
                                             <outlet property="process" destination="rBK-7P-g5M" id="tiy-vO-Jxd"/>
                                             <outlet property="started" destination="rfM-1U-Yq5" id="olI-l1-qoa"/>
                                             <outlet property="status" destination="FNL-Vx-njy" id="uZk-zi-wdw"/>
@@ -1833,6 +1840,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="cMg-uF-AiC"/>
+        <segue reference="gFg-gU-lFq"/>
     </inferredMetricsTieBreakers>
 </document>
