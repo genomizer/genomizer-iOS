@@ -392,15 +392,10 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Select annotations" id="LFg-vy-Gnb">
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="RJm-Qg-YWE">
-                            <connections>
-                                <segue destination="AJf-gD-ybn" kind="unwind" unwindAction="unwindToList:" id="ING-kb-3ff"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="RJm-Qg-YWE"/>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CSf-AT-0Od" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="AJf-gD-ybn" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="4020" y="-1542"/>
         </scene>
