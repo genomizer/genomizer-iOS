@@ -92,7 +92,6 @@
         _selectedExperiment = [_searchResults objectAtIndex: row];
         [self performSegueWithIdentifier:@"toFileList1" sender:self];
     }
-
 }
 
 - (void)viewWillAppear:(BOOL)animated
