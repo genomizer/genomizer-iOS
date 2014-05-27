@@ -27,11 +27,9 @@
     _textView.text = text;
 }
 
-- (IBAction)experimentTouchDownInside:(id)sender
+- (IBAction)experimentTouchUpInside:(id)sender
 {
     [_controller didSelectRow:_index];
-   // _controller.selectedExperiment = _experiement;
-    
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
