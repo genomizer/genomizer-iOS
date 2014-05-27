@@ -38,24 +38,9 @@ static BOOL BUSY;
     // Dispose of any resources that can be recreated.
 }
 
-- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
-{
-    NSLog(@"shoudld peroreo");
-    return YES;
-    //return ![XYZNavigationController isBusy];
-}
-
-- (void) performSegueWithIdentifier:(NSString *)identifier sender:(id)sender
-{
-    if ([self shouldPerformSegueWithIdentifier:identifier sender:sender]) {
-        [super performSegueWithIdentifier:identifier sender:sender];
-    }
-    
-}
-
-
 - (UIViewController *)popViewControllerAnimated:(BOOL)animated
 {
+    NSLog(@"popping");
     if ([XYZNavigationController isBusy]) {
         return nil; //[super topViewController];
     } else {

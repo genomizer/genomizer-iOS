@@ -28,9 +28,16 @@
 
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
 {
-    NSLog(@"shoudld peroreo");
-    return YES;
-    //return ![XYZNavigationController isBusy];
+    NSLog(@"should perform3");
+    return ![XYZNavigationController isBusy];
+}
+
+- (void) performSegueWithIdentifier:(NSString *)identifier sender:(id)sender
+{
+    NSLog(@"perform segueue4");
+    if ([self shouldPerformSegueWithIdentifier:identifier sender:sender]) {
+        [super performSegueWithIdentifier:identifier sender:sender];
+    }
 }
 
 @end
