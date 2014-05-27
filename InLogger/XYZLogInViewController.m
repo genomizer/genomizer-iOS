@@ -13,7 +13,7 @@
 #import "XYZSettingsPopupDelegate.h"
 #import "JSONBuilder.h"
 #import "XYZFileHandler.h"
-#import <SystemConfiguration/SystemConfiguration.h>
+#import "Reachability.h"
 
 @interface XYZLogInViewController ()
 
@@ -51,30 +51,23 @@
     NSString *username = _userField.text;
     NSString *password = _passwordField.text;
     NSError *error;
-//    Reachability *reachability = [Reachability reachabilityForInternetConnection];
-//    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
-//    if (networkStatus == ReachableViaWWAN) {
-//        
-//        NSLog(@"Code when there is a WiFi connection
-//              ");
-//        
-//    } else if (networkStatus == ReachableViaWiFi) {
-//        
-//        //Code when there is a WiFi connection
-//        
-//    } else if (networkStatus == NotReachable) {
-//        
-//        //Code when there is no connection
-//    }
-    if((username.length > 0) && (password.length > 0))
-    {
-        [ServerConnection login:self.userField.text withPassword:self.passwordField.text error:&error withContext:self];
-        [_spinner startAnimating];
-        [self deactivateEverything];
-        
-    } else{
-        [XYZPopupGenerator showPopupWithMessage:@"Please enter username and password."];
+    Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
+    if (networkStatus == NotReachable) {
+        [XYZPopupGenerator showPopupWithMessage:@"There is no internet connection." withTitle:@"Connection Error"];
+       
+    } else {
+        if((username.length > 0) && (password.length > 0))
+        {
+            [ServerConnection login:self.userField.text withPassword:self.passwordField.text error:&error withContext:self];
+            [_spinner startAnimating];
+            [self deactivateEverything];
+            
+        } else{
+            [XYZPopupGenerator showPopupWithMessage:@"Please enter username and password."];
+        }
     }
+   
 }
 
 - (void) deactivateEverything
