@@ -15,6 +15,7 @@ NSMutableArray* controllers;
 
 - (AppDelegate*) init {
     self = [super init];
+    _userIsLoggingOut = NO;
     controllers = [[NSMutableArray alloc] init];
     _numberOfThreadsAlive = 0;
     return self;
@@ -49,18 +50,21 @@ NSMutableArray* controllers;
 
 - (bool) threadIsAvailable {
     
-    if(_numberOfThreadsAlive >= 5)
+    if(_numberOfThreadsAlive <= 3)
     {
         _numberOfThreadsAlive++;
+        NSLog(@"threadCount: %d", _numberOfThreadsAlive);
         return YES;
     } else
     {
+        NSLog(@"No thread available, threadnumber: %d", _numberOfThreadsAlive);
         return NO;
     }
 }
 
 - (void) threadFinished
 {
+    NSLog(@"threadFinished");
     _numberOfThreadsAlive--;
 }
 

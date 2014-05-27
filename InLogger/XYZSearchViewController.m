@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UITextView *pubmedTextView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
 @property (weak, nonatomic) IBOutlet UIButton *searchButton;
+@property bool searching;
 
 @end
 
@@ -35,6 +36,7 @@
     _pickerView = [self createPickerView];
     _toolBar = [self createPickerViewToolBar:_pickerView];
     [self.tableView reloadData];
+    _searching = NO;
     
     //add self to appDelegate
     AppDelegate *app = [UIApplication sharedApplication].delegate;
@@ -92,6 +94,9 @@
     cell.annotation = annotation;
     cell.controller = self;
     cell.switchButton.on = annotation.selected;
+    cell.switchButton.enabled = !_searching;
+    cell.inputField.enabled = !_searching;
+    
     if (annotation.value == nil) {
         cell.inputField.text = @"";
     } else {
@@ -109,25 +114,53 @@
 }
 
 - (IBAction)searchButton:(id)sender {
-    [self showLoading];
+    [self searchIsStarting];
     NSArray *selectedAnnotations = [self getSelectedAnnotations];
     [ServerConnection search:[XYZPubMedBuilder createAnnotationsSearch: selectedAnnotations] withContext:self];
 }
 
+- (void) searchIsFinished
+{
+    [_spinner stopAnimating];
+    _searchButton.enabled = YES;
+    _searchButton.hidden = NO;
+    self.navigationItem.rightBarButtonItem.enabled = YES;
+    _searching = NO;
+    [_tableView reloadData];
+}
+    
+- (void) searchIsStarting
+{
+    _spinner.hidden = NO;
+    [_spinner startAnimating];
+    _searchButton.enabled = NO;
+    _searchButton.hidden = YES;
+    self.navigationItem.rightBarButtonItem.enabled = NO;
+    _searching = YES;
+    [_tableView reloadData];
+}
+
 - (void) reportSearchResult: (NSMutableArray*) result error: (NSError*) error
 {
-    if(error)
+    AppDelegate *app = [UIApplication sharedApplication].delegate;
+    
+    if(!app.userIsLoggingOut)
     {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self hideLoading];
-            [XYZPopupGenerator showErrorMessage:error];
-        });
-    } else
-    {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self hideLoading];
-            [self performSegueWithIdentifier:@"searchResult" sender:result];
-        });
+        if(error)
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self searchIsFinished];
+                [XYZPopupGenerator showErrorMessage:error];
+            });
+        } else
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self searchIsFinished];
+                [self performSegueWithIdentifier:@"searchResult" sender:result];
+            });
+        }
+    } else{
+        NSLog(@"success");
     }
 }
 
@@ -150,7 +183,7 @@
 
 - (IBAction)searchQueryButtonTouched:(id)sender {
     
-    [self showLoading];
+    [self searchIsStarting];
     
     //send search
     [ServerConnection search:_pubmedTextView.text withContext:self];
@@ -179,20 +212,6 @@
     [_pubmedTextView becomeFirstResponder];
 }
 
-- (void) showLoading
-{
-    _spinner.hidden = NO;
-    [_spinner startAnimating];
-    _searchButton.enabled = NO;
-    _searchButton.hidden = YES;
-}
-
-- (void) hideLoading {
-    [_spinner stopAnimating];
-    _searchButton.enabled = YES;
-    _searchButton.hidden = NO;
-}
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"searchResult"]) {
@@ -205,7 +224,7 @@
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     
     if([text isEqualToString:@"\n"]) {
-        [self showLoading];
+        [self searchIsStarting];
         [self closeAdvancedSearch:nil];
         [ServerConnection search:_pubmedTextView.text withContext:self];
         return NO;

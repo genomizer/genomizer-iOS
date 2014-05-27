@@ -15,7 +15,7 @@
 #import "AppDelegate.h"
 
 @interface ProcessViewController ()
-@property  NSTimer *timer;
+@property UIRefreshControl *refreshControl;
 @end
 
 @implementation ProcessViewController
@@ -25,19 +25,22 @@ static NSMutableArray * processingExperimentFiles;
 - (void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
 
-    [ServerConnection getProcessStatus:self];
-
-    _timer=  [NSTimer scheduledTimerWithTimeInterval:10
-                                              target:self
-                                            selector:@selector(timerDidTick:)
-                                            userInfo:nil
-                                             repeats:YES];
+ //   [self updateProcessStatusFromServer];
 }
 
 - (void)initialize
 {
     if (processingExperimentFiles == nil) {
         processingExperimentFiles = [[NSMutableArray alloc] init];
+    }
+}
+
+- (void) updateProcessStatusFromServer
+{
+    AppDelegate *app = [UIApplication sharedApplication].delegate;
+    if([app threadIsAvailable])
+    {
+        [ServerConnection getProcessStatus:self];
     }
 }
 
@@ -57,22 +60,29 @@ static NSMutableArray * processingExperimentFiles;
 {
     [super viewDidLoad];
     [self initialize];
-    [ServerConnection getProcessStatus:self];
-   
+    [self updateProcessStatusFromServer];
+    
     //add self to appDelegate
     AppDelegate *app = [UIApplication sharedApplication].delegate;
     [app addController:self];
+ //   self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(updateProcessStatusFromServer)];
+    
+    UIView *refreshView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+    [self.tableView insertSubview:refreshView atIndex:0];
+    _refreshControl = [[UIRefreshControl alloc] init];
+    [_refreshControl addTarget:self action:@selector(reloadDatas) forControlEvents:UIControlEventValueChanged];
+    [refreshView addSubview:_refreshControl];
+
 }
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
-    [self.timer invalidate];
+}
+-(void)reloadDatas {
+    NSLog(@"update");
+    [self updateProcessStatusFromServer];
+    [_refreshControl endRefreshing];
 }
 
--(void) timerDidTick:(NSTimer*) theTimer{
-    NSLog(@"timer ");
-    [ServerConnection getProcessStatus:self];
-    
-}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -135,16 +145,17 @@ static NSMutableArray * processingExperimentFiles;
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [_tableView reloadData];
+            AppDelegate *app = [UIApplication sharedApplication].delegate;
+            [app threadFinished];
         });
     } else
     {
         dispatch_async(dispatch_get_main_queue(), ^{
             [XYZPopupGenerator showErrorMessage:error];
+            AppDelegate *app = [UIApplication sharedApplication].delegate;
+            [app threadFinished];
         });
     }
-    
-    AppDelegate *app = [UIApplication sharedApplication].delegate;
-    [app threadFinished];
 }
 
 @end

@@ -86,4 +86,22 @@
     }
     return exp;
 }
+
++ (NSError*) validateData: (NSDictionary*) data
+{
+    NSArray *valuesToCheck = [NSArray arrayWithObjects: @"grVersion", @"filename", nil];
+    
+    for(NSString *value in valuesToCheck)
+    {
+        if([data objectForKey:value] == nil)
+        {
+            NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+            NSString *message = [NSString stringWithFormat:@"Server sent invalid data on experiment: %@", data];
+            [dict setObject:message forKey:NSLocalizedDescriptionKey];
+            return [NSError errorWithDomain:@"invalid data" code:5 userInfo:dict];
+        }
+    }
+    return nil;
+}
+
 @end

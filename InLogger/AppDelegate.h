@@ -12,7 +12,9 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
-@property int numberOfThreadsAlive; 
+@property int numberOfThreadsAlive;
+
+@property bool userIsLoggingOut;
 
 - (int) getNumberOfControllers;
 
