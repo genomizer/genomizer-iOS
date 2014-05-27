@@ -15,7 +15,7 @@
 @property BOOL ratio;
 @property (nonatomic, copy) ProcessViewController *aReference;
 
-- (void) reportResult: (NSError*) error;
+- (void) reportResult: (NSError*) error experiment: (NSString*) expid;
 - (void) reportGenomeResult:(NSMutableArray*) genomeReleases withError:(NSError*) error;
 @end
 
