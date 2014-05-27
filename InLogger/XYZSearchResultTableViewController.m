@@ -91,7 +91,6 @@
 
 - (IBAction)editButtonPressed:(id)sender
 {
-    [XYZNavigationController setBusy:![XYZNavigationController isBusy]];
     [self performSegueWithIdentifier:@"toEditDisplay" sender:self];
 }
 
