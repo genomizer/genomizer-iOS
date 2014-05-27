@@ -7,7 +7,7 @@
 //
 
 #import "XYZTableViewController.h"
-#import "XYZNavigationController.h"
+#import "XYZSegueController.h"
 
 @interface XYZTableViewController ()
 
@@ -18,10 +18,7 @@
 - (void) viewDidAppear:(BOOL)animated
 {
     NSLog(@"DID APPEAR");
-    UINavigationController *navController = [super navigationController];
-    if ([navController isKindOfClass:[XYZNavigationController class]]) {
-        [XYZNavigationController setBusy:NO];
-    }
+    [XYZSegueController segueDone];
     [super viewDidAppear:animated];
     
 }
@@ -29,13 +26,14 @@
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
 {
     NSLog(@"should perform3");
-    return ![XYZNavigationController isBusy];
+    return ![XYZSegueController isPerformingSegue];
 }
 
 - (void) performSegueWithIdentifier:(NSString *)identifier sender:(id)sender
 {
     NSLog(@"perform segueue4");
     if ([self shouldPerformSegueWithIdentifier:identifier sender:sender]) {
+        [XYZSegueController segueStarted];
         [super performSegueWithIdentifier:identifier sender:sender];
     }
 }

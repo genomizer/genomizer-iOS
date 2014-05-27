@@ -46,13 +46,13 @@
 		DE750AD61924BD3000F77FEC /* XYZDataFileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE750AD41924BD3000F77FEC /* XYZDataFileTableViewCell.xib */; };
 		DE7C9C2519235F6C004A2492 /* XYZAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = DE7C9C2419235F6C004A2492 /* XYZAnnotation.m */; };
 		DE7C9C2719236044004A2492 /* TestAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = DE7C9C2619236044004A2492 /* TestAnnotation.m */; };
+		DE915F7F19347AB5009C0F79 /* XYZSegueController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE915F7E19347AB5009C0F79 /* XYZSegueController.m */; };
 		DE9A3EEF1918CAA100F7C33B /* XYZAnnotationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DE9A3EED1918CAA100F7C33B /* XYZAnnotationTableViewCell.m */; };
 		DE9A3EF01918CAA100F7C33B /* XYZAnnotationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE9A3EEE1918CAA100F7C33B /* XYZAnnotationTableViewCell.xib */; };
 		DE9A3EF41918CB4600F7C33B /* XYZAnnotationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE9A3EF21918CB4600F7C33B /* XYZAnnotationTableViewController.m */; };
 		DE9A3EF51918CB4600F7C33B /* XYZAnnotationTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE9A3EF31918CB4600F7C33B /* XYZAnnotationTableViewController.xib */; };
 		DE9A3EF91918CFDC00F7C33B /* TestExperimentDescriber.m in Sources */ = {isa = PBXBuildFile; fileRef = DE9A3EF81918CFDC00F7C33B /* TestExperimentDescriber.m */; };
 		DEB9EBE31929F83E00BD051B /* XYZFileContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = DEB9EBE21929F83E00BD051B /* XYZFileContainer.m */; };
-		DEBD8BBB19338008005C5E19 /* XYZNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEBD8BBA19338008005C5E19 /* XYZNavigationController.m */; };
 		DEBD8BC21933835B005C5E19 /* XYZViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEBD8BC11933835B005C5E19 /* XYZViewController.m */; };
 		DEBD8BC519338594005C5E19 /* XYZTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEBD8BC419338594005C5E19 /* XYZTableViewController.m */; };
 		DEBD8BC819338B09005C5E19 /* XYZNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = DEBD8BC719338B09005C5E19 /* XYZNavigationBar.m */; };
@@ -156,6 +156,8 @@
 		DE7C9C2319235F6C004A2492 /* XYZAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZAnnotation.h; sourceTree = "<group>"; };
 		DE7C9C2419235F6C004A2492 /* XYZAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZAnnotation.m; sourceTree = "<group>"; };
 		DE7C9C2619236044004A2492 /* TestAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestAnnotation.m; sourceTree = "<group>"; };
+		DE915F7D19347AB5009C0F79 /* XYZSegueController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZSegueController.h; sourceTree = "<group>"; };
+		DE915F7E19347AB5009C0F79 /* XYZSegueController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZSegueController.m; sourceTree = "<group>"; };
 		DE9A3EEC1918CAA100F7C33B /* XYZAnnotationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZAnnotationTableViewCell.h; sourceTree = "<group>"; };
 		DE9A3EED1918CAA100F7C33B /* XYZAnnotationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZAnnotationTableViewCell.m; sourceTree = "<group>"; };
 		DE9A3EEE1918CAA100F7C33B /* XYZAnnotationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XYZAnnotationTableViewCell.xib; sourceTree = "<group>"; };
@@ -165,8 +167,6 @@
 		DE9A3EF81918CFDC00F7C33B /* TestExperimentDescriber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestExperimentDescriber.m; sourceTree = "<group>"; };
 		DEB9EBE11929F83E00BD051B /* XYZFileContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZFileContainer.h; sourceTree = "<group>"; };
 		DEB9EBE21929F83E00BD051B /* XYZFileContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZFileContainer.m; sourceTree = "<group>"; };
-		DEBD8BB919338008005C5E19 /* XYZNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZNavigationController.h; sourceTree = "<group>"; };
-		DEBD8BBA19338008005C5E19 /* XYZNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZNavigationController.m; sourceTree = "<group>"; };
 		DEBD8BC01933835B005C5E19 /* XYZViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZViewController.h; sourceTree = "<group>"; };
 		DEBD8BC11933835B005C5E19 /* XYZViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZViewController.m; sourceTree = "<group>"; };
 		DEBD8BC319338594005C5E19 /* XYZTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZTableViewController.h; sourceTree = "<group>"; };
@@ -331,14 +331,14 @@
 		DEBD8BBC193382C2005C5E19 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
-				DEBD8BB919338008005C5E19 /* XYZNavigationController.h */,
-				DEBD8BBA19338008005C5E19 /* XYZNavigationController.m */,
 				DEBD8BC01933835B005C5E19 /* XYZViewController.h */,
 				DEBD8BC11933835B005C5E19 /* XYZViewController.m */,
 				DEBD8BC319338594005C5E19 /* XYZTableViewController.h */,
 				DEBD8BC419338594005C5E19 /* XYZTableViewController.m */,
 				DEBD8BC619338B09005C5E19 /* XYZNavigationBar.h */,
 				DEBD8BC719338B09005C5E19 /* XYZNavigationBar.m */,
+				DE915F7D19347AB5009C0F79 /* XYZSegueController.h */,
+				DE915F7E19347AB5009C0F79 /* XYZSegueController.m */,
 			);
 			name = Navigation;
 			sourceTree = "<group>";
@@ -631,6 +631,7 @@
 				DED12290190E966200D8E530 /* XYZSearchResultTableViewController.m in Sources */,
 				6484A2F4190E8F160071BB23 /* ServerConnection.m in Sources */,
 				646F06AE1918D46000C959CA /* (null) in Sources */,
+				DE915F7F19347AB5009C0F79 /* XYZSegueController.m in Sources */,
 				DEEF7D94190A55D1005EDB8E /* XYZTabViewController.m in Sources */,
 				DEEF6AF819094F8A00A2CD8C /* AppDelegate.m in Sources */,
 				DEBD8BC819338B09005C5E19 /* XYZNavigationBar.m in Sources */,
@@ -639,7 +640,6 @@
 				649483E0193479C500C646FE /* Reachability.m in Sources */,
 				649778EF191119FB000FD14F /* MoreViewController.m in Sources */,
 				DE25D7FC1910D6840084BDDC /* XYZTitleTableViewCell.m in Sources */,
-				DEBD8BBB19338008005C5E19 /* XYZNavigationController.m in Sources */,
 				DE9A3EEF1918CAA100F7C33B /* XYZAnnotationTableViewCell.m in Sources */,
 				DE25D8061910E1500084BDDC /* XYZExperimentDescriber.m in Sources */,
 				DE6BC22E192DE12400B6D7AD /* XYZSettingsPopupDelegate.m in Sources */,

@@ -7,7 +7,7 @@
 //
 
 #import "XYZNavigationBar.h"
-#import "XYZNavigationController.h"
+#import "XYZSegueController.h"
 
 @implementation XYZNavigationBar
 
@@ -23,7 +23,7 @@
 - (UINavigationItem *)popNavigationItemAnimated:(BOOL)animated
 {
     NSLog(@"POPOPOP");
-    if([XYZNavigationController isBusy]) {
+    if([XYZSegueController isPerformingSegue]) {
         NSLog(@"no popopop");
         return nil;
     } else {
