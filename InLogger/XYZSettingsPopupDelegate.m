@@ -9,6 +9,7 @@
 #import "XYZSettingsPopupDelegate.h"
 #import "JSONBuilder.h"
 #import "XYZFileHandler.h"
+#import "XYZPopupGenerator.h"
 
 
 @interface XYZSettingsPopupDelegate ()
@@ -20,8 +21,17 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     UITextField *textField = [alertView textFieldAtIndex:0];
-    [JSONBuilder setServerURLToString:textField.text];
-    [XYZFileHandler writeData:textField.text toFile:SERVER_URL_FILE_NAME];
+    NSURLRequest *candidateURL = [NSURLRequest requestWithURL:[NSURL URLWithString: textField.text]];
+
+    if ([NSURLConnection canHandleRequest:candidateURL])
+    {
+        [JSONBuilder setServerURLToString:textField.text];
+        [XYZFileHandler writeData: [JSONBuilder getServerURL] toFile:SERVER_URL_FILE_NAME];
+    }
+    else
+    {
+        [XYZPopupGenerator showPopupWithMessage:(@"Invalid URL entered")];
+    }
 }
 
 @end

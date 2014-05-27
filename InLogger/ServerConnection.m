@@ -42,11 +42,13 @@ NSString *token;
     
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler: ^(NSURLResponse *response, NSData *POSTReply, NSError *internalError)
      {
-         NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
-         NSMutableDictionary *message = [NSJSONSerialization JSONObjectWithData:POSTReply options:kNilOptions error:error];
+         NSMutableDictionary *message;
          NSError *error;
          if (internalError == nil)
          {
+
+             NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
+              message = [NSJSONSerialization JSONObjectWithData:POSTReply options:kNilOptions error:&error];
              NSDictionary *json = [self parseJSONToDictionary:POSTReply error:&internalError];
              
              if(internalError == nil)
@@ -73,7 +75,7 @@ NSString *token;
          }
          else
          {
-             error = [self generateError:@"Connetion error" withErrorDomain:@"Connection Error" withUnderlyingError:internalError];
+             error = [self generateError:@"Connection error" withErrorDomain:@"Connection Error" withUnderlyingError:internalError];
          }
          [controller reportLoginResult:error];
      }];
