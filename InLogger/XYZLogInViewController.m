@@ -13,6 +13,7 @@
 #import "XYZSettingsPopupDelegate.h"
 #import "JSONBuilder.h"
 #import "XYZFileHandler.h"
+#import <SystemConfiguration/SystemConfiguration.h>
 
 @interface XYZLogInViewController ()
 
@@ -50,16 +51,21 @@
     NSString *username = _userField.text;
     NSString *password = _passwordField.text;
     NSError *error;
-/*    Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
-    NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
-    if (networkStatus == NotReachable) {
-        NSLog(@"There IS NO internet connection");
-    } else {
-        
-        NSLog(@"There IS internet connection");
-        
-    }        
-}*/
+//    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+//    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
+//    if (networkStatus == ReachableViaWWAN) {
+//        
+//        NSLog(@"Code when there is a WiFi connection
+//              ");
+//        
+//    } else if (networkStatus == ReachableViaWiFi) {
+//        
+//        //Code when there is a WiFi connection
+//        
+//    } else if (networkStatus == NotReachable) {
+//        
+//        //Code when there is no connection
+//    }
     if((username.length > 0) && (password.length > 0))
     {
         [ServerConnection login:self.userField.text withPassword:self.passwordField.text error:&error withContext:self];
