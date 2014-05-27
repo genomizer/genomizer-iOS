@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XYZTableViewController.h"
 #import "ProcessViewController.h"
 
-@interface RawConvertViewController : UITableViewController<UITextFieldDelegate>
+@interface RawConvertViewController : XYZTableViewController<UITextFieldDelegate>
 @property NSMutableArray * experimentFiles;
 @property NSInteger * type;
 @property BOOL ratio;

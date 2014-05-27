@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XYZTableViewController.h"
 #import "XYZSelectTaskTableViewController.h"
 #import "XYZExperimentFile.h"
 
-@interface XYZSelectTaskTableViewController : UITableViewController
+@interface XYZSelectTaskTableViewController : XYZTableViewController
 @property NSMutableArray* experimentFiles;
 @property FileType fileType;
 

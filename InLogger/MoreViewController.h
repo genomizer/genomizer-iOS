@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XYZViewController.h"
 
-@interface MoreViewController : UIViewController
+@interface MoreViewController : XYZViewController
 - (IBAction)logoutButtonTouched:(id)sender;
 
 @end
