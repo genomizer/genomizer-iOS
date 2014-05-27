@@ -347,7 +347,7 @@ NSString *token;
          {
              error = [self generateError:@"Could not connect to server" withErrorDomain:@"Connection" withUnderlyingError:internalError];
          }
-         [NSThread sleepForTimeInterval:1];
+
          [controller reportProcessStatusResult:processStatusResults error:error];
      }];
 }

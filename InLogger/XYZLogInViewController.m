@@ -13,6 +13,7 @@
 #import "XYZSettingsPopupDelegate.h"
 #import "JSONBuilder.h"
 #import "XYZFileHandler.h"
+#import "Reachability.h"
 
 @interface XYZLogInViewController ()
 
@@ -50,16 +51,24 @@
     NSString *username = _userField.text;
     NSString *password = _passwordField.text;
     NSError *error;
-    
-    if((username.length > 0) && (password.length > 0))
-    {
-        [ServerConnection login:self.userField.text withPassword:self.passwordField.text error:&error withContext:self];
-        [_spinner startAnimating];
-        [self deactivateEverything];
+    Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
+    if (networkStatus == NotReachable) {
+        [XYZPopupGenerator showPopupWithMessage:@"There is no internet connection." withTitle:@"Connection Error"];
+       
+    } else {
         
-    } else{
-        [XYZPopupGenerator showPopupWithMessage:@"Please enter username and password."];
+        if((username.length > 0) && (password.length > 0))
+        {
+            [ServerConnection login:self.userField.text withPassword:self.passwordField.text error:&error withContext:self];
+            [_spinner startAnimating];
+            [self deactivateEverything];
+            
+        } else{
+            [XYZPopupGenerator showPopupWithMessage:@"Please enter username and password."];
+        }
     }
+   
 }
 
 - (void) deactivateEverything

@@ -157,7 +157,6 @@ static XYZFileContainer * FILES = nil;
             }
         }
     }
-    
 }
 
 - (IBAction)infoFile:(UIButton*)sender {
