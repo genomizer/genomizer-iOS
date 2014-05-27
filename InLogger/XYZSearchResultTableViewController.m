@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 Joel Viklund. All rights reserved.
 //
 
-#import "XYZNavigationController.h"
 #import "XYZSearchResultTableViewController.h"
 #import "XYZSearchResultTableViewCell.h"
 #import "XYZDataFileViewController.h"
@@ -91,7 +90,6 @@
 
 - (IBAction)editButtonPressed:(id)sender
 {
-    NSLog(@"edit pressed, busy: %hhd", [XYZNavigationController isBusy]);
     [self performSegueWithIdentifier:@"toEditDisplay" sender:self];
 }
 

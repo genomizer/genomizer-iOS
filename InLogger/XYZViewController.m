@@ -7,7 +7,7 @@
 //
 
 #import "XYZViewController.h"
-#import "XYZNavigationController.h"
+#import "XYZSegueController.h"
 
 @interface XYZViewController ()
 
@@ -17,10 +17,7 @@
 
 - (void) viewDidAppear:(BOOL)animated
 {
-    UINavigationController *navController = [super navigationController];
-    if ([navController isKindOfClass:[XYZNavigationController class]]) {
-        [XYZNavigationController setBusy:NO];
-    }
+    [XYZSegueController segueDone];
     [super viewDidAppear:animated];
     
 }
@@ -28,7 +25,7 @@
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
 {
     NSLog(@"should perform1");
-    return ![XYZNavigationController isBusy];
+    return ![XYZSegueController isPerformingSegue];
 }
 
 - (void) performSegueWithIdentifier:(NSString *)identifier sender:(id)sender
@@ -36,6 +33,7 @@
     NSLog(@"perform segueue2");
     if ([self shouldPerformSegueWithIdentifier:identifier sender:sender]) {
         NSLog(@"yes perform segueue");
+        [XYZSegueController segueStarted];
         [super performSegueWithIdentifier:identifier sender:sender];
     }
 }
