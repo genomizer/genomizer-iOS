@@ -35,8 +35,15 @@
 {
     NSLog(@"perform segueue2");
     if ([self shouldPerformSegueWithIdentifier:identifier sender:sender]) {
+        NSLog(@"yes perform segueue");
         [super performSegueWithIdentifier:identifier sender:sender];
     }
+}
+
+- (void)presentViewController:(UIViewController *)viewControllerToPresent animated:(BOOL)flag completion:(void (^)(void))completion
+{
+   // NSLog(@"SDASDAS");
+    [super presentViewController:viewControllerToPresent animated:flag completion:completion];
 }
 
 @end

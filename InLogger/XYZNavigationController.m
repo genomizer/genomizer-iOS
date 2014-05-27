@@ -42,8 +42,10 @@ static BOOL BUSY;
 {
     NSLog(@"popping");
     if ([XYZNavigationController isBusy]) {
+        NSLog(@"no");
         return nil; //[super topViewController];
     } else {
+        NSLog(@"yes");
         [XYZNavigationController setBusy:YES];
         return [super popViewControllerAnimated:animated];
     }

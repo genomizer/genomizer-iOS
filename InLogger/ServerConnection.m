@@ -207,7 +207,8 @@ NSString *token;
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler: ^(NSURLResponse *response, NSData *POSTReply, NSError *internalError)
      {
-         NSError * error;
+         [NSThread sleepForTimeInterval:5];
+         NSError *error;
          NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
          if(internalError == nil)
          {
@@ -224,14 +225,12 @@ NSString *token;
                      errorMessage =@"Server sent incorrectly formatted data";
                  }
                  error = [self generateErrorObjectFromHTTPError:httpResp.statusCode errorMessage:errorMessage];
-                 [controller reportResult:error];
              }
          } else
          {
              error = [self generateError:@"Could not connect to server" withErrorDomain:@"Connection Error" withUnderlyingError:internalError];
-             [controller reportResult:error];
          }
-         
+         [controller reportResult:error experiment: [dict objectForKey:@"expid"]];
      }];
 }
 

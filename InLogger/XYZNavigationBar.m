@@ -24,8 +24,10 @@
 {
     NSLog(@"POPOPOP");
     if([XYZNavigationController isBusy]) {
+        NSLog(@"no popopop");
         return nil;
     } else {
+        NSLog(@"yes popoppo");
         return [super popNavigationItemAnimated:animated];
     }
 }

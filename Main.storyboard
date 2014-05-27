@@ -978,7 +978,7 @@
         <!--Navigation Controller-->
         <scene sceneID="d00-W3-BKo">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Tiy-o2-5Ke" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Tiy-o2-5Ke" customClass="XYZNavigationController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="more" id="9RK-eF-MEV"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="uoo-yn-dUC">
@@ -1032,7 +1032,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="this wounderful application!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GAJ-Ks-sWX">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="this wonderful application!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GAJ-Ks-sWX">
                                 <rect key="frame" x="20" y="299" width="280" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -1785,7 +1785,7 @@
         <!--Navigation Controller-->
         <scene sceneID="yzg-op-63V">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="NVQ-fn-jnW" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="NVQ-fn-jnW" customClass="XYZNavigationController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="sc3-zA-RPj"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Yit-kv-zId" customClass="XYZNavigationBar">
@@ -1804,7 +1804,7 @@
         <!--Navigation Controller - Processes-->
         <scene sceneID="nxs-he-Ele">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="axL-bg-48q" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="axL-bg-48q" customClass="XYZNavigationController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Processes" image="processIcon" id="Zmr-ID-HTR"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ref-vw-pc1" customClass="XYZNavigationBar">
