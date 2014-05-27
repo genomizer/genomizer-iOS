@@ -306,7 +306,7 @@
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <connections>
-                                                <action selector="experimentTouchDownInside:" destination="CwE-h2-EVG" eventType="touchDown" id="3Ke-p6-Vie"/>
+                                                <action selector="experimentTouchUpInside:" destination="CwE-h2-EVG" eventType="touchUpInside" id="LBm-JI-eXZ"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -530,7 +530,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="selectTaskButton:" destination="OaH-dG-5KC" eventType="touchUpInside" id="82p-7b-Vcy"/>
+                                    <action selector="selectTaskButton:" destination="OaH-dG-5KC" eventType="touchUpInside" id="hsv-No-gFN"/>
                                 </connections>
                             </button>
                             <view hidden="YES" alpha="0.39999999999999963" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0r3-La-QJb">
@@ -1836,6 +1836,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="mTu-BK-rMg"/>
+        <segue reference="Thg-Vs-Nk7"/>
     </inferredMetricsTieBreakers>
 </document>
