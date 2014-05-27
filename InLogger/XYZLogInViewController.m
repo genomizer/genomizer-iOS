@@ -57,6 +57,7 @@
         [XYZPopupGenerator showPopupWithMessage:@"There is no internet connection." withTitle:@"Connection Error"];
        
     } else {
+        
         if((username.length > 0) && (password.length > 0))
         {
             [ServerConnection login:self.userField.text withPassword:self.passwordField.text error:&error withContext:self];
