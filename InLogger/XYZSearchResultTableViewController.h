@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "XYZExperiment.h"
 #import "XYZExperimentDescriber.h"
+#import "XYZTableViewController.h"
 
-@interface XYZSearchResultTableViewController : UITableViewController
+@interface XYZSearchResultTableViewController : XYZTableViewController
 
 @property XYZExperimentDescriber *experimentDescriber;
 @property XYZExperiment * selectedExperiment;

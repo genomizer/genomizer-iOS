@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XYZViewController.h"
 
-@interface XYZSettingsPopupDelegate : UIViewController
+@interface XYZSettingsPopupDelegate : XYZViewController
 
 @end

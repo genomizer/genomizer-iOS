@@ -79,6 +79,7 @@ static XYZFileContainer * FILES = nil;
 - (void)viewDidAppear:(BOOL)animated
 {
     [self updateTableViewAndButtons];
+    [super viewDidAppear:animated];
 }
 
 - (void)viewDidLoad

@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XYZViewController.h"
 #import "XYZExperimentDescriber.h"
 
-@interface XYZSearchViewController : UIViewController<UITextFieldDelegate>
+@interface XYZSearchViewController : XYZViewController<UITextFieldDelegate>
 
 @property UIPickerView *pickerView;
 @property UIToolbar *toolBar;

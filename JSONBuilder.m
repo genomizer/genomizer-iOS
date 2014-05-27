@@ -32,10 +32,6 @@ static NSString *SERVER_URL = nil;
     return request;
 }
 
-- (void) asd {
-    
-}
-
 +(NSMutableURLRequest*)getLogoutJSON:(NSString *)token
 {
     NSMutableURLRequest *request = [self getRequest:@"DELETE" withToken:token];

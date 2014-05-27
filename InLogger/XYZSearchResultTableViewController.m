@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Joel Viklund. All rights reserved.
 //
 
+#import "XYZNavigationController.h"
 #import "XYZSearchResultTableViewController.h"
 #import "XYZSearchResultTableViewCell.h"
 #import "XYZDataFileViewController.h"
@@ -15,7 +16,6 @@
 @interface XYZSearchResultTableViewController ()
 
 @property CGFloat tableCellWidth;
-@property BOOL animating;
 
 @end
 
@@ -30,31 +30,13 @@
     //add self to appDelegate
     AppDelegate *app = [UIApplication sharedApplication].delegate;
     [app addController:self];
-    [self initBackButton];
-}
-
-- (void)initBackButton {
-    UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleBordered target:self action:@selector(backButtonPressed:)];
-    self.navigationItem.backBarButtonItem=newBackButton;
-    //self.navigationItem.backBarButtonItem.action = @selector(backButtonPressed:);
-}
-
-
-
--(void)backButtonPressed:(id)sender {
-    NSLog(@"BACK");
-    if (!_animating) {
-        [self.navigationController popToRootViewControllerAnimated:YES];
-    }
 }
 
 - (void) viewDidAppear:(BOOL)animated {
-    _animating = NO;
+    [super viewDidAppear:animated];
 }
 
 -(void) viewWillDisappear:(BOOL)animated {
-    NSLog(@"VIEW WILL DISAPPEAR!");
-    //_animating = YES;
     [super viewWillDisappear:animated];
 }
 
@@ -103,18 +85,13 @@
 
 -(void) didSelectRow: (NSInteger) row
 {
-    if (!_animating) {
-        _selectedExperiment = [_searchResults objectAtIndex: row];
-        [self performSegueWithIdentifier:@"toFileList1" sender:self];
-    }
+    _selectedExperiment = [_searchResults objectAtIndex: row];
+    [self performSegueWithIdentifier:@"toFileList1" sender:self];
 }
 
 - (IBAction)editButtonPressed:(id)sender
 {
-    if (!_animating) {
-        NSLog(@"TO EDIT!");
-        [self performSegueWithIdentifier:@"toEditDisplay" sender:self];
-    }
+    [self performSegueWithIdentifier:@"toEditDisplay" sender:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -125,6 +102,7 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    NSLog(@"PERFORM SEGUEAUAUAA");
     if ([segue.identifier isEqualToString:@"toFileList1"] || [segue.identifier isEqualToString:@"toFileList2"]) {
         XYZDataFileViewController *nextVC = (XYZDataFileViewController *)[segue destinationViewController];
         nextVC.experiment = _selectedExperiment;
