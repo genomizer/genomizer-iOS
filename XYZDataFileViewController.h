@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "XYZExperiment.h"
+#import "XYZViewController.h"
 
-@interface XYZDataFileViewController : UIViewController
+@interface XYZDataFileViewController : XYZViewController
 
 @property (nonatomic) XYZExperiment *experiment;
 @property XYZFileContainer *selectedFiles;

@@ -923,7 +923,7 @@
                 <navigationController storyboardIdentifier="loginView" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="x1l-HJ-QPz" sceneMemberID="viewController">
                     <toolbarItems/>
                     <nil key="simulatedTopBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="jhx-ej-kQC">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="jhx-ej-kQC" customClass="XYZNavigationBar">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -939,10 +939,10 @@
         <!--Navigation Controller-->
         <scene sceneID="LYj-y1-V27">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="90g-6s-d5P" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="90g-6s-d5P" customClass="XYZNavigationController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="search" id="YNg-gz-9CQ"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="bmY-o0-koj">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="bmY-o0-koj" customClass="XYZNavigationBar">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -958,10 +958,10 @@
         <!--Navigation Controller - Selected Files-->
         <scene sceneID="3eF-FV-YH1">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9IC-kd-hqg" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9IC-kd-hqg" customClass="XYZNavigationController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Selected Files" image="selectedFiles" id="8wV-4Y-jvX"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="kNi-i9-baF">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="kNi-i9-baF" customClass="XYZNavigationBar">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1787,7 +1787,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="NVQ-fn-jnW" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="sc3-zA-RPj"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Yit-kv-zId">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Yit-kv-zId" customClass="XYZNavigationBar">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1806,7 +1806,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="axL-bg-48q" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Processes" image="processIcon" id="Zmr-ID-HTR"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ref-vw-pc1">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ref-vw-pc1" customClass="XYZNavigationBar">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1835,6 +1835,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Thg-Vs-Nk7"/>
+        <segue reference="mTu-BK-rMg"/>
     </inferredMetricsTieBreakers>
 </document>

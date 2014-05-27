@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "XYZExperimentFIle.h"
-@interface ProcessViewController : UIViewController
+#import "XYZViewController.h"
+#import "XYZExperimentFile.h"
+
+@interface ProcessViewController : XYZViewController
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 

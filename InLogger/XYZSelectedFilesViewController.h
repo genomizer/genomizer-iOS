@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XYZViewController.h"
 #import "XYZExperiment.h"
 
 
-@interface XYZSelectedFilesViewController : UIViewController 
+@interface XYZSelectedFilesViewController : XYZViewController
 
 + (void) addExperimentFile:(XYZExperimentFile *) file;
 + (void) removeExperimentFile:(XYZExperimentFile *) file;

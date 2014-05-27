@@ -42,6 +42,7 @@
 
 - (void) viewDidAppear:(BOOL)animated {
     _animating = NO;
+    [super viewDidAppear:animated];
 }
 
 -(void) viewWillDisappear:(BOOL)animated {

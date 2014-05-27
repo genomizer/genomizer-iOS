@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XYZViewController.h"
 
-@interface XYZLogInViewController : UIViewController<UITextFieldDelegate>
+@interface XYZLogInViewController : XYZViewController<UITextFieldDelegate>
 
 - (void) reportLoginResult: (NSError*) error;
 
