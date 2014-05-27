@@ -49,10 +49,15 @@
 @property UIPickerView *pickerView;
 @property UIToolbar *toolBar;
 @property NSMutableArray* genomeReleases;
+@property UIButton *convertButton;
+
+
 @end
 
 @implementation RawConvertViewController{
     __weak UIView *_staticView;
+    int numberOfConvertRequestsLeftToConfirm;
+    int successfulConvertRequests;
 }
 
 - (void)viewDidLoad
@@ -112,11 +117,11 @@
     
     UIView *staticView = [[UIView alloc] initWithFrame:CGRectMake(0, self.tableView.bounds.size.height-50, self.tableView.bounds.size.width, 50)];
     staticView.backgroundColor = [UIColor whiteColor];
-    UIButton *button=[UIButton buttonWithType:UIButtonTypeRoundedRect] ;
-    [button setTitle:@"Convert" forState:UIControlStateNormal];
-    [button addTarget:self action:@selector(convertButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
-    button.frame=CGRectMake(self.tableView.bounds.size.width/2-65, 10, 130, 30);
-    [staticView addSubview:button];
+    _convertButton=[UIButton buttonWithType:UIButtonTypeRoundedRect] ;
+    [_convertButton setTitle:@"Convert" forState:UIControlStateNormal];
+    [_convertButton addTarget:self action:@selector(convertButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
+    _convertButton.frame=CGRectMake(self.tableView.bounds.size.width/2-65, 10, 130, 30);
+    [staticView addSubview:_convertButton];
     staticView.clipsToBounds = YES;
     CALayer *rightBorder = [CALayer layer];
     rightBorder.borderColor = [UIColor lightGrayColor].CGColor;
@@ -325,6 +330,7 @@
     if((_bowtie.text.length == 0) || (_genomeFile.text.length == 0)){
         [XYZPopupGenerator showPopupWithMessage:@"Fill in at least the fields \"Bowtie parameters\" and \"Genome file\" to start a process"];
     }else{
+        _convertButton.enabled = NO;
         NSMutableArray * parameters = [[NSMutableArray alloc] init];
         [parameters addObject:_bowtie.text];
         [parameters addObject:@""];
@@ -416,24 +422,50 @@
         }
         
         [self createExperimentFiles];
+        
+        numberOfConvertRequestsLeftToConfirm = 0;
+        successfulConvertRequests = 0;
         for(NSMutableDictionary *dict in _experimentFilesDictArr){
             [dict setObject:parameters forKey:@"parameters"];
             [dict setObject:_genomeFile.text forKey:@"genomeVersion"];
             [ServerConnection convert:dict withContext:self];
+            numberOfConvertRequestsLeftToConfirm++;
         }
-         [XYZPopupGenerator showPopupWithMessage:@"Convert request sent to server"];
     }
     return;
     
 }
 
-- (void) reportResult: (NSError*) error {
-    if(error){
-        [XYZPopupGenerator showErrorMessage:error];
-    } 
+- (void) reportResult: (NSError*) error experiment: (NSString*) expid
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        numberOfConvertRequestsLeftToConfirm--;
+        if(error)
+        {
+            NSDictionary *dictionary = error.userInfo;
+            [dictionary setValue:([NSString stringWithFormat:@"Experiment %@ failed with error: %@", expid, error.localizedDescription]) forKey:@"localizedDescription"];
+            [XYZPopupGenerator showErrorMessage:[NSError errorWithDomain:error.domain code:error.code userInfo:dictionary]];
+        } else
+        {
+            successfulConvertRequests++;
+        }
+        
+        if(numberOfConvertRequestsLeftToConfirm == 0)
+        {
+            NSString *requestString = @"request";
+            if (successfulConvertRequests > 1)
+            {
+                requestString = [requestString stringByAppendingString:@"s"];
+            }
+            NSString *message = [NSString stringWithFormat:@"%d convert %@ successfully sent to the server.", successfulConvertRequests, requestString];
+            [XYZPopupGenerator showPopupWithMessage:message];
+            _convertButton.enabled = YES;
+            self.navigationItem.leftBarButtonItem.enabled = YES;
+        }
+    });
 }
+
 - (void) reportGenomeResult:(NSMutableArray*) genomeReleases withError:(NSError*) error {
-    NSLog(@"Selected Picker View Row: %d",[_pickerView selectedRowInComponent:0]);
     if(error){
         [XYZPopupGenerator showErrorMessage:error];
     }
