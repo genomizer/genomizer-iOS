@@ -28,6 +28,7 @@
         return nil;
     } else {
         NSLog(@"yes popoppo");
+        [XYZSegueController segueStarted];
         return [super popNavigationItemAnimated:animated];
     }
 }
