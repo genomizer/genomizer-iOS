@@ -50,7 +50,16 @@
     NSString *username = _userField.text;
     NSString *password = _passwordField.text;
     NSError *error;
-    
+/*    Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
+    if (networkStatus == NotReachable) {
+        NSLog(@"There IS NO internet connection");
+    } else {
+        
+        NSLog(@"There IS internet connection");
+        
+    }        
+}*/
     if((username.length > 0) && (password.length > 0))
     {
         [ServerConnection login:self.userField.text withPassword:self.passwordField.text error:&error withContext:self];
