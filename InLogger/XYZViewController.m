@@ -15,13 +15,6 @@
 
 @implementation XYZViewController
 
-- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
-{
-    NSLog(@"shoudld peroreo");
-    return YES;
-    //return ![XYZNavigationController isBusy];
-}
-
 - (void) viewDidAppear:(BOOL)animated
 {
     UINavigationController *navController = [super navigationController];
@@ -30,6 +23,20 @@
     }
     [super viewDidAppear:animated];
     
+}
+
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
+{
+    NSLog(@"should perform1");
+    return ![XYZNavigationController isBusy];
+}
+
+- (void) performSegueWithIdentifier:(NSString *)identifier sender:(id)sender
+{
+    NSLog(@"perform segueue2");
+    if ([self shouldPerformSegueWithIdentifier:identifier sender:sender]) {
+        [super performSegueWithIdentifier:identifier sender:sender];
+    }
 }
 
 @end
