@@ -306,7 +306,7 @@
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <connections>
-                                                <action selector="experimentTouchDownInside:" destination="CwE-h2-EVG" eventType="touchDown" id="3Ke-p6-Vie"/>
+                                                <action selector="experimentTouchUpInside:" destination="CwE-h2-EVG" eventType="touchUpInside" id="LBm-JI-eXZ"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -530,7 +530,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="selectTaskButton:" destination="OaH-dG-5KC" eventType="touchUpInside" id="82p-7b-Vcy"/>
+                                    <action selector="selectTaskButton:" destination="OaH-dG-5KC" eventType="touchUpInside" id="hsv-No-gFN"/>
                                 </connections>
                             </button>
                             <view hidden="YES" alpha="0.39999999999999963" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0r3-La-QJb">
@@ -940,7 +940,7 @@
         <!--Navigation Controller-->
         <scene sceneID="LYj-y1-V27">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="90g-6s-d5P" customClass="XYZNavigationController" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="90g-6s-d5P" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="search" id="YNg-gz-9CQ"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="bmY-o0-koj" customClass="XYZNavigationBar">
@@ -959,7 +959,7 @@
         <!--Navigation Controller - Selected Files-->
         <scene sceneID="3eF-FV-YH1">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9IC-kd-hqg" customClass="XYZNavigationController" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9IC-kd-hqg" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Selected Files" image="selectedFiles" id="8wV-4Y-jvX"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="kNi-i9-baF" customClass="XYZNavigationBar">
@@ -1836,6 +1836,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="mTu-BK-rMg"/>
+        <segue reference="Thg-Vs-Nk7"/>
     </inferredMetricsTieBreakers>
 </document>
