@@ -452,7 +452,12 @@
         
         if(numberOfConvertRequestsLeftToConfirm == 0)
         {
-            NSString *message = [NSString stringWithFormat:@"Convert request/s successfully sent to server: %d", successfulConvertRequests];
+            NSString *requestString = @"request";
+            if (successfulConvertRequests > 1)
+            {
+                requestString = [requestString stringByAppendingString:@"s"];
+            }
+            NSString *message = [NSString stringWithFormat:@"%d convert %@ successfully sent to the server.", successfulConvertRequests, requestString];
             [XYZPopupGenerator showPopupWithMessage:message];
             _convertButton.enabled = YES;
             self.navigationItem.leftBarButtonItem.enabled = YES;
@@ -461,7 +466,6 @@
 }
 
 - (void) reportGenomeResult:(NSMutableArray*) genomeReleases withError:(NSError*) error {
-    NSLog(@"Selected Picker View Row: %d",[_pickerView selectedRowInComponent:0]);
     if(error){
         [XYZPopupGenerator showErrorMessage:error];
     }
