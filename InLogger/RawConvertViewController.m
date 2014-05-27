@@ -481,10 +481,12 @@
         }
     }
 }
--(void) createExperimentFiles{
+
+-(void) createExperimentFiles
+{
     _experimentFilesDictArr = [[NSMutableArray alloc] init];
     for(XYZExperimentFile *file in _experimentFiles){
-        NSMutableDictionary * currentFile =[[NSMutableDictionary alloc] init];
+        NSMutableDictionary *currentFile =[[NSMutableDictionary alloc] init];
         
         [currentFile setObject:file.expID forKey:@"expid"];
         [currentFile setObject:file.metaData forKey:@"metadata"];
