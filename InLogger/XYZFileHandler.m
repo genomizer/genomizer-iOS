@@ -20,7 +20,6 @@
         [data writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:&error];
         return data;
     }
-    NSLog(@"server url %@", [NSString stringWithContentsOfFile: filePath encoding:NSUTF8StringEncoding error:nil]);
     return [NSString stringWithContentsOfFile: filePath encoding:NSUTF8StringEncoding error:nil];
 }
 

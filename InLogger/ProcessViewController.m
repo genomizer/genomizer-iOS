@@ -2,8 +2,10 @@
 //  ProcessViewController.m
 //  Genomizer
 //
-//  Created by Linus Öberg on 15/05/14.
-//  Copyright (c) 2014 Linus Öberg. All rights reserved.
+//  Class that controlls the processView, the processView shows information
+//  about all processes that the server have either completed,
+//  started, waiting or processes that have crashed.
+//  Each tableViewCell contains information about one process.
 //
 
 #import "ProcessViewController.h"
@@ -34,6 +36,9 @@ static NSMutableArray * processingExperimentFiles;
     }
 }
 
+/**
+ * Method that calls serverConnection to update the tableView of processes.
+ */
 - (void) updateProcessStatusFromServer
 {
     AppDelegate *app = [UIApplication sharedApplication].delegate;
@@ -43,7 +48,10 @@ static NSMutableArray * processingExperimentFiles;
         [ServerConnection getProcessStatus:self];
     }
 }
-
+/**
+ * Method that adds a single process to a list containg all processes,
+ * but only if that process not already exists in the list of all processes.
+ */
 - (void) addProcessingExperiment:(ProcessStatusDescriptor *) file {
     
     if(![processingExperimentFiles containsObject:file]){
@@ -63,10 +71,10 @@ static NSMutableArray * processingExperimentFiles;
     //add self to appDelegate
     AppDelegate *app = [UIApplication sharedApplication].delegate;
     [app addController:self];
- //   self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(updateProcessStatusFromServer)];
-    
     UIView *refreshView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
     [self.tableView insertSubview:refreshView atIndex:0];
+    
+    // Pull tableview down to refresh.
     _refreshControl = [[UIRefreshControl alloc] init];
     [_refreshControl addTarget:self action:@selector(reloadDatas) forControlEvents:UIControlEventValueChanged];
     [refreshView addSubview:_refreshControl];
@@ -75,8 +83,8 @@ static NSMutableArray * processingExperimentFiles;
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
 }
+
 -(void)reloadDatas {
-    NSLog(@"update");
     [self updateProcessStatusFromServer];
     [_refreshControl endRefreshing];
 }
@@ -86,18 +94,27 @@ static NSMutableArray * processingExperimentFiles;
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
     return 1;
 }
 
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    // Returns number of rows in the tableView.
     return processingExperimentFiles.count;
 }
 
+/**
+ * This method sets up the tableview.
+ *
+ * @param tableView - the tableview.
+ * @param cellForRowAtIndexPath - what index in the tableView the 
+ *                                created cell will be added to.
+ * @return a cell that will be added to the tableView.
+ */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ProcessTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"processCell" forIndexPath:indexPath];
@@ -131,6 +148,15 @@ static NSMutableArray * processingExperimentFiles;
     return cell;
 }
 
+/**
+ * This method is called by serverConnection.m after serverConnection 
+ * has executed a getProcessStatus. If a error occured a popup with information
+ * about the error will be shown to the user.
+ *
+ * @param result - Contains all ongoing/finished/crashed processes on the server.
+ * @param error - If a error occured this variable will be set.
+ * @return adds all processes to the NSMutableArray processingExperimentFiles.
+ */
 - (void) reportProcessStatusResult: (NSMutableArray*) result error: (NSError*) error {
     
     [self resetProcessingExperimentFiles];

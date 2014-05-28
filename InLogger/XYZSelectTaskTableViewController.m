@@ -61,11 +61,9 @@
 {
     if (_fileType == RAW) {
         if([[sender.superview.subviews[1] valueForKey:@"text"] isEqualToString:@"Convert to profile"]){
-            NSLog(@"toConvertToProfile %@", [sender.superview.subviews[1] valueForKey:@"tag"]);
             [self performSegueWithIdentifier:@"toConvertToProfile" sender:_experimentFiles];
         }
         else{
-            NSLog(@"executeTaskRatio");
             [self performSegueWithIdentifier:@"executeTaskRatio" sender:_experimentFiles];
         }
     } else {
@@ -76,7 +74,6 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"toConvertToProfile"]) {
-          NSLog(@"prepConvertToProfile");
         RawConvertViewController *nextVC = (RawConvertViewController *)[segue destinationViewController];
         nextVC.experimentFiles = _experimentFiles;
         nextVC.ratio = true;

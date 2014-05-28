@@ -57,6 +57,15 @@
     [super viewDidDisappear:animated];
 }
 
+/**
+ * This method is called by serverConnection.m after serverConnection
+ * has executed a getAvailableAnnotations. If a error occured a popup with information
+ * about the error will be shown to the user.
+ *
+ * @param result - Contains all annotations that was sent back from the server.
+ * @param error - If a error occured this variable will be set.
+ * @return stores all annotations in the NSArray annotations.
+ */
 - (void) reportAnnotationResult: (NSArray*) result error: (NSError*) error {
     
     if(error == nil)
@@ -83,14 +92,24 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    // Returns number of sections in the tableView.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    // Returns number of rows in the tableView.
     return [_annotations count];
 }
 
+/**
+ * This method sets up the tableview.
+ *
+ * @param tableView - the tableview.
+ * @param cellForRowAtIndexPath - what index in the tableView the 
+ *                                created cell will be added to.
+ * @return a cell that will be added to the tableView.
+ */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"ListPrototypeCell";
@@ -118,21 +137,31 @@
     }
     return cell;
 }
-
+/**
+ * Method that will be called when the search button is pressed.
+ *
+ * @return The search data that was entered by the user is sent to
+ *         serverConnections search method.
+ */
 - (IBAction)searchButton:(id)sender {
     [self searchIsStarting];
     NSArray *selectedAnnotations = [self getSelectedAnnotations];
     [ServerConnection search:[XYZPubMedBuilder createAnnotationsSearch: selectedAnnotations] withContext:self];
 }
+/*
+ * Executes when a getAnnotations request from server is finished.
+ */
 - (void) annotationsIsFinished
 {
     [_spinner stopAnimating];
     _searchButton.enabled = YES;
     _searchButton.hidden = NO;
-    
     [_tableView reloadData];
 }
 
+/*
+ * Executes when a getAnnotations requrest from server is called.
+ */
 - (void) annotationsIsStarting
 {
     _spinner.hidden = NO;
@@ -142,6 +171,9 @@
     [_tableView reloadData];
 }
 
+/*
+ * Executes when a search request from server is finished.
+ */
 - (void) searchIsFinished
 {
     [_spinner stopAnimating];
@@ -152,6 +184,9 @@
     [_tableView reloadData];
 }
 
+/*
+ * Executes when a search request from server is called.
+ */
 - (void) searchIsStarting
 {
     _spinner.hidden = NO;
@@ -163,6 +198,15 @@
     [_tableView reloadData];
 }
 
+/**
+ * This method is called by serverConnection.m after serverConnection
+ * has executed a search. If a error occured a popup with information
+ * about the error will be shown to the user.
+ *
+ * @param result - the searchResults.
+ * @param error - If a error occured this variable will be set.
+ * @return preforms a segue to searchResults.
+ */
 - (void) reportSearchResult: (NSMutableArray*) result error: (NSError*) error
 {
     AppDelegate *app = [UIApplication sharedApplication].delegate;
@@ -183,10 +227,14 @@
             });
         }
     } else{
-        NSLog(@"success");
     }
 }
 
+/**
+ * Method that returns all annotations selected by the user.
+ *
+ * @return A array containing all selected annotations.
+ */
 - (NSArray *) getSelectedAnnotations
 {
     NSMutableArray *selectedAnnotations = [[NSMutableArray alloc] init];
@@ -197,15 +245,20 @@
     }
     return selectedAnnotations;
 }
-
+/**
+ * Method that executes when the "close"-button in the advanced 
+ * search frame is pressed.
+ */
 - (IBAction)closeAdvancedSearch:(id)sender {
     _advancedView.hidden = YES;
     _tableView.userInteractionEnabled = YES;
     [_pubmedTextView endEditing:YES];
 }
 
+/**
+ * Method that executes when the "search"-button is pressed.
+ */
 - (IBAction)searchQueryButtonTouched:(id)sender {
-    
     [self searchIsStarting];
     
     //send search
@@ -215,6 +268,10 @@
     [_pubmedTextView endEditing:YES];
 }
 
+/**
+ * Method that executes when the "search"-button in the advanced
+ * search frame is pressed.
+ */
 - (IBAction)advancedSearchButton:(id)sender {
     _advancedView.hidden = NO;
     _advancedView.layer.cornerRadius = 5;
@@ -234,7 +291,11 @@
     _pubmedTextView.text = [XYZPubMedBuilder createAnnotationsSearch: selectedAnnotations];
     [_pubmedTextView becomeFirstResponder];
 }
-
+/**
+ * Method that executes before a segue is done.
+ *
+ * @return stores the results of a serarch in the "searchResult" controller.
+ */
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"searchResult"]) {

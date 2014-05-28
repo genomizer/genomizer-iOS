@@ -17,7 +17,6 @@
 
 - (void) viewDidAppear:(BOOL)animated
 {
-    NSLog(@"DID APPEAR");
     [XYZSegueController segueDone];
     [super viewDidAppear:animated];
     
@@ -25,13 +24,11 @@
 
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
 {
-    NSLog(@"should perform3");
     return ![XYZSegueController isPerformingSegue];
 }
 
 - (void) performSegueWithIdentifier:(NSString *)identifier sender:(id)sender
 {
-    NSLog(@"perform segueue4");
     if ([self shouldPerformSegueWithIdentifier:identifier sender:sender]) {
         [XYZSegueController segueStarted];
         [super performSegueWithIdentifier:identifier sender:sender];
