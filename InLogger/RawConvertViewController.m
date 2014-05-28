@@ -444,22 +444,6 @@
                 numberOfConvertRequestsLeftToConfirm++;
             }
         }
-        }
-        return;
-        
-        [self createExperimentFiles];
-        
-        numberOfConvertRequestsLeftToConfirm = 0;
-        successfulConvertRequests = 0;
-      
-        for(NSMutableDictionary *dict in _experimentFilesDictArr)
-        {
-            
-            [dict setObject:parameters forKey:@"parameters"];
-            [dict setObject:_genomeFile.text forKey:@"genomeVersion"];
-            [ServerConnection convert:dict withContext:self];
-            numberOfConvertRequestsLeftToConfirm++;
-        }
     }
     return;
     

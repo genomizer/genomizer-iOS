@@ -189,7 +189,6 @@ NSString *token;
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler: ^(NSURLResponse *response, NSData *POSTReply, NSError *internalError)
      {
-         [NSThread sleepForTimeInterval:5];
          NSError *error;
          NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
          if(internalError == nil)
