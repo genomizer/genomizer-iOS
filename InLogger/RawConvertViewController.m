@@ -429,7 +429,10 @@
         
         numberOfConvertRequestsLeftToConfirm = 0;
         successfulConvertRequests = 0;
-        for(NSMutableDictionary *dict in _experimentFilesDictArr){
+      
+        for(NSMutableDictionary *dict in _experimentFilesDictArr)
+        {
+            
             [dict setObject:parameters forKey:@"parameters"];
             [dict setObject:_genomeFile.text forKey:@"genomeVersion"];
             [ServerConnection convert:dict withContext:self];
@@ -488,19 +491,26 @@
 
 -(void) createExperimentFiles
 {
+    NSMutableArray *expIdsAlreadyCreated = [[NSMutableArray alloc] init];
+    
     _experimentFilesDictArr = [[NSMutableArray alloc] init];
     for(XYZExperimentFile *file in _experimentFiles){
-        NSMutableDictionary *currentFile =[[NSMutableDictionary alloc] init];
         
-        [currentFile setObject:file.expID forKey:@"expid"];
-        [currentFile setObject:file.metaData forKey:@"metadata"];
-        
-        if(file.author != nil)
+        if(![expIdsAlreadyCreated containsObject:file.expID])
         {
-            [currentFile setObject:file.author forKey:@"author"];
-        }
-        
-        [_experimentFilesDictArr addObject:currentFile];
+            NSMutableDictionary *currentFile =[[NSMutableDictionary alloc] init];
+            
+            [currentFile setObject:file.expID forKey:@"expid"];
+            [expIdsAlreadyCreated addObject:file.expID];
+            [currentFile setObject:file.metaData forKey:@"metadata"];
+            
+            if(file.author != nil)
+            {
+                [currentFile setObject:file.author forKey:@"author"];
+            }
+            
+            [_experimentFilesDictArr addObject:currentFile];
+        } 
     }
 }
 
