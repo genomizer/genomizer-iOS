@@ -24,7 +24,6 @@
 		646F06AE1918D46000C959CA /* (null) in Sources */ = {isa = PBXBuildFile; };
 		6484A2F4190E8F160071BB23 /* ServerConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6484A2F3190E8F160071BB23 /* ServerConnection.m */; };
 		649483DA193475D000C646FE /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 649483D9193475D000C646FE /* SystemConfiguration.framework */; };
-		649483E0193479C500C646FE /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 649483DF193479C500C646FE /* Reachability.m */; };
 		649778EB1910EC9D000FD14F /* XYZExperimentParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 649778EA1910EC9D000FD14F /* XYZExperimentParser.m */; };
 		649778EF191119FB000FD14F /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 649778ED191119FB000FD14F /* MoreViewController.m */; };
 		649778F0191119FB000FD14F /* MoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 649778EE191119FB000FD14F /* MoreViewController.xib */; };
@@ -637,7 +636,6 @@
 				DEBD8BC819338B09005C5E19 /* XYZNavigationBar.m in Sources */,
 				DED12292190E966200D8E530 /* XYZSearchTableViewCell.m in Sources */,
 				DED1228E190E966200D8E530 /* XYZSearchResultTableViewCell.m in Sources */,
-				649483E0193479C500C646FE /* Reachability.m in Sources */,
 				649778EF191119FB000FD14F /* MoreViewController.m in Sources */,
 				DE25D7FC1910D6840084BDDC /* XYZTitleTableViewCell.m in Sources */,
 				DE9A3EEF1918CAA100F7C33B /* XYZAnnotationTableViewCell.m in Sources */,
