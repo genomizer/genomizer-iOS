@@ -279,8 +279,6 @@
 				76E2DA9E190E96C90048069D /* JSONBuilder.m */,
 				6484A2F2190E8F160071BB23 /* ServerConnection.h */,
 				6484A2F3190E8F160071BB23 /* ServerConnection.m */,
-				DE157D821935CA6C0000D613 /* Reachability.h */,
-				DE157D831935CA6C0000D613 /* Reachability.m */,
 			);
 			name = ServerConnetion;
 			sourceTree = "<group>";
@@ -409,6 +407,8 @@
 		DED1229A190E9C9100D8E530 /* LogIn */ = {
 			isa = PBXGroup;
 			children = (
+				DE157D821935CA6C0000D613 /* Reachability.h */,
+				DE157D831935CA6C0000D613 /* Reachability.m */,
 				DEEF6B181909553C00A2CD8C /* XYZLogInViewController.h */,
 				DEEF6B191909553C00A2CD8C /* XYZLogInViewController.m */,
 				DEEF6B1A1909553C00A2CD8C /* XYZLogInViewController.xib */,
