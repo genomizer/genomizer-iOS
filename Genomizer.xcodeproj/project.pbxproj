@@ -24,6 +24,7 @@
 		646F06AE1918D46000C959CA /* (null) in Sources */ = {isa = PBXBuildFile; };
 		6484A2F4190E8F160071BB23 /* ServerConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6484A2F3190E8F160071BB23 /* ServerConnection.m */; };
 		649483DA193475D000C646FE /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 649483D9193475D000C646FE /* SystemConfiguration.framework */; };
+		649483E61935C5AC00C646FE /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 649483E51935C5AC00C646FE /* Reachability.m */; };
 		649778EB1910EC9D000FD14F /* XYZExperimentParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 649778EA1910EC9D000FD14F /* XYZExperimentParser.m */; };
 		649778EF191119FB000FD14F /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 649778ED191119FB000FD14F /* MoreViewController.m */; };
 		649778F0191119FB000FD14F /* MoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 649778EE191119FB000FD14F /* MoreViewController.xib */; };
@@ -118,6 +119,8 @@
 		6484A2F2190E8F160071BB23 /* ServerConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerConnection.h; sourceTree = "<group>"; };
 		6484A2F3190E8F160071BB23 /* ServerConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerConnection.m; sourceTree = "<group>"; };
 		649483D9193475D000C646FE /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		649483E41935C5AC00C646FE /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = ../Reachability.h; sourceTree = "<group>"; };
+		649483E51935C5AC00C646FE /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = ../Reachability.m; sourceTree = "<group>"; };
 		649778E91910EC9D000FD14F /* XYZExperimentParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZExperimentParser.h; sourceTree = "<group>"; };
 		649778EA1910EC9D000FD14F /* XYZExperimentParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZExperimentParser.m; sourceTree = "<group>"; };
 		649778EC191119FB000FD14F /* MoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreViewController.h; sourceTree = "<group>"; };
@@ -404,6 +407,8 @@
 		DED1229A190E9C9100D8E530 /* LogIn */ = {
 			isa = PBXGroup;
 			children = (
+				649483E41935C5AC00C646FE /* Reachability.h */,
+				649483E51935C5AC00C646FE /* Reachability.m */,
 				DEEF6B181909553C00A2CD8C /* XYZLogInViewController.h */,
 				DEEF6B191909553C00A2CD8C /* XYZLogInViewController.m */,
 				DEEF6B1A1909553C00A2CD8C /* XYZLogInViewController.xib */,
@@ -633,6 +638,7 @@
 				DED12292190E966200D8E530 /* XYZSearchTableViewCell.m in Sources */,
 				DED1228E190E966200D8E530 /* XYZSearchResultTableViewCell.m in Sources */,
 				649778EF191119FB000FD14F /* MoreViewController.m in Sources */,
+				649483E61935C5AC00C646FE /* Reachability.m in Sources */,
 				DE25D7FC1910D6840084BDDC /* XYZTitleTableViewCell.m in Sources */,
 				DE9A3EEF1918CAA100F7C33B /* XYZAnnotationTableViewCell.m in Sources */,
 				DE25D8061910E1500084BDDC /* XYZExperimentDescriber.m in Sources */,

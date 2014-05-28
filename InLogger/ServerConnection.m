@@ -15,26 +15,6 @@
 
 NSString *token;
 
-//+ (void)handleLoginPostReply: (NSData *)POSTReply httpResp:(NSHTTPURLResponse *)httpResp error:(NSError **)error{
-//
-//    NSError *internalError;
-//    NSDictionary *json = [self parseJSONToDictionary:POSTReply error:&internalError];
-//
-//    if(internalError == nil)
-//    {
-//        NSLog(@"------- Login Token %@", [json objectForKey:@"token"]);
-//
-//        if(httpResp.statusCode != 200)
-//        {
-//            *error = [self generateErrorObjectFromHTTPError:httpResp.statusCode errorMessage:@"Login failed"];
-//        }
-//    }
-//    else
-//    {
-//        *error = [self generateError:@"Server sent incorrectly formatted data, talk to admin" withErrorDomain:@"ServerError" withUnderlyingError:nil];
-//    }
-//}
-
 + (void)login:(NSString *)username withPassword:(NSString *)password error:(NSError**) error withContext: (XYZLogInViewController*) controller
 {
     NSMutableURLRequest *request = [JSONBuilder getLoginJSON:username withPassword:password];
@@ -232,7 +212,7 @@ NSString *token;
          {
              error = [self generateError:@"Could not connect to server" withErrorDomain:@"Connection Error" withUnderlyingError:internalError];
          }
-         [controller reportResult:error experiment: [dict objectForKey:@"expid"]];
+         [controller reportResult:error experiment:@"experrid" /*[dict objectForKey:@"expid"]*/];
      }];
 }
 

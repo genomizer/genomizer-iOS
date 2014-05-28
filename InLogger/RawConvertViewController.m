@@ -13,6 +13,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "ProcessViewController.h"
 #import "AppDelegate.h"
+#import "Reachability.h"
 
 @interface RawConvertViewController ()
 
@@ -156,7 +157,7 @@
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow: (NSInteger)row inComponent:(NSInteger)component
 {
     self.genomeFile.text = [_genomeReleases objectAtIndex:row];
-
+    
 }
 
 - (UIToolbar *) createPickerViewToolBar: (UIPickerView *) pickerView
@@ -331,115 +332,123 @@
 
 - (IBAction)convertButtonTouch:(id)sender
 {
-    if((_bowtie.text.length == 0) || (_genomeFile.text.length == 0)){
-        [XYZPopupGenerator showPopupWithMessage:@"Fill in at least the fields \"Bowtie parameters\" and \"Genome file\" to start a process"];
-    }else{
-        _convertButton.enabled = NO;
-        NSMutableArray * parameters = [[NSMutableArray alloc] init];
-        [parameters addObject:_bowtie.text];
-        [parameters addObject:@""];
+    Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
+    if (networkStatus == NotReachable) {
+        [XYZPopupGenerator showPopupWithMessage:@"There is no internet connection." withTitle:@"Connection Error"];
         
-        if(_samToGff.on){
-            [parameters addObject:@"y"];
-        }
-        else{
-            [parameters addObject:@""];
-        }
-        if(_gffToSgr.on){
-            [parameters addObject:@"y"];
-        }
-        else{
-            [parameters addObject:@""];
-        }
-        if((self.smoothingWindowSize.text.length > 0) && (self.smoothingMinimumStep.text.length > 0) && ([self.smoothingWindowSize.text intValue] > 0)){
-            NSString *text = self.smoothingWindowSize.text;
-            text = [text stringByAppendingString:@" "];
-            if (self.smoothingSmoothTypeSwitch.on){
-                text = [text stringByAppendingString:@"1"];
-            }else{
-                text = [text stringByAppendingString:@"0"];
-            }
-            text = [text stringByAppendingString:@" "];
-            text = [text stringByAppendingString:self.smoothingMinimumStep.text];
-            text = [text stringByAppendingString:@" "];
-            if (self.smoothingPrintMean.on){
-                text = [text stringByAppendingString:@"1"];
-            }else{
-                text = [text stringByAppendingString:@"0 "];
-            }
-            text = [text stringByAppendingString:@" "];
-            if (self.smoothingPrintZeros.on){
-                text = [text stringByAppendingString:@"1"];
-            }else{
-                text = [text stringByAppendingString:@"0"];
-            }
-            [parameters addObject:text];
+    } else {
+        if((_bowtie.text.length == 0) || (_genomeFile.text.length == 0)){
+            [XYZPopupGenerator showPopupWithMessage:@"Fill in at least the fields \"Bowtie parameters\" and \"Genome file\" to start a process"];
         }else{
+            _convertButton.enabled = NO;
+            NSMutableArray * parameters = [[NSMutableArray alloc] init];
+            [parameters addObject:_bowtie.text];
             [parameters addObject:@""];
-        }
-        if((self.ratioCalcInputReads.text.length > 0) && (self.ratioCalcChromosomes.text.length > 0)){
-            NSString *text = [self.ratioCalcDoubleSingle titleForSegmentAtIndex:self.ratioCalcDoubleSingle.selectedSegmentIndex];
-            text = [text stringByAppendingString:@" "];
-            text = [text stringByAppendingString:self.ratioCalcInputReads.text];
-            text = [text stringByAppendingString:@" "];
-            text = [text stringByAppendingString:self.ratioCalcChromosomes.text];
-            [parameters addObject:text];
-        }else{
-            [parameters addObject:@""];
-        }
-        
-        if((self.step.text.length > 0) && (self.stepCreateStep.on) && (self.step.text > 0)){
-            NSString *text = @"y ";
-            text = [text stringByAppendingString:self.step.text];
-            text = [text stringByAppendingString:@" "];
-            [parameters addObject:text];
-        }else{
-            [parameters addObject:@""];
-        }
-        
-        if((self.ratioCalcSmoothingWindowSize.text.length > 0) && (self.ratioCalcSmoothingMinimumStep.text.length > 0) && ( [self.ratioCalcSmoothingWindowSize.text intValue] > 0)){
-            NSString *text = self.ratioCalcSmoothingWindowSize.text;
-            text = [text stringByAppendingString:@" "];
-            if (self.ratioCalcSmoothingSmoothType.on){
-                text = [text stringByAppendingString:@"1"];
-            }else{
-                text = [text stringByAppendingString:@"0"];
+            
+            if(_samToGff.on){
+                [parameters addObject:@"y"];
             }
-            text = [text stringByAppendingString:@" "];
-            text = [text stringByAppendingString:self.ratioCalcSmoothingMinimumStep.text];
-            text = [text stringByAppendingString:@" "];
-            if (self.ratioCalcSmoothingPrintMean.on){
-                text = [text stringByAppendingString:@"1"];
-            }else{
-                text = [text stringByAppendingString:@"0"];
+            else{
+                [parameters addObject:@""];
             }
-            text = [text stringByAppendingString:@" "];
-            if (self.ratioCalcSmoothingPrintZeros.on){
-                text = [text stringByAppendingString:@"1"];
-            }else{
-                text = [text stringByAppendingString:@"0"];
+            if(_gffToSgr.on){
+                [parameters addObject:@"y"];
             }
-            [parameters addObject:text];
+            else{
+                [parameters addObject:@""];
+            }
+            if((self.smoothingWindowSize.text.length > 0) && (self.smoothingMinimumStep.text.length > 0) && ([self.smoothingWindowSize.text intValue] > 0)){
+                NSString *text = self.smoothingWindowSize.text;
+                text = [text stringByAppendingString:@" "];
+                if (self.smoothingSmoothTypeSwitch.on){
+                    text = [text stringByAppendingString:@"1"];
+                }else{
+                    text = [text stringByAppendingString:@"0"];
+                }
+                text = [text stringByAppendingString:@" "];
+                text = [text stringByAppendingString:self.smoothingMinimumStep.text];
+                text = [text stringByAppendingString:@" "];
+                if (self.smoothingPrintMean.on){
+                    text = [text stringByAppendingString:@"1"];
+                }else{
+                    text = [text stringByAppendingString:@"0 "];
+                }
+                text = [text stringByAppendingString:@" "];
+                if (self.smoothingPrintZeros.on){
+                    text = [text stringByAppendingString:@"1"];
+                }else{
+                    text = [text stringByAppendingString:@"0"];
+                }
+                [parameters addObject:text];
+            }else{
+                [parameters addObject:@""];
+            }
+            if((self.ratioCalcInputReads.text.length > 0) && (self.ratioCalcChromosomes.text.length > 0)){
+                NSString *text = [self.ratioCalcDoubleSingle titleForSegmentAtIndex:self.ratioCalcDoubleSingle.selectedSegmentIndex];
+                text = [text stringByAppendingString:@" "];
+                text = [text stringByAppendingString:self.ratioCalcInputReads.text];
+                
+                text = [text stringByAppendingString:@" "];
+                text = [text stringByAppendingString:self.ratioCalcChromosomes.text];
+                [parameters addObject:text];
+            }else{
+                [parameters addObject:@""];
+            }
+            
+            if((self.step.text.length > 0) && (self.stepCreateStep.on) && (self.step.text > 0)){
+                NSString *text = @"y ";
+                text = [text stringByAppendingString:self.step.text];
+                text = [text stringByAppendingString:@" "];
+                [parameters addObject:text];
+            }else{
+                [parameters addObject:@""];
+            }
+            
+            if((self.ratioCalcSmoothingWindowSize.text.length > 0) && (self.ratioCalcSmoothingMinimumStep.text.length > 0) && ( [self.ratioCalcSmoothingWindowSize.text intValue] > 0)){
+                NSString *text = self.ratioCalcSmoothingWindowSize.text;
+                text = [text stringByAppendingString:@" "];
+                if (self.ratioCalcSmoothingSmoothType.on){
+                    text = [text stringByAppendingString:@"1"];
+                }else{
+                    text = [text stringByAppendingString:@"0"];
+                }
+                text = [text stringByAppendingString:@" "];
+                text = [text stringByAppendingString:self.ratioCalcSmoothingMinimumStep.text];
+                text = [text stringByAppendingString:@" "];
+                if (self.ratioCalcSmoothingPrintMean.on){
+                    text = [text stringByAppendingString:@"1"];
+                }else{
+                    text = [text stringByAppendingString:@"0"];
+                }
+                text = [text stringByAppendingString:@" "];
+                if (self.ratioCalcSmoothingPrintZeros.on){
+                    text = [text stringByAppendingString:@"1"];
+                }else{
+                    text = [text stringByAppendingString:@"0"];
+                }
+                [parameters addObject:text];
+            }
+            else{
+                [parameters addObject:@""];
+            }
+            
+            [self createExperimentFiles];
+            
+            numberOfConvertRequestsLeftToConfirm = 0;
+            successfulConvertRequests = 0;
+            for(NSMutableDictionary *dict in _experimentFilesDictArr){
+                [dict setObject:parameters forKey:@"parameters"];
+                [dict setObject:_genomeFile.text forKey:@"genomeVersion"];
+                [ServerConnection convert:dict withContext:self];
+                numberOfConvertRequestsLeftToConfirm++;
+            }
         }
-        else{
-            [parameters addObject:@""];
         }
+        return;
         
-        [self createExperimentFiles];
-        
-        numberOfConvertRequestsLeftToConfirm = 0;
-        successfulConvertRequests = 0;
-        for(NSMutableDictionary *dict in _experimentFilesDictArr){
-            [dict setObject:parameters forKey:@"parameters"];
-            [dict setObject:_genomeFile.text forKey:@"genomeVersion"];
-            [ServerConnection convert:dict withContext:self];
-            numberOfConvertRequestsLeftToConfirm++;
-        }
-    }
-    return;
     
 }
-
 - (void) reportResult: (NSError*) error experiment: (NSString*) expid
 {
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -447,6 +456,8 @@
         if(error)
         {
             NSDictionary *dictionary = error.userInfo;
+            NSLog(@"expid %@", expid);
+            NSLog(@"errrorr %@", error.localizedDescription);
             [dictionary setValue:([NSString stringWithFormat:@"Experiment %@ failed with error: %@", expid, error.localizedDescription]) forKey:@"localizedDescription"];
             [XYZPopupGenerator showErrorMessage:[NSError errorWithDomain:error.domain code:error.code userInfo:dictionary]];
         } else
@@ -468,6 +479,7 @@
         }
     });
 }
+
 
 - (void) reportGenomeResult:(NSMutableArray*) genomeReleases withError:(NSError*) error {
     if(error){
