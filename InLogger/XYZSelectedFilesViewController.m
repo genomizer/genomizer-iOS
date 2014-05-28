@@ -41,7 +41,6 @@ static XYZFileContainer * FILES = nil;
 
 + (void) addExperimentFile:(XYZExperimentFile *) file
 {
-    NSLog(@"File Added");
     [FILES addExperimentFile: file];
 }
 

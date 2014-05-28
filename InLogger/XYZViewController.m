@@ -25,15 +25,12 @@
 
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
 {
-    NSLog(@"should perform1");
     return ![XYZSegueController isPerformingSegue];
 }
 
 - (void) performSegueWithIdentifier:(NSString *)identifier sender:(id)sender
 {
-    NSLog(@"perform segueue2");
     if ([self shouldPerformSegueWithIdentifier:identifier sender:sender]) {
-        NSLog(@"yes perform segueue");
         [XYZSegueController segueStarted];
         [super performSegueWithIdentifier:identifier sender:sender];
     }

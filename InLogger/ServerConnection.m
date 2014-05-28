@@ -293,7 +293,7 @@ NSString *token;
              {
                  
                  NSArray *array = [NSJSONSerialization JSONObjectWithData:POSTReply options: NSJSONReadingMutableContainers error:&internalError];
-                 NSLog(@"processes: %@", array);
+
                  if (internalError == nil)
                  {
                      
@@ -374,7 +374,7 @@ NSString *token;
             break;
         case 503:
             [dict setObject:errorMessage forKey:NSLocalizedDescriptionKey];
-            error = [NSError errorWithDomain:@"Server maintenance" code:0 userInfo:dict];
+            error = [NSError errorWithDomain:@"Server Message" code:0 userInfo:dict];
             break;
         default:
             [dict setObject: [NSString stringWithFormat:@"Unrecognised error, talk to developers. Error: %d", errorCode] forKey:NSLocalizedDescriptionKey];

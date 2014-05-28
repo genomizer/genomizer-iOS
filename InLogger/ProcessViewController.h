@@ -2,8 +2,10 @@
 //  ProcessViewController.h
 //  Genomizer
 //
-//  Created by Linus Öberg on 15/05/14.
-//  Copyright (c) 2014 Linus Öberg. All rights reserved.
+//  Class that controlls the processView, the processView shows information
+//  about all processes that the server have either completed,
+//  started, waiting or processes that have crashed.
+//  Each tableViewCell contains information about one process.
 //
 
 #import <UIKit/UIKit.h>
