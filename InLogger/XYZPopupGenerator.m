@@ -37,11 +37,22 @@ static UIView * ACTIVITY_CONTAINER;
 + (void)showPopupWithMessage: (NSString *) message withTitle: (NSString *) title
              withCancelButtonTitle: (NSString *) cancelTitle
 {
+    [XYZPopupGenerator showPopupWithMessage: message withTitle:title withCancelButtonTitle:cancelTitle withDelegate:nil];
+}
+
++ (void)showPopupWithMessage: (NSString *) message withTitle: (NSString *) title
+       withCancelButtonTitle: (NSString *) cancelTitle withDelegate: (id) delegate
+{
     UIAlertView *popup = [[UIAlertView alloc]
                           initWithTitle:title message: [XYZPopupGenerator formatMessage:message]
-                          delegate:nil cancelButtonTitle:cancelTitle
+                          delegate:delegate cancelButtonTitle:cancelTitle
                           otherButtonTitles:nil];
     [popup show];
+}
+
++ (void) showPopupWithMessage:(NSString *)message withDelegate: (id) delegate
+{
+    
 }
 
 + (void) showInputPopupWithMessage: (NSString *) message withTitle: (NSString *) title withText: (NSString *) text withDelegate: (id) delegate
