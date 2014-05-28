@@ -28,6 +28,11 @@
     [app addController:self];
 }
 
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
+{
+    [XYZSegueController segueStarted];
+}
+
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
 {
     return ![XYZSegueController isPerformingSegue];

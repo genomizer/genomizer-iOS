@@ -474,8 +474,8 @@
         
         if(numberOfConvertRequestsLeftToConfirm == 0)
         {
+            NSString *requestString = @"request";
             if(successfulConvertRequests > 0){
-                NSString *requestString = @"request";
                 if (successfulConvertRequests > 1)
                 {
                     requestString = [requestString stringByAppendingString:@"s"];
