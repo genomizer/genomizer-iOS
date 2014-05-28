@@ -481,7 +481,7 @@
                     requestString = [requestString stringByAppendingString:@"s"];
                 }
                 NSString *message = [NSString stringWithFormat:@"%d convert %@ successfully sent to the server.", successfulConvertRequests, requestString];
-                [XYZPopupGenerator showPopupWithMessage:message];
+                [XYZPopupGenerator showPopupWithMessage:message withTitle:@"" withCancelButtonTitle:@"OK" withDelegate:self];
                 
             }
             NSString *message = [NSString stringWithFormat:@"%d convert %@ successfully sent to the server.", successfulConvertRequests, @"requestString"];
