@@ -16,5 +16,6 @@
        withCancelButtonTitle: (NSString *) cancelTitle;
 + (void) showInputPopupWithMessage: (NSString *) message withTitle: (NSString *) title withText: (NSString *) text withDelegate: (id) delegate;
 + (void) showErrorMessage: (NSError *) error;
++ (void) showActivityIndicatorOnView: (UIView *) view;
 
 @end

@@ -50,7 +50,7 @@
     NSString *username = _userField.text;
     NSString *password = _passwordField.text;
     NSError *error;
-    
+    [XYZPopupGenerator showActivityIndicatorOnView: self.view];
     if((username.length > 0) && (password.length > 0))
     {
         [ServerConnection login:self.userField.text withPassword:self.passwordField.text error:&error withContext:self];

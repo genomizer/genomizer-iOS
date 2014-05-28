@@ -10,6 +10,8 @@
 
 @implementation XYZPopupGenerator
 
+static UIView * ACTIVITY_CONTAINER;
+
 + (NSString *) formatMessage: (NSString *) message
 {
     NSMutableString *formatedMessage = [[NSMutableString alloc] init];
@@ -55,6 +57,26 @@
 {
     NSString * errorMsg = [error.userInfo objectForKey:NSLocalizedDescriptionKey];
     [XYZPopupGenerator showPopupWithMessage:errorMsg withTitle:error.domain];
+}
+
++ (void) showActivityIndicatorOnView: (UIView *) view
+{
+    UIView *ACTIVITY_CONTAINER = [[UIView alloc] initWithFrame:CGRectMake(0, 0, view.frame.size.width, view.frame.size.height)];
+    ACTIVITY_CONTAINER.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.40];
+    UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake((view.frame.size.width/2) - 40, (view.frame.size.height/2) - 40, 80, 80)];
+    indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
+    indicator.backgroundColor = [UIColor blackColor];
+    [indicator layer].cornerRadius = 8.0;
+    [indicator layer].masksToBounds = YES;
+    [ACTIVITY_CONTAINER addSubview:indicator];
+    [indicator startAnimating];
+    [view addSubview: ACTIVITY_CONTAINER];
+    
+}
+
++ (void) hideActivityIndicator
+{
+    [ACTIVITY_CONTAINER removeFromSuperview];
 }
 
 @end
