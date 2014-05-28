@@ -1,9 +1,11 @@
 //
 //  XYZSearchViewController.m
-//  InLogger
+//  Genomizer
 //
-//  Created by Joel Viklund on 25/04/14.
-//  Copyright (c) 2014 Joel Viklund. All rights reserved.
+// Class that controlls the SearchView. the searchView shows a list of annotations
+// the user is avaliable to search for to retrive an experiment. The annotations is
+// recived from the server. when the a search button is pressed a request to find
+// experiments matching the searchvalues are sent to the server.
 //
 
 #import "XYZSearchViewController.h"
@@ -314,7 +316,12 @@
     _pickerView.dataSource = nil;
     [_tableView reloadData];
 }
-
+/**
+ * Method that adds a "done"-button to the pickerview for 
+ * annotations that have specified values.
+ *
+ * @return the done button that is added to the pickerview.
+ */
 - (UIToolbar *) createPickerViewToolBar: (UIPickerView *) pickerView
 {
     UIToolbar *toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, pickerView.bounds.size.width, 44)];
@@ -322,6 +329,12 @@
     [toolBar setItems:[NSArray arrayWithObjects:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], doneButton, nil]];
     return toolBar;
 }
+/**
+ * Method that creates a pickerivew that is shown when a 
+ * annotation have specified values
+ *
+ * @return the pickerView.
+ */
 - (UIPickerView *) createPickerView
 {
     UIPickerView *pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 44, 44, 44)];

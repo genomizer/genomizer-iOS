@@ -1,9 +1,11 @@
 //
 //  XYZSearchViewController.h
-//  InLogger
+//  Genomizer
 //
-//  Created by Joel Viklund on 25/04/14.
-//  Copyright (c) 2014 Joel Viklund. All rights reserved.
+// Class that controlls the SearchView. the searchView shows a list of annotations
+// the user is avaliable to search for to retrive an experiment. The annotations is
+// recived from the server. when the a search button is pressed a request to find
+// experiments matching the searchvalues are sent to the server.
 //
 
 #import <UIKit/UIKit.h>
