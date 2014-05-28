@@ -212,12 +212,13 @@ NSString *token;
          {
              error = [self generateError:@"Could not connect to server" withErrorDomain:@"Connection Error" withUnderlyingError:internalError];
          }
-         [controller reportResult:error experiment:@"experrid" /*[dict objectForKey:@"expid"]*/];
+         [controller reportResult:error experiment:[dict objectForKey:@"expid"]];
      }];
 }
 
 + (void)getAvailableAnnotations:(XYZSearchViewController*) controller
 {
+    
     NSMutableURLRequest *request = [JSONBuilder getAvailableAnnotationsJSON:token];
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler: ^(NSURLResponse *response, NSData *POSTReply, NSError *internalError)
