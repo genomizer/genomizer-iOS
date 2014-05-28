@@ -106,7 +106,6 @@
 - (IBAction)addFilesToSelectedFilesOnTouchUpInside:(UIButton *)sender
 {
     NSArray *selectedFiles = [_selectedFiles getFiles];
-    NSLog(@"%d", [selectedFiles count]);
     for (NSInteger i = [selectedFiles count]; i > 0; i--) {
         XYZExperimentFile *file = [selectedFiles objectAtIndex:i-1];
         [XYZSelectedFilesViewController addExperimentFile: file];

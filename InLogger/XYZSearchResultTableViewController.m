@@ -101,7 +101,6 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    NSLog(@"PERFORM SEGUEAUAUAA");
     if ([segue.identifier isEqualToString:@"toFileList1"] || [segue.identifier isEqualToString:@"toFileList2"]) {
         XYZDataFileViewController *nextVC = (XYZDataFileViewController *)[segue destinationViewController];
         nextVC.experiment = _selectedExperiment;

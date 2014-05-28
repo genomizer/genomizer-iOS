@@ -12,7 +12,7 @@
 
 - (IBAction)switchValueChanged:(UISwitch *)sender
 {
-    NSLog(@"SWITCH");
+
     if (_switchButton.on) {
         [_controller.selectedFiles addExperimentFile:_file];
     } else {

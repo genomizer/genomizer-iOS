@@ -53,18 +53,15 @@ NSMutableArray* controllers;
     if(_numberOfThreadsAlive <= 3)
     {
         _numberOfThreadsAlive++;
-        NSLog(@"threadCount: %d", _numberOfThreadsAlive);
         return YES;
     } else
     {
-        NSLog(@"No thread available, threadnumber: %d", _numberOfThreadsAlive);
         return NO;
     }
 }
 
 - (void) threadFinished
 {
-    NSLog(@"threadFinished");
     _numberOfThreadsAlive--;
 }
 

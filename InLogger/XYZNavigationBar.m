@@ -22,12 +22,9 @@
 
 - (UINavigationItem *)popNavigationItemAnimated:(BOOL)animated
 {
-    NSLog(@"POPOPOP");
     if([XYZSegueController isPerformingSegue]) {
-        NSLog(@"no popopop");
         return nil;
     } else {
-        NSLog(@"yes popoppo");
         [XYZSegueController segueStarted];
         return [super popNavigationItemAnimated:animated];
     }
