@@ -470,7 +470,7 @@
                 
                 self.navigationItem.leftBarButtonItem.enabled = YES;
             }
-            NSString *message = [NSString stringWithFormat:@"%d convert %@ successfully sent to the server.", successfulConvertRequests, requestString];
+            NSString *message = [NSString stringWithFormat:@"%d convert %@ successfully sent to the server.", successfulConvertRequests, @"requestString"];
             [XYZPopupGenerator showPopupWithMessage:message withTitle:@"" withCancelButtonTitle:@"OK" withDelegate: self];
             _convertButton.enabled = YES;
             self.navigationItem.leftBarButtonItem.enabled = YES;
