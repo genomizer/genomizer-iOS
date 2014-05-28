@@ -17,6 +17,7 @@
 
 - (void) viewDidAppear:(BOOL)animated
 {
+    NSLog(@"view controller did appear");
     [XYZSegueController segueDone];
     [super viewDidAppear:animated];
     
@@ -40,7 +41,6 @@
 
 - (void)presentViewController:(UIViewController *)viewControllerToPresent animated:(BOOL)flag completion:(void (^)(void))completion
 {
-   // NSLog(@"SDASDAS");
     [super presentViewController:viewControllerToPresent animated:flag completion:completion];
 }
 

@@ -32,7 +32,6 @@
 {
     [super viewDidLoad];
     _spinner.hidesWhenStopped = YES;
-    
     //add self to appDelegate
     AppDelegate *app = [UIApplication sharedApplication].delegate;
     [app addController:self];
@@ -40,8 +39,6 @@
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    _annotations= [[NSArray alloc] init];
-    [self.tableView reloadData];
     [self annotationsIsStarting];
 }
 - (void) viewDidAppear:(BOOL)animated {
@@ -62,14 +59,12 @@
     if(error == nil)
     {
         dispatch_async(dispatch_get_main_queue(), ^{
-            _annotations = result;
-            [self annotationsIsFinished];
-            [self.tableView reloadData];
+            [self annotationsIsFinishedWithResult: result];
         });
     } else
     {
         [XYZPopupGenerator showErrorMessage:error];
-        [self annotationsIsFinished];
+        [self annotationsIsFinishedWithResult: nil];
     }
 }
 
@@ -124,22 +119,20 @@
     NSArray *selectedAnnotations = [self getSelectedAnnotations];
     [ServerConnection search:[XYZPubMedBuilder createAnnotationsSearch: selectedAnnotations] withContext:self];
 }
-- (void) annotationsIsFinished
+- (void) annotationsIsFinishedWithResult: (NSArray *) result
 {
-    [_spinner stopAnimating];
+    if(_annotations == nil || (result != nil && ![_annotations isEqualToArray:result])) {
+        _annotations = result;
+        [_tableView reloadData];
+    }
     _searchButton.enabled = YES;
-    _searchButton.hidden = NO;
-    
-    [_tableView reloadData];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
 
 - (void) annotationsIsStarting
 {
-    _spinner.hidden = NO;
-    [_spinner startAnimating];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     _searchButton.enabled = NO;
-    _searchButton.hidden = YES;
-    [_tableView reloadData];
 }
 
 - (void) searchIsFinished
@@ -149,7 +142,7 @@
     _searchButton.hidden = NO;
     self.navigationItem.rightBarButtonItem.enabled = YES;
     _searching = NO;
-    [_tableView reloadData];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
 
 - (void) searchIsStarting
@@ -160,7 +153,7 @@
     _searchButton.hidden = YES;
     self.navigationItem.rightBarButtonItem.enabled = NO;
     _searching = YES;
-    [_tableView reloadData];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 }
 
 - (void) reportSearchResult: (NSMutableArray*) result error: (NSError*) error

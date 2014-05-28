@@ -12,6 +12,8 @@
 
 @interface XYZTabViewController ()
 
+@property NSUInteger prevSelectedIndex;
+
 @end
 
 @implementation XYZTabViewController
@@ -22,6 +24,7 @@
     self.delegate = self;
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.hidesBackButton = YES;
+    _prevSelectedIndex = 0;
     
     //add self to appDelegate
     AppDelegate *app = [UIApplication sharedApplication].delegate;
@@ -30,12 +33,17 @@
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
 {
-    [XYZSegueController segueStarted];
+   // viewController.
+    //if (_prevSelectedIndex == self.selectedIndex) {
+        NSLog(@"seg pressed");
+        //[XYZSegueController segueStarted];
+    //}
 }
 
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
 {
-    return ![XYZSegueController isPerformingSegue];
+    NSLog(@"should select? %@", [viewController class]);
+    return viewController != tabBarController.selectedViewController; //![XYZSegueController isPerformingSegue];
 }
 
 @end
