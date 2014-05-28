@@ -328,21 +328,6 @@
 			name = DataHolders;
 			sourceTree = "<group>";
 		};
-		DEBD8BBC193382C2005C5E19 /* Navigation */ = {
-			isa = PBXGroup;
-			children = (
-				DEBD8BC01933835B005C5E19 /* XYZViewController.h */,
-				DEBD8BC11933835B005C5E19 /* XYZViewController.m */,
-				DEBD8BC319338594005C5E19 /* XYZTableViewController.h */,
-				DEBD8BC419338594005C5E19 /* XYZTableViewController.m */,
-				DEBD8BC619338B09005C5E19 /* XYZNavigationBar.h */,
-				DEBD8BC719338B09005C5E19 /* XYZNavigationBar.m */,
-				DE915F7D19347AB5009C0F79 /* XYZSegueController.h */,
-				DE915F7E19347AB5009C0F79 /* XYZSegueController.m */,
-			);
-			name = Navigation;
-			sourceTree = "<group>";
-		};
 		DED12296190E9C2F00D8E530 /* SearchResult */ = {
 			isa = PBXGroup;
 			children = (
@@ -397,6 +382,14 @@
 		DED12299190E9C8100D8E530 /* MainGUI */ = {
 			isa = PBXGroup;
 			children = (
+				DEBD8BC01933835B005C5E19 /* XYZViewController.h */,
+				DEBD8BC11933835B005C5E19 /* XYZViewController.m */,
+				DEBD8BC319338594005C5E19 /* XYZTableViewController.h */,
+				DEBD8BC419338594005C5E19 /* XYZTableViewController.m */,
+				DEBD8BC619338B09005C5E19 /* XYZNavigationBar.h */,
+				DEBD8BC719338B09005C5E19 /* XYZNavigationBar.m */,
+				DE915F7D19347AB5009C0F79 /* XYZSegueController.h */,
+				DE915F7E19347AB5009C0F79 /* XYZSegueController.m */,
 				DEEF7D91190A55D1005EDB8E /* XYZTabViewController.h */,
 				DEEF7D92190A55D1005EDB8E /* XYZTabViewController.m */,
 				DEEF7D93190A55D1005EDB8E /* XYZTabViewController.xib */,
@@ -469,7 +462,6 @@
 				DEEF6AF719094F8A00A2CD8C /* AppDelegate.m */,
 				DEEF6AF919094F8A00A2CD8C /* Images.xcassets */,
 				DEEF6AEE19094F8A00A2CD8C /* Supporting Files */,
-				DEBD8BBC193382C2005C5E19 /* Navigation */,
 			);
 			name = Genomizer;
 			path = InLogger;

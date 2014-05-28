@@ -27,9 +27,4 @@ static BOOL BUSY;
     BUSY = YES;
 }
 
-+ (void) blockScreen
-{
-    
-}
-
 @end
