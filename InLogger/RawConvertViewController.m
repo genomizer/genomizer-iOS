@@ -433,9 +433,23 @@
             }
             [parameters addObject:text];
         }
+        else{
+            [parameters addObject:@""];
+        }
+    
+        [self createExperimentFiles];
+    
+        numberOfConvertRequestsLeftToConfirm = 0;
+        successfulConvertRequests = 0;
+        for(NSMutableDictionary *dict in _experimentFilesDictArr){
+            [dict setObject:parameters forKey:@"parameters"];
+            [dict setObject:_genomeFile.text forKey:@"genomeVersion"];
+            [ServerConnection convert:dict withContext:self];
+            numberOfConvertRequestsLeftToConfirm++;
+        }
     }
     return;
-    
+
 }
 - (void) reportResult: (NSError*) error experiment: (NSString*) expid
 {
@@ -446,6 +460,7 @@
         {
             
             [XYZPopupGenerator showErrorMessage:error];
+            numberOfConvertRequestsLeftToConfirm = 0;
         }
         else if(error){
             NSDictionary *dictionary = error.userInfo;
@@ -468,16 +483,11 @@
                 NSString *message = [NSString stringWithFormat:@"%d convert %@ successfully sent to the server.", successfulConvertRequests, requestString];
                 [XYZPopupGenerator showPopupWithMessage:message];
                 
-                self.navigationItem.leftBarButtonItem.enabled = YES;
             }
-            NSString *message = [NSString stringWithFormat:@"%d convert %@ successfully sent to the server.", successfulConvertRequests, requestString];
-            [XYZPopupGenerator showPopupWithMessage:message withTitle:@"" withCancelButtonTitle:@"OK" withDelegate: self];
-            _convertButton.enabled = YES;
             self.navigationItem.leftBarButtonItem.enabled = YES;
+            [_activityIndicator stopAnimating];
+            _convertButton.hidden = NO;
         }
-        [_activityIndicator stopAnimating];
-        _convertButton.hidden = NO;
-        
     });
 }
 
@@ -485,7 +495,6 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     [self dismissViewControllerAnimated:YES completion:nil];
-    NSLog(@"ok!");
 }
 
 
@@ -509,7 +518,6 @@
 -(void) createExperimentFiles
 {
     NSMutableArray *expIdsAlreadyCreated = [[NSMutableArray alloc] init];
-    
     _experimentFilesDictArr = [[NSMutableArray alloc] init];
     for(XYZExperimentFile *file in _experimentFiles){
         
