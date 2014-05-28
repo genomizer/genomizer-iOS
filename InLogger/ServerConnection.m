@@ -218,6 +218,7 @@ NSString *token;
 
 + (void)getAvailableAnnotations:(XYZSearchViewController*) controller
 {
+    
     NSMutableURLRequest *request = [JSONBuilder getAvailableAnnotationsJSON:token];
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler: ^(NSURLResponse *response, NSData *POSTReply, NSError *internalError)

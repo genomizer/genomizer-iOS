@@ -51,6 +51,7 @@
 @property UIToolbar *toolBar;
 @property NSMutableArray* genomeReleases;
 @property UIButton *convertButton;
+@property UIActivityIndicatorView *activityIndicator;
 
 
 @end
@@ -123,7 +124,14 @@
     [_convertButton setTitle:@"Convert" forState:UIControlStateNormal];
     [_convertButton addTarget:self action:@selector(convertButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
     _convertButton.frame=CGRectMake(self.tableView.bounds.size.width/2-65, 10, 130, 30);
+    
+    _activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    _activityIndicator.frame=CGRectMake(self.tableView.bounds.size.width/2-65, 10, 130, 30);
+    _activityIndicator.hidesWhenStopped = YES;
+    _activityIndicator.hidden = YES;
+    [staticView addSubview:_activityIndicator];
     [staticView addSubview:_convertButton];
+    [_activityIndicator stopAnimating];
     staticView.clipsToBounds = YES;
     CALayer *rightBorder = [CALayer layer];
     rightBorder.borderColor = [UIColor lightGrayColor].CGColor;
@@ -336,7 +344,8 @@
     if((_bowtie.text.length == 0) || (_genomeFile.text.length == 0)){
         [XYZPopupGenerator showPopupWithMessage:@"Fill in at least the fields \"Bowtie parameters\" and \"Genome file\" to start a process"];
     }else{
-        _convertButton.enabled = NO;
+        _convertButton.hidden = YES;
+        [_activityIndicator startAnimating];
         NSMutableArray * parameters = [[NSMutableArray alloc] init];
         [parameters addObject:_bowtie.text];
         [parameters addObject:@""];
@@ -474,10 +483,13 @@
                 }
                 NSString *message = [NSString stringWithFormat:@"%d convert %@ successfully sent to the server.", successfulConvertRequests, requestString];
                 [XYZPopupGenerator showPopupWithMessage:message];
-                _convertButton.enabled = YES;
+                
                 self.navigationItem.leftBarButtonItem.enabled = YES;
             }
         }
+        [_activityIndicator stopAnimating];
+        _convertButton.hidden = NO;
+        
     });
 }
 

@@ -32,11 +32,6 @@
 {
     [super viewDidLoad];
     _spinner.hidesWhenStopped = YES;
-    [ServerConnection getAvailableAnnotations:self];
-    _pickerView = [self createPickerView];
-    _toolBar = [self createPickerViewToolBar:_pickerView];
-    [self.tableView reloadData];
-    _searching = NO;
     
     //add self to appDelegate
     AppDelegate *app = [UIApplication sharedApplication].delegate;
@@ -45,8 +40,17 @@
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    //asdasd
-    //[ServerConnection getAvailableAnnotations:self];
+    _annotations= [[NSArray alloc] init];
+    [self.tableView reloadData];
+    [self annotationsIsStarting];
+}
+- (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [ServerConnection getAvailableAnnotations:self];
+    _pickerView = [self createPickerView];
+    _toolBar = [self createPickerViewToolBar:_pickerView];
+    [self.tableView reloadData];
+    _searching = NO;
 }
 
 - (void) viewDidDisappear:(BOOL)animated {
@@ -59,11 +63,13 @@
     {
         dispatch_async(dispatch_get_main_queue(), ^{
             _annotations = result;
+            [self annotationsIsFinished];
             [self.tableView reloadData];
         });
     } else
     {
         [XYZPopupGenerator showErrorMessage:error];
+        [self annotationsIsFinished];
     }
 }
 
@@ -118,6 +124,23 @@
     NSArray *selectedAnnotations = [self getSelectedAnnotations];
     [ServerConnection search:[XYZPubMedBuilder createAnnotationsSearch: selectedAnnotations] withContext:self];
 }
+- (void) annotationsIsFinished
+{
+    [_spinner stopAnimating];
+    _searchButton.enabled = YES;
+    _searchButton.hidden = NO;
+    
+    [_tableView reloadData];
+}
+
+- (void) annotationsIsStarting
+{
+    _spinner.hidden = NO;
+    [_spinner startAnimating];
+    _searchButton.enabled = NO;
+    _searchButton.hidden = YES;
+    [_tableView reloadData];
+}
 
 - (void) searchIsFinished
 {
@@ -128,7 +151,7 @@
     _searching = NO;
     [_tableView reloadData];
 }
-    
+
 - (void) searchIsStarting
 {
     _spinner.hidden = NO;
@@ -177,7 +200,7 @@
 
 - (IBAction)closeAdvancedSearch:(id)sender {
     _advancedView.hidden = YES;
-     _tableView.userInteractionEnabled = YES;
+    _tableView.userInteractionEnabled = YES;
     [_pubmedTextView endEditing:YES];
 }
 
