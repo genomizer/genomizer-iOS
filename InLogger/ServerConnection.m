@@ -2,6 +2,11 @@
 //  ServerConnection.m
 //  InLogger
 //
+// A class that contains static methods for all server communication.
+// All communication happens asynchronous, which means none of the methods
+// have return values. Instead the method, when done, reports to the viewController
+// it has access to. 
+//
 //  Created by Linus Öberg on 28/04/14.
 //  Copyright (c) 2014 Linus Öberg. All rights reserved.
 //
@@ -15,6 +20,14 @@
 
 NSString *token;
 
+/**
+ * Static method that asynchronously sends a login request to the server,
+ * which either succeeds or fails. When an answer is received, 
+ * the method reports to the viewController it has knowledge about.
+ *
+ *@param controller - XYZLogInViewController, which the method will report the result to
+ *@return nothing
+ */
 + (void)login:(NSString *)username withPassword:(NSString *)password error:(NSError**) error withContext: (XYZLogInViewController*) controller
 {
     NSMutableURLRequest *request = [JSONBuilder getLoginJSON:username withPassword:password];
@@ -22,13 +35,18 @@ NSString *token;
     
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler: ^(NSURLResponse *response, NSData *POSTReply, NSError *internalError)
      {
+         //everything in here happens when the asynchronous NSURLRequest is finished, in the same thread.
+         
          NSMutableDictionary *message;
          NSError *error;
+         if (POSTReply != nil)
+         {
+             message = [NSJSONSerialization JSONObjectWithData:POSTReply options:kNilOptions error:&error];
+         }
          if (internalError == nil)
          {
 
              NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
-              message = [NSJSONSerialization JSONObjectWithData:POSTReply options:kNilOptions error:&error];
              NSDictionary *json = [self parseJSONToDictionary:POSTReply error:&internalError];
              
              if(internalError == nil)
@@ -61,7 +79,7 @@ NSString *token;
      }];
 }
 
-+ (void)logout:(NSError**)error
++ (void)logout
 {
     NSMutableURLRequest *request = [JSONBuilder getLogoutJSON:token];
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
@@ -69,7 +87,15 @@ NSString *token;
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler: nil];
 }
 
-
+/**
+ * Method that handles the reply from a search request. Returns an NSArray containing the answer.
+ *
+ *@param interalError - error that has happened during server communication, if such an error exists
+ *@param POSTReply - the reply the server gave
+ *@param error - memory holder for error, where errors during parsing is saved. WARNING: Has to be checked when 
+ *                                                                                       this method is used.
+ *@return NSMutableArray containing the information recieved from the server
+ */
 + (NSMutableArray*)handleSearchPostReply:(NSError *)internalError POSTReply:(NSData *)POSTReply error:(NSError **)error
 {
     NSArray *array = [NSJSONSerialization JSONObjectWithData:POSTReply options: NSJSONReadingMutableContainers error:&internalError];
@@ -96,6 +122,13 @@ NSString *token;
     return nil;
 }
 
+/**
+ * Static method that asynchronously sends a search request to the server. When a search result
+ * is received, method reports to the viewController it has knowledge about.
+ *
+ *@param controller - XYZSearchViewController, which the method will report the result to
+ *@return nothing
+ */
 + (void)search:(NSString*)annotations withContext: (XYZSearchViewController*) controller
 {
     NSMutableURLRequest *request = [JSONBuilder getSearchJSON:annotations withToken: token];
@@ -103,6 +136,8 @@ NSString *token;
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler: ^(NSURLResponse *response, NSData *POSTReply, NSError *internalError)
      {
+         //everything in here happens when the asynchronous NSURLRequest is finished, in the same thread.
+         
          NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
          NSMutableArray *array;
          NSError *error;
@@ -135,13 +170,23 @@ NSString *token;
      }];
 }
 
+/**
+ * Static method that asynchronously sends a get genome releases request to the server,
+ * which contains all available genome releases on the server. When an answer
+ * is received, method reports to the viewController it has knowledge about.
+ *
+ *@param controller - RawConvertViewController, which the method will report the result to
+ *@return nothing
+ */
 + (void)genomeRelease: (RawConvertViewController*) controller
 {
-    NSMutableURLRequest *request = [JSONBuilder getgenomeReleaseJSON:token];
+    NSMutableURLRequest *request = [JSONBuilder getGenomeReleaseJSON:token];
     
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler: ^(NSURLResponse *response, NSData *POSTReply, NSError *internalError)
      {
+         //everything in here happens when the asynchronous NSURLRequest is finished, in the same thread.
+         
          NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
          NSError *error;
          NSMutableArray* genomeReleases = [[NSMutableArray alloc] init];
@@ -181,7 +226,13 @@ NSString *token;
      }];
 }
 
-
+/**
+ * Static method that asynchronously sends a conversion request to the server. When an answer
+ * is received, method reports to the viewController it has knowledge about.
+ *
+ *@param controller - RawConvertViewController, which the method will report the result to
+ *@return nothing
+ */
 +(void)convert:(NSMutableDictionary*)dict withContext: (RawConvertViewController*) controller
 {
     NSMutableURLRequest *request = [JSONBuilder getRawToProfileJSON:token withDict:dict];
@@ -189,6 +240,8 @@ NSString *token;
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler: ^(NSURLResponse *response, NSData *POSTReply, NSError *internalError)
      {
+         //everything in here happens when the asynchronous NSURLRequest is finished, in the same thread.
+         
          NSError *error;
          NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
          if(internalError == nil)
@@ -215,6 +268,14 @@ NSString *token;
      }];
 }
 
+/**
+ * Static method that asynchronously sends a get annotations request to the server,
+ * which contains all annotations on the server. When an answer
+ * is received, method reports to the viewController it has knowledge about.
+ *
+ *@param controller - XYZSearchViewController, which the method will report the result to
+ *@return nothing
+ */
 + (void)getAvailableAnnotations:(XYZSearchViewController*) controller
 {
     
@@ -222,6 +283,8 @@ NSString *token;
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler: ^(NSURLResponse *response, NSData *POSTReply, NSError *internalError)
      {
+         //everything in here happens when the asynchronous NSURLRequest is finished, in the same thread.
+         
          NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
          NSError *error;
          NSMutableArray *annotations;
@@ -276,7 +339,14 @@ NSString *token;
      }];
 }
 
-
+/**
+ * Static method that asynchronously sends a process request to the server,
+ * which contains the current processes the server is doing. When an answer 
+ * is received, method reports to the viewController it has knowledge about.
+ *
+ *@param controller - ProcessViewController, which the method will report the result to
+ *@return nothing
+ */
 + (void) getProcessStatus:(ProcessViewController*) controller
 {
     NSMutableURLRequest *request = [JSONBuilder getProcessStatusJSON:token];
@@ -284,6 +354,8 @@ NSString *token;
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler: ^(NSURLResponse *response, NSData *POSTReply, NSError *internalError)
      {
+         //everything in here happens when the asynchronous NSURLRequest is finished, in the same thread.
+         
          NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
          NSError *error;
          NSMutableArray *processStatusResults = [[NSMutableArray alloc] init];
@@ -338,6 +410,13 @@ NSString *token;
     return json;
 }
 
+/**
+ * Static method that generates an NSError from an HTTP error
+ *
+ * @param errorCode - integer containing a code for the error
+ * @param errorMessage - NSString containing a description to display to the user.
+ * @return superseding NSError
+ */
 +(NSError*)generateErrorObjectFromHTTPError:(NSInteger)errorCode errorMessage:(NSString *)errorMessage
 {
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
@@ -384,6 +463,15 @@ NSString *token;
     return error;
 }
 
+/**
+ * Static method that creates an NSError from parameters.
+ *
+ *@param errrorDescription - NSString containing information about the error
+ *@param withErrorDomain - NSString containing information about what domain the error
+ *                         is related to
+ *@param withUnderlyingError - NSError containing preceding error, if any
+ *@return the superseding NSError
+ */
 + (NSError*) generateError: (NSString*) errorDescription withErrorDomain: (NSString*) errorDomain withUnderlyingError: (NSError*) underlyingError
 {
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
