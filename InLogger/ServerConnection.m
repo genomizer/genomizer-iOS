@@ -212,7 +212,7 @@ NSString *token;
          {
              error = [self generateError:@"Could not connect to server" withErrorDomain:@"Connection Error" withUnderlyingError:internalError];
          }
-         [controller reportResult:error experiment:@"experrid" /*[dict objectForKey:@"expid"]*/];
+         [controller reportResult:error experiment:[dict objectForKey:@"expid"]];
      }];
 }
 
