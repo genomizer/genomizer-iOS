@@ -24,8 +24,7 @@ static NSMutableArray * processingExperimentFiles;
 
 - (void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-
- //   [self updateProcessStatusFromServer];
+    [self updateProcessStatusFromServer];
 }
 
 - (void)initialize
@@ -40,6 +39,7 @@ static NSMutableArray * processingExperimentFiles;
     AppDelegate *app = [UIApplication sharedApplication].delegate;
     if([app threadIsAvailable])
     {
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
         [ServerConnection getProcessStatus:self];
     }
 }
@@ -60,8 +60,6 @@ static NSMutableArray * processingExperimentFiles;
 {
     [super viewDidLoad];
     [self initialize];
-    [self updateProcessStatusFromServer];
-    
     //add self to appDelegate
     AppDelegate *app = [UIApplication sharedApplication].delegate;
     [app addController:self];
@@ -144,6 +142,7 @@ static NSMutableArray * processingExperimentFiles;
         }
         
         dispatch_async(dispatch_get_main_queue(), ^{
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
             [_tableView reloadData];
             AppDelegate *app = [UIApplication sharedApplication].delegate;
             [app threadFinished];
@@ -151,6 +150,7 @@ static NSMutableArray * processingExperimentFiles;
     } else
     {
         dispatch_async(dispatch_get_main_queue(), ^{
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
             [XYZPopupGenerator showErrorMessage:error];
             AppDelegate *app = [UIApplication sharedApplication].delegate;
             [app threadFinished];
