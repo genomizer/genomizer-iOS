@@ -51,23 +51,20 @@ static NSString *SERVER_URL = nil;
     NSString *annotationString = @"search/?annotations=";
     NSString *annotationsStringComplete = [annotationString stringByAppendingString:annotations];
     NSString *encodedAnnotations = [annotationsStringComplete stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSLog(@"hej %@",annotationsStringComplete);
     NSMutableURLRequest *request =  [self getRequest:@"GET" withToken:token];
     [request setURL:[NSURL URLWithString: [[self getServerURL] stringByAppendingString:encodedAnnotations]]];   
     return request;
 }
 
 +(NSMutableURLRequest*)getRawToProfileJSON:(NSString *)token withDict:(NSMutableDictionary*)dict{
-    NSLog(@"dict %@", dict);
-        NSData *postData = [NSJSONSerialization dataWithJSONObject:dict
+    NSData *postData = [NSJSONSerialization dataWithJSONObject:dict
                                                            options:0
                                                              error:nil];
-        NSString *conversionString =@"process/rawtoprofile";
-        NSMutableURLRequest *request = [self getRequest:@"PUT" withToken:token];
-        [request setHTTPBody:postData];
-        [request setURL:[NSURL URLWithString: [[self getServerURL] stringByAppendingString:conversionString]]];
-        NSLog(@"req %@", request);
-        return request;
+    NSString *conversionString =@"process/rawtoprofile";
+    NSMutableURLRequest *request = [self getRequest:@"PUT" withToken:token];
+    [request setHTTPBody:postData];
+    [request setURL:[NSURL URLWithString: [[self getServerURL] stringByAppendingString:conversionString]]];
+    return request;
     
 }
 
@@ -99,11 +96,7 @@ static NSString *SERVER_URL = nil;
 
 + (NSString*) getServerURL
 {
-//return @"http://genomizer.apiary-mock.com/";
-//return @"http://scratchy.cs.umu.se:7000/";
     return SERVER_URL;
-    //return @"http://genomizer.apiary-mock.com/";
-   // return @"http://itchy.cs.umu.se:7000/";
 }
 
 + (void) setServerURLToString: (NSString *) url

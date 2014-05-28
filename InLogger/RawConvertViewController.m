@@ -107,6 +107,7 @@
     self.genomeFile.enabled = YES;
     self.genomeFile.inputView = _pickerView;
     self.genomeFile.inputAccessoryView = _toolBar;
+    self.samToGff.enabled = YES;
     _pickerView.delegate = (id)self;
     _pickerView.dataSource = (id)self;
     self.originalCenter = self.view.center;
@@ -276,7 +277,10 @@
             }
         }
     } else{
-        if(((textField == self.smoothingWindowSize) || (textField == self.smoothingMinimumStep)) && (self.smoothingWindowSize.text.length > 0) && (self.smoothingMinimumStep.text.length > 0)) {
+        if(textField == self.genomeFile) {
+            self.samToGff.enabled = YES;
+        }
+        else if(((textField == self.smoothingWindowSize) || (textField == self.smoothingMinimumStep)) && (self.smoothingWindowSize.text.length > 0) && (self.smoothingMinimumStep.text.length > 0)) {
             self.stepCreateStep.enabled = YES;
             self.step.enabled = YES;
         }
@@ -481,10 +485,12 @@
         }
     }
 }
--(void) createExperimentFiles{
+
+-(void) createExperimentFiles
+{
     _experimentFilesDictArr = [[NSMutableArray alloc] init];
     for(XYZExperimentFile *file in _experimentFiles){
-        NSMutableDictionary * currentFile =[[NSMutableDictionary alloc] init];
+        NSMutableDictionary *currentFile =[[NSMutableDictionary alloc] init];
         
         [currentFile setObject:file.expID forKey:@"expid"];
         [currentFile setObject:file.metaData forKey:@"metadata"];

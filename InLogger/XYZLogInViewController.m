@@ -13,6 +13,7 @@
 #import "XYZSettingsPopupDelegate.h"
 #import "JSONBuilder.h"
 #import "XYZFileHandler.h"
+#import "Reachability.h"
 
 @interface XYZLogInViewController ()
 
@@ -57,9 +58,17 @@
         [_spinner startAnimating];
         [self deactivateEverything];
         
-    } else{
-        [XYZPopupGenerator showPopupWithMessage:@"Please enter username and password."];
+        if((username.length > 0) && (password.length > 0))
+        {
+            [ServerConnection login:self.userField.text withPassword:self.passwordField.text error:&error withContext:self];
+            [_spinner startAnimating];
+            [self deactivateEverything];
+            
+        } else{
+            [XYZPopupGenerator showPopupWithMessage:@"Please enter username and password."];
+        }
     }
+   
 }
 
 - (void) deactivateEverything

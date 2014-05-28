@@ -78,7 +78,7 @@ NSMutableArray* controllers;
     int length = [controllers count];
     for(int i = 0; i < length; i++)
     {
-        NSLog(@"asd");
+        NSLog(@"kill Controllers");
         [[controllers lastObject] dismissViewControllerAnimated:NO completion:nil];
         [controllers removeObject:[controllers lastObject]];
     }
