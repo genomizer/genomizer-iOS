@@ -473,11 +473,18 @@
                 requestString = [requestString stringByAppendingString:@"s"];
             }
             NSString *message = [NSString stringWithFormat:@"%d convert %@ successfully sent to the server.", successfulConvertRequests, requestString];
-            [XYZPopupGenerator showPopupWithMessage:message];
+            [XYZPopupGenerator showPopupWithMessage:message withTitle:@"" withCancelButtonTitle:@"OK" withDelegate: self];
             _convertButton.enabled = YES;
             self.navigationItem.leftBarButtonItem.enabled = YES;
         }
     });
+}
+
+/* popup delegate method */
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+    NSLog(@"ok!");
 }
 
 
