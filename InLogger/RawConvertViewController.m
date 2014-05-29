@@ -444,6 +444,17 @@
         successfulConvertRequests = 0;
         for(NSMutableDictionary *dict in _experimentFilesDictArr){
             [dict setObject:parameters forKey:@"parameters"];
+            NSString *metadata = @"";
+            for (int i = 0; i < parameters.count; i++)
+            {
+                NSString *data = parameters[i];
+                metadata = [metadata stringByAppendingString:data];
+                if ((i + 1) < parameters.count)
+                {
+                    metadata = [metadata stringByAppendingString:@", "];
+                }
+            }
+            [dict setObject:metadata forKey:@"metadata"];
             [dict setObject:_genomeFile.text forKey:@"genomeVersion"];
             [ServerConnection convert:dict withContext:self];
             numberOfConvertRequestsLeftToConfirm++;
