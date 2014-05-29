@@ -1,14 +1,11 @@
 //
 //  ServerConnection.m
-//  InLogger
+//  Genomizer
 //
 // A class that contains static methods for all server communication.
 // All communication happens asynchronous, which means none of the methods
 // have return values. Instead the method, when done, reports to the viewController
-// it has access to. 
-//
-//  Created by Linus Öberg on 28/04/14.
-//  Copyright (c) 2014 Linus Öberg. All rights reserved.
+// it has access to.
 //
 
 #import "ServerConnection.h"

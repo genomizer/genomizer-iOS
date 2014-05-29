@@ -1,9 +1,8 @@
 //
 //  MoreViewController.m
-//  InLogger
+//  Genomizer
 //
-//  Created by Linus Öberg on 30/04/14.
-//  Copyright (c) 2014 Linus Öberg. All rights reserved.
+// Class that as of now only contains a logout-button.
 //
 
 #import "MoreViewController.h"
@@ -19,12 +18,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     //add self to appDelegate
     AppDelegate *app = [UIApplication sharedApplication].delegate;
     [app addController:self];
 }
-
+/**
+ * Method that executes when the "logout"-button is pressed.
+ * Calls the method "logout" in serverConnection.
+ * @return kills all controllers and returns to logout screen.
+ */
 - (IBAction)logoutButtonTouched:(id)sender {
     AppDelegate *app = [UIApplication sharedApplication].delegate;
     app.userIsLoggingOut = YES;

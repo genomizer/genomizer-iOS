@@ -33,17 +33,20 @@
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
 {
-   // viewController.
-    //if (_prevSelectedIndex == self.selectedIndex) {
-        NSLog(@"seg pressed");
-        //[XYZSegueController segueStarted];
-    //}
+    [XYZSegueController segueStarted];
 }
 
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
 {
-    NSLog(@"should select? %@", [viewController class]);
-    return viewController != tabBarController.selectedViewController; //![XYZSegueController isPerformingSegue];
+    if ([XYZSegueController isPerformingSegue]) {
+        return false;
+    } else if(viewController != tabBarController.selectedViewController) {
+        return true;
+    } else if ([viewController isKindOfClass:[UINavigationController class]]) {
+        return ((UINavigationController *)viewController).viewControllers.count > 1;
+    } else {
+        return true;
+    }
 }
 
 @end

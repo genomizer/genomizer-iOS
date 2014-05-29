@@ -17,7 +17,6 @@
 
 - (void) viewDidAppear:(BOOL)animated
 {
-    NSLog(@"table view controller did appear");
     [XYZSegueController segueDone];
     [super viewDidAppear:animated];
     

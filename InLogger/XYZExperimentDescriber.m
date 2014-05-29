@@ -1,9 +1,9 @@
 //
 //  XYZExperimentDescriber.m
-//  InLogger
+//  Genomizer
 //
-//  Created by Joel Viklund on 30/04/14.
-//  Copyright (c) 2014 Joel Viklund. All rights reserved.
+//  The ExperimentDescriber describes experiments. It keeps track of which
+//  annotations to display.
 //
 
 #import "XYZExperimentDescriber.h"
@@ -19,7 +19,12 @@
 
 @implementation XYZExperimentDescriber
 
-
+/**
+ * Initializes an XYZExperimentDescriber that displays
+ * the given annotations.
+ * 
+ * @param annotations - the annotations to display
+ */
 - (XYZExperimentDescriber *) initWithAnnotations: (NSArray *) annotations
 {
     self = [super init];
@@ -28,6 +33,11 @@
     return self;
 }
 
+/**
+ * Adds the given annotation to the list of annotations to display.
+ *
+ * @param annotation - the annotation to display
+ */
 - (void) showAnnotation: (XYZAnnotation *) annotation
 {
     if( ![_visibleAnnotations containsObject:annotation]) {
@@ -35,15 +45,35 @@
     }
 }
 
+/**
+ * Removes the given annotation from the list of annotations to display.
+ *
+ * @param annotation - the annotation to hide
+ */
 - (void) hideAnnotation: (XYZAnnotation *) annotation
 {
     [_visibleAnnotations removeObject:annotation];
 }
 
+
+/**
+ * Returns true if the annotation is to display, false otherwise.
+ *
+ * @param annotation - the annotation
+ * @return true if the annotation is to display
+ */
 - (BOOL) showsAnnotation: (XYZAnnotation *) annotation {
     return [_visibleAnnotations containsObject:annotation];
 }
 
+/**
+ * Returns a description of the given experiment. Each annotation
+ * is separeted by a new line, and the annotation names are formated
+ * to look nice.
+ *
+ * @param experiment - the experiment
+ * @return a description of the experiment
+ */
 - (NSString *) getDescriptionOf: (XYZExperiment*) experiment
 {
     NSMutableString *description = [[NSMutableString alloc] init];
@@ -60,6 +90,14 @@
     return description;
 }
 
+/**
+ * Formats the given annotation name and appends the given value to it.
+ *
+ * @param annotation - the annotation name
+ * @param withValue - the annotation value
+ * @param newLine - determines if a newline should be appended
+ *
+ */
 - (NSString *) createRowForAnnotation: (NSString *) annotation withValue: (NSString *) value andNewLine: (BOOL) newLine
 {
     NSMutableString *description = [[NSMutableString alloc] init];
@@ -76,6 +114,12 @@
     return description;
 }
 
+/**
+ * Saves the list with annotations to display to a text file.
+ * The name of the value is defined as FILE_NAME.
+ *
+ *
+ */
 - (void) saveAnnotationsToFile
 {
     NSMutableString *data = [[NSMutableString alloc] init];
@@ -89,6 +133,10 @@
     [XYZFileHandler writeData: data toFile:FILE_NAME];
 }
 
+/**
+ * Reads a text file and generates a list of annotations to display.
+ *
+ */
 - (NSMutableArray *) loadAnnotationsFromFile
 {
     NSMutableArray *result = [[NSMutableArray alloc] init];

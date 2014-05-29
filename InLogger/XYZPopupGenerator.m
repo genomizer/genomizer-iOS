@@ -1,9 +1,10 @@
 //
 //  XYZPopupGenerator.m
-//  InLogger
+//  Genomizer
 //
-//  Created by Marc Armgren on 08/05/14.
-//  Copyright (c) 2014 Marc Armgren. All rights reserved.
+//  The XYZPopupGenerator contains static methods to generate and display
+//  pop-ups of different sorts.
+//
 //
 
 #import "XYZPopupGenerator.h"
@@ -12,6 +13,15 @@
 
 static UIView * ACTIVITY_CONTAINER;
 
+/**
+ * Appends a dot to the given message if it doesn't contain a punctation
+ * mark.
+ *
+ * @param message - the message to operate on
+ *
+ * @return the formated message
+ *
+ */
 + (NSString *) formatMessage: (NSString *) message
 {
     NSMutableString *formatedMessage = [[NSMutableString alloc] init];
@@ -40,6 +50,15 @@ static UIView * ACTIVITY_CONTAINER;
     [XYZPopupGenerator showPopupWithMessage: message withTitle:title withCancelButtonTitle:cancelTitle withDelegate:nil];
 }
 
+/**
+ * Displays a pop-up with the given message, title, cancel-title and delegate.
+ *
+ * @param message - the message
+ * @param title - the title
+ * @param cancelTitle - the cancel title
+ * @param delegate - the pop-up delegate
+ *
+ */
 + (void)showPopupWithMessage: (NSString *) message withTitle: (NSString *) title
        withCancelButtonTitle: (NSString *) cancelTitle withDelegate: (id) delegate
 {
@@ -50,11 +69,14 @@ static UIView * ACTIVITY_CONTAINER;
     [popup show];
 }
 
-+ (void) showPopupWithMessage:(NSString *)message withDelegate: (id) delegate
-{
-    
-}
-
+/**
+ * Displays an input pop-up with the given message, title, default text and delegate.
+ *
+ * @param message - the message
+ * @param title - the title
+ * @param text - the default input text
+ * @param delegate - the pop-up delegate
+ */
 + (void) showInputPopupWithMessage: (NSString *) message withTitle: (NSString *) title withText: (NSString *) text withDelegate: (id) delegate
 {
     UIAlertView * alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:delegate cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -64,12 +86,23 @@ static UIView * ACTIVITY_CONTAINER;
     [alert show];
 }
 
+/**
+ * Displays a pop-up with information about the given error.
+ *
+ * @param error - the error
+ */
 + (void) showErrorMessage:(NSError *)error
 {
     NSString * errorMsg = [error.userInfo objectForKey:NSLocalizedDescriptionKey];
     [XYZPopupGenerator showPopupWithMessage:errorMsg withTitle:error.domain];
 }
 
+/**
+ * Displays an activity indicator on the given view.
+ *
+ * @param view - the view
+ *
+ */
 + (void) showActivityIndicatorOnView: (UIView *) view
 {
     UIView *ACTIVITY_CONTAINER = [[UIView alloc] initWithFrame:CGRectMake(0, 0, view.frame.size.width, view.frame.size.height)];
@@ -85,6 +118,10 @@ static UIView * ACTIVITY_CONTAINER;
     
 }
 
+/**
+ * Hides the activity indicator.
+ *
+ */
 + (void) hideActivityIndicator
 {
     [ACTIVITY_CONTAINER removeFromSuperview];

@@ -1,9 +1,8 @@
 //
 //  XYZPubMedBuilder.m
-//  InLogger
+//  Genomizer
 //
-//  Created by Joel Viklund on 14/05/14.
-//  Copyright (c) 2014 Joel Viklund. All rights reserved.
+//  Builds search strings according to the pubmed-standards.
 //
 
 #import "XYZPubMedBuilder.h"
@@ -11,6 +10,14 @@
 
 @implementation XYZPubMedBuilder
 
+/**
+ * Builds search strings according to the pubmed-standards.
+ * The given annotations will be seperated by ANDs.
+ *
+ * @param annotations - the annotations to search for
+ *
+ * @return a pubmed search string
+ */
 + (NSString *)createAnnotationsSearch: (NSArray *)annotations
 {
     NSString *annoSearch = @"";
