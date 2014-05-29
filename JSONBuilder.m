@@ -1,6 +1,8 @@
 //
 //  JSONBuilder.m
-//  InLogger
+//
+//  A class that creates NSURLRequests containing JSON objects
+//  as described by the API for the Genomizer project.
 //
 //  Created by Linus Öberg on 29/04/14.
 //  Copyright (c) 2014 Linus Öberg. All rights reserved.
@@ -39,7 +41,7 @@ static NSString *SERVER_URL = nil;
     return request;
 }
 
-+(NSMutableURLRequest*)getgenomeReleaseJSON:(NSString *)token
++(NSMutableURLRequest*)getGenomeReleaseJSON:(NSString *)token
 {
     NSMutableURLRequest *request = [self getRequest:@"GET" withToken:token];
     [request setURL:[NSURL URLWithString:[[self getServerURL] stringByAppendingString:@"genomeRelease"]]];
