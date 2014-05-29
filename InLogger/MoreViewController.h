@@ -1,9 +1,10 @@
 //
 //  MoreViewController.h
-//  InLogger
+//  Genomizer
 //
-//  Created by Linus Öberg on 30/04/14.
-//  Copyright (c) 2014 Linus Öberg. All rights reserved.
+// Class that represents a cell in the searchView tableView.
+// Contains logic for which switchButton should be activated when
+// and what should happen when textfields have begin/end-editing.
 //
 
 #import <UIKit/UIKit.h>
@@ -11,5 +12,4 @@
 
 @interface MoreViewController : XYZViewController
 - (IBAction)logoutButtonTouched:(id)sender;
-
 @end

@@ -1,9 +1,9 @@
 //
 //  XYZSelectTaskTableViewController.m
-//  InLogger
+//  Genomizer
 //
-//  Created by Joel Viklund on 08/05/14.
-//  Copyright (c) 2014 Joel Viklund. All rights reserved.
+//  Class that lets the user select what type of fileConvert
+//  the user want to pereform.
 //
 
 #import "XYZSelectTaskTableViewController.h"
@@ -30,6 +30,11 @@
     [app addController:self];
 }
 
+/**
+ * Depending of what filetype the files the user want to convert is, diffrent
+ * TableData will show.
+ * @return tableData corresponding to filetype of files the user want to convert.
+ */
 - (NSArray *) tasksOfFileType: (FileType) fileType
 {
     switch(fileType) {
@@ -49,14 +54,23 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    // Returns number of sections in tableView.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    // Returns number of rows in tableView.
     return [_tasks count];
 }
 
+/**
+ * Method that executes when a cell in the tableView is pressed.
+ * Depending on filetype diffrent things happen. However as of now
+ * only rawConvert is implemented.
+ * @return calls method prepereForSegue with the files that the user want
+ *         to convert.
+ */
 - (IBAction)touchUpInsideCell:(UIButton *)sender
 {
     if (_fileType == RAW) {
@@ -71,6 +85,10 @@
     }
 }
 
+/**
+ * Method that stores files the user wants to convert in the next viewController
+ * (RawConvertViewController).
+ */
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"toConvertToProfile"]) {

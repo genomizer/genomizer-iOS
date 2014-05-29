@@ -101,7 +101,7 @@
 
 /**
  * This method sets up the tableview.
- *
+ * Creates a cell and puts data into it.
  * @param tableView - the tableview.
  * @param cellForRowAtIndexPath - what index in the tableView the 
  *                                created cell will be added to.
