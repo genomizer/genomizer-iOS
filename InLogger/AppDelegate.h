@@ -1,9 +1,11 @@
 //
 //  AppDelegate.h
-//  InLogger
+//  Genomizer
 //
-//  Created by Joel Viklund on 24/04/14.
-//  Copyright (c) 2014 ___FULLUSERNAME___. All rights reserved.
+//  AppDelegate class, in addition to default methods, it also contains:
+//  An array of loaded view controllers, methods to keep the array up to date and a method to
+//  dismiss all view controllers in the array.
+//  Methods for keeping track of the number of background threads created by the app.
 //
 
 #import <UIKit/UIKit.h>
