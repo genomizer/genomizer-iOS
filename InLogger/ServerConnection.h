@@ -3,7 +3,7 @@
 //  Genomizer
 //
 // A class that contains static methods for all server communication.
-// All communication happens asynchronous, which means none of the methods
+// All communication happens asynchronously, which means none of the methods
 // have return values. Instead the method, when done, reports to the viewController
 // it has access to.
 //
