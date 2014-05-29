@@ -1,9 +1,10 @@
 //
 //  XYZTabViewController.m
-//  InLogger
+//  Genomizer
 //
-//  Created by Anonymous on 25/04/14.
-//  Copyright (c) 2014 Joel Viklund. All rights reserved.
+//  The XYZTabViewController contains methods to automatically avoid
+//  two segues to be executed at the same time.
+//
 //
 
 #import "XYZSegueController.h"
@@ -18,24 +19,33 @@
 
 @implementation XYZTabViewController
 
+/**
+ * Initial setup on view did load. Add self to appdelegate.
+ *
+ */
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.delegate = self;
-    // Do any additional setup after loading the view from its nib.
     self.navigationItem.hidesBackButton = YES;
     _prevSelectedIndex = 0;
     
-    //add self to appDelegate
     AppDelegate *app = [UIApplication sharedApplication].delegate;
     [app addController:self];
 }
 
+/**
+ * Marks the segue as started.
+ */
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
 {
     [XYZSegueController segueStarted];
 }
 
+/**
+ * Determines if a segue should be performed. Checks if a segue already is animating.
+ *
+ */
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
 {
     if ([XYZSegueController isPerformingSegue]) {

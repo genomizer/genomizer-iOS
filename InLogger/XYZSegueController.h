@@ -2,8 +2,9 @@
 //  XYZSegueController.h
 //  Genomizer
 //
-//  Created by Joel Viklund on 27/05/14.
-//  Copyright (c) 2014 Joel Viklund. All rights reserved.
+//  The XYZSeguwController controlls the segues to automatically avoid
+//  two segues to be executed at the same time. It contains static methods
+//  to keep track of if a segue is animating.
 //
 
 #import <Foundation/Foundation.h>
