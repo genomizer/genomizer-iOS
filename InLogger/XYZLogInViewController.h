@@ -1,9 +1,8 @@
 //
 //  XYZLogInViewController.h
-//  InLogger
+//  Genomizer
 //
-//  Created by Joel Viklund on 24/04/14.
-//  Copyright (c) 2014 Joel Viklund. All rights reserved.
+//  Class that handles the loginScreen
 //
 
 #import <UIKit/UIKit.h>

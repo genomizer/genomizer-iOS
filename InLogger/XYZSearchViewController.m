@@ -101,9 +101,9 @@
 
 /**
  * This method sets up the tableview.
- *
+ * Creates a cell and puts data into it.
  * @param tableView - the tableview.
- * @param cellForRowAtIndexPath - what index in the tableView the 
+ * @param cellForRowAtIndexPath - what index in the tableView the
  *                                created cell will be added to.
  * @return a cell that will be added to the tableView.
  */
@@ -239,7 +239,7 @@
     return selectedAnnotations;
 }
 /**
- * Method that executes when the "close"-button in the advanced 
+ * Method that executes when the "close"-button in the advanced
  * search frame is pressed.
  */
 - (IBAction)closeAdvancedSearch:(id)sender {
@@ -317,7 +317,7 @@
     [_tableView reloadData];
 }
 /**
- * Method that adds a "done"-button to the pickerview for 
+ * Method that adds a "done"-button to the pickerview for
  * annotations that have specified values.
  *
  * @return the done button that is added to the pickerview.
@@ -330,7 +330,7 @@
     return toolBar;
 }
 /**
- * Method that creates a pickerivew that is shown when a 
+ * Method that creates a pickerivew that is shown when a
  * annotation have specified values
  *
  * @return the pickerView.

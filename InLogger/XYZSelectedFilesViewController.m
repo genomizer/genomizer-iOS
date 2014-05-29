@@ -1,10 +1,9 @@
 //
 //  XYZSelectedFilesViewController.m
-//  InLogger
+//  Genomizer
 //
-//  Created by Joel Viklund on 28/04/14.
-//  Copyright (c) 2014 Joel Viklund. All rights reserved.
-//
+//  Class that handles the files added from the searcResultView to the
+//  selectedFilesView (this view).
 
 #import "XYZSelectedFilesViewController.h"
 #import "XYZDataFileTableViewCell.h"
@@ -39,21 +38,41 @@ static XYZFileContainer * FILES = nil;
     }
 }
 
+/**
+ * Method that adds a experiment file to XYZFileContainer.
+ * Called by XYZDataFileTableViewCell.
+ */
 + (void) addExperimentFile:(XYZExperimentFile *) file
 {
     [FILES addExperimentFile: file];
 }
 
+/**
+ * Method that removes a experiment file from the XYZFileContainer.
+ * Called by XYZDataFileTableViewCell.
+ */
 + (void) removeExperimentFile:(XYZExperimentFile *) file
 {
     [FILES removeExperimentFile: file];
 }
 
+/**
+ * Method that executes when the segmentcontroll is changed.
+ * i.e the user want to view selected profile-files instead 
+ * of the raw-files the user is currently viewing.
+ */
 - (IBAction)segmentedControlValueChanged:(UISegmentedControl *)sender
 {
     [self updateTableViewAndButtons];
 }
 
+/**
+ * Executes when a switchbutton is pressed. 
+ * @return if switch changed to ON - adds corresponding file to 
+ *                                   the array selectedFiles.
+ * @return if switch changed to OFF - removes corresponding file from
+ *                                    the array selectedFiles.
+ */
 - (IBAction)fileSwitchValueChanged:(UISwitch *)sender
 {
     XYZExperimentFile *file = [_filesToDisplay objectAtIndex:sender.tag];
@@ -96,14 +115,24 @@ static XYZFileContainer * FILES = nil;
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    // Returns number of sections i tableView.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    // Returns number of rows in tableView.
     return [_filesToDisplay count];
 }
 
+/**
+ * This method sets up the tableview.
+ * Creates a cell and puts data into it.
+ * @param tableView - the tableview.
+ * @param cellForRowAtIndexPath - what index in the tableView the
+ *                                created cell will be added to.
+ * @return a cell that will be added to the tableView.
+ */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     XYZDataFileTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DataFilePrototypeCell" forIndexPath:indexPath];
@@ -117,14 +146,21 @@ static XYZFileContainer * FILES = nil;
 
 -(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
+    // Number of sections i pickerView.
     return 1;
 }
 
 - (FileType) getSelectedFileType
 {
+    // returns what file-type corresponding segmentcontroll refer to.
     return _segmentedControl.selectedSegmentIndex;
 }
 
+/** 
+ * Method that executes when the trashbutton i top-right corner is pressed.
+ *  @return Removes all selected files (those files that 
+ *          have switchbutton set to "ON".)
+ */
 - (IBAction)removeFilesWhenTouchTrash:(UIBarButtonItem *)sender
 {
     NSArray *files = [_selectedFiles getFiles: [self getSelectedFileType]];
@@ -135,10 +171,14 @@ static XYZFileContainer * FILES = nil;
     }
     
     [XYZPopupGenerator showPopupWithMessage:@"Files removed"];
-    
     [self updateTableViewAndButtons];
 }
 
+/**
+ * Executes when "selectTask"-button is pressed.
+ * Some checks to see if files have the same speices.
+ * @return calls method "preformSegueWithIdentifier".
+ */
 - (IBAction)selectTaskButton:(id)sender {
     NSArray *filesSelected = [_selectedFiles getFiles:[self getSelectedFileType]];
     if(filesSelected.count == 1) {
@@ -158,6 +198,10 @@ static XYZFileContainer * FILES = nil;
     }
 }
 
+/**
+ * Executes when the "info"-button next to a file is pressed.
+ * @return Shows a popup containing information about that file.
+ */
 - (IBAction)infoFile:(UIButton*)sender {
     _dimView.hidden = NO;
     _infoAboutFile.hidden = NO;
@@ -173,17 +217,25 @@ static XYZFileContainer * FILES = nil;
     [[_infoFileTextField layer] setBorderWidth:0.4];
 }
 
+/**
+ * Executes when "close"-button in the "infoFile"-popup is pressed.
+ */
 - (IBAction)closeInfoFile:(id)sender {
     _infoAboutFile.hidden = YES;
     _dimView.hidden = YES;
     _trashButton.enabled =YES;
 }
-
+/*
+ * Used to go back to this view from selectTaskTableViewController.
+ */
 - (IBAction)unwindToList:(UIStoryboardSegue *)segue
 {
     
 }
-
+/**
+ * Method that stores information about what files are supposed to be converted
+ * into the next viewContoller (XYZSelectTaskViewController).
+ */
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"convertTask"]) {
