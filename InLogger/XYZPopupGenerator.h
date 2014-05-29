@@ -1,9 +1,10 @@
 //
 //  XYZPopupGenerator.h
-//  InLogger
+//  Genomizer
 //
-//  Created by Marc Armgren on 08/05/14.
-//  Copyright (c) 2014 Marc Armgren. All rights reserved.
+//  The XYZPopupGenerator contains static methods to generate and display
+//  pop-ups of different sorts.
+//
 //
 
 #import <Foundation/Foundation.h>

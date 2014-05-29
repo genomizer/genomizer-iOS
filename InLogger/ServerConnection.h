@@ -16,7 +16,7 @@
 @interface ServerConnection : NSObject
 
 + (void)login:(NSString *)username withPassword:(NSString *)password error:(NSError**) error withContext: (UIViewController*) controller;
-+ (void)logout:(NSError**) error;
++ (void)logout;
 
 + (void)search:(NSString *) annotations withContext: (XYZSearchViewController*) controller;
 

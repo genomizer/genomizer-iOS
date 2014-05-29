@@ -1,9 +1,8 @@
 //
 //  XYZTitleTableViewCell.m
-//  InLogger
+//  Genomizer
 //
-//  Created by Joel Viklund on 30/04/14.
-//  Copyright (c) 2014 Joel Viklund. All rights reserved.
+//  A TableViewCell containing an text field.
 //
 
 #import "XYZTitleTableViewCell.h"
