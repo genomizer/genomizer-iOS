@@ -1,9 +1,8 @@
 //
 //  XYZSearchResultTableViewController.m
-//  InLogger
+//  Genomizer
 //
-//  Created by Joel Viklund on 28/04/14.
-//  Copyright (c) 2014 Joel Viklund. All rights reserved.
+//  Class that handles the search result view
 //
 
 #import "XYZSearchResultTableViewController.h"
@@ -20,6 +19,12 @@
 
 @implementation XYZSearchResultTableViewController
 
+/**
+ * Method that runs when the view controller is loaded.
+ * It sets the width of the tables in the table view, used to calculate size of cells
+ * dynamically.
+ * Also adds this viewcontroller to the list of loaded viewcontrollers in AppDelegate.
+ */
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -29,14 +34,6 @@
     //add self to appDelegate
     AppDelegate *app = [UIApplication sharedApplication].delegate;
     [app addController:self];
-}
-
-- (void) viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-
--(void) viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
 }
 
 #pragma mark - Table view data source
@@ -51,7 +48,11 @@
     return [self.searchResults count];
 }
 
-
+/**
+ * Method that is called when a new cell is to be shown in the table view.
+ * Re-uses an existing cell if possible, otherwise a new cell is generated.
+ * It also sets the information in the cell.
+ */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"ListPrototypeCell";
@@ -65,6 +66,12 @@
     return cell;
 }
 
+/**
+ * Method that calculates the height of the cell according to the size of the text to 
+ * be shown in the cell.
+ *
+ */
+ 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     XYZExperiment *experiment = [_searchResults objectAtIndex: indexPath.row];
@@ -77,28 +84,54 @@
     return ceilf(rect.size.height+25);
 }
 
+/**
+ * Method that is called when a cell in the tableview is clicked. It calls didSelectRow with
+ * the appropriate rownumber.
+ *
+ */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self didSelectRow: indexPath.row];
 }
 
+/**
+ * Method that sets currently selected experiment to the one described by the cell at
+ * row 'row'. It also shows a file list view for the selected experiment.
+ *
+ */
 -(void) didSelectRow: (NSInteger) row
 {
     _selectedExperiment = [_searchResults objectAtIndex: row];
     [self performSegueWithIdentifier:@"toFileList1" sender:self];
 }
 
+/**
+ * Method that is called when the Edit button is pressed in the view.
+ * It shows the Edit Annotations view where the user can change which annotations
+ * are visible in the search result view.
+ *
+ */
 - (IBAction)editButtonPressed:(id)sender
 {
     [self performSegueWithIdentifier:@"toEditDisplay" sender:self];
 }
 
+/**
+ * Method which is called when the view is about to appear. Reloads the tableview data
+ * to make sure it is up to date.
+ *
+ */
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [self.tableView reloadData];
 }
 
+/**
+ * Method which is called when a segue is about to be performed.
+ * It sends relevant data to the next view controller.
+ *
+ */
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"toFileList1"] || [segue.identifier isEqualToString:@"toFileList2"]) {
@@ -106,13 +139,14 @@
         nextVC.experiment = _selectedExperiment;
     } else if ([segue.identifier isEqualToString:@"toEditDisplay"]) {
         XYZAnnotationTableViewController *nextVC = (XYZAnnotationTableViewController *)[segue destinationViewController];
-        /*UINavigationController *navController = segue.destinationViewController;
-        XYZAnnotationTableViewController *nextVC = (XYZAnnotationTableViewController *)(navController.viewControllers[0]);
-         */
         nextVC.describer = _experimentDescriber;
     }
 }
 
+/**
+ * Used for returning to this view from subviews. Must be here even though it is empty.
+ *
+ */
 - (IBAction)unwindToList:(UIStoryboardSegue *)segue
 {
     

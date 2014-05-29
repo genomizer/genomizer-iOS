@@ -1,9 +1,8 @@
 //
-//  XYZDataFileViewController.h
-//  InLogger
+//  XYZDataFileViewController.m
+//  Genomizer
 //
-//  Created by Joel Viklund on 30/04/14.
-//  Copyright (c) 2014 Joel Viklund. All rights reserved.
+//  Class that handles the Data File view for search results.
 //
 
 #import <UIKit/UIKit.h>

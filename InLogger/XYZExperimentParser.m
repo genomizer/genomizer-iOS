@@ -1,9 +1,9 @@
 //
 //  XYZExperimentParser.m
-//  InLogger
+//  Genomizer
 //
-//  Created by Linus Öberg on 30/04/14.
-//  Copyright (c) 2014 Linus Öberg. All rights reserved.
+//  Class that parses experiment data contained in an NSDictionary into an XYZExperiment object.
+//  This class is used in ServerConnection to parse search results into usable data.
 //
 
 #import "XYZExperimentParser.h"
@@ -11,12 +11,19 @@
 
 @implementation XYZExperimentParser
 
-+(XYZExperiment*) expParser:(NSDictionary*) json{
+
+/**
+ * Method that parses experiment data in an NSDictionary into an XYZExperiment object.
+ *
+ * @param experimentData - the experiment data to be parsed
+ * @return XYZExperiment containing the parsesd information
+ */
++(XYZExperiment*) expParser:(NSDictionary*) experimentData{
     
     XYZExperiment *exp = [[XYZExperiment alloc] init];
-    exp.name = [json objectForKey:@"name"];
+    exp.name = [experimentData objectForKey:@"name"];
     // add annotations
-    NSArray *annotationsArray = [json  valueForKey:@"annotations"];
+    NSArray *annotationsArray = [experimentData  valueForKey:@"annotations"];
     NSMutableDictionary* annonDict = [NSMutableDictionary dictionary];
     for(NSDictionary *annon in annotationsArray){
         if(([annon valueForKey:@"value"] != nil) && ([annon valueForKey:@"name"] != nil)){
@@ -26,7 +33,7 @@
     exp.annotations = annonDict;
     
     // add files
-    NSArray *filesArray = [json valueForKey:@"files"];
+    NSArray *filesArray = [experimentData valueForKey:@"files"];
     for(NSDictionary *file in filesArray){
         XYZExperimentFile *expFile = [[XYZExperimentFile alloc] init];
         if([file valueForKey:@"id"] != nil){
@@ -85,23 +92,6 @@
         [exp.files addExperimentFile:expFile];
     }
     return exp;
-}
-
-+ (NSError*) validateData: (NSDictionary*) data
-{
-    NSArray *valuesToCheck = [NSArray arrayWithObjects: @"grVersion", @"filename", nil];
-    
-    for(NSString *value in valuesToCheck)
-    {
-        if([data objectForKey:value] == nil)
-        {
-            NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-            NSString *message = [NSString stringWithFormat:@"Server sent invalid data on experiment: %@", data];
-            [dict setObject:message forKey:NSLocalizedDescriptionKey];
-            return [NSError errorWithDomain:@"invalid data" code:5 userInfo:dict];
-        }
-    }
-    return nil;
 }
 
 @end

@@ -2,7 +2,7 @@
 //  JSONBuilder.h
 //  Genomizer
 //
-//  A class that creates NSURLRequests containing JSON objects
+//  A class that creates NSURLRequests containing JSON objects where applicable
 //  as described by the API for the Genomizer project.
 //
 

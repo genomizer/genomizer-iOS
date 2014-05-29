@@ -1,10 +1,11 @@
 //
-//  XYZExperimentParser.h
-//  InLogger
+//  XYZExperimentParser.m
+//  Genomizer
 //
-//  Created by Linus Öberg on 30/04/14.
-//  Copyright (c) 2014 Linus Öberg. All rights reserved.
+//  Class that parses experiment data contained in an NSDictionary into an XYZExperiment object.
+//  This class is used in ServerConnection to parse search results into usable data.
 //
+
 
 #import <Foundation/Foundation.h>
 #import "XYZExperiment.h"
@@ -12,6 +13,6 @@
 
 @interface XYZExperimentParser : NSObject
 
-+(XYZExperiment *) expParser:(NSDictionary*) json;
++(XYZExperiment *) expParser:(NSDictionary*) experimentData;
 
 @end

@@ -1,9 +1,9 @@
 //
 //  XYZAnnotationTableViewController.m
-//  InLogger
+//  Genomizer
 //
-//  Created by Joel Viklund on 06/05/14.
-//  Copyright (c) 2014 Joel Viklund. All rights reserved.
+//  Class that handles the view for showing/hiding annotations in the search result cells.
+//  This class uses XYZExperimentDescriber to handle data storage.
 //
 
 #import "XYZAnnotationTableViewController.h"
@@ -20,6 +20,11 @@
 
 @implementation XYZAnnotationTableViewController
 
+/**
+ * Method that runs when the view controller is loaded.
+ * Also adds this viewcontroller to the list of loaded viewcontrollers in AppDelegate.
+ *
+ */
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -27,21 +32,7 @@
     //add self to appDelegate
     AppDelegate *app = [UIApplication sharedApplication].delegate;
     [app addController:self];
-   // _annotations = [self getAnnotationsFromServer];
 }
-
-/*
-- (NSArray *) getAnnotationsFromServer
-{
-    NSError *error;
-    NSArray *annotations = [ServerConnection getAvailableAnnotations:&error];
-    if (error) {
-        [XYZPopupGenerator showErrorMessage:error];
-        return [[NSArray alloc] init];
-    }
-    return annotations;
-}
-*/
 
 #pragma mark - Table view data source
 
@@ -56,6 +47,13 @@
 }
 
 
+
+/**
+ * Method that is called when a new cell is to be shown in the table view.
+ * Re-uses an existing cell if possible, otherwise a new cell is generated.
+ * It also sets the information in the cell. and sets the switch button of the cell to the
+ * current visibility state of each annotation.
+ */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     XYZAnnotationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AnnotationPrototypeCell" forIndexPath:indexPath];
@@ -66,11 +64,22 @@
     return cell;
 }
 
+/**
+ * Method that is called when this view will stop being the main view.
+ * The method makes its XYZExperimentDescriber save the current visibility status for annotations
+ * to file for later use.
+ *
+ */
 -(void) viewWillDisappear:(BOOL)animated
 {
     [_describer saveAnnotationsToFile];
 }
 
+/**
+ * Method that is called when a switch button is switched in the view.
+ * The method updates the visibility status of the switched annotation.
+ *
+ */
 - (IBAction)switchButtonValueChanged:(UISwitch *)sender
 {
     XYZAnnotation *annotation = [_describer.annotations objectAtIndex:sender.tag];

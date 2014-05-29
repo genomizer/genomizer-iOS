@@ -1,9 +1,8 @@
 //
 //  XYZSearchResultTableViewCell.m
-//  InLogger
+//  Genomizer
 //
-//  Created by Joel Viklund on 28/04/14.
-//  Copyright (c) 2014 Joel Viklund. All rights reserved.
+//  Class that represents a cell in the searchResultView tableView.
 //
 
 #import "XYZSearchResultTableViewCell.h"
