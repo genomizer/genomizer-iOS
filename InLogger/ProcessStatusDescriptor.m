@@ -1,9 +1,9 @@
 //
-//  ProcessStatusDescriptor.m
+//  ProcessStatusDescriptor.h
 //  Genomizer
 //
-//  Created by Marc Armgren on 19/05/14.
-//  Copyright (c) 2014 Marc Armgren. All rights reserved.
+//  The ProcessStatusDescriptor describes process statuses. It
+//  contains information about a process.
 //
 
 #import "ProcessStatusDescriptor.h"
@@ -13,6 +13,11 @@
 NSMutableArray* files;
 NSArray *expectedInformation;
 
+/**
+ * Initializes a ProcessStatusDecsriptor.
+ *
+ * @return an initialized ProcessStatusDescriptor
+ */
 - (ProcessStatusDescriptor*) init
 {
     self = [super init];
@@ -31,6 +36,12 @@ NSArray *expectedInformation;
     return self;
 }
 
+/**
+ * Initializes a ProcessStatusDecsriptor with the given status.
+ *
+ * @param status - values and keys for the attributes
+ * @return an initialized ProcessStatusDescriptor
+ */
 - (ProcessStatusDescriptor*) init: (NSDictionary*) status
 {
     if([self statusDictionaryIsValid:status])
@@ -59,6 +70,12 @@ NSArray *expectedInformation;
     }
 }
 
+/**
+ * Returns YES if the given status dictionary is valid, NO otherwise.
+ *
+ * @param the status dictionary
+ * @return YES if the given status dictionary is valid, NO otherwise
+ */
 - (bool) statusDictionaryIsValid: (NSDictionary*) status
 {
     for(NSString *string in expectedInformation)
@@ -71,6 +88,12 @@ NSArray *expectedInformation;
     return YES;
 }
 
+/**
+ * Adds the given file name as an output file.
+ *
+ * @param fileName - the name of the file
+ * @return YES if the file was added, NO if the file was already added
+ */
 - (bool) addOutputFile:(NSString*) fileName
 {
     if(![files containsObject:fileName]){
@@ -82,11 +105,17 @@ NSArray *expectedInformation;
     }
 }
 
-- (NSString*) getOutputFile: (int) fileNumber
+/**
+ * Returns the output file at the given index.
+ *
+ * @param index - the index
+ * @return the file at the given index
+ */
+- (NSString*) getOutputFile: (int) index
 {
-    if(fileNumber < [files count])
+    if(index < [files count])
     {
-        return [files objectAtIndex:fileNumber];
+        return [files objectAtIndex:index];
     }
     else
     {
@@ -94,6 +123,11 @@ NSArray *expectedInformation;
     }
 }
 
+/**
+ * Returns the number of output files.
+ *
+ * @return the number of output files
+ */
 - (int) getNumberOfOutputFiles {
     return [files count];
 }

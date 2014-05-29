@@ -2,8 +2,8 @@
 //  XYZFileContainer.m
 //  Genomizer
 //
-//  Created by Joel Viklund on 19/05/14.
-//  Copyright (c) 2014 Joel Viklund. All rights reserved.
+//  The XYZFileContainer contains experiments files. It sorts them into four
+//  categories based on the file type.
 //
 
 #import "XYZFileContainer.h"
@@ -19,6 +19,12 @@
 
 @implementation XYZFileContainer
 
+/**
+ * Initializes the XYZFileContainer.
+ *
+ * @return an intialized XYZFileContainer
+ *
+ */
 - (XYZFileContainer *) init
 {
     self = [super init];
@@ -31,48 +37,63 @@
     return self;
 }
 
-- (NSMutableArray *) arrayOfFileType: (FileType) fileType
-{
-    switch (fileType) {
-        case RAW:
-            return _rawFiles;
-        case PROFILE:
-            return _profileFiles;
-        case REGION:
-            return _regionFiles;
-        default:
-            return _otherFiles;
-    }
-}
-
+/**
+ * Adds the given experiment file to the container. Hello future wife! If you read this then call
+ * Marc @0703803365. It's our destiny. I like segways and segues.
+ *
+ * @param file - the file to add
+ */
 - (void) addExperimentFile: (XYZExperimentFile *) file
 {
-    NSMutableArray *filesArray = [self arrayOfFileType:file.type];
+    NSMutableArray *filesArray = [self getFiles:file.type];
     if (![filesArray containsObject:file]) {
         [filesArray addObject:file];
     }
 }
 
+/**
+ * Removes the given experiment from the container.
+ */
 - (void) removeExperimentFile: (XYZExperimentFile *) file
 {
-    [[self arrayOfFileType: file.type] removeObject:file];
+    [[self getFiles: file.type] removeObject:file];
 }
 
+/**
+ * Returns the total number of files.
+ *
+ * @return the total numer of files
+ */
 - (NSInteger) numberOfFiles
 {
     return [_rawFiles count] + [_profileFiles count] + [_regionFiles count] + [_otherFiles count];
 }
 
+/**
+ * Returns the number of files with the given type.
+ *
+ * @return the number of files with the given type
+ */
 - (NSInteger) numberOfFilesWithType: (FileType) fileType
 {
-    return [[self arrayOfFileType:fileType] count];
+    return [[self getFiles:fileType] count];
 }
 
+/**
+ * Returns YES if the container contains the given file, NO otherwise.
+ *
+ * @return YES if the container contains the given file, NO otherwise.
+ */
 - (BOOL) containsFile: (XYZExperimentFile *) file
 {
-    return [[self arrayOfFileType:file.type] containsObject:file];
+    return [[self getFiles:file.type] containsObject:file];
 }
 
+/**
+ * Returns all the files of the container.
+ *
+ * @return all the files
+ */
 - (NSMutableArray *) getFiles
 {
     NSMutableArray *files = [[NSMutableArray alloc] init];
@@ -85,9 +106,25 @@
     return files;
 }
 
+/**
+ * Returns the file array that corresponds to the given file type.
+ *
+ * @param fileType - the type of the file
+ *
+ * @return the corresponding array
+ */
 - (NSMutableArray *) getFiles: (FileType) fileType
 {
-    return [self arrayOfFileType:fileType];
+    switch (fileType) {
+        case RAW:
+            return _rawFiles;
+        case PROFILE:
+            return _profileFiles;
+        case REGION:
+            return _regionFiles;
+        default:
+            return _otherFiles;
+    }
 }
 
 @end

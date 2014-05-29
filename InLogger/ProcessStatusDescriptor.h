@@ -2,8 +2,8 @@
 //  ProcessStatusDescriptor.h
 //  Genomizer
 //
-//  Created by Marc Armgren on 19/05/14.
-//  Copyright (c) 2014 Marc Armgren. All rights reserved.
+//  The ProcessStatusDescriptor describes process statuses. It
+//  contains information about a process.
 //
 
 #import <Foundation/Foundation.h>
@@ -19,11 +19,8 @@
 @property NSDate* timeFinished;
 
 - (bool) addOutputFile:(NSString*) fileName;
-
 - (NSString*) getOutputFile: (int) fileNumber;
-
 - (int) getNumberOfOutputFiles;
-
 - (ProcessStatusDescriptor*) init: (NSDictionary*) status;
 
 @end

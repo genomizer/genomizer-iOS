@@ -1,9 +1,9 @@
 //
 //  XYZExperimentFile.h
-//  InLogger
+//  Genomizer
 //
-//  Created by Patrik Nordström on 29/04/14.
-//  Copyright (c) 2014 Patrik Nordström. All rights reserved.
+//  The XYZExmperimentFile represents an experiment file and contatins
+//  information about it.
 //
 
 #import <Foundation/Foundation.h>
@@ -32,6 +32,6 @@ typedef NS_ENUM(NSInteger, FileType) {
 - (NSString *) getDescription;
 - (NSString *) getAllInfo;
 + (FileType) NSStringFileTypeToEnumFileType: (NSString *) type;
-+ (BOOL) ambigousFileTypes: (NSArray *) files;
++ (BOOL) multipleFileType: (NSArray *) files;
 
 @end
