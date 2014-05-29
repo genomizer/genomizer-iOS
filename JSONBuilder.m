@@ -1,11 +1,9 @@
 //
 //  JSONBuilder.m
+//  Genomizer
 //
 //  A class that creates NSURLRequests containing JSON objects
 //  as described by the API for the Genomizer project.
-//
-//  Created by Linus Öberg on 29/04/14.
-//  Copyright (c) 2014 Linus Öberg. All rights reserved.
 //
 
 #import "JSONBuilder.h"

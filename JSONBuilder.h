@@ -1,9 +1,9 @@
 //
 //  JSONBuilder.h
-//  InLogger
+//  Genomizer
 //
-//  Created by Patrik Nordström on 28/04/14.
-//  Copyright (c) 2014 Patrik Nordström. All rights reserved.
+//  A class that creates NSURLRequests containing JSON objects
+//  as described by the API for the Genomizer project.
 //
 
 #import <Foundation/Foundation.h>

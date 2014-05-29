@@ -33,6 +33,7 @@
 /**
  * Depending of what filetype the files the user want to convert is, diffrent
  * TableData will show.
+ * @param The filetype of the files that are supposed to be converted.
  * @return tableData corresponding to filetype of files the user want to convert.
  */
 - (NSArray *) tasksOfFileType: (FileType) fileType
