@@ -57,7 +57,7 @@
     NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
     if (networkStatus == NotReachable) {
         [XYZPopupGenerator showPopupWithMessage:@"There is no internet connection." withTitle:@"Connection Error"];
-       
+        
     } else {
         
         if((username.length > 0) && (password.length > 0))
@@ -70,7 +70,7 @@
             [XYZPopupGenerator showPopupWithMessage:@"Please enter username and password."];
         }
     }
-   
+    
 }
 /*
  * Method that deactivates every user interaction enabled object, executes when
@@ -109,7 +109,7 @@
 }
 /**
  * Method that is called by serverConnection when a login reqest is sent to the server
- * and a response is recived. 
+ * and a response is recived.
  * @param error - Contains information about error is such have occured.
  * @return if a error occured a popup with information about the error is shown.
  *         else a segue to the searchView is preformed.
