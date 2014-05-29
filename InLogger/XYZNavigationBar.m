@@ -2,8 +2,11 @@
 //  XYZNavigationBar.m
 //  Genomizer
 //
-//  Created by Joel Viklund on 26/05/14.
-//  Copyright (c) 2014 Joel Viklund. All rights reserved.
+//  The XYZNavigationBar contains methods to automatically avoid
+//  two segues to be executed at the same time.
+//
+//  All subclasses of this class must call the corresponding super methods
+//  when overriding them.
 //
 
 #import "XYZNavigationBar.h"
@@ -11,15 +14,9 @@
 
 @implementation XYZNavigationBar
 
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
-    }
-    return self;
-}
-
+/**
+ * Prevents a segue pop to be performed if another segue is animating.
+ */
 - (UINavigationItem *)popNavigationItemAnimated:(BOOL)animated
 {
     if([XYZSegueController isPerformingSegue]) {

@@ -144,7 +144,7 @@
     if ([selectedFiles count] == 0) {
         [XYZPopupGenerator showPopupWithMessage:@"Please select files to convert."];
         return;
-    } else if(![XYZExperimentFile ambigousFileTypes: selectedFiles]) {
+    } else if(![XYZExperimentFile multipleFileType: selectedFiles]) {
         FileType type = ((XYZExperimentFile *)selectedFiles[0]).type;
         if (type == RAW) {
             [self performSegueWithIdentifier:@"toSelectTask" sender:selectedFiles];

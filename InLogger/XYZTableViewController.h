@@ -2,8 +2,11 @@
 //  XYZTableViewController.h
 //  Genomizer
 //
-//  Created by Joel Viklund on 26/05/14.
-//  Copyright (c) 2014 Joel Viklund. All rights reserved.
+//  The XYZTableViewController contains methods to automatically avoid
+//  two segues to be executed at the same time.
+//
+//  All subclasses of this class must call the corresponding super methods
+//  when overriding them.
 //
 
 #import <UIKit/UIKit.h>

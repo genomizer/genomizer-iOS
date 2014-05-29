@@ -1,9 +1,9 @@
 //
 //  XYZExperiment.m
-//  InLogger
+//  Genomizer
 //
-//  Created by Patrik Nordström on 29/04/14.
-//  Copyright (c) 2014 Patrik Nordström. All rights reserved.
+//  The XYZExperiment represents an experiment. It contains files
+//  and annotation names and values.
 //
 
 #import "XYZExperiment.h"
@@ -11,6 +11,11 @@
 
 @implementation XYZExperiment
 
+/**
+ * Initializes the experiment.
+ *
+ * @return
+ */
 - (XYZExperiment *) init
 {
     self = [super init];
@@ -20,13 +25,22 @@
     return self;
 }
 
-
+/**
+ * Sets the value for the given annotation.
+ *
+ * @param value - the value for the annotation
+ * @param annotation - the annotation for which the value should be set
+ */
 - (void) setValue: (id) value forAnnotation: (NSString*) annotation
 {
     [_annotations setValue: value forKey:annotation];
-
 }
 
+/**
+ * Returns the value for a given annotation.
+ *
+ * @return the value of the annotation
+ */
 - (NSString *) getValueForAnnotation: (NSString *) annotation
 {
     return [_annotations valueForKey:annotation];
