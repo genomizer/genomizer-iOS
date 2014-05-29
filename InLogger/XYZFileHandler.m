@@ -2,14 +2,23 @@
 //  XYZFileHandler.m
 //  Genomizer
 //
-//  Created by Joel Viklund on 22/05/14.
-//  Copyright (c) 2014 Joel Viklund. All rights reserved.
+//  The XYZFileHandler reads and writes data to and from files
+//  in the Documents folder of the device.
 //
 
 #import "XYZFileHandler.h"
 
 @implementation XYZFileHandler
 
+/**
+ * Reads from the file with the given name. If no file is found the file will be created
+ * and the default data will be stored in it.
+ *
+ * @param fileName - the name of the file
+ * @param data - the default data to use if no file is found
+ *
+ * @return the data of the file
+ */
 + (NSString *) readFromFile: (NSString *) fileName withDefaultData: (NSString *) data
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -23,6 +32,12 @@
     return [NSString stringWithContentsOfFile: filePath encoding:NSUTF8StringEncoding error:nil];
 }
 
+/**
+ * Writes the given data to the file with the given name.
+ *
+ * @param data - the data to write to the file
+ * @param fileName - the name of the file
+ */
 + (void) writeData: (NSString *) data toFile: (NSString *) fileName
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);

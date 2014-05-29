@@ -24,12 +24,10 @@
 {
     if(_inputField.text.length == 0) {
         _annotation.value = nil;
-    } else {
-        _annotation.value = _inputField.text;
-    }
-    if (_inputField.text.length == 0) {
         _switchButton.on = NO;
         _annotation.selected = NO;
+    } else {
+        _annotation.value = _inputField.text;
     }
 }
 

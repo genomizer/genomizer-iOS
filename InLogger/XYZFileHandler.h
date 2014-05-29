@@ -2,8 +2,8 @@
 //  XYZFileHandler.h
 //  Genomizer
 //
-//  Created by Joel Viklund on 22/05/14.
-//  Copyright (c) 2014 Joel Viklund. All rights reserved.
+//  The XYZFileHandler reads and writes data to and from files
+//  in the Documents folder of the device.
 //
 
 #import <Foundation/Foundation.h>
