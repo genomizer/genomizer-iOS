@@ -147,6 +147,7 @@
     AppDelegate *app = [UIApplication sharedApplication].delegate;
     [app addController:self];
 }
+
 -(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
     return 1;
@@ -451,6 +452,7 @@
     return;
 
 }
+
 - (void) reportResult: (NSError*) error experiment: (NSString*) expid
 {
     dispatch_async(dispatch_get_main_queue(), ^{
