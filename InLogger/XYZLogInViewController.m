@@ -1,9 +1,8 @@
 //
 //  XYZLogInViewController.m
-//  InLogger
+//  Genomizer
 //
-//  Created by Joel Viklund on 24/04/14.
-//  Copyright (c) 2014 Joel Viklund. All rights reserved.
+//  Class that handles the loginScreen
 //
 
 #import "XYZLogInViewController.h"
@@ -24,8 +23,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *settingsButton;
 
 @property XYZSettingsPopupDelegate *delegate;
-
-
 @end
 
 @implementation XYZLogInViewController
@@ -46,6 +43,11 @@
     [app addController:self];
 }
 
+/**
+ * Method that checks if any internetconnection is aviable if thats the case
+ * a call to the serverConnection method "login" is called.
+ * @return calls login-method in serverConnection.
+ */
 - (void) tryToLogIn
 {
     NSString *username = _userField.text;
@@ -70,7 +72,10 @@
     }
    
 }
-
+/*
+ * Method that deactivates every user interaction enabled object, executes when
+ * the "signIn"-button is pressed.
+ */
 - (void) deactivateEverything
 {
     _loginButton.enabled = NO;
@@ -80,6 +85,10 @@
     _settingsButton.enabled = NO;
 }
 
+/*
+ * Method that activates every user interaction enabled object, executes when
+ * the "signIn" sequence is done.
+ */
 - (void) activateEverything
 {
     _loginButton.enabled = YES;
@@ -89,13 +98,22 @@
     _settingsButton.enabled = YES;
 }
 
+/**
+ * Executes when the "signIn"-button is pressed.
+ */
 - (IBAction)signInButtonTouchUp:(UIButton *)sender
 {
     [self.view endEditing:YES];
     [self centerFrameView];
     [self tryToLogIn];
 }
-
+/**
+ * Method that is called by serverConnection when a login reqest is sent to the server
+ * and a response is recived. 
+ * @param error - Contains information about error is such have occured.
+ * @return if a error occured a popup with information about the error is shown.
+ *         else a segue to the searchView is preformed.
+ */
 - (void) reportLoginResult: (NSError*) error {
     
     if(error == nil)
@@ -114,7 +132,9 @@
         });
     }
 }
-
+/**
+ * Executes when a textfield is clicked.
+ */
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     if(self.view.frame.origin.y < 0) {
@@ -122,10 +142,14 @@
     }
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.25];
+    // Move frame so that keyboard is not on top of any inputfield.
     self.view.frame = CGRectMake(0, -140, self.view.frame.size.width, self.view.frame.size.height);
     [UIView commitAnimations];
 }
 
+/**
+ * Puts frame back to its original center.
+ */
 - (void)centerFrameView
 {
     [UIView beginAnimations:nil context:NULL];
@@ -141,6 +165,9 @@
     [super touchesBegan:touches withEvent:event];
 }
 
+/**
+ * Describes what is shoud happen if the "next" button on the keyboard is pressed.
+ */
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     if(textField == _userField) {
@@ -153,6 +180,10 @@
     return NO;
 }
 
+/**
+ * Executes when the settings-icon in top-right corner is pressed.
+ * Shows a popup with a textfield where the user can input the URL to the server.
+ */
 - (IBAction)settingsButtonPressed:(id)sender
 {
     [XYZPopupGenerator showInputPopupWithMessage:@"Enter server URL:" withTitle:@"" withText: [JSONBuilder getServerURL] withDelegate:_delegate];
