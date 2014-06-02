@@ -45,7 +45,7 @@
  */
 - (void) addExperimentFile: (XYZExperimentFile *) file
 {
-    NSMutableArray *filesArray = [self getFiles:file.type];
+    NSMutableArray *filesArray = [self getFilesOfFileType:file.type];
     if (![filesArray containsObject:file]) {
         [filesArray addObject:file];
     }
@@ -56,7 +56,7 @@
  */
 - (void) removeExperimentFile: (XYZExperimentFile *) file
 {
-    [[self getFiles: file.type] removeObject:file];
+    [[self getFilesOfFileType: file.type] removeObject:file];
 }
 
 /**
@@ -76,7 +76,7 @@
  */
 - (NSInteger) numberOfFilesWithType: (FileType) fileType
 {
-    return [[self getFiles:fileType] count];
+    return [[self getFilesOfFileType:fileType] count];
 }
 
 /**
@@ -86,7 +86,7 @@
  */
 - (BOOL) containsFile: (XYZExperimentFile *) file
 {
-    return [[self getFiles:file.type] containsObject:file];
+    return [[self getFilesOfFileType:file.type] containsObject:file];
 }
 
 /**
@@ -98,10 +98,10 @@
 {
     NSMutableArray *files = [[NSMutableArray alloc] init];
     
-    [files addObjectsFromArray:[self getFiles:RAW]];
-    [files addObjectsFromArray:[self getFiles:PROFILE]];
-    [files addObjectsFromArray:[self getFiles:REGION]];
-    [files addObjectsFromArray:[self getFiles:OTHER]];
+    [files addObjectsFromArray:[self getFilesOfFileType:RAW]];
+    [files addObjectsFromArray:[self getFilesOfFileType:PROFILE]];
+    [files addObjectsFromArray:[self getFilesOfFileType:REGION]];
+    [files addObjectsFromArray:[self getFilesOfFileType:OTHER]];
     
     return files;
 }
@@ -113,7 +113,7 @@
  *
  * @return the corresponding array
  */
-- (NSMutableArray *) getFiles: (FileType) fileType
+- (NSMutableArray *) getFilesOfFileType: (FileType) fileType
 {
     switch (fileType) {
         case RAW:

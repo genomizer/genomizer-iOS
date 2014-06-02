@@ -1,9 +1,11 @@
 //
 //  RawConvertViewController.h
-//  InLogger
+//  Genomizer
 //
-//  Created by Linus Öberg on 08/05/14.
-//  Copyright (c) 2014 Linus Öberg. All rights reserved.
+//  This class makes a convertrequest from data specified by the user and
+//  converts the files that was selected by the user in the searchResult or
+//  selectedfiles -view from raw to profile. Uses the method convert in
+//  serverConnection to send the request to the server.
 //
 
 #import <UIKit/UIKit.h>

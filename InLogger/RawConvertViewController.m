@@ -1,9 +1,11 @@
 //
 //  RawConvertViewController.m
-//  InLogger
+//  Genomizer
 //
-//  Created by Linus Öberg on 08/05/14.
-//  Copyright (c) 2014 Linus Öberg. All rights reserved.
+//  This class makes a convertrequest from data specified by the user and
+//  converts the files that was selected by the user in the searchResult or
+//  selectedfiles -view from raw to profile. Uses the method convert in
+//  serverConnection to send the request to the server.
 //
 
 #import "RawConvertViewController.h"
@@ -66,9 +68,11 @@
 {
     
     [super viewDidLoad];
+    // Get genomereleases that are used as datasource for the pickerView.
     [ServerConnection genomeRelease:self];
     _pickerView = [self createPickerView];
     _toolBar = [self createPickerViewToolBar:_pickerView];
+    //set up all textfields and switchbuttons.
     self.numpadFields = [[NSMutableArray alloc] init];
     [self.numpadFields addObject:self.smoothingWindowSize];
     [self.numpadFields addObject:self.smoothingMinimumStep];
@@ -117,7 +121,10 @@
         _ratioCalcCell.hidden = NO;
         _ratioCalcSmoothingCell.hidden = NO;
     }
-    
+
+    /**
+      * Create frame containing the convert button.
+      */
     UIView *staticView = [[UIView alloc] initWithFrame:CGRectMake(0, self.tableView.bounds.size.height-50, self.tableView.bounds.size.width, 50)];
     staticView.backgroundColor = [UIColor whiteColor];
     _convertButton=[UIButton buttonWithType:UIButtonTypeRoundedRect] ;
@@ -150,16 +157,19 @@
 
 -(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
+    // Returns number of sections in pickerview.
     return 1;
 }
 
 -(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
+    // Returns number of rows in pickerview.
     return [_genomeReleases count];
 }
 
 -(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
+    //returns title for object at specific row in pickerview.
     return [_genomeReleases objectAtIndex:row];
 }
 
@@ -169,6 +179,9 @@
     
 }
 
+/**
+ * Method that creates a toolbar in pickerview containg a done-button.
+ */
 - (UIToolbar *) createPickerViewToolBar: (UIPickerView *) pickerView
 {
     UIToolbar *toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, pickerView.bounds.size.width, 44)];
@@ -176,7 +189,9 @@
     [toolBar setItems:[NSArray arrayWithObjects:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], doneButton, nil]];
     return toolBar;
 }
-
+/**
+ * Method that creates and reutrns a pickerview.
+ */
 - (UIPickerView *) createPickerView
 {
     UIPickerView *pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 44, 44, 44)];
@@ -186,6 +201,9 @@
     return pickerView;
 }
 
+/**
+ * Executes when the "done"-button in pickerviews toolbar is pressed.
+ */
 -(void)doneTouched:(UIBarButtonItem*)sender
 {
     [self.view endEditing:YES];
@@ -220,7 +238,11 @@
 {
     [super didReceiveMemoryWarning];
 }
-
+/**
+ * Executes when a textfield have ended editing.
+ * Does some cheking to see what fields should be de/activated depending on
+ * what fields contains text.
+ */
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     if(textField.text.length == 0){
@@ -312,7 +334,10 @@
         }
     }
 }
-
+/**
+ * Method that describes what should happen when the next button on the keyboard is
+ * pressed.
+ */
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     if(textField.text.length > 0 ){
         if(textField == self.bowtie) {
@@ -339,6 +364,14 @@
     return NO;
 }
 
+/**
+ * Method that executes when the convert-button is pressed.
+ * Creates a NSMutableArray that are filled with datainput from the user,
+ * the userinput are converted to a form that matches the form the server are 
+ * excpecting.
+ * @return calls the serverConnections convert-method with the data that are
+ *          going to be sent to the server.
+ */
 - (IBAction)convertButtonTouch:(id)sender
 {
     
@@ -464,6 +497,15 @@
 
 }
 
+/**
+ * Method that are called by serverConnection when a convert request have been 
+ * sent to the server.
+ * @param error - Contains information about any error that may have  occured.
+ * @param expid - The experiment ID if the experiment that are going to be converted.
+ * @return shows a popup with info abvout any error if such have occured.
+ *         if no error a popup explaining to the user how many successfull request
+ *         that was sent to the server.
+ */
 - (void) reportResult: (NSError*) error experiment: (NSString*) expid
 {
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -511,7 +553,14 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-
+/**
+ * Method that are called by serverConnection when a genomerelease request are sent to 
+ * the server.
+ * @param genomeReleases - an array containing all genomereleases on the server.
+ * @param error - Contains information about any error that may have  occured.
+ * @return fills the pickerView with the genomereleases that was returned by the 
+ *         genomeReleases request sent by serverConnection.
+ */
 - (void) reportGenomeResult:(NSMutableArray*) genomeReleases withError:(NSError*) error {
     if(error){
         [XYZPopupGenerator showErrorMessage:error];
@@ -529,6 +578,10 @@
     }
 }
 
+/**
+ * Method that creates one experimentFile per experiment that are going to be converted.
+ * Fills the experiment file with the data that are needed to send the convert request.
+ */
 -(void) createExperimentFiles
 {
     NSMutableArray *expIdsAlreadyCreated = [[NSMutableArray alloc] init];
@@ -553,6 +606,9 @@
     }
 }
 
+/**
+ * Executes when the switchbutton "samToGff" is changed.
+ */
 - (IBAction)samToGffChanged:(id)sender {
     if (self.samToGff.on) {
         self.gffToSgr.enabled = YES;
@@ -570,6 +626,10 @@
         }
     }
 }
+
+/**
+ * Executes when the switchbutton "GffToSgr" is changed.
+ */
 - (IBAction)gffToSgrChanged:(id)sender {
     if (self.gffToSgr.on) {
         self.smoothingWindowSize.enabled = YES;
