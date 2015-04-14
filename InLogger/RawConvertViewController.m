@@ -64,6 +64,8 @@
     int successfulConvertRequests;
 }
 
+@synthesize tableView;
+
 - (void)viewDidLoad
 {
     

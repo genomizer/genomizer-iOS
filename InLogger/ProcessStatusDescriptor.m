@@ -129,7 +129,7 @@ NSArray *expectedInformation;
  * @return the number of output files
  */
 - (int) getNumberOfOutputFiles {
-    return [files count];
+    return (int)[files count];
 }
 
 

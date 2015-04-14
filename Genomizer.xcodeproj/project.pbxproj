@@ -514,7 +514,7 @@
 				ORGANIZATIONNAME = "___FULLUSERNAME___";
 				TargetAttributes = {
 					DEEF6AE319094F8A00A2CD8C = {
-						DevelopmentTeam = GW9N4G6EGD;
+						DevelopmentTeam = 3LK2DRBJ29;
 					};
 					DEEF6AFE19094F8B00A2CD8C = {
 						TestTargetID = DEEF6AE319094F8A00A2CD8C;
@@ -740,7 +740,7 @@
 				INFOPLIST_FILE = "InLogger/Genomizer-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = Genomizer;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "92aa0121-78f4-4a87-8d43-151b81ceb2b7";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -759,7 +759,7 @@
 				INFOPLIST_FILE = "InLogger/Genomizer-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = Genomizer;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "92aa0121-78f4-4a87-8d43-151b81ceb2b7";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};

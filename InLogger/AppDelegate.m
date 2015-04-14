@@ -37,7 +37,7 @@ NSMutableArray* controllers;
 }
 
 - (int) getNumberOfControllers {
-    return [controllers count];
+    return (int)[controllers count];
 }
 
 - (void) addController: (UIViewController*) controller {
@@ -72,7 +72,7 @@ NSMutableArray* controllers;
 
 - (void) killControllers
 {
-    int length = [controllers count];
+    int length = (int)[controllers count];
     for(int i = 0; i < length; i++)
     {
         NSLog(@"kill Controllers");

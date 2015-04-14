@@ -453,7 +453,7 @@ NSString *token;
             error = [NSError errorWithDomain:@"Server Message" code:0 userInfo:dict];
             break;
         default:
-            [dict setObject: [NSString stringWithFormat:@"Unrecognised error, talk to developers. Error: %d", errorCode] forKey:NSLocalizedDescriptionKey];
+            [dict setObject: [NSString stringWithFormat:@"Unrecognised error, talk to developers. Error: %d", (int)errorCode] forKey:NSLocalizedDescriptionKey];
             error = [NSError errorWithDomain:@"Coding error" code:0 userInfo:dict];
             break;
     }
