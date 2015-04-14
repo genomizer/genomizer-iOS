@@ -11,6 +11,7 @@
 
 @implementation XYZExperiment
 
+@synthesize createdByUser, name, files, annotations;
 /**
  * Initializes the experiment.
  *
@@ -19,8 +20,8 @@
 - (XYZExperiment *) init
 {
     self = [super init];
-    _annotations = [[NSMutableDictionary alloc] init];
-    _files = [[XYZFileContainer alloc] init];
+    self.annotations = [[NSMutableDictionary alloc] init];
+    self.files = [[XYZFileContainer alloc] init];
 
     return self;
 }
@@ -33,7 +34,7 @@
  */
 - (void) setValue: (id) value forAnnotation: (NSString*) annotation
 {
-    [_annotations setValue: value forKey:annotation];
+    [self.annotations setValue: value forKey:annotation];
 }
 
 /**
@@ -43,7 +44,7 @@
  */
 - (NSString *) getValueForAnnotation: (NSString *) annotation
 {
-    return [_annotations valueForKey:annotation];
+    return [self.annotations valueForKey:annotation];
 }
 
 @end

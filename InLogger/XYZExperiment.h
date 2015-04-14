@@ -12,6 +12,7 @@
 @interface XYZExperiment : NSObject
 
 @property NSString *name;
+@property NSString *createdByUser;
 @property XYZFileContainer *files;
 @property NSMutableDictionary *annotations;
 

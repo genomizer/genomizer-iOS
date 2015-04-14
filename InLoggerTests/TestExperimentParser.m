@@ -41,7 +41,7 @@
 
 - (void)testExpParserShouldReturnExperimentWithCreatorYuri
 {
-    NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@"yuri", @"created by", nil];
+    NSDictionary *dict = @{@"created by":@"yuri"};//[[NSMutableDictionary alloc] initWithObjectsAndKeys:@"yuri", @"created by", nil];
     XYZExperiment *exp = [XYZExperimentParser expParser:dict];
     XCTAssertEqualObjects(exp.createdByUser, @"yuri");
 }
