@@ -30,6 +30,7 @@
 		76E2DA9F190E96C90048069D /* JSONBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 76E2DA9E190E96C90048069D /* JSONBuilder.m */; };
 		76F638D8190FD99300F0F4BF /* Experiment.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F638D7190FD99300F0F4BF /* Experiment.m */; };
 		76F638DB190FDD9D00F0F4BF /* ExperimentFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F638DA190FDD9D00F0F4BF /* ExperimentFile.m */; };
+		D1F6637C1ADD5F2E002DBE03 /* FileAboutView.m in Sources */ = {isa = PBXBuildFile; fileRef = D1F6637B1ADD5F2E002DBE03 /* FileAboutView.m */; };
 		DE032D72191BCDC4006AC257 /* SelectTaskTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE032D71191BCDC4006AC257 /* SelectTaskTableViewController.m */; };
 		DE25D7FC1910D6840084BDDC /* TitleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DE25D7FA1910D6840084BDDC /* TitleTableViewCell.m */; };
 		DE25D8021910D72A0084BDDC /* DataFileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE25D8001910D72A0084BDDC /* DataFileViewController.m */; };
@@ -118,6 +119,8 @@
 		76F638D7190FD99300F0F4BF /* Experiment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Experiment.m; sourceTree = "<group>"; };
 		76F638D9190FDD9D00F0F4BF /* ExperimentFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExperimentFile.h; sourceTree = "<group>"; };
 		76F638DA190FDD9D00F0F4BF /* ExperimentFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExperimentFile.m; sourceTree = "<group>"; };
+		D1F6637A1ADD5F2E002DBE03 /* FileAboutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FileAboutView.h; path = ../FileAboutView.h; sourceTree = "<group>"; };
+		D1F6637B1ADD5F2E002DBE03 /* FileAboutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FileAboutView.m; path = ../FileAboutView.m; sourceTree = "<group>"; };
 		DE032D70191BCDC4006AC257 /* SelectTaskTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectTaskTableViewController.h; sourceTree = "<group>"; };
 		DE032D71191BCDC4006AC257 /* SelectTaskTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectTaskTableViewController.m; sourceTree = "<group>"; };
 		DE25D7F91910D6840084BDDC /* TitleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleTableViewCell.h; sourceTree = "<group>"; };
@@ -355,6 +358,8 @@
 				DE915F7E19347AB5009C0F79 /* SegueController.m */,
 				DEEF7D91190A55D1005EDB8E /* TabViewController.h */,
 				DEEF7D92190A55D1005EDB8E /* TabViewController.m */,
+				D1F6637A1ADD5F2E002DBE03 /* FileAboutView.h */,
+				D1F6637B1ADD5F2E002DBE03 /* FileAboutView.m */,
 			);
 			name = MainGUI;
 			sourceTree = "<group>";
@@ -575,6 +580,7 @@
 				DEEF6AF819094F8A00A2CD8C /* AppDelegate.m in Sources */,
 				DEBD8BC819338B09005C5E19 /* NavigationBar.m in Sources */,
 				DED12292190E966200D8E530 /* SearchTableViewCell.m in Sources */,
+				D1F6637C1ADD5F2E002DBE03 /* FileAboutView.m in Sources */,
 				DED1228E190E966200D8E530 /* SearchResultTableViewCell.m in Sources */,
 				649778EF191119FB000FD14F /* MoreViewController.m in Sources */,
 				DE25D7FC1910D6840084BDDC /* TitleTableViewCell.m in Sources */,
