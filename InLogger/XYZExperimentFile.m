@@ -51,34 +51,15 @@
  * @return information about the file
  */
 - (NSString *) getAllInfo{
-    NSMutableString *string = [[NSMutableString alloc] init];
-    [string appendString: @"Filename: "];
-    [string appendString: [self format: _name]];
-    [string appendString: @"\n"];
-    [string appendString: @"Date: "];
-    [string appendString: [self format: _date]];
-    [string appendString: @"\n"];
-    [string appendString: @"Uploaded by: "];
-    [string appendString: [self format: _uploadedBy]];
-    [string appendString: @"\n"];
-    [string appendString: @"Name: "];
-    [string appendString: [self format: _name]];
-    [string appendString: @"\n"];
-    [string appendString: @"Experiment ID: "];
-    [string appendString: [self format: _expID]];
-    [string appendString: @"\n"];
-    [string appendString: @"Metadata: "];
-    [string appendString: [self format: _metaData]];
-    [string appendString: @"\n"];
-    [string appendString: @"Author: "];
-    [string appendString: [self format: _author]];
-    [string appendString: @"\n"];
-    [string appendString: @"Genome Version: "];
-    [string appendString: [self format: _grVersion]];
-    [string appendString: @"\n"];
-    [string appendString: @"Speice: "];
-    [string appendString: [self format: _species]];
-    [string appendString: @"\n"];
+    NSString *string = [[NSMutableString alloc] init];
+    string = [NSString stringWithFormat:@"Filename: %@\n", [self format:_idFile]];
+    [string stringByAppendingFormat:@"Date: %@\n", [self format:_date]];
+    [string stringByAppendingFormat:@"Name: %@\n", [self format:_name]];
+    [string stringByAppendingFormat:@"Experiment ID: %@\n", [self format:_expID]];
+    [string stringByAppendingFormat:@"Metadata: %@\n", [self format:_metaData]];
+    [string stringByAppendingFormat:@"Author: %@\n", [self format:_author]];
+    [string stringByAppendingFormat:@"Genome Version: %@\n", [self format:_grVersion]];
+    [string stringByAppendingFormat:@"Speice: %@\n", [self format:_species]];
     return string;
 }
 

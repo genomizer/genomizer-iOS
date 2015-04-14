@@ -113,7 +113,7 @@
  *
  * @return the corresponding array
  */
-- (NSMutableArray *) getFiles: (FileType) fileType
+- (NSMutableArray *) getFilesOfType:(FileType)fileType
 {
     switch (fileType) {
         case RAW:

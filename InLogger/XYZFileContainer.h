@@ -17,6 +17,6 @@
 - (NSInteger) numberOfFilesWithType: (FileType) fileType;
 - (BOOL) containsFile: (XYZExperimentFile *) file;
 - (NSMutableArray *) getFiles;
-- (NSMutableArray *) getFiles: (FileType) fileType;
+- (NSMutableArray *) getFilesOfType: (FileType) fileType;
 
 @end
