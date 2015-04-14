@@ -22,7 +22,10 @@
     
     XYZExperiment *exp = [[XYZExperiment alloc] init];
     exp.name = [experimentData objectForKey:@"name"];
-    exp.createdByUser = experimentData[@"created by"];
+    if(experimentData[@"created by"] != nil){
+        exp.createdByUser = experimentData[@"created by"];
+    }
+    
     
     // add annotations
     NSArray *annotationsArray = [experimentData  valueForKey:@"annotations"];

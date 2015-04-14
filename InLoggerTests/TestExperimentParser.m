@@ -48,27 +48,23 @@
 
 - (void)testExpParserShouldHandleAnnotations
 {
-    NSDictionary *annotations = [[NSDictionary alloc] initWithObjectsAndKeys:@"sex", @"name",
-                                                                             @"male", @"value", nil];
-    NSMutableArray *anno = [[NSMutableArray alloc] init];
-    [anno addObject:annotations];
-    NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:anno, @"annotations", nil];
+    NSDictionary *annotations = @{@"name":@"value", @"sex":@"female"};
+    NSArray *anno = @[annotations];
+    
+    NSDictionary *dict = @{@"annotations":anno};
     XYZExperiment *exp = [XYZExperimentParser expParser:dict];
-    XCTAssertEqualObjects([exp getValueForAnnotation:@"sex"], @"male");
+    XCTAssertEqualObjects([exp getValueForAnnotation:@"sex"], @"female");
 }
 
 - (void)testExpParserShouldHandleMultipleAnnotations
 {
-    NSDictionary *annotation1 = [[NSDictionary alloc] initWithObjectsAndKeys:@"sex", @"name",
-                                                                             @"male", @"value", nil];
-    NSDictionary *annotation2 = [[NSDictionary alloc] initWithObjectsAndKeys:@"stage", @"name",
-                                                                             @"larvae", @"value", nil];
-    NSMutableArray *anno = [[NSMutableArray alloc] init];
-    [anno addObject:annotation1];
-    [anno addObject:annotation2];
-    NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:anno, @"annotations", nil];
+    NSDictionary *annotation1 = @{@"name":@"value", @"sex":@"female"};
+    NSDictionary *annotation2 = @{@"stage":@"larvae", @"name":@"value"};
+    NSArray *anno = @[annotation1, annotation2];
+
+    NSDictionary *dict = @{@"annotations":anno};
     XYZExperiment *exp = [XYZExperimentParser expParser:dict];
-    XCTAssertEqualObjects([exp getValueForAnnotation:@"sex"], @"male");
+    XCTAssertEqualObjects([exp getValueForAnnotation:@"sex"], @"female");
     XCTAssertEqualObjects([exp getValueForAnnotation:@"stage"], @"larvae");
 }
 
