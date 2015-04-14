@@ -7,8 +7,8 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "XYZExperimentParser.h"
-#import "XYZExperiment.h"
+#import "ExperimentParser.h"
+#import "Experiment.h"
 
 @interface TestExperimentParser : XCTestCase
 
@@ -27,22 +27,22 @@
     [super tearDown];
 }
 
-- (void)testExpParserShouldReturnXYZExperiment
+- (void)testExpParserShouldReturnExperiment
 {
-    XCTAssertEqual([XYZExperiment class], [[XYZExperimentParser expParser:nil] class]);
+    XCTAssertEqual([Experiment class], [[ExperimentParser expParser:nil] class]);
 }
 
 - (void)testExpParserShouldHandleAndReturnExperimentWithNameYuri
 {
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@"yuri", @"name", nil];
-    XYZExperiment *exp = [XYZExperimentParser expParser:dict];
+    Experiment *exp = [ExperimentParser expParser:dict];
     XCTAssertEqualObjects(exp.name, @"yuri");
 }
 
 - (void)testExpParserShouldReturnExperimentWithCreatorYuri
 {
     NSDictionary *dict = @{@"created by":@"yuri"};//[[NSMutableDictionary alloc] initWithObjectsAndKeys:@"yuri", @"created by", nil];
-    XYZExperiment *exp = [XYZExperimentParser expParser:dict];
+    Experiment *exp = [ExperimentParser expParser:dict];
     XCTAssertEqualObjects(exp.createdByUser, @"yuri");
 }
 
@@ -52,7 +52,7 @@
     NSArray *anno = @[annotations];
     
     NSDictionary *dict = @{@"annotations":anno};
-    XYZExperiment *exp = [XYZExperimentParser expParser:dict];
+    Experiment *exp = [ExperimentParser expParser:dict];
     XCTAssertEqualObjects([exp getValueForAnnotation:@"sex"], @"female");
 }
 
@@ -63,7 +63,7 @@
     NSArray *anno = @[annotation1, annotation2];
 
     NSDictionary *dict = @{@"annotations":anno};
-    XYZExperiment *exp = [XYZExperimentParser expParser:dict];
+    Experiment *exp = [ExperimentParser expParser:dict];
     XCTAssertEqualObjects([exp getValueForAnnotation:@"sex"], @"female");
     XCTAssertEqualObjects([exp getValueForAnnotation:@"stage"], @"larvae");
 }
@@ -82,7 +82,7 @@
     
     NSDictionary *dict = @{@"annotations":arrayOfDicts};//[[NSDictionary alloc] initWithObjectsAndKeys:arrayOfDicts, @"annotations", nil];
     
-    XYZExperiment *exp = [XYZExperimentParser expParser:dict];
+    Experiment *exp = [ExperimentParser expParser:dict];
     
     for(int i = 0; i < 100000; i++){
         annotationValue = [NSString stringWithFormat:@"%d", i];
@@ -98,7 +98,7 @@
     NSMutableArray *anno = [[NSMutableArray alloc] init];
     [anno addObject:annotations];
     NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:anno, @"annotations", nil];
-    XYZExperiment *exp = [XYZExperimentParser expParser:dict];
+    Experiment *exp = [ExperimentParser expParser:dict];
     
     XCTAssertNil([exp getValueForAnnotation:@"stage"]);
 }

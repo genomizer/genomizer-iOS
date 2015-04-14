@@ -8,7 +8,7 @@
 
 #import <XCTest/XCTest.h>
 #import "AppDelegate.h"
-#import "XYZLogInViewController.h"
+#import "LogInViewController.h"
 
 @interface TestAppDelegate : XCTestCase
 
@@ -33,25 +33,25 @@ AppDelegate *appDelegate;
 
 - (void)testAppDelegateShouldHandleOneController
 {
-    [appDelegate addController: [[XYZLogInViewController alloc] init]];
+    [appDelegate addController: [[LogInViewController alloc] init]];
     XCTAssertEqual([appDelegate getNumberOfControllers], 1);
 }
 
 - (void) testAppDelegateShouldHandleTwoControllers
 {
-   [appDelegate addController: [[XYZLogInViewController alloc] init]];
-   [appDelegate addController: [[XYZLogInViewController alloc] init]];
+   [appDelegate addController: [[LogInViewController alloc] init]];
+   [appDelegate addController: [[LogInViewController alloc] init]];
     XCTAssertEqual([appDelegate getNumberOfControllers], 2);
 }
 
 - (void) testRemoveOneController {
-    [appDelegate addController: [[XYZLogInViewController alloc] init]];
+    [appDelegate addController: [[LogInViewController alloc] init]];
     [appDelegate popController];
     XCTAssertEqual([appDelegate getNumberOfControllers], 0);
 }
 
 - (void) testGetControllerReturnsSameObject {
-    UIViewController *originalController = [[XYZLogInViewController alloc] init];
+    UIViewController *originalController = [[LogInViewController alloc] init];
     [appDelegate addController: originalController];
     UIViewController *retrievedController = [appDelegate getController: 0];
     XCTAssertEqual(retrievedController, originalController);
@@ -61,7 +61,7 @@ AppDelegate *appDelegate;
 {
     for(int i = 0; i < 100; i++)
     {
-        [appDelegate addController: [[XYZLogInViewController alloc] init]];
+        [appDelegate addController: [[LogInViewController alloc] init]];
     }
     [appDelegate killControllers];
     XCTAssertEqual([appDelegate getNumberOfControllers], 0);

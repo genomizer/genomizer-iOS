@@ -12,7 +12,7 @@
 #import "ProcessTableViewCell.h"
 #import "RawConvertViewController.h"
 #import "ServerConnection.h"
-#import "XYZPopupGenerator.h"
+#import "PopupGenerator.h"
 #import "ProcessStatusDescriptor.h"
 #import "AppDelegate.h"
 
@@ -177,7 +177,7 @@ static NSMutableArray * processingExperimentFiles;
     {
         dispatch_async(dispatch_get_main_queue(), ^{
             [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-            [XYZPopupGenerator showErrorMessage:error];
+            [PopupGenerator showErrorMessage:error];
             AppDelegate *app = [UIApplication sharedApplication].delegate;
             [app threadFinished];
         });

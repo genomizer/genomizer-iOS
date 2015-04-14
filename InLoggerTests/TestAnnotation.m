@@ -7,11 +7,11 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "XYZAnnotation.h"
+#import "Annotation.h"
 
 @interface TestAnnotation : XCTestCase
 
-@property XYZAnnotation *annotation;
+@property Annotation *annotation;
 
 @end
 
@@ -20,7 +20,7 @@
 - (void)setUp
 {
     [super setUp];
-    _annotation = [[XYZAnnotation alloc] init];
+    _annotation = [[Annotation alloc] init];
 }
 
 - (void)tearDown

@@ -10,8 +10,8 @@
 
 #import "ServerConnection.h"
 #import "JSONBuilder.h"
-#import "XYZExperimentParser.h"
-#import "XYZAnnotation.h"
+#import "ExperimentParser.h"
+#import "Annotation.h"
 
 @implementation ServerConnection
 
@@ -22,10 +22,10 @@ NSString *token;
  * which either succeeds or fails. When an answer is received, 
  * the method reports to the viewController it has knowledge about.
  *
- *@param controller - XYZLogInViewController, which the method will report the result to
+ *@param controller - LogInViewController, which the method will report the result to
  *@return nothing
  */
-+ (void)login:(NSString *)username withPassword:(NSString *)password error:(NSError**) error withContext: (XYZLogInViewController*) controller
++ (void)login:(NSString *)username withPassword:(NSString *)password error:(NSError**) error withContext: (LogInViewController*) controller
 {
     NSMutableURLRequest *request = [JSONBuilder getLoginJSON:username withPassword:password];
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
@@ -40,14 +40,16 @@ NSString *token;
          {
              message = [NSJSONSerialization JSONObjectWithData:POSTReply options:kNilOptions error:&error];
          }
+         NSLog(@"LOGIN resp: %@ %@", response, message);
          if (internalError == nil)
          {
 
              NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
              NSDictionary *json = [self parseJSONToDictionary:POSTReply error:&internalError];
-             
+             NSLog(@"json: %@", json);
              if(internalError == nil)
              {
+                
                  if([json objectForKey:@"token"] != nil){
                      token = [json objectForKey:@"token"];
                  }else{
@@ -103,7 +105,7 @@ NSString *token;
         for(NSDictionary *json in array)
         {
             if([json objectForKey:@"name"] != nil){
-                [experiments addObject:[XYZExperimentParser expParser:json]];
+                [experiments addObject:[ExperimentParser expParser:json]];
             }else{
                 *error = [self generateError:@"Server sent incorrectly formatted data" withErrorDomain:@"Server Error" withUnderlyingError:nil];
             }
@@ -123,10 +125,10 @@ NSString *token;
  * Static method that asynchronously sends a search request to the server. When a search result
  * is received, method reports to the viewController it has knowledge about.
  *
- *@param controller - XYZSearchViewController, which the method will report the result to
+ *@param controller - SearchViewController, which the method will report the result to
  *@return nothing
  */
-+ (void)search:(NSString*)annotations withContext: (XYZSearchViewController*) controller
++ (void)search:(NSString*)annotations withContext: (SearchViewController*) controller
 {
     NSMutableURLRequest *request = [JSONBuilder getSearchJSON:annotations withToken: token];
     
@@ -270,10 +272,10 @@ NSString *token;
  * which contains all annotations on the server. When an answer
  * is received, method reports to the viewController it has knowledge about.
  *
- *@param controller - XYZSearchViewController, which the method will report the result to
+ *@param controller - SearchViewController, which the method will report the result to
  *@return nothing
  */
-+ (void)getAvailableAnnotations:(XYZSearchViewController*) controller
++ (void)getAvailableAnnotations:(SearchViewController*) controller
 {
     
     NSMutableURLRequest *request = [JSONBuilder getAvailableAnnotationsJSON:token];
@@ -296,7 +298,7 @@ NSString *token;
                      annotations = [[NSMutableArray alloc] init];
                      for (NSDictionary *json in array)
                      {
-                         XYZAnnotation *annotation = [[XYZAnnotation alloc] init];
+                         Annotation *annotation = [[Annotation alloc] init];
                          if([json objectForKey:@"name"] != nil){
                              annotation.name = [json objectForKey:@"name"];
                              NSArray* values;

@@ -7,10 +7,10 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "XYZExperimentFile.h"
+#import "ExperimentFile.h"
 @interface TestExperimentFile : XCTestCase
 
-@property XYZExperimentFile *experimentFile;
+@property ExperimentFile *experimentFile;
 
 @end
 
@@ -19,7 +19,7 @@
 - (void)setUp
 {
     [super setUp];
-    _experimentFile = [[XYZExperimentFile alloc] init];
+    _experimentFile = [[ExperimentFile alloc] init];
     // Put setup code here. This method is called before the invocation of each test method in the class.
 }
 
@@ -32,10 +32,10 @@
 
 - (void) testNSStringFileTypeToEnumFileType
 {
-    XCTAssertEqual([XYZExperimentFile NSStringFileTypeToEnumFileType:@"RAW"], RAW);
-    XCTAssertEqual([XYZExperimentFile NSStringFileTypeToEnumFileType:@"profile"], PROFILE);
-    XCTAssertEqual([XYZExperimentFile NSStringFileTypeToEnumFileType:@"rEgIoN"], REGION);
-    XCTAssertEqual([XYZExperimentFile NSStringFileTypeToEnumFileType:@"Ä!Ö#KQ"], OTHER);
+    XCTAssertEqual([ExperimentFile NSStringFileTypeToEnumFileType:@"RAW"], RAW);
+    XCTAssertEqual([ExperimentFile NSStringFileTypeToEnumFileType:@"profile"], PROFILE);
+    XCTAssertEqual([ExperimentFile NSStringFileTypeToEnumFileType:@"rEgIoN"], REGION);
+    XCTAssertEqual([ExperimentFile NSStringFileTypeToEnumFileType:@"Ä!Ö#KQ"], OTHER);
 
 }
 

@@ -9,9 +9,9 @@
 //
 
 #import "RawConvertViewController.h"
-#import "XYZExperimentFile.h"
+#import "ExperimentFile.h"
 #import "ServerConnection.h"
-#import "XYZPopupGenerator.h"
+#import "PopupGenerator.h"
 #import <QuartzCore/QuartzCore.h>
 #import "ProcessViewController.h"
 #import "AppDelegate.h"
@@ -378,7 +378,7 @@
 {
     
     if((_bowtie.text.length == 0) || (_genomeFile.text.length == 0)){
-        [XYZPopupGenerator showPopupWithMessage:@"Fill in at least the fields \"Bowtie parameters\" and \"Genome file\" to start a process"];
+        [PopupGenerator showPopupWithMessage:@"Fill in at least the fields \"Bowtie parameters\" and \"Genome file\" to start a process"];
     }else{
         _convertButton.hidden = YES;
         [_activityIndicator startAnimating];
@@ -516,13 +516,13 @@
         if([error.domain isEqualToString:@"Connection Error"])
         {
             
-            [XYZPopupGenerator showErrorMessage:error];
+            [PopupGenerator showErrorMessage:error];
             numberOfConvertRequestsLeftToConfirm = 0;
         }
         else if(error){
             NSDictionary *dictionary = error.userInfo;
             [dictionary setValue:([NSString stringWithFormat:@"Experiment %@ failed with error: %@", expid, error.localizedDescription]) forKey:@"localizedDescription"];
-            [XYZPopupGenerator showErrorMessage:[NSError errorWithDomain:error.domain code:error.code userInfo:dictionary]];
+            [PopupGenerator showErrorMessage:[NSError errorWithDomain:error.domain code:error.code userInfo:dictionary]];
         }
         else
         {
@@ -538,7 +538,7 @@
                     requestString = [requestString stringByAppendingString:@"s"];
                 }
                 NSString *message = [NSString stringWithFormat:@"%d convert %@ successfully sent to the server.", successfulConvertRequests, requestString];
-                [XYZPopupGenerator showPopupWithMessage:message withTitle:@"" withCancelButtonTitle:@"OK" withDelegate:self];
+                [PopupGenerator showPopupWithMessage:message withTitle:@"" withCancelButtonTitle:@"OK" withDelegate:self];
                 
             }
             _convertButton.enabled = YES;
@@ -565,7 +565,7 @@
  */
 - (void) reportGenomeResult:(NSMutableArray*) genomeReleases withError:(NSError*) error {
     if(error){
-        [XYZPopupGenerator showErrorMessage:error];
+        [PopupGenerator showErrorMessage:error];
     }
     else
     {
@@ -588,7 +588,7 @@
 {
     NSMutableArray *expIdsAlreadyCreated = [[NSMutableArray alloc] init];
     _experimentFilesDictArr = [[NSMutableArray alloc] init];
-    for(XYZExperimentFile *file in _experimentFiles){
+    for(ExperimentFile *file in _experimentFiles){
         
         if(![expIdsAlreadyCreated containsObject:file.expID])
         {

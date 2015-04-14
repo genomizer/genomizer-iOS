@@ -9,10 +9,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "XYZViewController.h"
-#import "XYZExperimentFile.h"
+#import "ViewController.h"
+#import "ExperimentFile.h"
 
-@interface ProcessViewController : XYZViewController
+@interface ProcessViewController : ViewController
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 

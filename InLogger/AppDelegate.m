@@ -9,7 +9,7 @@
 //
 
 #import "AppDelegate.h"
-#import "XYZLogInViewController.h"
+#import "LogInViewController.h"
 
 @implementation AppDelegate
 
@@ -25,6 +25,17 @@ NSMutableArray* controllers;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+    NSString *usertoken = [[NSUserDefaults standardUserDefaults] objectForKey:@"usertoken"];
+    usertoken = @"pal";
+    UIViewController *vc;
+    if(!usertoken){
+        vc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"login"];
+    } else{
+        vc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"home"];
+    }
+    
+    self.window.rootViewController = vc;
     return YES;
 }
 
@@ -32,7 +43,7 @@ NSMutableArray* controllers;
 
     UIStoryboard *storyboard =
         [UIStoryboard storyboardWithName:[[NSBundle mainBundle].infoDictionary objectForKey:@"UIMainStoryboardFile"] bundle:[NSBundle mainBundle]];
-    XYZLogInViewController *viewController = (XYZLogInViewController *)[storyboard instantiateViewControllerWithIdentifier:@"loginView"];
+    LogInViewController *viewController = (LogInViewController *)[storyboard instantiateViewControllerWithIdentifier:@"loginView"];
     [self.window setRootViewController:viewController];
 }
 

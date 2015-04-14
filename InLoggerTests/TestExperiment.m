@@ -7,12 +7,12 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "XYZExperiment.h"
+#import "Experiment.h"
 
 @interface TestExperiment : XCTestCase
 
-@property XYZExperiment *experiment;
-@property XYZExperimentFile *experimentFile;
+@property Experiment *experiment;
+@property ExperimentFile *experimentFile;
 
 @end
 
@@ -21,8 +21,8 @@
 - (void)setUp
 {
     [super setUp];
-    _experiment = [[XYZExperiment alloc] init];
-    _experimentFile = [[XYZExperimentFile alloc] init];
+    _experiment = [[Experiment alloc] init];
+    _experimentFile = [[ExperimentFile alloc] init];
     // Put setup code here. This method is called before the invocation of each test method in the class.
 }
 
@@ -111,7 +111,7 @@
     [_experiment removeExperimentFile: _experimentFile];
     XCTAssertEqual([_experiment.rawFiles count], 0);
     [_experiment addExperimentFile:_experimentFile];
-    [_experiment addExperimentFile:[[XYZExperimentFile alloc] init]];
+    [_experiment addExperimentFile:[[ExperimentFile alloc] init]];
     XCTAssertEqual([_experiment.rawFiles count], 2);
     [_experiment removeExperimentFile: _experimentFile];
     XCTAssertEqual([_experiment.rawFiles count], 1);
@@ -121,7 +121,7 @@
 
 -(void) testGetSelectedRAWFiles
 {
-    XYZExperimentFile *experimentFile2 = [[XYZExperimentFile alloc] init];
+    ExperimentFile *experimentFile2 = [[ExperimentFile alloc] init];
     _experimentFile.type = RAW;
     experimentFile2.type = RAW;
     [_experiment addExperimentFile:_experimentFile];
@@ -134,7 +134,7 @@
 
 -(void) testGetSelectedFiles
 {
-    XYZExperimentFile *experimentFile2 = [[XYZExperimentFile alloc] init];
+    ExperimentFile *experimentFile2 = [[ExperimentFile alloc] init];
     _experimentFile.type = REGION;
     experimentFile2.type = RAW;
     [_experiment addExperimentFile:_experimentFile];
