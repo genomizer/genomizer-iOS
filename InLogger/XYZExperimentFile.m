@@ -41,7 +41,7 @@
 - (NSString *) getDescription
 {
     NSMutableString *string = [[NSMutableString alloc] init];
-    [string appendString: [self format: _name]];
+    [string appendString: [XYZExperimentFile format: _name]];
     return string;
 }
 
@@ -52,14 +52,15 @@
  */
 - (NSString *) getAllInfo{
     NSString *string = [[NSMutableString alloc] init];
-    string = [NSString stringWithFormat:@"Filename: %@\n", [self format:_idFile]];
-    [string stringByAppendingFormat:@"Date: %@\n", [self format:_date]];
-    [string stringByAppendingFormat:@"Name: %@\n", [self format:_name]];
-    [string stringByAppendingFormat:@"Experiment ID: %@\n", [self format:_expID]];
-    [string stringByAppendingFormat:@"Metadata: %@\n", [self format:_metaData]];
-    [string stringByAppendingFormat:@"Author: %@\n", [self format:_author]];
-    [string stringByAppendingFormat:@"Genome Version: %@\n", [self format:_grVersion]];
-    [string stringByAppendingFormat:@"Speice: %@\n", [self format:_species]];
+    
+    string = [NSString stringWithFormat:             @"Filename: %@\n",      [XYZExperimentFile format:_idFile]];
+    string = [string stringByAppendingFormat:        @"Date: %@\n",          [XYZExperimentFile format:_date]];
+    string = [string stringByAppendingFormat:        @"Name: %@\n",          [XYZExperimentFile format:_name]];
+    string = [string stringByAppendingFormat:        @"Experiment ID: %@\n", [XYZExperimentFile format:_expID]];
+    string = [string stringByAppendingFormat:        @"Metadata: %@\n",      [XYZExperimentFile format:_metaData]];
+    string = [string stringByAppendingFormat:        @"Author: %@\n",        [XYZExperimentFile format:_author]];
+    string = [string stringByAppendingFormat:        @"Genome Version: %@\n",[XYZExperimentFile format:_grVersion]];
+    string = [string stringByAppendingFormat:        @"Speice: %@\n",        [XYZExperimentFile format:_species]];
     return string;
 }
 
@@ -70,7 +71,7 @@
  *
  * @return ? if the string is nil, otherwise the same string
  */
-- (NSString *) format: (NSString *) string
++ (NSString *) format: (NSString *) string
 {
     if (string == nil) {
         return @"?";

@@ -76,13 +76,11 @@
     NSDictionary *annotation;
     for(int i = 0; i < 100000; i++){
         annotationValue = [NSString stringWithFormat:@"%d", i];
-        annotation = [[NSMutableDictionary alloc] initWithObjectsAndKeys:annotationValue, @"name",
-                                                                         annotationValue, @"value",
-                                                                         nil];
+        annotation = @{@"name": annotationValue, @"value":annotationValue};
         [arrayOfDicts addObject:annotation];
     }
     
-    NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:arrayOfDicts, @"annotations", nil];
+    NSDictionary *dict = @{@"annotations":arrayOfDicts};//[[NSDictionary alloc] initWithObjectsAndKeys:arrayOfDicts, @"annotations", nil];
     
     XYZExperiment *exp = [XYZExperimentParser expParser:dict];
     

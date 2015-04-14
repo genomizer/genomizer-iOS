@@ -10,13 +10,13 @@
 
 @interface XYZFileContainer : NSObject
 
-- (NSMutableArray *) getFiles: (FileType) fileType;
+
 - (void) addExperimentFile: (XYZExperimentFile *) file;
 - (void) removeExperimentFile: (XYZExperimentFile *) file;
 - (NSInteger) numberOfFiles;
 - (NSInteger) numberOfFilesWithType: (FileType) fileType;
 - (BOOL) containsFile: (XYZExperimentFile *) file;
 - (NSMutableArray *) getFiles;
-- (NSMutableArray *) getFilesOfType: (FileType) fileType;
+- (NSMutableArray *) getFiles: (FileType) fileType;
 
 @end

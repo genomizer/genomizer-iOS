@@ -47,9 +47,8 @@
     _experimentFile.type = RAW;
     
     NSString *result = [_experimentFile getDescription];
-    NSString *correct = @"Datafile.wig";
     
-    XCTAssertEqualObjects(result, correct);
+    XCTAssertEqualObjects(result, @"Datafile.wig");
 }
 
 - (void) testGetDescription2
