@@ -8,11 +8,15 @@
 
 #import "FileAboutView.h"
 
-@implementation FileAboutView
+@implementation FileAboutView{
+    UITextView *infoTextView;
+}
 
 
 -(id)initWithFrame:(CGRect)frame{
     if(self = [super initWithFrame:frame]){
+        self.backgroundColor = [UIColor whiteColor];
+        
         UILabel *headerLabel = ({
             UILabel *l = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, 40)];
             l.text = @"File About";
@@ -21,7 +25,7 @@
             l;
         });
         
-        UITextView *infoView = ({
+        infoTextView = ({
             UITextView *tv = [[UITextView alloc] initWithFrame:CGRectMake(0, 40, frame.size.width, frame.size.height - 80)];
             tv;
         });
@@ -34,7 +38,7 @@
             b;
         });
         
-        [self addSubview:infoView];
+        [self addSubview:infoTextView];
         [self addSubview:headerLabel];
         [self addSubview:closeButton];
     }
@@ -42,6 +46,9 @@
     return self;
 }
 
+-(void)setText:(NSString *)text{
+    infoTextView.text = text;
+}
 -(void)closeButtonWasTapped:(UIButton *)b{
     [self removeFromSuperview];
 }

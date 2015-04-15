@@ -11,6 +11,7 @@
 #import "PopupGenerator.h"
 #import "FileContainer.h"
 #import "AppDelegate.h"
+#import "FileAboutView.h"
 
 @interface SelectedFilesViewController ()
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
@@ -203,12 +204,24 @@ static FileContainer * FILES = nil;
  * @return Shows a popup containing information about that file.
  */
 - (IBAction)infoFile:(UIButton*)sender {
+    
+    NSString *infoText = [[_filesToDisplay objectAtIndex:sender.tag] getAllInfo];
+    FileAboutView *fav = ({
+        float height = 150;
+        FileAboutView *fav = [[FileAboutView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height/2 - height/2, self.view.frame.size.width, height)];
+        fav;
+    });
+    
+    [self.view addSubview:fav];
+    [fav setText:infoText];
+    
     _dimView.hidden = NO;
     _infoAboutFile.hidden = NO;
     _infoAboutFile.layer.cornerRadius = 5;
     _infoAboutFile.layer.masksToBounds = YES;
     _tableView.editing = NO;
     [self.tableView endEditing:YES];
+    
     _trashButton.enabled = NO;
     _infoAboutFile.layer.borderWidth = 0.4;
     _infoAboutFile.layer.borderColor = [UIColor lightGrayColor].CGColor;
@@ -220,11 +233,11 @@ static FileContainer * FILES = nil;
 /**
  * Executes when "close"-button in the "infoFile"-popup is pressed.
  */
-- (IBAction)closeInfoFile:(id)sender {
-    _infoAboutFile.hidden = YES;
-    _dimView.hidden = YES;
-    _trashButton.enabled =YES;
-}
+//- (IBAction)closeInfoFile:(id)sender {
+//    _infoAboutFile.hidden = YES;
+//    _dimView.hidden = YES;
+//    _trashButton.enabled =YES;
+//}
 /*
  * Used to go back to this view from selectTaskTableViewController.
  */
