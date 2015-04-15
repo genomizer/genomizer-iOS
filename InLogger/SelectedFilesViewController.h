@@ -10,7 +10,6 @@
 #import "ViewController.h"
 #import "Experiment.h"
 
-
 @interface SelectedFilesViewController : ViewController
 
 + (void) addExperimentFile:(ExperimentFile *) file;

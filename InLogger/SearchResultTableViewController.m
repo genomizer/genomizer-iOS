@@ -9,7 +9,6 @@
 #import "SearchResultTableViewCell.h"
 #import "DataFileViewController.h"
 #import "AnnotationTableViewController.h"
-#import "AppDelegate.h"
 
 @interface SearchResultTableViewController ()
 
@@ -32,8 +31,8 @@
     _tableCellWidth = cell.textFieldSize.width;
     
     //add self to appDelegate
-    AppDelegate *app = [UIApplication sharedApplication].delegate;
-    [app addController:self];
+//    AppDelegate *app = [UIApplication sharedApplication].delegate;
+//    [app addController:self];
 }
 
 #pragma mark - Table view data source

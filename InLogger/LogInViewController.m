@@ -40,8 +40,8 @@
     [JSONBuilder setServerURLToString:serverURL];
     
     //add self to appDelegate
-    AppDelegate *app = [UIApplication sharedApplication].delegate;
-    [app addController:self];
+//    AppDelegate *app = [UIApplication sharedApplication].delegate;
+//    [app addController:self];
 }
 
 /**

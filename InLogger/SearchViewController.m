@@ -34,9 +34,7 @@
 {
     [super viewDidLoad];
     _spinner.hidesWhenStopped = YES;
-    //add self to appDelegate
-    AppDelegate *app = [UIApplication sharedApplication].delegate;
-    [app addController:self];
+
     NSLog(@"SearchViewController didLoad");
 }
 

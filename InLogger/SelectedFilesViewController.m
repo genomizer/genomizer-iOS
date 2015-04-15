@@ -10,16 +10,14 @@
 #import "SelectTaskTableViewController.h"
 #import "PopupGenerator.h"
 #import "FileContainer.h"
-#import "AppDelegate.h"
-#import "FileAboutView.h"
-
+#import "TabViewController.h"
 @interface SelectedFilesViewController ()
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 @property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) IBOutlet UIView *infoAboutFile;
-@property (weak, nonatomic) IBOutlet UITextView *infoFileTextField;
-@property (weak, nonatomic) IBOutlet UIView *dimView;
+//@property (weak, nonatomic) IBOutlet UIView *infoAboutFile;
+//@property (weak, nonatomic) IBOutlet UITextView *infoFileTextField;
+//@property (weak, nonatomic) IBOutlet UIView *dimView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *trashButton;
 @property (weak, nonatomic) IBOutlet UIButton *selectTaskToPerformButton;
 
@@ -106,10 +104,7 @@ static FileContainer * FILES = nil;
     [super viewDidLoad];
     _filesToDisplay = [FILES getFiles:RAW];
     _selectedFiles = [[FileContainer alloc] init];
-    
     //add self to appDelegate
-    AppDelegate *app = [UIApplication sharedApplication].delegate;
-    [app addController:self];
 }
 
 #pragma mark - Table view data source
@@ -204,32 +199,46 @@ static FileContainer * FILES = nil;
  * @return Shows a popup containing information about that file.
  */
 - (IBAction)infoFile:(UIButton*)sender {
+    ExperimentFile *file = _filesToDisplay[sender.tag];
+    [(TabViewController *)self.tabBarController showInfoAboutFile:file];
     
-    NSString *infoText = [[_filesToDisplay objectAtIndex:sender.tag] getAllInfo];
-    FileAboutView *fav = ({
-        float height = 150;
-        FileAboutView *fav = [[FileAboutView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height/2 - height/2, self.view.frame.size.width, height)];
-        fav;
-    });
-    
-    [self.view addSubview:fav];
-    [fav setText:infoText];
-    
-    _dimView.hidden = NO;
-    _infoAboutFile.hidden = NO;
-    _infoAboutFile.layer.cornerRadius = 5;
-    _infoAboutFile.layer.masksToBounds = YES;
-    _tableView.editing = NO;
-    [self.tableView endEditing:YES];
-    
-    _trashButton.enabled = NO;
-    _infoAboutFile.layer.borderWidth = 0.4;
-    _infoAboutFile.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    _infoFileTextField.text = [[_filesToDisplay objectAtIndex:sender.tag] getAllInfo];
-    [[_infoFileTextField layer] setBorderColor : [[UIColor lightGrayColor] CGColor]];
-    [[_infoFileTextField layer] setBorderWidth:0.4];
+//    NSString *infoText = @"Hejsan allihopa";//[[_filesToDisplay objectAtIndex:sender.tag] getAllInfo];
+//    UIView *dimView = ({
+//        UIView *v = [[UIView alloc] initWithFrame:self.view.frame];
+//        v.backgroundColor = [UIColor blackColor];
+//        v.alpha = 0.4;
+//        v;
+//    });
+//    FileAboutView *fav = ({
+//        float height = 150;
+//        FileAboutView *fav = [[FileAboutView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height/2 - height/2, self.view.frame.size.width, height)];
+//        fav.delegate = self;
+//        [fav setText:infoText];
+//        fav.dimView = dimView;
+//        fav;
+//    });
+//    
+//    [self.tabBarController.view addSubview:dimView];
+//    [self.tabBarController.view addSubview:fav];
+//    
+//    _dimView.hidden = NO;
+//    _infoAboutFile.hidden = NO;
+//    _infoAboutFile.layer.cornerRadius = 5;
+//    _infoAboutFile.layer.masksToBounds = YES;
+//    _tableView.editing = NO;
+//    [self.tableView endEditing:YES];
+//    
+//    _trashButton.enabled = NO;
+//    _infoAboutFile.layer.borderWidth = 0.4;
+//    _infoAboutFile.layer.borderColor = [UIColor lightGrayColor].CGColor;
+//    _infoFileTextField.text = [[_filesToDisplay objectAtIndex:sender.tag] getAllInfo];
+//    [[_infoFileTextField layer] setBorderColor : [[UIColor lightGrayColor] CGColor]];
+//    [[_infoFileTextField layer] setBorderWidth:0.4];
 }
 
+//-(void)fileAboutViewDidClose:(FileAboutView *)fav{
+//    _trashButton.enabled = true;
+//}
 /**
  * Executes when "close"-button in the "infoFile"-popup is pressed.
  */

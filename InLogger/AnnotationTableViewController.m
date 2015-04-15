@@ -12,7 +12,6 @@
 #import "ServerConnection.h"
 #import "PopupGenerator.h"
 #import "Annotation.h"
-#import "AppDelegate.h"
 
 @interface AnnotationTableViewController ()
 
@@ -30,8 +29,6 @@
     [super viewDidLoad];
     
     //add self to appDelegate
-    AppDelegate *app = [UIApplication sharedApplication].delegate;
-    [app addController:self];
 }
 
 #pragma mark - Table view data source

@@ -8,7 +8,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FileAboutView.h"
+#import "ExperimentFile.h"
+@interface TabViewController : UITabBarController <UITabBarControllerDelegate, FileAboutViewDelegate>
 
-@interface TabViewController : UITabBarController <UITabBarControllerDelegate>
 
+-(void)showInfoAboutFile:(ExperimentFile *)file;
 @end

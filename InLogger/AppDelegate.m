@@ -13,12 +13,12 @@
 
 @implementation AppDelegate
 
-NSMutableArray* controllers;
+//NSMutableArray* controllers;
 
 - (AppDelegate*) init {
     self = [super init];
     _userIsLoggingOut = NO;
-    controllers = [[NSMutableArray alloc] init];
+//    controllers = [[NSMutableArray alloc] init];
     _numberOfThreadsAlive = 0;
     return self;
 }
@@ -47,17 +47,17 @@ NSMutableArray* controllers;
     [self.window setRootViewController:viewController];
 }
 
-- (int) getNumberOfControllers {
-    return (int)[controllers count];
-}
-
-- (void) addController: (UIViewController*) controller {
-    [controllers addObject:controller];
-}
-
-- (void) popController {
-    [controllers removeLastObject];
-}
+//- (int) getNumberOfControllers {
+//    return (int)[controllers count];
+//}
+//
+//- (void) addController: (UIViewController*) controller {
+//    [controllers addObject:controller];
+//}
+//
+//- (void) popController {
+//    [controllers removeLastObject];
+//}
 
 - (bool) threadIsAvailable {
     
@@ -76,21 +76,21 @@ NSMutableArray* controllers;
     _numberOfThreadsAlive--;
 }
 
-- (UIViewController*) getController: (int) index
-{
-    return [controllers objectAtIndex:index];
-}
+//- (UIViewController*) getController: (int) index
+//{
+//    return [controllers objectAtIndex:index];
+//}
 
-- (void) killControllers
-{
-    int length = (int)[controllers count];
-    for(int i = 0; i < length; i++)
-    {
-        NSLog(@"kill Controllers");
-        [[controllers lastObject] dismissViewControllerAnimated:NO completion:nil];
-        [controllers removeObject:[controllers lastObject]];
-    }
-}
+//- (void) killControllers
+//{
+//    int length = (int)[controllers count];
+//    for(int i = 0; i < length; i++)
+//    {
+//        NSLog(@"kill Controllers");
+//        [[controllers lastObject] dismissViewControllerAnimated:NO completion:nil];
+//        [controllers removeObject:[controllers lastObject]];
+//    }
+//}
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {

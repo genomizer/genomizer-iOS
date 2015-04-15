@@ -9,7 +9,6 @@
 #import "SelectTaskTableViewController.h"
 #import "RawConvertViewController.h"
 #import "PopupGenerator.h"
-#import "AppDelegate.h"
 
 @interface SelectTaskTableViewController ()
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *executeButton;
@@ -24,10 +23,7 @@
 {
     [super viewDidLoad];
     _tasks = [self tasksOfFileType:_fileType];
-    
-    //add self to appDelegate
-    AppDelegate *app = [UIApplication sharedApplication].delegate;
-    [app addController:self];
+
 }
 
 /**

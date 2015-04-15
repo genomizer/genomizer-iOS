@@ -12,6 +12,8 @@
     UITextView *infoTextView;
 }
 
+@synthesize delegate = _delegate;
+@synthesize dimView;
 
 -(id)initWithFrame:(CGRect)frame{
     if(self = [super initWithFrame:frame]){
@@ -34,6 +36,7 @@
             UIButton *b = [UIButton buttonWithType:UIButtonTypeCustom];
             b.frame = CGRectMake(0, frame.size.height-40, frame.size.width, 40);
             [b setTitle:@"Close" forState:UIControlStateNormal];
+            [b setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
             [b addTarget:self action:@selector(closeButtonWasTapped:) forControlEvents:UIControlEventTouchUpInside];
             b;
         });
@@ -50,6 +53,15 @@
     infoTextView.text = text;
 }
 -(void)closeButtonWasTapped:(UIButton *)b{
+    if(self.delegate != nil){
+        [self.delegate fileAboutViewDidClose:self];
+    }
+    
+    [UIView animateWithDuration:0.2 animations:^{
+        self.dimView.alpha = 0.0;
+    } completion:^(BOOL finished) {
+        [self.dimView removeFromSuperview];
+    }];
     [self removeFromSuperview];
 }
 @end

@@ -9,7 +9,6 @@
 
 #import "SegueController.h"
 #import "TabViewController.h"
-#import "AppDelegate.h"
 
 @interface TabViewController ()
 
@@ -30,8 +29,6 @@
     self.navigationItem.hidesBackButton = YES;
     _prevSelectedIndex = 0;
     
-    AppDelegate *app = [UIApplication sharedApplication].delegate;
-    [app addController:self];
 }
 
 /**
@@ -57,6 +54,31 @@
     } else {
         return true;
     }
+}
+
+-(void)showInfoAboutFile:(ExperimentFile *)file{
+    NSString *infoText = @"Hejsan allihopa";//[file getAllInfo];
+    UIView *dimView = ({
+        UIView *v = [[UIView alloc] initWithFrame:self.view.frame];
+        v.backgroundColor = [UIColor blackColor];
+        v.alpha = 0.4;
+        v;
+    });
+    FileAboutView *fav = ({
+        float height = 150;
+        FileAboutView *fav = [[FileAboutView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height/2 - height/2, self.view.frame.size.width, height)];
+        fav.delegate = self;
+        [fav setText:infoText];
+        fav.dimView = dimView;
+        fav;
+    });
+    
+    [self.view addSubview:dimView];
+    [self.view addSubview:fav];
+}
+
+-(void)fileAboutViewDidClose:(FileAboutView *)fav{
+    
 }
 
 @end

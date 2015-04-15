@@ -15,12 +15,11 @@
 #import "PopupGenerator.h"
 #import "SelectTaskTableViewController.h"
 #import "FileContainer.h"
-#import "AppDelegate.h"
-
+#import "TabViewController.h"
 @interface DataFileViewController ()
 
-@property (weak, nonatomic) IBOutlet UIView *infoAboutFile;
-@property (weak, nonatomic) IBOutlet UITextView *infoFileTextField;
+//@property (weak, nonatomic) IBOutlet UIView *infoAboutFile;
+//@property (weak, nonatomic) IBOutlet UITextView *infoFileTextField;
 @property (weak, nonatomic) IBOutlet UIView *dimView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property BOOL animating;
@@ -38,10 +37,7 @@
 {
     [super viewDidLoad];
     _selectedFiles = [[FileContainer alloc] init];
-    
-    //add self to appDelegate
-    AppDelegate *app = [UIApplication sharedApplication].delegate;
-    [app addController:self];
+
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -165,16 +161,8 @@
  */
 - (void) showInfoAbout: (ExperimentFile *) file
 {
-    _dimView.hidden = NO;
-    _infoAboutFile.hidden = NO;
-    _infoAboutFile.layer.cornerRadius = 5;
-    _infoAboutFile.layer.masksToBounds = YES;
-    
-    _infoAboutFile.layer.borderWidth = 0.4;
-    _infoAboutFile.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    _infoFileTextField.text = [file getAllInfo];
-    [[_infoFileTextField layer] setBorderColor : [[UIColor lightGrayColor] CGColor]];
-    [[_infoFileTextField layer] setBorderWidth:0.4];
+    [(TabViewController *)self.tabBarController showInfoAboutFile:file];
+
 }
 
 /**
@@ -182,11 +170,11 @@
  * This method is called when the 'Close' button in the detailed information view.
  *
  */
-- (IBAction)closeFileInfo:(id)sender {
-    _infoAboutFile.hidden = YES;
-    _dimView.hidden = YES;
-    
-}
+//- (IBAction)closeFileInfo:(id)sender {
+//    _infoAboutFile.hidden = YES;
+//    _dimView.hidden = YES;
+//    
+//}
 
 /**
  * Method which is called when a segue is about to be performed.

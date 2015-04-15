@@ -501,37 +501,6 @@
                                     <action selector="selectTaskButton:" destination="OaH-dG-5KC" eventType="touchUpInside" id="hsv-No-gFN"/>
                                 </connections>
                             </button>
-                            <view hidden="YES" alpha="0.39999999999999963" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0r3-La-QJb">
-                                <rect key="frame" x="-28" y="-100" width="400" height="700"/>
-                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zoe-G4-QsV">
-                                <rect key="frame" x="10" y="123" width="300" height="201"/>
-                                <subviews>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="File info" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fXg-N8-Kd7">
-                                        <rect key="frame" x="125" y="5" width="51" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KXY-Ld-e9w">
-                                        <rect key="frame" x="127" y="171" width="46" height="30"/>
-                                        <state key="normal" title="Close">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="closeInfoFile:" destination="OaH-dG-5KC" eventType="touchUpInside" id="8On-2k-dgC"/>
-                                        </connections>
-                                    </button>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Cn-8I-zsb">
-                                        <rect key="frame" x="0.0" y="25" width="300" height="149"/>
-                                        <color key="backgroundColor" red="0.96552136479591832" green="0.96552136479591832" blue="0.96552136479591832" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textView>
-                                </subviews>
-                                <color key="backgroundColor" red="0.96552136479591832" green="0.96552136479591832" blue="0.96552136479591832" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.97639142335766427" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -565,9 +534,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="dimView" destination="0r3-La-QJb" id="pcH-ze-ZNO"/>
-                        <outlet property="infoAboutFile" destination="zoe-G4-QsV" id="OgG-Z9-QRt"/>
-                        <outlet property="infoFileTextField" destination="9Cn-8I-zsb" id="h4d-lQ-Oer"/>
                         <outlet property="segmentedControl" destination="2ha-Gv-y76" id="Fv9-71-dHz"/>
                         <outlet property="selectTaskToPerformButton" destination="1mi-tr-fZm" id="Zmr-LS-Qju"/>
                         <outlet property="tableView" destination="6pb-Wh-CBJ" id="5ch-FP-JXM"/>
@@ -1090,37 +1056,6 @@
                                     <constraint firstAttribute="height" constant="3" id="lFe-Yf-ics"/>
                                 </constraints>
                             </imageView>
-                            <view hidden="YES" alpha="0.39999999999999963" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fIs-Qi-2kD">
-                                <rect key="frame" x="-84" y="-47" width="488" height="662"/>
-                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="45H-5h-NPD">
-                                <rect key="frame" x="10" y="123" width="300" height="201"/>
-                                <subviews>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="File info" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vOs-AE-D3X">
-                                        <rect key="frame" x="125" y="5" width="51" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y99-Vg-vyc">
-                                        <rect key="frame" x="0.0" y="25" width="300" height="149"/>
-                                        <color key="backgroundColor" red="0.96552136479591832" green="0.96552136479591832" blue="0.96552136479591832" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textView>
-                                    <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8f3-SG-uBu">
-                                        <rect key="frame" x="127" y="171" width="46" height="30"/>
-                                        <state key="normal" title="Close">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="closeFileInfo:" destination="y6w-6T-HLO" eventType="touchUpInside" id="bNY-Ad-4r7"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="0.96552136479591832" green="0.96552136479591832" blue="0.96552136479591832" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -1140,9 +1075,6 @@
                     </view>
                     <navigationItem key="navigationItem" title="Files" id="mMZ-2V-ph4"/>
                     <connections>
-                        <outlet property="dimView" destination="fIs-Qi-2kD" id="mfD-Tg-FMz"/>
-                        <outlet property="infoAboutFile" destination="45H-5h-NPD" id="fky-tw-PH7"/>
-                        <outlet property="infoFileTextField" destination="y99-Vg-vyc" id="qBa-Cc-JYz"/>
                         <outlet property="tableView" destination="Zt8-vB-cTV" id="4wh-zp-uhu"/>
                         <segue destination="NVQ-fn-jnW" kind="modal" identifier="toSelectTask" id="mTu-BK-rMg"/>
                     </connections>

@@ -31,41 +31,41 @@ AppDelegate *appDelegate;
     [super tearDown];
 }
 
-- (void)testAppDelegateShouldHandleOneController
-{
-    [appDelegate addController: [[LogInViewController alloc] init]];
-    XCTAssertEqual([appDelegate getNumberOfControllers], 1);
-}
-
-- (void) testAppDelegateShouldHandleTwoControllers
-{
-   [appDelegate addController: [[LogInViewController alloc] init]];
-   [appDelegate addController: [[LogInViewController alloc] init]];
-    XCTAssertEqual([appDelegate getNumberOfControllers], 2);
-}
-
-- (void) testRemoveOneController {
-    [appDelegate addController: [[LogInViewController alloc] init]];
-    [appDelegate popController];
-    XCTAssertEqual([appDelegate getNumberOfControllers], 0);
-}
-
-- (void) testGetControllerReturnsSameObject {
-    UIViewController *originalController = [[LogInViewController alloc] init];
-    [appDelegate addController: originalController];
-    UIViewController *retrievedController = [appDelegate getController: 0];
-    XCTAssertEqual(retrievedController, originalController);
-}
-
-- (void) testKillAndRemoveAllControllers
-{
-    for(int i = 0; i < 100; i++)
-    {
-        [appDelegate addController: [[LogInViewController alloc] init]];
-    }
-    [appDelegate killControllers];
-    XCTAssertEqual([appDelegate getNumberOfControllers], 0);
-}
+//- (void)testAppDelegateShouldHandleOneController
+//{
+//    [appDelegate addController: [[LogInViewController alloc] init]];
+//    XCTAssertEqual([appDelegate getNumberOfControllers], 1);
+//}
+//
+//- (void) testAppDelegateShouldHandleTwoControllers
+//{
+//   [appDelegate addController: [[LogInViewController alloc] init]];
+//   [appDelegate addController: [[LogInViewController alloc] init]];
+//    XCTAssertEqual([appDelegate getNumberOfControllers], 2);
+//}
+//
+//- (void) testRemoveOneController {
+//    [appDelegate addController: [[LogInViewController alloc] init]];
+//    [appDelegate popController];
+//    XCTAssertEqual([appDelegate getNumberOfControllers], 0);
+//}
+//
+//- (void) testGetControllerReturnsSameObject {
+//    UIViewController *originalController = [[LogInViewController alloc] init];
+//    [appDelegate addController: originalController];
+//    UIViewController *retrievedController = [appDelegate getController: 0];
+//    XCTAssertEqual(retrievedController, originalController);
+//}
+//
+//- (void) testKillAndRemoveAllControllers
+//{
+//    for(int i = 0; i < 100; i++)
+//    {
+//        [appDelegate addController: [[LogInViewController alloc] init]];
+//    }
+//    [appDelegate killControllers];
+//    XCTAssertEqual([appDelegate getNumberOfControllers], 0);
+//}
 
 - (void) testMaxThreadsIsFive
 {

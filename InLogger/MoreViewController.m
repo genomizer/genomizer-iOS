@@ -19,8 +19,6 @@
 {
     [super viewDidLoad];
     //add self to appDelegate
-    AppDelegate *app = [UIApplication sharedApplication].delegate;
-    [app addController:self];
 }
 /**
  * Method that executes when the "logout"-button is pressed.
@@ -31,8 +29,6 @@
     AppDelegate *app = [UIApplication sharedApplication].delegate;
     app.userIsLoggingOut = YES;
     [ServerConnection logout];
-    [app killControllers];
-    [app restart];
 }
 
 @end
