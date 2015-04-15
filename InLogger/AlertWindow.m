@@ -21,42 +21,61 @@ typedef enum {
     void (^totalCompletion)();
 }
 
--(id)initWithFrame:(CGRect)frame title:(NSString *)title message:(NSString *)msg color:(UIColor *)color{
+-(id)initWithFrame:(CGRect)frame title:(NSString *)title message:(NSString *)msg color:(UIColor *)color image:(NSString *)imageName{
     
     if(self = [super initWithFrame:frame]){
         animating = false;
         currentState = kUp;
         
+        self.windowLevel = UIWindowLevelStatusBar+1;
+        self.hidden = false;
+        [self makeKeyAndVisible];
+        
+        UIImageView *imageView = ({
+            UIImageView *iv = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 44, 44)];
+            iv.image = [UIImage imageNamed:imageName];
+            iv;
+        });
+        
         UILabel *titleLabel = ({
-            UILabel *l = [[UILabel alloc] initWithFrame:CGRectMake(0, 5, frame.size.width, 20)];
+            UILabel *l = [[UILabel alloc] initWithFrame:CGRectMake(64, 5, frame.size.width - 52, 20)];
             l.text = title;
             l.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:15.f];
-            l.textAlignment = NSTextAlignmentCenter;
+            l.textAlignment = NSTextAlignmentLeft;
             l.textColor = [UIColor whiteColor];
+            l.layer.shadowColor = [UIColor blackColor].CGColor;
+            l.layer.shadowOffset = CGSizeMake(0, 1);
+            l.layer.shadowOpacity = 0.3;
+            l.layer.shadowRadius = 0.0;
             l;
         });
         
         UITextView *message = ({
-            UITextView *tv = [[UITextView alloc] initWithFrame:CGRectMake(40, 15, frame.size.width - 80, 44)];
+            UITextView *tv = [[UITextView alloc] initWithFrame:CGRectMake(60, 15, frame.size.width - 70, 52)];
             tv.text = msg;
             tv.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14.f];
             tv.textAlignment = titleLabel.textAlignment;
             tv.textColor = titleLabel.textColor;
             tv.backgroundColor = [UIColor clearColor];
+            tv.scrollEnabled = false;
             tv.editable = false;
+            tv.layer.shadowColor = [UIColor blackColor].CGColor;
+            tv.layer.shadowOffset = CGSizeMake(0, 1);
+            tv.layer.shadowOpacity = 0.3;
+            tv.layer.shadowRadius = 0.0;
             tv;
         });
         
-        self.windowLevel = UIWindowLevelStatusBar+1;
-        
-        self.hidden = false;
-        [self makeKeyAndVisible];
-        
-        view = [[UIView alloc] initWithFrame:self.bounds];
-        view.transform = CGAffineTransformMakeTranslation(0, -view.frame.size.height);
-        [view addSubview:titleLabel];
-        view.backgroundColor = color;
-        [view addSubview:message];
+        view = ({
+            UIView *v = [[UIView alloc] initWithFrame:self.bounds];
+            v.transform = CGAffineTransformMakeTranslation(0, -v.frame.size.height);
+            v.backgroundColor = color;
+
+            [v addSubview:titleLabel];
+            [v addSubview:imageView];
+            [v addSubview:message];
+            v;
+        });
         
         UITapGestureRecognizer *tapper = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedView:)];
         [view addGestureRecognizer:tapper];

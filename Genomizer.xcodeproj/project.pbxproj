@@ -31,6 +31,8 @@
 		76F638D8190FD99300F0F4BF /* Experiment.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F638D7190FD99300F0F4BF /* Experiment.m */; };
 		76F638DB190FDD9D00F0F4BF /* ExperimentFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F638DA190FDD9D00F0F4BF /* ExperimentFile.m */; };
 		D116AEE81ADE5FAE00E8E997 /* AlertWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = D116AEE71ADE5FAE00E8E997 /* AlertWindow.m */; };
+		D116AEED1ADE9EC000E8E997 /* Error.png in Resources */ = {isa = PBXBuildFile; fileRef = D116AEEB1ADE9EC000E8E997 /* Error.png */; };
+		D116AEEE1ADE9EC000E8E997 /* Error@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D116AEEC1ADE9EC000E8E997 /* Error@2x.png */; };
 		D1F6637C1ADD5F2E002DBE03 /* FileAboutView.m in Sources */ = {isa = PBXBuildFile; fileRef = D1F6637B1ADD5F2E002DBE03 /* FileAboutView.m */; };
 		DE032D72191BCDC4006AC257 /* SelectTaskTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE032D71191BCDC4006AC257 /* SelectTaskTableViewController.m */; };
 		DE25D7FC1910D6840084BDDC /* TitleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DE25D7FA1910D6840084BDDC /* TitleTableViewCell.m */; };
@@ -122,6 +124,8 @@
 		76F638DA190FDD9D00F0F4BF /* ExperimentFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExperimentFile.m; sourceTree = "<group>"; };
 		D116AEE61ADE5FAE00E8E997 /* AlertWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertWindow.h; sourceTree = "<group>"; };
 		D116AEE71ADE5FAE00E8E997 /* AlertWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertWindow.m; sourceTree = "<group>"; };
+		D116AEEB1ADE9EC000E8E997 /* Error.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Error.png; path = "../../../appar/genomizer-iOS/Icon/Error.png"; sourceTree = "<group>"; };
+		D116AEEC1ADE9EC000E8E997 /* Error@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Error@2x.png"; path = "../../../appar/genomizer-iOS/Icon/Error@2x.png"; sourceTree = "<group>"; };
 		D1F6637A1ADD5F2E002DBE03 /* FileAboutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FileAboutView.h; path = ../FileAboutView.h; sourceTree = "<group>"; };
 		D1F6637B1ADD5F2E002DBE03 /* FileAboutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FileAboutView.m; path = ../FileAboutView.m; sourceTree = "<group>"; };
 		DE032D70191BCDC4006AC257 /* SelectTaskTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectTaskTableViewController.h; sourceTree = "<group>"; };
@@ -431,6 +435,8 @@
 				DEEF6AF619094F8A00A2CD8C /* AppDelegate.h */,
 				DEEF6AF719094F8A00A2CD8C /* AppDelegate.m */,
 				DEEF6AF919094F8A00A2CD8C /* Images.xcassets */,
+				D116AEEB1ADE9EC000E8E997 /* Error.png */,
+				D116AEEC1ADE9EC000E8E997 /* Error@2x.png */,
 				DEEF6AEE19094F8A00A2CD8C /* Supporting Files */,
 			);
 			name = Genomizer;
@@ -556,7 +562,9 @@
 			files = (
 				DEEF6B1719094FA000A2CD8C /* Main.storyboard in Resources */,
 				DEEF6AF219094F8A00A2CD8C /* InfoPlist.strings in Resources */,
+				D116AEED1ADE9EC000E8E997 /* Error.png in Resources */,
 				DEEF6AFA19094F8A00A2CD8C /* Images.xcassets in Resources */,
+				D116AEEE1ADE9EC000E8E997 /* Error@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

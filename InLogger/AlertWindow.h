@@ -11,7 +11,7 @@
 @interface AlertWindow : UIWindow
 
 
--(id)initWithFrame:(CGRect)frame title:(NSString *)title message:(NSString *)msg color:(UIColor *)color;
+-(id)initWithFrame:(CGRect)frame title:(NSString *)title message:(NSString *)msg color:(UIColor *)color image:(NSString *)imageName;
 
 -(void)animateDownAndUp:(void(^)())completion;
 @end

@@ -23,7 +23,7 @@
 @implementation TabViewController
 @synthesize window;
 
-#define kErrorColor [UIColor colorWithRed:199/255.f green:53/255.f blue:53/255.f alpha:1.0]
+#define kErrorColor [UIColor colorWithRed:191/255.f green:53/255.f blue:53/255.f alpha:1.0]
 /**
  * Initial setup on view did load. Add self to appdelegate.
  *
@@ -90,10 +90,14 @@
 }
 -(void)showPopUpWithTitle:(NSString *)title andMessage:(NSString *)msg type:(NSString *)type{
     UIColor *color;
+    NSString *imageName;
+    
     if([type isEqualToString:@"error"]){
         color = kErrorColor;
+        imageName = @"Error";
     }
-    NSDictionary *dictMsg = @{@"title":title, @"message":msg, @"color":color};
+    
+    NSDictionary *dictMsg = @{@"title":title, @"message":msg, @"color":color, @"imageName":imageName};
     if(![messagesToShow containsObject:dictMsg]){
         [messagesToShow addObject:dictMsg];
         
@@ -114,11 +118,13 @@
     NSString *title = d[@"title"];
     NSString *msg = d[@"message"];
     UIColor *color = d[@"color"];
-
+    NSString *imageName = d[@"imageName"];
+    
     window = [[AlertWindow alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 64)
                                           title:title
                                         message:msg
-                                          color:color];
+                                          color:color
+                                          image:imageName];
 
     [window animateDownAndUp:^{
         [messagesToShow removeObjectAtIndex:0];

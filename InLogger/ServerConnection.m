@@ -335,7 +335,7 @@ NSString *token;
              }
          } else
          {
-             error = [self generateError:kConnectionErrorMsg withErrorDomain:@"Connection" withUnderlyingError:internalError];
+             error = [self generateError:kConnectionErrorMsg withErrorDomain:@"Connection Error" withUnderlyingError:internalError];
          }
          [controller reportAnnotationResult:annotations error:error];
      }];
@@ -399,7 +399,7 @@ NSString *token;
              }
          } else
          {
-             error = [self generateError:kConnectionErrorMsg withErrorDomain:@"Connection" withUnderlyingError:internalError];
+             error = [self generateError:kConnectionErrorMsg withErrorDomain:@"Connection Error" withUnderlyingError:internalError];
          }
 
          [controller reportProcessStatusResult:processStatusResults error:error];
