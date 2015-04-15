@@ -21,7 +21,7 @@
 //- (int) getNumberOfControllers;
 
 - (void) restart;
-
+-(void)resetUserToken;
 //- (void) addController: (UIViewController*) controller;
 //
 //- (void) popController;

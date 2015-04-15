@@ -16,7 +16,7 @@
 @implementation ServerConnection
 
 NSString *token;
-
+#define kConnectionErrorMsg @"Could not access server, either no internet connection or server error."
 /**
  * Static method that asynchronously sends a login request to the server,
  * which either succeeds or fails. When an answer is received, 
@@ -72,18 +72,21 @@ NSString *token;
          }
          else
          {
-             error = [self generateError:@"Connection error" withErrorDomain:@"Connection Error" withUnderlyingError:internalError];
+             error = [self generateError:kConnectionErrorMsg withErrorDomain:@"Connection Error" withUnderlyingError:internalError];
          }
          [controller reportLoginResult:error];
      }];
 }
 
-+ (void)logout
++ (void)logout:(void(^)())completion
 {
     NSMutableURLRequest *request = [JSONBuilder getLogoutJSON:token];
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     token = nil;
-    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler: nil];
+    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        NSLog(@"Logout response");
+        completion();
+    }];
 }
 
 /**
@@ -163,7 +166,7 @@ NSString *token;
              }
          }
          else{
-             error = [self generateError:@"Could not connect to server" withErrorDomain:@"Connection Error" withUnderlyingError:internalError];
+             error = [self generateError:kConnectionErrorMsg withErrorDomain:@"Connection Error" withUnderlyingError:internalError];
          }
          [controller reportSearchResult:array error:error];
      }];
@@ -217,7 +220,7 @@ NSString *token;
              }
          }
          else{
-             error = [self generateError:@"Could not connect to server" withErrorDomain:@"Connection Error" withUnderlyingError:internalError];
+             error = [self generateError:kConnectionErrorMsg withErrorDomain:@"Connection Error" withUnderlyingError:internalError];
          }
          
          [controller reportGenomeResult:genomeReleases withError:error];
@@ -261,7 +264,7 @@ NSString *token;
              }
          } else
          {
-             error = [self generateError:@"Could not connect to server" withErrorDomain:@"Connection Error" withUnderlyingError:internalError];
+             error = [self generateError:kConnectionErrorMsg withErrorDomain:@"Connection Error" withUnderlyingError:internalError];
          }
          [controller reportResult:error experiment:[dict objectForKey:@"expid"]];
      }];
@@ -332,7 +335,7 @@ NSString *token;
              }
          } else
          {
-             error = [self generateError:@"Could not connect to server" withErrorDomain:@"Connection" withUnderlyingError:internalError];
+             error = [self generateError:kConnectionErrorMsg withErrorDomain:@"Connection" withUnderlyingError:internalError];
          }
          [controller reportAnnotationResult:annotations error:error];
      }];
@@ -396,7 +399,7 @@ NSString *token;
              }
          } else
          {
-             error = [self generateError:@"Could not connect to server" withErrorDomain:@"Connection" withUnderlyingError:internalError];
+             error = [self generateError:kConnectionErrorMsg withErrorDomain:@"Connection" withUnderlyingError:internalError];
          }
 
          [controller reportProcessStatusResult:processStatusResults error:error];

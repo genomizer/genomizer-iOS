@@ -16,6 +16,7 @@
 #import "Annotation.h"
 #import "PubMedBuilder.h"
 #import "AppDelegate.h"
+#import "TabViewController.h"
 
 @interface SearchViewController ()
 
@@ -40,11 +41,11 @@
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self annotationsIsStarting];
+    
 }
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
+    [self annotationsIsStarting];
     [ServerConnection getAvailableAnnotations:self];
     _pickerView = [self createPickerView];
     _toolBar = [self createPickerViewToolBar:_pickerView];
@@ -74,7 +75,9 @@
         
     } else
     {
-        [PopupGenerator showErrorMessage:error];
+//        [PopupGenerator showErrorMessage:error];
+        NSString * errorMsg = [error.userInfo objectForKey:NSLocalizedDescriptionKey];
+        [(TabViewController *)self.tabBarController showPopUpWithTitle:error.domain andMessage:errorMsg type:@"error"];
         [self annotationsIsFinishedWithResult: nil];
         
     }

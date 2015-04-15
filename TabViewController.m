@@ -9,15 +9,21 @@
 
 #import "SegueController.h"
 #import "TabViewController.h"
+#import "AppDelegate.h"
 
-@interface TabViewController ()
+
+@interface TabViewController (){
+    NSMutableArray *messagesToShow;
+}
 
 @property NSUInteger prevSelectedIndex;
 
 @end
 
 @implementation TabViewController
+@synthesize window;
 
+#define kErrorColor [UIColor colorWithRed:199/255.f green:53/255.f blue:53/255.f alpha:1.0]
 /**
  * Initial setup on view did load. Add self to appdelegate.
  *
@@ -25,6 +31,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    messagesToShow = [[NSMutableArray alloc] init];
     self.delegate = self;
     self.navigationItem.hidesBackButton = YES;
     _prevSelectedIndex = 0;
@@ -57,7 +64,7 @@
 }
 
 -(void)showInfoAboutFile:(ExperimentFile *)file{
-    NSString *infoText = @"Hejsan allihopa";//[file getAllInfo];
+    NSString *infoText = [file getAllInfo];
     UIView *dimView = ({
         UIView *v = [[UIView alloc] initWithFrame:self.view.frame];
         v.backgroundColor = [UIColor blackColor];
@@ -75,6 +82,47 @@
     
     [self.view addSubview:dimView];
     [self.view addSubview:fav];
+}
+
+-(void)showPopUpWithTitle:(NSString *)title andMessage:(NSString *)msg type:(NSString *)type{
+    UIColor *color;
+    if([type isEqualToString:@"error"]){
+        color = kErrorColor;
+    }
+    NSDictionary *dictMsg = @{@"title":title, @"message":msg, @"color":color};
+    [messagesToShow addObject:dictMsg];
+    
+    if(messagesToShow.firstObject == dictMsg){
+        [self showNextMessage];
+    }
+}
+
+-(void)showNextMessage{
+    if(messagesToShow.count == 0){
+        return;
+    }
+    
+    NSDictionary *d = messagesToShow.firstObject;
+    
+    
+    NSString *title = d[@"title"];
+    NSString *msg = d[@"message"];
+    UIColor *color = d[@"color"];
+
+    window = [[AlertWindow alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 64)
+                                          title:title
+                                        message:msg
+                                          color:color];
+
+    [window animateDownAndUp:^{
+        [messagesToShow removeObjectAtIndex:0];
+        [self showNextMessage];
+    }];
+
+}
+
+-(void)hidePopUp:(UIView *)v{
+    
 }
 
 -(void)fileAboutViewDidClose:(FileAboutView *)fav{

@@ -15,7 +15,7 @@
 #import "PopupGenerator.h"
 #import "ProcessStatusDescriptor.h"
 #import "AppDelegate.h"
-
+#import "TabViewController.h"
 @interface ProcessViewController ()
 @property UIRefreshControl *refreshControl;
 @end
@@ -176,8 +176,11 @@ static NSMutableArray * processingExperimentFiles;
     } else
     {
         dispatch_async(dispatch_get_main_queue(), ^{
+            
+            NSString * errorMsg = [error.userInfo objectForKey:NSLocalizedDescriptionKey];
+            [(TabViewController *)self.tabBarController showPopUpWithTitle:error.domain andMessage:errorMsg type:@"error"];
+            
             [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-            [PopupGenerator showErrorMessage:error];
             AppDelegate *app = [UIApplication sharedApplication].delegate;
             [app threadFinished];
         });

@@ -41,10 +41,12 @@
 
 - (void) restart {
 
-    UIStoryboard *storyboard =
-        [UIStoryboard storyboardWithName:[[NSBundle mainBundle].infoDictionary objectForKey:@"UIMainStoryboardFile"] bundle:[NSBundle mainBundle]];
-    LogInViewController *viewController = (LogInViewController *)[storyboard instantiateViewControllerWithIdentifier:@"loginView"];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    LogInViewController *viewController = (LogInViewController *)[storyboard instantiateViewControllerWithIdentifier:@"login"];
     [self.window setRootViewController:viewController];
+}
+-(void)resetUserToken{
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"usertoken"];
 }
 
 //- (int) getNumberOfControllers {

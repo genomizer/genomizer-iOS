@@ -15,9 +15,6 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 @property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-//@property (weak, nonatomic) IBOutlet UIView *infoAboutFile;
-//@property (weak, nonatomic) IBOutlet UITextView *infoFileTextField;
-//@property (weak, nonatomic) IBOutlet UIView *dimView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *trashButton;
 @property (weak, nonatomic) IBOutlet UIButton *selectTaskToPerformButton;
 

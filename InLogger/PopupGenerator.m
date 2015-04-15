@@ -12,7 +12,6 @@
 @implementation PopupGenerator
 
 static UIView * ACTIVITY_CONTAINER;
-
 /**
  * Appends a dot to the given message if it doesn't contain a punctation
  * mark.
@@ -67,6 +66,8 @@ static UIView * ACTIVITY_CONTAINER;
                           delegate:delegate cancelButtonTitle:cancelTitle
                           otherButtonTitles:nil];
     [popup show];
+    
+
 }
 
 /**

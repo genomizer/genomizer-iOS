@@ -18,7 +18,7 @@
 @interface ServerConnection : NSObject
 
 + (void)login:(NSString *)username withPassword:(NSString *)password error:(NSError**) error withContext: (UIViewController*) controller;
-+ (void)logout;
++ (void)logout:(void(^)())completion;
 
 + (void)search:(NSString *) annotations withContext: (SearchViewController*) controller;
 
@@ -28,4 +28,6 @@
 + (void) getAvailableAnnotations:(SearchViewController*) controller;
 + (void) getProcessStatus:(ProcessViewController*) controller;
 + (void)genomeRelease: (RawConvertViewController*) controller;
+
+
 @end

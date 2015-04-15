@@ -28,7 +28,11 @@
 - (IBAction)logoutButtonTouched:(id)sender {
     AppDelegate *app = [UIApplication sharedApplication].delegate;
     app.userIsLoggingOut = YES;
-    [ServerConnection logout];
+    [app restart];
+    [app resetUserToken];
+    [ServerConnection logout:^{
+        
+    }];
 }
 
 @end
