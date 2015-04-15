@@ -52,7 +52,7 @@
 {
     NSString *description = [_describer getDescriptionOf:_experiment];
     NSString *correctDescription = @"Name: Experiment name\nCreated by: Yuri Yuri";
-    
+   
     XCTAssertEqualObjects(description, correctDescription);
 }
 
