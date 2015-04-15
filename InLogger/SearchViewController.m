@@ -35,8 +35,6 @@
 {
     [super viewDidLoad];
     _spinner.hidesWhenStopped = YES;
-
-    NSLog(@"SearchViewController didLoad");
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -68,16 +66,12 @@
  */
 - (void) reportAnnotationResult: (NSArray*) result error: (NSError*) error {
     dispatch_async(dispatch_get_main_queue(), ^{
-    if(error == nil)
-    {
-        
+    if(error == nil) {
         [self annotationsIsFinishedWithResult: result];
         
-    } else
-    {
+    } else {
 //        [PopupGenerator showErrorMessage:error];
-        NSString * errorMsg = [error.userInfo objectForKey:NSLocalizedDescriptionKey];
-        [(TabViewController *)self.tabBarController showPopUpWithTitle:error.domain andMessage:errorMsg type:@"error"];
+        [(TabViewController *)self.tabBarController showPopUpWithError:error];
         [self annotationsIsFinishedWithResult: nil];
         
     }
@@ -150,8 +144,8 @@
     NSArray *selectedAnnotations = [self getSelectedAnnotations];
     [ServerConnection search:[PubMedBuilder createAnnotationsSearch: selectedAnnotations] withContext:self];
 }
-- (void) annotationsIsFinishedWithResult: (NSArray *) result
-{
+
+- (void) annotationsIsFinishedWithResult: (NSArray *) result{
     if(_annotations == nil || (result != nil && ![_annotations isEqualToArray:result])) {
         _annotations = result;
         [_tableView reloadData];
@@ -215,7 +209,8 @@
         {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self searchIsFinished];
-                [PopupGenerator showErrorMessage:error];
+//                [PopupGenerator showErrorMessage:error];
+                [(TabViewController *)self.tabBarController showPopUpWithError:error];
             });
         } else
         {

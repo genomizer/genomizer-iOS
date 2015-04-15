@@ -152,6 +152,7 @@
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 50, 0);
     
     //add self to appDelegate
+//Pål did this
 //    AppDelegate *app = [UIApplication sharedApplication].delegate;
 //    [app addController:self];
 }

@@ -69,6 +69,7 @@ static NSMutableArray * processingExperimentFiles;
     [super viewDidLoad];
     [self initialize];
     //add self to appDelegate
+//Pål did this
 //    AppDelegate *app = [UIApplication sharedApplication].delegate;
 //    [app addController:self];
     UIView *refreshView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];

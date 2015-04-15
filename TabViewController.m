@@ -84,16 +84,22 @@
     [self.view addSubview:fav];
 }
 
+-(void)showPopUpWithError:(NSError *)error{
+    NSString * errorMsg = [error.userInfo objectForKey:NSLocalizedDescriptionKey];
+    [self showPopUpWithTitle:error.domain andMessage:errorMsg type:@"error"];
+}
 -(void)showPopUpWithTitle:(NSString *)title andMessage:(NSString *)msg type:(NSString *)type{
     UIColor *color;
     if([type isEqualToString:@"error"]){
         color = kErrorColor;
     }
     NSDictionary *dictMsg = @{@"title":title, @"message":msg, @"color":color};
-    [messagesToShow addObject:dictMsg];
-    
-    if(messagesToShow.firstObject == dictMsg){
-        [self showNextMessage];
+    if(![messagesToShow containsObject:dictMsg]){
+        [messagesToShow addObject:dictMsg];
+        
+        if(messagesToShow.firstObject == dictMsg){
+            [self showNextMessage];
+        }
     }
 }
 

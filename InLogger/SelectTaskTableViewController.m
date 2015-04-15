@@ -36,13 +36,13 @@
 {
     switch(fileType) {
         case RAW :
-            return [[NSArray alloc] initWithObjects:@"Convert to profile", nil];
+            return @[@"Convert to profile"];
         case PROFILE:
-            return [[NSArray alloc] initWithObjects:@"Convert to region", @"Change genome release", nil];
+            return @[@"Convert to region", @"Change genome release"];
         case REGION:
-            return [[NSArray alloc] initWithObjects:@"Change genome release", nil];
+            return @[@"Change genome release"];
         case OTHER:
-            return [[NSArray alloc] initWithObjects: nil];
+            return @[];
 
     }
 }
@@ -58,7 +58,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Returns number of rows in tableView.
-    return [_tasks count];
+    return _tasks.count;
 }
 
 /**

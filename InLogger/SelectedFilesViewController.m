@@ -198,7 +198,23 @@ static FileContainer * FILES = nil;
 - (IBAction)infoFile:(UIButton*)sender {
     ExperimentFile *file = _filesToDisplay[sender.tag];
     [(TabViewController *)self.tabBarController showInfoAboutFile:file];
-    
+
+}
+
+//Pål did this
+//-(void)fileAboutViewDidClose:(FileAboutView *)fav{
+//    _trashButton.enabled = true;
+//}
+/**
+ * Executes when "close"-button in the "infoFile"-popup is pressed.
+ */
+//- (IBAction)closeInfoFile:(id)sender {
+//    _infoAboutFile.hidden = YES;
+//    _dimView.hidden = YES;
+//    _trashButton.enabled =YES;
+//}
+
+//Pål did this
 //    NSString *infoText = @"Hejsan allihopa";//[[_filesToDisplay objectAtIndex:sender.tag] getAllInfo];
 //    UIView *dimView = ({
 //        UIView *v = [[UIView alloc] initWithFrame:self.view.frame];
@@ -214,36 +230,23 @@ static FileContainer * FILES = nil;
 //        fav.dimView = dimView;
 //        fav;
 //    });
-//    
+//
 //    [self.tabBarController.view addSubview:dimView];
 //    [self.tabBarController.view addSubview:fav];
-//    
+//
 //    _dimView.hidden = NO;
 //    _infoAboutFile.hidden = NO;
 //    _infoAboutFile.layer.cornerRadius = 5;
 //    _infoAboutFile.layer.masksToBounds = YES;
 //    _tableView.editing = NO;
 //    [self.tableView endEditing:YES];
-//    
+//
 //    _trashButton.enabled = NO;
 //    _infoAboutFile.layer.borderWidth = 0.4;
 //    _infoAboutFile.layer.borderColor = [UIColor lightGrayColor].CGColor;
 //    _infoFileTextField.text = [[_filesToDisplay objectAtIndex:sender.tag] getAllInfo];
 //    [[_infoFileTextField layer] setBorderColor : [[UIColor lightGrayColor] CGColor]];
 //    [[_infoFileTextField layer] setBorderWidth:0.4];
-}
-
-//-(void)fileAboutViewDidClose:(FileAboutView *)fav{
-//    _trashButton.enabled = true;
-//}
-/**
- * Executes when "close"-button in the "infoFile"-popup is pressed.
- */
-//- (IBAction)closeInfoFile:(id)sender {
-//    _infoAboutFile.hidden = YES;
-//    _dimView.hidden = YES;
-//    _trashButton.enabled =YES;
-//}
 /*
  * Used to go back to this view from selectTaskTableViewController.
  */

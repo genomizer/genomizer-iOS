@@ -17,4 +17,5 @@
 @property (strong, nonatomic) AlertWindow *window;
 -(void)showInfoAboutFile:(ExperimentFile *)file;
 -(void)showPopUpWithTitle:(NSString *)title andMessage:(NSString *)msg type:(NSString *)type;
+-(void)showPopUpWithError:(NSError *)error;
 @end

@@ -21,6 +21,7 @@
 +(Experiment*) expParser:(NSDictionary*) experimentData{
     
     Experiment *exp = [[Experiment alloc] init];
+    
     exp.name = [experimentData objectForKey:@"name"];
     if(experimentData[@"created by"] != nil){
         exp.createdByUser = experimentData[@"created by"];

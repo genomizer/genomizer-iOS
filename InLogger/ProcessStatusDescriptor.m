@@ -49,7 +49,6 @@ NSArray *expectedInformation;
         self = [self init];
         self.experimentName = [status objectForKey:@"experimentName"];
        
-    
         self.status = [status objectForKey:@"status"];
         self.author = [status objectForKey:@"author"];
       

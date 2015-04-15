@@ -31,6 +31,7 @@
     _tableCellWidth = cell.textFieldSize.width;
     
     //add self to appDelegate
+    //Pål jävlas
 //    AppDelegate *app = [UIApplication sharedApplication].delegate;
 //    [app addController:self];
 }
@@ -98,6 +99,7 @@
  * row 'row'. It also shows a file list view for the selected experiment.
  *
  */
+#warning lol 2.0?
 -(void) didSelectRow: (NSInteger) row
 {
     _selectedExperiment = [_searchResults objectAtIndex: row];
