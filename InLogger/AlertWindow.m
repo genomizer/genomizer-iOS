@@ -38,31 +38,24 @@ typedef enum {
         });
         
         UILabel *titleLabel = ({
-            UILabel *l = [[UILabel alloc] initWithFrame:CGRectMake(64, 5, frame.size.width - 52, 20)];
+            UILabel *l = [[UILabel alloc] initWithFrame:CGRectMake(64, 6, frame.size.width - 52, 20)];
             l.text = title;
-            l.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:15.f];
+            l.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:14.f];
             l.textAlignment = NSTextAlignmentLeft;
             l.textColor = [UIColor whiteColor];
-            l.layer.shadowColor = [UIColor blackColor].CGColor;
-            l.layer.shadowOffset = CGSizeMake(0, 1);
-            l.layer.shadowOpacity = 0.3;
-            l.layer.shadowRadius = 0.0;
             l;
         });
         
-        UITextView *message = ({
-            UITextView *tv = [[UITextView alloc] initWithFrame:CGRectMake(60, 15, frame.size.width - 70, 52)];
+        UITextView *messageView = ({
+            UITextView *tv = [[UITextView alloc] initWithFrame:CGRectMake(60, 16, frame.size.width - 70, 52)];
             tv.text = msg;
-            tv.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14.f];
+            tv.font = [UIFont fontWithName:@"HelveticaNeue" size:13.f];
             tv.textAlignment = titleLabel.textAlignment;
             tv.textColor = titleLabel.textColor;
+            tv.alpha = 0.8;
             tv.backgroundColor = [UIColor clearColor];
             tv.scrollEnabled = false;
             tv.editable = false;
-            tv.layer.shadowColor = [UIColor blackColor].CGColor;
-            tv.layer.shadowOffset = CGSizeMake(0, 1);
-            tv.layer.shadowOpacity = 0.3;
-            tv.layer.shadowRadius = 0.0;
             tv;
         });
         
@@ -73,7 +66,7 @@ typedef enum {
 
             [v addSubview:titleLabel];
             [v addSubview:imageView];
-            [v addSubview:message];
+            [v addSubview:messageView];
             v;
         });
         

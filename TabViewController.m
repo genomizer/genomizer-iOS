@@ -23,7 +23,7 @@
 @implementation TabViewController
 @synthesize window;
 
-#define kErrorColor [UIColor colorWithRed:191/255.f green:53/255.f blue:53/255.f alpha:1.0]
+#define kErrorColor [UIColor colorWithRed:212/255.f green:41/255.f blue:41/255.f alpha:1.0]
 /**
  * Initial setup on view did load. Add self to appdelegate.
  *
