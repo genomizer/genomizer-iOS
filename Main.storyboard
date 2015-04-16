@@ -824,7 +824,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Zz-S8-qvu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5075" y="499"/>
+            <point key="canvasLocation" x="4379" y="511"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="LYj-y1-V27">
@@ -904,35 +904,30 @@
                                     <action selector="logoutButtonTouched:" destination="p2d-tC-kAj" eventType="touchUpInside" id="cCZ-Bb-X8W"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo1" translatesAutoresizingMaskIntoConstraints="NO" id="zk8-In-Xqi">
-                                <rect key="frame" x="0.0" y="64" width="321" height="198"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="198" id="3Ca-4X-0Kd"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The development team behind this wonderful application!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GAJ-Ks-sWX">
-                                <rect key="frame" x="31" y="281" width="259" height="52"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="259" id="peU-AR-uEZ"/>
-                                    <constraint firstAttribute="height" constant="52" id="uFY-r0-8bJ"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="servername" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i5c-Ri-TSh">
+                                <rect key="frame" x="12" y="140" width="296" height="43"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Username" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2pd-Ev-C8e">
+                                <rect key="frame" x="14" y="96" width="292" height="37"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="0BI-rU-IZB" firstAttribute="centerX" secondItem="zk8-In-Xqi" secondAttribute="centerX" id="Fr5-xb-lsE"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="GAJ-Ks-sWX" secondAttribute="trailing" constant="14" id="G5v-2t-uaF"/>
                             <constraint firstItem="0BI-rU-IZB" firstAttribute="centerX" secondItem="8R4-FB-D6k" secondAttribute="centerX" id="Jni-6S-vD7"/>
-                            <constraint firstItem="GAJ-Ks-sWX" firstAttribute="top" secondItem="zk8-In-Xqi" secondAttribute="bottom" constant="19" id="OhE-pk-vDM"/>
-                            <constraint firstItem="zk8-In-Xqi" firstAttribute="leading" secondItem="8R4-FB-D6k" secondAttribute="leading" id="ULN-vZ-Azb"/>
-                            <constraint firstItem="zk8-In-Xqi" firstAttribute="top" secondItem="9Yp-85-UEo" secondAttribute="bottom" id="dKn-z3-QfE"/>
                             <constraint firstItem="ZPy-QJ-wXB" firstAttribute="top" secondItem="0BI-rU-IZB" secondAttribute="bottom" constant="26" id="j8E-HQ-s5X"/>
-                            <constraint firstItem="GAJ-Ks-sWX" firstAttribute="leading" secondItem="8R4-FB-D6k" secondAttribute="leadingMargin" constant="15" id="xjY-iE-Hb2"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="mLW-PV-yvc"/>
+                    <connections>
+                        <outlet property="serverLabel" destination="i5c-Ri-TSh" id="fbu-bs-Pxg"/>
+                        <outlet property="userLabel" destination="2pd-Ev-C8e" id="TRX-QQ-aqk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nhz-aV-3zZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1577,7 +1572,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jHM-7C-lqd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4841" y="-898"/>
+            <point key="canvasLocation" x="4797" y="-225"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="yzg-op-63V">
@@ -1623,7 +1618,6 @@
         <image name="Unstar.png" width="26" height="24"/>
         <image name="grey_line" width="64" height="6"/>
         <image name="grey_line_no_white" width="64" height="2"/>
-        <image name="photo1" width="3264" height="2448"/>
         <image name="processIcon" width="56" height="56"/>
         <image name="selectedFiles" width="64" height="64"/>
         <image name="taco" width="392" height="372"/>

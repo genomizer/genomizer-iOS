@@ -120,6 +120,8 @@
     
     if(error == nil)
     {
+        
+        [[NSUserDefaults standardUserDefaults] setObject:_userField.text forKey:@"username"];
         [[NSUserDefaults standardUserDefaults] setObject:token forKey:@"usertoken"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         

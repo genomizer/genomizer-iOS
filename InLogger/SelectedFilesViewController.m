@@ -59,6 +59,12 @@ static FileContainer * FILES = nil;
     [FILES removeExperimentFile: file];
     [SelectedFilesViewController updateSavedFilesStorage];
 }
+
++(void)removeAllExperimentFiles{
+    [FILES removeAllFiles];
+    [SelectedFilesViewController updateSavedFilesStorage];
+}
+
 +(void)updateSavedFilesStorage{
     NSData *encodedObject = [NSKeyedArchiver archivedDataWithRootObject:FILES];
     [[NSUserDefaults standardUserDefaults] setObject:encodedObject forKey:@"savedFiles"];
@@ -82,9 +88,8 @@ static FileContainer * FILES = nil;
  * @return if switch changed to OFF - removes corresponding file from
  *                                    the array selectedFiles.
  */
-
 - (IBAction)fileSwitchValueChanged:(UISwitch *)sender{
-    UITableViewCell *cell = [self cellForButton:sender];
+    UITableViewCell *cell = [self cellForButton:(UIButton *)sender];
 
     
     NSIndexPath *indexPath = [_tableView indexPathForCell:cell];

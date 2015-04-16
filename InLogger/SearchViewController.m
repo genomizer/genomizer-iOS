@@ -255,6 +255,7 @@
     [self searchIsStarting];
     
     //send search
+    
     [ServerConnection search:_pubmedTextView.text withContext:self];
     _advancedView.hidden = YES;
     _tableView.userInteractionEnabled = YES;
