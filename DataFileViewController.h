@@ -15,6 +15,7 @@
 @property FileContainer *selectedFiles;
 
 - (IBAction) unwindToList:(UIStoryboardSegue *)segue;
+-(IBAction)starButtonTapped:(UIButton *)sender;
 - (void) showInfoAbout: (ExperimentFile *) file;
 
 @end

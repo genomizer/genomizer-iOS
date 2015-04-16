@@ -9,7 +9,7 @@
 
 @implementation DataFileTableViewCell
 
-@synthesize starView, switchButton, infoButton,textField;
+@synthesize starButton, switchButton, infoButton,textField;
 
 - (IBAction)switchValueChanged:(UISwitch *)sender
 {
@@ -26,4 +26,8 @@
     [_controller showInfoAbout:_file];
 }
 
+
+-(IBAction)starButtonTapped:(UIButton *)sender{
+    
+}
 @end

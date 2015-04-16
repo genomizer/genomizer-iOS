@@ -99,7 +99,11 @@
     cell.switchButton.on = [_selectedFiles containsFile:file];
     cell.file = file;
     cell.controller = self;
-    cell.starView.backgroundColor = [SelectedFilesViewController containsExperimentFile:file] ? [UIColor blackColor] : [UIColor blueColor];
+    BOOL alreadyStared =[SelectedFilesViewController containsExperimentFile:file];
+    NSString *buttonImageName = alreadyStared ? @"Star" : @"Unstar";
+    [cell.starButton setImage:[UIImage imageNamed:buttonImageName] forState:UIControlStateNormal];
+    cell.starButton.tag = alreadyStared;
+    
     return cell;
 }
 
@@ -129,6 +133,25 @@
     [_tableView reloadData];
 }
 
+
+-(IBAction)starButtonTapped:(UIButton *)sender{
+    BOOL alreadyStared = sender.tag;
+    UITableViewCell *cell = (UITableViewCell *)sender.superview;
+    while(![cell isKindOfClass:[UITableViewCell class]]){
+        cell = (UITableViewCell *)cell.superview;
+    }
+    
+    NSIndexPath *indexPath = [_tableView indexPathForCell:cell];
+    ExperimentFile *file = [[_experiment.files getFiles: indexPath.section] objectAtIndex:indexPath.row];
+    if(alreadyStared){
+        //Unstar
+        [SelectedFilesViewController removeExperimentFile:file];
+    } else {
+        //Star
+        [SelectedFilesViewController addExperimentFile:file];
+    }
+    [_tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+}
 /**
  * Method that is called when the 'Convert Files' button is pressed.
  * If one or more files are selected, the 'Select Task' view will be shown for those files.
