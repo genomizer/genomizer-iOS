@@ -10,8 +10,10 @@
 
 @implementation JSONBuilder
 
-//Don't change!!
-static NSString *SERVER_URL = nil;
+
+static NSString *SERVER_URL = nil;//Don't change!!
+
+
 
 /**
  * Static method that generates a Login URLRequest with a JSON object containing login credentials.
@@ -159,6 +161,9 @@ static NSString *SERVER_URL = nil;
 {
     if(SERVER_URL == nil){
         SERVER_URL = [[NSUserDefaults standardUserDefaults] objectForKey:@"serverURL"];
+        if(SERVER_URL == nil){
+            [JSONBuilder setServerURLToString:MOCK_URL];
+        }
     }
     return SERVER_URL;
 }
