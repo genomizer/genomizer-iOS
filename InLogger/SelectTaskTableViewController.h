@@ -15,6 +15,7 @@
 @property NSMutableArray* experimentFiles;
 @property FileType fileType;
 
+@property (readwrite, copy) void (^completionBlock)(NSError *error, NSString *message);
 - (NSArray *) tasksOfFileType: (FileType) fileType;
 
 @end

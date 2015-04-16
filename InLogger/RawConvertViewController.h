@@ -17,6 +17,7 @@
 @property NSInteger * type;
 @property BOOL ratio;
 @property (nonatomic, copy) ProcessViewController *aReference;
+@property (readwrite, copy) void (^completionBlock)(NSError *error, NSString *message);
 
 - (void) reportResult: (NSError*) error experiment: (NSString*) expid;
 - (void) reportGenomeResult:(NSMutableArray*) genomeReleases withError:(NSError*) error;

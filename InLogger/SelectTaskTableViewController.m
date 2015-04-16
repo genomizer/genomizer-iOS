@@ -18,6 +18,7 @@
 @end
 
 @implementation SelectTaskTableViewController
+@synthesize completionBlock;
 
 - (void)viewDidLoad
 {
@@ -88,7 +89,7 @@
         RawConvertViewController *nextVC = (RawConvertViewController *)[segue destinationViewController];
         nextVC.experimentFiles = _experimentFiles;
         nextVC.ratio = true;
- 
+        nextVC.completionBlock = self.completionBlock;
     }
 }
 

@@ -336,6 +336,10 @@ static FileContainer * FILES = nil;
         SelectTaskTableViewController *nextVC = (SelectTaskTableViewController *)(navController.viewControllers[0]);
         nextVC.experimentFiles = [FILES getFiles:[self getSelectedFileType]];
         nextVC.fileType = _segmentedControl.selectedSegmentIndex;
+        nextVC.completionBlock = ^(NSError *error, NSString *message){
+            NSLog(@"task finished: %@ %@", message, error.userInfo);
+            [(TabViewController *)self.tabBarController showPopDownWithTitle:@"Convert sent" andMessage:@"Convert request was successfully sent to server" type:@"success"];
+        };
     }
 }
 

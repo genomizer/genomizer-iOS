@@ -15,6 +15,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "ProcessViewController.h"
 #import "Reachability.h"
+#import "TabViewController.h"
 
 @interface RawConvertViewController ()
 
@@ -64,7 +65,7 @@
 }
 
 @synthesize tableView;
-
+@synthesize completionBlock;
 - (void)viewDidLoad
 {
     
@@ -540,18 +541,21 @@
         {
             NSString *requestString = @"request";
             if(successfulConvertRequests > 0){
-                if (successfulConvertRequests > 1)
-                {
+                if (successfulConvertRequests > 1){
                     requestString = [requestString stringByAppendingString:@"s"];
                 }
-                NSString *message = [NSString stringWithFormat:@"%d convert %@ successfully sent to the server.", successfulConvertRequests, requestString];
-                [PopupGenerator showPopupWithMessage:message withTitle:@"" withCancelButtonTitle:@"OK" withDelegate:self];
+          
                 
+                NSString *message = [NSString stringWithFormat:@"%d convert %@ successfully sent to the server.", successfulConvertRequests, requestString];
+//                [PopupGenerator showPopupWithMessage:message withTitle:@"" withCancelButtonTitle:@"OK" withDelegate:self];
+                [self dismissViewControllerAnimated:true completion:nil];
+                self.completionBlock(error, message);
             }
             _convertButton.enabled = YES;
             self.navigationItem.leftBarButtonItem.enabled = YES;
             [_activityIndicator stopAnimating];
             _convertButton.hidden = NO;
+            
         }
     });
 }
