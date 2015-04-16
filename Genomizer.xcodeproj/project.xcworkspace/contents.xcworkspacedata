@@ -2,6 +2,18 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:">
+      location = "group:../Icon/Error.png">
+   </FileRef>
+   <FileRef
+      location = "group:../Icon/Error@2x.png">
+   </FileRef>
+   <FileRef
+      location = "group:../Icon/Success.png">
+   </FileRef>
+   <FileRef
+      location = "group:../Icon/Success@2x.png">
+   </FileRef>
+   <FileRef
+      location = "self:Genomizer.xcodeproj">
    </FileRef>
 </Workspace>

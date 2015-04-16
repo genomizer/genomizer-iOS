@@ -416,8 +416,8 @@ NSString *token;
             error = [NSError errorWithDomain:@"Empty response" code:0 userInfo:dict];
             break;
         case 400:
-            [dict setObject:@"Bad request, fill in more information" forKey:NSLocalizedDescriptionKey];
-            error = [NSError errorWithDomain:@"Bad request" code:0 userInfo:dict];
+            [dict setObject:@"Nothing got selected in the search. Please tap on the switches on the field's you wish to search. for." forKey:NSLocalizedDescriptionKey];
+            error = [NSError errorWithDomain:@"Nothing sent" code:0 userInfo:dict];
             break;
         case 401:
             [dict setObject:errorMessage forKey:NSLocalizedDescriptionKey];

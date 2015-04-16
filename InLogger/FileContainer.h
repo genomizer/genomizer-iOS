@@ -16,6 +16,7 @@ categories based on the file type.
 
 - (void) addExperimentFile: (ExperimentFile *) file;
 - (void) removeExperimentFile: (ExperimentFile *) file;
+-(void)removeAllFiles;
 - (NSInteger) numberOfFiles;
 - (NSInteger) numberOfFilesWithType: (FileType) fileType;
 - (BOOL) containsFile: (ExperimentFile *) file;

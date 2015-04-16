@@ -105,7 +105,9 @@
     if (![object isKindOfClass:[ExperimentFile class]]) {
         return NO;
     }
-    return [_name isEqualToString: ((ExperimentFile *)object).idFile];
+    ExperimentFile *otherFile = (ExperimentFile *)object;
+    return [self.idFile isEqual:otherFile.idFile] &&
+            [self.name isEqualToString:otherFile.name];
 }
 
 /**
@@ -151,7 +153,6 @@
     }
     return self;
 }
-
 
 @end
 
