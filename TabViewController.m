@@ -116,6 +116,9 @@
 
 -(void)showNextMessage{
     if(messagesToShow.count == 0){
+
+        window = nil;
+
         return;
     }
     

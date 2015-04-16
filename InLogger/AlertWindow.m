@@ -41,8 +41,10 @@ typedef enum {
         self.windowLevel = UIWindowLevelStatusBar+1;
         self.hidden = false;
         [self makeKeyAndVisible];
+        
         UIImage *image = [AlertWindow imageForType:type];
         UIImageView *imageView;
+        
         if(image != nil){
             imageView = ({
                 UIImageView *iv = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 44, 44)];
@@ -157,11 +159,12 @@ typedef enum {
 }
 
 -(void)doneAnimating{
+
     AppDelegate *app = [UIApplication sharedApplication].delegate;
     [app.window makeKeyWindow];
-    
     [view removeFromSuperview];
     [self removeFromSuperview];
+    self.hidden = true;
     totalCompletion();
 }
 @end
