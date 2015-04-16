@@ -280,8 +280,8 @@
 			children = (
 				DE25D8041910E1500084BDDC /* ExperimentDescriber.h */,
 				DE25D8051910E1500084BDDC /* ExperimentDescriber.m */,
-				DE25D7FA1910D6840084BDDC /* TitleTableViewCell.m */,
 				DE25D7F91910D6840084BDDC /* TitleTableViewCell.h */,
+				DE25D7FA1910D6840084BDDC /* TitleTableViewCell.m */,
 				21BFD1D9191B6A2A00F8E02F /* PopupGenerator.h */,
 				21BFD1DA191B6A2A00F8E02F /* PopupGenerator.m */,
 				DED0346F1923AD1B00E9EAF1 /* PubMedBuilder.h */,

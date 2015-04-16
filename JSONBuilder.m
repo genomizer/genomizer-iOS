@@ -156,6 +156,9 @@ static NSString *SERVER_URL = nil;
  */
 + (NSString*) getServerURL
 {
+    if(SERVER_URL == nil){
+        SERVER_URL = [[NSUserDefaults standardUserDefaults] objectForKey:@"serverURL"];
+    }
     return SERVER_URL;
 }
 
@@ -171,6 +174,8 @@ static NSString *SERVER_URL = nil;
     if ([urlString characterAtIndex: urlString.length - 1] != '/') {
         [urlString appendString:@"/"];
     }
+    [[NSUserDefaults standardUserDefaults] setObject:urlString forKey:@"serverURL"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     SERVER_URL = urlString;
 }
 

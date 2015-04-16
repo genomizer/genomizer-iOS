@@ -25,6 +25,10 @@ NSString *token;
  *@param controller - LogInViewController, which the method will report the result to
  *@return nothing
  */
+
++(void)setToken:(NSString *)t{
+    token = t;
+}
 + (void)login:(NSString *)username withPassword:(NSString *)password error:(NSError**) error withContext: (LogInViewController*) controller
 {
     NSMutableURLRequest *request = [JSONBuilder getLoginJSON:username withPassword:password];
@@ -50,6 +54,7 @@ NSString *token;
                 
                  if([json objectForKey:@"token"] != nil){
                      token = [json objectForKey:@"token"];
+                
                  } else{
                      error = [self generateError:@"Server sent incorrectly formatted data" withErrorDomain:@"Server Error" withUnderlyingError:nil];
                  }
@@ -70,7 +75,7 @@ NSString *token;
          else {
              error = [self generateError:kConnectionErrorMsg withErrorDomain:@"Connection Error" withUnderlyingError:internalError];
          }
-         [controller reportLoginResult:error];
+         [controller reportLoginResult:token error:error];
      }];
 }
 
@@ -270,7 +275,7 @@ NSString *token;
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler: ^(NSURLResponse *response, NSData *POSTReply, NSError *internalError)
      {
          //everything in here happens when the asynchronous NSURLRequest is finished, in the same thread.
-         
+         NSLog(@"Available annotations: %@ %@", response, internalError.userInfo);
          NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
          NSError *error;
          NSMutableArray *annotations;

@@ -42,23 +42,18 @@ typedef enum {
         self.hidden = false;
         [self makeKeyAndVisible];
         
-        UIImage *image = [AlertWindow imageForType:type];
-        UIImageView *imageView;
-        
-        if(image != nil){
-            imageView = ({
+        UIImageView *imageView = ({
                 UIImageView *iv = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 44, 44)];
-                iv.image = image;
+                iv.image = [AlertWindow imageForType:type];
                 iv;
             });
-        }
 
         UILabel *titleLabel = ({
             UILabel *l = [[UILabel alloc] initWithFrame:CGRectMake(64, 6, frame.size.width - 52, 20)];
             l.text = title;
             l.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:14.f];
             l.textAlignment = NSTextAlignmentLeft;
-            l.textColor = [UIColor whiteColor];
+            l.textColor = [AlertWindow textColorForType:type];
             l;
         });
         
@@ -99,6 +94,8 @@ typedef enum {
     NSString *imageName;
     if([type isEqualToString:@"error"]){
         imageName = @"Error";
+    } else if([type isEqualToString:@"success"]){
+        imageName = @"Success";
     }
     return [UIImage imageNamed:imageName];
 }
@@ -107,6 +104,18 @@ typedef enum {
     UIColor *color;
     if([type isEqualToString:@"error"]){
         color = kErrorColor;
+    } else if([type isEqualToString:@"success"]){
+        color = [UIColor whiteColor];
+    }
+    return color;
+}
+
++(UIColor *)textColorForType:(NSString *)type{
+    UIColor *color;
+    if([type isEqualToString:@"error"]){
+        color = [UIColor whiteColor];
+    } else if([type isEqualToString:@"success"]){
+        color = [UIColor blackColor];
     }
     return color;
 }

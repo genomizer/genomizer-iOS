@@ -13,5 +13,5 @@
  //  Class that handles the loginScreen
  */
 @interface LogInViewController : ViewController<UITextFieldDelegate>
-- (void) reportLoginResult: (NSError*) error;
+- (void) reportLoginResult:(NSString *)token error:(NSError*) error;
 @end

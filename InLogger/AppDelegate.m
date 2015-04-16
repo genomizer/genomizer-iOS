@@ -10,6 +10,7 @@
 
 #import "AppDelegate.h"
 #import "LogInViewController.h"
+#import "ServerConnection.h"
 
 @implementation AppDelegate
 
@@ -26,11 +27,13 @@
 {
     
     NSString *usertoken = [[NSUserDefaults standardUserDefaults] objectForKey:@"usertoken"];
-    usertoken = @"pal";
+
     UIViewController *vc;
     if(!usertoken){
         vc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"login"];
     } else{
+        NSLog(@"token: %@", usertoken);
+        [ServerConnection setToken:usertoken];
         vc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"home"];
     }
     

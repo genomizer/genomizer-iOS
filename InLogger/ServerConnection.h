@@ -31,4 +31,6 @@
 + (void)genomeRelease: (RawConvertViewController*) controller;
 
 
++(void)setToken:(NSString *)token;
+
 @end

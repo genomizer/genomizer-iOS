@@ -116,10 +116,13 @@
  * @return if a error occured a popup with information about the error is shown.
  *         else a segue to the searchView is preformed.
  */
-- (void) reportLoginResult: (NSError*) error {
+- (void) reportLoginResult:(NSString *)token error:(NSError*) error; {
     
     if(error == nil)
     {
+        [[NSUserDefaults standardUserDefaults] setObject:token forKey:@"usertoken"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             AppDelegate *app = [UIApplication sharedApplication].delegate;
             app.userIsLoggingOut = NO;

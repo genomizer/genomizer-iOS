@@ -21,6 +21,7 @@
  */
 + (NSString *) readFromFile: (NSString *) fileName withDefaultData: (NSString *) data
 {
+    //Pål did this
 //    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 //    NSString *documentsDirectory = [paths objectAtIndex:0];
 //    NSString *filePath = [NSString stringWithFormat:@"%@/%@", documentsDirectory, fileName];
@@ -45,6 +46,7 @@
  */
 + (void) writeData: (NSString *) data toFile: (NSString *) fileName
 {
+    //Pål did this
 //    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 //    NSString *documentsDirectory = [paths objectAtIndex:0];
 //    NSString *filePath = [NSString stringWithFormat:@"%@/%@", documentsDirectory, fileName];
