@@ -16,9 +16,7 @@
 }
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
-@property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *trashButton;
 @property (weak, nonatomic) IBOutlet UIButton *selectTaskToPerformButton;
 
 @property NSMutableArray *filesToDisplay;
@@ -84,12 +82,10 @@ static FileContainer * FILES = nil;
  * @return if switch changed to OFF - removes corresponding file from
  *                                    the array selectedFiles.
  */
+
 - (IBAction)fileSwitchValueChanged:(UISwitch *)sender{
-    UITableViewCell *cell = (UITableViewCell *)sender.superview;
-    
-    while(![cell isKindOfClass:[UITableViewCell class]]){
-        cell = (UITableViewCell *)cell.superview;
-    }
+    UITableViewCell *cell = [self cellForButton:sender];
+
     
     NSIndexPath *indexPath = [_tableView indexPathForCell:cell];
     ExperimentFile *file = _filesToDisplay[indexPath.section][indexPath.row];
@@ -218,18 +214,19 @@ static FileContainer * FILES = nil;
  *  @return Removes all selected files (those files that 
  *          have switchbutton set to "ON".)
  */
-- (IBAction)removeFilesWhenTouchTrash:(UIBarButtonItem *)sender
-{
-    NSArray *files = [_selectedFiles getFiles: [self getSelectedFileType]];
-    for (NSInteger i = [files count]; i > 0; i--) {
-        ExperimentFile *file = [files objectAtIndex:i-1];
-        [FILES removeExperimentFile:file];
-        [_selectedFiles removeExperimentFile:file];
-    }
-    
-    [PopupGenerator showPopupWithMessage:@"Files removed"];
-    [self updateTableViewAndButtons];
-}
+//Pål did this
+//- (IBAction)removeFilesWhenTouchTrash:(UIBarButtonItem *)sender
+//{
+//    NSArray *files = [_selectedFiles getFiles: [self getSelectedFileType]];
+//    for (NSInteger i = [files count]; i > 0; i--) {
+//        ExperimentFile *file = [files objectAtIndex:i-1];
+//        [FILES removeExperimentFile:file];
+//        [_selectedFiles removeExperimentFile:file];
+//    }
+//    
+//    [PopupGenerator showPopupWithMessage:@"Files removed"];
+//    [self updateTableViewAndButtons];
+//}
 
 /**
  * Executes when "selectTask"-button is pressed.
@@ -260,7 +257,9 @@ static FileContainer * FILES = nil;
  * @return Shows a popup containing information about that file.
  */
 - (IBAction)infoFile:(UIButton*)sender {
-    ExperimentFile *file = _filesToDisplay[sender.tag];
+    UITableViewCell *cell = [self cellForButton:sender];
+    NSIndexPath *indexPath = [_tableView indexPathForCell:cell];
+    ExperimentFile *file = _filesToDisplay[indexPath.section][indexPath.row];
     [(TabViewController *)self.tabBarController showInfoAboutFile:file];
 
 }
@@ -317,6 +316,14 @@ static FileContainer * FILES = nil;
 - (IBAction)unwindToList:(UIStoryboardSegue *)segue
 {
     
+}
+                                                       
+-(UITableViewCell *)cellForButton:(UIButton *)b{
+    UITableViewCell *cell = (UITableViewCell *)b.superview;
+    while(![cell isKindOfClass:[UITableViewCell class]]){
+        cell = (UITableViewCell *)cell.superview;
+    }
+    return cell;
 }
 /**
  * Method that stores information about what files are supposed to be converted

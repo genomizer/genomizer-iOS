@@ -33,6 +33,7 @@
 		D116AEE81ADE5FAE00E8E997 /* AlertWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = D116AEE71ADE5FAE00E8E997 /* AlertWindow.m */; };
 		D116AEED1ADE9EC000E8E997 /* Error.png in Resources */ = {isa = PBXBuildFile; fileRef = D116AEEB1ADE9EC000E8E997 /* Error.png */; };
 		D116AEEE1ADE9EC000E8E997 /* Error@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D116AEEC1ADE9EC000E8E997 /* Error@2x.png */; };
+		D17107801ADFE0D5009CD177 /* DataFileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D1FD6E371ADFDD8D00676BED /* DataFileTableViewCell.m */; };
 		D1F6637C1ADD5F2E002DBE03 /* FileAboutView.m in Sources */ = {isa = PBXBuildFile; fileRef = D1F6637B1ADD5F2E002DBE03 /* FileAboutView.m */; };
 		DE032D72191BCDC4006AC257 /* SelectTaskTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE032D71191BCDC4006AC257 /* SelectTaskTableViewController.m */; };
 		DE25D7FC1910D6840084BDDC /* TitleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DE25D7FA1910D6840084BDDC /* TitleTableViewCell.m */; };
@@ -41,7 +42,6 @@
 		DE403ACD190A8A3E003D21F5 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE403ACC190A8A3E003D21F5 /* SearchViewController.m */; };
 		DE6BC22E192DE12400B6D7AD /* SettingsPopupDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6BC22C192DE12400B6D7AD /* SettingsPopupDelegate.m */; };
 		DE6BC232192DE61400B6D7AD /* FileHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6BC231192DE61400B6D7AD /* FileHandler.m */; };
-		DE750AD51924BD3000F77FEC /* DataFileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DE750AD31924BD3000F77FEC /* DataFileTableViewCell.m */; };
 		DE7C9C2519235F6C004A2492 /* Annotation.m in Sources */ = {isa = PBXBuildFile; fileRef = DE7C9C2419235F6C004A2492 /* Annotation.m */; };
 		DE7C9C2719236044004A2492 /* TestAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = DE7C9C2619236044004A2492 /* TestAnnotation.m */; };
 		DE915F7F19347AB5009C0F79 /* SegueController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE915F7E19347AB5009C0F79 /* SegueController.m */; };
@@ -128,6 +128,8 @@
 		D116AEEC1ADE9EC000E8E997 /* Error@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Error@2x.png"; path = "../../../appar/genomizer-iOS/Icon/Error@2x.png"; sourceTree = "<group>"; };
 		D1F6637A1ADD5F2E002DBE03 /* FileAboutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FileAboutView.h; path = ../FileAboutView.h; sourceTree = "<group>"; };
 		D1F6637B1ADD5F2E002DBE03 /* FileAboutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FileAboutView.m; path = ../FileAboutView.m; sourceTree = "<group>"; };
+		D1FD6E361ADFDD8D00676BED /* DataFileTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataFileTableViewCell.h; sourceTree = "<group>"; };
+		D1FD6E371ADFDD8D00676BED /* DataFileTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataFileTableViewCell.m; sourceTree = "<group>"; };
 		DE032D70191BCDC4006AC257 /* SelectTaskTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectTaskTableViewController.h; sourceTree = "<group>"; };
 		DE032D71191BCDC4006AC257 /* SelectTaskTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectTaskTableViewController.m; sourceTree = "<group>"; };
 		DE25D7F91910D6840084BDDC /* TitleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleTableViewCell.h; sourceTree = "<group>"; };
@@ -142,8 +144,6 @@
 		DE6BC22C192DE12400B6D7AD /* SettingsPopupDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsPopupDelegate.m; sourceTree = "<group>"; };
 		DE6BC230192DE61400B6D7AD /* FileHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileHandler.h; sourceTree = "<group>"; };
 		DE6BC231192DE61400B6D7AD /* FileHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileHandler.m; sourceTree = "<group>"; };
-		DE750AD21924BD3000F77FEC /* DataFileTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataFileTableViewCell.h; sourceTree = "<group>"; };
-		DE750AD31924BD3000F77FEC /* DataFileTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataFileTableViewCell.m; sourceTree = "<group>"; };
 		DE7C9C2319235F6C004A2492 /* Annotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Annotation.h; sourceTree = "<group>"; };
 		DE7C9C2419235F6C004A2492 /* Annotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Annotation.m; sourceTree = "<group>"; };
 		DE7C9C2619236044004A2492 /* TestAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestAnnotation.m; sourceTree = "<group>"; };
@@ -318,8 +318,8 @@
 				DE9A3EF21918CB4600F7C33B /* AnnotationTableViewController.m */,
 				DE25D7FF1910D72A0084BDDC /* DataFileViewController.h */,
 				DE25D8001910D72A0084BDDC /* DataFileViewController.m */,
-				DE750AD21924BD3000F77FEC /* DataFileTableViewCell.h */,
-				DE750AD31924BD3000F77FEC /* DataFileTableViewCell.m */,
+				D1FD6E361ADFDD8D00676BED /* DataFileTableViewCell.h */,
+				D1FD6E371ADFDD8D00676BED /* DataFileTableViewCell.m */,
 				DED12281190E966200D8E530 /* SearchResultTableViewCell.h */,
 				DED12282190E966200D8E530 /* SearchResultTableViewCell.m */,
 				DED12284190E966200D8E530 /* SearchResultTableViewController.h */,
@@ -583,6 +583,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D17107801ADFE0D5009CD177 /* DataFileTableViewCell.m in Sources */,
 				21CFACF71935CC9A002112DD /* Reachability.m in Sources */,
 				DE403ACD190A8A3E003D21F5 /* SearchViewController.m in Sources */,
 				76E2DA9F190E96C90048069D /* JSONBuilder.m in Sources */,
@@ -608,7 +609,6 @@
 				DE7C9C2519235F6C004A2492 /* Annotation.m in Sources */,
 				6453DD1A1924D4E400DDCA2D /* ProcessTableViewCell.m in Sources */,
 				641BC92E191CC827000E5254 /* RawConvertViewController.m in Sources */,
-				DE750AD51924BD3000F77FEC /* DataFileTableViewCell.m in Sources */,
 				DE9A3EF41918CB4600F7C33B /* AnnotationTableViewController.m in Sources */,
 				76F638D8190FD99300F0F4BF /* Experiment.m in Sources */,
 				DEBD8BC519338594005C5E19 /* TableViewController.m in Sources */,

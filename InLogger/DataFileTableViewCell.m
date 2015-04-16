@@ -9,10 +9,12 @@
 
 @implementation DataFileTableViewCell
 
+@synthesize starView, switchButton, infoButton,textField;
+
 - (IBAction)switchValueChanged:(UISwitch *)sender
 {
 
-    if (_switchButton.on) {
+    if (self.switchButton.on) {
         [_controller.selectedFiles addExperimentFile:_file];
     } else {
         [_controller.selectedFiles removeExperimentFile:_file];

@@ -367,7 +367,7 @@
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Experiment ID" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yDU-Kz-Wat">
                                             <rect key="frame" x="26" y="11" width="217" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vjc-p8-OoE">
@@ -419,7 +419,7 @@
             </objects>
             <point key="canvasLocation" x="1894" y="-225"/>
         </scene>
-        <!--Selected Files-->
+        <!--Selected Files View Controller-->
         <scene sceneID="FKw-ER-BkB">
             <objects>
                 <viewController id="OaH-dG-5KC" customClass="SelectedFilesViewController" sceneMemberID="viewController">
@@ -431,78 +431,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="2ha-Gv-y76">
-                                <rect key="frame" x="20" y="74" width="280" height="29"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <segments>
-                                    <segment title="Raw"/>
-                                    <segment title="Profile"/>
-                                    <segment title="Region"/>
-                                    <segment title="Other"/>
-                                </segments>
-                                <connections>
-                                    <action selector="segmentedControlValueChanged:" destination="OaH-dG-5KC" eventType="valueChanged" id="wIe-Wn-MgT"/>
-                                </connections>
-                            </segmentedControl>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="grey_line_no_white" translatesAutoresizingMaskIntoConstraints="NO" id="ddK-Rf-71f">
-                                <rect key="frame" x="0.0" y="112" width="320" height="1"/>
-                                <rect key="contentStretch" x="0.0" y="0.0" width="1" height="0.14999999999999969"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="1" id="Lb4-ad-Jiq"/>
-                                </constraints>
-                            </imageView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="6pb-Wh-CBJ">
-                                <rect key="frame" x="0.0" y="113" width="320" height="353"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DataFilePrototypeCell" rowHeight="41" id="gku-GI-eqm" customClass="DataFileTableViewCell">
-                                        <rect key="frame" x="0.0" y="22" width="320" height="41"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gku-GI-eqm" id="GhD-h7-QnM">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qG7-lO-UOq">
-                                                    <rect key="frame" x="256" y="4" width="51" height="31"/>
-                                                    <connections>
-                                                        <action selector="fileSwitchValueChanged:" destination="OaH-dG-5KC" eventType="valueChanged" id="H6j-cY-FsA"/>
-                                                    </connections>
-                                                </switch>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Datafile1.wig  " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Poq-c8-ohc">
-                                                    <rect key="frame" x="46" y="9" width="205" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ail-Zm-uSm">
-                                                    <rect key="frame" x="15" y="9" width="22" height="22"/>
-                                                    <state key="normal">
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="infoFile:" destination="OaH-dG-5KC" eventType="touchUpInside" id="jvh-an-hsB"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <connections>
-                                            <outlet property="infoButton" destination="ail-Zm-uSm" id="I44-80-fbo"/>
-                                            <outlet property="switchButton" destination="qG7-lO-UOq" id="337-ON-tC3"/>
-                                            <outlet property="textField" destination="Poq-c8-ohc" id="ueX-Bg-PDr"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
-                                <sections/>
-                                <connections>
-                                    <outlet property="dataSource" destination="OaH-dG-5KC" id="BbK-mw-JnM"/>
-                                    <outlet property="delegate" destination="OaH-dG-5KC" id="5U1-sM-BcB"/>
-                                </connections>
-                            </tableView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="square" translatesAutoresizingMaskIntoConstraints="NO" id="KyP-h8-6M9">
-                                <rect key="frame" x="0.0" y="466" width="320" height="53"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="grey_line" translatesAutoresizingMaskIntoConstraints="NO" id="Xms-3l-o79">
                                 <rect key="frame" x="0.0" y="463" width="320" height="3"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -520,43 +448,86 @@
                                     <action selector="selectTaskButton:" destination="OaH-dG-5KC" eventType="touchUpInside" id="hsv-No-gFN"/>
                                 </connections>
                             </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="6pb-Wh-CBJ">
+                                <rect key="frame" x="0.0" y="64" width="320" height="399"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DataFilePrototypeCell" rowHeight="44" id="gku-GI-eqm" customClass="DataFileTableViewCell">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="41"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gku-GI-eqm" id="GhD-h7-QnM">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qG7-lO-UOq">
+                                                    <rect key="frame" x="256" y="6" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="fileSwitchValueChanged:" destination="OaH-dG-5KC" eventType="valueChanged" id="H6j-cY-FsA"/>
+                                                    </connections>
+                                                </switch>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Datafile1.wig  " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Poq-c8-ohc">
+                                                    <rect key="frame" x="46" y="11" width="205" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ail-Zm-uSm">
+                                                    <rect key="frame" x="15" y="11" width="22" height="22"/>
+                                                    <state key="normal">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="infoFile:" destination="OaH-dG-5KC" eventType="touchUpInside" id="jvh-an-hsB"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </tableViewCell>
+                                </prototypes>
+                                <sections/>
+                                <connections>
+                                    <outlet property="dataSource" destination="OaH-dG-5KC" id="BbK-mw-JnM"/>
+                                    <outlet property="delegate" destination="OaH-dG-5KC" id="5U1-sM-BcB"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="0.97639142335766427" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="1mi-tr-fZm" secondAttribute="trailing" constant="84" id="01j-T2-zFk"/>
+                            <constraint firstItem="6pb-Wh-CBJ" firstAttribute="top" secondItem="M5h-G1-RIW" secondAttribute="bottom" id="0ZQ-7P-c5t"/>
                             <constraint firstItem="1mi-tr-fZm" firstAttribute="leading" secondItem="xtR-Jh-0nM" secondAttribute="leading" constant="84" id="1Bm-sw-lvQ"/>
-                            <constraint firstAttribute="trailing" secondItem="2ha-Gv-y76" secondAttribute="trailing" constant="20" id="5V8-0e-oqh"/>
                             <constraint firstAttribute="trailing" secondItem="6pb-Wh-CBJ" secondAttribute="trailing" id="9B7-64-Kln"/>
-                            <constraint firstAttribute="trailing" secondItem="KyP-h8-6M9" secondAttribute="trailing" id="BRZ-E9-8Vu"/>
-                            <constraint firstItem="ddK-Rf-71f" firstAttribute="top" secondItem="2ha-Gv-y76" secondAttribute="bottom" constant="10" id="It0-Rg-AHk"/>
                             <constraint firstAttribute="trailing" secondItem="Xms-3l-o79" secondAttribute="trailing" id="J0e-SB-qls"/>
                             <constraint firstItem="pFH-yY-7BM" firstAttribute="top" secondItem="1mi-tr-fZm" secondAttribute="bottom" constant="11" id="JtM-NR-JdN"/>
-                            <constraint firstItem="6pb-Wh-CBJ" firstAttribute="top" secondItem="ddK-Rf-71f" secondAttribute="bottom" id="Ydd-q4-RKV"/>
-                            <constraint firstItem="2ha-Gv-y76" firstAttribute="top" secondItem="M5h-G1-RIW" secondAttribute="bottom" constant="10" id="cFs-Qg-FsX"/>
-                            <constraint firstItem="2ha-Gv-y76" firstAttribute="leading" secondItem="xtR-Jh-0nM" secondAttribute="leading" constant="20" id="ep7-Ry-1WJ"/>
-                            <constraint firstItem="KyP-h8-6M9" firstAttribute="leading" secondItem="xtR-Jh-0nM" secondAttribute="leading" id="fTX-YQ-58V"/>
+                            <constraint firstItem="6pb-Wh-CBJ" firstAttribute="top" secondItem="M5h-G1-RIW" secondAttribute="bottom" id="bei-z7-B4N"/>
                             <constraint firstItem="6pb-Wh-CBJ" firstAttribute="leading" secondItem="xtR-Jh-0nM" secondAttribute="leading" id="ngm-oH-dSk"/>
-                            <constraint firstItem="Xms-3l-o79" firstAttribute="top" secondItem="6pb-Wh-CBJ" secondAttribute="bottom" constant="-3" id="pnd-Jq-CfE"/>
-                            <constraint firstAttribute="trailing" secondItem="ddK-Rf-71f" secondAttribute="trailing" id="q0n-5M-EF6"/>
                             <constraint firstItem="Xms-3l-o79" firstAttribute="leading" secondItem="xtR-Jh-0nM" secondAttribute="leading" id="qji-dX-dRU"/>
-                            <constraint firstItem="KyP-h8-6M9" firstAttribute="top" secondItem="Xms-3l-o79" secondAttribute="bottom" id="uHX-6t-vIc"/>
                             <constraint firstItem="1mi-tr-fZm" firstAttribute="top" secondItem="Xms-3l-o79" secondAttribute="bottom" constant="12" id="vvj-KD-EUn"/>
-                            <constraint firstItem="pFH-yY-7BM" firstAttribute="top" secondItem="KyP-h8-6M9" secondAttribute="bottom" id="wzr-jO-TKe"/>
-                            <constraint firstItem="ddK-Rf-71f" firstAttribute="leading" secondItem="xtR-Jh-0nM" secondAttribute="leading" id="zwu-C3-WTi"/>
+                            <constraint firstItem="Xms-3l-o79" firstAttribute="top" secondItem="6pb-Wh-CBJ" secondAttribute="bottom" id="zwY-Hc-EEe"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Selected Files" id="ZJl-xb-5Xc">
-                        <barButtonItem key="rightBarButtonItem" systemItem="trash" id="S8B-s2-ee7">
+                    <navigationItem key="navigationItem" id="ZJl-xb-5Xc">
+                        <nil key="title"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="2ha-Gv-y76">
+                            <rect key="frame" x="30" y="8" width="260" height="29"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <segments>
+                                <segment title="Raw"/>
+                                <segment title="Profile"/>
+                                <segment title="Region"/>
+                                <segment title="Other"/>
+                            </segments>
                             <connections>
-                                <action selector="removeFilesWhenTouchTrash:" destination="OaH-dG-5KC" id="1Hl-bb-NEj"/>
+                                <action selector="segmentedControlValueChanged:" destination="OaH-dG-5KC" eventType="valueChanged" id="wIe-Wn-MgT"/>
                             </connections>
-                        </barButtonItem>
+                        </segmentedControl>
                     </navigationItem>
                     <connections>
                         <outlet property="segmentedControl" destination="2ha-Gv-y76" id="Fv9-71-dHz"/>
                         <outlet property="selectTaskToPerformButton" destination="1mi-tr-fZm" id="Zmr-LS-Qju"/>
                         <outlet property="tableView" destination="6pb-Wh-CBJ" id="5ch-FP-JXM"/>
-                        <outlet property="trashButton" destination="S8B-s2-ee7" id="O3J-9v-2cu"/>
                         <segue destination="NVQ-fn-jnW" kind="modal" identifier="convertTask" id="Thg-Vs-Nk7"/>
                     </connections>
                 </viewController>
@@ -645,7 +616,7 @@
                                                         <constraint firstAttribute="width" constant="85" id="RTV-uo-mgA"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Process: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3gP-WI-HuV">
@@ -697,7 +668,7 @@
                                                         <constraint firstAttribute="height" constant="15" id="0lL-0j-bLf"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="sFD-f6-I5h">
@@ -1005,7 +976,7 @@
                                 <rect key="frame" x="0.0" y="64" width="320" height="396"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DataFilePrototypeCell" rowHeight="41" id="byj-CI-98u" customClass="DataFileTableViewCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DataFilePrototypeCell" rowHeight="44" id="byj-CI-98u" customClass="DataFileTableViewCell">
                                         <rect key="frame" x="0.0" y="22" width="320" height="41"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="byj-CI-98u" id="JWV-dM-18q">
@@ -1013,15 +984,15 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gjd-uV-yNJ">
-                                                    <rect key="frame" x="256" y="4" width="51" height="31"/>
+                                                    <rect key="frame" x="259" y="6" width="51" height="31"/>
                                                     <connections>
                                                         <action selector="switchValueChanged:" destination="byj-CI-98u" eventType="valueChanged" id="fFl-S6-kXY"/>
                                                     </connections>
                                                 </switch>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Datafile1.wig " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7wx-f0-h80">
-                                                    <rect key="frame" x="46" y="9" width="206" height="21"/>
+                                                    <rect key="frame" x="45" y="9" width="206" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TxR-CQ-d7h">
@@ -1033,11 +1004,15 @@
                                                         <action selector="infoButtonTouchUpInside:" destination="byj-CI-98u" eventType="touchUpInside" id="Ar4-f9-Swr"/>
                                                     </connections>
                                                 </button>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y5G-uQ-PHZ">
+                                                    <rect key="frame" x="217" y="12" width="20" height="19"/>
+                                                </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="infoButton" destination="TxR-CQ-d7h" id="U0M-bZ-FwD"/>
+                                            <outlet property="starView" destination="y5G-uQ-PHZ" id="qtB-2Q-fDX"/>
                                             <outlet property="switchButton" destination="gjd-uV-yNJ" id="9nF-6D-5xB"/>
                                             <outlet property="textField" destination="7wx-f0-h80" id="D4f-gv-N5h"/>
                                         </connections>
@@ -1107,7 +1082,7 @@
                                                         <constraint firstAttribute="width" constant="148" id="l2k-fc-Z31"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="-a -m 1 --best -p 10 -v 2" borderStyle="roundedRect" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="kAs-61-89y">
@@ -1605,7 +1580,6 @@
         <!--Navigation Controller-->
         <scene sceneID="yzg-op-63V">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="MGo-wl-nLI" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="NVQ-fn-jnW" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="sc3-zA-RPj"/>
@@ -1618,6 +1592,7 @@
                         <segue destination="0GK-lv-S7R" kind="relationship" relationship="rootViewController" id="evC-Li-ZiP"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MGo-wl-nLI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3682" y="-225"/>
         </scene>
@@ -1643,11 +1618,9 @@
     </scenes>
     <resources>
         <image name="grey_line" width="64" height="6"/>
-        <image name="grey_line_no_white" width="64" height="2"/>
         <image name="photo1" width="3264" height="2448"/>
         <image name="processIcon" width="56" height="56"/>
         <image name="selectedFiles" width="64" height="64"/>
-        <image name="square" width="10" height="10"/>
         <image name="taco" width="392" height="372"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

@@ -76,7 +76,7 @@
         v;
     });
     FileAboutView *fav = ({
-        float height = 150;
+        float height = 300;
         FileAboutView *fav = [[FileAboutView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height/2 - height/2, self.view.frame.size.width, height)];
         fav.delegate = self;
         [fav setText:infoText];

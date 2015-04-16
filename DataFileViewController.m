@@ -99,6 +99,7 @@
     cell.switchButton.on = [_selectedFiles containsFile:file];
     cell.file = file;
     cell.controller = self;
+    cell.starView.backgroundColor = [SelectedFilesViewController containsExperimentFile:file] ? [UIColor blackColor] : [UIColor blueColor];
     return cell;
 }
 
