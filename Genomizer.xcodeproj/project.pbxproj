@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 47;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -546,7 +546,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0510;
-				ORGANIZATIONNAME = "___FULLUSERNAME___";
+				ORGANIZATIONNAME = Mattias;
 				TargetAttributes = {
 					DEEF6AE319094F8A00A2CD8C = {
 						DevelopmentTeam = 3LK2DRBJ29;
@@ -557,7 +557,7 @@
 				};
 			};
 			buildConfigurationList = DEEF6ADF19094F8A00A2CD8C /* Build configuration list for PBXProject "Genomizer" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 6.3";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
