@@ -39,6 +39,7 @@
     NSString *serverURL = [FileHandler readFromFile: SERVER_URL_FILE_NAME withDefaultData:MOCK_URL];
     [JSONBuilder setServerURLToString:serverURL];
     
+    //Pål did this
     //add self to appDelegate
 //    AppDelegate *app = [UIApplication sharedApplication].delegate;
 //    [app addController:self];
@@ -141,11 +142,10 @@
     if(self.view.frame.origin.y < 0) {
         return;
     }
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.25];
-    // Move frame so that keyboard is not on top of any inputfield.
-    self.view.frame = CGRectMake(0, -140, self.view.frame.size.width, self.view.frame.size.height);
-    [UIView commitAnimations];
+    [UIView animateWithDuration:0.25 animations:^{
+        self.view.transform = CGAffineTransformMakeTranslation(0, -140);
+//        self.view.frame = CGRectMake(0, -140, self.view.frame.size.width, self.view.frame.size.height);
+    }];
 }
 
 /**
@@ -153,10 +153,11 @@
  */
 - (void)centerFrameView
 {
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.25];
-    self.view.frame = CGRectMake(0,0,self.view.frame.size.width,self.view.frame.size.height);
-    [UIView commitAnimations];
+    [UIView animateWithDuration:0.25 animations:^{
+        self.view.transform = CGAffineTransformMakeTranslation(0, 0);
+//        self.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+    }];
+    
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -168,6 +169,7 @@
 
 /**
  * Describes what is shoud happen if the "next" button on the keyboard is pressed.
+ @param textField Textfield which is asked if it should return
  */
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {

@@ -10,6 +10,9 @@
 #import <UIKit/UIKit.h>
 #import "ViewController.h"
 
+/**
+ Controlls the More view of the application. 
+ */
 @interface MoreViewController : ViewController
 - (IBAction)logoutButtonTouched:(id)sender;
 @end

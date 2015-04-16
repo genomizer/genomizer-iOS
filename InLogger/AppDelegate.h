@@ -30,8 +30,8 @@
 //
 //- (void) killControllers;
 
-- (bool) threadIsAvailable;
+//- (bool) threadIsAvailable;
 
-- (void) threadFinished;
+//- (void) threadFinished;
 
 @end

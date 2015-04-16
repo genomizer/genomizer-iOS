@@ -71,7 +71,7 @@
         
     } else {
 //        [PopupGenerator showErrorMessage:error];
-        [(TabViewController *)self.tabBarController showPopUpWithError:error];
+        [(TabViewController *)self.tabBarController showPopDownWithError:error];
         [self annotationsIsFinishedWithResult: nil];
         
     }
@@ -210,7 +210,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self searchIsFinished];
 //                [PopupGenerator showErrorMessage:error];
-                [(TabViewController *)self.tabBarController showPopUpWithError:error];
+                [(TabViewController *)self.tabBarController showPopDownWithError:error];
             });
         } else
         {

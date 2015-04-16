@@ -14,8 +14,9 @@
 #import "ServerConnection.h"
 #import "PopupGenerator.h"
 #import "ProcessStatusDescriptor.h"
-#import "AppDelegate.h"
+//#import "AppDelegate.h"
 #import "TabViewController.h"
+
 @interface ProcessViewController ()
 @property UIRefreshControl *refreshControl;
 @end
@@ -41,12 +42,13 @@ static NSMutableArray * processingExperimentFiles;
  */
 - (void) updateProcessStatusFromServer
 {
-    AppDelegate *app = [UIApplication sharedApplication].delegate;
-    if([app threadIsAvailable])
-    {
+
+//Pål did this
+//    AppDelegate *app = [UIApplication sharedApplication].delegate;
+//    if ([app threadIsAvailable]) {
         [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
         [ServerConnection getProcessStatus:self];
-    }
+//    }
 }
 /**
  * Method that adds a single process to a list containg all processes,
@@ -169,21 +171,25 @@ static NSMutableArray * processingExperimentFiles;
         }
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+            
             [_tableView reloadData];
-            AppDelegate *app = [UIApplication sharedApplication].delegate;
-            [app threadFinished];
+            
+//Pål did this
+//            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+//            AppDelegate *app = [UIApplication sharedApplication].delegate;
+//            [app threadFinished];
         });
     } else
     {
         dispatch_async(dispatch_get_main_queue(), ^{
             
             NSString * errorMsg = [error.userInfo objectForKey:NSLocalizedDescriptionKey];
-            [(TabViewController *)self.tabBarController showPopUpWithTitle:error.domain andMessage:errorMsg type:@"error"];
+            [(TabViewController *)self.tabBarController showPopDownWithTitle:error.domain andMessage:errorMsg type:@"error"];
             
-            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-            AppDelegate *app = [UIApplication sharedApplication].delegate;
-            [app threadFinished];
+//Pål did this
+//            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+//            AppDelegate *app = [UIApplication sharedApplication].delegate;
+//            [app threadFinished];
         });
     }
 }

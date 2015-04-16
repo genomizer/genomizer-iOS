@@ -123,7 +123,7 @@
 		76F638D9190FDD9D00F0F4BF /* ExperimentFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExperimentFile.h; sourceTree = "<group>"; };
 		76F638DA190FDD9D00F0F4BF /* ExperimentFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExperimentFile.m; sourceTree = "<group>"; };
 		D116AEE61ADE5FAE00E8E997 /* AlertWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertWindow.h; sourceTree = "<group>"; };
-		D116AEE71ADE5FAE00E8E997 /* AlertWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertWindow.m; sourceTree = "<group>"; };
+		D116AEE71ADE5FAE00E8E997 /* AlertWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertWindow.m; sourceTree = "<group>"; wrapsLines = 1; };
 		D116AEEB1ADE9EC000E8E997 /* Error.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Error.png; path = "../../../appar/genomizer-iOS/Icon/Error.png"; sourceTree = "<group>"; };
 		D116AEEC1ADE9EC000E8E997 /* Error@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Error@2x.png"; path = "../../../appar/genomizer-iOS/Icon/Error@2x.png"; sourceTree = "<group>"; };
 		D1F6637A1ADD5F2E002DBE03 /* FileAboutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FileAboutView.h; path = ../FileAboutView.h; sourceTree = "<group>"; };
@@ -429,11 +429,11 @@
 				642DEB81192F3615002234CD /* Process */,
 				642DEB82192F363D002234CD /* Convert */,
 				DED12299190E9C8100D8E530 /* MainGUI */,
-				DEEF6B1619094FA000A2CD8C /* Main.storyboard */,
 				642DEB84192F36A4002234CD /* More */,
 				DE25D7FE1910D6A00084BDDC /* Utilities */,
 				DEEF6AF619094F8A00A2CD8C /* AppDelegate.h */,
 				DEEF6AF719094F8A00A2CD8C /* AppDelegate.m */,
+				DEEF6B1619094FA000A2CD8C /* Main.storyboard */,
 				DEEF6AF919094F8A00A2CD8C /* Images.xcassets */,
 				D116AEEB1ADE9EC000E8E997 /* Error.png */,
 				D116AEEC1ADE9EC000E8E997 /* Error@2x.png */,

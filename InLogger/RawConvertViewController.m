@@ -447,26 +447,33 @@
         
         if((self.ratioCalcSmoothingWindowSize.text.length > 0) && (self.ratioCalcSmoothingMinimumStep.text.length > 0) && ( [self.ratioCalcSmoothingWindowSize.text intValue] > 0)){
             NSString *text = self.ratioCalcSmoothingWindowSize.text;
-            text = [text stringByAppendingString:@" "];
-            if (self.ratioCalcSmoothingSmoothType.on){
-                text = [text stringByAppendingString:@"1"];
-            }else{
-                text = [text stringByAppendingString:@"0"];
-            }
-            text = [text stringByAppendingString:@" "];
-            text = [text stringByAppendingString:self.ratioCalcSmoothingMinimumStep.text];
-            text = [text stringByAppendingString:@" "];
-            if (self.ratioCalcSmoothingPrintMean.on){
-                text = [text stringByAppendingString:@"1"];
-            }else{
-                text = [text stringByAppendingString:@"0"];
-            }
-            text = [text stringByAppendingString:@" "];
-            if (self.ratioCalcSmoothingPrintZeros.on){
-                text = [text stringByAppendingString:@"1"];
-            }else{
-                text = [text stringByAppendingString:@"0"];
-            }
+
+            int calcSmoothinSmooth = self.ratioCalcSmoothingSmoothType.on/* ? 1 : 0*/;
+            int calcSmoothinMean = self.ratioCalcSmoothingPrintMean.on/* ? 1 : 0*/;
+            int calcSmoothinZeros = self.ratioCalcSmoothingPrintZeros.on;
+            text = [text stringByAppendingFormat:@" %d %@ %d %d", calcSmoothinSmooth, self.ratioCalcSmoothingMinimumStep.text, calcSmoothinMean, calcSmoothinZeros];
+            
+//Pål did this
+//            text = [text stringByAppendingString:@" "];
+//            if (self.ratioCalcSmoothingSmoothType.on){
+//                text = [text stringByAppendingString:@"1"];
+//            }else{
+//                text = [text stringByAppendingString:@"0"];
+//            }
+//            text = [text stringByAppendingString:@" "];
+//            text = [text stringByAppendingString:self.ratioCalcSmoothingMinimumStep.text];
+//            text = [text stringByAppendingString:@" "];
+//            if (self.ratioCalcSmoothingPrintMean.on){
+//                text = [text stringByAppendingString:@"1"];
+//            }else{
+//                text = [text stringByAppendingString:@"0"];
+//            }
+//            text = [text stringByAppendingString:@" "];
+//            if (self.ratioCalcSmoothingPrintZeros.on){
+//                text = [text stringByAppendingString:@"1"];
+//            }else{
+//                text = [text stringByAppendingString:@"0"];
+//            }
             [parameters addObject:text];
         }
         else{
@@ -550,8 +557,7 @@
 }
 
 /* popup delegate method */
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

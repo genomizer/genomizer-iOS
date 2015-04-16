@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Genomixer-->
@@ -17,19 +18,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="heV-ix-3Xk">
-                                <rect key="frame" x="70" y="251" width="180" height="30"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="qhR-JL-4yB">
-                                <rect key="frame" x="70" y="312" width="180" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="qhR-JL-4yB">
+                                <rect key="frame" x="70" y="299" width="180" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="p7p-yP-rFi"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iwx-tD-EHi">
-                                <rect key="frame" x="137" y="365" width="47" height="30"/>
+                                <rect key="frame" x="137" y="366" width="47" height="30"/>
                                 <state key="normal" title="Sign in">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -37,11 +35,19 @@
                                     <action selector="signInButtonTouchUp:" destination="Csn-f6-9k9" eventType="touchUpInside" id="ctX-x6-Jed"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="80" verticalHuggingPriority="237" fixedFrame="YES" placeholderIntrinsicWidth="138" placeholderIntrinsicHeight="128" image="taco" translatesAutoresizingMaskIntoConstraints="NO" id="AtL-z1-FEd">
-                                <rect key="frame" x="95" y="58" width="130" height="128"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="80" verticalHuggingPriority="237" placeholderIntrinsicWidth="138" placeholderIntrinsicHeight="128" image="taco" translatesAutoresizingMaskIntoConstraints="NO" id="AtL-z1-FEd">
+                                <rect key="frame" x="95" y="58" width="130" height="130"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="130" id="9fY-fG-vqc"/>
+                                    <constraint firstAttribute="width" constant="130" id="lkf-O0-LKC"/>
+                                </constraints>
                             </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Genomizer" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A3I-4g-ZnF">
-                                <rect key="frame" x="102" y="194" width="117" height="26"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Genomizer" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A3I-4g-ZnF">
+                                <rect key="frame" x="102" y="196" width="117" height="26"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="26" id="RHZ-2l-Rfe"/>
+                                    <constraint firstAttribute="width" constant="117" id="wBZ-WC-g32"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                 <color key="textColor" red="0.088182518708678548" green="0.29770220251103074" blue="0.51135784646739135" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="highlightedColor" red="0.071601144374781031" green="0.21912855349169111" blue="0.39514690896739135" alpha="1" colorSpace="calibratedRGB"/>
@@ -63,21 +69,34 @@
                                     <action selector="settingsButtonPressed:" destination="Csn-f6-9k9" eventType="touchUpInside" id="jOD-Nr-74b"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="heV-ix-3Xk">
+                                <rect key="frame" x="70" y="253" width="180" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="OZn-p9-hoq"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="18"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.98121178668478259" green="0.98121178668478259" blue="0.98121178668478259" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="heV-ix-3Xk" firstAttribute="leading" secondItem="4hb-dP-mX9" secondAttribute="leading" constant="70" id="0e6-iK-3VZ"/>
                             <constraint firstItem="iwx-tD-EHi" firstAttribute="top" secondItem="qhR-JL-4yB" secondAttribute="bottom" constant="23" id="18L-e1-aWA"/>
+                            <constraint firstItem="A3I-4g-ZnF" firstAttribute="leading" secondItem="4hb-dP-mX9" secondAttribute="leadingMargin" constant="86" id="Avq-mc-rTq"/>
                             <constraint firstItem="qhR-JL-4yB" firstAttribute="leading" secondItem="4hb-dP-mX9" secondAttribute="leading" constant="70" id="B6y-bO-U7V"/>
-                            <constraint firstItem="iV2-8Y-UUF" firstAttribute="top" secondItem="GTu-al-233" secondAttribute="bottom" constant="10" id="EXF-ND-1Rn"/>
-                            <constraint firstItem="heV-ix-3Xk" firstAttribute="top" secondItem="GTu-al-233" secondAttribute="bottom" constant="231" id="JbR-qT-BAO"/>
+                            <constraint firstItem="iV2-8Y-UUF" firstAttribute="top" secondItem="4hb-dP-mX9" secondAttribute="topMargin" constant="30" id="OOP-cA-vfj"/>
+                            <constraint firstItem="heV-ix-3Xk" firstAttribute="top" secondItem="A3I-4g-ZnF" secondAttribute="bottom" constant="31" id="SD5-RN-ou7"/>
                             <constraint firstAttribute="trailing" secondItem="iwx-tD-EHi" secondAttribute="trailing" constant="136" id="UFf-sA-vNk"/>
                             <constraint firstAttribute="trailing" secondItem="heV-ix-3Xk" secondAttribute="trailing" constant="70" id="UHe-za-YpW"/>
+                            <constraint firstItem="AtL-z1-FEd" firstAttribute="leading" secondItem="4hb-dP-mX9" secondAttribute="leadingMargin" constant="79" id="Y11-F6-Zzo"/>
+                            <constraint firstItem="AtL-z1-FEd" firstAttribute="top" secondItem="4hb-dP-mX9" secondAttribute="topMargin" constant="58" id="Ytj-C6-goN"/>
                             <constraint firstItem="iwx-tD-EHi" firstAttribute="leading" secondItem="4hb-dP-mX9" secondAttribute="leading" constant="137" id="bLH-ao-LcZ"/>
+                            <constraint firstItem="A3I-4g-ZnF" firstAttribute="top" secondItem="AtL-z1-FEd" secondAttribute="bottom" constant="8" id="h83-oN-24s"/>
                             <constraint firstAttribute="trailing" secondItem="qhR-JL-4yB" secondAttribute="trailing" constant="70" id="hga-iH-Qyh"/>
-                            <constraint firstItem="qhR-JL-4yB" firstAttribute="top" secondItem="heV-ix-3Xk" secondAttribute="bottom" constant="31" id="luW-bA-jU0"/>
                             <constraint firstAttribute="trailing" secondItem="iV2-8Y-UUF" secondAttribute="trailing" constant="20" id="vvA-qS-O7U"/>
+                            <constraint firstItem="qhR-JL-4yB" firstAttribute="top" secondItem="heV-ix-3Xk" secondAttribute="bottom" constant="2" id="zmn-ee-Mm6"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Genomixer" id="u7O-yS-ijM">

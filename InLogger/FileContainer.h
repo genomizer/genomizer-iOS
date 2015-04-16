@@ -2,12 +2,15 @@
 //  FileContainer.h
 //  Genomizer
 //
-//  The FileContainer contains experiments files. It sorts them into four
-//  categories based on the file type.
+
 //
 
 #import "ExperimentFile.h"
 
+/**
+The FileContainer contains experiments files. It sorts them into four
+categories based on the file type.
+ */
 @interface FileContainer : NSObject
 
 

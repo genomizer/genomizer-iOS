@@ -2,12 +2,15 @@
 //  Annotation.h
 //  Genomizer
 //
-// The Annotation represents an annotation. It contains fields such as
-// name, possible values and the current value.
+
 //
 
 #import <Foundation/Foundation.h>
 
+/**
+The Annotation represents an annotation. It contains fields such as
+name, possible values and the current value.
+ */
 @interface Annotation : NSObject
 
 @property NSString *name;

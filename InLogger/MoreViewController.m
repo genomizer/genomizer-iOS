@@ -23,6 +23,7 @@
 /**
  * Method that executes when the "logout"-button is pressed.
  * Calls the method "logout" in serverConnection.
+    @param sender Button which execute the method
  * @return kills all controllers and returns to logout screen.
  */
 - (IBAction)logoutButtonTouched:(id)sender {

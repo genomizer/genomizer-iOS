@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+/**
+ FileAboutView
+ Shows information about a file.
+ */
 @class FileAboutView;
 @protocol FileAboutViewDelegate <NSObject>
 -(void)fileAboutViewDidClose:(FileAboutView *)fav;
@@ -19,5 +23,6 @@
 }
 @property id<FileAboutViewDelegate>delegate;
 @property (nonatomic, retain) UIView *dimView;
+
 -(void)setText:(NSString *)text;
 @end

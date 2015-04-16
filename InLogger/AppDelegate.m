@@ -18,7 +18,6 @@
 - (AppDelegate*) init {
     self = [super init];
     _userIsLoggingOut = NO;
-//    controllers = [[NSMutableArray alloc] init];
     _numberOfThreadsAlive = 0;
     return self;
 }
@@ -61,22 +60,22 @@
 //    [controllers removeLastObject];
 //}
 
-- (bool) threadIsAvailable {
-    
-    if(_numberOfThreadsAlive <= 3)
-    {
-        _numberOfThreadsAlive++;
-        return YES;
-    } else
-    {
-        return NO;
-    }
-}
-
-- (void) threadFinished
-{
-    _numberOfThreadsAlive--;
-}
+//- (bool) threadIsAvailable {
+//    
+//    if(_numberOfThreadsAlive <= 3)
+//    {
+//        _numberOfThreadsAlive++;
+//        return YES;
+//    } else
+//    {
+//        return NO;
+//    }
+//}
+//
+//- (void) threadFinished
+//{
+//    _numberOfThreadsAlive--;
+//}
 
 //- (UIViewController*) getController: (int) index
 //{

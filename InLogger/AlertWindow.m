@@ -21,7 +21,18 @@ typedef enum {
     void (^totalCompletion)();
 }
 
--(id)initWithFrame:(CGRect)frame title:(NSString *)title message:(NSString *)msg color:(UIColor *)color image:(NSString *)imageName{
+///Red color which should be used to indicate error
+#define kErrorColor [UIColor colorWithRed:212/255.f green:41/255.f blue:41/255.f alpha:1.0]
+
+
+/**
+ Inits the AlertWindow with specified text and type.
+ @param title the title text which will be displayed in bigger font.
+ @param message message text, more describive.
+ @param type "error"
+ @return AlertWindow reference.
+ */
+-(id)initWithFrame:(CGRect)frame title:(NSString *)title message:(NSString *)msg type:(NSString *)type{
     
     if(self = [super initWithFrame:frame]){
         animating = false;
@@ -30,13 +41,16 @@ typedef enum {
         self.windowLevel = UIWindowLevelStatusBar+1;
         self.hidden = false;
         [self makeKeyAndVisible];
-        
-        UIImageView *imageView = ({
-            UIImageView *iv = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 44, 44)];
-            iv.image = [UIImage imageNamed:imageName];
-            iv;
-        });
-        
+        UIImage *image = [AlertWindow imageForType:type];
+        UIImageView *imageView;
+        if(image != nil){
+            imageView = ({
+                UIImageView *iv = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 44, 44)];
+                iv.image = image;
+                iv;
+            });
+        }
+
         UILabel *titleLabel = ({
             UILabel *l = [[UILabel alloc] initWithFrame:CGRectMake(64, 6, frame.size.width - 52, 20)];
             l.text = title;
@@ -62,21 +76,37 @@ typedef enum {
         view = ({
             UIView *v = [[UIView alloc] initWithFrame:self.bounds];
             v.transform = CGAffineTransformMakeTranslation(0, -v.frame.size.height);
-            v.backgroundColor = color;
+            v.backgroundColor = [AlertWindow colorForType:type];
 
             [v addSubview:titleLabel];
             [v addSubview:imageView];
             [v addSubview:messageView];
+            
+            UITapGestureRecognizer *tapper = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedView:)];
+            [v addGestureRecognizer:tapper];
             v;
         });
-        
-        UITapGestureRecognizer *tapper = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedView:)];
-        [view addGestureRecognizer:tapper];
-        
         [self addSubview:view];
     }
     
     return self;
+}
+
+
++(UIImage *)imageForType:(NSString *)type{
+    NSString *imageName;
+    if([type isEqualToString:@"error"]){
+        imageName = @"Error";
+    }
+    return [UIImage imageNamed:imageName];
+}
+
++(UIColor *)colorForType:(NSString *)type{
+    UIColor *color;
+    if([type isEqualToString:@"error"]){
+        color = kErrorColor;
+    }
+    return color;
 }
 
 -(void)tappedView:(UITapGestureRecognizer *)tapper{
@@ -108,6 +138,11 @@ typedef enum {
     }];
 }
 
+
+/**
+ Animates a alertWindow down, waits for 2 seconds and then animates up. If user dismisses alertwindow after animating up it wont animate up. 
+ @param completion block which gets called after alertwindow have disapperad.
+ */
 -(void)animateDownAndUp:(void(^)())completion{
     totalCompletion = completion;
     [self animateDown:^{
@@ -119,9 +154,6 @@ typedef enum {
             }
         });
     }];
-    
-//    [self performSelector:@selector(animateUp) withObject:view afterDelay:2.0];
-
 }
 
 -(void)doneAnimating{

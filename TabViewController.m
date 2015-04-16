@@ -23,7 +23,7 @@
 @implementation TabViewController
 @synthesize window;
 
-#define kErrorColor [UIColor colorWithRed:212/255.f green:41/255.f blue:41/255.f alpha:1.0]
+
 /**
  * Initial setup on view did load. Add self to appdelegate.
  *
@@ -63,6 +63,10 @@
     }
 }
 
+/**
+ Show a information popup about a file
+ @param file shows information about file
+ */
 -(void)showInfoAboutFile:(ExperimentFile *)file{
     NSString *infoText = [file getAllInfo];
     UIView *dimView = ({
@@ -84,20 +88,23 @@
     [self.view addSubview:fav];
 }
 
--(void)showPopUpWithError:(NSError *)error{
+/**
+ Shows a AlertWindow of type "error" and with text about error
+ @param error error which should be notified to user
+ */
+-(void)showPopDownWithError:(NSError *)error{
     NSString * errorMsg = [error.userInfo objectForKey:NSLocalizedDescriptionKey];
-    [self showPopUpWithTitle:error.domain andMessage:errorMsg type:@"error"];
+    [self showPopDownWithTitle:error.domain andMessage:errorMsg type:@"error"];
 }
--(void)showPopUpWithTitle:(NSString *)title andMessage:(NSString *)msg type:(NSString *)type{
-    UIColor *color;
-    NSString *imageName;
-    
-    if([type isEqualToString:@"error"]){
-        color = kErrorColor;
-        imageName = @"Error";
-    }
-    
-    NSDictionary *dictMsg = @{@"title":title, @"message":msg, @"color":color, @"imageName":imageName};
+/**
+ Shows a AlertWindow with title, msg and type
+ @param title Title of AlertWindow
+ @param msg Message of AlertWindow, should be more descriptive
+ @param type Type of AlertWindow
+ */
+-(void)showPopDownWithTitle:(NSString *)title andMessage:(NSString *)msg type:(NSString *)type{
+
+    NSDictionary *dictMsg = @{@"title":title, @"message":msg, @"type":type};
     if(![messagesToShow containsObject:dictMsg]){
         [messagesToShow addObject:dictMsg];
         
@@ -113,18 +120,15 @@
     }
     
     NSDictionary *d = messagesToShow.firstObject;
-    
-    
+
     NSString *title = d[@"title"];
     NSString *msg = d[@"message"];
-    UIColor *color = d[@"color"];
-    NSString *imageName = d[@"imageName"];
+    NSString *type = d[@"type"];
     
     window = [[AlertWindow alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 64)
                                           title:title
                                         message:msg
-                                          color:color
-                                          image:imageName];
+                                          type:type];
 
     [window animateDownAndUp:^{
         [messagesToShow removeObjectAtIndex:0];

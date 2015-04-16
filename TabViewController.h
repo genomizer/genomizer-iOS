@@ -12,10 +12,13 @@
 #import "ExperimentFile.h"
 #import "AlertWindow.h"
 
+/**
+ Child of UITabBarController, handles error messages as well.
+ */
 @interface TabViewController : UITabBarController <UITabBarControllerDelegate, FileAboutViewDelegate>
 
 @property (strong, nonatomic) AlertWindow *window;
 -(void)showInfoAboutFile:(ExperimentFile *)file;
--(void)showPopUpWithTitle:(NSString *)title andMessage:(NSString *)msg type:(NSString *)type;
--(void)showPopUpWithError:(NSError *)error;
+-(void)showPopDownWithTitle:(NSString *)title andMessage:(NSString *)msg type:(NSString *)type;
+-(void)showPopDownWithError:(NSError *)error;
 @end

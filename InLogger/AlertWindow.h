@@ -8,10 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+
+/**
+ Displays a AlertWindow above NavBar with specified text and type.
+ 
+ */
 @interface AlertWindow : UIWindow
 
 
--(id)initWithFrame:(CGRect)frame title:(NSString *)title message:(NSString *)msg color:(UIColor *)color image:(NSString *)imageName;
+-(id)initWithFrame:(CGRect)frame title:(NSString *)title message:(NSString *)msg type:(NSString *)type;
 
 -(void)animateDownAndUp:(void(^)())completion;
 @end

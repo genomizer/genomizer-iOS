@@ -15,6 +15,11 @@
 @synthesize delegate = _delegate;
 @synthesize dimView;
 
+/**
+ Initilizes a FileAboutView with a specified frame
+ @param frame Frame which FileAboutView gets.
+ @return Reference to a FileAboutView
+ */
 -(id)initWithFrame:(CGRect)frame{
     if(self = [super initWithFrame:frame]){
         self.backgroundColor = [UIColor whiteColor];
@@ -49,6 +54,10 @@
     return self;
 }
 
+/**
+Set the text which should be shown
+ @param text should be text of information about a file
+ */
 -(void)setText:(NSString *)text{
     infoTextView.text = text;
 }
