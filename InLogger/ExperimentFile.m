@@ -118,6 +118,40 @@
     return [_idFile hash];
 }
 
+/**
+ Encode the object to be able to store it in NSUserDefaults
+ 
+ */
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    //Encode properties, other class variables, etc
+    [encoder encodeObject:_idFile forKey:@"idFile"];
+    [encoder encodeObject:@(_type) forKey:@"type"];
+    [encoder encodeObject:_name forKey:@"name"];
+    [encoder encodeObject:_uploadedBy forKey:@"uploadedBy"];
+    [encoder encodeObject:_date forKey:@"date"];
+    [encoder encodeObject:_expID forKey:@"expID"];
+    [encoder encodeObject:_metaData forKey:@"metaData"];
+    [encoder encodeObject:_author forKey:@"author"];
+    [encoder encodeObject:_grVersion forKey:@"grVersion"];
+    [encoder encodeObject:_species forKey:@"species"];
+}
+- (id)initWithCoder:(NSCoder *)decoder {
+    if((self = [super init])) {
+        //decode properties, other class vars
+        _idFile = [decoder decodeObjectForKey:@"idFile"];
+        _type = [(NSNumber *)[decoder decodeObjectForKey:@"type"] intValue];
+        _name = [decoder decodeObjectForKey:@"name"];
+        _uploadedBy = [decoder decodeObjectForKey:@"uploadedBy"];
+        _date = [decoder decodeObjectForKey:@"date"];
+        _expID = [decoder decodeObjectForKey:@"expID"];
+        _metaData = [decoder decodeObjectForKey:@"metaData"];
+        _author = [decoder decodeObjectForKey:@"author"];
+        _grVersion = [decoder decodeObjectForKey:@"grVersion"];
+        _species = [decoder decodeObjectForKey:@"species"];
+    }
+    return self;
+}
+
 
 @end
 

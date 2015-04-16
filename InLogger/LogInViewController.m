@@ -35,9 +35,9 @@
     _spinner.hidden = YES;
     _spinner.hidesWhenStopped = YES;
     _delegate = [[SettingsPopupDelegate alloc] init];
-    
-    NSString *serverURL = [FileHandler readFromFile: SERVER_URL_FILE_NAME withDefaultData:MOCK_URL];
-    [JSONBuilder setServerURLToString:serverURL];
+
+//    NSString *serverURL = [FileHandler readFromFile: SERVER_URL_FILE_NAME withDefaultData:MOCK_URL];
+//    [JSONBuilder setServerURLToString:serverURL];
     
     //Pål did this
     //add self to appDelegate

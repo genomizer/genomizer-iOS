@@ -805,7 +805,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2At-SN-6Fe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2959" y="998"/>
+            <point key="canvasLocation" x="2969" y="554"/>
         </scene>
         <!--Convert Genome Release-->
         <scene sceneID="LfB-4V-g9h">
@@ -904,7 +904,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rqa-sC-xTB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2439" y="1773"/>
+            <point key="canvasLocation" x="2433" y="1261"/>
         </scene>
         <!--More View Controller-->
         <scene sceneID="CYu-Ig-EHi">
@@ -969,7 +969,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nhz-aV-3zZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4088" y="1050"/>
+            <point key="canvasLocation" x="2959" y="1261"/>
         </scene>
         <!--Files-->
         <scene sceneID="Zof-6r-61V">
@@ -1605,6 +1605,7 @@
         <!--Navigation Controller-->
         <scene sceneID="yzg-op-63V">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MGo-wl-nLI" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="NVQ-fn-jnW" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="sc3-zA-RPj"/>
@@ -1617,7 +1618,6 @@
                         <segue destination="0GK-lv-S7R" kind="relationship" relationship="rootViewController" id="evC-Li-ZiP"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="MGo-wl-nLI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3682" y="-225"/>
         </scene>
@@ -1638,7 +1638,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OAR-d4-QW0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2433" y="998"/>
+            <point key="canvasLocation" x="2433" y="554"/>
         </scene>
     </scenes>
     <resources>
@@ -1656,6 +1656,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="mTu-BK-rMg"/>
+        <segue reference="Thg-Vs-Nk7"/>
     </inferredMetricsTieBreakers>
 </document>

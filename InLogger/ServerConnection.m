@@ -90,37 +90,6 @@ NSString *token;
     }];
 }
 
-/**
- * Method that handles the reply from a search request. Returns an NSArray containing the answer.
- *
- *@param interalError - error that has happened during server communication, if such an error exists
- *@param POSTReply - the reply the server gave
- *@param error - memory holder for error, where errors during parsing is saved. WARNING: Has to be checked when 
- *                                                                                       this method is used.
- *@return NSMutableArray containing the information recieved from the server
- */
-+ (NSMutableArray*)handleSearchPostReply:(NSError *)internalError POSTReply:(NSData *)POSTReply error:(NSError **)error
-{
-    NSArray *array = [NSJSONSerialization JSONObjectWithData:POSTReply options: NSJSONReadingMutableContainers error:&internalError];
-    
-    if(internalError == nil) {
-        NSMutableArray *experiments = [[NSMutableArray alloc] init];
-        for(NSDictionary *json in array) {
-            if([json objectForKey:@"name"] != nil){
-                [experiments addObject:[ExperimentParser expParser:json]];
-            } else{
-                *error = [self generateError:@"Server sent incorrectly formatted data" withErrorDomain:@"Server Error" withUnderlyingError:nil];
-            }
-            
-            
-        }
-        return experiments;
-    }
-    else{
-        *error = [self generateError:@"Server sent incorrectly formatted data" withErrorDomain:@"ServerError" withUnderlyingError:nil];
-    }
-    return nil;
-}
 
 /**
  * Static method that asynchronously sends a search request to the server. When a search result
@@ -141,7 +110,7 @@ NSString *token;
          NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
          NSMutableArray *array;
          NSError *error;
-         
+         NSLog(@"Search result: %@ %@", response, internalError);
          if(internalError == nil)
          {
              if(httpResp.statusCode == 200)
@@ -159,6 +128,37 @@ NSString *token;
      }];
 }
 
+/**
+ * Method that handles the reply from a search request. Returns an NSArray containing the answer.
+ *
+ *@param interalError - error that has happened during server communication, if such an error exists
+ *@param POSTReply - the reply the server gave
+ *@param error - memory holder for error, where errors during parsing is saved. WARNING: Has to be checked when
+ *                                                                                       this method is used.
+ *@return NSMutableArray containing the information recieved from the server
+ */
++ (NSMutableArray*)handleSearchPostReply:(NSError *)internalError POSTReply:(NSData *)POSTReply error:(NSError **)error
+{
+    NSDictionary *array = [NSJSONSerialization JSONObjectWithData:POSTReply options: NSJSONReadingMutableContainers error:&internalError];
+    
+    if(internalError == nil) {
+        NSMutableArray *experiments = [[NSMutableArray alloc] init];
+        for(NSDictionary *json in array) {
+            if([json objectForKey:@"name"] != nil){
+                [experiments addObject:[ExperimentParser expParser:json]];
+            } else{
+                *error = [self generateError:@"Server sent incorrectly formatted data" withErrorDomain:@"Server Error" withUnderlyingError:nil];
+            }
+            
+            
+        }
+        return experiments;
+    }
+    else{
+        *error = [self generateError:@"Server sent incorrectly formatted data" withErrorDomain:@"ServerError" withUnderlyingError:nil];
+    }
+    return nil;
+}
 
 /**
  * Static method that asynchronously sends a get genome releases request to the server,

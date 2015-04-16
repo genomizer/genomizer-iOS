@@ -11,7 +11,10 @@
 #import "PopupGenerator.h"
 #import "FileContainer.h"
 #import "TabViewController.h"
-@interface SelectedFilesViewController ()
+@interface SelectedFilesViewController (){
+     NSMutableArray *experiements;
+}
+
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 @property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -31,6 +34,10 @@ static FileContainer * FILES = nil;
 {
     if (FILES == nil) {
         FILES = [[FileContainer alloc] init];
+        NSData *encodedData = [[NSUserDefaults standardUserDefaults] objectForKey:@"savedFiles"];
+        if(encodedData != nil){
+            FILES = [NSKeyedUnarchiver unarchiveObjectWithData:encodedData];
+        }
     }
 }
 
@@ -38,18 +45,26 @@ static FileContainer * FILES = nil;
  * Method that adds a experiment file to FileContainer.
  * Called by DataFileTableViewCell.
  */
-+ (void) addExperimentFile:(ExperimentFile *) file
-{
++ (void) addExperimentFile:(ExperimentFile *) file{
     [FILES addExperimentFile: file];
+    [SelectedFilesViewController updateSavedFilesStorage];
 }
 
++(BOOL)containsExperimentFile:(ExperimentFile *) file{
+    return [FILES containsFile:file];
+}
 /**
  * Method that removes a experiment file from the FileContainer.
  * Called by DataFileTableViewCell.
  */
-+ (void) removeExperimentFile:(ExperimentFile *) file
-{
++ (void) removeExperimentFile:(ExperimentFile *) file{
     [FILES removeExperimentFile: file];
+    [SelectedFilesViewController updateSavedFilesStorage];
+}
++(void)updateSavedFilesStorage{
+    NSData *encodedObject = [NSKeyedArchiver archivedDataWithRootObject:FILES];
+    [[NSUserDefaults standardUserDefaults] setObject:encodedObject forKey:@"savedFiles"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 /**
@@ -69,9 +84,15 @@ static FileContainer * FILES = nil;
  * @return if switch changed to OFF - removes corresponding file from
  *                                    the array selectedFiles.
  */
-- (IBAction)fileSwitchValueChanged:(UISwitch *)sender
-{
-    ExperimentFile *file = [_filesToDisplay objectAtIndex:sender.tag];
+- (IBAction)fileSwitchValueChanged:(UISwitch *)sender{
+    UITableViewCell *cell = (UITableViewCell *)sender.superview;
+    
+    while(![cell isKindOfClass:[UITableViewCell class]]){
+        cell = (UITableViewCell *)cell.superview;
+    }
+    
+    NSIndexPath *indexPath = [_tableView indexPathForCell:cell];
+    ExperimentFile *file = _filesToDisplay[indexPath.section][indexPath.row];
     if (sender.on) {
         [_selectedFiles addExperimentFile:file];
     } else {
@@ -81,13 +102,22 @@ static FileContainer * FILES = nil;
     _selectTaskToPerformButton.enabled = ([_selectedFiles numberOfFilesWithType:_segmentedControl.selectedSegmentIndex] > 0);
 }
 
+-(void)updateFiles{
+    experiements = [FILES getAllExperimentIDsOfFileType:_segmentedControl.selectedSegmentIndex].mutableCopy;
+    NSMutableArray *newFilesToDisplay = [[NSMutableArray alloc] init];
+    for(NSString *expID in experiements){
+        [newFilesToDisplay addObject:[FILES getAllExperimentsWithID:expID fileType:RAW]];
+    }
+    _filesToDisplay = newFilesToDisplay;
+}
 - (void) updateTableViewAndButtons
 {
-    _filesToDisplay = [FILES getFiles:_segmentedControl.selectedSegmentIndex];
-    
-    _selectTaskToPerformButton.enabled = ([_selectedFiles numberOfFilesWithType:_segmentedControl.selectedSegmentIndex] > 0);
+//    _filesToDisplay = [FILES getFiles:_segmentedControl.selectedSegmentIndex];
+//    _selectTaskToPerformButton.enabled = ([_selectedFiles numberOfFilesWithType:_segmentedControl.selectedSegmentIndex] > 0);
+//    [_tableView reloadData];
+    [self updateFiles];
+
     [_tableView reloadData];
-    
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -100,22 +130,29 @@ static FileContainer * FILES = nil;
 {
     [super viewDidLoad];
     _filesToDisplay = [FILES getFiles:RAW];
+    
     _selectedFiles = [[FileContainer alloc] init];
+    [self updateTableViewAndButtons];
+    
     //add self to appDelegate
 }
+
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Returns number of sections i tableView.
-    return 1;
+    return experiements.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Returns number of rows in tableView.
-    return [_filesToDisplay count];
+    if(_filesToDisplay.count < section){
+        return 0;
+    }
+    return [(NSArray *)_filesToDisplay[section] count];
 }
 
 /**
@@ -129,18 +166,45 @@ static FileContainer * FILES = nil;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     DataFileTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DataFilePrototypeCell" forIndexPath:indexPath];
-    ExperimentFile *file = [_filesToDisplay objectAtIndex:indexPath.row];
+    ExperimentFile *file = _filesToDisplay[indexPath.section][indexPath.row];
     cell.textField.text = [file getDescription];
     cell.switchButton.on = [_selectedFiles containsFile:file];
     //cell.file = [_selectedFiles objectAtIndex:indexPath.row];
-    cell.switchButton.tag = indexPath.row;
     return cell;
 }
 
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    return experiements[section];
+}
 -(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
     // Number of sections i pickerView.
     return 1;
+}
+
+-(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
+    return true;
+}
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if(editingStyle == UITableViewCellEditingStyleDelete){
+        ExperimentFile *file = _filesToDisplay[indexPath.section][indexPath.row];
+        [SelectedFilesViewController removeExperimentFile:file];
+        [_selectedFiles removeExperimentFile:file];
+        
+        [self updateFiles];
+        // Either delete some rows within a section (leaving at least one) or the entire section.
+        if (_filesToDisplay.count > indexPath.section){
+            // Section is not yet empty, so delete only the current row.
+            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+        }
+        else{
+            // Section is now completely empty, so delete the entire section.
+            [tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section]
+                     withRowAnimation:UITableViewRowAnimationLeft];
+        }
+        
+    }
 }
 
 - (FileType) getSelectedFileType

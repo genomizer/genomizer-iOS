@@ -22,4 +22,7 @@ categories based on the file type.
 - (NSMutableArray *) getFiles;
 - (NSMutableArray *) getFiles: (FileType) fileType;
 
+-(NSArray *)getAllExperimentIDsOfFileType:(FileType)fileType;
+-(NSArray *)getAllExperimentsWithID:(NSString *)expID fileType:(FileType)fileType;
+
 @end

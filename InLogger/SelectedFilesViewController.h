@@ -10,10 +10,10 @@
 #import "ViewController.h"
 #import "Experiment.h"
 
-@interface SelectedFilesViewController : ViewController
+@interface SelectedFilesViewController : ViewController<UITableViewDataSource, UITableViewDelegate>
 
 + (void) addExperimentFile:(ExperimentFile *) file;
 + (void) removeExperimentFile:(ExperimentFile *) file;
 - (IBAction) unwindToList:(UIStoryboardSegue *)segue;
-
++(BOOL)containsExperimentFile:(ExperimentFile *) file;
 @end

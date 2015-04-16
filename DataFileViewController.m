@@ -113,7 +113,9 @@
     NSArray *selectedFiles = [_selectedFiles getFiles];
     for (NSInteger i = [selectedFiles count]; i > 0; i--) {
         ExperimentFile *file = [selectedFiles objectAtIndex:i-1];
-        [SelectedFilesViewController addExperimentFile: file];
+        if(![SelectedFilesViewController containsExperimentFile:file]){
+            [SelectedFilesViewController addExperimentFile: file];
+        }
         [_selectedFiles removeExperimentFile:file];
     }
     
