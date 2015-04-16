@@ -10,7 +10,8 @@
 
 @implementation JSONBuilder
 
-static NSString *SERVER_URL = @"dumbledore.cs.umu.se:7000";
+//Don't change!!
+static NSString *SERVER_URL = nil;
 
 /**
  * Static method that generates a Login URLRequest with a JSON object containing login credentials.
