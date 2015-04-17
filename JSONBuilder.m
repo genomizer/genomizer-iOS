@@ -33,6 +33,7 @@ static NSString *SERVER_URL = nil;//Don't change!!
     
     NSString *postLength = [NSString stringWithFormat:@"%d", (int)[postData length]];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    NSLog(@"%@",[self getServerURL]);
     [request setURL:[NSURL URLWithString:[[self getServerURL] stringByAppendingString:@"login"]]];
     [request setHTTPMethod:@"POST"];
     [request setValue:postLength forHTTPHeaderField:@"Content-Length"];

@@ -43,7 +43,7 @@ NSString *token;
          if (POSTReply != nil) {
              message = [NSJSONSerialization JSONObjectWithData:POSTReply options:kNilOptions error:&error];
          }
-         NSLog(@"LOGIN resp: %@ %@", response, message);
+         NSLog(@"LOGIN resp: %@ | %@", response, message);
          if (internalError == nil) {
 
              NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
@@ -110,7 +110,7 @@ NSString *token;
          NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
          NSMutableArray *array;
          NSError *error;
-         NSLog(@"Search result: %@ %@", response, internalError);
+         NSLog(@"Search result: [%@] internal error: [%@]", response, internalError);
          if(internalError == nil)
          {
              if(httpResp.statusCode == 200)
