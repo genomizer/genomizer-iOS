@@ -1,4 +1,4 @@
-//
+ //
 //  SettingsPopupDelegate.m
 //  Genomizer
 //
@@ -15,7 +15,6 @@
 @end
 
 @implementation SettingsPopupDelegate
-
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {

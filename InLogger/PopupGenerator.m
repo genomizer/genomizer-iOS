@@ -83,6 +83,7 @@ static UIView * ACTIVITY_CONTAINER;
     UIAlertView * alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:delegate cancelButtonTitle: nil otherButtonTitles:@"Done", @"Cancel", nil];
     alert.alertViewStyle = UIAlertViewStylePlainTextInput;
     UITextField *textField = [alert textFieldAtIndex:0];
+    [textField setReturnKeyType:UIReturnKeyDone];
     textField.text = text;
     [alert show];
 }

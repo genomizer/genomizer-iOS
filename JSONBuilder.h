@@ -7,7 +7,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define MOCK_URL @"192.168.100.74:7000"
+#define MOCK_URL @"http://dumbledore.cs.umu.se:7000/"
 
 /**
  A class that creates NSURLRequests containing JSON objects where applicable

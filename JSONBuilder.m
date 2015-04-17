@@ -176,7 +176,7 @@ static NSString *SERVER_URL = nil;//Don't change!!
 {
     NSMutableString *urlString = [[NSMutableString alloc] initWithString:url];
     if ([urlString characterAtIndex: urlString.length - 1] != '/') {
-        //[urlString appendString:@"/"];
+        [urlString appendString:@"/"];
     }
     [[NSUserDefaults standardUserDefaults] setObject:urlString forKey:@"serverURL"];
     [[NSUserDefaults standardUserDefaults] synchronize];
