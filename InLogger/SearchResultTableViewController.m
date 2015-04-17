@@ -38,13 +38,11 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return [self.searchResults count];
 }
 
@@ -62,7 +60,7 @@
 
     cell.index = indexPath.row;
     cell.experiement = experiment;
-    cell.controller = self;
+//    cell.controller = self;
     return cell;
 }
 
@@ -89,20 +87,8 @@
  * the appropriate rownumber.
  *
  */
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [self didSelectRow: indexPath.row];
-}
-
-/**
- * Method that sets currently selected experiment to the one described by the cell at
- * row 'row'. It also shows a file list view for the selected experiment.
- *
- */
-#warning lol 2.0?
--(void) didSelectRow: (NSInteger) row
-{
-    _selectedExperiment = [_searchResults objectAtIndex: row];
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    _selectedExperiment = [_searchResults objectAtIndex: indexPath.row];
     [self performSegueWithIdentifier:@"toFileList1" sender:self];
 }
 
