@@ -171,6 +171,7 @@ typedef enum {
 
     AppDelegate *app = [UIApplication sharedApplication].delegate;
     [app.window makeKeyWindow];
+    
     [view removeFromSuperview];
     [self removeFromSuperview];
     self.hidden = true;

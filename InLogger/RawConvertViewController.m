@@ -127,31 +127,31 @@
     /**
       * Create frame containing the convert button.
       */
-    UIView *staticView = [[UIView alloc] initWithFrame:CGRectMake(0, self.tableView.bounds.size.height-50, self.tableView.bounds.size.width, 50)];
-    staticView.backgroundColor = [UIColor whiteColor];
+    float buttonHeight = 56;
+    UIView *staticView = [[UIView alloc] initWithFrame:CGRectMake(0, self.tableView.bounds.size.height-buttonHeight, self.tableView.bounds.size.width, buttonHeight)];
+    staticView.backgroundColor = [UIColor colorWithRed:74/255.f green:144/255.f blue:226/255.f alpha:1.0];
     _convertButton=[UIButton buttonWithType:UIButtonTypeRoundedRect] ;
     [_convertButton setTitle:@"Convert" forState:UIControlStateNormal];
+    _convertButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:17.f];
+    [_convertButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_convertButton addTarget:self action:@selector(convertButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
-    _convertButton.frame=CGRectMake(self.tableView.bounds.size.width/2-65, 10, 130, 30);
+    _convertButton.frame=staticView.bounds;
     
     _activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     _activityIndicator.frame=CGRectMake(self.tableView.bounds.size.width/2-65, 10, 130, 30);
     _activityIndicator.hidesWhenStopped = YES;
     _activityIndicator.hidden = YES;
+    
     [staticView addSubview:_activityIndicator];
     [staticView addSubview:_convertButton];
+    
     [_activityIndicator stopAnimating];
-    staticView.clipsToBounds = YES;
-    CALayer *rightBorder = [CALayer layer];
-    rightBorder.borderColor = [UIColor lightGrayColor].CGColor;
-    rightBorder.borderWidth = 1;
-    rightBorder.frame = CGRectMake(0, -1.5, CGRectGetWidth(staticView.frame), 2);
-    [staticView.layer addSublayer:rightBorder];
+    
     [self.tableView addSubview:staticView];
     _staticView = staticView;
     
-    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 50, 0);
-    
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, buttonHeight, 0);
+    self.tableView.scrollIndicatorInsets = self.tableView.contentInset;
     //add self to appDelegate
 //Pål did this
 //    AppDelegate *app = [UIApplication sharedApplication].delegate;
