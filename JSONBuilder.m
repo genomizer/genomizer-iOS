@@ -33,6 +33,7 @@ static NSString *SERVER_URL = nil;//Don't change!!
     
     NSString *postLength = [NSString stringWithFormat:@"%d", (int)[postData length]];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    NSLog(@"%@",[self getServerURL]);
     [request setURL:[NSURL URLWithString:[[self getServerURL] stringByAppendingString:@"login"]]];
     [request setHTTPMethod:@"POST"];
     [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
@@ -175,7 +176,7 @@ static NSString *SERVER_URL = nil;//Don't change!!
 {
     NSMutableString *urlString = [[NSMutableString alloc] initWithString:url];
     if ([urlString characterAtIndex: urlString.length - 1] != '/') {
-        [urlString appendString:@"/"];
+        //[urlString appendString:@"/"];
     }
     [[NSUserDefaults standardUserDefaults] setObject:urlString forKey:@"serverURL"];
     [[NSUserDefaults standardUserDefaults] synchronize];

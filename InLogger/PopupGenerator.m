@@ -80,7 +80,7 @@ static UIView * ACTIVITY_CONTAINER;
  */
 + (void) showInputPopupWithMessage: (NSString *) message withTitle: (NSString *) title withText: (NSString *) text withDelegate: (id) delegate
 {
-    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:delegate cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:delegate cancelButtonTitle: nil otherButtonTitles:@"Done", @"Cancel", nil];
     alert.alertViewStyle = UIAlertViewStylePlainTextInput;
     UITextField *textField = [alert textFieldAtIndex:0];
     textField.text = text;
