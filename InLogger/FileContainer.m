@@ -59,6 +59,13 @@
     [[self getFiles: file.type] removeObject:file];
 }
 
+-(void)removeAllFiles{
+    [_rawFiles removeAllObjects];
+    [_profileFiles removeAllObjects];
+    [_regionFiles removeAllObjects];
+    [_otherFiles removeAllObjects];
+}
+
 /**
  * Returns the total number of files.
  *

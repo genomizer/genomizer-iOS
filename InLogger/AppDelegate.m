@@ -20,6 +20,7 @@
     self = [super init];
     _userIsLoggingOut = NO;
     _numberOfThreadsAlive = 0;
+    
     return self;
 }
 
@@ -48,7 +49,10 @@
     [self.window setRootViewController:viewController];
 }
 -(void)resetUserToken{
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"usertoken"];
+//    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"usertoken"];
+    NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
+    [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 //- (int) getNumberOfControllers {

@@ -12,14 +12,14 @@
 #import "FileContainer.h"
 #import "TabViewController.h"
 @interface SelectedFilesViewController (){
-     NSMutableArray *experiements;
+    NSMutableArray *experiements;
+    NSMutableArray *filesToDisplay;
 }
 
-@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) IBOutlet UIButton *selectTaskToPerformButton;
 
-@property NSMutableArray *filesToDisplay;
+
+
+
 @property FileContainer *selectedFiles;
 
 @end
@@ -59,6 +59,12 @@ static FileContainer * FILES = nil;
     [FILES removeExperimentFile: file];
     [SelectedFilesViewController updateSavedFilesStorage];
 }
+
++(void)removeAllExperimentFiles{
+    [FILES removeAllFiles];
+    [SelectedFilesViewController updateSavedFilesStorage];
+}
+
 +(void)updateSavedFilesStorage{
     NSData *encodedObject = [NSKeyedArchiver archivedDataWithRootObject:FILES];
     [[NSUserDefaults standardUserDefaults] setObject:encodedObject forKey:@"savedFiles"];
@@ -82,20 +88,20 @@ static FileContainer * FILES = nil;
  * @return if switch changed to OFF - removes corresponding file from
  *                                    the array selectedFiles.
  */
-
 - (IBAction)fileSwitchValueChanged:(UISwitch *)sender{
-    UITableViewCell *cell = [self cellForButton:sender];
+    UITableViewCell *cell = [self cellForButton:(UIButton *)sender];
 
     
     NSIndexPath *indexPath = [_tableView indexPathForCell:cell];
-    ExperimentFile *file = _filesToDisplay[indexPath.section][indexPath.row];
+    ExperimentFile *file = filesToDisplay[indexPath.section][indexPath.row];
     if (sender.on) {
         [_selectedFiles addExperimentFile:file];
     } else {
         [_selectedFiles removeExperimentFile:file];
     }
     
-    _selectTaskToPerformButton.enabled = ([_selectedFiles numberOfFilesWithType:_segmentedControl.selectedSegmentIndex] > 0);
+    [self updateSelectTaskView];
+//    _selectTaskToPerformButton.enabled = ([_selectedFiles numberOfFilesWithType:_segmentedControl.selectedSegmentIndex] > 0);
 }
 
 -(void)updateFiles{
@@ -104,31 +110,50 @@ static FileContainer * FILES = nil;
     for(NSString *expID in experiements){
         [newFilesToDisplay addObject:[FILES getAllExperimentsWithID:expID fileType:RAW]];
     }
-    _filesToDisplay = newFilesToDisplay;
+    filesToDisplay = newFilesToDisplay;
+}
+
+-(void)updateSelectTaskView{
+    BOOL wasEnabled = _selectTaskToPerformButton.enabled;
+    BOOL selectTaskEnabled = ([_selectedFiles numberOfFilesWithType:_segmentedControl.selectedSegmentIndex] > 0);
+    _selectTaskToPerformButton.enabled = selectTaskEnabled;
+    NSLog(@"size: %@", NSStringFromCGRect(_tableView.frame));
+    if(!selectTaskEnabled && wasEnabled){
+        [UIView animateWithDuration:0.1 animations:^{
+//            _selectTaskView.transform = CGAffineTransformMakeTranslation(0, _selectTaskView.frame.size.height);
+            _selectTaskView.frame = CGRectMake(_selectTaskView.frame.origin.x, _selectTaskView.frame.origin.y + _selectTaskView.frame.size.height, _selectTaskView.frame.size.width, _selectTaskView.frame.size.height);
+            _tableView.frame = CGRectMake(_tableView.frame.origin.x, _tableView.frame.origin.y, _tableView.frame.size.width, _tableView.frame.size.height + _selectTaskView.frame.size.height);
+        }];
+        
+    } else if(selectTaskEnabled && !wasEnabled){
+        [UIView animateWithDuration:0.1 animations:^{
+//            _selectTaskView.transform = CGAffineTransformMakeTranslation(0, 0);
+            _selectTaskView.frame = CGRectMake(_selectTaskView.frame.origin.x, _selectTaskView.frame.origin.y - _selectTaskView.frame.size.height, _selectTaskView.frame.size.width, _selectTaskView.frame.size.height);
+            _tableView.frame = CGRectMake(_tableView.frame.origin.x, _tableView.frame.origin.y, _tableView.frame.size.width, _tableView.frame.size.height - _selectTaskView.frame.size.height);
+        }];
+    }
 }
 - (void) updateTableViewAndButtons
 {
-//    _filesToDisplay = [FILES getFiles:_segmentedControl.selectedSegmentIndex];
-//    _selectTaskToPerformButton.enabled = ([_selectedFiles numberOfFilesWithType:_segmentedControl.selectedSegmentIndex] > 0);
-//    [_tableView reloadData];
-    [self updateFiles];
+//    filesToDisplay = [FILES getFiles:_segmentedControl.selectedSegmentIndex];
 
+    [self updateSelectTaskView];
+    [self updateFiles];
     [_tableView reloadData];
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
+- (void)viewDidAppear:(BOOL)animated{
     [self updateTableViewAndButtons];
     [super viewDidAppear:animated];
 }
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _filesToDisplay = [FILES getFiles:RAW];
+    filesToDisplay = [FILES getFiles:RAW];
     
     _selectedFiles = [[FileContainer alloc] init];
-    [self updateTableViewAndButtons];
+    _selectTaskToPerformButton.enabled = false;
+//    [self updateTableViewAndButtons];
     
     //add self to appDelegate
 }
@@ -145,10 +170,10 @@ static FileContainer * FILES = nil;
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Returns number of rows in tableView.
-    if(_filesToDisplay.count < section){
+    if(filesToDisplay.count < section){
         return 0;
     }
-    return [(NSArray *)_filesToDisplay[section] count];
+    return [(NSArray *)filesToDisplay[section] count];
 }
 
 /**
@@ -162,7 +187,7 @@ static FileContainer * FILES = nil;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     DataFileTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DataFilePrototypeCell" forIndexPath:indexPath];
-    ExperimentFile *file = _filesToDisplay[indexPath.section][indexPath.row];
+    ExperimentFile *file = filesToDisplay[indexPath.section][indexPath.row];
     cell.textField.text = [file getDescription];
     cell.switchButton.on = [_selectedFiles containsFile:file];
     //cell.file = [_selectedFiles objectAtIndex:indexPath.row];
@@ -184,13 +209,18 @@ static FileContainer * FILES = nil;
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if(editingStyle == UITableViewCellEditingStyleDelete){
-        ExperimentFile *file = _filesToDisplay[indexPath.section][indexPath.row];
+        
+        ExperimentFile *file = filesToDisplay[indexPath.section][indexPath.row];
         [SelectedFilesViewController removeExperimentFile:file];
         [_selectedFiles removeExperimentFile:file];
         
+        BOOL onlyOne = [filesToDisplay[indexPath.section] count] == 1;
+        
         [self updateFiles];
+        
+        
         // Either delete some rows within a section (leaving at least one) or the entire section.
-        if (_filesToDisplay.count > indexPath.section){
+        if (!onlyOne){
             // Section is not yet empty, so delete only the current row.
             [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
         }
@@ -201,6 +231,27 @@ static FileContainer * FILES = nil;
         }
         
     }
+}
+
+#define kHeaderHeight 46.f
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, kHeaderHeight)];
+    v.backgroundColor = [UIColor clearColor];
+    
+    UILabel *l = [[UILabel alloc] initWithFrame:CGRectInset(v.bounds, 15, 0)];
+    l.text = [tableView.dataSource tableView:tableView titleForHeaderInSection:section];
+    l.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:17.f];
+    [v addSubview:l];
+    
+    return v;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return kHeaderHeight;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 0.01;
 }
 
 - (FileType) getSelectedFileType
@@ -259,7 +310,7 @@ static FileContainer * FILES = nil;
 - (IBAction)infoFile:(UIButton*)sender {
     UITableViewCell *cell = [self cellForButton:sender];
     NSIndexPath *indexPath = [_tableView indexPathForCell:cell];
-    ExperimentFile *file = _filesToDisplay[indexPath.section][indexPath.row];
+    ExperimentFile *file = filesToDisplay[indexPath.section][indexPath.row];
     [(TabViewController *)self.tabBarController showInfoAboutFile:file];
 
 }
@@ -278,7 +329,7 @@ static FileContainer * FILES = nil;
 //}
 
 //Pål did this
-//    NSString *infoText = @"Hejsan allihopa";//[[_filesToDisplay objectAtIndex:sender.tag] getAllInfo];
+//    NSString *infoText = @"Hejsan allihopa";//[[filesToDisplay objectAtIndex:sender.tag] getAllInfo];
 //    UIView *dimView = ({
 //        UIView *v = [[UIView alloc] initWithFrame:self.view.frame];
 //        v.backgroundColor = [UIColor blackColor];
@@ -307,7 +358,7 @@ static FileContainer * FILES = nil;
 //    _trashButton.enabled = NO;
 //    _infoAboutFile.layer.borderWidth = 0.4;
 //    _infoAboutFile.layer.borderColor = [UIColor lightGrayColor].CGColor;
-//    _infoFileTextField.text = [[_filesToDisplay objectAtIndex:sender.tag] getAllInfo];
+//    _infoFileTextField.text = [[filesToDisplay objectAtIndex:sender.tag] getAllInfo];
 //    [[_infoFileTextField layer] setBorderColor : [[UIColor lightGrayColor] CGColor]];
 //    [[_infoFileTextField layer] setBorderWidth:0.4];
 /*

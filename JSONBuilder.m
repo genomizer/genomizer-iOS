@@ -13,8 +13,6 @@
 
 static NSString *SERVER_URL = nil;//Don't change!!
 
-
-
 /**
  * Static method that generates a Login URLRequest with a JSON object containing login credentials.
  *
@@ -35,6 +33,7 @@ static NSString *SERVER_URL = nil;//Don't change!!
     
     NSString *postLength = [NSString stringWithFormat:@"%d", (int)[postData length]];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    NSLog(@"%@",[self getServerURL]);
     [request setURL:[NSURL URLWithString:[[self getServerURL] stringByAppendingString:@"login"]]];
     [request setHTTPMethod:@"POST"];
     [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
@@ -157,8 +156,7 @@ static NSString *SERVER_URL = nil;//Don't change!!
  *
  *@return NSString containing the server URL.
  */
-+ (NSString*) getServerURL
-{
++ (NSString*) getServerURL{
     if(SERVER_URL == nil){
         SERVER_URL = [[NSUserDefaults standardUserDefaults] objectForKey:@"serverURL"];
         if(SERVER_URL == nil){

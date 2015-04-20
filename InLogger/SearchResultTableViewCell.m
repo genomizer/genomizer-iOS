@@ -27,16 +27,16 @@
 }
 
 
-#warning lol?
-- (IBAction)experimentTouchUpInside:(id)sender
-{
-    [_controller didSelectRow:_index];
-}
+//#warning lol?
+//- (IBAction)experimentTouchUpInside:(id)sender
+//{
+//    [_controller didSelectRow:_index];
+//}
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    _controller.selectedExperiment = _experiement;
-    [super touchesBegan:touches withEvent:event];
-}
+//- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+//    _controller.selectedExperiment = _experiement;
+//    [super touchesBegan:touches withEvent:event];
+//}
 
 - (CGSize)textFieldSize
 {

@@ -43,7 +43,7 @@ NSString *token;
          if (POSTReply != nil) {
              message = [NSJSONSerialization JSONObjectWithData:POSTReply options:kNilOptions error:&error];
          }
-         NSLog(@"LOGIN resp: %@ %@", response, message);
+         NSLog(@"LOGIN resp: %@ | %@", response, message);
          if (internalError == nil) {
 
              NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
@@ -110,7 +110,7 @@ NSString *token;
          NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
          NSMutableArray *array;
          NSError *error;
-         NSLog(@"Search result: %@ %@", response, internalError);
+         NSLog(@"Search result: [%@] internal error: [%@]", response, internalError);
          if(internalError == nil)
          {
              if(httpResp.statusCode == 200)
@@ -416,8 +416,8 @@ NSString *token;
             error = [NSError errorWithDomain:@"Empty response" code:0 userInfo:dict];
             break;
         case 400:
-            [dict setObject:@"Bad request, fill in more information" forKey:NSLocalizedDescriptionKey];
-            error = [NSError errorWithDomain:@"Bad request" code:0 userInfo:dict];
+            [dict setObject:@"Nothing got selected in the search. Please tap on the switches on the field's you wish to search. for." forKey:NSLocalizedDescriptionKey];
+            error = [NSError errorWithDomain:@"Nothing sent" code:0 userInfo:dict];
             break;
         case 401:
             [dict setObject:errorMessage forKey:NSLocalizedDescriptionKey];

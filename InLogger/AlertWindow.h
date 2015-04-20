@@ -19,4 +19,5 @@
 -(id)initWithFrame:(CGRect)frame title:(NSString *)title message:(NSString *)msg type:(NSString *)type;
 
 -(void)animateDownAndUp:(void(^)())completion;
++(UIColor *)colorForType:(NSString *)type;
 @end

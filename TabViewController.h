@@ -11,6 +11,7 @@
 #import "FileAboutView.h"
 #import "ExperimentFile.h"
 #import "AlertWindow.h"
+#import "AdvancedSearchView.h"
 
 /**
  Child of UITabBarController, handles error messages as well.
@@ -21,4 +22,7 @@
 -(void)showInfoAboutFile:(ExperimentFile *)file;
 -(void)showPopDownWithTitle:(NSString *)title andMessage:(NSString *)msg type:(NSString *)type;
 -(void)showPopDownWithError:(NSError *)error;
+
+-(void)showAdvancedSearchView:(NSString *)searchText delegate:(id<AdvancedSearchViewDelegate>)del;
+-(void)zoomViewRestore;
 @end

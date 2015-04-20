@@ -14,11 +14,15 @@
 @end
 
 @implementation MoreViewController
-
+@synthesize serverLabel, userLabel;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //add self to appDelegate
+    
+    NSString *serverURL = [[NSUserDefaults standardUserDefaults] objectForKey:@"serverURL"];
+    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+    self.serverLabel.text = serverURL;
+    self.userLabel.text = username;
 }
 /**
  * Method that executes when the "logout"-button is pressed.
