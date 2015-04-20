@@ -30,6 +30,7 @@
 		76E2DA9F190E96C90048069D /* JSONBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 76E2DA9E190E96C90048069D /* JSONBuilder.m */; };
 		76F638D8190FD99300F0F4BF /* Experiment.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F638D7190FD99300F0F4BF /* Experiment.m */; };
 		76F638DB190FDD9D00F0F4BF /* ExperimentFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F638DA190FDD9D00F0F4BF /* ExperimentFile.m */; };
+		CFE6F04C1AE1049600047985 /* testViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFE6F04B1AE1049600047985 /* testViewController.m */; };
 		D108BEBF1ADFE1F40075D736 /* DataFileTableViewCell.h in Sources */ = {isa = PBXBuildFile; fileRef = D1FD6E361ADFDD8D00676BED /* DataFileTableViewCell.h */; };
 		D116AEE81ADE5FAE00E8E997 /* AlertWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = D116AEE71ADE5FAE00E8E997 /* AlertWindow.m */; };
 		D134590B1AE0FF6D004EDF31 /* AdvancedSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = D134590A1AE0FF6D004EDF31 /* AdvancedSearchView.m */; };
@@ -143,6 +144,7 @@
 		76F638D7190FD99300F0F4BF /* Experiment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Experiment.m; sourceTree = "<group>"; };
 		76F638D9190FDD9D00F0F4BF /* ExperimentFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExperimentFile.h; sourceTree = "<group>"; };
 		76F638DA190FDD9D00F0F4BF /* ExperimentFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExperimentFile.m; sourceTree = "<group>"; };
+		CFE6F04B1AE1049600047985 /* testViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testViewController.m; sourceTree = "<group>"; };
 		D116AEE61ADE5FAE00E8E997 /* AlertWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertWindow.h; sourceTree = "<group>"; };
 		D116AEE71ADE5FAE00E8E997 /* AlertWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertWindow.m; sourceTree = "<group>"; wrapsLines = 1; };
 		D13459091AE0FF6D004EDF31 /* AdvancedSearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvancedSearchView.h; sourceTree = "<group>"; };
@@ -526,6 +528,7 @@
 		DEEF6B0619094F8B00A2CD8C /* GenomizerTests */ = {
 			isa = PBXGroup;
 			children = (
+				CFE6F04B1AE1049600047985 /* testViewController.m */,
 				2173DFC61929F2160040A336 /* TestProcessStatusDescriptor.m */,
 				210BED2B1918D83400A8E690 /* TestJSONBuilder */,
 				DE9A3EF81918CFDC00F7C33B /* TestExperimentDescriber.m */,
@@ -733,6 +736,7 @@
 				2173DFC71929F2160040A336 /* TestProcessStatusDescriptor.m in Sources */,
 				21277BD019190095005FB7FD /* testJSONBuilderTestAvailableAnnotations.m in Sources */,
 				2114DA0E19235A3D002A88D9 /* TestServerConnection.m in Sources */,
+				CFE6F04C1AE1049600047985 /* testViewController.m in Sources */,
 				DEF812931918DE1C00A88173 /* TestExperimentFile.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

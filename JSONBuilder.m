@@ -174,13 +174,16 @@ static NSString *SERVER_URL = nil;//Don't change!!
  */
 + (void) setServerURLToString: (NSString *) url
 {
-    NSMutableString *urlString = [[NSMutableString alloc] initWithString:url];
-    if ([urlString characterAtIndex: urlString.length - 1] != '/') {
-        [urlString appendString:@"/"];
+    if ([url length] != 0) {
+        NSMutableString *urlString = [[NSMutableString alloc] initWithString:url];
+        if ([urlString characterAtIndex: urlString.length - 1] != '/') {
+            [urlString appendString:@"/"];
+        }
+    
+        [[NSUserDefaults standardUserDefaults] setObject:urlString forKey:@"serverURL"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        SERVER_URL = urlString;
     }
-    [[NSUserDefaults standardUserDefaults] setObject:urlString forKey:@"serverURL"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    SERVER_URL = urlString;
 }
 
 @end
