@@ -35,7 +35,7 @@
     } else{
         NSLog(@"token: %@", usertoken);
         [ServerConnection setToken:usertoken];
-        vc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"home"];
+        vc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"home2"];
     }
     
     self.window.rootViewController = vc;

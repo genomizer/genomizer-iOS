@@ -13,4 +13,6 @@
 
 @interface TableViewController : UITableViewController
 
+
+@property (nonatomic, retain, getter=getTabbar) UIViewController *tabBar2Controller;
 @end

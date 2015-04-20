@@ -19,6 +19,8 @@
 @property (nonatomic, copy) ProcessViewController *aReference;
 @property (readwrite, copy) void (^completionBlock)(NSError *error, NSString *message);
 
+
+-(IBAction)popViewController:(id)sender;
 - (void) reportResult: (NSError*) error experiment: (NSString*) expid;
 - (void) reportGenomeResult:(NSMutableArray*) genomeReleases withError:(NSError*) error;
 @end

@@ -11,13 +11,14 @@
 
 #import "ViewController.h"
 #import "SegueController.h"
+#import "NavController.h"
 
 @interface ViewController ()
 
 @end
 
 @implementation ViewController
-
+@synthesize tabBar2Controller;
 /**
  * Marks the segue as done.
  */
@@ -25,6 +26,12 @@
 {
     [SegueController segueDone];
     [super viewDidAppear:animated];
+}
+
+-(TabBar2Controller *)getTabbar{
+    NavController *nc = (NavController *)self.navigationController;
+    NSLog(@"tabbar 15: %@", nc.tabBar2Controller);
+    return nc.tabBar2Controller;
 }
 
 /**

@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "ViewController.h"
 #import "Experiment.h"
-
-@interface SelectedFilesViewController : ViewController<UITableViewDataSource, UITableViewDelegate>
+#import "TabBar2Controller.h"
+#import "OptionsView.h"
+@interface SelectedFilesViewController : ViewController<UITableViewDataSource, UITableViewDelegate, OptionsViewDelegate>
 
 
 @property (weak, nonatomic) IBOutlet UIView *selectTaskView;
@@ -22,6 +23,6 @@
 + (void) addExperimentFile:(ExperimentFile *) file;
 + (void) removeExperimentFile:(ExperimentFile *) file;
 - (IBAction) unwindToList:(UIStoryboardSegue *)segue;
-
+- (IBAction)removeFilesWhenTouchTrash:(UIBarButtonItem *)sender;
 +(BOOL)containsExperimentFile:(ExperimentFile *) file;
 @end

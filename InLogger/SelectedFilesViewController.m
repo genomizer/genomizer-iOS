@@ -11,6 +11,9 @@
 #import "PopupGenerator.h"
 #import "FileContainer.h"
 #import "TabViewController.h"
+#import "RawConvertViewController.h"
+#import "NavController.h"
+
 @interface SelectedFilesViewController (){
     NSMutableArray *experiements;
     NSMutableArray *filesToDisplay;
@@ -156,6 +159,7 @@ static FileContainer * FILES = nil;
 //    [self updateTableViewAndButtons];
     
     //add self to appDelegate
+
 }
 
 
@@ -236,7 +240,7 @@ static FileContainer * FILES = nil;
 #define kHeaderHeight 46.f
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, kHeaderHeight)];
-    v.backgroundColor = [UIColor clearColor];
+    v.backgroundColor = [UIColor colorWithWhite:0.96 alpha:1.f];
     
     UILabel *l = [[UILabel alloc] initWithFrame:CGRectInset(v.bounds, 15, 0)];
     l.text = [tableView.dataSource tableView:tableView titleForHeaderInSection:section];
@@ -266,18 +270,18 @@ static FileContainer * FILES = nil;
  *          have switchbutton set to "ON".)
  */
 //Pål did this
-//- (IBAction)removeFilesWhenTouchTrash:(UIBarButtonItem *)sender
-//{
-//    NSArray *files = [_selectedFiles getFiles: [self getSelectedFileType]];
-//    for (NSInteger i = [files count]; i > 0; i--) {
-//        ExperimentFile *file = [files objectAtIndex:i-1];
-//        [FILES removeExperimentFile:file];
-//        [_selectedFiles removeExperimentFile:file];
-//    }
-//    
+- (IBAction)removeFilesWhenTouchTrash:(UIBarButtonItem *)sender
+{
+    NSArray *files = [_selectedFiles getFiles: [self getSelectedFileType]];
+    for (NSInteger i = [files count]; i > 0; i--) {
+        ExperimentFile *file = [files objectAtIndex:i-1];
+        [FILES removeExperimentFile:file];
+        [_selectedFiles removeExperimentFile:file];
+    }
+    
 //    [PopupGenerator showPopupWithMessage:@"Files removed"];
-//    [self updateTableViewAndButtons];
-//}
+    [self updateTableViewAndButtons];
+}
 
 /**
  * Executes when "selectTask"-button is pressed.
@@ -285,24 +289,49 @@ static FileContainer * FILES = nil;
  * @return calls method "preformSegueWithIdentifier".
  */
 - (IBAction)selectTaskButton:(id)sender {
-    NSArray *filesSelected = [_selectedFiles getFiles:[self getSelectedFileType]];
-    if(filesSelected.count == 1) {
-        [self performSegueWithIdentifier:@"convertTask" sender:self];
-    } else if(filesSelected.count > 1){
-        ExperimentFile *firstFile = filesSelected[0];
-        NSString *specie = firstFile.species;
-        for(int i = 1; i < filesSelected.count; i++){
-            if(!([specie isEqualToString:[filesSelected[i] species]])){
-                [PopupGenerator showPopupWithMessage:@"Files with diffrent speices selected"];
-                break;
-            }
-            else if(i == filesSelected.count-1){
-                [self performSegueWithIdentifier:@"convertTask" sender:self];
-            }
-        }
-    }
+    NSLog(@"self.tabbar: %@", self.tabBar2Controller);
+    [(TabBar2Controller *)self.tabBar2Controller showOptions:@[@"Convert to raw"] delegate:self];
+    
+//    NSArray *filesSelected = [_selectedFiles getFiles:[self getSelectedFileType]];
+//    
+//    if(filesSelected.count == 1) {
+//        [self performSegueWithIdentifier:@"convertTask" sender:self];
+//    } else if(filesSelected.count > 1){
+//        ExperimentFile *firstFile = filesSelected[0];
+//        NSString *specie = firstFile.species;
+//        for(int i = 1; i < filesSelected.count; i++){
+//            if(!([specie isEqualToString:[filesSelected[i] species]])){
+//                [PopupGenerator showPopupWithMessage:@"Files with diffrent speices selected"];
+//                break;
+//            }
+//            else if(i == filesSelected.count-1){
+//                [self performSegueWithIdentifier:@"convertTask" sender:self];
+//            }
+//        }
+//    }
 }
 
+-(void)optionsView:(OptionsView *)ov selectedIndex:(NSUInteger)index{
+    [self optionsViewDidClose:ov];
+    
+    if(index == 0){
+        NavController *nextNVC = [self.storyboard instantiateViewControllerWithIdentifier:@"rawConvertNav"];
+        nextNVC.tabBar2Controller = (TabBar2Controller *)self.tabBar2Controller;
+        
+        RawConvertViewController *nextVC = nextNVC.childViewControllers.firstObject;
+        nextVC.experimentFiles = [FILES getFiles:[self getSelectedFileType]];
+        nextVC.ratio = true;
+        nextVC.completionBlock = ^(NSError *error, NSString *message){
+//            NSLog(@"task finished: %@ %@", message, error.userInfo);
+//            [(TabBar2Controller *)self.tabBar2Controller showPopDownWithTitle:@"Convert sent" andMessage:@"Convert request was successfully sent to server" type:@"success"];
+        };
+        [self.tabBar2Controller presentViewController:nextNVC animated:true completion:nil];
+    }
+    
+}
+-(void)optionsViewDidClose:(OptionsView *)ov{
+    [(TabBar2Controller *)self.tabBar2Controller zoomViewRestore];
+}
 /**
  * Executes when the "info"-button next to a file is pressed.
  * @return Shows a popup containing information about that file.
@@ -311,7 +340,7 @@ static FileContainer * FILES = nil;
     UITableViewCell *cell = [self cellForButton:sender];
     NSIndexPath *indexPath = [_tableView indexPathForCell:cell];
     ExperimentFile *file = filesToDisplay[indexPath.section][indexPath.row];
-    [(TabViewController *)self.tabBarController showInfoAboutFile:file];
+    [(TabBar2Controller *)self.tabBar2Controller showInfoAboutFile:file];
 
 }
 
@@ -345,8 +374,8 @@ static FileContainer * FILES = nil;
 //        fav;
 //    });
 //
-//    [self.tabBarController.view addSubview:dimView];
-//    [self.tabBarController.view addSubview:fav];
+//    [self.tabBar2Controller.view addSubview:dimView];
+//    [self.tabBar2Controller.view addSubview:fav];
 //
 //    _dimView.hidden = NO;
 //    _infoAboutFile.hidden = NO;
@@ -387,10 +416,7 @@ static FileContainer * FILES = nil;
         SelectTaskTableViewController *nextVC = (SelectTaskTableViewController *)(navController.viewControllers[0]);
         nextVC.experimentFiles = [FILES getFiles:[self getSelectedFileType]];
         nextVC.fileType = _segmentedControl.selectedSegmentIndex;
-        nextVC.completionBlock = ^(NSError *error, NSString *message){
-            NSLog(@"task finished: %@ %@", message, error.userInfo);
-            [(TabViewController *)self.tabBarController showPopDownWithTitle:@"Convert sent" andMessage:@"Convert request was successfully sent to server" type:@"success"];
-        };
+
     }
 }
 

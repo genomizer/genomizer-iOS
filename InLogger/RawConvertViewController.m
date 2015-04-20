@@ -158,6 +158,11 @@
 //    [app addController:self];
 }
 
+
+-(IBAction)popViewController:(id)sender{
+    [self dismissViewControllerAnimated:true completion:nil];
+    
+}
 -(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
     // Returns number of sections in pickerview.
@@ -379,7 +384,7 @@
 {
     
     if((_bowtie.text.length == 0) || (_genomeFile.text.length == 0)){
-        [PopupGenerator showPopupWithMessage:@"Fill in at least the fields \"Bowtie parameters\" and \"Genome file\" to start a process"];
+        [(TabBar2Controller *)self.tabBar2Controller showPopDownWithTitle:@"Not enough information" andMessage:@"Fill in at least the fields \"Bowtie parameters\" and \"Genome file\" to start a process" type:@"error"];
     }else{
         _convertButton.hidden = YES;
         [_activityIndicator startAnimating];
@@ -549,6 +554,7 @@
                 NSString *message = [NSString stringWithFormat:@"%d convert %@ successfully sent to the server.", successfulConvertRequests, requestString];
 //                [PopupGenerator showPopupWithMessage:message withTitle:@"" withCancelButtonTitle:@"OK" withDelegate:self];
                 [self dismissViewControllerAnimated:true completion:nil];
+                [(TabBar2Controller *)self.tabBar2Controller showPopDownWithTitle:@"Convert sent" andMessage:message type:@"success"];
                 self.completionBlock(error, message);
             }
             _convertButton.enabled = YES;
@@ -575,7 +581,9 @@
  */
 - (void) reportGenomeResult:(NSMutableArray*) genomeReleases withError:(NSError*) error {
     if(error){
-        [PopupGenerator showErrorMessage:error];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [(TabBar2Controller *)self.tabBar2Controller showPopDownWithError:error];
+        });
     }
     else
     {

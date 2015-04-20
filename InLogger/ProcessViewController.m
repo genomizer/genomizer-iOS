@@ -212,7 +212,8 @@ static NSMutableArray * processingExperimentFiles;
         dispatch_async(dispatch_get_main_queue(), ^{
             
             NSString * errorMsg = [error.userInfo objectForKey:NSLocalizedDescriptionKey];
-            [(TabViewController *)self.tabBarController showPopDownWithTitle:error.domain andMessage:errorMsg type:@"error"];
+            [(TabBar2Controller *)self.tabBar2Controller showPopDownWithTitle:error.domain andMessage:errorMsg type:@"error"];
+            
             
 //Pål did this
 //            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;

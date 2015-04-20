@@ -30,9 +30,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [_tableView setContentInset:UIEdgeInsetsMake(0, 0, 0, 0)];
+    [_tableView setContentInset:UIEdgeInsetsMake(0, 0, _searchButtonView.frame.size.height, 0)];
     _searchButtonView.transform = CGAffineTransformMakeTranslation(0, _searchButtonView.frame.size.height);
     _spinner.hidesWhenStopped = YES;
+    [self.view bringSubviewToFront:_searchButtonView];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -47,6 +48,7 @@
     _toolBar = [self createPickerViewToolBar:_pickerView];
     [self.tableView reloadData];
     _searching = NO;
+
 }
 
 - (void) viewDidDisappear:(BOOL)animated {
@@ -69,7 +71,7 @@
         
     } else {
 //        [PopupGenerator showErrorMessage:error];
-        [(TabViewController *)self.tabBarController showPopDownWithError:error];
+        [(TabBar2Controller *)self.tabBar2Controller showPopDownWithError:error];
         [self annotationsIsFinishedWithResult: nil];
         
     }
@@ -78,7 +80,7 @@
 
 - (void)scrollToCell: (UITableViewCell *) cell
 {
-    _tableView.contentInset = UIEdgeInsetsMake(0, 0, 117, 0);
+//    _tableView.contentInset = UIEdgeInsetsMake(0, 0, 117, 0);
     [_tableView scrollToRowAtIndexPath:[_tableView indexPathForCell:cell] atScrollPosition:UITableViewScrollPositionTop animated:YES];
 }
 
@@ -86,12 +88,12 @@
     int nrOfSelected = (int)[self getSelectedAnnotations].count;
     
     if (nrOfSelected == 0) {
-        [_tableView setContentInset:UIEdgeInsetsMake(0, 0, 0, 0)];
+//        [_tableView setContentInset:UIEdgeInsetsMake(0, 0, 0, 0)];
         [UIView animateWithDuration:0.2 animations:^{
             _searchButtonView.transform = CGAffineTransformMakeTranslation(0, _searchButtonView.frame.size.height);
         }];
     } else if(nrOfSelected == 1){
-        [_tableView setContentInset:UIEdgeInsetsMake(0, 0, _searchButtonView.frame.size.height, 0)];
+//        [_tableView setContentInset:UIEdgeInsetsMake(0, 0, _searchButtonView.frame.size.height, 0)];
         [UIView animateWithDuration:0.2 animations:^{
             _searchButtonView.transform = CGAffineTransformMakeTranslation(0, 0);
         }];
@@ -229,7 +231,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self searchIsFinished];
 //                [PopupGenerator showErrorMessage:error];
-                [(TabViewController *)self.tabBarController showPopDownWithError:error];
+                [(TabBar2Controller *)self.tabBar2Controller showPopDownWithError:error];
             });
         } else
         {
@@ -288,7 +290,7 @@
 - (IBAction)advancedSearchButton:(id)sender {
     
     NSArray *selectedAnnotations = [self getSelectedAnnotations];
-    [(TabViewController *)self.tabBarController showAdvancedSearchView:[PubMedBuilder createAnnotationsSearch:selectedAnnotations] delegate:self];
+    [(TabBar2Controller *)self.tabBar2Controller showAdvancedSearchView:[PubMedBuilder createAnnotationsSearch:selectedAnnotations] delegate:self];
     
 //    _advancedView.hidden = NO;
 //    _advancedView.layer.cornerRadius = 5;
@@ -317,7 +319,7 @@
         [adv removeFromSuperview];
         [adv.dimView removeFromSuperview];
     }];
-    [(TabViewController *)self.tabBarController zoomViewRestore];
+    [(TabBar2Controller *)self.tabBar2Controller zoomViewRestore];
 }
 -(void)advancedSearchViewDidSearch:(AdvancedSearchView *)adv{
     [ServerConnection search:[adv getSearchText] withContext:self];
@@ -351,7 +353,7 @@
 
 - (void)hideKeyboardAndAdjustTable {
     [self.view endEditing:YES];
-    _tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+//    _tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     _pickerView.delegate = nil;
     _pickerView.dataSource = nil;
     [_tableView reloadData];

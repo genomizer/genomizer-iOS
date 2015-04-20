@@ -11,12 +11,15 @@
 
 #import "TableViewController.h"
 #import "SegueController.h"
+#import "TabBar2Controller.h"
+#import "NavController.h"
 
 @interface TableViewController ()
 
 @end
 
 @implementation TableViewController
+@synthesize tabBar2Controller;
 
 /**
  * Marks the segue as done.
@@ -26,6 +29,13 @@
     [SegueController segueDone];
     [super viewDidAppear:animated];
 }
+
+
+-(TabBar2Controller *)getTabbar{
+    NavController *nc = (NavController *)self.navigationController;
+    return nc.tabBar2Controller;
+}
+
 
 /**
  * Checks if the segue should be performed.

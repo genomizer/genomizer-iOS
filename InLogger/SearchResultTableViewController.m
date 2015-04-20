@@ -29,6 +29,8 @@
     [super viewDidLoad];
     SearchResultTableViewCell *cell= [self.tableView dequeueReusableCellWithIdentifier:@"ListPrototypeCell"];
     _tableCellWidth = cell.textFieldSize.width;
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 49, 0);
+    self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 49, 0);
     
     //add self to appDelegate
     //Pål jävlas

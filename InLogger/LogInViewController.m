@@ -128,6 +128,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             AppDelegate *app = [UIApplication sharedApplication].delegate;
             app.userIsLoggingOut = NO;
+
             [self performSegueWithIdentifier:@"loginSegue" sender:self];
         });
     } else
@@ -139,6 +140,7 @@
         });
     }
 }
+
 /**
  * Executes when a textfield is clicked.
  */
