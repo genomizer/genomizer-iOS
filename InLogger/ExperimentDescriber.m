@@ -89,9 +89,7 @@
     
     [description appendString: [self createRowForAnnotation:@"Name" withValue:experiment.name andNewLine:true]];
     [description appendString:[self createRowForAnnotation:@"Created by" withValue:experiment.createdByUser andNewLine:[_visibleAnnotations count] > 0]];
-//    for(NSString *key in experiment.annotations){
-//        NSLog(@"key: %@, value: %@", key, experiment.annotations[key]);
-//    }
+
      for (NSInteger i = 0; i < [_visibleAnnotations count]; i++) {
          Annotation *annotation = _visibleAnnotations[i];
          NSString *newString = [self createRowForAnnotation:[annotation getFormatedName]

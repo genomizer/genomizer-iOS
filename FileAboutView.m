@@ -84,7 +84,6 @@ Set the text which should be shown
          [string addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-Light" size:infoTextView.font.pointSize] range:NSMakeRange(prevLoc, loc - prevLoc)];
     }
     infoTextView.attributedText = string;
-//    infoTextView.text = text;
 }
 -(void)closeButtonWasTapped:(UIButton *)b{
     if(self.delegate != nil){

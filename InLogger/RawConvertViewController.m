@@ -152,10 +152,6 @@
     
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, buttonHeight, 0);
     self.tableView.scrollIndicatorInsets = self.tableView.contentInset;
-    //add self to appDelegate
-//Pål did this
-//    AppDelegate *app = [UIApplication sharedApplication].delegate;
-//    [app addController:self];
 }
 
 
@@ -459,27 +455,6 @@
             int calcSmoothinZeros = self.ratioCalcSmoothingPrintZeros.on;
             text = [text stringByAppendingFormat:@" %d %@ %d %d", calcSmoothinSmooth, self.ratioCalcSmoothingMinimumStep.text, calcSmoothinMean, calcSmoothinZeros];
             
-//Pål did this
-//            text = [text stringByAppendingString:@" "];
-//            if (self.ratioCalcSmoothingSmoothType.on){
-//                text = [text stringByAppendingString:@"1"];
-//            }else{
-//                text = [text stringByAppendingString:@"0"];
-//            }
-//            text = [text stringByAppendingString:@" "];
-//            text = [text stringByAppendingString:self.ratioCalcSmoothingMinimumStep.text];
-//            text = [text stringByAppendingString:@" "];
-//            if (self.ratioCalcSmoothingPrintMean.on){
-//                text = [text stringByAppendingString:@"1"];
-//            }else{
-//                text = [text stringByAppendingString:@"0"];
-//            }
-//            text = [text stringByAppendingString:@" "];
-//            if (self.ratioCalcSmoothingPrintZeros.on){
-//                text = [text stringByAppendingString:@"1"];
-//            }else{
-//                text = [text stringByAppendingString:@"0"];
-//            }
             [parameters addObject:text];
         }
         else{

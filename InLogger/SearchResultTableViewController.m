@@ -33,9 +33,6 @@
     self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 49, 0);
     
     //add self to appDelegate
-    //Pål jävlas
-//    AppDelegate *app = [UIApplication sharedApplication].delegate;
-//    [app addController:self];
 }
 
 #pragma mark - Table view data source
@@ -62,7 +59,6 @@
 
     cell.index = indexPath.row;
     cell.experiement = experiment;
-//    cell.controller = self;
     return cell;
 }
 

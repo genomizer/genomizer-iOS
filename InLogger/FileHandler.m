@@ -21,16 +21,6 @@
  */
 + (NSString *) readFromFile: (NSString *) fileName withDefaultData: (NSString *) data
 {
-    //Pål did this
-//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-//    NSString *documentsDirectory = [paths objectAtIndex:0];
-//    NSString *filePath = [NSString stringWithFormat:@"%@/%@", documentsDirectory, fileName];
-//    if (![[NSFileManager defaultManager] fileExistsAtPath:filePath]) { // if file is not exist, create it.
-//        NSError *error;
-//        [data writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:&error];
-//        return data;
-//    }
-//    return [NSString stringWithContentsOfFile: filePath encoding:NSUTF8StringEncoding error:nil];
     NSString *readData = [[NSUserDefaults standardUserDefaults] objectForKey:fileName];
     if(readData == nil){
         readData = data;
@@ -46,14 +36,7 @@
  */
 + (void) writeData: (NSString *) data toFile: (NSString *) fileName
 {
-    //Pål did this
-//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-//    NSString *documentsDirectory = [paths objectAtIndex:0];
-//    NSString *filePath = [NSString stringWithFormat:@"%@/%@", documentsDirectory, fileName];
-//    NSError *error;
-//    [data writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:&error];
     [[NSUserDefaults standardUserDefaults] setObject:data forKey:fileName];
-    
 }
 
 @end

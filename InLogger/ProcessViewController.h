@@ -16,6 +16,5 @@
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 
-//- (void) reportProcessStatusResult: (NSMutableArray*) result error: (NSError*) error;
 
 @end

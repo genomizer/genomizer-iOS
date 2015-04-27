@@ -191,18 +191,6 @@ NSString *token;
                  }
              }
              else{
-                 //Pål did this
-//                 NSDictionary *errorDict = [self parseJSONToDictionary:POSTReply error:&internalError];
-//                 NSString *errorMessage;
-//                 if([errorDict objectForKey:@"message"] != nil)
-//                 {
-//                     errorMessage = [[self parseJSONToDictionary:POSTReply error:&internalError] objectForKey:@"message"];
-//                     
-//                 }
-//                 else{
-//                     errorMessage =@"Server sent incorrectly formatted data";
-//                 }
-//                 error = [self generateErrorObjectFromHTTPError:httpResp.statusCode errorMessage:errorMessage];
                  error = [ServerConnection generateError:POSTReply internaleError:internalError response:httpResp];
              }
          }
@@ -237,19 +225,7 @@ NSString *token;
          {
              if(httpResp.statusCode != 200)
              {
-                 //Pål did this
-//                 NSDictionary *errorDict = [self parseJSONToDictionary:POSTReply error:&internalError];
-//                 NSString *errorMessage;
-//                 if([errorDict objectForKey:@"message"] != nil)
-//                 {
-//                     errorMessage = [[self parseJSONToDictionary:POSTReply error:&internalError] objectForKey:@"message"];
-//                     
-//                 }
-//                 else{
-//                     errorMessage =@"Server sent incorrectly formatted data";
-//                 }
-//                 error = [self generateErrorObjectFromHTTPError:httpResp.statusCode errorMessage:errorMessage];
-                 error = [ServerConnection generateError:POSTReply internaleError:internalError response:httpResp];
+                error = [ServerConnection generateError:POSTReply internaleError:internalError response:httpResp];
              }
          } else
          {
@@ -309,20 +285,7 @@ NSString *token;
                  }
              } else
              {
-                 //Pål did this
-//                 NSDictionary *errorDict = [self parseJSONToDictionary:POSTReply error:&internalError];
-//                 NSString *errorMessage;
-//                 if([errorDict objectForKey:@"message"] != nil)
-//                 {
-//                     errorMessage = [[self parseJSONToDictionary:POSTReply error:&internalError] objectForKey:@"message"];
-//                     
-//                 }
-//                 else{
-//                     errorMessage =@"Server sent incorrectly formatted data";
-//                 }
-//                 error = [self generateErrorObjectFromHTTPError:httpResp.statusCode errorMessage:errorMessage];
                  error = [ServerConnection generateError:POSTReply internaleError:internalError response:httpResp];
-
              }
          } else
          {
@@ -371,24 +334,12 @@ NSString *token;
                      error = [self generateError:@"Server sent incorrectly formatted data, talk to admin" withErrorDomain:@"ServerError" withUnderlyingError:nil];
                  }
              } else {
-//Pål did this
-//                 NSDictionary *errorDict = [self parseJSONToDictionary:POSTReply error:&internalError];
-//                 NSString *errorMessage;
-//                 if([errorDict objectForKey:@"message"] != nil)
-//                 {
-//                     errorMessage = [[self parseJSONToDictionary:POSTReply error:&internalError] objectForKey:@"message"];
-//                     
-//                 }
-//                 else{
-//                     errorMessage =@"Server sent incorrectly formatted data";
-//                 }
                  error = [ServerConnection generateError:POSTReply internaleError:internalError response:httpResp];
              }
          } else {
              error = [self generateError:kConnectionErrorMsg withErrorDomain:@"Connection Error" withUnderlyingError:internalError];
          }
          completionBlock(processStatusResults, error);
-//         [controller reportProcessStatusResult:processStatusResults error:error];
      }];
 }
 

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 /**
- //  Class that describes a cell in the AnnotationTable.
+ *  Class that describes a cell in the AnnotationTable.
  */
 @interface AnnotationTableViewCell : UITableViewCell
 

@@ -14,7 +14,7 @@
 @property NSInteger index;
 
 @property Experiment *experiement;
-//@property SearchResultTableViewController *controller;
+
 
 - (void) setTextFieldText: (NSString *) text;
 - (CGSize)textFieldSize;

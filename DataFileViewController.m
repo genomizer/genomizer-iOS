@@ -18,8 +18,6 @@
 #import "TabViewController.h"
 @interface DataFileViewController ()
 
-//@property (weak, nonatomic) IBOutlet UIView *infoAboutFile;
-//@property (weak, nonatomic) IBOutlet UITextView *infoFileTextField;
 @property (weak, nonatomic) IBOutlet UIView *dimView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property BOOL animating;
@@ -190,16 +188,6 @@
     [(TabBar2Controller *)self.tabBar2Controller showInfoAboutFile:file];
 }
 
-/**
- * Method for hiding the display for detailed information about a ExperimentFile.
- * This method is called when the 'Close' button in the detailed information view.
- *
- */
-//- (IBAction)closeFileInfo:(id)sender {
-//    _infoAboutFile.hidden = YES;
-//    _dimView.hidden = YES;
-//    
-//}
 
 /**
  * Method which is called when a segue is about to be performed.
