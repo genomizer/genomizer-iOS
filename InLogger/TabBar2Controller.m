@@ -70,9 +70,10 @@
     
 }
 
--(BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
+-(BOOL)gestureRecognizerShouldBegin:(UIPanGestureRecognizer *)gestureRecognizer{
     CGPoint location = [gestureRecognizer locationInView:gestureRecognizer.view];
-    return !CGRectContainsPoint(self.tabBar.frame, location);
+    CGPoint translation = [gestureRecognizer translationInView:gestureRecognizer.view];
+    return !CGRectContainsPoint(self.tabBar.frame, location) && fabs(translation.x) > fabs(translation.y);
 }
 
 -(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldBeRequiredToFailByGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer{

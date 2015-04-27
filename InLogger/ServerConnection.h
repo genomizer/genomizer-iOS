@@ -28,7 +28,7 @@
 
 + (void) getAvailableAnnotations:(SearchViewController*) controller;
 + (void) getProcessStatus:(void (^)(NSMutableArray *, NSError *))completionBlock;
-+ (void)genomeRelease: (RawConvertViewController*) controller;
++ (void) genomeRelease: (RawConvertViewController*) controller;
 
 
 +(void)setToken:(NSString *)token;

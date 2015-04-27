@@ -14,9 +14,9 @@
 @property NSInteger index;
 
 @property Experiment *experiement;
+@property (nonatomic, retain) IBOutlet UITextView *textView;
 //@property SearchResultTableViewController *controller;
 
-- (void) setTextFieldText: (NSString *) text;
 - (CGSize)textFieldSize;
 
 @end

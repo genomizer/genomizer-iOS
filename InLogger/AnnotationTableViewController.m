@@ -17,7 +17,9 @@
 
 @end
 
-@implementation AnnotationTableViewController
+@implementation AnnotationTableViewController{
+    NSMutableArray *sortArray;
+}
 
 /**
  * Method that runs when the view controller is loaded.
@@ -27,20 +29,39 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    self.tableView.editing = true;
+
+    sortArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"sortArray"];
+    sortArray = sortArray.mutableCopy;
+    if(sortArray == nil){
+        sortArray = [[NSMutableArray alloc] init];
+        NSArray *annotations = [_describer getVisibleAnnotations];
+        for(Annotation *a in annotations){
+            [sortArray addObject:[a getFormatedName]];
+        }
+        [sortArray insertObject:@"Name" atIndex:0];
+        [sortArray insertObject:@"Created by" atIndex:1];
+    }
     //add self to appDelegate
 }
 
 #pragma mark - Table view data source
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *) tableView
 {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [_describer.annotations count];
+    NSInteger nrOfRows = 0;
+    if(section == 0){
+        nrOfRows = _describer.annotations.count;
+    } else if(section == 1){
+        nrOfRows = sortArray.count;
+    }
+    return nrOfRows;
 }
 
 
@@ -54,11 +75,71 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     AnnotationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AnnotationPrototypeCell" forIndexPath:indexPath];
-    Annotation *annotation = [_describer.annotations objectAtIndex:indexPath.row];
-    cell.label.text = [annotation getFormatedName];
-    cell.switchButton.tag = indexPath.row;
-    cell.switchButton.on = [_describer showsAnnotation: [_describer.annotations objectAtIndex: indexPath.row]];
+    if(indexPath.section == 0){
+        
+        Annotation *annotation = [_describer.annotations objectAtIndex:indexPath.row];
+        cell.label.text = [annotation getFormatedName];
+        cell.switchButton.tag = indexPath.row;
+        cell.switchButton.on = [_describer showsAnnotation: [_describer.annotations objectAtIndex: indexPath.row]];
+        cell.switchButton.hidden = false;
+        
+    } else{
+        NSString *annotation = [sortArray objectAtIndex:indexPath.row];
+        cell.label.text = annotation;
+        cell.switchButton.hidden = true;
+//        if(indexPath.row >= 2){
+//            cell.label.alpha = 0.4;
+//        } else{
+//            cell.label.alpha = 1.0;
+//        }
+    }
     return cell;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    CGFloat height = 0;
+    if(section == 1){
+        height = 44;
+    }
+    return height;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 0.01f;
+}
+
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    NSString *title = @"";
+    if (section == 1) {
+        title = @"Sort by";
+    }
+    return title;
+}
+
+-(NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath{
+    if (proposedDestinationIndexPath.section == 0) {
+        return sourceIndexPath;
+    }
+    return proposedDestinationIndexPath;
+}
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
+    
+    id object = sortArray[sourceIndexPath.row];
+    [sortArray removeObjectAtIndex:sourceIndexPath.row];
+    [sortArray insertObject:object atIndex:destinationIndexPath.row];
+//    [tableView moveRowAtIndexPath:sourceIndexPath toIndexPath:destinationIndexPath];
+//    [tableView reloadRowsAtIndexPaths:@[sourceIndexPath, destinationIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+//    [tableView reloadData];
+
+}
+-(BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath{
+    return indexPath.section > 0;
+}
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return UITableViewCellEditingStyleNone;
+}
+- (BOOL)tableView:(UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath {
+    return NO;
 }
 
 /**
@@ -70,6 +151,9 @@
 -(void) viewWillDisappear:(BOOL)animated
 {
     [_describer saveAnnotationsToFile];
+    [[NSUserDefaults standardUserDefaults] setObject:sortArray forKey:@"sortArray"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
 }
 
 /**
@@ -79,13 +163,18 @@
  */
 - (IBAction)switchButtonValueChanged:(UISwitch *)sender
 {
+
     Annotation *annotation = [_describer.annotations objectAtIndex:sender.tag];
 
     if (sender.on) {
         [_describer showAnnotation: annotation];
+        [sortArray addObject:[annotation getFormatedName]];
     } else {
         [_describer hideAnnotation:annotation];
+        [sortArray removeObject:[annotation getFormatedName]];
     }
+
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationFade];
 }
 
 @end

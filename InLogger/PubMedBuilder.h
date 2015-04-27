@@ -12,4 +12,6 @@
 
 + (NSString *)createAnnotationsSearch: (NSArray *)annotations;
 
++(NSAttributedString *)formatInfoText:(NSString *)text fontSize:(CGFloat)pointSize;
+
 @end
