@@ -109,8 +109,8 @@
     
     if(_panner.state == UIGestureRecognizerStateBegan){
 
-        leftVC.view.center  = CGPointMake(nav.view.center.x - 330, leftVC.view.center.y);
-        rightVC.view.center = CGPointMake(nav.view.center.x + 330, rightVC.view.center.y);
+        leftVC.view.center  = CGPointMake(nav.view.center.x - self.view.frame.size.width - 10, leftVC.view.center.y);
+        rightVC.view.center = CGPointMake(nav.view.center.x + self.view.frame.size.width + 10, rightVC.view.center.y);
         [self.view insertSubview:rightVC.view belowSubview:self.tabBar];
         [self.view insertSubview:leftVC.view belowSubview:self.tabBar];
 
@@ -127,8 +127,8 @@
                                 options:UIViewAnimationOptionCurveEaseOut
                              animations:^{
                 
-                leftVC.view.center  = CGPointMake(self.view.frame.size.width/2-330*2, nav.view.center.y);
-                nav.view.center     = CGPointMake(self.view.frame.size.width/2-330, nav.view.center.y);
+                leftVC.view.center  = CGPointMake(self.view.frame.size.width/2-(self.view.frame.size.width+10)*2, nav.view.center.y);
+                nav.view.center     = CGPointMake(self.view.frame.size.width/2-(self.view.frame.size.width+10), nav.view.center.y);
                 rightVC.view.center = CGPointMake(self.view.frame.size.width/2, rightVC.view.center.y);
                                  
             } completion:^(BOOL finished) {
@@ -145,9 +145,9 @@
                                   delay:0.0
                                 options:UIViewAnimationOptionCurveEaseOut
                              animations:^{
-                nav.view.center     = CGPointMake(self.view.frame.size.width/2+330, nav.view.center.y);
+                nav.view.center     = CGPointMake(self.view.frame.size.width/2+(self.view.frame.size.width+10), nav.view.center.y);
                 leftVC.view.center  = CGPointMake(self.view.frame.size.width/2, leftVC.view.center.y);
-                rightVC.view.center = CGPointMake(self.view.frame.size.width/2+330*2, nav.view.center.y);
+                rightVC.view.center = CGPointMake(self.view.frame.size.width/2+(self.view.frame.size.width+10)*2, nav.view.center.y);
                                  
             } completion:^(BOOL finished) {
                 [nav.view removeFromSuperview];
@@ -160,8 +160,8 @@
         } else{
             [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
                 nav.view.center = CGPointMake(self.view.frame.size.width/2, nav.view.center.y);
-                rightVC.view.center = CGPointMake(self.view.frame.size.width/2 + 330, rightVC.view.center.y);
-                leftVC.view.center  = CGPointMake(self.view.frame.size.width/2 - 330, leftVC.view.center.y);
+                rightVC.view.center = CGPointMake(self.view.frame.size.width/2 + (self.view.frame.size.width+10), rightVC.view.center.y);
+                leftVC.view.center  = CGPointMake(self.view.frame.size.width/2 - (self.view.frame.size.width+10), leftVC.view.center.y);
                 
             } completion:^(BOOL finished) {
                 [leftVC.view removeFromSuperview];
@@ -172,8 +172,8 @@
         }
     }
     
-    float friction = currentIndex == 0 && nav.view.center.x                     >= 160 ? 0.2 : 1.0;
-    friction = currentIndex == childControllers.count-1 && nav.view.center.x    <= 160 ? 0.2 : friction;
+    float friction = currentIndex == 0 && nav.view.center.x                     >= self.view.frame.size.width/2 ? 0.2 : 1.0;
+    friction = currentIndex == childControllers.count-1 && nav.view.center.x    <= self.view.frame.size.width/2 ? 0.2 : friction;
     nav.view.center = CGPointMake(nav.view.center.x + translation.x * friction, _panner.view.center.y);
     rightVC.view.center = CGPointMake(rightVC.view.center.x + translation.x * friction, rightVC.view.center.y);
     leftVC.view.center = CGPointMake(leftVC.view.center.x + translation.x * friction, leftVC.view.center.y);

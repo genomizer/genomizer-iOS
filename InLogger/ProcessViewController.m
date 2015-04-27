@@ -50,7 +50,9 @@ static NSMutableArray * processingExperimentFiles;
 //    AppDelegate *app = [UIApplication sharedApplication].delegate;
 //    if ([app threadIsAvailable]) {
         [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-        [ServerConnection getProcessStatus:self];
+        [ServerConnection getProcessStatus:^(NSMutableArray *array, NSError *error) {
+            [self reportProcessStatusResult:array error:error];
+        }];
 //    }
 }
 /**

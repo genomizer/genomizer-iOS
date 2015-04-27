@@ -19,12 +19,7 @@
     NSMutableArray *filesToDisplay;
 }
 
-
-
-
-
 @property FileContainer *selectedFiles;
-
 @end
 
 @implementation SelectedFilesViewController

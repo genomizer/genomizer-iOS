@@ -28,7 +28,7 @@
 {
     
     NSString *usertoken = [[NSUserDefaults standardUserDefaults] objectForKey:@"usertoken"];
-
+//    usertoken = @"mats";
     UIViewController *vc;
     if(!usertoken){
         vc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"login"];

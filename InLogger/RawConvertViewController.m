@@ -521,7 +521,7 @@
  *         if no error a popup explaining to the user how many successfull request
  *         that was sent to the server.
  */
-- (void) reportResult: (NSError*) error experiment: (NSString*) expid
+- (void) reportResult: (NSError*) error experiment: (NSString*) expid 
 {
     dispatch_async(dispatch_get_main_queue(), ^{
         numberOfConvertRequestsLeftToConfirm--;

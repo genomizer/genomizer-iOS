@@ -27,7 +27,7 @@
 + (NSDictionary*)parseJSONToDictionary:(NSData*)POSTReply error:(NSError**)error;
 
 + (void) getAvailableAnnotations:(SearchViewController*) controller;
-+ (void) getProcessStatus:(ProcessViewController*) controller;
++ (void) getProcessStatus:(void (^)(NSMutableArray *, NSError *))completionBlock;
 + (void)genomeRelease: (RawConvertViewController*) controller;
 
 

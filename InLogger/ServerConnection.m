@@ -340,7 +340,7 @@ NSString *token;
  *@param controller - ProcessViewController, which the method will report the result to
  *@return nothing
  */
-+ (void) getProcessStatus:(ProcessViewController*) controller
++ (void) getProcessStatus:(void (^)(NSMutableArray *, NSError *))completionBlock;
 {
     NSMutableURLRequest *request = [JSONBuilder getProcessStatusJSON:token];
     
@@ -387,8 +387,8 @@ NSString *token;
          } else {
              error = [self generateError:kConnectionErrorMsg withErrorDomain:@"Connection Error" withUnderlyingError:internalError];
          }
-
-         [controller reportProcessStatusResult:processStatusResults error:error];
+         completionBlock(processStatusResults, error);
+//         [controller reportProcessStatusResult:processStatusResults error:error];
      }];
 }
 
