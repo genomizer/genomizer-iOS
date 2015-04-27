@@ -9,7 +9,6 @@
 #import "SelectTaskTableViewController.h"
 #import "RawConvertViewController.h"
 #import "PopupGenerator.h"
-#import "AppDelegate.h"
 
 @interface SelectTaskTableViewController ()
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *executeButton;
@@ -19,15 +18,13 @@
 @end
 
 @implementation SelectTaskTableViewController
+@synthesize completionBlock;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     _tasks = [self tasksOfFileType:_fileType];
-    
-    //add self to appDelegate
-    AppDelegate *app = [UIApplication sharedApplication].delegate;
-    [app addController:self];
+
 }
 
 /**
@@ -40,29 +37,25 @@
 {
     switch(fileType) {
         case RAW :
-            return [[NSArray alloc] initWithObjects:@"Convert to profile", nil];
+            return @[@"Convert to profile"];
         case PROFILE:
-            return [[NSArray alloc] initWithObjects:@"Convert to region", @"Change genome release", nil];
+            return @[@"Convert to region", @"Change genome release"];
         case REGION:
-            return [[NSArray alloc] initWithObjects:@"Change genome release", nil];
+            return @[@"Change genome release"];
         case OTHER:
-            return [[NSArray alloc] initWithObjects: nil];
+            return @[];
 
     }
 }
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    // Returns number of sections in tableView.
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    // Returns number of rows in tableView.
-    return [_tasks count];
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return _tasks.count;
 }
 
 /**
@@ -96,7 +89,7 @@
         RawConvertViewController *nextVC = (RawConvertViewController *)[segue destinationViewController];
         nextVC.experimentFiles = _experimentFiles;
         nextVC.ratio = true;
- 
+        nextVC.completionBlock = self.completionBlock;
     }
 }
 

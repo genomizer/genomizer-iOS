@@ -44,12 +44,13 @@ NSArray *expectedInformation;
  */
 - (ProcessStatusDescriptor*) init: (NSDictionary*) status
 {
+    
+//    NSLog(@"status: %@", status);
     if([self statusDictionaryIsValid:status])
     {
         self = [self init];
         self.experimentName = [status objectForKey:@"experimentName"];
        
-    
         self.status = [status objectForKey:@"status"];
         self.author = [status objectForKey:@"author"];
       

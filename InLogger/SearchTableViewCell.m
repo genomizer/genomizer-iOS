@@ -57,6 +57,7 @@
         [_inputField resignFirstResponder];
     }
     _annotation.selected = sender.on;
+    [_controller switchDidChange];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -100,7 +101,10 @@
         _switchButton.on = YES;
     }
     _annotation.selected = _switchButton.on;
+    [_controller switchDidChange];
 }
+
+
 /**
  * Executes when a textfield have began editing.
  */

@@ -19,17 +19,26 @@
 
 @implementation ExperimentDescriber
 
+
+-(id)init{
+    if(self = [super init]){
+        _visibleAnnotations = [[NSMutableArray alloc] init];
+    }
+    return self;
+}
 /**
  * Initializes an ExperimentDescriber that displays
  * the given annotations.
  * 
  * @param annotations - the annotations to display
  */
-- (ExperimentDescriber *) initWithAnnotations: (NSArray *) annotations
+- (id) initWithAnnotations: (NSArray *) annotations
 {
-    self = [super init];
-    _annotations = annotations;
-    _visibleAnnotations = [self loadAnnotationsFromFile];
+    if(self = [super init]){
+        _annotations = annotations;
+        _visibleAnnotations = [self loadAnnotationsFromFile];
+        
+    }
     return self;
 }
 
@@ -40,7 +49,7 @@
  */
 - (void) showAnnotation: (Annotation *) annotation
 {
-    if( ![_visibleAnnotations containsObject:annotation]) {
+    if(![_visibleAnnotations containsObject:annotation]) {
         [_visibleAnnotations addObject:annotation];
     }
 }
@@ -78,13 +87,18 @@
 {
     NSMutableString *description = [[NSMutableString alloc] init];
     
-    [description appendString: [self createRowForAnnotation:@"Name" withValue:experiment.name andNewLine:[_visibleAnnotations count] > 0]];
-    
+    [description appendString: [self createRowForAnnotation:@"Name" withValue:experiment.name andNewLine:true]];
+    [description appendString:[self createRowForAnnotation:@"Created by" withValue:experiment.createdByUser andNewLine:[_visibleAnnotations count] > 0]];
+//    for(NSString *key in experiment.annotations){
+//        NSLog(@"key: %@, value: %@", key, experiment.annotations[key]);
+//    }
      for (NSInteger i = 0; i < [_visibleAnnotations count]; i++) {
          Annotation *annotation = _visibleAnnotations[i];
-        [description appendString: [self createRowForAnnotation:[annotation getFormatedName]
-                                                     withValue:[experiment getValueForAnnotation:annotation.name]
-                                                     andNewLine:i != [_visibleAnnotations count] -1]];
+         NSString *newString = [self createRowForAnnotation:[annotation getFormatedName]
+                                                  withValue:[experiment getValueForAnnotation:annotation.name]
+                                                 andNewLine:i != [_visibleAnnotations count] -1];
+         NSLog(@"NEW STRING: %@", newString);
+        [description appendString: newString];
     }
     
     return description;

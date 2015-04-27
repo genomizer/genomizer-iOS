@@ -48,7 +48,7 @@
 
 - (void)testExpParserShouldHandleAnnotations
 {
-    NSDictionary *annotations = @{@"name":@"value", @"sex":@"female"};
+    NSDictionary *annotations = @{@"name":@"sex", @"value":@"female"};
     NSArray *anno = @[annotations];
     
     NSDictionary *dict = @{@"annotations":anno};
@@ -58,8 +58,8 @@
 
 - (void)testExpParserShouldHandleMultipleAnnotations
 {
-    NSDictionary *annotation1 = @{@"name":@"value", @"sex":@"female"};
-    NSDictionary *annotation2 = @{@"stage":@"larvae", @"name":@"value"};
+    NSDictionary *annotation1 = @{@"name":@"sex", @"value":@"female"};
+    NSDictionary *annotation2 = @{@"name":@"stage", @"value":@"larvae"};
     NSArray *anno = @[annotation1, annotation2];
 
     NSDictionary *dict = @{@"annotations":anno};

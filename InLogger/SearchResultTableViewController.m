@@ -9,7 +9,6 @@
 #import "SearchResultTableViewCell.h"
 #import "DataFileViewController.h"
 #import "AnnotationTableViewController.h"
-#import "AppDelegate.h"
 
 @interface SearchResultTableViewController ()
 
@@ -30,21 +29,22 @@
     [super viewDidLoad];
     SearchResultTableViewCell *cell= [self.tableView dequeueReusableCellWithIdentifier:@"ListPrototypeCell"];
     _tableCellWidth = cell.textFieldSize.width;
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 49, 0);
+    self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 49, 0);
     
     //add self to appDelegate
-    AppDelegate *app = [UIApplication sharedApplication].delegate;
-    [app addController:self];
+    //Pål jävlas
+//    AppDelegate *app = [UIApplication sharedApplication].delegate;
+//    [app addController:self];
 }
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return [self.searchResults count];
 }
 
@@ -62,7 +62,7 @@
 
     cell.index = indexPath.row;
     cell.experiement = experiment;
-    cell.controller = self;
+//    cell.controller = self;
     return cell;
 }
 
@@ -89,19 +89,8 @@
  * the appropriate rownumber.
  *
  */
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [self didSelectRow: indexPath.row];
-}
-
-/**
- * Method that sets currently selected experiment to the one described by the cell at
- * row 'row'. It also shows a file list view for the selected experiment.
- *
- */
--(void) didSelectRow: (NSInteger) row
-{
-    _selectedExperiment = [_searchResults objectAtIndex: row];
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    _selectedExperiment = [_searchResults objectAtIndex: indexPath.row];
     [self performSegueWithIdentifier:@"toFileList1" sender:self];
 }
 

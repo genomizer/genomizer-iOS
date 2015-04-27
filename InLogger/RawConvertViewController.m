@@ -14,8 +14,8 @@
 #import "PopupGenerator.h"
 #import <QuartzCore/QuartzCore.h>
 #import "ProcessViewController.h"
-#import "AppDelegate.h"
 #import "Reachability.h"
+#import "TabViewController.h"
 
 @interface RawConvertViewController ()
 
@@ -65,7 +65,7 @@
 }
 
 @synthesize tableView;
-
+@synthesize completionBlock;
 - (void)viewDidLoad
 {
     
@@ -127,36 +127,42 @@
     /**
       * Create frame containing the convert button.
       */
-    UIView *staticView = [[UIView alloc] initWithFrame:CGRectMake(0, self.tableView.bounds.size.height-50, self.tableView.bounds.size.width, 50)];
-    staticView.backgroundColor = [UIColor whiteColor];
+    float buttonHeight = 56;
+    UIView *staticView = [[UIView alloc] initWithFrame:CGRectMake(0, self.tableView.bounds.size.height-buttonHeight, self.tableView.bounds.size.width, buttonHeight)];
+    staticView.backgroundColor = [UIColor colorWithRed:74/255.f green:144/255.f blue:226/255.f alpha:1.0];
     _convertButton=[UIButton buttonWithType:UIButtonTypeRoundedRect] ;
     [_convertButton setTitle:@"Convert" forState:UIControlStateNormal];
+    _convertButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:17.f];
+    [_convertButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_convertButton addTarget:self action:@selector(convertButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
-    _convertButton.frame=CGRectMake(self.tableView.bounds.size.width/2-65, 10, 130, 30);
+    _convertButton.frame=staticView.bounds;
     
     _activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     _activityIndicator.frame=CGRectMake(self.tableView.bounds.size.width/2-65, 10, 130, 30);
     _activityIndicator.hidesWhenStopped = YES;
     _activityIndicator.hidden = YES;
+    
     [staticView addSubview:_activityIndicator];
     [staticView addSubview:_convertButton];
+    
     [_activityIndicator stopAnimating];
-    staticView.clipsToBounds = YES;
-    CALayer *rightBorder = [CALayer layer];
-    rightBorder.borderColor = [UIColor lightGrayColor].CGColor;
-    rightBorder.borderWidth = 1;
-    rightBorder.frame = CGRectMake(0, -1.5, CGRectGetWidth(staticView.frame), 2);
-    [staticView.layer addSublayer:rightBorder];
+    
     [self.tableView addSubview:staticView];
     _staticView = staticView;
     
-    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 50, 0);
-    
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, buttonHeight, 0);
+    self.tableView.scrollIndicatorInsets = self.tableView.contentInset;
     //add self to appDelegate
-    AppDelegate *app = [UIApplication sharedApplication].delegate;
-    [app addController:self];
+//Pål did this
+//    AppDelegate *app = [UIApplication sharedApplication].delegate;
+//    [app addController:self];
 }
 
+
+-(IBAction)popViewController:(id)sender{
+    [self dismissViewControllerAnimated:true completion:nil];
+    
+}
 -(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
     // Returns number of sections in pickerview.
@@ -378,7 +384,7 @@
 {
     
     if((_bowtie.text.length == 0) || (_genomeFile.text.length == 0)){
-        [PopupGenerator showPopupWithMessage:@"Fill in at least the fields \"Bowtie parameters\" and \"Genome file\" to start a process"];
+        [(TabBar2Controller *)self.tabBar2Controller showPopDownWithTitle:@"Not enough information" andMessage:@"Fill in at least the fields \"Bowtie parameters\" and \"Genome file\" to start a process" type:@"error"];
     }else{
         _convertButton.hidden = YES;
         [_activityIndicator startAnimating];
@@ -447,26 +453,33 @@
         
         if((self.ratioCalcSmoothingWindowSize.text.length > 0) && (self.ratioCalcSmoothingMinimumStep.text.length > 0) && ( [self.ratioCalcSmoothingWindowSize.text intValue] > 0)){
             NSString *text = self.ratioCalcSmoothingWindowSize.text;
-            text = [text stringByAppendingString:@" "];
-            if (self.ratioCalcSmoothingSmoothType.on){
-                text = [text stringByAppendingString:@"1"];
-            }else{
-                text = [text stringByAppendingString:@"0"];
-            }
-            text = [text stringByAppendingString:@" "];
-            text = [text stringByAppendingString:self.ratioCalcSmoothingMinimumStep.text];
-            text = [text stringByAppendingString:@" "];
-            if (self.ratioCalcSmoothingPrintMean.on){
-                text = [text stringByAppendingString:@"1"];
-            }else{
-                text = [text stringByAppendingString:@"0"];
-            }
-            text = [text stringByAppendingString:@" "];
-            if (self.ratioCalcSmoothingPrintZeros.on){
-                text = [text stringByAppendingString:@"1"];
-            }else{
-                text = [text stringByAppendingString:@"0"];
-            }
+
+            int calcSmoothinSmooth = self.ratioCalcSmoothingSmoothType.on/* ? 1 : 0*/;
+            int calcSmoothinMean = self.ratioCalcSmoothingPrintMean.on/* ? 1 : 0*/;
+            int calcSmoothinZeros = self.ratioCalcSmoothingPrintZeros.on;
+            text = [text stringByAppendingFormat:@" %d %@ %d %d", calcSmoothinSmooth, self.ratioCalcSmoothingMinimumStep.text, calcSmoothinMean, calcSmoothinZeros];
+            
+//Pål did this
+//            text = [text stringByAppendingString:@" "];
+//            if (self.ratioCalcSmoothingSmoothType.on){
+//                text = [text stringByAppendingString:@"1"];
+//            }else{
+//                text = [text stringByAppendingString:@"0"];
+//            }
+//            text = [text stringByAppendingString:@" "];
+//            text = [text stringByAppendingString:self.ratioCalcSmoothingMinimumStep.text];
+//            text = [text stringByAppendingString:@" "];
+//            if (self.ratioCalcSmoothingPrintMean.on){
+//                text = [text stringByAppendingString:@"1"];
+//            }else{
+//                text = [text stringByAppendingString:@"0"];
+//            }
+//            text = [text stringByAppendingString:@" "];
+//            if (self.ratioCalcSmoothingPrintZeros.on){
+//                text = [text stringByAppendingString:@"1"];
+//            }else{
+//                text = [text stringByAppendingString:@"0"];
+//            }
             [parameters addObject:text];
         }
         else{
@@ -508,7 +521,7 @@
  *         if no error a popup explaining to the user how many successfull request
  *         that was sent to the server.
  */
-- (void) reportResult: (NSError*) error experiment: (NSString*) expid
+- (void) reportResult: (NSError*) error experiment: (NSString*) expid 
 {
     dispatch_async(dispatch_get_main_queue(), ^{
         numberOfConvertRequestsLeftToConfirm--;
@@ -533,25 +546,28 @@
         {
             NSString *requestString = @"request";
             if(successfulConvertRequests > 0){
-                if (successfulConvertRequests > 1)
-                {
+                if (successfulConvertRequests > 1){
                     requestString = [requestString stringByAppendingString:@"s"];
                 }
-                NSString *message = [NSString stringWithFormat:@"%d convert %@ successfully sent to the server.", successfulConvertRequests, requestString];
-                [PopupGenerator showPopupWithMessage:message withTitle:@"" withCancelButtonTitle:@"OK" withDelegate:self];
+          
                 
+                NSString *message = [NSString stringWithFormat:@"%d convert %@ successfully sent to the server.", successfulConvertRequests, requestString];
+//                [PopupGenerator showPopupWithMessage:message withTitle:@"" withCancelButtonTitle:@"OK" withDelegate:self];
+                [self dismissViewControllerAnimated:true completion:nil];
+                [(TabBar2Controller *)self.tabBar2Controller showPopDownWithTitle:@"Convert sent" andMessage:message type:@"success"];
+                self.completionBlock(error, message);
             }
             _convertButton.enabled = YES;
             self.navigationItem.leftBarButtonItem.enabled = YES;
             [_activityIndicator stopAnimating];
             _convertButton.hidden = NO;
+            
         }
     });
 }
 
 /* popup delegate method */
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -565,7 +581,9 @@
  */
 - (void) reportGenomeResult:(NSMutableArray*) genomeReleases withError:(NSError*) error {
     if(error){
-        [PopupGenerator showErrorMessage:error];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [(TabBar2Controller *)self.tabBar2Controller showPopDownWithError:error];
+        });
     }
     else
     {

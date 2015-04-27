@@ -17,7 +17,6 @@
 @property Experiment *selectedFiles;
 @property NSArray *searchResults;
 
--(void) didSelectRow: (NSInteger) row;
 - (IBAction)unwindToList:(UIStoryboardSegue *)segue;
 
 @end

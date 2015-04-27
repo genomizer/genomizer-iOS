@@ -12,7 +12,6 @@
 @implementation PopupGenerator
 
 static UIView * ACTIVITY_CONTAINER;
-
 /**
  * Appends a dot to the given message if it doesn't contain a punctation
  * mark.
@@ -67,6 +66,8 @@ static UIView * ACTIVITY_CONTAINER;
                           delegate:delegate cancelButtonTitle:cancelTitle
                           otherButtonTitles:nil];
     [popup show];
+    
+
 }
 
 /**
@@ -79,9 +80,10 @@ static UIView * ACTIVITY_CONTAINER;
  */
 + (void) showInputPopupWithMessage: (NSString *) message withTitle: (NSString *) title withText: (NSString *) text withDelegate: (id) delegate
 {
-    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:delegate cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:delegate cancelButtonTitle: nil otherButtonTitles:@"Done", @"Cancel", nil];
     alert.alertViewStyle = UIAlertViewStylePlainTextInput;
     UITextField *textField = [alert textFieldAtIndex:0];
+    [textField setReturnKeyType:UIReturnKeyDone];
     textField.text = text;
     [alert show];
 }

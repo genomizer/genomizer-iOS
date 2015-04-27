@@ -10,16 +10,17 @@
 
 #import "AppDelegate.h"
 #import "LogInViewController.h"
+#import "ServerConnection.h"
 
 @implementation AppDelegate
 
-NSMutableArray* controllers;
+//NSMutableArray* controllers;
 
 - (AppDelegate*) init {
     self = [super init];
     _userIsLoggingOut = NO;
-    controllers = [[NSMutableArray alloc] init];
     _numberOfThreadsAlive = 0;
+    
     return self;
 }
 
@@ -27,12 +28,14 @@ NSMutableArray* controllers;
 {
     
     NSString *usertoken = [[NSUserDefaults standardUserDefaults] objectForKey:@"usertoken"];
-    usertoken = @"pal";
+//    usertoken = @"mats";
     UIViewController *vc;
     if(!usertoken){
         vc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"login"];
     } else{
-        vc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"home"];
+        NSLog(@"token: %@", usertoken);
+        [ServerConnection setToken:usertoken];
+        vc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"home2"];
     }
     
     self.window.rootViewController = vc;
@@ -41,56 +44,61 @@ NSMutableArray* controllers;
 
 - (void) restart {
 
-    UIStoryboard *storyboard =
-        [UIStoryboard storyboardWithName:[[NSBundle mainBundle].infoDictionary objectForKey:@"UIMainStoryboardFile"] bundle:[NSBundle mainBundle]];
-    LogInViewController *viewController = (LogInViewController *)[storyboard instantiateViewControllerWithIdentifier:@"loginView"];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    LogInViewController *viewController = (LogInViewController *)[storyboard instantiateViewControllerWithIdentifier:@"login"];
     [self.window setRootViewController:viewController];
 }
-
-- (int) getNumberOfControllers {
-    return (int)[controllers count];
+-(void)resetUserToken{
+//    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"usertoken"];
+    NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
+    [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-- (void) addController: (UIViewController*) controller {
-    [controllers addObject:controller];
-}
+//- (int) getNumberOfControllers {
+//    return (int)[controllers count];
+//}
+//
+//- (void) addController: (UIViewController*) controller {
+//    [controllers addObject:controller];
+//}
+//
+//- (void) popController {
+//    [controllers removeLastObject];
+//}
 
-- (void) popController {
-    [controllers removeLastObject];
-}
+//- (bool) threadIsAvailable {
+//    
+//    if(_numberOfThreadsAlive <= 3)
+//    {
+//        _numberOfThreadsAlive++;
+//        return YES;
+//    } else
+//    {
+//        return NO;
+//    }
+//}
+//
+//- (void) threadFinished
+//{
+//    _numberOfThreadsAlive--;
+//}
 
-- (bool) threadIsAvailable {
-    
-    if(_numberOfThreadsAlive <= 3)
-    {
-        _numberOfThreadsAlive++;
-        return YES;
-    } else
-    {
-        return NO;
-    }
-}
+//- (UIViewController*) getController: (int) index
+//{
+//    return [controllers objectAtIndex:index];
+//}
 
-- (void) threadFinished
-{
-    _numberOfThreadsAlive--;
-}
-
-- (UIViewController*) getController: (int) index
-{
-    return [controllers objectAtIndex:index];
-}
-
-- (void) killControllers
-{
-    int length = (int)[controllers count];
-    for(int i = 0; i < length; i++)
-    {
-        NSLog(@"kill Controllers");
-        [[controllers lastObject] dismissViewControllerAnimated:NO completion:nil];
-        [controllers removeObject:[controllers lastObject]];
-    }
-}
+//- (void) killControllers
+//{
+//    int length = (int)[controllers count];
+//    for(int i = 0; i < length; i++)
+//    {
+//        NSLog(@"kill Controllers");
+//        [[controllers lastObject] dismissViewControllerAnimated:NO completion:nil];
+//        [controllers removeObject:[controllers lastObject]];
+//    }
+//}
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {

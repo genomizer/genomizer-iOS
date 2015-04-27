@@ -2,12 +2,15 @@
 //  ExperimentFile.h
 //  Genomizer
 //
-//  The ExmperimentFile represents an experiment file and contatins
-//  information about it.
+
 //
 
 #import <Foundation/Foundation.h>
 
+/**
+The ExmperimentFile represents an experiment file and contatins
+information about it.
+ */
 @interface ExperimentFile : NSObject
 
 typedef NS_ENUM(NSInteger, FileType) {

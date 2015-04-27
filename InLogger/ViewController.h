@@ -10,7 +10,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "TabBar2Controller.h"
 @interface ViewController : UIViewController
 
+
+@property (nonatomic, retain, getter=getTabbar) UIViewController *tabBar2Controller;
 @end

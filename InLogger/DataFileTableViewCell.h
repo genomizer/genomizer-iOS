@@ -11,10 +11,10 @@
 
 @interface DataFileTableViewCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UISwitch *switchButton;
-@property (weak, nonatomic) IBOutlet UILabel *textField;
-@property (weak, nonatomic) IBOutlet UIButton *infoButton;
-
+@property (nonatomic, retain) IBOutlet UISwitch *switchButton;
+@property (nonatomic, retain) IBOutlet UILabel *textField;
+@property (nonatomic, retain) IBOutlet UIButton *infoButton;
+@property (nonatomic, retain) IBOutlet UIButton *starButton;
 
 @property ExperimentFile *file;
 @property DataFileViewController* controller;

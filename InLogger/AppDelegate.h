@@ -18,20 +18,20 @@
 
 @property bool userIsLoggingOut;
 
-- (int) getNumberOfControllers;
+//- (int) getNumberOfControllers;
 
 - (void) restart;
+-(void)resetUserToken;
+//- (void) addController: (UIViewController*) controller;
+//
+//- (void) popController;
+//
+//- (UIViewController*) getController: (int) index;
+//
+//- (void) killControllers;
 
-- (void) addController: (UIViewController*) controller;
+//- (bool) threadIsAvailable;
 
-- (void) popController;
-
-- (UIViewController*) getController: (int) index;
-
-- (void) killControllers;
-
-- (bool) threadIsAvailable;
-
-- (void) threadFinished;
+//- (void) threadFinished;
 
 @end

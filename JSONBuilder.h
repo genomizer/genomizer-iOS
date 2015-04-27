@@ -2,14 +2,17 @@
 //  JSONBuilder.h
 //  Genomizer
 //
-//  A class that creates NSURLRequests containing JSON objects where applicable
-//  as described by the API for the Genomizer project.
+
 //
 
 #import <Foundation/Foundation.h>
 
-#define MOCK_URL @"http://genomizer.apiary-mock.com/"
+#define MOCK_URL @"http://dumbledore.cs.umu.se:7000/"
 
+/**
+ A class that creates NSURLRequests containing JSON objects where applicable
+ as described by the API for the Genomizer project.
+ */
 @interface JSONBuilder : NSObject
 
 + (NSMutableURLRequest*) getLoginJSON:(NSString *) username withPassword: (NSString *) password;

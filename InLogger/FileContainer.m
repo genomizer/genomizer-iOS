@@ -59,6 +59,13 @@
     [[self getFiles: file.type] removeObject:file];
 }
 
+-(void)removeAllFiles{
+    [_rawFiles removeAllObjects];
+    [_profileFiles removeAllObjects];
+    [_regionFiles removeAllObjects];
+    [_otherFiles removeAllObjects];
+}
+
 /**
  * Returns the total number of files.
  *
@@ -106,6 +113,30 @@
     return files;
 }
 
+-(NSArray *)getAllExperimentIDsOfFileType:(FileType)fileType{
+    NSArray *allFiles = [self getFiles:fileType];
+    NSMutableArray *experiments = [[NSMutableArray alloc] init];
+    
+    for(ExperimentFile *ef in allFiles){
+        if(![experiments containsObject:ef.expID]){
+            [experiments addObject:ef.expID];
+        }
+    }
+    return experiments.copy;
+}
+
+-(NSArray *)getAllExperimentsWithID:(NSString *)expID fileType:(FileType)fileType{
+    NSArray *allFiles = [self getFiles:fileType];
+    NSMutableArray *experiments = [[NSMutableArray alloc] init];
+    
+    for(ExperimentFile *ef in allFiles){
+        if([ef.expID isEqualToString:expID]){
+            [experiments addObject:ef];
+        }
+    }
+    return experiments.copy;
+}
+
 /**
  * Returns the file array that corresponds to the given file type.
  *
@@ -125,6 +156,24 @@
         default:
             return _otherFiles;
     }
+}
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    //Encode properties, other class variables, etc
+    [encoder encodeObject:_rawFiles forKey:@"raw"];
+    [encoder encodeObject:_profileFiles forKey:@"profile"];
+    [encoder encodeObject:_regionFiles forKey:@"region"];
+    [encoder encodeObject:_otherFiles forKey:@"other"];
+}
+- (id)initWithCoder:(NSCoder *)decoder {
+    if((self = [super init])) {
+        //decode properties, other class vars
+        _rawFiles = [decoder decodeObjectForKey:@"raw"];
+        _profileFiles = [decoder decodeObjectForKey:@"profile"];
+        _regionFiles = [decoder decodeObjectForKey:@"region"];
+        _otherFiles = [decoder decodeObjectForKey:@"other"];
+    }
+    return self;
 }
 
 @end

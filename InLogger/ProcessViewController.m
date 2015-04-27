@@ -14,9 +14,13 @@
 #import "ServerConnection.h"
 #import "PopupGenerator.h"
 #import "ProcessStatusDescriptor.h"
-#import "AppDelegate.h"
+//#import "AppDelegate.h"
+#import "TabViewController.h"
+#import "AlertWindow.h"
 
-@interface ProcessViewController ()
+@interface ProcessViewController (){
+//    NSMutableArray *indexUnderMinute;
+}
 @property UIRefreshControl *refreshControl;
 @end
 
@@ -41,12 +45,15 @@ static NSMutableArray * processingExperimentFiles;
  */
 - (void) updateProcessStatusFromServer
 {
-    AppDelegate *app = [UIApplication sharedApplication].delegate;
-    if([app threadIsAvailable])
-    {
+
+//Pål did this
+//    AppDelegate *app = [UIApplication sharedApplication].delegate;
+//    if ([app threadIsAvailable]) {
         [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-        [ServerConnection getProcessStatus:self];
-    }
+        [ServerConnection getProcessStatus:^(NSMutableArray *array, NSError *error) {
+            [self reportProcessStatusResult:array error:error];
+        }];
+//    }
 }
 /**
  * Method that adds a single process to a list containg all processes,
@@ -69,11 +76,12 @@ static NSMutableArray * processingExperimentFiles;
     [super viewDidLoad];
     [self initialize];
     //add self to appDelegate
-    AppDelegate *app = [UIApplication sharedApplication].delegate;
-    [app addController:self];
+//Pål did this
+//    AppDelegate *app = [UIApplication sharedApplication].delegate;
+//    [app addController:self];
     UIView *refreshView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
     [self.tableView insertSubview:refreshView atIndex:0];
-    
+//    indexUnderMinute = [[NSMutableArray alloc] init];
     // Pull tableview down to refresh.
     _refreshControl = [[UIRefreshControl alloc] init];
     [_refreshControl addTarget:self action:@selector(reloadDatas) forControlEvents:UIControlEventValueChanged];
@@ -117,39 +125,65 @@ static NSMutableArray * processingExperimentFiles;
  */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ProcessTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"processCell" forIndexPath:indexPath];
+    ProcessTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"processCell2" forIndexPath:indexPath];
     ProcessStatusDescriptor *temp = [processingExperimentFiles objectAtIndex:indexPath.row];
     NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+//    @property NSString* author;
+//    @property NSString* experimentName;
+//    @property NSString* outputFile;
+//    @property NSString* status;
+//    @property NSDate* timeAdded;
+//    @property NSDate* timeStarted;
+//    @property NSDate* timeFinished;
     
-    cell.file.text = temp.experimentName;
+    NSMutableAttributedString * expAndFile = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ - %@", temp.experimentName, temp.author]];
+    [expAndFile addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-Medium" size:cell.file.font.pointSize] range:NSMakeRange(0, temp.experimentName.length)];
+    
+    
+    NSString *added = [NSString stringWithFormat:@"Added %@.", [self dateDiff:temp.timeAdded indexPath:indexPath]];
+    NSString *started = [NSString stringWithFormat:@"Started %@.", [self dateDiff:temp.timeStarted indexPath:indexPath]];
+    
+    cell.file.attributedText = expAndFile;
     cell.status.text = temp.status;
-    cell.added.text =  [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:temp.timeAdded]];
-    cell.started.text = @"Not started";
-    cell.finished.text = @"Not finished";
-    if([temp.status isEqualToString:@"Started"])
-    {
-        cell.started.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:temp.timeStarted]];
-        [cell.activityIndicator startAnimating];
-        cell.activityIndicator.hidden = NO;
-    } else
-    {
-        cell.activityIndicator.hidden = YES;
-    }
-    if([temp.status isEqualToString:@"Finished"])
-    {
-        cell.started.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:temp.timeStarted]];
-        cell.finished.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:temp.timeFinished]];
-    }
-    if([temp.status isEqualToString:@"Crashed"])
-    {
-        cell.started.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:temp.timeStarted]];
-    }
+    cell.status.textColor = [temp.status isEqualToString:@"Crashed"] ? [AlertWindow colorForType:@"error"] : cell.status.textColor;
+    cell.process.text = [NSString stringWithFormat:@"%@ %@", added, started];
+//    cell.file.text = temp.experimentName;
+//    cell.status.text = temp.status;
+//    cell.added.text =  [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:temp.timeAdded]];
+//    cell.started.text = @"Not started";
+//    cell.finished.text = @"Not finished";
+//    if([temp.status isEqualToString:@"Started"])
+//    {
+//        cell.started.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:temp.timeStarted]];
+//        [cell.activityIndicator startAnimating];
+//        cell.activityIndicator.hidden = NO;
+//    } else
+//    {
+//        cell.activityIndicator.hidden = YES;
+//    }
+//    if([temp.status isEqualToString:@"Finished"])
+//    {
+//        cell.started.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:temp.timeStarted]];
+//        cell.finished.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:temp.timeFinished]];
+//    }
+//    if([temp.status isEqualToString:@"Crashed"])
+//    {
+//        cell.started.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:temp.timeStarted]];
+//    }
     return cell;
 }
 
+
+-(void)sortProcesses{
+    [processingExperimentFiles sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        ProcessStatusDescriptor *p1 = (ProcessStatusDescriptor *)obj1;
+        ProcessStatusDescriptor *p2 = (ProcessStatusDescriptor *)obj2;
+        return [p2.timeAdded compare:p1.timeAdded];
+    }];
+}
 /**
- * This method is called by serverConnection.m after serverConnection 
+ * This method is called by serverConnection.m after serverConnection
  * has executed a getProcessStatus. If a error occured a popup with information
  * about the error will be shown to the user.
  *
@@ -160,28 +194,67 @@ static NSMutableArray * processingExperimentFiles;
 - (void) reportProcessStatusResult: (NSMutableArray*) result error: (NSError*) error {
     
     [self resetProcessingExperimentFiles];
-    if(error == nil)
-    {
-        for(NSDictionary *processStatus in result)
-        {
+    if(error == nil){
+        for(NSDictionary *processStatus in result){
             [self addProcessingExperiment:[[ProcessStatusDescriptor alloc] init: processStatus]];
         }
-        
+    
+        [self sortProcesses];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+            
             [_tableView reloadData];
-            AppDelegate *app = [UIApplication sharedApplication].delegate;
-            [app threadFinished];
+            
+//Pål did this
+//            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+//            AppDelegate *app = [UIApplication sharedApplication].delegate;
+//            [app threadFinished];
         });
     } else
     {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-            [PopupGenerator showErrorMessage:error];
-            AppDelegate *app = [UIApplication sharedApplication].delegate;
-            [app threadFinished];
+            
+            NSString * errorMsg = [error.userInfo objectForKey:NSLocalizedDescriptionKey];
+            [(TabBar2Controller *)self.tabBar2Controller showPopDownWithTitle:error.domain andMessage:errorMsg type:@"error"];
+            
+            
+//Pål did this
+//            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+//            AppDelegate *app = [UIApplication sharedApplication].delegate;
+//            [app threadFinished];
         });
     }
 }
+
+-(NSString *)dateDiff:(NSDate *)convertedDate indexPath:(NSIndexPath *)indexPath{
+    NSDate *todayDate = [NSDate date];
+    double ti = [convertedDate timeIntervalSinceDate:todayDate];
+
+    ti = ti * -1;
+    if(ti < 1) {
+        return @"never";
+    } else 	if (ti < 60) {
+        return [NSString stringWithFormat:@"%.0fs ago", ti];
+    } else if (ti < 3600) {
+        int diff = round(ti / 60);
+        return [NSString stringWithFormat:@"%dm ago", diff];
+    } else if (ti < 86400) {
+        int diff = round(ti / 60 / 60);
+        return[NSString stringWithFormat:@"%dh ago", diff];
+    } else if (ti < 2629743) {
+        int diff = round(ti / 60 / 60 / 24);
+        return[NSString stringWithFormat:@"%dd ago", diff];
+    } else {
+        return @"never";
+    }	
+}
+//
+//-(void)reloadIndexPath:(NSIndexPath *)indexPath{
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        [_tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+//        if([indexUnderMinute containsObject:indexPath]){
+//            [indexUnderMinute removeObject:indexPath];
+//        }
+//    });
+//}
 
 @end

@@ -1,14 +1,14 @@
 //
 //  PopupGenerator.h
 //  Genomizer
-//
-//  The PopupGenerator contains static methods to generate and display
-//  pop-ups of different sorts.
-//
-//
+
 
 #import <Foundation/Foundation.h>
 
+/**
+ //  The PopupGenerator contains static methods to generate and display
+ //  pop-ups of different sorts.
+ */
 @interface PopupGenerator : NSObject
 
 + (void)showPopupWithMessage: (NSString *) message;

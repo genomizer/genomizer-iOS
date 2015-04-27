@@ -2,12 +2,15 @@
 //  AnnotationTableViewCell.h
 //  Genomizer
 //
-//  Class that describes a cell in the AnnotationTable.
+
 //
 
 
 #import <UIKit/UIKit.h>
 
+/**
+ //  Class that describes a cell in the AnnotationTable.
+ */
 @interface AnnotationTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *label;

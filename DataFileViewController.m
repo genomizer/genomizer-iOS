@@ -15,12 +15,11 @@
 #import "PopupGenerator.h"
 #import "SelectTaskTableViewController.h"
 #import "FileContainer.h"
-#import "AppDelegate.h"
-
+#import "TabViewController.h"
 @interface DataFileViewController ()
 
-@property (weak, nonatomic) IBOutlet UIView *infoAboutFile;
-@property (weak, nonatomic) IBOutlet UITextView *infoFileTextField;
+//@property (weak, nonatomic) IBOutlet UIView *infoAboutFile;
+//@property (weak, nonatomic) IBOutlet UITextView *infoFileTextField;
 @property (weak, nonatomic) IBOutlet UIView *dimView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property BOOL animating;
@@ -38,10 +37,7 @@
 {
     [super viewDidLoad];
     _selectedFiles = [[FileContainer alloc] init];
-    
-    //add self to appDelegate
-    AppDelegate *app = [UIApplication sharedApplication].delegate;
-    [app addController:self];
+
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -103,6 +99,11 @@
     cell.switchButton.on = [_selectedFiles containsFile:file];
     cell.file = file;
     cell.controller = self;
+    BOOL alreadyStared =[SelectedFilesViewController containsExperimentFile:file];
+    NSString *buttonImageName = alreadyStared ? @"Star" : @"Unstar";
+    [cell.starButton setImage:[UIImage imageNamed:buttonImageName] forState:UIControlStateNormal];
+    cell.starButton.tag = alreadyStared;
+    
     return cell;
 }
 
@@ -117,7 +118,9 @@
     NSArray *selectedFiles = [_selectedFiles getFiles];
     for (NSInteger i = [selectedFiles count]; i > 0; i--) {
         ExperimentFile *file = [selectedFiles objectAtIndex:i-1];
-        [SelectedFilesViewController addExperimentFile: file];
+        if(![SelectedFilesViewController containsExperimentFile:file]){
+            [SelectedFilesViewController addExperimentFile: file];
+        }
         [_selectedFiles removeExperimentFile:file];
     }
     
@@ -130,6 +133,25 @@
     [_tableView reloadData];
 }
 
+
+-(IBAction)starButtonTapped:(UIButton *)sender{
+    BOOL alreadyStared = sender.tag;
+    UITableViewCell *cell = (UITableViewCell *)sender.superview;
+    while(![cell isKindOfClass:[UITableViewCell class]]){
+        cell = (UITableViewCell *)cell.superview;
+    }
+    
+    NSIndexPath *indexPath = [_tableView indexPathForCell:cell];
+    ExperimentFile *file = [[_experiment.files getFiles: indexPath.section] objectAtIndex:indexPath.row];
+    if(alreadyStared){
+        //Unstar
+        [SelectedFilesViewController removeExperimentFile:file];
+    } else {
+        //Star
+        [SelectedFilesViewController addExperimentFile:file];
+    }
+    [_tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+}
 /**
  * Method that is called when the 'Convert Files' button is pressed.
  * If one or more files are selected, the 'Select Task' view will be shown for those files.
@@ -165,16 +187,7 @@
  */
 - (void) showInfoAbout: (ExperimentFile *) file
 {
-    _dimView.hidden = NO;
-    _infoAboutFile.hidden = NO;
-    _infoAboutFile.layer.cornerRadius = 5;
-    _infoAboutFile.layer.masksToBounds = YES;
-    
-    _infoAboutFile.layer.borderWidth = 0.4;
-    _infoAboutFile.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    _infoFileTextField.text = [file getAllInfo];
-    [[_infoFileTextField layer] setBorderColor : [[UIColor lightGrayColor] CGColor]];
-    [[_infoFileTextField layer] setBorderWidth:0.4];
+    [(TabBar2Controller *)self.tabBar2Controller showInfoAboutFile:file];
 }
 
 /**
@@ -182,11 +195,11 @@
  * This method is called when the 'Close' button in the detailed information view.
  *
  */
-- (IBAction)closeFileInfo:(id)sender {
-    _infoAboutFile.hidden = YES;
-    _dimView.hidden = YES;
-    
-}
+//- (IBAction)closeFileInfo:(id)sender {
+//    _infoAboutFile.hidden = YES;
+//    _dimView.hidden = YES;
+//    
+//}
 
 /**
  * Method which is called when a segue is about to be performed.

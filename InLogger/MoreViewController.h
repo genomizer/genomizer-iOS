@@ -10,6 +10,14 @@
 #import <UIKit/UIKit.h>
 #import "ViewController.h"
 
+/**
+ Controlls the More view of the application. 
+ */
 @interface MoreViewController : ViewController
+
+@property (nonatomic, retain) IBOutlet UILabel *userLabel;
+@property (nonatomic, retain) IBOutlet UILabel *serverLabel;
+
 - (IBAction)logoutButtonTouched:(id)sender;
+
 @end

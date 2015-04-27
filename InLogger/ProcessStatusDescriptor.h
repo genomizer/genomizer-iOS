@@ -2,12 +2,15 @@
 //  ProcessStatusDescriptor.h
 //  Genomizer
 //
-//  The ProcessStatusDescriptor describes process statuses. It
-//  contains information about a process.
+
 //
 
 #import <Foundation/Foundation.h>
 
+/**
+ The ProcessStatusDescriptor describes process statuses. It
+ contains information about a process.
+ */
 @interface ProcessStatusDescriptor : NSObject
 
 @property NSString* author;

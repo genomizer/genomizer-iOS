@@ -35,13 +35,14 @@
     _spinner.hidden = YES;
     _spinner.hidesWhenStopped = YES;
     _delegate = [[SettingsPopupDelegate alloc] init];
+
+//    NSString *serverURL = [FileHandler readFromFile: SERVER_URL_FILE_NAME withDefaultData:MOCK_URL];
+//    [JSONBuilder setServerURLToString:serverURL];
     
-    NSString *serverURL = [FileHandler readFromFile: SERVER_URL_FILE_NAME withDefaultData:MOCK_URL];
-    [JSONBuilder setServerURLToString:serverURL];
-    
+    //Pål did this
     //add self to appDelegate
-    AppDelegate *app = [UIApplication sharedApplication].delegate;
-    [app addController:self];
+//    AppDelegate *app = [UIApplication sharedApplication].delegate;
+//    [app addController:self];
 }
 
 /**
@@ -115,13 +116,19 @@
  * @return if a error occured a popup with information about the error is shown.
  *         else a segue to the searchView is preformed.
  */
-- (void) reportLoginResult: (NSError*) error {
+- (void) reportLoginResult:(NSString *)token error:(NSError*) error; {
     
     if(error == nil)
     {
+        
+        [[NSUserDefaults standardUserDefaults] setObject:_userField.text forKey:@"username"];
+        [[NSUserDefaults standardUserDefaults] setObject:token forKey:@"usertoken"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             AppDelegate *app = [UIApplication sharedApplication].delegate;
             app.userIsLoggingOut = NO;
+
             [self performSegueWithIdentifier:@"loginSegue" sender:self];
         });
     } else
@@ -133,6 +140,7 @@
         });
     }
 }
+
 /**
  * Executes when a textfield is clicked.
  */
@@ -141,11 +149,10 @@
     if(self.view.frame.origin.y < 0) {
         return;
     }
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.25];
-    // Move frame so that keyboard is not on top of any inputfield.
-    self.view.frame = CGRectMake(0, -140, self.view.frame.size.width, self.view.frame.size.height);
-    [UIView commitAnimations];
+    [UIView animateWithDuration:0.25 animations:^{
+        self.view.transform = CGAffineTransformMakeTranslation(0, -140);
+//        self.view.frame = CGRectMake(0, -140, self.view.frame.size.width, self.view.frame.size.height);
+    }];
 }
 
 /**
@@ -153,10 +160,11 @@
  */
 - (void)centerFrameView
 {
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.25];
-    self.view.frame = CGRectMake(0,0,self.view.frame.size.width,self.view.frame.size.height);
-    [UIView commitAnimations];
+    [UIView animateWithDuration:0.25 animations:^{
+        self.view.transform = CGAffineTransformMakeTranslation(0, 0);
+//        self.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+    }];
+    
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -168,6 +176,7 @@
 
 /**
  * Describes what is shoud happen if the "next" button on the keyboard is pressed.
+ @param textField Textfield which is asked if it should return
  */
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {

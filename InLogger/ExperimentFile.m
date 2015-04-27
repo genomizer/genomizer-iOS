@@ -12,9 +12,7 @@
 /**
  * Checks if the files in the given array contains files of multiples 
  * file types.
- *
  * @param files - an array with files
- *
  * @return YES if the files are of different types, NO otherwise
  */
 + (BOOL) multipleFileType: (NSArray *) files
@@ -35,7 +33,6 @@
 
 /**
  * Returns the name of the file.
- *
  * @return the name of the file
  */
 - (NSString *) getDescription
@@ -47,7 +44,6 @@
 
 /**
  * Returns a string with all information about the file.
- *
  * @return information about the file
  */
 - (NSString *) getAllInfo{
@@ -66,9 +62,7 @@
 
 /**
  * Returns a ? if the given string is nil, otherwise the same string is returned.
- *
  * @param string - the string to format
- *
  * @return ? if the string is nil, otherwise the same string
  */
 + (NSString *) format: (NSString *) string
@@ -103,9 +97,7 @@
 
 /**
  * Returns YES if the arguments are equal to each other and NO otherwise.
- *
  * @param object - the object to compare with
- *
  * @return YES if the arguments are equal to each other and NO otherwise.
  */
 - (BOOL) isEqual:(id)object
@@ -113,7 +105,9 @@
     if (![object isKindOfClass:[ExperimentFile class]]) {
         return NO;
     }
-    return [_name isEqualToString: ((ExperimentFile *)object).idFile];
+    ExperimentFile *otherFile = (ExperimentFile *)object;
+    return [self.idFile isEqual:otherFile.idFile] &&
+            [self.name isEqualToString:otherFile.name];
 }
 
 /**
@@ -126,6 +120,39 @@
     return [_idFile hash];
 }
 
+/**
+ Encode the object to be able to store it in NSUserDefaults
+ 
+ */
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    //Encode properties, other class variables, etc
+    [encoder encodeObject:_idFile forKey:@"idFile"];
+    [encoder encodeObject:@(_type) forKey:@"type"];
+    [encoder encodeObject:_name forKey:@"name"];
+    [encoder encodeObject:_uploadedBy forKey:@"uploadedBy"];
+    [encoder encodeObject:_date forKey:@"date"];
+    [encoder encodeObject:_expID forKey:@"expID"];
+    [encoder encodeObject:_metaData forKey:@"metaData"];
+    [encoder encodeObject:_author forKey:@"author"];
+    [encoder encodeObject:_grVersion forKey:@"grVersion"];
+    [encoder encodeObject:_species forKey:@"species"];
+}
+- (id)initWithCoder:(NSCoder *)decoder {
+    if((self = [super init])) {
+        //decode properties, other class vars
+        _idFile = [decoder decodeObjectForKey:@"idFile"];
+        _type = [(NSNumber *)[decoder decodeObjectForKey:@"type"] intValue];
+        _name = [decoder decodeObjectForKey:@"name"];
+        _uploadedBy = [decoder decodeObjectForKey:@"uploadedBy"];
+        _date = [decoder decodeObjectForKey:@"date"];
+        _expID = [decoder decodeObjectForKey:@"expID"];
+        _metaData = [decoder decodeObjectForKey:@"metaData"];
+        _author = [decoder decodeObjectForKey:@"author"];
+        _grVersion = [decoder decodeObjectForKey:@"grVersion"];
+        _species = [decoder decodeObjectForKey:@"species"];
+    }
+    return self;
+}
 
 @end
 

@@ -8,6 +8,21 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FileAboutView : UIView
+/**
+ FileAboutView
+ Shows information about a file.
+ */
+@class FileAboutView;
+@protocol FileAboutViewDelegate <NSObject>
+-(void)fileAboutViewDidClose:(FileAboutView *)fav;
+@end
 
+@interface FileAboutView : UIView
+{
+    id<FileAboutViewDelegate>delegate;
+}
+@property id<FileAboutViewDelegate>delegate;
+@property (nonatomic, retain) UIView *dimView;
+
+-(void)setText:(NSString *)text;
 @end

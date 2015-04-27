@@ -14,25 +14,30 @@
 @end
 
 @implementation MoreViewController
-
+@synthesize serverLabel, userLabel;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //add self to appDelegate
-    AppDelegate *app = [UIApplication sharedApplication].delegate;
-    [app addController:self];
+    
+    NSString *serverURL = [[NSUserDefaults standardUserDefaults] objectForKey:@"serverURL"];
+    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+    self.serverLabel.text = serverURL;
+    self.userLabel.text = username;
 }
 /**
  * Method that executes when the "logout"-button is pressed.
  * Calls the method "logout" in serverConnection.
+    @param sender Button which execute the method
  * @return kills all controllers and returns to logout screen.
  */
 - (IBAction)logoutButtonTouched:(id)sender {
     AppDelegate *app = [UIApplication sharedApplication].delegate;
     app.userIsLoggingOut = YES;
-    [ServerConnection logout];
-    [app killControllers];
     [app restart];
+    [app resetUserToken];
+    [ServerConnection logout:^{
+        
+    }];
 }
 
 @end
