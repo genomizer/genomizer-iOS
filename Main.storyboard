@@ -251,7 +251,7 @@
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" sectionHeaderHeight="22" sectionFooterHeight="22" id="ABo-z4-czf">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.95999999999999996" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ListPrototypeCell" rowHeight="80" id="CwE-h2-EVG" customClass="SearchResultTableViewCell">
                                 <rect key="frame" x="0.0" y="86" width="320" height="80"/>
@@ -261,7 +261,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="Experiment ID: 1231 Publication ID: 1231" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ulx-fv-OET">
-                                            <rect key="frame" x="15" y="7" width="237" height="87"/>
+                                            <rect key="frame" x="15" y="7" width="237" height="72"/>
                                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <accessibility key="accessibilityConfiguration">
                                                 <bool key="isElement" value="NO"/>
@@ -274,7 +274,7 @@
                                         <constraint firstAttribute="trailing" secondItem="ulx-fv-OET" secondAttribute="trailing" constant="35" id="Srj-lw-FBO"/>
                                         <constraint firstItem="ulx-fv-OET" firstAttribute="leading" secondItem="8cF-Af-bhw" secondAttribute="leading" constant="15" id="UuL-Ng-anP"/>
                                         <constraint firstItem="ulx-fv-OET" firstAttribute="top" secondItem="8cF-Af-bhw" secondAttribute="top" constant="7" id="YPt-lr-LDR"/>
-                                        <constraint firstAttribute="bottom" secondItem="ulx-fv-OET" secondAttribute="bottom" constant="-15" id="f8f-mC-4cb"/>
+                                        <constraint firstAttribute="bottom" secondItem="ulx-fv-OET" secondAttribute="bottom" id="f8f-mC-4cb"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
@@ -311,7 +311,7 @@
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="anZ-tI-qPu">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.95999999999999996" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AnnotationPrototypeCell" id="NEQ-6F-owQ" customClass="AnnotationTableViewCell">
                                 <rect key="frame" x="0.0" y="86" width="320" height="44"/>
@@ -333,7 +333,9 @@
                                             </connections>
                                         </switch>
                                     </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="label" destination="yDU-Kz-Wat" id="EEK-UD-8NC"/>
                                     <outlet property="switchButton" destination="vjc-p8-OoE" id="OOs-QW-2A7"/>

@@ -8,7 +8,6 @@
 #import "SearchViewController.h"
 #import "RawConvertViewController.h"
 #import "LogInViewController.h"
-#import "ProcessViewController.h"
 
 /**
  A class that contains static methods for all server communication.

@@ -87,12 +87,12 @@
     CGRect rect = [text boundingRectWithSize:CGSizeMake(self.tableCellWidth, CGFLOAT_MAX)
                                 options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
                              attributes:[NSDictionary dictionaryWithObjectsAndKeys:font,NSFontAttributeName, nil] context:nil];
-//    heightTextView.attributedText = [PubMedBuilder formatInfoText:[_experimentDescriber getDescriptionOf:experiment] fontSize:15];
-//    [heightTextView sizeToFit];
-//    [heightTextView layoutIfNeeded];
-//    float height = [heightTextView sizeThatFits:CGSizeMake(heightTextView.frame.size.width, 400)].height;
-//    return height;
+    
     return ceilf(rect.size.height+25);
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 0.01f;
 }
 
 /**
