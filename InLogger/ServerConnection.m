@@ -98,7 +98,9 @@ NSString *token;
  *@param controller - SearchViewController, which the method will report the result to
  *@return nothing
  */
-+ (void)search:(NSString*)annotations withContext: (SearchViewController*) controller
++ (void)search:(NSString*)annotations withContext:(void (^)(NSMutableArray *,
+                                                            NSError *)
+                                                   )completionBlock;
 {
     NSMutableURLRequest *request = [JSONBuilder getSearchJSON:annotations withToken: token];
     
@@ -124,7 +126,7 @@ NSString *token;
          else{
              error = [self generateError:kConnectionErrorMsg withErrorDomain:@"Connection Error" withUnderlyingError:internalError];
          }
-         [controller reportSearchResult:array error:error];
+         completionBlock(array, error);
      }];
 }
 
@@ -168,7 +170,7 @@ NSString *token;
  *@param controller - RawConvertViewController, which the method will report the result to
  *@return nothing
  */
-+ (void)genomeRelease: (RawConvertViewController*) controller
++ (void)genomeRelease:(void (^)(NSMutableArray *, NSError *))completionBlock
 {
     NSMutableURLRequest *request = [JSONBuilder getGenomeReleaseJSON:token];
     
@@ -198,7 +200,7 @@ NSString *token;
              error = [self generateError:kConnectionErrorMsg withErrorDomain:@"Connection Error" withUnderlyingError:internalError];
          }
          
-         [controller reportGenomeResult:genomeReleases withError:error];
+         completionBlock(genomeReleases, error);
          
      }];
 }
@@ -210,7 +212,9 @@ NSString *token;
  *@param controller - RawConvertViewController, which the method will report the result to
  *@return nothing
  */
-+(void)convert:(NSMutableDictionary*)dict withContext: (RawConvertViewController*) controller
++(void)convert:(NSMutableDictionary*)dict withContext:(void (^)(NSError *,
+                                                                NSString *)
+                                                       )completionBlock
 {
     NSMutableURLRequest *request = [JSONBuilder getRawToProfileJSON:token withDict:dict];
     
@@ -231,7 +235,7 @@ NSString *token;
          {
              error = [self generateError:kConnectionErrorMsg withErrorDomain:@"Connection Error" withUnderlyingError:internalError];
          }
-         [controller reportResult:error experiment:[dict objectForKey:@"expid"]];
+         completionBlock(error, [dict objectForKey:@"expid"]);
      }];
 }
 
@@ -243,7 +247,7 @@ NSString *token;
  *@param controller - SearchViewController, which the method will report the result to
  *@return nothing
  */
-+ (void)getAvailableAnnotations:(SearchViewController*) controller
++ (void)getAvailableAnnotations:(void (^)(NSArray *, NSError *))completionBlock
 {
     
     NSMutableURLRequest *request = [JSONBuilder getAvailableAnnotationsJSON:token];
@@ -291,7 +295,7 @@ NSString *token;
          {
              error = [self generateError:kConnectionErrorMsg withErrorDomain:@"Connection Error" withUnderlyingError:internalError];
          }
-         [controller reportAnnotationResult:annotations error:error];
+         completionBlock(annotations, error);
      }];
 }
 
@@ -303,7 +307,7 @@ NSString *token;
  *@param controller - ProcessViewController, which the method will report the result to
  *@return nothing
  */
-+ (void) getProcessStatus:(void (^)(NSMutableArray *, NSError *))completionBlock;
++ (void) getProcessStatus:(void (^)(NSMutableArray *, NSError *))completionBlock
 {
     NSMutableURLRequest *request = [JSONBuilder getProcessStatusJSON:token];
     
