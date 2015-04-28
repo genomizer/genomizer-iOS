@@ -71,7 +71,9 @@
     
     [super viewDidLoad];
     // Get genomereleases that are used as datasource for the pickerView.
-    [ServerConnection genomeRelease:self];
+    [ServerConnection genomeRelease:^(NSMutableArray *ma, NSError *e){
+        [self reportGenomeResult:ma withError:e];
+    }];
     _pickerView = [self createPickerView];
     _toolBar = [self createPickerViewToolBar:_pickerView];
     //set up all textfields and switchbuttons.
@@ -479,7 +481,10 @@
             }
             [dict setObject:metadata forKey:@"metadata"];
             [dict setObject:_genomeFile.text forKey:@"genomeVersion"];
-            [ServerConnection convert:dict withContext:self];
+            [ServerConnection convert:dict withContext:^(NSError *e,
+                                                         NSString *s){
+                [self reportResult:e experiment:s];
+            }];
             numberOfConvertRequestsLeftToConfirm++;
         }
     }
