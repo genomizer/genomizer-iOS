@@ -9,8 +9,23 @@
 
 @implementation ExperimentFile
 
-
-
+#warning not used
+- (instancetype)initWithCoder:(NSCoder *)decoder {
+    if((self = [super init])) {
+        //decode properties, other class vars
+        _idFile = [decoder decodeObjectForKey:@"idFile"];
+        _type = [(NSNumber *)[decoder decodeObjectForKey:@"type"] intValue];
+        _name = [decoder decodeObjectForKey:@"name"];
+        _uploadedBy = [decoder decodeObjectForKey:@"uploadedBy"];
+        _date = [decoder decodeObjectForKey:@"date"];
+        _expID = [decoder decodeObjectForKey:@"expID"];
+        _metaData = [decoder decodeObjectForKey:@"metaData"];
+        _author = [decoder decodeObjectForKey:@"author"];
+        _grVersion = [decoder decodeObjectForKey:@"grVersion"];
+        _species = [decoder decodeObjectForKey:@"species"];
+    }
+    return self;
+}
 /**
  * Checks if the files in the given array contains files of multiples 
  * file types.
@@ -34,20 +49,11 @@
 }
 
 /**
- * Returns the name of the file.
- * @return the name of the file
- *//*
-- (NSString *) getDescription
-{
-    return _name;
-}*/
-
-/**
  * Returns a string with all information about the file.
  * @return information about the file
  */
 - (NSString *) getAllInfo{
-#warning Filename and name?
+#warning Filename==idFile?
     NSString *fileInfo = [NSString stringWithFormat:
                           @"Filename: %@\nDate: %@\n"
                           "Name: %@\nExperiment ID: %@\n"
@@ -124,23 +130,6 @@
     [encoder encodeObject:_species forKey:@"species"];
 }
 
-#warning not used
-- (instancetype)initWithCoder:(NSCoder *)decoder {
-    if((self = [super init])) {
-        //decode properties, other class vars
-        _idFile = [decoder decodeObjectForKey:@"idFile"];
-        _type = [(NSNumber *)[decoder decodeObjectForKey:@"type"] intValue];
-        _name = [decoder decodeObjectForKey:@"name"];
-        _uploadedBy = [decoder decodeObjectForKey:@"uploadedBy"];
-        _date = [decoder decodeObjectForKey:@"date"];
-        _expID = [decoder decodeObjectForKey:@"expID"];
-        _metaData = [decoder decodeObjectForKey:@"metaData"];
-        _author = [decoder decodeObjectForKey:@"author"];
-        _grVersion = [decoder decodeObjectForKey:@"grVersion"];
-        _species = [decoder decodeObjectForKey:@"species"];
-    }
-    return self;
-}
 
 @end
 

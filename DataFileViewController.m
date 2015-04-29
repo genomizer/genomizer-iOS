@@ -7,14 +7,11 @@
 
 #import "DataFileViewController.h"
 #import "SearchResultTableViewController.h"
-#import "ExperimentFile.h"
 #import "DataFileTableViewCell.h"
-#import "ServerConnection.h"
 #import "SelectedFilesViewController.h"
 #import "PopupGenerator.h"
 #import "SelectTaskTableViewController.h"
-#import "FileContainer.h"
-#import "TabViewController.h"
+
 @interface DataFileViewController ()
 
 @property (weak, nonatomic) IBOutlet UIView *dimView;

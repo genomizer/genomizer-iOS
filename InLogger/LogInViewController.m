@@ -180,19 +180,16 @@
     return NO;
 }
 
-/**
- Executes when the settings-icon in top-right corner is pressed.
- Shows a popup with a textfield where the user can input the URL to the server.
+/*!
+ @discussion Creates a popup-view when settings is pressed
+ @param sender The button that was pressed
+ @return
  */
 - (IBAction)settingsButtonPressed:(id)sender
 {
     [PopupGenerator showInputPopupWithMessage:@"Enter server URL:" withTitle:@"" withText: [JSONBuilder getServerURL] withDelegate:self];
 }
 
-/**
- When done-button is pressed in Enter server URL view, set the server url in JSONBuilder
- and write server url to file.
- */
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     UITextField *textField = [alertView textFieldAtIndex:0];
