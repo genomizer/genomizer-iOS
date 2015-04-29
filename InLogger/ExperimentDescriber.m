@@ -11,11 +11,9 @@
 #define FILE_NAME @"annotations.asd"
 #define DELIMITER @","
 
-@interface ExperimentDescriber(){
-    NSMutableArray *visibleAnnotations;
-}
+@interface ExperimentDescriber ()
 
-
+    @property (nonatomic)  NSMutableArray *visibleAnnotations;
 
 @end
 
@@ -25,7 +23,7 @@
 -(instancetype)init
 {
     if(self = [super init]){
-        visibleAnnotations = [[NSMutableArray alloc] init];
+        _visibleAnnotations = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -52,8 +50,8 @@
  */
 - (void) showAnnotation: (Annotation *) annotation
 {
-    if(![visibleAnnotations containsObject:annotation]) {
-        [visibleAnnotations addObject:annotation];
+    if(![self.visibleAnnotations containsObject:annotation]) {
+        [self.visibleAnnotations addObject:annotation];
     }
 }
 
@@ -64,7 +62,7 @@
  */
 - (void) hideAnnotation: (Annotation *) annotation
 {
-    [visibleAnnotations removeObject:annotation];
+    [self.visibleAnnotations removeObject:annotation];
 }
 
 
@@ -75,7 +73,7 @@
  * @return true if the annotation is to display
  */
 - (BOOL) showsAnnotation: (Annotation *) annotation {
-    return [visibleAnnotations containsObject:annotation];
+    return [self.visibleAnnotations containsObject:annotation];
 }
 
 /**
@@ -91,13 +89,13 @@
     NSMutableString *description = [[NSMutableString alloc] init];
     
     [description appendString: [self createRowForAnnotation:@"Name" withValue:experiment.name andNewLine:true]];
-    [description appendString:[self createRowForAnnotation:@"Created by" withValue:experiment.createdByUser andNewLine:[_visibleAnnotations count] > 0]];
+    [description appendString:[self createRowForAnnotation:@"Created by" withValue:experiment.createdByUser andNewLine:[self.visibleAnnotations count] > 0]];
     
-    for (NSInteger i = 0; i < [_visibleAnnotations count]; i++) {
-        Annotation *annotation = _visibleAnnotations[i];
+    for (NSInteger i = 0; i < [self.visibleAnnotations count]; i++) {
+        Annotation *annotation = self.visibleAnnotations[i];
         NSString *newString = [self createRowForAnnotation:[annotation getFormatedName]
                                                  withValue:[experiment getValueForAnnotation:annotation.name]
-                                                andNewLine:i != [_visibleAnnotations count] -1];
+                                                andNewLine:i != [self.visibleAnnotations count] -1];
         NSLog(@"NEW STRING: %@", newString);
         [description appendString: newString];
     }
@@ -105,11 +103,12 @@
     return description;
 }
 - (NSArray *)getVisibleAnnotations{
-    return visibleAnnotations;
+    return self.visibleAnnotations;
 }
-- (void)setVisibleAnnotations:(NSArray *)array{
-    visibleAnnotations = array.mutableCopy;
-}
+/*
+- (void)setVisibleAnnotations:(NSMutableArray *)array{
+    self.visibleAnnotations = array.mutableCopy;
+}*/
 
 /**
  * Formats the given annotation name and appends the given value to it.
@@ -144,10 +143,10 @@
 - (void) saveAnnotationsToFile
 {
     NSMutableString *data = [[NSMutableString alloc] init];
-    for (NSInteger i = 0; i < visibleAnnotations.count; i++) {
-        Annotation *annotation = visibleAnnotations[i];
+    for (NSInteger i = 0; i < self.visibleAnnotations.count; i++) {
+        Annotation *annotation = self.visibleAnnotations[i];
         [data appendString: annotation.name];
-        if (i < visibleAnnotations.count - 1) {
+        if (i < self.visibleAnnotations.count - 1) {
             [data appendString: DELIMITER];
         }
     }
