@@ -20,7 +20,7 @@
 - (NSString *) getDescriptionOf: (Experiment*) experiment;
 - (BOOL) showsAnnotation: (Annotation *) annotation;
 - (NSArray *)getVisibleAnnotations;
-- (void)setVisibleAnnotations:(NSArray *)array;
+//- (void)setVisibleAnnotations:(NSArray *)array;
 - (void) saveAnnotationsToFile;
 
 @end

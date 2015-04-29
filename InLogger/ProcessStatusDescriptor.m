@@ -37,6 +37,14 @@
                                       @"outputFiles"];
     }
     
+    _author = @"unknown";
+    _experimentName = @"unknown";
+    _outputFile = @"unknown";
+    _status = @"unknown";
+    _timeAdded = [NSDate date];
+    _timeStarted = [NSDate date];
+    _timeFinished = [NSDate date];
+    
     return self;
 }
 
@@ -71,7 +79,7 @@
         return self;
     } else
     {
-        return nil;
+        return [self init];
     }
 }
 
@@ -83,6 +91,9 @@
  */
 - (BOOL) statusDictionaryIsValid: (NSDictionary*) status
 {
+    if ([status count] == 0) {
+        return NO;
+    }
     for(NSString *string in self.expectedInformation)
     {
         if([status objectForKey:string] == nil)
