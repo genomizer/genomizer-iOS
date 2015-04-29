@@ -31,7 +31,6 @@
 		76F638D8190FD99300F0F4BF /* Experiment.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F638D7190FD99300F0F4BF /* Experiment.m */; };
 		76F638DB190FDD9D00F0F4BF /* ExperimentFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F638DA190FDD9D00F0F4BF /* ExperimentFile.m */; };
 		CFE6F04C1AE1049600047985 /* testViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFE6F04B1AE1049600047985 /* testViewController.m */; };
-		D108BEBF1ADFE1F40075D736 /* DataFileTableViewCell.h in Sources */ = {isa = PBXBuildFile; fileRef = D1FD6E361ADFDD8D00676BED /* DataFileTableViewCell.h */; };
 		D116AEE81ADE5FAE00E8E997 /* AlertWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = D116AEE71ADE5FAE00E8E997 /* AlertWindow.m */; };
 		D134590B1AE0FF6D004EDF31 /* AdvancedSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = D134590A1AE0FF6D004EDF31 /* AdvancedSearchView.m */; };
 		D15D17B71AE7900D00B65DFE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D15D17B61AE7900D00B65DFE /* LaunchScreen.xib */; };
@@ -53,8 +52,6 @@
 		D1E7C2E61ADFE30700E8D5E4 /* Error@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D1E7C2E21ADFE30700E8D5E4 /* Error@2x.png */; };
 		D1E7C2E71ADFE30700E8D5E4 /* Success.png in Resources */ = {isa = PBXBuildFile; fileRef = D1E7C2E31ADFE30700E8D5E4 /* Success.png */; };
 		D1E7C2E81ADFE30700E8D5E4 /* Success@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D1E7C2E41ADFE30700E8D5E4 /* Success@2x.png */; };
-		D1E7C2ED1ADFE77D00E8D5E4 /* Star.png in Resources */ = {isa = PBXBuildFile; fileRef = D1E7C2E91ADFE77D00E8D5E4 /* Star.png */; };
-		D1E7C2EE1ADFE77D00E8D5E4 /* Star@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D1E7C2EA1ADFE77D00E8D5E4 /* Star@2x.png */; };
 		D1E7C2EF1ADFE77D00E8D5E4 /* Unstar.png in Resources */ = {isa = PBXBuildFile; fileRef = D1E7C2EB1ADFE77D00E8D5E4 /* Unstar.png */; };
 		D1E7C2F01ADFE77D00E8D5E4 /* Unstar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D1E7C2EC1ADFE77D00E8D5E4 /* Unstar@2x.png */; };
 		D1F6637C1ADD5F2E002DBE03 /* FileAboutView.m in Sources */ = {isa = PBXBuildFile; fileRef = D1F6637B1ADD5F2E002DBE03 /* FileAboutView.m */; };
@@ -62,7 +59,6 @@
 		DE25D8021910D72A0084BDDC /* DataFileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE25D8001910D72A0084BDDC /* DataFileViewController.m */; };
 		DE25D8061910E1500084BDDC /* ExperimentDescriber.m in Sources */ = {isa = PBXBuildFile; fileRef = DE25D8051910E1500084BDDC /* ExperimentDescriber.m */; };
 		DE403ACD190A8A3E003D21F5 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE403ACC190A8A3E003D21F5 /* SearchViewController.m */; };
-		DE6BC22E192DE12400B6D7AD /* SettingsPopupDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6BC22C192DE12400B6D7AD /* SettingsPopupDelegate.m */; };
 		DE6BC232192DE61400B6D7AD /* FileHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6BC231192DE61400B6D7AD /* FileHandler.m */; };
 		DE7C9C2519235F6C004A2492 /* Annotation.m in Sources */ = {isa = PBXBuildFile; fileRef = DE7C9C2419235F6C004A2492 /* Annotation.m */; };
 		DE7C9C2719236044004A2492 /* TestAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = DE7C9C2619236044004A2492 /* TestAnnotation.m */; };
@@ -168,8 +164,6 @@
 		D1E7C2E21ADFE30700E8D5E4 /* Error@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Error@2x.png"; path = "Genomizer.xcodeproj/../Icon/Error@2x.png"; sourceTree = SOURCE_ROOT; };
 		D1E7C2E31ADFE30700E8D5E4 /* Success.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Success.png; path = Genomizer.xcodeproj/../Icon/Success.png; sourceTree = SOURCE_ROOT; };
 		D1E7C2E41ADFE30700E8D5E4 /* Success@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Success@2x.png"; path = "Genomizer.xcodeproj/../Icon/Success@2x.png"; sourceTree = SOURCE_ROOT; };
-		D1E7C2E91ADFE77D00E8D5E4 /* Star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Star.png; path = Icon/Star.png; sourceTree = SOURCE_ROOT; };
-		D1E7C2EA1ADFE77D00E8D5E4 /* Star@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Star@2x.png"; path = "Icon/Star@2x.png"; sourceTree = SOURCE_ROOT; };
 		D1E7C2EB1ADFE77D00E8D5E4 /* Unstar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Unstar.png; path = Icon/Unstar.png; sourceTree = SOURCE_ROOT; };
 		D1E7C2EC1ADFE77D00E8D5E4 /* Unstar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Unstar@2x.png"; path = "Icon/Unstar@2x.png"; sourceTree = SOURCE_ROOT; };
 		D1F6637A1ADD5F2E002DBE03 /* FileAboutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FileAboutView.h; path = ../FileAboutView.h; sourceTree = "<group>"; };
@@ -184,8 +178,6 @@
 		DE25D8051910E1500084BDDC /* ExperimentDescriber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExperimentDescriber.m; sourceTree = "<group>"; };
 		DE403ACB190A8A3E003D21F5 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		DE403ACC190A8A3E003D21F5 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
-		DE6BC22B192DE12400B6D7AD /* SettingsPopupDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsPopupDelegate.h; sourceTree = "<group>"; };
-		DE6BC22C192DE12400B6D7AD /* SettingsPopupDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsPopupDelegate.m; sourceTree = "<group>"; };
 		DE6BC230192DE61400B6D7AD /* FileHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileHandler.h; sourceTree = "<group>"; };
 		DE6BC231192DE61400B6D7AD /* FileHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileHandler.m; sourceTree = "<group>"; };
 		DE7C9C2319235F6C004A2492 /* Annotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Annotation.h; sourceTree = "<group>"; };
@@ -422,8 +414,6 @@
 				649483E51935C5AC00C646FE /* Reachability.m */,
 				DEEF6B181909553C00A2CD8C /* LogInViewController.h */,
 				DEEF6B191909553C00A2CD8C /* LogInViewController.m */,
-				DE6BC22B192DE12400B6D7AD /* SettingsPopupDelegate.h */,
-				DE6BC22C192DE12400B6D7AD /* SettingsPopupDelegate.m */,
 			);
 			name = LogIn;
 			sourceTree = "<group>";
@@ -492,8 +482,6 @@
 				D1E7C2E21ADFE30700E8D5E4 /* Error@2x.png */,
 				D1E7C2E31ADFE30700E8D5E4 /* Success.png */,
 				D1E7C2E41ADFE30700E8D5E4 /* Success@2x.png */,
-				D1E7C2E91ADFE77D00E8D5E4 /* Star.png */,
-				D1E7C2EA1ADFE77D00E8D5E4 /* Star@2x.png */,
 				D1E7C2EB1ADFE77D00E8D5E4 /* Unstar.png */,
 				D1E7C2EC1ADFE77D00E8D5E4 /* Unstar@2x.png */,
 				DEEF6AEE19094F8A00A2CD8C /* Supporting Files */,
@@ -632,11 +620,9 @@
 				D1E7C2E51ADFE30700E8D5E4 /* Error.png in Resources */,
 				D1CEABCA1AE15F58002EF615 /* Star@2x.png in Resources */,
 				D1CEABC81AE15F58002EF615 /* Settings@2x.png in Resources */,
-				D1E7C2ED1ADFE77D00E8D5E4 /* Star.png in Resources */,
 				D1CEABC51AE15F58002EF615 /* Search.png in Resources */,
 				D1CEABC61AE15F58002EF615 /* Search@2x.png in Resources */,
 				D1CB5F1D1AE180070017EE4A /* Process@2x.png in Resources */,
-				D1E7C2EE1ADFE77D00E8D5E4 /* Star@2x.png in Resources */,
 				DEEF6AFA19094F8A00A2CD8C /* Images.xcassets in Resources */,
 				D1CB5F1C1AE180070017EE4A /* Process.png in Resources */,
 				D1E7C2E81ADFE30700E8D5E4 /* Success@2x.png in Resources */,
@@ -660,7 +646,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D108BEBF1ADFE1F40075D736 /* DataFileTableViewCell.h in Sources */,
 				D17107801ADFE0D5009CD177 /* DataFileTableViewCell.m in Sources */,
 				21CFACF71935CC9A002112DD /* Reachability.m in Sources */,
 				DE403ACD190A8A3E003D21F5 /* SearchViewController.m in Sources */,
@@ -677,7 +662,6 @@
 				649778EF191119FB000FD14F /* MoreViewController.m in Sources */,
 				DE9A3EEF1918CAA100F7C33B /* AnnotationTableViewCell.m in Sources */,
 				DE25D8061910E1500084BDDC /* ExperimentDescriber.m in Sources */,
-				DE6BC22E192DE12400B6D7AD /* SettingsPopupDelegate.m in Sources */,
 				2173DFC51929F1EA0040A336 /* ProcessStatusDescriptor.m in Sources */,
 				DED12294190E966200D8E530 /* SelectedFilesViewController.m in Sources */,
 				76F638DB190FDD9D00F0F4BF /* ExperimentFile.m in Sources */,

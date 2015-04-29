@@ -46,7 +46,6 @@
         [sortArray insertObject:@"Name" atIndex:0];
         [sortArray insertObject:@"Created by" atIndex:1];
     }
-    //add self to appDelegate
 }
 
 #pragma mark - Table view data source
