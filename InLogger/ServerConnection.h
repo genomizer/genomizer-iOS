@@ -8,7 +8,6 @@
 #import "SearchViewController.h"
 #import "RawConvertViewController.h"
 #import "LogInViewController.h"
-#import "ProcessViewController.h"
 
 /**
  A class that contains static methods for all server communication.
@@ -24,21 +23,14 @@
                                              )completionBlock;
 + (void)logout:(void(^)())completion;
 
-+ (void)search:(NSString *) annotations withContext:(void (^)(NSMutableArray *,
-                                                              NSError *)
-                                                     )completionBlock;
++ (void)search:(NSString *) annotations withContext: (SearchViewController*) controller;
 
-+ (void)convert:(NSMutableDictionary*)dict withContext:(void (^)(NSError *,
-                                                                 NSString *)
-                                                        )completionBlock;
-+ (NSDictionary*)parseJSONToDictionary:(NSData*)POSTReply
-                                 error:(NSError**)error;
++ (void)convert:(NSMutableDictionary*)dict withContext: (RawConvertViewController*) controller;
++ (NSDictionary*)parseJSONToDictionary:(NSData*)POSTReply error:(NSError**)error;
 
-+ (void) getAvailableAnnotations:(void (^)(NSArray *,
-                                           NSError *))completionBlock;
-+ (void) getProcessStatus:(void (^)(NSMutableArray *,
-                                    NSError *))completionBlock;
-+ (void)genomeRelease:(void (^)(NSMutableArray *, NSError *))completionBlock;
++ (void) getAvailableAnnotations:(SearchViewController*) controller;
++ (void) getProcessStatus:(void (^)(NSMutableArray *, NSError *))completionBlock;
++ (void) genomeRelease: (RawConvertViewController*) controller;
 
 
 +(void)setToken:(NSString *)token;

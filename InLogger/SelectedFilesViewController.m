@@ -105,7 +105,7 @@ static FileContainer * FILES = nil;
     experiements = [FILES getAllExperimentIDsOfFileType:_segmentedControl.selectedSegmentIndex].mutableCopy;
     NSMutableArray *newFilesToDisplay = [[NSMutableArray alloc] init];
     for(NSString *expID in experiements){
-        [newFilesToDisplay addObject:[FILES getAllExperimentsWithID:expID fileType:RAW]];
+        [newFilesToDisplay addObject:[FILES getAllExperimentsWithID:expID fileType:_segmentedControl.selectedSegmentIndex]];
     }
     filesToDisplay = newFilesToDisplay;
 }
@@ -288,10 +288,10 @@ static FileContainer * FILES = nil;
         RawConvertViewController *nextVC = nextNVC.childViewControllers.firstObject;
         nextVC.experimentFiles = [FILES getFiles:[self getSelectedFileType]];
         nextVC.ratio = true;
-        nextVC.completionBlock = ^(NSError *error, NSString *message){
-//            NSLog(@"task finished: %@ %@", message, error.userInfo);
-//            [(TabBar2Controller *)self.tabBar2Controller showPopDownWithTitle:@"Convert sent" andMessage:@"Convert request was successfully sent to server" type:@"success"];
-        };
+//        nextVC.completionBlock = ^(NSError *error, NSString *message){
+////            NSLog(@"task finished: %@ %@", message, error.userInfo);
+////            [(TabBar2Controller *)self.tabBar2Controller showPopDownWithTitle:@"Convert sent" andMessage:@"Convert request was successfully sent to server" type:@"success"];
+//        };
         [self.tabBar2Controller presentViewController:nextNVC animated:true completion:nil];
     }
     

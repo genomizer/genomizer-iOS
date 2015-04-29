@@ -43,18 +43,15 @@ NSString *token;
          if (POSTReply != nil) {
              message = [NSJSONSerialization JSONObjectWithData:POSTReply options:kNilOptions error:&error];
          }
-         NSLog(@"LOGIN resp: %@ | %@", response, message);
          if (internalError == nil) {
 
              NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
              NSDictionary *json = [self parseJSONToDictionary:POSTReply error:&internalError];
-             NSLog(@"json: %@", json);
              if(internalError == nil)
              {
                 
                  if([json objectForKey:@"token"] != nil){
                      token = [json objectForKey:@"token"];
-                
                  } else{
                      error = [self generateError:@"Server sent incorrectly formatted data" withErrorDomain:@"Server Error" withUnderlyingError:nil];
                  }
@@ -229,7 +226,7 @@ NSString *token;
          {
              if(httpResp.statusCode != 200)
              {
-                error = [ServerConnection generateError:POSTReply internaleError:internalError response:httpResp];
+                 error = [ServerConnection generateError:POSTReply internaleError:internalError response:httpResp];
              }
          } else
          {
@@ -265,6 +262,7 @@ NSString *token;
              if (httpResp.statusCode == 200)
              {
                  NSArray *array = [NSJSONSerialization JSONObjectWithData:POSTReply options: NSJSONReadingMutableContainers error:&internalError];
+                 
                  if (internalError == nil)
                  {
                      annotations = [[NSMutableArray alloc] init];
@@ -319,8 +317,7 @@ NSString *token;
          NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
          NSError *error;
          NSMutableArray *processStatusResults = [[NSMutableArray alloc] init];
-         if (internalError == nil)
-         {
+         if (internalError == nil) {
              if (httpResp.statusCode == 200){
                  
                  NSArray *array = [NSJSONSerialization JSONObjectWithData:POSTReply options: NSJSONReadingMutableContainers error:&internalError];

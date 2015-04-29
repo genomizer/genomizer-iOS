@@ -65,7 +65,7 @@
 }
 
 @synthesize tableView;
-@synthesize completionBlock;
+//@synthesize completionBlock;
 - (void)viewDidLoad
 {
     
@@ -535,7 +535,7 @@
 //                [PopupGenerator showPopupWithMessage:message withTitle:@"" withCancelButtonTitle:@"OK" withDelegate:self];
                 [self dismissViewControllerAnimated:true completion:nil];
                 [(TabBar2Controller *)self.tabBar2Controller showPopDownWithTitle:@"Convert sent" andMessage:message type:@"success"];
-                self.completionBlock(error, message);
+//                self.completionBlock(error, message);
             }
             _convertButton.enabled = YES;
             self.navigationItem.leftBarButtonItem.enabled = YES;
