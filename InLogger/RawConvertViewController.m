@@ -65,13 +65,15 @@
 }
 
 @synthesize tableView;
-@synthesize completionBlock;
+//@synthesize completionBlock;
 - (void)viewDidLoad
 {
     
     [super viewDidLoad];
     // Get genomereleases that are used as datasource for the pickerView.
-    [ServerConnection genomeRelease:self];
+    [ServerConnection genomeRelease:^(NSMutableArray *ma, NSError *e){
+        [self reportGenomeResult:ma withError:e];
+    }];
     _pickerView = [self createPickerView];
     _toolBar = [self createPickerViewToolBar:_pickerView];
     //set up all textfields and switchbuttons.
@@ -479,7 +481,10 @@
             }
             [dict setObject:metadata forKey:@"metadata"];
             [dict setObject:_genomeFile.text forKey:@"genomeVersion"];
-            [ServerConnection convert:dict withContext:self];
+            [ServerConnection convert:dict withContext:^(NSError *e,
+                                                         NSString *s){
+                [self reportResult:e experiment:s];
+            }];
             numberOfConvertRequestsLeftToConfirm++;
         }
     }
@@ -530,7 +535,7 @@
 //                [PopupGenerator showPopupWithMessage:message withTitle:@"" withCancelButtonTitle:@"OK" withDelegate:self];
                 [self dismissViewControllerAnimated:true completion:nil];
                 [(TabBar2Controller *)self.tabBar2Controller showPopDownWithTitle:@"Convert sent" andMessage:message type:@"success"];
-                self.completionBlock(error, message);
+//                self.completionBlock(error, message);
             }
             _convertButton.enabled = YES;
             self.navigationItem.leftBarButtonItem.enabled = YES;

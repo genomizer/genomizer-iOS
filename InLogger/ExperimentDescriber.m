@@ -11,9 +11,11 @@
 #define FILE_NAME @"annotations.asd"
 #define DELIMITER @","
 
-@interface ExperimentDescriber()
+@interface ExperimentDescriber(){
+    NSMutableArray *visibleAnnotations;
+}
 
-@property NSMutableArray *visibleAnnotations;
+
 
 @end
 
@@ -23,7 +25,7 @@
 -(instancetype)init
 {
     if(self = [super init]){
-        _visibleAnnotations = [[NSMutableArray alloc] init];
+        visibleAnnotations = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -50,8 +52,8 @@
  */
 - (void) showAnnotation: (Annotation *) annotation
 {
-    if(![_visibleAnnotations containsObject:annotation]) {
-        [_visibleAnnotations addObject:annotation];
+    if(![visibleAnnotations containsObject:annotation]) {
+        [visibleAnnotations addObject:annotation];
     }
 }
 
@@ -62,7 +64,7 @@
  */
 - (void) hideAnnotation: (Annotation *) annotation
 {
-    [_visibleAnnotations removeObject:annotation];
+    [visibleAnnotations removeObject:annotation];
 }
 
 
@@ -73,7 +75,7 @@
  * @return true if the annotation is to display
  */
 - (BOOL) showsAnnotation: (Annotation *) annotation {
-    return [_visibleAnnotations containsObject:annotation];
+    return [visibleAnnotations containsObject:annotation];
 }
 
 /**
@@ -99,8 +101,14 @@
         NSLog(@"NEW STRING: %@", newString);
         [description appendString: newString];
     }
-    
+    NSLog(@"desc: %@", description);
     return description;
+}
+- (NSArray *)getVisibleAnnotations{
+    return visibleAnnotations;
+}
+- (void)setVisibleAnnotations:(NSArray *)array{
+    visibleAnnotations = array.mutableCopy;
 }
 
 /**
@@ -136,10 +144,10 @@
 - (void) saveAnnotationsToFile
 {
     NSMutableString *data = [[NSMutableString alloc] init];
-    for (NSInteger i = 0; i < _visibleAnnotations.count; i++) {
-        Annotation *annotation = _visibleAnnotations[i];
+    for (NSInteger i = 0; i < visibleAnnotations.count; i++) {
+        Annotation *annotation = visibleAnnotations[i];
         [data appendString: annotation.name];
-        if (i < _visibleAnnotations.count - 1) {
+        if (i < visibleAnnotations.count - 1) {
             [data appendString: DELIMITER];
         }
     }

@@ -7,6 +7,7 @@
 //
 
 #import "FileAboutView.h"
+#import "PubMedBuilder.h"
 
 @implementation FileAboutView{
     UITextView *infoTextView;
@@ -67,23 +68,9 @@ Set the text which should be shown
  */
 -(void)setText:(NSString *)text{
     
-    NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:text];
 
-    NSUInteger loc = 0;
-    while (loc < text.length) {
-        NSUInteger prevLoc = loc;
-        
-        loc = (int)[text rangeOfString:@":" options:NSCaseInsensitiveSearch range:NSMakeRange(prevLoc, text.length - prevLoc)].location;
-        if(loc == NSNotFound || (int)loc < 0){
-            break;
-        }
-        [string addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-Medium" size:infoTextView.font.pointSize-2] range:NSMakeRange(prevLoc, loc - prevLoc)];
-        prevLoc = loc;
-        loc = (int)[text rangeOfString:@"\n" options:NSCaseInsensitiveSearch range:NSMakeRange(prevLoc, text.length - prevLoc)].location;
-        
-         [string addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-Light" size:infoTextView.font.pointSize] range:NSMakeRange(prevLoc, loc - prevLoc)];
-    }
-    infoTextView.attributedText = string;
+    infoTextView.attributedText = [PubMedBuilder formatInfoText:text fontSize:infoTextView.font.pointSize];
+//    infoTextView.text = text;
 }
 -(void)closeButtonWasTapped:(UIButton *)b{
     if(self.delegate != nil){

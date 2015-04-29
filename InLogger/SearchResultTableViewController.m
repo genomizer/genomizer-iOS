@@ -9,6 +9,7 @@
 #import "SearchResultTableViewCell.h"
 #import "DataFileViewController.h"
 #import "AnnotationTableViewController.h"
+#import "PubMedBuilder.h"
 
 @interface SearchResultTableViewController ()
 
@@ -16,7 +17,9 @@
 
 @end
 
-@implementation SearchResultTableViewController
+@implementation SearchResultTableViewController{
+    UITextView *heightTextView;
+}
 
 /**
  * Method that runs when the view controller is loaded.
@@ -31,6 +34,8 @@
     _tableCellWidth = cell.textFieldSize.width;
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 49, 0);
     self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 49, 0);
+    heightTextView = [[UITextView alloc] initWithFrame:CGRectMake(-999, 0, 237, 999)];
+    [self.view addSubview:heightTextView];
     
     //add self to appDelegate
 }
@@ -55,10 +60,12 @@
     static NSString *CellIdentifier = @"ListPrototypeCell";
     SearchResultTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     Experiment *experiment = [_searchResults objectAtIndex: indexPath.row];
-    [cell setTextFieldText: [_experimentDescriber getDescriptionOf: experiment]];
+//    NSAttributedString *atString = [PubMedBuilder formatInfoText:[_experimentDescriber getDescriptionOf:experiment] fontSize:15];
+//    cell.textView.attributedText = atString;
+    
+    cell.textView.text = [_experimentDescriber getDescriptionOf: experiment];
 
-    cell.index = indexPath.row;
-    cell.experiement = experiment;
+//    cell.controller = self;
     return cell;
 }
 
@@ -77,7 +84,12 @@
     CGRect rect = [text boundingRectWithSize:CGSizeMake(self.tableCellWidth, CGFLOAT_MAX)
                                 options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
                              attributes:[NSDictionary dictionaryWithObjectsAndKeys:font,NSFontAttributeName, nil] context:nil];
+    
     return ceilf(rect.size.height+25);
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 0.01f;
 }
 
 /**
@@ -109,6 +121,21 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+
+    NSArray *sortArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"sortArray"];
+    for(NSString *s in [sortArray reverseObjectEnumerator]){
+        _searchResults = [_searchResults sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+            Experiment *exp1 = obj1;
+            Experiment *exp2 = obj2;
+            if([s isEqualToString:@"Name"]){
+                return [exp1.name compare:exp2.name];
+            }
+            NSObject *o1 = exp1.annotations[s];
+            NSObject *o2 = exp2.annotations[s];
+            
+            return [exp1.annotations[s] compare:exp2.annotations[s] options:NSCaseInsensitiveSearch];
+        }];
+    }
     [self.tableView reloadData];
 }
 

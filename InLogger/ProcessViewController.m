@@ -129,6 +129,9 @@ static NSMutableArray * processingExperimentFiles;
     return cell;
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 0.01f;
+}
 
 -(void)sortProcesses{
     [processingExperimentFiles sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {

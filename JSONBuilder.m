@@ -99,7 +99,7 @@ static NSString *SERVER_URL = nil;//Don't change!!
     NSData *postData = [NSJSONSerialization dataWithJSONObject:dict
                                                            options:0
                                                              error:nil];
-    NSString *conversionString =@"process/rawtoprofile";
+    NSString *conversionString = @"process/rawtoprofile";
     NSMutableURLRequest *request = [self getRequest:@"PUT" withToken:token];
     [request setHTTPBody:postData];
     [request setURL:[NSURL URLWithString: [[self getServerURL] stringByAppendingString:conversionString]]];

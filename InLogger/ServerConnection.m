@@ -45,18 +45,15 @@ NSString *token;
          if (POSTReply != nil) {
              message = [NSJSONSerialization JSONObjectWithData:POSTReply options:kNilOptions error:&error];
          }
-         NSLog(@"LOGIN resp: %@ | %@", response, message);
          if (internalError == nil) {
 
              NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
              NSDictionary *json = [self parseJSONToDictionary:POSTReply error:&internalError];
-             NSLog(@"json: %@", json);
              if(internalError == nil)
              {
                 
                  if([json objectForKey:@"token"] != nil){
                      token = [json objectForKey:@"token"];
-                
                  } else{
                      error = [self generateError:@"Server sent incorrectly formatted data" withErrorDomain:@"Server Error" withUnderlyingError:nil];
                  }
@@ -100,7 +97,9 @@ NSString *token;
  *@param controller - SearchViewController, which the method will report the result to
  *@return nothing
  */
-+ (void)search:(NSString*)annotations withContext: (SearchViewController*) controller
++ (void)search:(NSString*)annotations withContext:(void (^)(NSMutableArray *,
+                                                            NSError *)
+                                                   )completionBlock;
 {
     NSMutableURLRequest *request = [JSONBuilder getSearchJSON:annotations withToken: token];
     
@@ -126,7 +125,7 @@ NSString *token;
          else{
              error = [self generateError:kConnectionErrorMsg withErrorDomain:@"Connection Error" withUnderlyingError:internalError];
          }
-         [controller reportSearchResult:array error:error];
+         completionBlock(array, error);
      }];
 }
 
@@ -170,7 +169,7 @@ NSString *token;
  *@param controller - RawConvertViewController, which the method will report the result to
  *@return nothing
  */
-+ (void)genomeRelease: (RawConvertViewController*) controller
++ (void)genomeRelease:(void (^)(NSMutableArray *, NSError *))completionBlock
 {
     NSMutableURLRequest *request = [JSONBuilder getGenomeReleaseJSON:token];
     
@@ -200,7 +199,7 @@ NSString *token;
              error = [self generateError:kConnectionErrorMsg withErrorDomain:@"Connection Error" withUnderlyingError:internalError];
          }
          
-         [controller reportGenomeResult:genomeReleases withError:error];
+         completionBlock(genomeReleases, error);
          
      }];
 }
@@ -212,7 +211,9 @@ NSString *token;
  *@param controller - RawConvertViewController, which the method will report the result to
  *@return nothing
  */
-+(void)convert:(NSMutableDictionary*)dict withContext: (RawConvertViewController*) controller
++(void)convert:(NSMutableDictionary*)dict withContext:(void (^)(NSError *,
+                                                                NSString *)
+                                                       )completionBlock
 {
     NSMutableURLRequest *request = [JSONBuilder getRawToProfileJSON:token withDict:dict];
     
@@ -227,13 +228,13 @@ NSString *token;
          {
              if(httpResp.statusCode != 200)
              {
-                error = [ServerConnection generateError:POSTReply internaleError:internalError response:httpResp];
+                 error = [ServerConnection generateError:POSTReply internaleError:internalError response:httpResp];
              }
          } else
          {
              error = [self generateError:kConnectionErrorMsg withErrorDomain:@"Connection Error" withUnderlyingError:internalError];
          }
-         [controller reportResult:error experiment:[dict objectForKey:@"expid"]];
+         completionBlock(error, [dict objectForKey:@"expid"]);
      }];
 }
 
@@ -245,7 +246,7 @@ NSString *token;
  *@param controller - SearchViewController, which the method will report the result to
  *@return nothing
  */
-+ (void)getAvailableAnnotations:(SearchViewController*) controller
++ (void)getAvailableAnnotations:(void (^)(NSArray *, NSError *))completionBlock
 {
     
     NSMutableURLRequest *request = [JSONBuilder getAvailableAnnotationsJSON:token];
@@ -263,6 +264,7 @@ NSString *token;
              if (httpResp.statusCode == 200)
              {
                  NSArray *array = [NSJSONSerialization JSONObjectWithData:POSTReply options: NSJSONReadingMutableContainers error:&internalError];
+                 
                  if (internalError == nil)
                  {
                      annotations = [[NSMutableArray alloc] init];
@@ -293,7 +295,7 @@ NSString *token;
          {
              error = [self generateError:kConnectionErrorMsg withErrorDomain:@"Connection Error" withUnderlyingError:internalError];
          }
-         [controller reportAnnotationResult:annotations error:error];
+         completionBlock(annotations, error);
      }];
 }
 
@@ -305,7 +307,7 @@ NSString *token;
  *@param controller - ProcessViewController, which the method will report the result to
  *@return nothing
  */
-+ (void) getProcessStatus:(void (^)(NSMutableArray *, NSError *))completionBlock;
++ (void) getProcessStatus:(void (^)(NSMutableArray *, NSError *))completionBlock
 {
     NSMutableURLRequest *request = [JSONBuilder getProcessStatusJSON:token];
     
@@ -317,8 +319,7 @@ NSString *token;
          NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
          NSError *error;
          NSMutableArray *processStatusResults = [[NSMutableArray alloc] init];
-         if (internalError == nil)
-         {
+         if (internalError == nil) {
              if (httpResp.statusCode == 200){
                  
                  NSArray *array = [NSJSONSerialization JSONObjectWithData:POSTReply options: NSJSONReadingMutableContainers error:&internalError];

@@ -43,7 +43,9 @@
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self annotationsIsStarting];
-    [ServerConnection getAvailableAnnotations:self];
+    [ServerConnection getAvailableAnnotations:^(NSArray *a, NSError *e) {
+        [self reportAnnotationResult:a error:e];
+    }];
     _pickerView = [self createPickerView];
     _toolBar = [self createPickerViewToolBar:_pickerView];
     [self.tableView reloadData];
@@ -159,7 +161,10 @@
 - (IBAction)searchButton:(id)sender {
     [self searchIsStarting];
     NSArray *selectedAnnotations = [self getSelectedAnnotations];
-    [ServerConnection search:[PubMedBuilder createAnnotationsSearch: selectedAnnotations] withContext:self];
+    [ServerConnection search:[PubMedBuilder createAnnotationsSearch:
+                              selectedAnnotations] withContext:
+     ^(NSMutableArray *ma, NSError *e) {[self reportSearchResult:ma error:e];}
+        ];
 }
 
 - (void) annotationsIsFinishedWithResult: (NSArray *) result{
@@ -285,7 +290,9 @@
     [(TabBar2Controller *)self.tabBar2Controller zoomViewRestore];
 }
 -(void)advancedSearchViewDidSearch:(AdvancedSearchView *)adv{
-    [ServerConnection search:[adv getSearchText] withContext:self];
+    [ServerConnection search:[adv getSearchText] withContext:
+     ^(NSMutableArray *ma, NSError *e){[self reportSearchResult:ma error:e ];}
+         ];
     _tableView.userInteractionEnabled = YES;
     [self advancedSearchViewDidClose:adv];
 }

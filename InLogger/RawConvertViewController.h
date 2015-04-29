@@ -17,7 +17,7 @@
 @property NSInteger * type;
 @property BOOL ratio;
 @property (nonatomic, copy) ProcessViewController *aReference;
-@property (readwrite, copy) void (^completionBlock)(NSError *error, NSString *message);
+//@property (readwrite, copy) void (^completionBlock)(NSError *error, NSString *message);
 
 
 -(IBAction)popViewController:(id)sender;

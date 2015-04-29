@@ -10,21 +10,15 @@
 
 @interface SearchResultTableViewCell()
 
-@property (weak, nonatomic) IBOutlet UITextView *textView;
-
 @end
 
 @implementation SearchResultTableViewCell
-
+@synthesize textView;
 - (void)awakeFromNib
 {
     self.textLabel.numberOfLines = 10;
 }
 
-- (void) setTextFieldText: (NSString *) text
-{
-    _textView.text = text;
-}
 
 - (CGSize)textFieldSize
 {
