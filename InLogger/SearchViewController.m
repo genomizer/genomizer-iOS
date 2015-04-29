@@ -56,8 +56,8 @@
 }
 
 /**
- * This method is called by serverConnection.m after serverConnection
- * has executed a getAvailableAnnotations. If a error occured a popup with information
+ * This method is calling serverConnection.m which
+ * executes getAvailableAnnotations. If a error occured a popup with information
  * about the error will be shown to the user.
  *
  * @param result - Contains all annotations that was sent back from the server.
@@ -211,8 +211,8 @@
 }
 
 /**
- * This method is called by serverConnection.m after serverConnection
- * has executed a search. If a error occured a popup with information
+ * This method is called by serverConnection.m after executing a search.
+ * If a error occured a popup with information
  * about the error will be shown to the user.
  *
  * @param result - the searchResults.

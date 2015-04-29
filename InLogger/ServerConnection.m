@@ -22,7 +22,8 @@ NSString *token;
  * which either succeeds or fails. When an answer is received, 
  * the method reports to the viewController it has knowledge about.
  *
- *@param controller - LogInViewController, which the method will report the result to
+ *@param completionBlock - is called at end of function, then it's up to the
+ *                         caller to decide what to do with the information.
  *@return nothing
  */
 
@@ -95,7 +96,8 @@ NSString *token;
  * Static method that asynchronously sends a search request to the server. When a search result
  * is received, method reports to the viewController it has knowledge about.
  *
- *@param controller - SearchViewController, which the method will report the result to
+ *@param completionBlock - is called at end of function, then it's up to the
+ *                         caller to decide what to do with the information.
  *@return nothing
  */
 + (void)search:(NSString*)annotations withContext:(void (^)(NSMutableArray *,
@@ -167,7 +169,8 @@ NSString *token;
  * which contains all available genome releases on the server. When an answer
  * is received, method reports to the viewController it has knowledge about.
  *
- *@param controller - RawConvertViewController, which the method will report the result to
+ *@param completionBlock - is called at end of function, then it's up to the
+ *                         caller to decide what to do with the information.
  *@return nothing
  */
 + (void)genomeRelease:(void (^)(NSMutableArray *, NSError *))completionBlock
@@ -209,7 +212,8 @@ NSString *token;
  * Static method that asynchronously sends a conversion request to the server. When an answer
  * is received, method reports to the viewController it has knowledge about.
  *
- *@param controller - RawConvertViewController, which the method will report the result to
+ *@param completionBlock - is called at end of function, then it's up to the
+ *                         caller to decide what to do with the information.
  *@return nothing
  */
 +(void)convert:(NSMutableDictionary*)dict withContext:(void (^)(NSError *,
@@ -244,7 +248,8 @@ NSString *token;
  * which contains all annotations on the server. When an answer
  * is received, method reports to the viewController it has knowledge about.
  *
- *@param controller - SearchViewController, which the method will report the result to
+ *@param completionBlock - is called at end of function, then it's up to the
+ *                         caller to decide what to do with the information.
  *@return nothing
  */
 + (void)getAvailableAnnotations:(void (^)(NSArray *, NSError *))completionBlock
@@ -305,7 +310,8 @@ NSString *token;
  * which contains the current processes the server is doing. When an answer 
  * is received, method reports to the viewController it has knowledge about.
  *
- *@param controller - ProcessViewController, which the method will report the result to
+ *@param completionBlock - is called at end of function, then it's up to the
+ *                         caller to decide what to do with the information.
  *@return nothing
  */
 + (void) getProcessStatus:(void (^)(NSMutableArray *, NSError *))completionBlock
