@@ -129,13 +129,6 @@ static NSMutableArray * processingExperimentFiles;
     ProcessStatusDescriptor *temp = [processingExperimentFiles objectAtIndex:indexPath.row];
     NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
-//    @property NSString* author;
-//    @property NSString* experimentName;
-//    @property NSString* outputFile;
-//    @property NSString* status;
-//    @property NSDate* timeAdded;
-//    @property NSDate* timeStarted;
-//    @property NSDate* timeFinished;
     
     NSMutableAttributedString * expAndFile = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ - %@", temp.experimentName, temp.author]];
     [expAndFile addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-Medium" size:cell.file.font.pointSize] range:NSMakeRange(0, temp.experimentName.length)];
@@ -174,6 +167,9 @@ static NSMutableArray * processingExperimentFiles;
     return cell;
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 0.01f;
+}
 
 -(void)sortProcesses{
     [processingExperimentFiles sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
