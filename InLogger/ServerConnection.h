@@ -18,9 +18,8 @@
 @interface ServerConnection : NSObject
 
 + (void)login:(NSString *)username withPassword:(NSString *)password
-        error:(NSError**) error withContext:(void (^)(NSString *,
-                                                      NSError *)
-                                             )completionBlock;
+  withContext:(void (^)(NSString *,NSError *))completionBlock;
+
 + (void)logout:(void(^)())completion;
 
 + (void)search:(NSString *) annotations withContext:(void (^)(NSMutableArray *,

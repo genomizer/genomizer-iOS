@@ -8,9 +8,6 @@
 
 #import "AnnotationTableViewController.h"
 #import "AnnotationTableViewCell.h"
-#import "SearchResultTableViewController.h"
-#import "ServerConnection.h"
-#import "PopupGenerator.h"
 #import "Annotation.h"
 
 @interface AnnotationTableViewController ()
@@ -44,7 +41,6 @@
         [sortArray insertObject:@"Name" atIndex:0];
         [sortArray insertObject:@"Created by" atIndex:1];
     }
-    //add self to appDelegate
 }
 
 #pragma mark - Table view data source
