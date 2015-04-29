@@ -20,7 +20,7 @@
 {
     UITextField *textField = [alertView textFieldAtIndex:0];
     if (buttonIndex == 0) {
-        [JSONBuilder setServerURLToString:textField.text];
+        [JSONBuilder setServerURLFromString:textField.text];
         [FileHandler writeData: [JSONBuilder getServerURL] toFile:SERVER_URL_FILE_NAME];
     }
 }

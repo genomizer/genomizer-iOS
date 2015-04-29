@@ -11,7 +11,6 @@
 #import "AppDelegate.h"
 #import "SettingsPopupDelegate.h"
 #import "JSONBuilder.h"
-#import "FileHandler.h"
 #import "Reachability.h"
 
 @interface LogInViewController ()

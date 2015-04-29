@@ -180,7 +180,7 @@ static FileContainer * FILES = nil;
 {
     DataFileTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DataFilePrototypeCell" forIndexPath:indexPath];
     ExperimentFile *file = filesToDisplay[indexPath.section][indexPath.row];
-    cell.textField.text = [file getDescription];
+    cell.textField.text = file.name;
     cell.switchButton.on = [_selectedFiles containsFile:file];
     return cell;
 }

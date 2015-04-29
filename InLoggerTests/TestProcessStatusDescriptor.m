@@ -136,14 +136,14 @@
 - (void) testCanCreateFromValidDictionaryWithOneValue
 {
     [_dict setObject:@"Exp1" forKey:@"experimentName"];
-    ProcessStatusDescriptor *desc = [[ProcessStatusDescriptor alloc] init: _dict];
+    ProcessStatusDescriptor *desc = [[ProcessStatusDescriptor alloc] initWithStatus: _dict];
     XCTAssertEqualObjects(desc.experimentName, @"Exp1");
 }
 
 - (void) testCanHandleInvalidDictionaryWithoutValues
 {
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-    ProcessStatusDescriptor *desc = [[ProcessStatusDescriptor alloc] init: dict];
+    ProcessStatusDescriptor *desc = [[ProcessStatusDescriptor alloc] initWithStatus: dict];
     XCTAssertNil(desc);
 }
 /*
@@ -163,13 +163,13 @@
 - (void) testCanHandleInitWithoutTimeAdded
 {
     [_dict removeObjectForKey:@"timeAdded"];
-    ProcessStatusDescriptor* desc = [[ProcessStatusDescriptor alloc] init: _dict];
+    ProcessStatusDescriptor* desc = [[ProcessStatusDescriptor alloc] initWithStatus: _dict];
     XCTAssertNil(desc);
 }
 
 - (void) testCanHandleInitWithTestFiles
 {
-    ProcessStatusDescriptor* desc = [[ProcessStatusDescriptor alloc] init: _dict];
+    ProcessStatusDescriptor* desc = [[ProcessStatusDescriptor alloc] initWithStatus: _dict];
     
     XCTAssertEqual([desc getNumberOfOutputFiles], 2);
 }
@@ -177,7 +177,7 @@
 - (void) testCanHandleInitWithNilTestFiles
 {
     [_dict removeObjectForKey:@"outputFiles"];
-    ProcessStatusDescriptor* desc = [[ProcessStatusDescriptor alloc] init: _dict];
+    ProcessStatusDescriptor* desc = [[ProcessStatusDescriptor alloc] initWithStatus: _dict];
     XCTAssertNil(desc);
 }
 

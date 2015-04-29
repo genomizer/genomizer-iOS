@@ -7,22 +7,20 @@
 //
 
 #import "Experiment.h"
-#import "ExperimentFile.h"
 
 @implementation Experiment
 
-@synthesize createdByUser, name, files, annotations;
 /**
- * Initializes the experiment.
+ * Designated initializer.
  *
  * @return
  */
-- (Experiment *) init
+- (instancetype)init
 {
-    self = [super init];
-    self.annotations = [[NSMutableDictionary alloc] init];
-    self.files = [[FileContainer alloc] init];
-
+    if (self = [super init]) {
+        self.annotations = [[NSMutableDictionary alloc] init];
+        self.files = [[FileContainer alloc] init];
+    }
     return self;
 }
 
@@ -32,7 +30,7 @@
  * @param value - the value for the annotation
  * @param annotation - the annotation for which the value should be set
  */
-- (void) setValue: (id) value forAnnotation: (NSString*) annotation
+- (void)setValue:(id)value forAnnotation:(NSString*)annotation
 {
     [self.annotations setValue: value forKey:annotation];
 }

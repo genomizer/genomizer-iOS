@@ -29,6 +29,8 @@ NSString *token;
 +(void)setToken:(NSString *)t{
     token = t;
 }
+
+#warning change return value to BOOL
 + (void)login:(NSString *)username withPassword:(NSString *)password error:(NSError**) error withContext: (LogInViewController*) controller
 {
     NSMutableURLRequest *request = [JSONBuilder getLoginJSON:username withPassword:password];

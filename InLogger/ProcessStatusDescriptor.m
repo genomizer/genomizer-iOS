@@ -8,29 +8,33 @@
 
 #import "ProcessStatusDescriptor.h"
 
+@interface ProcessStatusDescriptor ()
+@property (nonatomic, strong) NSMutableArray* files;
+@property (nonatomic, strong) NSArray *expectedInformation;
+@end
+
 @implementation ProcessStatusDescriptor
 
-NSMutableArray* files;
-NSArray *expectedInformation;
+
 
 /**
  * Initializes a ProcessStatusDecsriptor.
  *
  * @return an initialized ProcessStatusDescriptor
  */
-- (ProcessStatusDescriptor*) init
+- (instancetype) init
 {
     self = [super init];
-    files = [[NSMutableArray alloc] init];
+    self.files = [[NSMutableArray alloc] init];
     
-    if(expectedInformation == nil){
-        expectedInformation =  @[@"experimentName",
-                                 @"timeFinished",
-                                 @"status",
-                                 @"author",
-                                 @"timeStarted",
-                                 @"timeAdded",
-                                 @"outputFiles"];
+    if(self.expectedInformation == nil){
+        self.expectedInformation =  @[@"experimentName",
+                                      @"timeFinished",
+                                      @"status",
+                                      @"author",
+                                      @"timeStarted",
+                                      @"timeAdded",
+                                      @"outputFiles"];
     }
     
     return self;
@@ -42,18 +46,18 @@ NSArray *expectedInformation;
  * @param status - values and keys for the attributes
  * @return an initialized ProcessStatusDescriptor
  */
-- (ProcessStatusDescriptor*) init: (NSDictionary*) status
+- (instancetype) initWithStatus: (NSDictionary*) status
 {
     
-//    NSLog(@"status: %@", status);
+    //    NSLog(@"status: %@", status);
     if([self statusDictionaryIsValid:status])
     {
         self = [self init];
         self.experimentName = [status objectForKey:@"experimentName"];
-       
+        
         self.status = [status objectForKey:@"status"];
         self.author = [status objectForKey:@"author"];
-      
+        
         self.timeStarted = [[NSDate alloc] initWithTimeIntervalSince1970:[[status objectForKey:@"timeStarted"] doubleValue]/1000];
         self.timeAdded = [NSDate dateWithTimeIntervalSince1970:[[status objectForKey:@"timeAdded"] doubleValue]/1000];
         self.timeFinished = [NSDate dateWithTimeIntervalSince1970:[[status objectForKey:@"timeFinished"] doubleValue]/1000];
@@ -77,9 +81,9 @@ NSArray *expectedInformation;
  * @param the status dictionary
  * @return YES if the given status dictionary is valid, NO otherwise
  */
-- (bool) statusDictionaryIsValid: (NSDictionary*) status
+- (BOOL) statusDictionaryIsValid: (NSDictionary*) status
 {
-    for(NSString *string in expectedInformation)
+    for(NSString *string in self.expectedInformation)
     {
         if([status objectForKey:string] == nil)
         {
@@ -95,10 +99,10 @@ NSArray *expectedInformation;
  * @param fileName - the name of the file
  * @return YES if the file was added, NO if the file was already added
  */
-- (bool) addOutputFile:(NSString*) fileName
+- (BOOL) addOutputFile:(NSString*) fileName
 {
-    if(![files containsObject:fileName]){
-        [files addObject: fileName];
+    if(![self.files containsObject:fileName]){
+        [self.files addObject: fileName];
         return YES;
     } else
     {
@@ -114,9 +118,9 @@ NSArray *expectedInformation;
  */
 - (NSString*) getOutputFile: (int) index
 {
-    if(index < [files count])
+    if(index < [self.files count])
     {
-        return [files objectAtIndex:index];
+        return [self.files objectAtIndex:index];
     }
     else
     {
@@ -130,7 +134,7 @@ NSArray *expectedInformation;
  * @return the number of output files
  */
 - (int) getNumberOfOutputFiles {
-    return (int)[files count];
+    return (int)[self.files count];
 }
 
 

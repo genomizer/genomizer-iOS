@@ -14,7 +14,7 @@
 
 @property NSArray *annotations;
 
-- (ExperimentDescriber *) initWithAnnotations: (NSArray *) annotations;
+- (instancetype) initWithAnnotations: (NSArray *) annotations;
 - (void) showAnnotation: (Annotation *) annotation;
 - (void) hideAnnotation: (Annotation *) annotation;
 - (NSString *) getDescriptionOf: (Experiment*) experiment;
