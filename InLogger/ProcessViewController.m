@@ -30,12 +30,6 @@ static NSMutableArray * processingExperimentFiles;
     [self updateProcessStatusFromServer];
 }
 
-- (void)initialize
-{
-    if (processingExperimentFiles == nil) {
-        processingExperimentFiles = [[NSMutableArray alloc] init];
-    }
-}
 
 /**
  * Method that calls serverConnection to update the tableView of processes.
@@ -66,7 +60,9 @@ static NSMutableArray * processingExperimentFiles;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self initialize];
+    if (processingExperimentFiles == nil) {
+        processingExperimentFiles = [[NSMutableArray alloc] init];
+    }
     //add self to appDelegate
     UIView *refreshView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
     [self.tableView insertSubview:refreshView atIndex:0];
@@ -158,7 +154,7 @@ static NSMutableArray * processingExperimentFiles;
     [self resetProcessingExperimentFiles];
     if(error == nil){
         for(NSDictionary *processStatus in result){
-            [self addProcessingExperiment:[[ProcessStatusDescriptor alloc] init: processStatus]];
+            [self addProcessingExperiment:[[ProcessStatusDescriptor alloc] initWithStatus: processStatus]];
         }
     
         [self sortProcesses];

@@ -156,6 +156,7 @@
  */
 -(void) viewWillDisappear:(BOOL)animated
 {
+    [super viewWillDisappear:animated];
     [_describer saveAnnotationsToFile];
     [[NSUserDefaults standardUserDefaults] setObject:sortArray forKey:@"sortArray"];
     [[NSUserDefaults standardUserDefaults] synchronize];

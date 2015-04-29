@@ -22,7 +22,8 @@
 @implementation ExperimentDescriber
 
 
--(id)init{
+-(instancetype)init
+{
     if(self = [super init]){
         visibleAnnotations = [[NSMutableArray alloc] init];
     }
@@ -31,15 +32,15 @@
 /**
  * Initializes an ExperimentDescriber that displays
  * the given annotations.
- * 
+ *
  * @param annotations - the annotations to display
  */
-- (id) initWithAnnotations: (NSArray *) annotations
+- (instancetype) initWithAnnotations: (NSArray *) annotations
 {
-    if(self = [super init]){
+    if(self = [self init]){
         _annotations = annotations;
-        visibleAnnotations = [self loadAnnotationsFromFile];
-
+        [self loadAnnotationsFromFile];
+        
     }
     return self;
 }
@@ -157,25 +158,22 @@
  * Reads a text file and generates a list of annotations to display.
  *
  */
-- (NSMutableArray *) loadAnnotationsFromFile
+- (void) loadAnnotationsFromFile
 {
-    NSMutableArray *result = [[NSMutableArray alloc] init];
     NSString *data = [FileHandler readFromFile:FILE_NAME withDefaultData:@""];
-    if ([data isEqualToString:@""]) {
-        return result;
-    }
-    NSArray *seperated = [data componentsSeparatedByString:DELIMITER];
-
-    for (NSString *name in seperated) {
-        for (Annotation *annotation in _annotations) {
-            if ([annotation.name isEqualToString:name]) {
-                [result addObject:annotation];
-                break;
+    if (![data isEqualToString:@""]) {
+        
+        NSArray *seperated = [data componentsSeparatedByString:DELIMITER];
+        
+        for (NSString *name in seperated) {
+            for (Annotation *annotation in _annotations) {
+                if ([annotation.name isEqualToString:name]) {
+                    [self.visibleAnnotations addObject:annotation];
+                    break;
+                }
             }
         }
     }
-    
-    return result;
 }
 
 @end

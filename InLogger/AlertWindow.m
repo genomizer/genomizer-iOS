@@ -32,7 +32,7 @@ typedef enum {
  @param type "error"
  @return AlertWindow reference.
  */
--(id)initWithFrame:(CGRect)frame title:(NSString *)title message:(NSString *)msg type:(NSString *)type{
+-(instancetype)initWithFrame:(CGRect)frame title:(NSString *)title message:(NSString *)msg type:(NSString *)type{
     
     if(self = [super initWithFrame:frame]){
         animating = false;

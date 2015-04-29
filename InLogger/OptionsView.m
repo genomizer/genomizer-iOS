@@ -14,7 +14,7 @@
 
 @synthesize dimView;
 @synthesize optionsDelegate = _optionsDelegate;
--(id)initWithFrame:(CGRect)frame{
+-(instancetype)initWithFrame:(CGRect)frame{
     if(self = [super initWithFrame:frame]){
         self.dataSource = self;
         self.delegate = self;

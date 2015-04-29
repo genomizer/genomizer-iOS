@@ -23,7 +23,7 @@
 + (NSMutableURLRequest*) getAvailableAnnotationsJSON:(NSString *) token;
 + (NSMutableURLRequest*) getProcessStatusJSON:(NSString *) token;
 + (NSString*) getServerURL;
-+ (void) setServerURLToString: (NSString *) url;
++ (void) setServerURLFromString: (NSString *) url;
 + (NSMutableURLRequest*) getRequest:(NSString*) requestType withToken:(NSString*) token;
 
 @end

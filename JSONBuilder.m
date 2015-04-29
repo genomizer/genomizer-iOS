@@ -160,7 +160,7 @@ static NSString *SERVER_URL = nil;//Don't change!!
     if(SERVER_URL == nil){
         SERVER_URL = [[NSUserDefaults standardUserDefaults] objectForKey:@"serverURL"];
         if(SERVER_URL == nil){
-            [JSONBuilder setServerURLToString:MOCK_URL];
+            [JSONBuilder setServerURLFromString:MOCK_URL];
         }
     }
     return SERVER_URL;
@@ -172,7 +172,7 @@ static NSString *SERVER_URL = nil;//Don't change!!
  *
  *@param url - the new server URL.
  */
-+ (void) setServerURLToString: (NSString *) url
++ (void) setServerURLFromString: (NSString *) url
 {
     if ([url length] != 0) {
         NSMutableString *urlString = [[NSMutableString alloc] initWithString:url];

@@ -11,7 +11,6 @@
 #import "AppDelegate.h"
 #import "SettingsPopupDelegate.h"
 #import "JSONBuilder.h"
-#import "FileHandler.h"
 #import "Reachability.h"
 
 @interface LogInViewController ()
@@ -56,7 +55,9 @@
         
         if((username.length > 0) && (password.length > 0))
         {
-            [ServerConnection login:self.userField.text withPassword:self.passwordField.text error:&error withContext:self];
+            [ServerConnection login:self.userField.text withPassword:self.passwordField.text error:&error withContext:^(NSString *s, NSError *e){
+                [self reportLoginResult:s error:e];}
+                ];
             [_spinner startAnimating];
             [self deactivateEverything];
             

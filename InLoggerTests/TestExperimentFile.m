@@ -46,7 +46,7 @@
     _experimentFile.uploadedBy = @"Yuri";
     _experimentFile.type = RAW;
     
-    NSString *result = [_experimentFile getDescription];
+    NSString *result = _experimentFile.name;
     
     XCTAssertEqualObjects(result, @"Datafile.wig");
 }
@@ -58,22 +58,11 @@
     _experimentFile.uploadedBy = @"Yuri";
     _experimentFile.type = RAW;
     
-    NSString *result = [_experimentFile getDescription];
+    NSString *result = _experimentFile.name;
     NSString *correct = @"File.wig";
     
     XCTAssertEqualObjects(result, correct);
 }
 
-- (void) testGetDescriptionWithUnknownField
-{
-    _experimentFile.date = @"2014-04-01";
-    _experimentFile.uploadedBy = @"Yuri";
-    _experimentFile.type = RAW;
-    
-    NSString *result = [_experimentFile getDescription];
-    NSString *correct = @"?";
-    NSLog(@"%@", result);
-    XCTAssertEqualObjects(result, correct);
-}
 
 @end

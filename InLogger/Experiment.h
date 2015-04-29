@@ -15,10 +15,10 @@
  */
 @interface Experiment : NSObject
 
-@property NSString *name;
-@property NSString *createdByUser;
-@property FileContainer *files;
-@property NSMutableDictionary *annotations;
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *createdByUser;
+@property (nonatomic, strong) FileContainer *files;
+@property (nonatomic, strong) NSMutableDictionary *annotations;
 
 - (void) setValue: (id)value forAnnotation: (NSString*) annotation;
 - (NSString *) getValueForAnnotation: (NSString *) annotation;
