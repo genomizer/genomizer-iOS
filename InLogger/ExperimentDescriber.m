@@ -92,13 +92,13 @@
     
     [description appendString: [self createRowForAnnotation:@"Name" withValue:experiment.name andNewLine:true]];
     [description appendString:[self createRowForAnnotation:@"Created by" withValue:experiment.createdByUser andNewLine:[_visibleAnnotations count] > 0]];
-
-     for (NSInteger i = 0; i < [_visibleAnnotations count]; i++) {
-         Annotation *annotation = _visibleAnnotations[i];
-         NSString *newString = [self createRowForAnnotation:[annotation getFormatedName]
-                                                  withValue:[experiment getValueForAnnotation:annotation.name]
-                                                 andNewLine:i != [visibleAnnotations count] -1];
-//         NSLog(@"NEW STRING: %@", newString);
+    
+    for (NSInteger i = 0; i < [_visibleAnnotations count]; i++) {
+        Annotation *annotation = _visibleAnnotations[i];
+        NSString *newString = [self createRowForAnnotation:[annotation getFormatedName]
+                                                 withValue:[experiment getValueForAnnotation:annotation.name]
+                                                andNewLine:i != [_visibleAnnotations count] -1];
+        NSLog(@"NEW STRING: %@", newString);
         [description appendString: newString];
     }
     NSLog(@"desc: %@", description);
