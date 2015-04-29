@@ -43,7 +43,9 @@
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self annotationsIsStarting];
-    [ServerConnection getAvailableAnnotations:self];
+    [ServerConnection getAvailableAnnotations:^(NSArray *a, NSError *e) {
+        [self reportAnnotationResult:a error:e];
+    }];
     _pickerView = [self createPickerView];
     _toolBar = [self createPickerViewToolBar:_pickerView];
     [self.tableView reloadData];
@@ -70,7 +72,6 @@
         [self annotationsIsFinishedWithResult: result];
         
     } else {
-//        [PopupGenerator showErrorMessage:error];
         [(TabBar2Controller *)self.tabBar2Controller showPopDownWithError:error];
         [self annotationsIsFinishedWithResult: nil];
         
@@ -80,7 +81,6 @@
 
 - (void)scrollToCell: (UITableViewCell *) cell
 {
-//    _tableView.contentInset = UIEdgeInsetsMake(0, 0, 117, 0);
     [_tableView scrollToRowAtIndexPath:[_tableView indexPathForCell:cell] atScrollPosition:UITableViewScrollPositionTop animated:YES];
 }
 
@@ -88,12 +88,10 @@
     int nrOfSelected = (int)[self getSelectedAnnotations].count;
     
     if (nrOfSelected == 0) {
-//        [_tableView setContentInset:UIEdgeInsetsMake(0, 0, 0, 0)];
         [UIView animateWithDuration:0.2 animations:^{
             _searchButtonView.transform = CGAffineTransformMakeTranslation(0, _searchButtonView.frame.size.height);
         }];
     } else if(nrOfSelected == 1){
-//        [_tableView setContentInset:UIEdgeInsetsMake(0, 0, _searchButtonView.frame.size.height, 0)];
         [UIView animateWithDuration:0.2 animations:^{
             _searchButtonView.transform = CGAffineTransformMakeTranslation(0, 0);
         }];
@@ -163,7 +161,10 @@
 - (IBAction)searchButton:(id)sender {
     [self searchIsStarting];
     NSArray *selectedAnnotations = [self getSelectedAnnotations];
-    [ServerConnection search:[PubMedBuilder createAnnotationsSearch: selectedAnnotations] withContext:self];
+    [ServerConnection search:[PubMedBuilder createAnnotationsSearch:
+                              selectedAnnotations] withContext:
+     ^(NSMutableArray *ma, NSError *e) {[self reportSearchResult:ma error:e];}
+        ];
 }
 
 - (void) annotationsIsFinishedWithResult: (NSArray *) result{
@@ -230,7 +231,6 @@
         {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self searchIsFinished];
-//                [PopupGenerator showErrorMessage:error];
                 [(TabBar2Controller *)self.tabBar2Controller showPopDownWithError:error];
             });
         } else
@@ -259,28 +259,14 @@
     }
     return selectedAnnotations;
 }
-/**
- * Method that executes when the "close"-button in the advanced
- * search frame is pressed.
- */
-//- (IBAction)closeAdvancedSearch:(id)sender {
-////    _advancedView.hidden = YES;
-//    _tableView.userInteractionEnabled = YES;
-////    [_pubmedTextView endEditing:YES];
-//}
+
 
 /**
  * Method that executes when the "search"-button is pressed.
  */
 - (IBAction)searchQueryButtonTouched:(id)sender {
     [self searchIsStarting];
-    
-    //send search
-    
-//    [ServerConnection search:_pubmedTextView.text withContext:self];
-//    _advancedView.hidden = YES;
     _tableView.userInteractionEnabled = YES;
-//    [_pubmedTextView endEditing:YES];
 }
 
 /**
@@ -291,24 +277,6 @@
     
     NSArray *selectedAnnotations = [self getSelectedAnnotations];
     [(TabBar2Controller *)self.tabBar2Controller showAdvancedSearchView:[PubMedBuilder createAnnotationsSearch:selectedAnnotations] delegate:self];
-    
-//    _advancedView.hidden = NO;
-//    _advancedView.layer.cornerRadius = 5;
-//    _advancedView.layer.masksToBounds = YES;
-//    _tableView.editing = NO;
-//    [self.tableView endEditing:YES];
-//    _advancedView.layer.borderWidth = 0.4;
-//    _advancedView.layer.borderColor = [UIColor lightGrayColor].CGColor;
-//    _pubmedTextView.layer.cornerRadius = 5;
-//    _pubmedTextView.layer.masksToBounds = YES;
-//    _pubmedTextView.layer.borderWidth = 0.2;
-//    _pubmedTextView.layer.borderColor = [UIColor lightGrayColor].CGColor;
-//    _pubmedTextView.delegate = (id)self;
-//    [self.view bringSubviewToFront:_advancedView];
-//    _tableView.userInteractionEnabled = NO;
-//    
-//    _pubmedTextView.text = [PubMedBuilder createAnnotationsSearch: selectedAnnotations];
-//    [_pubmedTextView becomeFirstResponder];
 }
 
 -(void)advancedSearchViewDidClose:(AdvancedSearchView *)adv{
@@ -322,7 +290,9 @@
     [(TabBar2Controller *)self.tabBar2Controller zoomViewRestore];
 }
 -(void)advancedSearchViewDidSearch:(AdvancedSearchView *)adv{
-    [ServerConnection search:[adv getSearchText] withContext:self];
+    [ServerConnection search:[adv getSearchText] withContext:
+     ^(NSMutableArray *ma, NSError *e){[self reportSearchResult:ma error:e ];}
+         ];
     _tableView.userInteractionEnabled = YES;
     [self advancedSearchViewDidClose:adv];
 }
@@ -344,8 +314,6 @@
     
     if([text isEqualToString:@"\n"]) {
         [self searchIsStarting];
-//        [self closeAdvancedSearch:nil];
-//        [ServerConnection search:_pubmedTextView.text withContext:self];
         return NO;
     }
     return YES;
@@ -353,7 +321,6 @@
 
 - (void)hideKeyboardAndAdjustTable {
     [self.view endEditing:YES];
-//    _tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     _pickerView.delegate = nil;
     _pickerView.dataSource = nil;
     [_tableView reloadData];

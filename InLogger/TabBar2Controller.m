@@ -23,7 +23,7 @@
 
 @implementation TabBar2Controller
 @synthesize window, tabBar, panner;
-//@synthesize selectedViewController = _selectedViewController;
+
 /**
  * Initial setup on view did load. Add self to appdelegate.
  *
@@ -32,7 +32,7 @@
 {
     [super viewDidLoad];
     messagesToShow = [[NSMutableArray alloc] init];
-//    self.delegate = self;
+
     self.view.backgroundColor = [UIColor blackColor];
     _prevSelectedIndex = 0;
     UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -42,10 +42,6 @@
     NavController *nvc3 = [story instantiateViewControllerWithIdentifier:@"process"];
     NavController *nvc4 = [story instantiateViewControllerWithIdentifier:@"more"];
     
-//    ViewController *vc1 = nvc1.childViewControllers.firstObject;
-//    ViewController *vc2 = nvc2.childViewControllers.lastObject;
-//    ViewController *vc3 = nvc3.childViewControllers.firstObject;
-//    ViewController *vc4 = nvc4.childViewControllers.firstObject;
     
     nvc1.tabBar2Controller = self;
     nvc2.tabBar2Controller = self;
@@ -180,21 +176,7 @@
     leftVC.view.center = CGPointMake(leftVC.view.center.x + translation.x * friction, leftVC.view.center.y);
     [_panner setTranslation:CGPointZero inView:_panner.view];
 }
-//
-//-(void)moveViews:(float)duration left:(UIView *)left center:(UIView *)center right:(UIView *)right index:(int)index{
-//    [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-//        left.center = CGPointMake(self.view.frame.size.width/2  - 330, left.center.y);
-//        center.center = CGPointMake(self.view.frame.size.width/2 + 330, center.center.y);
-//        right.center  = CGPointMake(self.view.frame.size.width/2 + 330, right.center.y);
-//        
-//    } completion:^(BOOL finished) {
-//        [left removeFromSuperview];
-//        [right removeFromSuperview];
-//        
-//        left.center = center.center;
-//        right.center = center.center;
-//    }];
-//}
+
 -(IBAction)tabbarButtonTapped:(UIButton *)sender{
 
     UIViewController *vc = [childControllers objectAtIndex:sender.tag-100];
@@ -205,14 +187,6 @@
         return;
     }
     NSLog(@"new vc %@, oldvc: %@", vc, self.selectedViewController);
-//    if(![vc isViewLoaded]){
-//        NSUInteger index = [childControllers indexOfObject:vc];
-//        vc = [self.storyboard instantiateViewControllerWithIdentifier:vc.restorationIdentifier];
-//        NSMutableArray *cop = childControllers.mutableCopy;
-//        [cop removeObjectAtIndex:index];
-//        [cop insertObject:vc atIndex:index];
-//        childControllers = cop.copy;
-//    }
     
     [self.view insertSubview:vc.view belowSubview:self.tabBar];
     [self.selectedViewController.view removeFromSuperview];

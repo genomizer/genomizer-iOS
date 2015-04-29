@@ -71,7 +71,9 @@
     
     [super viewDidLoad];
     // Get genomereleases that are used as datasource for the pickerView.
-    [ServerConnection genomeRelease:self];
+    [ServerConnection genomeRelease:^(NSMutableArray *ma, NSError *e){
+        [self reportGenomeResult:ma withError:e];
+    }];
     _pickerView = [self createPickerView];
     _toolBar = [self createPickerViewToolBar:_pickerView];
     //set up all textfields and switchbuttons.
@@ -152,10 +154,6 @@
     
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, buttonHeight, 0);
     self.tableView.scrollIndicatorInsets = self.tableView.contentInset;
-    //add self to appDelegate
-//Pål did this
-//    AppDelegate *app = [UIApplication sharedApplication].delegate;
-//    [app addController:self];
 }
 
 
@@ -459,27 +457,6 @@
             int calcSmoothinZeros = self.ratioCalcSmoothingPrintZeros.on;
             text = [text stringByAppendingFormat:@" %d %@ %d %d", calcSmoothinSmooth, self.ratioCalcSmoothingMinimumStep.text, calcSmoothinMean, calcSmoothinZeros];
             
-//Pål did this
-//            text = [text stringByAppendingString:@" "];
-//            if (self.ratioCalcSmoothingSmoothType.on){
-//                text = [text stringByAppendingString:@"1"];
-//            }else{
-//                text = [text stringByAppendingString:@"0"];
-//            }
-//            text = [text stringByAppendingString:@" "];
-//            text = [text stringByAppendingString:self.ratioCalcSmoothingMinimumStep.text];
-//            text = [text stringByAppendingString:@" "];
-//            if (self.ratioCalcSmoothingPrintMean.on){
-//                text = [text stringByAppendingString:@"1"];
-//            }else{
-//                text = [text stringByAppendingString:@"0"];
-//            }
-//            text = [text stringByAppendingString:@" "];
-//            if (self.ratioCalcSmoothingPrintZeros.on){
-//                text = [text stringByAppendingString:@"1"];
-//            }else{
-//                text = [text stringByAppendingString:@"0"];
-//            }
             [parameters addObject:text];
         }
         else{
@@ -504,7 +481,10 @@
             }
             [dict setObject:metadata forKey:@"metadata"];
             [dict setObject:_genomeFile.text forKey:@"genomeVersion"];
-            [ServerConnection convert:dict withContext:self];
+            [ServerConnection convert:dict withContext:^(NSError *e,
+                                                         NSString *s){
+                [self reportResult:e experiment:s];
+            }];
             numberOfConvertRequestsLeftToConfirm++;
         }
     }

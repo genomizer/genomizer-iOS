@@ -38,9 +38,6 @@
     [self.view addSubview:heightTextView];
     
     //add self to appDelegate
-    //Pål jävlas
-//    AppDelegate *app = [UIApplication sharedApplication].delegate;
-//    [app addController:self];
 }
 
 #pragma mark - Table view data source

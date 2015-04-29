@@ -10,7 +10,7 @@
 #import <SystemConfiguration/SystemConfiguration.h>
 
 /**
- //  Class that handles the loginScreen
+ *  Class that handles the loginScreen
  */
 @interface LogInViewController : ViewController<UITextFieldDelegate>
 - (void) reportLoginResult:(NSString *)token error:(NSError*) error;
