@@ -8,7 +8,6 @@
 #import "DataFileViewController.h"
 #import "SearchResultTableViewController.h"
 #import "ExperimentFile.h"
-#import "TitleTableViewCell.h"
 #import "DataFileTableViewCell.h"
 #import "ServerConnection.h"
 #import "SelectedFilesViewController.h"

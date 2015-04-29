@@ -31,7 +31,7 @@ NSString *token;
 }
 
 #warning change return value to BOOL
-+ (void)login:(NSString *)username withPassword:(NSString *)password error:(NSError**) error withContext: (LogInViewController*) controller
++ (void)login:(NSString *)username withPassword:(NSString *)password error:(NSError**) error withContext: (void (^)(NSString *,NSError *))completionBlock
 {
     NSMutableURLRequest *request = [JSONBuilder getLoginJSON:username withPassword:password];
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];

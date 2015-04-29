@@ -282,7 +282,7 @@ static FileContainer * FILES = nil;
     [self optionsViewDidClose:ov];
     
     if(index == 0){
-        NavController *nextNVC = [self.storyboard instantiateViewControllerWithIdentifier:@"rawConvertNav"];
+        ViewController *nextNVC = [self.storyboard instantiateViewControllerWithIdentifier:@"rawConvertNav"];
         nextNVC.tabBar2Controller = (TabBar2Controller *)self.tabBar2Controller;
         
         RawConvertViewController *nextVC = nextNVC.childViewControllers.firstObject;

@@ -7,7 +7,6 @@
 //
 //
 
-#import "SegueController.h"
 #import "TabViewController.h"
 #import "AppDelegate.h"
 
@@ -40,30 +39,30 @@
     
 }
 
-/**
- * Marks the segue as started.
- */
-- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
-{
-    [SegueController segueStarted];
-}
+///**
+// * Marks the segue as started.
+// */
+//- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
+//{
+//    [SegueController segueStarted];
+//}
 
-/**
- * Determines if a segue should be performed. Checks if a segue already is animating.
- *
- */
-- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
-{
-    if ([SegueController isPerformingSegue]) {
-        return false;
-    } else if(viewController != tabBarController.selectedViewController) {
-        return true;
-    } else if ([viewController isKindOfClass:[UINavigationController class]]) {
-        return ((UINavigationController *)viewController).viewControllers.count > 1;
-    } else {
-        return true;
-    }
-}
+///**
+// * Determines if a segue should be performed. Checks if a segue already is animating.
+// *
+// */
+//- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
+//{
+//    if ([SegueController isPerformingSegue]) {
+//        return false;
+//    } else if(viewController != tabBarController.selectedViewController) {
+//        return true;
+//    } else if ([viewController isKindOfClass:[UINavigationController class]]) {
+//        return ((UINavigationController *)viewController).viewControllers.count > 1;
+//    } else {
+//        return true;
+//    }
+//}
 
 
 /*
