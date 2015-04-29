@@ -10,9 +10,6 @@
 #import "DataFileViewController.h"
 #import "AnnotationTableViewController.h"
 
-#warning oanvänd import
-//#import "PubMedBuilder.h"
-
 @interface SearchResultTableViewController ()
 
 @property CGFloat tableCellWidth;
@@ -132,9 +129,6 @@
             if([s isEqualToString:@"Name"]){
                 return [exp1.name compare:exp2.name];
             }
-#warning unused variables?
-            NSObject *o1 = exp1.annotations[s];
-            NSObject *o2 = exp2.annotations[s];
             
             return [exp1.annotations[s] compare:exp2.annotations[s] options:NSCaseInsensitiveSearch];
         }];

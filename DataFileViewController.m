@@ -12,11 +12,6 @@
 #import "PopupGenerator.h"
 #import "SelectTaskTableViewController.h"
 
-#warning oanvända importer
-//#import "ExperimentFile.h"
-//#import "ServerConnection.h"
-//#import "FileContainer.h"
-//#import "TabViewController.h"
 @interface DataFileViewController ()
 
 @property (weak, nonatomic) IBOutlet UIView *dimView;

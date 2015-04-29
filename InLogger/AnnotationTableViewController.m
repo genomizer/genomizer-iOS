@@ -9,11 +9,6 @@
 #import "AnnotationTableViewController.h"
 #import "AnnotationTableViewCell.h"
 
-#warning oanvända importer
-//#import "SearchResultTableViewController.h"
-//#import "ServerConnection.h"
-//#import "PopupGenerator.h"
-//#import "Annotation.h"
 
 @interface AnnotationTableViewController ()
 
