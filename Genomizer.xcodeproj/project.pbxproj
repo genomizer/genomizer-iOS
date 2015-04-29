@@ -254,6 +254,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		143389A41AF0F86B0006641D /* images */ = {
+			isa = PBXGroup;
+			children = (
+				D1CB5F1A1AE180070017EE4A /* Process.png */,
+				D1CB5F1B1AE180070017EE4A /* Process@2x.png */,
+				D1CB5F131AE166680017EE4A /* Star_tabbar.png */,
+				D1CB5F141AE166680017EE4A /* Star_tabbar@2x.png */,
+				D1CEABBF1AE15F58002EF615 /* Search.png */,
+				D1CEABC01AE15F58002EF615 /* Search@2x.png */,
+				D1CEABC11AE15F58002EF615 /* Settings.png */,
+				D1CEABC21AE15F58002EF615 /* Settings@2x.png */,
+				D1CEABC31AE15F58002EF615 /* Star.png */,
+				D1CEABC41AE15F58002EF615 /* Star@2x.png */,
+				D1E7C2E11ADFE30700E8D5E4 /* Error.png */,
+				D1E7C2E21ADFE30700E8D5E4 /* Error@2x.png */,
+				D1E7C2E31ADFE30700E8D5E4 /* Success.png */,
+				D1E7C2E41ADFE30700E8D5E4 /* Success@2x.png */,
+				D1E7C2EB1ADFE77D00E8D5E4 /* Unstar.png */,
+				D1E7C2EC1ADFE77D00E8D5E4 /* Unstar@2x.png */,
+			);
+			name = images;
+			sourceTree = "<group>";
+		};
 		210BED2B1918D83400A8E690 /* TestJSONBuilder */ = {
 			isa = PBXGroup;
 			children = (
@@ -452,6 +475,7 @@
 		DEEF6AED19094F8A00A2CD8C /* Genomizer */ = {
 			isa = PBXGroup;
 			children = (
+				143389A41AF0F86B0006641D /* images */,
 				DE7C9C2219235F2A004A2492 /* DataHolders */,
 				642DEB83192F367A002234CD /* ServerConnetion */,
 				DED1229A190E9C9100D8E530 /* LogIn */,
@@ -468,22 +492,6 @@
 				DEEF6B1619094FA000A2CD8C /* Main.storyboard */,
 				D15D17B61AE7900D00B65DFE /* LaunchScreen.xib */,
 				DEEF6AF919094F8A00A2CD8C /* Images.xcassets */,
-				D1CB5F1A1AE180070017EE4A /* Process.png */,
-				D1CB5F1B1AE180070017EE4A /* Process@2x.png */,
-				D1CB5F131AE166680017EE4A /* Star_tabbar.png */,
-				D1CB5F141AE166680017EE4A /* Star_tabbar@2x.png */,
-				D1CEABBF1AE15F58002EF615 /* Search.png */,
-				D1CEABC01AE15F58002EF615 /* Search@2x.png */,
-				D1CEABC11AE15F58002EF615 /* Settings.png */,
-				D1CEABC21AE15F58002EF615 /* Settings@2x.png */,
-				D1CEABC31AE15F58002EF615 /* Star.png */,
-				D1CEABC41AE15F58002EF615 /* Star@2x.png */,
-				D1E7C2E11ADFE30700E8D5E4 /* Error.png */,
-				D1E7C2E21ADFE30700E8D5E4 /* Error@2x.png */,
-				D1E7C2E31ADFE30700E8D5E4 /* Success.png */,
-				D1E7C2E41ADFE30700E8D5E4 /* Success@2x.png */,
-				D1E7C2EB1ADFE77D00E8D5E4 /* Unstar.png */,
-				D1E7C2EC1ADFE77D00E8D5E4 /* Unstar@2x.png */,
 				DEEF6AEE19094F8A00A2CD8C /* Supporting Files */,
 			);
 			name = Genomizer;
