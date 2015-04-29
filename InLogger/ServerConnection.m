@@ -226,7 +226,7 @@ NSString *token;
          {
              if(httpResp.statusCode != 200)
              {
-                 error = [ServerConnection generateError:POSTReply internaleError:internalError response:httpResp];
+                error = [ServerConnection generateError:POSTReply internaleError:internalError response:httpResp];
              }
          } else
          {
