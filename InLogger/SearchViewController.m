@@ -11,12 +11,10 @@
 #import "SearchViewController.h"
 #import "SearchResultTableViewController.h"
 #import "ServerConnection.h"
-#import "PopupGenerator.h"
 #import "SearchTableViewCell.h"
-#import "Annotation.h"
 #import "PubMedBuilder.h"
 #import "AppDelegate.h"
-#import "TabViewController.h"
+
 
 @interface SearchViewController ()
 
