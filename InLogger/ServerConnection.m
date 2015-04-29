@@ -29,7 +29,7 @@ NSString *token;
 +(void)setToken:(NSString *)t{
     token = t;
 }
-+ (void)login:(NSString *)username withPassword:(NSString *)password error:(NSError**) error withContext: (LogInViewController*) controller
++ (void)login:(NSString *)username withPassword:(NSString *)password error:(NSError**) error withContext: (void (^)(NSString *, NSError *))completionBlock
 {
     NSMutableURLRequest *request = [JSONBuilder getLoginJSON:username withPassword:password];
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
@@ -75,7 +75,7 @@ NSString *token;
          else {
              error = [self generateError:kConnectionErrorMsg withErrorDomain:@"Connection Error" withUnderlyingError:internalError];
          }
-         [controller reportLoginResult:token error:error];
+         completionBlock(token, error);
      }];
 }
 

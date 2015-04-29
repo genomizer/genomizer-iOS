@@ -56,7 +56,9 @@
         
         if((username.length > 0) && (password.length > 0))
         {
-            [ServerConnection login:self.userField.text withPassword:self.passwordField.text error:&error withContext:self];
+            [ServerConnection login:self.userField.text withPassword:self.passwordField.text error:&error withContext:^(NSString *s, NSError *e){
+                [self reportLoginResult:s error:e];}
+                ];
             [_spinner startAnimating];
             [self deactivateEverything];
             
