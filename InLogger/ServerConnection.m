@@ -74,7 +74,7 @@ NSString *token;
          else {
              error = [self generateError:kConnectionErrorMsg withErrorDomain:@"Connection Error" withUnderlyingError:internalError];
          }
-         [controller reportLoginResult:token error:error];
+         completionBlock(token, error);
      }];
 }
 
