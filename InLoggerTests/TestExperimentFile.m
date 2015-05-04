@@ -8,6 +8,8 @@
 
 #import <XCTest/XCTest.h>
 #import "ExperimentFile.h"
+#import "ExperimentParser.h"
+
 @interface TestExperimentFile : XCTestCase
 
 @property ExperimentFile *experimentFile;
@@ -62,6 +64,18 @@
     NSString *correct = @"File.wig";
     
     XCTAssertEqualObjects(result, correct);
+}
+
+- (void)testFileSize
+{
+    NSDictionary *annotations = @{@"name":@"sex", @"value":@"female"};
+    NSArray *anno = @[annotations];
+    NSDictionary *file = @{@"filesize":@"10MB"};
+    NSArray *files = @[file];
+    NSDictionary *dict = @{@"annotations":anno, @"files":files};
+    Experiment *experiment = [ExperimentParser expParser:dict];
+    ExperimentFile *expFile = (ExperimentFile *)[[experiment.files getFiles] firstObject];
+    XCTAssertEqualObjects(expFile.filesize, @"10MB");
 }
 
 

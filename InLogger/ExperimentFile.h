@@ -32,6 +32,9 @@ typedef NS_ENUM(NSInteger, FileType) {
 @property (nonatomic, strong) NSString *species;
 
 
+// Might need to be changed depending on how it is saved in DB
+@property (nonatomic, strong) NSString *filesize;
+
 - (NSString *)getAllInfo;
 + (FileType)NSStringFileTypeToEnumFileType:(NSString *) type;
 + (BOOL)multipleFileType:(NSArray *) files;
