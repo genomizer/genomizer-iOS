@@ -1278,7 +1278,7 @@
                                                     </connections>
                                                 </switch>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Datafile1.wig " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7wx-f0-h80">
-                                                    <rect key="frame" x="45" y="9" width="206" height="21"/>
+                                                    <rect key="frame" x="45" y="9" width="146" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -1301,10 +1301,17 @@
                                                         <action selector="starButtonTapped:" destination="y6w-6T-HLO" eventType="touchUpInside" id="7HF-kS-2Sj"/>
                                                     </connections>
                                                 </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="size" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hh3-Lp-PD8">
+                                                    <rect key="frame" x="201" y="9" width="52" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
+                                            <outlet property="fileSize" destination="hh3-Lp-PD8" id="D2P-c5-cep"/>
                                             <outlet property="infoButton" destination="TxR-CQ-d7h" id="U0M-bZ-FwD"/>
                                             <outlet property="starButton" destination="1lX-SF-Edz" id="3ZX-96-isn"/>
                                             <outlet property="switchButton" destination="gjd-uV-yNJ" id="9nF-6D-5xB"/>

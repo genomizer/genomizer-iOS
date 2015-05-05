@@ -59,10 +59,12 @@
                           "Name: %@\nExperiment ID: %@\n"
                           "Metadata: %@\nAuthor: %@\n"
                           "Genome Version: %@\nSpecies: %@\n"
+                          "File size: %@"
                           ,self.idFile, self.date
                           ,self.name, self.expID
                           ,self.metaData, self.author
-                          ,self.grVersion, self.species];
+                          ,self.grVersion, self.species
+                          ,self.filesize];
     
     return fileInfo;
 }

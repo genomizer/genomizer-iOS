@@ -10,8 +10,8 @@
 
 #import <UIKit/UIKit.h>
 #import "ViewController.h"
-#import "ExperimentDescriber.h"
-#import "AdvancedSearchView.h"
+//#import "ExperimentDescriber.h"
+//#import "AdvancedSearchView.h"
 
 @interface SearchViewController : ViewController<UITextFieldDelegate, AdvancedSearchViewDelegate, UITableViewDataSource, UITableViewDelegate>
 

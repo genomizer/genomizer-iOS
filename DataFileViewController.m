@@ -90,6 +90,7 @@
     DataFileTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DataFilePrototypeCell" forIndexPath:indexPath];
     ExperimentFile *file = [[_experiment.files getFiles: indexPath.section] objectAtIndex:indexPath.row];
     cell.textField.text = file.name;
+    cell.fileSize.text = file.filesize;
     cell.switchButton.on = [_selectedFiles containsFile:file];
     cell.file = file;
     cell.controller = self;

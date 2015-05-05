@@ -15,6 +15,7 @@
 @property (nonatomic, retain) IBOutlet UILabel *textField;
 @property (nonatomic, retain) IBOutlet UIButton *infoButton;
 @property (nonatomic, retain) IBOutlet UIButton *starButton;
+@property (weak, nonatomic) IBOutlet UILabel *fileSize;
 
 @property ExperimentFile *file;
 @property DataFileViewController* controller;

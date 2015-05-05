@@ -94,6 +94,13 @@
         }else{
             expFile.date = @"Not set!";
         }
+
+        if ([file valueForKey:@"filesize"] != nil) {
+            expFile.filesize = [file valueForKey:@"filesize"];
+        } else {
+            expFile.filesize = @"0MB";
+        }
+        
         expFile.metaData = @"astringofmeta"; // remove?
         [exp.files addExperimentFile:expFile];
     }
