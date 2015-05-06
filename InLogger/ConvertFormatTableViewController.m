@@ -13,7 +13,7 @@
     
 
 
-@property (nonatomic, strong) NSMutableArray *container;
+
 @property (nonatomic, strong) NSString *selectedFormat;
 @property (nonatomic, strong) NSArray *possibleFormats;
 @property (nonatomic, strong) NSIndexPath *pickerViewIndexPath;
@@ -25,6 +25,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    UIBarButtonItem *convertButton = [[UIBarButtonItem alloc]
+                                   initWithTitle:@"Convert"
+                                   style:UIBarButtonItemStyleBordered
+                                   target:self
+                                   action:@selector(convert)];
+    self.navigationItem.rightBarButtonItem = convertButton;
     
     self.title = @"Convert file format";
     self.possibleFormats = @[@"format1", @"format2", @"format3"];
@@ -36,15 +42,18 @@
     _container = [[NSMutableArray alloc] init];
     
     for (ExperimentFile *file in self.files) {
-        NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:file,@"value", @"1", @"type", self.possibleFormats[0],
-            @"format", nil];
+        NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:file,@"value", self.possibleFormats[0], @"format", nil];
         
         [self.container addObject:dict];
     }
     
 }
 
-
+- (void)convert
+{
+    NSLog(@"Convert!!!");
+    // use self.container to get dictionary with files and format to convert to.
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -55,6 +64,11 @@
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     self.selectedFormat = [self.possibleFormats objectAtIndex:row];
+    NSIndexPath *parentIndexPath = [NSIndexPath indexPathForRow:(self.pickerViewIndexPath.row-1) inSection:0];
+    ConvertFormatTableViewCell *cell = (ConvertFormatTableViewCell *)[self.tableView cellForRowAtIndexPath:parentIndexPath];
+    cell.format.text = self.selectedFormat;
+    NSMutableDictionary *fileInfo = [self.container objectAtIndex:parentIndexPath.row];
+    [fileInfo setObject:self.selectedFormat forKey:@"format"];
 }
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
@@ -149,7 +163,7 @@
             
             UIButton *doneBtn = [[UIButton alloc] initWithFrame:CGRectMake(250.0f, 5.0f, 60.0f, 30.0f)];
             [doneBtn setTitle:@"Done" forState:UIControlStateNormal];
-            [doneBtn setTitleColor:[UIColor cyanColor] forState:UIControlStateNormal];
+            [doneBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
             [doneBtn addTarget:self action:@selector(doneBtnTap:) forControlEvents:UIControlEventTouchUpInside];
             [cell addSubview:doneBtn];
         }
@@ -185,7 +199,6 @@
     
     if (!([self pickerViewIsShown] && (self.pickerViewIndexPath.row == indexPath.row)))
     {
-        //NSMutableDictionary *rowInfo = [self.container objectAtIndex:indexPath.row];
         return 44.0f;
     }
     else
@@ -240,16 +253,7 @@
  */
 - (void)doneBtnTap:(id)sender
 {
-    UIButton *doneBtn = (UIButton*) sender;
-    UITableViewCell *cell = (UITableViewCell*) [doneBtn superview];
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-    [self.tableView deselectRowAtIndexPath:[NSIndexPath indexPathForRow:(indexPath.row-1) inSection:0] animated:YES];
-    //TODO store selectedFormat with the file somewhere.
-    
-    // remove picker cell
-    [self.container removeObjectAtIndex:indexPath.row];
-    [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-    self.isPickerVisible = NO;
+    [self hideExistingPicker];
 }
 
 

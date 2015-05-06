@@ -11,5 +11,5 @@
 @interface ConvertFormatTableViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
 
 @property (nonatomic, strong) NSMutableArray *files;
-@property BOOL isPickerVisible;
+@property (nonatomic, strong) NSMutableArray *container;
 @end
