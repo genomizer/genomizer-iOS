@@ -7,14 +7,16 @@
 //
 
 #import "ConvertFormatTableViewController.h"
+#import "ConvertFormatTableViewCell.h"
 
-@interface ConvertFormatTableViewController () {
-    NSIndexPath *pickerViewIsAtRow;
-}
+@interface ConvertFormatTableViewController ()
+    
+
 
 @property (nonatomic, strong) NSMutableArray *container;
 @property (nonatomic, strong) NSString *selectedFormat;
 @property (nonatomic, strong) NSArray *possibleFormats;
+@property (nonatomic, strong) NSIndexPath *pickerViewIndexPath;
 
 @end
 
@@ -65,52 +67,83 @@
     return self.possibleFormats.count;
 }
 
-#pragma mark - Table view data source
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
-    return 1;
-}
+
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
     return self.possibleFormats[row];
 }
 
+- (BOOL)pickerViewIsShown {
+    return self.pickerViewIndexPath != nil;
+}
+
+- (void)hideExistingPicker {
+    NSIndexPath *temp = self.pickerViewIndexPath;
+    self.pickerViewIndexPath = nil;
+    [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:temp.row inSection:0]]
+                          withRowAnimation:UITableViewRowAnimationFade];
+    
+}
+
+- (NSIndexPath *)calculateIndexPathForNewPicker:(NSIndexPath *)selectedIndexPath {
+    NSIndexPath *newIndexPath;
+    
+    if (([self pickerViewIsShown]) && (self.pickerViewIndexPath.row < selectedIndexPath.row)){
+        
+        newIndexPath = [NSIndexPath indexPathForRow:selectedIndexPath.row - 1 inSection:0];
+        
+    }else {
+        
+        newIndexPath = [NSIndexPath indexPathForRow:selectedIndexPath.row  inSection:0];
+        
+    }
+    
+    return newIndexPath;
+}
+
+- (void)showNewPickerAtIndex:(NSIndexPath *)indexPath {
+    
+    NSArray *indexPaths = @[[NSIndexPath indexPathForRow:indexPath.row + 1 inSection:0]];
+    
+    [self.tableView insertRowsAtIndexPaths:indexPaths
+                          withRowAnimation:UITableViewRowAnimationFade];
+
+}
+#pragma mark - Table view data source
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    // Return the number of sections.
+    return 1;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return self.container.count;
+    NSInteger numberOfRows = self.container.count;
+    if ([self pickerViewIsShown]) {
+        numberOfRows++;
+    }
+    return numberOfRows;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    NSMutableDictionary *rowInfo = [self.container objectAtIndex:indexPath.row];
     
     
-    if ([[rowInfo objectForKey:@"type"] intValue] == 1)
+    
+    if ([self pickerViewIsShown] && (self.pickerViewIndexPath.row == indexPath.row))
     {
-        UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"row"];
-        
-        if (cell == nil)
-        {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"row"];
-        }
-        ExperimentFile *file = [rowInfo objectForKey:@"value"];
-        [cell.textLabel setText:file.name];
-        
-        [cell setSelectionStyle:UITableViewCellSelectionStyleGray];
-        
-        return cell;
-    } else {
         UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"picker"];
         
         if (cell == nil)
         {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"picker"];
-            
+        
             UIPickerView *pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 200.0f)];
             pickerView.delegate = self;
             pickerView.dataSource = self;
+            
+            // TODO set picker row by what the default format for converting the file.
             [pickerView setTag:1];
             [cell addSubview:pickerView];
             
@@ -122,15 +155,37 @@
         }
         
         return cell;
+    } else {
+        NSMutableDictionary *rowInfo;
+        if ([self pickerViewIsShown] && indexPath.row > self.pickerViewIndexPath.row) {
+            rowInfo = [self.container objectAtIndex:indexPath.row-1];
+
+        } else {
+            rowInfo = [self.container objectAtIndex:indexPath.row];
+
+        }
+        ConvertFormatTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"format cell"];
+        
+        if (cell == nil)
+        {
+            cell = [[ConvertFormatTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"format cell"];
+        }
+        ExperimentFile *file = [rowInfo objectForKey:@"value"];
+        cell.fileName.text = file.name;
+        cell.format.text = @"format1";
+        [cell setSelectionStyle:UITableViewCellSelectionStyleGray];
+        
+        return cell;
     }
 }
 
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSMutableDictionary *rowInfo = [self.container objectAtIndex:indexPath.row];
     
-    if ([[rowInfo objectForKey:@"type"] intValue] == 1)
+    if (!([self pickerViewIsShown] && (self.pickerViewIndexPath.row == indexPath.row)))
     {
+        //NSMutableDictionary *rowInfo = [self.container objectAtIndex:indexPath.row];
         return 44.0f;
     }
     else
@@ -139,33 +194,43 @@
     }
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 0.01f;
+}
+
 #pragma mark - UITableView Delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"row %d selected", indexPath.row);
     
-    
-    NSMutableDictionary *rowInfo = [self.container objectAtIndex:indexPath.row];
-    
-    if ([[rowInfo objectForKey:@"type"] intValue] == 1)
-    {
+    if ([self pickerViewIsShown] && (self.pickerViewIndexPath.row - 1 == indexPath.row)){
         
-        NSMutableDictionary *rowInfo = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"2",@"type",nil];
-        [self.container insertObject:rowInfo atIndex:indexPath.row+1];
-        NSIndexPath *nextIndexPath = [NSIndexPath indexPathForRow:indexPath.row+1 inSection:0];
-        [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:nextIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self hideExistingPicker];
         
-        // if there already was a visible pickerview, remove it.
-        if (self.isPickerVisible)
-        {
-            [self.container removeObjectAtIndex:pickerViewIsAtRow.row];
-            [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:pickerViewIsAtRow] withRowAnimation:UITableViewRowAnimationAutomatic];
-            self.isPickerVisible = NO;
+    } else {
+        
+        NSIndexPath *newPickerIndexPath = [self calculateIndexPathForNewPicker:indexPath];
+        
+        if ([self pickerViewIsShown]){
+            
+            [self hideExistingPicker];
+            
         }
-        pickerViewIsAtRow = nextIndexPath;
-        self.isPickerVisible = YES;
+        self.pickerViewIndexPath = [NSIndexPath indexPathForRow:newPickerIndexPath.row + 1 inSection:0];
+        [self showNewPickerAtIndex:newPickerIndexPath];
+        
+        
+        
     }
+    
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+}
+
+- (void)updateWantedFileFormat:(NSIndexPath *)indexPath
+{
+    
 }
 
 /*!

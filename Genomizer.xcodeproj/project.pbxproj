@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1446F66B1AF790A100BBD3B0 /* ConvertFormatTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1446F6691AF790A100BBD3B0 /* ConvertFormatTableViewController.m */; };
+		14EC5A121AFA0541005EF4FB /* ConvertFormatTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14EC5A111AFA0541005EF4FB /* ConvertFormatTableViewCell.m */; };
 		210BED2D1918D85000A8E690 /* TestJSONBuilderGetRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 210BED2C1918D85000A8E690 /* TestJSONBuilderGetRequest.m */; };
 		210BED2F1918DCD500A8E690 /* TestJSONBuilderGetLogout.m in Sources */ = {isa = PBXBuildFile; fileRef = 210BED2E1918DCD500A8E690 /* TestJSONBuilderGetLogout.m */; };
 		210BED331918E32900A8E690 /* TestJSONBuilderGetSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 210BED321918E32900A8E690 /* TestJSONBuilderGetSearch.m */; };
@@ -106,6 +107,8 @@
 /* Begin PBXFileReference section */
 		1446F6681AF790A100BBD3B0 /* ConvertFormatTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConvertFormatTableViewController.h; sourceTree = "<group>"; };
 		1446F6691AF790A100BBD3B0 /* ConvertFormatTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConvertFormatTableViewController.m; sourceTree = "<group>"; };
+		14EC5A101AFA0541005EF4FB /* ConvertFormatTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConvertFormatTableViewCell.h; sourceTree = "<group>"; };
+		14EC5A111AFA0541005EF4FB /* ConvertFormatTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConvertFormatTableViewCell.m; sourceTree = "<group>"; };
 		210BED2C1918D85000A8E690 /* TestJSONBuilderGetRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestJSONBuilderGetRequest.m; sourceTree = "<group>"; };
 		210BED2E1918DCD500A8E690 /* TestJSONBuilderGetLogout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestJSONBuilderGetLogout.m; sourceTree = "<group>"; };
 		210BED321918E32900A8E690 /* TestJSONBuilderGetSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestJSONBuilderGetSearch.m; sourceTree = "<group>"; };
@@ -311,6 +314,8 @@
 				641BC92D191CC827000E5254 /* RawConvertViewController.m */,
 				1446F6681AF790A100BBD3B0 /* ConvertFormatTableViewController.h */,
 				1446F6691AF790A100BBD3B0 /* ConvertFormatTableViewController.m */,
+				14EC5A101AFA0541005EF4FB /* ConvertFormatTableViewCell.h */,
+				14EC5A111AFA0541005EF4FB /* ConvertFormatTableViewCell.m */,
 			);
 			name = Convert;
 			sourceTree = "<group>";
@@ -677,6 +682,7 @@
 				DE25D8061910E1500084BDDC /* ExperimentDescriber.m in Sources */,
 				2173DFC51929F1EA0040A336 /* ProcessStatusDescriptor.m in Sources */,
 				DED12294190E966200D8E530 /* SelectedFilesViewController.m in Sources */,
+				14EC5A121AFA0541005EF4FB /* ConvertFormatTableViewCell.m in Sources */,
 				76F638DB190FDD9D00F0F4BF /* ExperimentFile.m in Sources */,
 				6453DD171924D4CC00DDCA2D /* ProcessViewController.m in Sources */,
 				D116AEE81ADE5FAE00E8E997 /* AlertWindow.m in Sources */,
