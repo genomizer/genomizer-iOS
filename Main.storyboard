@@ -938,6 +938,32 @@
             </objects>
             <point key="canvasLocation" x="2874" y="554"/>
         </scene>
+        <!--Convert Format Table View Controller-->
+        <scene sceneID="P78-6D-viG">
+            <objects>
+                <tableViewController storyboardIdentifier="convertFormat" useStoryboardIdentifierAsRestorationIdentifier="YES" id="b0V-dP-LEn" customClass="ConvertFormatTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="d1W-zs-o5s">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Cwz-zO-c7A">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Cwz-zO-c7A" id="Q5B-4g-Hdu">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="b0V-dP-LEn" id="zL9-Ds-GWO"/>
+                            <outlet property="delegate" destination="b0V-dP-LEn" id="eHe-wL-ZsQ"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="f8C-Vp-4xG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3381" y="688"/>
+        </scene>
         <!--Convert Genome Release-->
         <scene sceneID="LfB-4V-g9h">
             <objects>
@@ -978,7 +1004,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Zz-S8-qvu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4379" y="511"/>
+            <point key="canvasLocation" x="4110" y="597"/>
         </scene>
         <!--Nav Controller-->
         <scene sceneID="LYj-y1-V27">
@@ -1292,6 +1318,12 @@
                                                         <action selector="infoButtonTouchUpInside:" destination="byj-CI-98u" eventType="touchUpInside" id="Ar4-f9-Swr"/>
                                                     </connections>
                                                 </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="SIZE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hh3-Lp-PD8">
+                                                    <rect key="frame" x="201" y="9" width="52" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1lX-SF-Edz">
                                                     <rect key="frame" x="261" y="0.0" width="44" height="44"/>
                                                     <state key="normal" image="Unstar.png">
@@ -1301,12 +1333,6 @@
                                                         <action selector="starButtonTapped:" destination="y6w-6T-HLO" eventType="touchUpInside" id="7HF-kS-2Sj"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="size" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hh3-Lp-PD8">
-                                                    <rect key="frame" x="201" y="9" width="52" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1359,7 +1385,7 @@
             </objects>
             <point key="canvasLocation" x="4020" y="-868"/>
         </scene>
-        <!--Convert-->
+        <!--Process file-->
         <scene sceneID="7TM-3d-xSQ">
             <objects>
                 <tableViewController storyboardIdentifier="rawConvert" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ipQ-X4-59G" customClass="RawConvertViewController" sceneMemberID="viewController">
@@ -1848,7 +1874,7 @@
                             <outlet property="delegate" destination="ipQ-X4-59G" id="hgw-Ir-bXm"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Convert" id="JxN-lF-8hk">
+                    <navigationItem key="navigationItem" title="Process file" id="JxN-lF-8hk">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="a4m-Tj-pLs">
                             <connections>
                                 <action selector="popViewController:" destination="ipQ-X4-59G" id="cxB-Qk-epA"/>
@@ -1944,7 +1970,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="ovH-C4-m4G"/>
-        <segue reference="mTu-BK-rMg"/>
+        <segue reference="Thg-Vs-Nk7"/>
+        <segue reference="gP9-m9-IYK"/>
     </inferredMetricsTieBreakers>
 </document>

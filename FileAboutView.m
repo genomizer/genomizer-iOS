@@ -36,7 +36,9 @@
         
         infoTextView = ({
             UITextView *tv = [[UITextView alloc] initWithFrame:CGRectMake(10, 38, frame.size.width-20, frame.size.height - 70)];
-            tv.userInteractionEnabled = false;
+            tv.userInteractionEnabled = true;
+            tv.scrollEnabled = true;
+            tv.editable = false;
             tv.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:16.f];
             tv;
         });

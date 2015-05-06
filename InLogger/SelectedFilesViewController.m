@@ -13,10 +13,13 @@
 #import "TabViewController.h"
 #import "RawConvertViewController.h"
 #import "NavController.h"
+#import "ConvertFormatTableViewController.h"
 
 @interface SelectedFilesViewController (){
     NSMutableArray *experiements;
     NSMutableArray *filesToDisplay;
+    BOOL wasEnabled;
+    BOOL selectTaskEnabled;
 }
 
 @property FileContainer *selectedFiles;
@@ -69,6 +72,7 @@ static FileContainer * FILES = nil;
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+
 /**
  * Method that executes when the segmentcontroll is changed.
  * i.e the user want to view selected profile-files instead 
@@ -111,8 +115,8 @@ static FileContainer * FILES = nil;
 }
 
 -(void)updateSelectTaskView{
-    BOOL wasEnabled = _selectTaskToPerformButton.enabled;
-    BOOL selectTaskEnabled = ([_selectedFiles numberOfFilesWithType:_segmentedControl.selectedSegmentIndex] > 0);
+    wasEnabled = _selectTaskToPerformButton.enabled;
+    selectTaskEnabled = ([_selectedFiles numberOfFilesWithType:_segmentedControl.selectedSegmentIndex] > 0);
     _selectTaskToPerformButton.enabled = selectTaskEnabled;
     NSLog(@"size: %@", NSStringFromCGRect(_tableView.frame));
     if(!selectTaskEnabled && wasEnabled){
@@ -146,8 +150,12 @@ static FileContainer * FILES = nil;
     
     _selectedFiles = [[FileContainer alloc] init];
     _selectTaskToPerformButton.enabled = false;
-    
-    //add self to appDelegate
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    wasEnabled = false;
+    selectTaskEnabled = false;
 }
 
 
@@ -275,7 +283,7 @@ static FileContainer * FILES = nil;
  */
 - (IBAction)selectTaskButton:(id)sender {
     NSLog(@"self.tabbar: %@", self.tabBar2Controller);
-    [(TabBar2Controller *)self.tabBar2Controller showOptions:@[@"Convert to raw"] delegate:self];
+    [(TabBar2Controller *)self.tabBar2Controller showOptions:@[@"Convert to raw", @"Convert file format"] delegate:self];
 }
 
 -(void)optionsView:(OptionsView *)ov selectedIndex:(NSUInteger)index{
@@ -293,6 +301,12 @@ static FileContainer * FILES = nil;
 ////            [(TabBar2Controller *)self.tabBar2Controller showPopDownWithTitle:@"Convert sent" andMessage:@"Convert request was successfully sent to server" type:@"success"];
 //        };
         [self.tabBar2Controller presentViewController:nextNVC animated:true completion:nil];
+    } else if (index == 1) {
+        ConvertFormatTableViewController *cftv = (ConvertFormatTableViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"convertFormat"];
+        cftv.files = [_selectedFiles getFiles];
+        [self.navigationController pushViewController:cftv animated:YES];
+    } else {
+        
     }
     
 }
@@ -338,7 +352,6 @@ static FileContainer * FILES = nil;
         nextVC.experimentFiles = [FILES getFiles:[self getSelectedFileType]];
         nextVC.fileType = _segmentedControl.selectedSegmentIndex;
 
-    }
-}
+    }}
 
 @end

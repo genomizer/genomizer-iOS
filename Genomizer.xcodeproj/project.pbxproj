@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1446F66B1AF790A100BBD3B0 /* ConvertFormatTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1446F6691AF790A100BBD3B0 /* ConvertFormatTableViewController.m */; };
 		210BED2D1918D85000A8E690 /* TestJSONBuilderGetRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 210BED2C1918D85000A8E690 /* TestJSONBuilderGetRequest.m */; };
 		210BED2F1918DCD500A8E690 /* TestJSONBuilderGetLogout.m in Sources */ = {isa = PBXBuildFile; fileRef = 210BED2E1918DCD500A8E690 /* TestJSONBuilderGetLogout.m */; };
 		210BED331918E32900A8E690 /* TestJSONBuilderGetSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 210BED321918E32900A8E690 /* TestJSONBuilderGetSearch.m */; };
@@ -103,6 +104,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1446F6681AF790A100BBD3B0 /* ConvertFormatTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConvertFormatTableViewController.h; sourceTree = "<group>"; };
+		1446F6691AF790A100BBD3B0 /* ConvertFormatTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConvertFormatTableViewController.m; sourceTree = "<group>"; };
 		210BED2C1918D85000A8E690 /* TestJSONBuilderGetRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestJSONBuilderGetRequest.m; sourceTree = "<group>"; };
 		210BED2E1918DCD500A8E690 /* TestJSONBuilderGetLogout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestJSONBuilderGetLogout.m; sourceTree = "<group>"; };
 		210BED321918E32900A8E690 /* TestJSONBuilderGetSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestJSONBuilderGetSearch.m; sourceTree = "<group>"; };
@@ -306,6 +309,8 @@
 			children = (
 				641BC92C191CC827000E5254 /* RawConvertViewController.h */,
 				641BC92D191CC827000E5254 /* RawConvertViewController.m */,
+				1446F6681AF790A100BBD3B0 /* ConvertFormatTableViewController.h */,
+				1446F6691AF790A100BBD3B0 /* ConvertFormatTableViewController.m */,
 			);
 			name = Convert;
 			sourceTree = "<group>";
@@ -684,6 +689,7 @@
 				DEBD8BC519338594005C5E19 /* TableViewController.m in Sources */,
 				DEBD8BC21933835B005C5E19 /* ViewController.m in Sources */,
 				21BFD1DB191B6A2A00F8E02F /* PopupGenerator.m in Sources */,
+				1446F66B1AF790A100BBD3B0 /* ConvertFormatTableViewController.m in Sources */,
 				DEEF6AF419094F8A00A2CD8C /* main.m in Sources */,
 				DE25D8021910D72A0084BDDC /* DataFileViewController.m in Sources */,
 				D1CEABBE1AE14EEC002EF615 /* TabBar2Controller.m in Sources */,
