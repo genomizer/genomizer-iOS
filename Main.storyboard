@@ -21,6 +21,7 @@
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="qhR-JL-4yB">
                                 <rect key="frame" x="70" y="299" width="180" height="44"/>
+                                <accessibility key="accessibilityConfiguration" label="Pass"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="p7p-yP-rFi"/>
                                 </constraints>
@@ -39,6 +40,7 @@
                             </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iV2-8Y-UUF">
                                 <rect key="frame" x="254" y="30" width="46" height="46"/>
+                                <accessibility key="accessibilityConfiguration" label="Setting"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="46" id="AeN-wi-JjG"/>
                                     <constraint firstAttribute="width" constant="46" id="bOE-7a-4Vw"/>
@@ -53,6 +55,7 @@
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="heV-ix-3Xk">
                                 <rect key="frame" x="70" y="253" width="180" height="44"/>
+                                <accessibility key="accessibilityConfiguration" label="User"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="OZn-p9-hoq"/>
                                 </constraints>
@@ -62,6 +65,7 @@
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iwx-tD-EHi">
                                 <rect key="frame" x="110" y="358" width="100" height="44"/>
+                                <accessibility key="accessibilityConfiguration" label="Signin"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="DKJ-wf-RPi"/>
                                 </constraints>
@@ -145,6 +149,7 @@
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="InputField" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Experiment ID" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cuH-Be-R19">
                                                     <rect key="frame" x="15" y="10" width="228" height="30"/>
+                                                    <accessibility key="accessibilityConfiguration" label="Experiment"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done"/>
                                                     <connections>
@@ -156,6 +161,7 @@
                                                 </textField>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vgg-C9-vRK">
                                                     <rect key="frame" x="251" y="9" width="51" height="31"/>
+                                                    <accessibility key="accessibilityConfiguration" label="Searchswitch"/>
                                                     <connections>
                                                         <action selector="switchValueChanged:" destination="Tig-61-Fif" eventType="valueChanged" id="uqA-Vn-fk4"/>
                                                     </connections>
@@ -187,6 +193,7 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EJL-DW-KHM">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
+                                        <accessibility key="accessibilityConfiguration" label="Search"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="320" id="OAw-lY-ifE"/>
                                             <constraint firstAttribute="height" constant="56" id="OuX-Vt-vqE"/>
@@ -263,7 +270,7 @@
                                         <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="Experiment ID: 1231 Publication ID: 1231" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ulx-fv-OET">
                                             <rect key="frame" x="15" y="7" width="237" height="72"/>
                                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <accessibility key="accessibilityConfiguration">
+                                            <accessibility key="accessibilityConfiguration" label="Experimentresult">
                                                 <bool key="isElement" value="NO"/>
                                             </accessibility>
                                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="15"/>
@@ -328,6 +335,7 @@
                                         </label>
                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vjc-p8-OoE">
                                             <rect key="frame" x="251" y="6" width="51" height="31"/>
+                                            <accessibility key="accessibilityConfiguration" label="Experimentswitch"/>
                                             <connections>
                                                 <action selector="switchButtonValueChanged:" destination="fQH-1E-MeM" eventType="valueChanged" id="phW-Fp-gt2"/>
                                             </connections>
@@ -388,6 +396,7 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1mi-tr-fZm">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
+                                        <accessibility key="accessibilityConfiguration" label="Taskperform"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
                                         <state key="normal" title="Select task to perform">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -416,6 +425,7 @@
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qG7-lO-UOq">
                                                     <rect key="frame" x="256" y="9" width="51" height="31"/>
+                                                    <accessibility key="accessibilityConfiguration" label="Fileswitch"/>
                                                     <connections>
                                                         <action selector="fileSwitchValueChanged:" destination="OaH-dG-5KC" eventType="valueChanged" id="H6j-cY-FsA"/>
                                                     </connections>
@@ -428,6 +438,7 @@
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ail-Zm-uSm">
                                                     <rect key="frame" x="15" y="14" width="22" height="22"/>
+                                                    <accessibility key="accessibilityConfiguration" label="Fileinfo"/>
                                                     <state key="normal">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
@@ -1285,6 +1296,7 @@
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TxR-CQ-d7h" userLabel="Info Button">
                                                     <rect key="frame" x="15" y="9" width="22" height="22"/>
+                                                    <accessibility key="accessibilityConfiguration" label="Info"/>
                                                     <state key="normal">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
@@ -1294,6 +1306,7 @@
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1lX-SF-Edz">
                                                     <rect key="frame" x="261" y="0.0" width="44" height="44"/>
+                                                    <accessibility key="accessibilityConfiguration" label="Star"/>
                                                     <state key="normal" image="Unstar.png">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
@@ -1945,6 +1958,6 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="ovH-C4-m4G"/>
-        <segue reference="mTu-BK-rMg"/>
+        <segue reference="Thg-Vs-Nk7"/>
     </inferredMetricsTieBreakers>
 </document>

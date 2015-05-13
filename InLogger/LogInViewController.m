@@ -189,7 +189,7 @@
  */
 - (IBAction)settingsButtonPressed:(id)sender
 {
-    [PopupGenerator showInputPopupWithMessage:@"Enter server URL:" withTitle:@"" withText: [JSONBuilder getServerURL] withDelegate:self];
+    [PopupGenerator showInputPopupWithMessage:@"Enter server URL:" withTitle:@"Settings" withText: [JSONBuilder getServerURL] withDelegate:self];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
