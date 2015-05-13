@@ -16,7 +16,7 @@ test("Test 1", function(target, app) {
      
      window.buttons()["Setting"].tap();
      target.delay(2);
-     app.alert().scrollViews()[0].tableViews()[0].cells()[0].tableviews()[0].setValue("http://bellatrix.cs.umu.se:7005");
+     app.alert().scrollViews()[0].tableViews()[0].cells()[0].textFields()[0].setValue("http://bellatrix.cs.umu.se:7005");
      target.delay(2);
      app.alert().buttons()["Done"].tap();
      target.delay(2);
