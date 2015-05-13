@@ -89,7 +89,7 @@
         RawConvertViewController *nextVC = (RawConvertViewController *)[segue destinationViewController];
         nextVC.experimentFiles = _experimentFiles;
         nextVC.ratio = true;
-        //nextVC.completionBlock = self.completionBlock;
+//        nextVC.completionBlock = self.completionBlock;
     }
 }
 
