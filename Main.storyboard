@@ -1031,7 +1031,7 @@
                 <navigationController storyboardIdentifier="search" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="90g-6s-d5P" customClass="NavController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="search" id="YNg-gz-9CQ"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="bmY-o0-koj" customClass="NavigationBar">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="bmY-o0-koj">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1053,7 +1053,7 @@
                 <navigationController storyboardIdentifier="selected" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9IC-kd-hqg" customClass="NavController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Selected Files" image="selectedFiles" id="8wV-4Y-jvX"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="kNi-i9-baF" customClass="NavigationBar">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="kNi-i9-baF">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1951,7 +1951,7 @@
                 <navigationController storyboardIdentifier="rawConvertNav" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="NVQ-fn-jnW" customClass="NavController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="sc3-zA-RPj"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Yit-kv-zId" customClass="NavigationBar">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Yit-kv-zId">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1971,7 +1971,7 @@
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <tabBarItem key="tabBarItem" title="Processes" image="processIcon" id="Zmr-ID-HTR"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="ref-vw-pc1" customClass="NavigationBar">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="ref-vw-pc1">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -2005,7 +2005,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="ovH-C4-m4G"/>
         <segue reference="Thg-Vs-Nk7"/>
+        <segue reference="gP9-m9-IYK"/>
     </inferredMetricsTieBreakers>
 </document>

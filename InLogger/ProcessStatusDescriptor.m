@@ -37,14 +37,13 @@
                                       @"outputFiles"];
     }
     
-    _author = @"unknown";
-    _experimentName = @"unknown";
-    _outputFile = @"unknown";
-    _status = @"unknown";
-    _timeAdded = [NSDate date];
-    _timeStarted = [NSDate date];
-    _timeFinished = [NSDate date];
-    
+    self.author = @"unknown";
+    self.experimentName = @"unknown";
+    self.outputFile = @"unknown";
+    self.status = @"unknown";
+    self.timeAdded = [NSDate date];
+    self.timeStarted = [NSDate date];
+    self.timeFinished = [NSDate date];
     return self;
 }
 
