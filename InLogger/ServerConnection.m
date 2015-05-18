@@ -12,10 +12,25 @@
 #import "JSONBuilder.h"
 #import "ExperimentParser.h"
 #import "Annotation.h"
+#import "DummyServer.h"
+
 
 @implementation ServerConnection
 
-NSString *token;
+    NSString *token;
+
+    /**
+     * Only for Gui testing
+     */
+    DummyServer *dummy;
+
++ (DummyServer*)getDummyServer {
+    if (!dummy) {
+        dummy = [[DummyServer alloc] init];
+    }
+    return dummy;
+}
+
 #define kConnectionErrorMsg @"Could not access server, either no internet connection or server error."
 /**
  * Static method that asynchronously sends a login request to the server,
@@ -35,6 +50,9 @@ NSString *token;
     withContext: (void (^)(NSString *,
                            NSError *))completionBlock
 {
+    if ([[JSONBuilder getServerURL] isEqualToString:@"dummyserver/"]) {
+        completionBlock(@"1337", nil);
+    } else {
     NSMutableURLRequest *request = [JSONBuilder getLoginJSON:username withPassword:password];
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     
@@ -56,6 +74,7 @@ NSString *token;
                 
                  if([json objectForKey:@"token"] != nil){
                      token = [json objectForKey:@"token"];
+                     NSLog(@"token=%@", token);
                  } else{
                      error = [self generateError:@"Server sent incorrectly formatted data" withErrorDomain:@"Server Error" withUnderlyingError:nil];
                  }
@@ -78,10 +97,14 @@ NSString *token;
          }
          completionBlock(token, error);
      }];
+    }
 }
 
 + (void)logout:(void(^)())completion
 {
+    if ([[JSONBuilder getServerURL] isEqualToString:@"dummyserver/"]) {
+        
+    } else {
     NSMutableURLRequest *request = [JSONBuilder getLogoutJSON:token];
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     token = nil;
@@ -89,6 +112,7 @@ NSString *token;
         NSLog(@"Logout response");
         completion();
     }];
+    }
 }
 
 
@@ -104,6 +128,10 @@ NSString *token;
                                                             NSError *)
                                                    )completionBlock;
 {
+    if ([[JSONBuilder getServerURL] isEqualToString:@"dummyserver/"]) {
+        NSMutableArray *temp = [[NSMutableArray alloc] initWithObjects:[self getDummyServer].experiment, nil];
+        completionBlock(temp,nil);
+    } else {
     NSMutableURLRequest *request = [JSONBuilder getSearchJSON:annotations withToken: token];
     
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
@@ -130,6 +158,7 @@ NSString *token;
          }
          completionBlock(array, error);
      }];
+    }
 }
 
 /**
@@ -143,6 +172,9 @@ NSString *token;
  */
 + (NSMutableArray*)handleSearchPostReply:(NSError *)internalError POSTReply:(NSData *)POSTReply error:(NSError **)error
 {
+    if ([[JSONBuilder getServerURL] isEqualToString:@"dummyserver/"]) {
+        return nil;
+    } else {
     NSDictionary *array = [NSJSONSerialization JSONObjectWithData:POSTReply options: NSJSONReadingMutableContainers error:&internalError];
     
     if(internalError == nil) {
@@ -162,6 +194,7 @@ NSString *token;
         *error = [self generateError:@"Server sent incorrectly formatted data" withErrorDomain:@"ServerError" withUnderlyingError:nil];
     }
     return nil;
+    }
 }
 
 /**
@@ -175,6 +208,9 @@ NSString *token;
  */
 + (void)genomeRelease:(void (^)(NSMutableArray *, NSError *))completionBlock
 {
+    if ([[JSONBuilder getServerURL] isEqualToString:@"dummyserver/"]) {
+        
+    } else {
     NSMutableURLRequest *request = [JSONBuilder getGenomeReleaseJSON:token];
     
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
@@ -206,6 +242,7 @@ NSString *token;
          completionBlock(genomeReleases, error);
          
      }];
+    }
 }
 
 /**
@@ -220,6 +257,9 @@ NSString *token;
                                                                 NSString *)
                                                        )completionBlock
 {
+    if ([[JSONBuilder getServerURL] isEqualToString:@"dummyserver/"]) {
+        completionBlock(nil, @"dummy");
+    } else {
     NSMutableURLRequest *request = [JSONBuilder getRawToProfileJSON:token withDict:dict];
     
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
@@ -241,6 +281,7 @@ NSString *token;
          }
          completionBlock(error, [dict objectForKey:@"expid"]);
      }];
+    }
 }
 
 /**
@@ -254,7 +295,9 @@ NSString *token;
  */
 + (void)getAvailableAnnotations:(void (^)(NSArray *, NSError *))completionBlock
 {
-    
+    if ([[JSONBuilder getServerURL] isEqualToString:@"dummyserver/"]) {
+        completionBlock([self getDummyServer].annotations, nil);
+    } else {
     NSMutableURLRequest *request = [JSONBuilder getAvailableAnnotationsJSON:token];
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler: ^(NSURLResponse *response, NSData *POSTReply, NSError *internalError)
@@ -276,6 +319,7 @@ NSString *token;
                      annotations = [[NSMutableArray alloc] init];
                      for (NSDictionary *json in array)
                      {
+                         NSLog(@"%@", [json description]);
                          Annotation *annotation = [[Annotation alloc] init];
                          if([json objectForKey:@"name"] != nil){
                              annotation.name = [json objectForKey:@"name"];
@@ -303,6 +347,7 @@ NSString *token;
          }
          completionBlock(annotations, error);
      }];
+    }
 }
 
 /**
@@ -316,6 +361,10 @@ NSString *token;
  */
 + (void) getProcessStatus:(void (^)(NSMutableArray *, NSError *))completionBlock
 {
+    if ([[JSONBuilder getServerURL] isEqualToString:@"dummyserver/"]) {
+        NSMutableArray *temp = [[NSMutableArray alloc] initWithObjects:[self getDummyServer].process, nil];
+        completionBlock(temp,nil);
+    } else {
     NSMutableURLRequest *request = [JSONBuilder getProcessStatusJSON:token];
     
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
@@ -351,6 +400,7 @@ NSString *token;
          }
          completionBlock(processStatusResults, error);
      }];
+    }
 }
 
 +(NSDictionary*)parseJSONToDictionary:(NSData*)POSTReply error:(NSError**)error

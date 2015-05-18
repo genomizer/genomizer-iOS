@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		147DD5CD1B09C23C00AD4313 /* DummyServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 147DD5CC1B09C23C00AD4313 /* DummyServer.m */; };
 		148575E31B033BB400B22AFB /* test automation in Resources */ = {isa = PBXBuildFile; fileRef = 148575E21B033BB400B22AFB /* test automation */; };
 		210BED2D1918D85000A8E690 /* TestJSONBuilderGetRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 210BED2C1918D85000A8E690 /* TestJSONBuilderGetRequest.m */; };
 		210BED2F1918DCD500A8E690 /* TestJSONBuilderGetLogout.m in Sources */ = {isa = PBXBuildFile; fileRef = 210BED2E1918DCD500A8E690 /* TestJSONBuilderGetLogout.m */; };
@@ -104,6 +105,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		147DD5CB1B09C23C00AD4313 /* DummyServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DummyServer.h; sourceTree = "<group>"; };
+		147DD5CC1B09C23C00AD4313 /* DummyServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DummyServer.m; sourceTree = "<group>"; };
 		148575E21B033BB400B22AFB /* test automation */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "test automation"; sourceTree = "<group>"; };
 		210BED2C1918D85000A8E690 /* TestJSONBuilderGetRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestJSONBuilderGetRequest.m; sourceTree = "<group>"; };
 		210BED2E1918DCD500A8E690 /* TestJSONBuilderGetLogout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestJSONBuilderGetLogout.m; sourceTree = "<group>"; };
@@ -319,6 +322,8 @@
 				76E2DA9E190E96C90048069D /* JSONBuilder.m */,
 				6484A2F2190E8F160071BB23 /* ServerConnection.h */,
 				6484A2F3190E8F160071BB23 /* ServerConnection.m */,
+				147DD5CB1B09C23C00AD4313 /* DummyServer.h */,
+				147DD5CC1B09C23C00AD4313 /* DummyServer.m */,
 			);
 			name = ServerConnetion;
 			sourceTree = "<group>";
@@ -677,6 +682,7 @@
 				2173DFC51929F1EA0040A336 /* ProcessStatusDescriptor.m in Sources */,
 				DED12294190E966200D8E530 /* SelectedFilesViewController.m in Sources */,
 				76F638DB190FDD9D00F0F4BF /* ExperimentFile.m in Sources */,
+				147DD5CD1B09C23C00AD4313 /* DummyServer.m in Sources */,
 				6453DD171924D4CC00DDCA2D /* ProcessViewController.m in Sources */,
 				D116AEE81ADE5FAE00E8E997 /* AlertWindow.m in Sources */,
 				DE7C9C2519235F6C004A2492 /* Annotation.m in Sources */,
