@@ -1,7 +1,14 @@
 #import "tuneup/tuneup.js"
 
-// Test if settings will show.
-test("Test 1", function(target, app) {
+/*
+ IMPORTANT: Change the url for each time you run this test since the app will
+ save the url in memory in between different runs.
+ */
+
+/*
+ Test changing url and press done.
+*/
+ test("Test 1", function(target, app) {
      var window = app.mainWindow();
      var didChangeUrl = false;
      UIALogger.logDebug("Now setting up the alert function");
@@ -33,6 +40,9 @@ test("Test 1", function(target, app) {
      assertTrue(didChangeUrl);
 });
 
+/*
+ Test changing url and press cancel.
+ */
 test("Test 2", function(target, app) {
      var window = app.mainWindow();
      var didChangeUrl = false;
