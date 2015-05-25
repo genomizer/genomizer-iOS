@@ -204,6 +204,7 @@
     pickerView.backgroundColor = [UIColor colorWithRed:247.0/255.0f green:248.0/255.0f
                                                   blue:247.0/255 alpha:1.0f];
     pickerView.showsSelectionIndicator = YES;
+    [pickerView setAccessibilityLabel:@"PickerView"];
     return pickerView;
 }
 

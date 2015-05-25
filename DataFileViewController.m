@@ -138,14 +138,16 @@
     
     NSIndexPath *indexPath = [_tableView indexPathForCell:cell];
     ExperimentFile *file = [[_experiment.files getFiles: indexPath.section] objectAtIndex:indexPath.row];
-    if(alreadyStared){
-        //Unstar
-        [SelectedFilesViewController removeExperimentFile:file];
-    } else {
-        //Star
-        [SelectedFilesViewController addExperimentFile:file];
-    }
-    [_tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+    
+    
+//    if(alreadyStared){
+//        //Unstar
+//        [SelectedFilesViewController removeExperimentFile:file];
+//    } else {
+//        //Star
+//        [SelectedFilesViewController addExperimentFile:file];
+//    }
+//    [_tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
 }
 /**
  * Method that is called when the 'Convert Files' button is pressed.
