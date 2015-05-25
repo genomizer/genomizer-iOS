@@ -114,7 +114,7 @@ static NSString *SERVER_URL = nil;//Don't change!!
  * @param dict A dictionary containing process data.
  * @return NSMutableURLRequest A request with dict as JSON body.
  */
-+ (NSMutableURLRequest *)getProcessCommandJSON:(NSString *)token withDict:(NSMutableDictionary *)dict {
++ (NSMutableURLRequest *)getProcessCommandJSON:(NSString *)token withDict:(NSDictionary *)dict {
     
     NSData *postData = [NSJSONSerialization dataWithJSONObject:dict options:0 error:nil];
     NSString *conversionString = @"process/processCommands";

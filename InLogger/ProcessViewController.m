@@ -167,7 +167,7 @@ static NSMutableArray * processingExperimentFiles;
         dispatch_async(dispatch_get_main_queue(), ^{
             
             NSString * errorMsg = [error.userInfo objectForKey:NSLocalizedDescriptionKey];
-            [(TabBar2Controller *)self.tabBar2Controller showPopDownWithTitle:error.domain andMessage:errorMsg type:@"error"];
+            [self.tabBar2Controller showPopDownWithTitle:error.domain andMessage:errorMsg type:@"error"];
             
 
         });

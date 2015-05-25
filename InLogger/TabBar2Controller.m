@@ -359,9 +359,9 @@
     
     NSDictionary *d = messagesToShow.firstObject;
     
-    NSString *title = d[@"title"];
-    NSString *msg = d[@"message"];
-    NSString *type = d[@"type"];
+    NSString *title =   d[@"title"];
+    NSString *msg =     d[@"message"];
+    NSString *type =    d[@"type"];
     
     window = [[AlertWindow alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 64)
                                           title:title
@@ -369,8 +369,11 @@
                                            type:type];
     
     [window animateDownAndUp:^{
-        [messagesToShow removeObjectAtIndex:0];
-        [self showNextMessage];
+        if(messagesToShow.count > 0){
+            [messagesToShow removeObjectAtIndex:0];
+            [self showNextMessage];
+        }
+        
     }];
 }
 

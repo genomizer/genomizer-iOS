@@ -10,7 +10,7 @@
 //
 
 #import "ViewController.h"
-#import "NavController.h"
+
 
 @interface ViewController ()
 
@@ -29,7 +29,7 @@
 
 -(TabBar2Controller *)getTabbar{
     NavController *nc = (NavController *)self.navigationController;
-    NSLog(@"tabbar 15: %@", nc.tabBar2Controller);
+//    NSLog(@"tabbar 15: %@", nc.tabBar2Controller);
     return nc.tabBar2Controller;
 }
 

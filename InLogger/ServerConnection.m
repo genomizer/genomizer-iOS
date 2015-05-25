@@ -253,7 +253,7 @@
  *                         caller to decide what to do with the information.
  *@return nothing
  */
-+(void)convert:(NSMutableDictionary*)dict withContext:(void (^)(NSError *,
++(void)convert:(NSDictionary*)dict withContext:(void (^)(NSError *,
                                                                 NSString *)
                                                        )completionBlock
 {
@@ -426,7 +426,7 @@
             error = [NSError errorWithDomain:@"Empty response" code:0 userInfo:dict];
             break;
         case 400:
-            [dict setObject:@"Nothing got selected in the search. Please tap on the switches on the field's you wish to search. for." forKey:NSLocalizedDescriptionKey];
+            [dict setObject:@"400 Bad request. Servers fault." forKey:NSLocalizedDescriptionKey];
             error = [NSError errorWithDomain:@"Nothing sent" code:0 userInfo:dict];
             break;
         case 401:

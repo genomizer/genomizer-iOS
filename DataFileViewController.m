@@ -197,7 +197,7 @@
  */
 - (void) showInfoAbout: (ExperimentFile *) file
 {
-    [(TabBar2Controller *)self.tabBar2Controller showInfoAboutFile:file];
+    [self.tabBar2Controller showInfoAboutFile:file];
 }
 
 

@@ -70,7 +70,7 @@
         [self annotationsIsFinishedWithResult: result];
         
     } else {
-        [(TabBar2Controller *)self.tabBar2Controller showPopDownWithError:error];
+        [self.tabBar2Controller showPopDownWithError:error];
         [self annotationsIsFinishedWithResult: nil];
         
     }
@@ -229,7 +229,7 @@
         {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self searchIsFinished];
-                [(TabBar2Controller *)self.tabBar2Controller showPopDownWithError:error];
+                [self.tabBar2Controller showPopDownWithError:error];
             });
         } else
         {
@@ -274,7 +274,7 @@
 - (IBAction)advancedSearchButton:(id)sender {
     
     NSArray *selectedAnnotations = [self getSelectedAnnotations];
-    [(TabBar2Controller *)self.tabBar2Controller showAdvancedSearchView:[PubMedBuilder createAnnotationsSearch:selectedAnnotations] delegate:self];
+    [self.tabBar2Controller showAdvancedSearchView:[PubMedBuilder createAnnotationsSearch:selectedAnnotations] delegate:self];
 }
 
 -(void)advancedSearchViewDidClose:(AdvancedSearchView *)adv{
@@ -285,7 +285,7 @@
         [adv removeFromSuperview];
         [adv.dimView removeFromSuperview];
     }];
-    [(TabBar2Controller *)self.tabBar2Controller zoomViewRestore];
+    [self.tabBar2Controller zoomViewRestore];
 }
 -(void)advancedSearchViewDidSearch:(AdvancedSearchView *)adv{
     [ServerConnection search:[adv getSearchText] withContext:

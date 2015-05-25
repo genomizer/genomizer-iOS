@@ -275,7 +275,7 @@ static FileContainer * FILES = nil;
  */
 - (IBAction)selectTaskButton:(id)sender {
     NSLog(@"self.tabbar: %@", self.tabBar2Controller);
-    [(TabBar2Controller *)self.tabBar2Controller showOptions:@[@"Convert to raw"] delegate:self];
+    [self.tabBar2Controller showOptions:@[@"Convert to raw"] delegate:self];
 }
 
 -(void)optionsView:(OptionsView *)ov selectedIndex:(NSUInteger)index{
@@ -283,21 +283,17 @@ static FileContainer * FILES = nil;
     
     if(index == 0){
         ViewController *nextNVC = [self.storyboard instantiateViewControllerWithIdentifier:@"rawConvertNav"];
-        nextNVC.tabBar2Controller = (TabBar2Controller *)self.tabBar2Controller;
+        nextNVC.tabBar2Controller = self.tabBar2Controller;
         
         RawConvertViewController *nextVC = nextNVC.childViewControllers.firstObject;
         nextVC.experimentFiles = [FILES getFiles:[self getSelectedFileType]];
         nextVC.ratio = true;
-//        nextVC.completionBlock = ^(NSError *error, NSString *message){
-////            NSLog(@"task finished: %@ %@", message, error.userInfo);
-////            [(TabBar2Controller *)self.tabBar2Controller showPopDownWithTitle:@"Convert sent" andMessage:@"Convert request was successfully sent to server" type:@"success"];
-//        };
         [self.tabBar2Controller presentViewController:nextNVC animated:true completion:nil];
     }
     
 }
 -(void)optionsViewDidClose:(OptionsView *)ov{
-    [(TabBar2Controller *)self.tabBar2Controller zoomViewRestore];
+    [self.tabBar2Controller zoomViewRestore];
 }
 /**
  * Executes when the "info"-button next to a file is pressed.
@@ -307,7 +303,7 @@ static FileContainer * FILES = nil;
     UITableViewCell *cell = [self cellForButton:sender];
     NSIndexPath *indexPath = [_tableView indexPathForCell:cell];
     ExperimentFile *file = filesToDisplay[indexPath.section][indexPath.row];
-    [(TabBar2Controller *)self.tabBar2Controller showInfoAboutFile:file];
+    [self.tabBar2Controller showInfoAboutFile:file];
 
 }
 
