@@ -13,6 +13,7 @@
 
 @property (nonatomic) Experiment *experiment;
 @property FileContainer *selectedFiles;
+@property (nonatomic, retain) IBOutlet UIButton *processButton;
 
 - (IBAction) unwindToList:(UIStoryboardSegue *)segue;
 -(IBAction)starButtonTapped:(UIButton *)sender;
