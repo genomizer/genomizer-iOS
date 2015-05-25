@@ -17,7 +17,7 @@
  Child of UITabBarController, handles error messages as well.
  */
 //@class TabBar2Controller;
-@interface TabBar2Controller : UIViewController <FileAboutViewDelegate, UIGestureRecognizerDelegate>
+@interface TabBar2Controller : UIViewController <FileAboutViewDelegate, UIGestureRecognizerDelegate, OptionsActionDelegate>
 
 @property (strong, nonatomic) AlertWindow *window;
 @property (nonatomic, setter=setSelectedViewController:, getter=getSelectedViewController) UIViewController *selectedViewController;

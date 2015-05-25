@@ -14,6 +14,8 @@
 
 @synthesize dimView;
 @synthesize optionsDelegate = _optionsDelegate;
+@synthesize actionDelegate = _actionDelegate;
+
 -(instancetype)initWithFrame:(CGRect)frame{
     if(self = [super initWithFrame:frame]){
         self.dataSource = self;
@@ -89,10 +91,11 @@
 -(void)cancelButtonTapped:(UIButton *)button{
 
     [self removeSelf];
-    [self.optionsDelegate optionsViewDidClose:self];
+
 }
 
 -(void)removeSelf{
+    [self.actionDelegate optionsViewDidClose:self];
     [UIView animateWithDuration:0.2 animations:^{
         self.transform = CGAffineTransformMakeTranslation(0, self.frame.size.height);
         dimView.alpha = 0.0;

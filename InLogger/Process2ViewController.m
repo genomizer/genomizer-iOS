@@ -187,16 +187,13 @@
 }
 
 -(void)optionsView:(OptionsView *)ov selectedIndex:(NSUInteger)index{
-    [self optionsViewDidClose:ov];
     NSArray *convertedFiles = [Process2ViewController convertExperimentFilesToAPI:filesToProcess type:processTypes[index]];
     NSDictionary *dict = @{@"type":processTypes[index][@"type"], @"files":convertedFiles.copy};
     [contentArray addObject:dict];
     [tableView insertSections:[NSIndexSet indexSetWithIndex:[self numberOfSectionsInTableView:tableView]-2] withRowAnimation:UITableViewRowAnimationAutomatic];
     
 }
--(void)optionsViewDidClose:(OptionsView *)ov{
-    [self.tabBar2Controller zoomViewRestore];
-}
+
 
 
 +(NSArray *)convertExperimentFilesToAPI:(NSArray *)expFiles type:(NSDictionary *)d{

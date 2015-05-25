@@ -9,17 +9,19 @@
 #import <UIKit/UIKit.h>
 
 @class OptionsView;
-@protocol OptionsViewDelegate <NSObject>
-
--(void)optionsView:(OptionsView *)ov selectedIndex:(NSUInteger)index;
+@protocol OptionsActionDelegate <NSObject>
 -(void)optionsViewDidClose:(OptionsView *)ov;
-
+@end
+@protocol OptionsViewDelegate <NSObject>
+-(void)optionsView:(OptionsView *)ov selectedIndex:(NSUInteger)index;
 @end
 @interface OptionsView : UITableView<UITableViewDataSource, UITableViewDelegate>{
     id<OptionsViewDelegate>optionsDelegate;
+    id<OptionsActionDelegate>actionDelegate;
 }
 
 @property (nonatomic, retain) id<OptionsViewDelegate>optionsDelegate;
+@property (nonatomic, retain) id<OptionsActionDelegate>actionDelegate;
 @property (nonatomic, retain) UIView *dimView;
 
 -(void)setDataArray:(NSArray *)array;
