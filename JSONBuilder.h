@@ -20,7 +20,7 @@
 + (NSMutableURLRequest*) getGenomeReleaseJSON:(NSString *)token;
 + (NSMutableURLRequest*) getSearchJSON:(NSString *)annotations withToken:(NSString *)token;
 + (NSMutableURLRequest*) getRawToProfileJSON:(NSString *)token withDict:(NSMutableDictionary *)dict __deprecated_msg("Use getProcessCommandJSON instead");
-+ (NSMutableURLRequest*) getProcessCommandJSON:(NSString *)token withDict:(NSMutableDictionary *)dict;
++ (NSMutableURLRequest*) getProcessCommandJSON:(NSString *)token withDict:(NSDictionary *)dict;
 + (NSMutableURLRequest*) getAvailableAnnotationsJSON:(NSString *) token;
 + (NSMutableURLRequest*) getProcessStatusJSON:(NSString *) token;
 + (NSString*) getServerURL;

@@ -26,7 +26,7 @@
                                                               NSError *)
                                                      )completionBlock;
 
-+ (void)convert:(NSMutableDictionary*)dict withContext:(void (^)(NSError *,
++ (void)convert:(NSDictionary*)dict withContext:(void (^)(NSError *,
                                                                  NSString *)
                                                         )completionBlock;
 + (NSDictionary*)parseJSONToDictionary:(NSData*)POSTReply

@@ -7,7 +7,7 @@
 //
 
 #import "Process2ViewController.h"
-
+#import "ServerConnection.h"
 
 @interface Process2ViewController (){
     NSMutableArray *contentArray;
@@ -28,7 +28,7 @@
     tableView.dataSource = self;
     
     NSLog(@"files: %@", filesToProcess);
-
+    
     
     processTypes = @[@{@"type":@"bowtie", @"file_ext":@"wig", @"default_param":@"hejsan"},
                      @{@"type":@"smoothie", @"file_ext":@"smth", @"default_param":@"strawberry+mango"},
@@ -42,7 +42,29 @@
 
 
 -(IBAction)sendProcessRequest:(id)sender{
+    if(filesToProcess.count == 0){
+        [self.tabBar2Controller showPopDownWithTitle:@"No files selected" andMessage:@"Please back one step and add some files." type:@"error"];
+        return;
+    } else if(contentArray.count == 0){
+        [self.tabBar2Controller showPopDownWithTitle:@"No processes" andMessage:@"Tap the Add Process button and add some." type:@"error"];
+        return;
+    }
+    ExperimentFile *firstFile = filesToProcess.firstObject;
     
+    NSDictionary *dict = @{@"expId":firstFile.expID, @"processCommands":contentArray};
+    [ServerConnection convert:dict withContext:^(NSError *errold, NSString *expId) {
+        NSLog(@"Convert sent: %@ %@", expId, errold.localizedDescription);
+        if(errold != nil){
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.tabBar2Controller showPopDownWithError:errold];
+            });
+        }
+    }];
+    
+     NSData *d = [NSJSONSerialization dataWithJSONObject:dict options:0 error:nil];
+    NSDictionary *d1 = [NSJSONSerialization JSONObjectWithData:d options:0 error:nil];
+    NSLog(@"JSON: %@", d1);
+
 }
 
 
@@ -161,7 +183,7 @@
         [a addObject:typename.capitalizedString];
     }
     
-    [(TabBar2Controller *)self.tabBar2Controller showOptions:a delegate:self];
+    [self.tabBar2Controller showOptions:a delegate:self];
 }
 
 -(void)optionsView:(OptionsView *)ov selectedIndex:(NSUInteger)index{
@@ -173,7 +195,7 @@
     
 }
 -(void)optionsViewDidClose:(OptionsView *)ov{
-    [(TabBar2Controller *)self.tabBar2Controller zoomViewRestore];
+    [self.tabBar2Controller zoomViewRestore];
 }
 
 

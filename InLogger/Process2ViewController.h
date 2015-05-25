@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ViewController.h"
 #import "Process2Cell.h"
+#import "TabBar2Controller.h"
 
 @interface Process2ViewController : ViewController<UITableViewDataSource, UITableViewDelegate, OptionsViewDelegate, Process2CellDelegate>
 

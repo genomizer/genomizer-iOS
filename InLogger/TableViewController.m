@@ -10,8 +10,6 @@
 //
 
 #import "TableViewController.h"
-#import "TabBar2Controller.h"
-#import "NavController.h"
 
 @interface TableViewController ()
 
