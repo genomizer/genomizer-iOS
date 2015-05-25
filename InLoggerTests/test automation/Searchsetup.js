@@ -1,3 +1,10 @@
+/*
+This function does the searching sequence from the search view. The sequence consists of;
+Selecting Human as species in pickerview and press done, and press search.
+ 
+ IMPORTANT: The Search view must be loaded before running this function.
+*/
+
 function search() {
     var target = UIATarget.localTarget();
     target.delay(0.1);

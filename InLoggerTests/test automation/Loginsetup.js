@@ -1,3 +1,9 @@
+/*
+ This function does the login sequence which consists of;
+ changing url to dummyserver/, set username and password, press sign in.
+ 
+ IMPORTANT: The Login view must be loaded before running this function.
+ */
 function login() {
 var target = UIATarget.localTarget();
 

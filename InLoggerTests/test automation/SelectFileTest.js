@@ -2,8 +2,10 @@
 #import "Loginsetup.js"
 #import "Searchsetup.js"
 
-// Test select file.
-test("Test 1", function(target, app) {
+/*
+ Test to select a file in an experiment and confirm that the file is in Selected files view.
+*/
+ test("Test 1", function(target, app) {
      login();
      target.delay(0.1);
      search();
