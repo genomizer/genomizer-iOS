@@ -32,9 +32,10 @@
     [super viewDidLoad];
     messagesToShow = [[NSMutableArray alloc] init];
 
-    self.view.backgroundColor = [UIColor blackColor];
     _prevSelectedIndex = 0;
-    UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    self.view.backgroundColor = [UIColor blackColor];
+    
+    UIStoryboard *story = self.storyboard;
     
     NavController *nvc1 = [story instantiateViewControllerWithIdentifier:@"search"];
     NavController *nvc2 = [story instantiateViewControllerWithIdentifier:@"selected"];

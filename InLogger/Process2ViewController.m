@@ -114,7 +114,7 @@
 }
 -(CGFloat)tableView:(UITableView *)_tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if(indexPath.section == [self numberOfSectionsInTableView:_tableView]-1){
-        return 57;
+        return 44;
     } else{
         return 100;
     }
@@ -124,7 +124,7 @@
     if(section == [self numberOfSectionsInTableView:_tableView]-1){
         return 0;
     } else{
-        return 44;
+        return 34;
     }
 }
 
@@ -133,7 +133,7 @@
 }
 
 -(UIView *)tableView:(UITableView *)_tableView viewForHeaderInSection:(NSInteger)section{
-    UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
+    UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 34)];
     v.backgroundColor = [UIColor colorWithWhite:0.96 alpha:1.f];
     
     UILabel *l = [[UILabel alloc] initWithFrame:CGRectInset(v.bounds, 15, 0)];
