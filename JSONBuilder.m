@@ -108,6 +108,23 @@ static NSString *SERVER_URL = nil;//Don't change!!
 }
 
 /**
+ * Statis method that generates a URLRequst to process a set of files with specific commands.
+ *
+ * @param token The authorization token to the server.
+ * @param dict A dictionary containing process data.
+ * @return NSMutableURLRequest A request with dict as JSON body.
+ */
++ (NSMutableURLRequest *)getProcessCommandJSON:(NSString *)token withDict:(NSMutableDictionary *)dict {
+    
+    NSData *postData = [NSJSONSerialization dataWithJSONObject:dict options:0 error:nil];
+    NSString *conversionString = @"process/processCommands";
+    NSMutableURLRequest *request = [self getRequest:@"PUT" withToken:token];
+    [request setHTTPBody:postData];
+    [request setURL:[NSURL URLWithString:[[self getServerURL] stringByAppendingString:conversionString]]];
+    return request;
+}
+
+/**
  * Static method that generates a get annotations URLRequest.
  *
  *@param token - the authorization token to the server.

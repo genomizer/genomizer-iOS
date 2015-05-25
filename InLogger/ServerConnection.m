@@ -260,8 +260,7 @@
     if ([[JSONBuilder getServerURL] isEqualToString:@"dummyserver/"]) {
         completionBlock(nil, @"dummy");
     } else {
-    NSMutableURLRequest *request = [JSONBuilder getRawToProfileJSON:token withDict:dict];
-    
+    NSMutableURLRequest *request = [JSONBuilder getProcessCommandJSON:token withDict:dict];
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler: ^(NSURLResponse *response, NSData *POSTReply, NSError *internalError)
      {
