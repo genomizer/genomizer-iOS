@@ -279,7 +279,7 @@ static FileContainer * FILES = nil;
 }
 
 -(void)optionsView:(OptionsView *)ov selectedIndex:(NSUInteger)index{
-    [self optionsViewDidClose:ov];
+
     
     if(index == 0){
         ViewController *nextNVC = [self.storyboard instantiateViewControllerWithIdentifier:@"rawConvertNav"];
@@ -291,9 +291,6 @@ static FileContainer * FILES = nil;
         [self.tabBar2Controller presentViewController:nextNVC animated:true completion:nil];
     }
     
-}
--(void)optionsViewDidClose:(OptionsView *)ov{
-    [self.tabBar2Controller zoomViewRestore];
 }
 /**
  * Executes when the "info"-button next to a file is pressed.

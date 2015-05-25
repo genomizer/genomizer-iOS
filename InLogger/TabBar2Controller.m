@@ -311,6 +311,7 @@
     OptionsView *ov = [[OptionsView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - options.count*50-100, self.view.frame.size.width, options.count*50+100)];
     ov.transform = CGAffineTransformMakeTranslation(0, ov.frame.size.height);
     [ov setDataArray:options];
+    ov.actionDelegate = self;
     ov.optionsDelegate = delegate;
     ov.dimView = dimView;
   
@@ -323,6 +324,9 @@
         ov.transform = CGAffineTransformMakeTranslation(0, 0);
     }];
     [self animateDimViewIn:dimView];
+}
+-(void)optionsViewDidClose:(OptionsView *)ov{
+    [self zoomViewRestore];
 }
 
 /**
