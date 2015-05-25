@@ -11,8 +11,11 @@
 #import "SelectedFilesViewController.h"
 #import "PopupGenerator.h"
 #import "SelectTaskTableViewController.h"
+#import "Process2ViewController.h"
 
-@interface DataFileViewController ()
+@interface DataFileViewController (){
+    NSMutableArray *filesToProcessing;
+}
 
 @property (weak, nonatomic) IBOutlet UIView *dimView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -21,6 +24,7 @@
 @end
 
 @implementation DataFileViewController
+@synthesize processButton;
 
 /**
  * Method that runs when the view controller is loaded.
@@ -31,6 +35,7 @@
 {
     [super viewDidLoad];
     _selectedFiles = [[FileContainer alloc] init];
+    filesToProcessing = [[NSMutableArray alloc] init];
 
 }
 
@@ -94,10 +99,10 @@
     cell.switchButton.on = [_selectedFiles containsFile:file];
     cell.file = file;
     cell.controller = self;
-    BOOL alreadyStared =[SelectedFilesViewController containsExperimentFile:file];
-    NSString *buttonImageName = alreadyStared ? @"Star" : @"Unstar";
-    [cell.starButton setImage:[UIImage imageNamed:buttonImageName] forState:UIControlStateNormal];
-    cell.starButton.tag = alreadyStared;
+//    BOOL alreadyStared =[SelectedFilesViewController containsExperimentFile:file];
+//    NSString *buttonImageName = alreadyStared ? @"Star" : @"Unstar";
+//    [cell.starButton setImage:[UIImage imageNamed:buttonImageName] forState:UIControlStateNormal];
+//    cell.starButton.tag = alreadyStared;
     
     return cell;
 }
@@ -130,7 +135,7 @@
 
 
 -(IBAction)starButtonTapped:(UIButton *)sender{
-    BOOL alreadyStared = sender.tag;
+//    BOOL alreadyStared = sender.tag;
     UITableViewCell *cell = (UITableViewCell *)sender.superview;
     while(![cell isKindOfClass:[UITableViewCell class]]){
         cell = (UITableViewCell *)cell.superview;
@@ -138,14 +143,19 @@
     
     NSIndexPath *indexPath = [_tableView indexPathForCell:cell];
     ExperimentFile *file = [[_experiment.files getFiles: indexPath.section] objectAtIndex:indexPath.row];
-    if(alreadyStared){
-        //Unstar
-        [SelectedFilesViewController removeExperimentFile:file];
-    } else {
-        //Star
-        [SelectedFilesViewController addExperimentFile:file];
-    }
-    [_tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+    
+    [filesToProcessing addObject:file];
+    NSLog(@"filesToProcess: %@", filesToProcessing);
+    [processButton setTitle:[NSString stringWithFormat:@"Process (%d)", filesToProcessing.count] forState:UIControlStateNormal];
+    
+//    if(alreadyStared){
+//        //Unstar
+//        [SelectedFilesViewController removeExperimentFile:file];
+//    } else {
+//        //Star
+//        [SelectedFilesViewController addExperimentFile:file];
+//    }
+//    [_tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
 }
 /**
  * Method that is called when the 'Convert Files' button is pressed.
@@ -154,24 +164,29 @@
  */
 - (IBAction)convertToProfileOnTouchUpInside:(id)sender
 {
-    if (_animating) {
-        return;
-    }
-    NSArray *selectedFiles = [_selectedFiles getFiles];
-    if ([selectedFiles count] == 0) {
-        [PopupGenerator showPopupWithMessage:@"Please select files to convert."];
-        return;
-    } else if(![ExperimentFile multipleFileType: selectedFiles]) {
-        FileType type = ((ExperimentFile *)selectedFiles[0]).type;
-        if (type == RAW) {
-            [self performSegueWithIdentifier:@"toSelectTask" sender:selectedFiles];
-        }else{
-            [PopupGenerator showPopupWithMessage:@"Not yet implemented."];
-        }
-    }
-    else{
-        [PopupGenerator showPopupWithMessage:@"Please select files of same type."];
-    }
+    NSLog(@"Send to process");
+    Process2ViewController *pvc = [self.storyboard instantiateViewControllerWithIdentifier:@"process2"];
+    pvc.filesToProcess = filesToProcessing;
+    [self.navigationController pushViewController:pvc animated:true];
+    
+//    if (_animating) {
+//        return;
+//    }
+//    NSArray *selectedFiles = [_selectedFiles getFiles];
+//    if ([selectedFiles count] == 0) {
+//        [PopupGenerator showPopupWithMessage:@"Please select files to convert."];
+//        return;
+//    } else if(![ExperimentFile multipleFileType: selectedFiles]) {
+//        FileType type = ((ExperimentFile *)selectedFiles[0]).type;
+//        if (type == RAW) {
+//            [self performSegueWithIdentifier:@"toSelectTask" sender:selectedFiles];
+//        }else{
+//            [PopupGenerator showPopupWithMessage:@"Not yet implemented."];
+//        }
+//    }
+//    else{
+//        [PopupGenerator showPopupWithMessage:@"Please select files of same type."];
+//    }
 }
 
 /**

@@ -32,6 +32,8 @@
 		76E2DA9F190E96C90048069D /* JSONBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 76E2DA9E190E96C90048069D /* JSONBuilder.m */; };
 		76F638D8190FD99300F0F4BF /* Experiment.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F638D7190FD99300F0F4BF /* Experiment.m */; };
 		76F638DB190FDD9D00F0F4BF /* ExperimentFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F638DA190FDD9D00F0F4BF /* ExperimentFile.m */; };
+		CF5EC0DF1B133E8200CD89D3 /* Process2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5EC0DE1B133E8200CD89D3 /* Process2ViewController.m */; };
+		CF5EC0E21B1345E300CD89D3 /* Process2Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5EC0E11B1345E300CD89D3 /* Process2Cell.m */; };
 		CFE6F04C1AE1049600047985 /* testViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFE6F04B1AE1049600047985 /* testViewController.m */; };
 		D116AEE81ADE5FAE00E8E997 /* AlertWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = D116AEE71ADE5FAE00E8E997 /* AlertWindow.m */; };
 		D134590B1AE0FF6D004EDF31 /* AdvancedSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = D134590A1AE0FF6D004EDF31 /* AdvancedSearchView.m */; };
@@ -143,6 +145,10 @@
 		76F638D7190FD99300F0F4BF /* Experiment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Experiment.m; sourceTree = "<group>"; };
 		76F638D9190FDD9D00F0F4BF /* ExperimentFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExperimentFile.h; sourceTree = "<group>"; };
 		76F638DA190FDD9D00F0F4BF /* ExperimentFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExperimentFile.m; sourceTree = "<group>"; };
+		CF5EC0DD1B133E8200CD89D3 /* Process2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Process2ViewController.h; sourceTree = "<group>"; };
+		CF5EC0DE1B133E8200CD89D3 /* Process2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Process2ViewController.m; sourceTree = "<group>"; };
+		CF5EC0E01B1345E300CD89D3 /* Process2Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Process2Cell.h; sourceTree = "<group>"; };
+		CF5EC0E11B1345E300CD89D3 /* Process2Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Process2Cell.m; sourceTree = "<group>"; };
 		CFE6F04B1AE1049600047985 /* testViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testViewController.m; sourceTree = "<group>"; };
 		D116AEE61ADE5FAE00E8E997 /* AlertWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertWindow.h; sourceTree = "<group>"; };
 		D116AEE71ADE5FAE00E8E997 /* AlertWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertWindow.m; sourceTree = "<group>"; wrapsLines = 1; };
@@ -302,6 +308,10 @@
 				6453DD191924D4E400DDCA2D /* ProcessTableViewCell.m */,
 				6453DD151924D4CC00DDCA2D /* ProcessViewController.h */,
 				6453DD161924D4CC00DDCA2D /* ProcessViewController.m */,
+				CF5EC0DD1B133E8200CD89D3 /* Process2ViewController.h */,
+				CF5EC0DE1B133E8200CD89D3 /* Process2ViewController.m */,
+				CF5EC0E01B1345E300CD89D3 /* Process2Cell.h */,
+				CF5EC0E11B1345E300CD89D3 /* Process2Cell.m */,
 			);
 			name = Process;
 			sourceTree = "<group>";
@@ -692,6 +702,7 @@
 				DE9A3EF41918CB4600F7C33B /* AnnotationTableViewController.m in Sources */,
 				76F638D8190FD99300F0F4BF /* Experiment.m in Sources */,
 				DEBD8BC519338594005C5E19 /* TableViewController.m in Sources */,
+				CF5EC0DF1B133E8200CD89D3 /* Process2ViewController.m in Sources */,
 				DEBD8BC21933835B005C5E19 /* ViewController.m in Sources */,
 				21BFD1DB191B6A2A00F8E02F /* PopupGenerator.m in Sources */,
 				DEEF6AF419094F8A00A2CD8C /* main.m in Sources */,
@@ -700,6 +711,7 @@
 				649778EB1910EC9D000FD14F /* ExperimentParser.m in Sources */,
 				DEB9EBE31929F83E00BD051B /* FileContainer.m in Sources */,
 				DED034711923AD1B00E9EAF1 /* PubMedBuilder.m in Sources */,
+				CF5EC0E21B1345E300CD89D3 /* Process2Cell.m in Sources */,
 				DE6BC232192DE61400B6D7AD /* FileHandler.m in Sources */,
 				DEEF6B1B1909553C00A2CD8C /* LogInViewController.m in Sources */,
 				DE032D72191BCDC4006AC257 /* SelectTaskTableViewController.m in Sources */,
