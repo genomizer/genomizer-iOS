@@ -32,17 +32,17 @@
     
     processTypes = @[@{@"type":@"bowtie",
                        @"file_ext":@"wig",
-                       @"default_param":@"hejsan",
+                       @"default_param":@"-f 9000",
                        @"snd_types":@[@"smoothie", @"step size"]},
 
                      @{@"type":@"smoothie",
                        @"file_ext":@"smth",
-                       @"default_param":@"strawberry+mango",
+                       @"default_param":@"-a 'ballong'",
                        @"snd_types":@[@"step size"]},
                      
                      @{@"type":@"step size",
                        @"file_ext":@"stsz",
-                       @"default_param":@"50m",
+                       @"default_param":@"-b -a -t -m 'an'",
                        @"snd_types":@[@"bowtie"]}];
     
     
@@ -89,7 +89,7 @@
     if([self numberOfSectionsInTableView:tableView] > 1){
         [firstresponder resignFirstResponder];
         currentProcessTypes = processTypes.copy;
-        int sections = [self numberOfSectionsInTableView:tableView]-1;
+        NSInteger sections = [self numberOfSectionsInTableView:tableView];
         [contentArray removeAllObjects];
 
         [tableView deleteSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, sections)] withRowAnimation:UITableViewRowAnimationRight];
@@ -98,14 +98,15 @@
 
 #pragma mark UITableViewDataSource
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return contentArray.count + 1;
+    return contentArray.count == 0 ? 0 : contentArray.count+1;
 }
 
 -(NSInteger)tableView:(UITableView *)_tableView numberOfRowsInSection:(NSInteger)section{
-    int nrOfRows = 0;
-    if(section == [self numberOfSectionsInTableView:_tableView]-1){
-        nrOfRows = 1;
-    } else{
+    NSInteger nrOfRows = 0;
+    if(section != 0 && section == [self numberOfSectionsInTableView:_tableView]-1){
+        NSDictionary *d = contentArray[section-1];
+        nrOfRows = [(NSArray *)d[@"files"] count];
+    } else if(contentArray.count > 0){
         if(contentArray.count >= section && [contentArray[section] isKindOfClass:[NSDictionary class]]){
             NSDictionary *d = contentArray[section];
             nrOfRows = [(NSArray *)d[@"files"] count];
@@ -117,23 +118,26 @@
 -(UITableViewCell *)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell;
     if(indexPath.section == [self numberOfSectionsInTableView:_tableView]-1){
-        cell = [_tableView dequeueReusableCellWithIdentifier:@"bottomCell"];
+        cell = [_tableView dequeueReusableCellWithIdentifier:@"lastCell"];
+        Process2Cell *cell2 = (Process2Cell *)cell;
 //        UIButton *clearButton = (UIButton *)[cell.contentView viewWithTag:4];
-
-        
+        NSDictionary *file = contentArray[indexPath.section-1][@"files"][indexPath.row];
+        cell2.inFileLabel.text      = file[@"outfile"];
     } else{
         cell = [_tableView dequeueReusableCellWithIdentifier:@"processCell"];
         Process2Cell *cell2 = (Process2Cell *)cell;
         NSDictionary *file = contentArray[indexPath.section][@"files"][indexPath.row];
         UIColor *color = colorArray[indexPath.row];
         
-        cell2.inFileLabel.textColor         = color;
+//        cell2.inFileLabel.textColor         = color;
         cell2.outFileTextField.textColor    = color;
-        cell2.paramTextField.textColor      = color;
+//        cell2.paramTextField.textColor      = color;
         
-        cell2.inFileLabel.text      = file[@"infile"];
-        cell2.outFileTextField.text = file[@"outfile"];
-        cell2.paramTextField.text   = file[@"params"];
+//        cell2.inFileLabel.text      = file[@"infile"];
+        cell2.outFileTextField.text = file[@"infile"];
+        cell2.outFileTextField.enabled = indexPath.section == 0 ? false : true;
+        cell2.paramTextField.placeholder = file[@"default_param"];
+        cell2.paramTextField.text = file[@"params"];
         cell2.outfile_ext           = file[@"outfile_ext"];
         
         cell2.delegate = self;
@@ -150,17 +154,17 @@
 }
 -(CGFloat)tableView:(UITableView *)_tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if(indexPath.section == [self numberOfSectionsInTableView:_tableView]-1){
-        return 44;
+        return 40;
     } else{
-        return 100;
+        return 70;
     }
 }
 
 -(CGFloat)tableView:(UITableView *)_tableView heightForHeaderInSection:(NSInteger)section{
-    if(section == [self numberOfSectionsInTableView:_tableView]-1){
+    if(section == 0){
         return 0;
     } else{
-        return 34;
+        return 70;
     }
 }
 
@@ -168,23 +172,38 @@
     return 0.01f;
 }
 
+-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    return [[UIView alloc] init];
+}
+
 -(UIView *)tableView:(UITableView *)_tableView viewForHeaderInSection:(NSInteger)section{
-    UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 34)];
-    v.backgroundColor = [UIColor colorWithWhite:0.96 alpha:1.f];
-    
-    UILabel *l = [[UILabel alloc] initWithFrame:CGRectInset(v.bounds, 15, 0)];
-    l.text = [_tableView.dataSource tableView:_tableView titleForHeaderInSection:section];
-    l.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:17.f];
-    [v addSubview:l];
-    
-    return v;
+    NSString *title = [_tableView.dataSource tableView:_tableView titleForHeaderInSection:section];
+    if(title.length > 0){
+        UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, [self tableView:tableView heightForHeaderInSection:section])];
+        v.backgroundColor = [UIColor colorWithWhite:0.96 alpha:1.f];
+        
+        UILabel *l = [[UILabel alloc] initWithFrame:CGRectMake(0, 9, v.frame.size.width, 20)];
+        l.text = title.uppercaseString;
+        l.textColor = [UIColor whiteColor];
+        l.textAlignment = NSTextAlignmentCenter;
+        l.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16.f];
+        [v addSubview:l];
+        
+        UIImageView *i = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2-100, 0, 200, 70)];
+        i.image = [UIImage imageNamed:@"Arrow"];
+        i.contentMode = UIViewContentModeScaleAspectFit;
+        [v addSubview:i];
+        
+        return v;
+    }
+    return nil;
 }
 
 -(NSString *)tableView:(UITableView *)_tableView titleForHeaderInSection:(NSInteger)section{
-    if(section == [self numberOfSectionsInTableView:_tableView]-1){
-        return @"Button";
+    if(section == 0){
+        return @"";
     } else{
-        NSDictionary *d = contentArray[section];
+        NSDictionary *d = contentArray[section-1];
         return [(NSString *)d[@"type"] capitalizedString];
     }
 }
@@ -231,8 +250,8 @@
     [contentArray removeObjectAtIndex:cellIndex.section];
     [contentArray insertObject:cellDict.copy atIndex:cellIndex.section];
     
-    if(cellIndex.section < [self numberOfSectionsInTableView:tableView]-2){
-        NSMutableDictionary *cellDict = [(NSDictionary *)contentArray[cellIndex.section+1] mutableCopy];
+    if(cellIndex.section < [self numberOfSectionsInTableView:tableView]-1){
+        NSMutableDictionary *cellDict = [(NSDictionary *)contentArray[cellIndex.section] mutableCopy];
         
         NSMutableArray *a = [cellDict[@"files"] mutableCopy];
         NSMutableDictionary *d = [(NSDictionary *)a[cellIndex.row] mutableCopy];
@@ -244,8 +263,8 @@
         
         [cellDict setObject:a forKey:@"files"];
         
-        [contentArray removeObjectAtIndex:cellIndex.section+1];
-        [contentArray insertObject:cellDict.copy atIndex:cellIndex.section+1];
+        [contentArray removeObjectAtIndex:cellIndex.section];
+        [contentArray insertObject:cellDict.copy atIndex:cellIndex.section];
         [tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:cellIndex.row inSection:cellIndex.section+1]] withRowAnimation:UITableViewRowAnimationFade];
     }
 
@@ -277,9 +296,12 @@
     //Converts the files to the new type
     NSArray *convertedFiles = [Process2ViewController convertExperimentFilesToAPI:filesToProcess type:currentProcessTypes[index] prevFiles:prevFiles];
     NSDictionary *dict = @{@"type":currentProcessTypes[index][@"type"], @"files":convertedFiles.copy};
+    int lastNrSections = [self numberOfSectionsInTableView:tableView];;
     [contentArray addObject:dict];
-    [tableView insertSections:[NSIndexSet indexSetWithIndex:[self numberOfSectionsInTableView:tableView]-2] withRowAnimation:UITableViewRowAnimationAutomatic];
-    
+    int currentNrSections = [self numberOfSectionsInTableView:tableView];
+    [tableView reloadData];
+//    [tableView insertSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(lastNrSections, currentNrSections-lastNrSections)] withRowAnimation:UITableViewRowAnimationAutomatic];
+//    [tableView reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(lastNrSections, currentNrSections-lastNrSections)] withRowAnimation:UITableViewRowAnimationFade];
     //Updates the currentProcessTypes to match the selected types snd_types
     NSMutableArray *temp = [[NSMutableArray alloc] init];
     for(NSString *s in currentProcessTypes[index][@"snd_types"]){
@@ -315,7 +337,7 @@
         NSString *filename = [fileComps componentsJoinedByString:@"."];
         NSString *infile_final = prevD == nil ? f.name : [NSString stringWithFormat:@"%@.%@", filename, prevD[@"outfile_ext"]];
         infile_final = prevD == nil ? infile_final : prevD[@"outfile"];
-        NSDictionary *dict = @{@"infile":infile_final, @"outfile":[NSString stringWithFormat:@"%@.%@", filename, d[@"file_ext"]], @"params":d[@"default_param"], @"genomeVersion":f.grVersion, @"keepSAM":@(true), @"outfile_ext":d[@"file_ext"]};
+        NSDictionary *dict = @{@"infile":infile_final, @"outfile":[NSString stringWithFormat:@"%@.%@", filename, d[@"file_ext"]], @"params":@"", @"default_param":d[@"default_param"], @"genomeVersion":f.grVersion, @"keepSAM":@(true), @"outfile_ext":d[@"file_ext"]};
         [a addObject:dict];
     }
     return a.mutableCopy;
