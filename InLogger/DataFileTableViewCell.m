@@ -9,7 +9,7 @@
 
 @implementation DataFileTableViewCell
 
-@synthesize starButton, switchButton, infoButton,textField;
+@synthesize starButton, switchButton, infoButton,textField, numberAddedLabel;
 
 - (IBAction)switchValueChanged:(UISwitch *)sender
 {

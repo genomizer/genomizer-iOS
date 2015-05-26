@@ -17,4 +17,6 @@
 @property (nonatomic, retain) IBOutlet UITableView *tableView;
 
 -(IBAction)sendProcessRequest:(id)sender;
+-(IBAction)addProcessTapped:(id)sender;
+-(IBAction)clearTapped:(id)sender;
 @end

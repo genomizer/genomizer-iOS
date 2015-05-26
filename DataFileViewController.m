@@ -59,6 +59,15 @@
     _experiment = experiment;
 }
 
+-(NSInteger)timesAdded:(ExperimentFile *)file{
+    NSInteger times = 0;
+    for(ExperimentFile *f in filesToProcessing){
+        if([file isEqual:f]){
+            times++;
+        }
+    }
+    return times;
+}
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -99,6 +108,13 @@
     cell.switchButton.on = [_selectedFiles containsFile:file];
     cell.file = file;
     cell.controller = self;
+    
+    NSInteger timesAdded = [self timesAdded:file];
+    if(timesAdded > 0){
+        cell.numberAddedLabel.text = [NSString stringWithFormat:@"(%d)", timesAdded];
+    } else{
+        cell.numberAddedLabel.text = @"";
+    }
 //    BOOL alreadyStared =[SelectedFilesViewController containsExperimentFile:file];
 //    NSString *buttonImageName = alreadyStared ? @"Star" : @"Unstar";
 //    [cell.starButton setImage:[UIImage imageNamed:buttonImageName] forState:UIControlStateNormal];
@@ -147,7 +163,7 @@
     [filesToProcessing addObject:file];
     NSLog(@"filesToProcess: %@", filesToProcessing);
     [processButton setTitle:[NSString stringWithFormat:@"Process (%d)", filesToProcessing.count] forState:UIControlStateNormal];
-    
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
 //    if(alreadyStared){
 //        //Unstar
 //        [SelectedFilesViewController removeExperimentFile:file];
@@ -157,6 +173,11 @@
 //    }
 //    [_tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
 }
+-(IBAction)clearButtonTapped:(id)sender{
+    [filesToProcessing removeAllObjects];
+    [processButton setTitle:@"Process" forState:UIControlStateNormal];
+    [self.tableView reloadData];
+}
 /**
  * Method that is called when the 'Convert Files' button is pressed.
  * If one or more files are selected, the 'Select Task' view will be shown for those files.
@@ -165,6 +186,10 @@
 - (IBAction)convertToProfileOnTouchUpInside:(id)sender
 {
     NSLog(@"Send to process");
+    if(filesToProcessing.count == 0){
+        [self.tabBar2Controller showPopDownWithTitle:@"No files added" andMessage:@"Add some files to process before proceding" type:@"error"];
+        return;
+    }
     Process2ViewController *pvc = [self.storyboard instantiateViewControllerWithIdentifier:@"process2"];
     pvc.filesToProcess = filesToProcessing;
     [self.navigationController pushViewController:pvc animated:true];

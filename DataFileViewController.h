@@ -17,6 +17,7 @@
 
 - (IBAction) unwindToList:(UIStoryboardSegue *)segue;
 -(IBAction)starButtonTapped:(UIButton *)sender;
+-(IBAction)clearButtonTapped:(id)sender;
 - (void) showInfoAbout: (ExperimentFile *) file;
 
 @end
