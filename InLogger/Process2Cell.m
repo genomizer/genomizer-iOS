@@ -9,7 +9,7 @@
 #import "Process2Cell.h"
 
 @implementation Process2Cell
-@synthesize paramTextField, outFileTextField, outfile_ext, windowSizeTextField, minSmoothTextField, stepSizeTextField, meanOrMedianTextField;
+@synthesize paramTextField, outFileTextField, outfile_ext, windowSizeTextField, minSmoothTextField, stepSizeTextField, meanOrMedianTextField, readsCutOffTextField, chromosomeTextField;
 @synthesize delegate = _delegate;
 
 - (void)awakeFromNib {
@@ -19,6 +19,9 @@
     windowSizeTextField.delegate    = self;
     minSmoothTextField.delegate     = self;
     stepSizeTextField.delegate      = self;
+    chromosomeTextField.delegate    = self;
+    readsCutOffTextField.delegate   = self;
+    meanOrMedianTextField.delegate  = self;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -62,6 +65,10 @@
     } else if([textField isEqual:meanOrMedianTextField]){
         key = @"meanOrMedian";
         value = value.lowercaseString;
+    } else if([textField isEqual:readsCutOffTextField]){
+        key = @"readsCutoff";
+    } else if([textField isEqual:chromosomeTextField]){
+        key = @"chromosome";
     }
     
     if([self.delegate respondsToSelector:@selector(processCell2:didChangeValue:forKey:)]){

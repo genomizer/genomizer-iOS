@@ -28,6 +28,9 @@
 @property (nonatomic, retain) IBOutlet UITextField *windowSizeTextField;
 @property (nonatomic, retain) IBOutlet UITextField *minSmoothTextField;
 @property (nonatomic, retain) IBOutlet UITextField *meanOrMedianTextField;
+@property (nonatomic, retain) IBOutlet UITextField *readsCutOffTextField;
+@property (nonatomic, retain) IBOutlet UITextField *chromosomeTextField;
+@property (nonatomic, retain) IBOutlet UITextField *outFilePostTextField;
 @property (nonatomic, retain) NSString *outfile_ext;
 
 

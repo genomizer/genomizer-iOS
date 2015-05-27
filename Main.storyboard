@@ -1437,28 +1437,6 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VLN-Kb-gHP">
-                                <rect key="frame" x="0.0" y="53" width="320" height="320"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No processes added. Tap 'Add Process' to get started." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ny0-hf-pgw">
-                                        <rect key="frame" x="48" y="100" width="224" height="120"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="224" id="CSd-J9-zqR"/>
-                                            <constraint firstAttribute="height" constant="120" id="ibv-mD-9Xu"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="22"/>
-                                        <color key="textColor" white="0.75" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="0.95999999999999996" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="centerY" secondItem="Ny0-hf-pgw" secondAttribute="centerY" id="9sM-pH-VEw"/>
-                                    <constraint firstAttribute="width" constant="320" id="bK5-DQ-TXT"/>
-                                    <constraint firstAttribute="height" constant="320" id="iVf-am-I6F"/>
-                                    <constraint firstAttribute="centerX" secondItem="Ny0-hf-pgw" secondAttribute="centerX" id="tcn-0b-KAz"/>
-                                </constraints>
-                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="eAw-Hl-qfP">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="411"/>
                                 <color key="backgroundColor" white="0.95999999999999996" alpha="1" colorSpace="calibratedWhite"/>
@@ -1558,29 +1536,21 @@
                                             <outlet property="stepSizeTextField" destination="SMA-Dp-4By" id="UeZ-BY-X57"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="processCellsratio" rowHeight="85" id="pmj-2Q-O7B" customClass="Process2Cell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="processCellratio" rowHeight="85" id="pmj-2Q-O7B" customClass="Process2Cell">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pmj-2Q-O7B" id="s4M-pZ-qfa">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Reads cut off" placeholder="Window Size" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yJI-uB-4Tq">
-                                                    <rect key="frame" x="35" y="55" width="91" height="30"/>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Reads cutoff" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yJI-uB-4Tq">
+                                                    <rect key="frame" x="35" y="55" width="95" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="bWM-sh-zPl"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                                 </textField>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Chromosome" placeholder="Mean/Median" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sDS-GU-Ymj">
-                                                    <rect key="frame" x="166" y="55" width="146" height="30"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="30" id="tS2-cb-jdc"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                </textField>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Outfile name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0CD-he-ZF0">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Outfile name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0CD-he-ZF0">
                                                     <rect key="frame" x="17" y="4" width="281" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="IFs-0u-Jb1"/>
@@ -1588,14 +1558,7 @@
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Flag" translatesAutoresizingMaskIntoConstraints="NO" id="oSO-At-xrU">
-                                                    <rect key="frame" x="17" y="64" width="10" height="11"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="11" id="1HA-k0-tfy"/>
-                                                        <constraint firstAttribute="width" constant="10" id="hg4-N5-vHE"/>
-                                                    </constraints>
-                                                </imageView>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Outfile name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hFj-kc-PH1">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Outfile name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hFj-kc-PH1">
                                                     <rect key="frame" x="17" y="29" width="281" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="EMH-rn-hLc"/>
@@ -1603,26 +1566,45 @@
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Flag" translatesAutoresizingMaskIntoConstraints="NO" id="oSO-At-xrU">
+                                                    <rect key="frame" x="17" y="64" width="10" height="11"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="11" id="1HA-k0-tfy"/>
+                                                        <constraint firstAttribute="width" constant="10" id="hg4-N5-vHE"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Chromosome" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sDS-GU-Ymj">
+                                                    <rect key="frame" x="143" y="55" width="155" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="tS2-cb-jdc"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="yJI-uB-4Tq" secondAttribute="trailing" constant="185" id="BTi-E6-JLB"/>
-                                                <constraint firstItem="sDS-GU-Ymj" firstAttribute="leading" secondItem="yJI-uB-4Tq" secondAttribute="trailing" constant="1" id="GVj-ht-deT"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="yJI-uB-4Tq" secondAttribute="trailing" constant="182" id="BTi-E6-JLB"/>
+                                                <constraint firstItem="hFj-kc-PH1" firstAttribute="leading" secondItem="s4M-pZ-qfa" secondAttribute="leadingMargin" constant="9" id="CDm-bO-6c7"/>
                                                 <constraint firstItem="0CD-he-ZF0" firstAttribute="leading" secondItem="s4M-pZ-qfa" secondAttribute="leadingMargin" constant="9" id="Gg9-wn-scG"/>
                                                 <constraint firstItem="yJI-uB-4Tq" firstAttribute="leading" secondItem="s4M-pZ-qfa" secondAttribute="leadingMargin" constant="27" id="JDw-hB-zre"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="sDS-GU-Ymj" secondAttribute="trailing" constant="92" id="LAo-MZ-jlb"/>
-                                                <constraint firstItem="yJI-uB-4Tq" firstAttribute="top" secondItem="s4M-pZ-qfa" secondAttribute="topMargin" constant="17" id="R80-Ej-Vz3"/>
+                                                <constraint firstItem="hFj-kc-PH1" firstAttribute="top" secondItem="s4M-pZ-qfa" secondAttribute="topMargin" constant="21" id="KfE-sa-6vy"/>
+                                                <constraint firstItem="yJI-uB-4Tq" firstAttribute="top" secondItem="s4M-pZ-qfa" secondAttribute="topMargin" constant="47" id="R80-Ej-Vz3"/>
+                                                <constraint firstItem="sDS-GU-Ymj" firstAttribute="leading" secondItem="yJI-uB-4Tq" secondAttribute="trailing" constant="13" id="bml-fh-7nd"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="0CD-he-ZF0" secondAttribute="trailing" constant="14" id="cND-pw-aZ7"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="hFj-kc-PH1" secondAttribute="trailing" constant="14" id="dC9-K1-obf"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="sDS-GU-Ymj" secondAttribute="trailing" constant="14" id="shS-Z9-inO"/>
                                                 <constraint firstItem="oSO-At-xrU" firstAttribute="leading" secondItem="s4M-pZ-qfa" secondAttribute="leadingMargin" constant="9" id="t2f-OT-TUi"/>
                                                 <constraint firstItem="0CD-he-ZF0" firstAttribute="top" secondItem="s4M-pZ-qfa" secondAttribute="top" constant="4" id="uAu-C6-b9T"/>
-                                                <constraint firstItem="oSO-At-xrU" firstAttribute="top" secondItem="0CD-he-ZF0" secondAttribute="bottom" id="xUo-Jg-Cm7"/>
-                                                <constraint firstItem="sDS-GU-Ymj" firstAttribute="top" secondItem="s4M-pZ-qfa" secondAttribute="topMargin" constant="17" id="yDM-eN-rFg"/>
+                                                <constraint firstItem="oSO-At-xrU" firstAttribute="top" secondItem="0CD-he-ZF0" secondAttribute="bottom" constant="30" id="xUo-Jg-Cm7"/>
+                                                <constraint firstItem="sDS-GU-Ymj" firstAttribute="top" secondItem="s4M-pZ-qfa" secondAttribute="topMargin" constant="47" id="yDM-eN-rFg"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <inset key="separatorInset" minX="320" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
-                                            <outlet property="meanOrMedianTextField" destination="sDS-GU-Ymj" id="hQd-bJ-Bo9"/>
+                                            <outlet property="chromosomeTextField" destination="sDS-GU-Ymj" id="I9i-6H-odc"/>
+                                            <outlet property="outFilePostTextField" destination="hFj-kc-PH1" id="ZyR-Qu-IOt"/>
                                             <outlet property="outFileTextField" destination="0CD-he-ZF0" id="6WY-vC-Rkt"/>
-                                            <outlet property="windowSizeTextField" destination="yJI-uB-4Tq" id="nHs-N0-wRr"/>
+                                            <outlet property="readsCutOffTextField" destination="yJI-uB-4Tq" id="T9x-52-1td"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="processCellsmoothie" rowHeight="60" id="aSa-91-qzM" customClass="Process2Cell">
@@ -1761,7 +1743,6 @@
                         <constraints>
                             <constraint firstItem="COv-CN-lWF" firstAttribute="leading" secondItem="a9a-DR-gJk" secondAttribute="trailing" id="6Gz-Ew-TlM"/>
                             <constraint firstItem="gbh-gc-OVd" firstAttribute="top" secondItem="eAw-Hl-qfP" secondAttribute="bottom" constant="93" id="89x-ye-sUt"/>
-                            <constraint firstItem="VLN-Kb-gHP" firstAttribute="top" secondItem="HAX-C6-wAN" secondAttribute="bottom" constant="53" id="CBd-fi-OcW"/>
                             <constraint firstAttribute="trailingMargin" secondItem="eAw-Hl-qfP" secondAttribute="trailing" constant="-16" id="KVb-cf-8Iy"/>
                             <constraint firstItem="eAw-Hl-qfP" firstAttribute="leading" secondItem="XKK-dF-fxo" secondAttribute="leadingMargin" constant="-16" id="Lh1-ro-eYR"/>
                             <constraint firstItem="a9a-DR-gJk" firstAttribute="leading" secondItem="XKK-dF-fxo" secondAttribute="leading" id="Mxe-TN-Lfz"/>
@@ -1769,7 +1750,6 @@
                             <constraint firstItem="gbh-gc-OVd" firstAttribute="top" secondItem="COv-CN-lWF" secondAttribute="bottom" constant="49" id="SJV-E8-kzi"/>
                             <constraint firstItem="eAw-Hl-qfP" firstAttribute="top" secondItem="HAX-C6-wAN" secondAttribute="bottom" id="Z0P-zG-C7b"/>
                             <constraint firstItem="COv-CN-lWF" firstAttribute="top" secondItem="eAw-Hl-qfP" secondAttribute="bottom" id="dKY-Gr-YI8"/>
-                            <constraint firstAttribute="centerX" secondItem="VLN-Kb-gHP" secondAttribute="centerX" id="ihN-D1-0W5"/>
                             <constraint firstItem="a9a-DR-gJk" firstAttribute="top" secondItem="eAw-Hl-qfP" secondAttribute="bottom" id="kio-Jc-lZY"/>
                             <constraint firstItem="gbh-gc-OVd" firstAttribute="top" secondItem="a9a-DR-gJk" secondAttribute="bottom" constant="49" id="l0r-BD-l18"/>
                         </constraints>
@@ -1788,52 +1768,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r4H-sK-rPs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4475" y="-876"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="fIU-RD-gqo">
-            <objects>
-                <viewController id="aQo-el-WhR" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="4Qh-Tm-U5K"/>
-                        <viewControllerLayoutGuide type="bottom" id="wbL-yi-bFj"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="OsP-cm-m2w">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4kT-Rh-0ZY">
-                                <rect key="frame" x="0.0" y="124" width="320" height="320"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No processes added. Tap 'Add Process' to get started" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="94g-Hl-Rdr">
-                                        <rect key="frame" x="48" y="100" width="224" height="120"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="120" id="3oa-82-uH4"/>
-                                            <constraint firstAttribute="width" constant="224" id="eoB-mH-KDZ"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="22"/>
-                                        <color key="textColor" white="0.75" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="0.95999999999999996" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="centerX" secondItem="94g-Hl-Rdr" secondAttribute="centerX" id="1Uh-ZK-tfF"/>
-                                    <constraint firstAttribute="height" constant="320" id="SgG-fP-I8u"/>
-                                    <constraint firstAttribute="width" constant="320" id="Zxs-bV-yL3"/>
-                                    <constraint firstAttribute="centerY" secondItem="94g-Hl-Rdr" secondAttribute="centerY" id="spQ-h6-C3X"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="centerY" secondItem="4kT-Rh-0ZY" secondAttribute="centerY" id="Bpq-qB-zUB"/>
-                            <constraint firstAttribute="centerX" secondItem="4kT-Rh-0ZY" secondAttribute="centerX" id="F30-U7-3tt"/>
-                        </constraints>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="g0a-vO-bF6" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4846" y="-876"/>
         </scene>
         <!--Convert-->
         <scene sceneID="7TM-3d-xSQ">
