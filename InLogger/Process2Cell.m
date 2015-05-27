@@ -9,13 +9,16 @@
 #import "Process2Cell.h"
 
 @implementation Process2Cell
-@synthesize inFileLabel, outFileLabel, paramTextField, outFileTextField, outfile_ext;
+@synthesize paramTextField, outFileTextField, outfile_ext, windowSizeTextField, minSmoothTextField, stepSizeTextField, meanOrMedianTextField;
 @synthesize delegate = _delegate;
 
 - (void)awakeFromNib {
     // Initialization code
-    paramTextField.delegate     = self;
-    outFileTextField.delegate   = self;
+    paramTextField.delegate         = self;
+    outFileTextField.delegate       = self;
+    windowSizeTextField.delegate    = self;
+    minSmoothTextField.delegate     = self;
+    stepSizeTextField.delegate      = self;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -39,15 +42,30 @@
 
 -(void)textFieldDidEndEditing:(UITextField *)textField{
     NSLog(@"New params: %@", textField.text);
-    if([textField isEqual:paramTextField]){
-        if([self.delegate respondsToSelector:@selector(processCell2:didChangeParams:)]){
-            [self.delegate processCell2:self didChangeParams:textField.text];
-        }
-    } else if([textField isEqual:outFileTextField]){
+    if([textField isEqual:outFileTextField]){
         textField.text = [NSString stringWithFormat:@"%@.%@",textField.text, outfile_ext];
         if([self.delegate respondsToSelector:@selector(processCell2:didChangeOutFileName:)]){
             [self.delegate processCell2:self didChangeOutFileName:textField.text];
         }
+        return;
+    }
+    NSString *key = nil;
+    NSString *value = textField.text;
+    if([textField isEqual:paramTextField]){
+        key = @"params";
+    } else if([textField isEqual:windowSizeTextField]){
+        key = @"windowSize";
+    } else if([textField isEqual:minSmoothTextField]){
+        key = @"minSmooth";
+    } else if([textField isEqual:stepSizeTextField]){
+        key = @"stepsize";
+    } else if([textField isEqual:meanOrMedianTextField]){
+        key = @"meanOrMedian";
+        value = value.lowercaseString;
+    }
+    
+    if([self.delegate respondsToSelector:@selector(processCell2:didChangeValue:forKey:)]){
+        [self.delegate processCell2:self didChangeValue:value forKey:key];
     }
 
 }

@@ -10,7 +10,7 @@
 
 @class Process2Cell;
 @protocol Process2CellDelegate <NSObject>
--(void)processCell2:(Process2Cell *)cell didChangeParams:(NSString *)params;
+-(void)processCell2:(Process2Cell *)cell didChangeValue:(id)val forKey:(NSString *)key;
 -(void)processCell2:(Process2Cell *)cell didChangeOutFileName:(NSString *)outfileName;
 -(void)processCell2DidBeginEdit:(UITextField *)textField;
 
@@ -20,10 +20,14 @@
 }
 
 @property (nonatomic, retain) id<Process2CellDelegate>delegate;
-@property (nonatomic, retain) IBOutlet UILabel *inFileLabel;
-@property (nonatomic, retain) IBOutlet UILabel *outFileLabel;
+//@property (nonatomic, retain) IBOutlet UILabel *inFileLabel;
+//@property (nonatomic, retain) IBOutlet UILabel *outFileLabel;
 @property (nonatomic, retain) IBOutlet UITextField *outFileTextField;
 @property (nonatomic, retain) IBOutlet UITextField *paramTextField;
+@property (nonatomic, retain) IBOutlet UITextField *stepSizeTextField;
+@property (nonatomic, retain) IBOutlet UITextField *windowSizeTextField;
+@property (nonatomic, retain) IBOutlet UITextField *minSmoothTextField;
+@property (nonatomic, retain) IBOutlet UITextField *meanOrMedianTextField;
 @property (nonatomic, retain) NSString *outfile_ext;
 
 

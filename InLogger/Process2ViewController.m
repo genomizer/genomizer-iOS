@@ -32,20 +32,24 @@
 //    tableView.separatorInset = UIEdgeInsetsMake(0, 160, 0, 160);
     tableView.separatorColor = [UIColor whiteColor];
     
-    processTypes = @[@{@"type":@"bowtie",
+    processTypes = @[@{@"type":@"rawToProfile",
                        @"file_ext":@"wig",
                        @"default_param":@"-f 9000",
-                       @"snd_types":@[@"smoothie", @"step size"]},
+                       @"snd_types":@[@"smoothie", @"step"]},
 
                      @{@"type":@"smoothie",
                        @"file_ext":@"smth",
                        @"default_param":@"-a 'ballong'",
-                       @"snd_types":@[@"step size"]},
+                       @"snd_types":@[@"step"]},
                      
-                     @{@"type":@"step size",
+                     @{@"type":@"step",
+                       @"file_ext":@"stsz",
+                       @"snd_types":@[@"rawToProfile"]},
+                     
+                     @{@"type":@"ratio",
                        @"file_ext":@"stsz",
                        @"default_param":@"-b -a -t -m 'an'",
-                       @"snd_types":@[@"bowtie"]}];
+                       @"snd_types":@[]}];
     
     
     currentProcessTypes = processTypes.copy;
@@ -79,10 +83,13 @@
         NSMutableDictionary *d_d = d.mutableCopy;
         for(NSDictionary *file in d[@"files"]){
             NSMutableDictionary *file_d = file.mutableCopy;
-            if([(NSString *) file_d[@"params"] length] == 0){
-                [file_d setObject:file_d[@"default_param"] forKey:@"params"];
+            if([d_d[@"type"] isEqualToString:@"rawToProfile"]){
+                if([(NSString *) file_d[@"params"] length] == 0){
+                    [file_d setObject:file_d[@"default_param"] forKey:@"params"];
+                }
+                [file_d removeObjectForKey:@"default_param"];
+                
             }
-            [file_d removeObjectForKey:@"default_param"];
             [file_d removeObjectForKey:@"outfile_ext"];
             [files addObject:file_d];
         }
@@ -140,7 +147,7 @@
 
 -(UITableViewCell *)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell;
-    if(indexPath.section == [self numberOfSectionsInTableView:_tableView]-1){
+    if(indexPath.section == [self numberOfSectionsInTableView:_tableView]-1){ //last cell
         cell = [_tableView dequeueReusableCellWithIdentifier:@"lastCell"];
         Process2Cell *cell2 = (Process2Cell *)cell;
         NSDictionary *file = contentArray[indexPath.section-1][@"files"][indexPath.row];
@@ -150,8 +157,11 @@
         cell2.outFileTextField.text         = file[@"outfile"];
         cell2.outfile_ext                   = file[@"outfile_ext"];
         cell2.delegate = self;
-    } else if(indexPath.section == 0){
-        cell = [_tableView dequeueReusableCellWithIdentifier:@"processCell"];
+        
+    } else if(indexPath.section == 0){//first cell
+        NSString *type = contentArray[indexPath.section][@"type"];
+        
+        cell = [_tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"processCell%@", type]];
         Process2Cell *cell2 = (Process2Cell *)cell;
         NSDictionary *file = contentArray[indexPath.section][@"files"][indexPath.row];
         UIColor *color = colorArray[indexPath.row];
@@ -161,11 +171,16 @@
         cell2.outFileTextField.enabled      = false;
         cell2.paramTextField.placeholder    = file[@"default_param"];
         cell2.paramTextField.text           = file[@"params"];
+        cell2.stepSizeTextField.text        = file[@"stepsize"];
+        cell2.minSmoothTextField.text       = file[@"minSmooth"];
+        cell2.windowSizeTextField.text      = file[@"windowSize"];
+        cell2.meanOrMedianTextField.text    = [file[@"meanOrMedian"] capitalizedString];
         
         cell2.delegate = self;
         
-    }else{
-        cell = [_tableView dequeueReusableCellWithIdentifier:@"processCell"];
+    }else{ //middle cells
+        NSString *type = contentArray[indexPath.section][@"type"];
+        cell = [_tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"processCell%@", type]];
         Process2Cell *cell2 = (Process2Cell *)cell;
         NSDictionary *file = contentArray[indexPath.section][@"files"][indexPath.row];
         NSDictionary *prevFile = contentArray[indexPath.section-1][@"files"][indexPath.row];
@@ -177,6 +192,10 @@
         cell2.paramTextField.placeholder    = file[@"default_param"];
         cell2.paramTextField.text           = file[@"params"];
         cell2.outfile_ext                   = prevFile[@"outfile_ext"];
+        cell2.stepSizeTextField.text        = file[@"stepsize"];
+        cell2.minSmoothTextField.text       = file[@"minSmooth"];
+        cell2.windowSizeTextField.text      = file[@"windowSize"];
+        cell2.meanOrMedianTextField.text    = [file[@"meanOrMedian"] capitalizedString];
         
         cell2.delegate = self;
     }
@@ -247,16 +266,21 @@
 }
 
 
--(void)processCell2:(Process2Cell *)cell didChangeParams:(NSString *)params{
+-(void)processCell2:(Process2Cell *)cell didChangeValue:(id)val forKey:(NSString *)key{
     firstresponder = nil;
     NSIndexPath *cellIndex = [tableView indexPathForCell:cell];
+    [self changeValue:val forKey:key atSection:cellIndex];
+}
+
+-(void)changeValue:(id)val forKey:(NSString *)key atSection:(NSIndexPath *)cellIndex{
+
     
     NSMutableDictionary *cellDict = [(NSDictionary *)contentArray[cellIndex.section] mutableCopy];
     
     NSMutableArray *a = [cellDict[@"files"] mutableCopy];
     NSMutableDictionary *d = [(NSDictionary *)a[cellIndex.row] mutableCopy];
     
-    [d setObject:params forKey:@"params"];
+    [d setObject:val forKey:key];
     
     [a removeObjectAtIndex:cellIndex.row];
     [a insertObject:d.copy atIndex:cellIndex.row];
@@ -266,7 +290,6 @@
     
     [contentArray removeObjectAtIndex:cellIndex.section];
     [contentArray insertObject:cellDict.copy atIndex:cellIndex.section];
-    
 }
 
 -(void)processCell2:(Process2Cell *)cell didChangeOutFileName:(NSString *)outfileName{
@@ -381,7 +404,14 @@
         NSString *filename = [fileComps componentsJoinedByString:@"."];
         NSString *infile_final = prevD == nil ? f.name : [NSString stringWithFormat:@"%@.%@", filename, prevD[@"outfile_ext"]];
         infile_final = prevD == nil ? infile_final : prevD[@"outfile"];
-        NSDictionary *dict = @{@"infile":infile_final, @"outfile":[NSString stringWithFormat:@"%@.%@", filename, d[@"file_ext"]], @"params":@"", @"default_param":d[@"default_param"], @"genomeVersion":f.grVersion, @"keepSAM":@(true), @"outfile_ext":d[@"file_ext"]};
+        NSDictionary *dict = nil;
+        if([d[@"type"] isEqualToString:@"rawToProfile"]){
+            dict = @{@"infile":infile_final, @"outfile":[NSString stringWithFormat:@"%@.%@", filename, d[@"file_ext"]], @"params":@"", @"default_param":d[@"default_param"], @"genomeVersion":f.grVersion, @"keepSAM":@(true), @"outfile_ext":d[@"file_ext"]};
+        } else if([d[@"type"] isEqualToString:@"step"]){
+            dict = @{@"infile":infile_final, @"outfile":[NSString stringWithFormat:@"%@.%@", filename, d[@"file_ext"]], @"stepsize":@"", @"outfile_ext":d[@"file_ext"]};
+        } else if([d[@"type"] isEqualToString:@"smoothie"]){
+            dict = @{@"infile":infile_final, @"outfile":[NSString stringWithFormat:@"%@.%@", filename, d[@"file_ext"]], @"windowSize":@"", @"minSmooth":@"", @"outfile_ext":d[@"file_ext"], @"meanOrMedian":@"Mean"};
+        }
         [a addObject:dict];
     }
     return a.mutableCopy;

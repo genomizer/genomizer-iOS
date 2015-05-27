@@ -1459,18 +1459,65 @@
                                     <constraint firstAttribute="centerX" secondItem="Ny0-hf-pgw" secondAttribute="centerX" id="tcn-0b-KAz"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="eAw-Hl-qfP">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="eAw-Hl-qfP">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="411"/>
                                 <color key="backgroundColor" white="0.95999999999999996" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="processCell" rowHeight="60" id="jSG-Js-zRH" customClass="Process2Cell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="processCellrawToProfile" rowHeight="60" id="vii-17-bjs" customClass="Process2Cell">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vii-17-bjs" id="pSa-QB-D2Y">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Parameters" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FeP-3r-Slg">
+                                                    <rect key="frame" x="35" y="25" width="259" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="mPZ-sf-XUn"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Outfile name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nqT-HM-1kl">
+                                                    <rect key="frame" x="17" y="4" width="281" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="xut-vH-OoM"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Flag" translatesAutoresizingMaskIntoConstraints="NO" id="JZK-vq-Vz9">
+                                                    <rect key="frame" x="17" y="34" width="10" height="11"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="10" id="RCZ-OY-25j"/>
+                                                        <constraint firstAttribute="height" constant="11" id="a8K-E5-LpH"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="FeP-3r-Slg" firstAttribute="leading" secondItem="pSa-QB-D2Y" secondAttribute="leadingMargin" constant="27" id="3qy-kQ-vUE"/>
+                                                <constraint firstItem="FeP-3r-Slg" firstAttribute="top" secondItem="pSa-QB-D2Y" secondAttribute="topMargin" constant="17" id="4Nq-kP-8ZN"/>
+                                                <constraint firstItem="nqT-HM-1kl" firstAttribute="leading" secondItem="pSa-QB-D2Y" secondAttribute="leadingMargin" constant="9" id="Aqg-cM-2DE"/>
+                                                <constraint firstItem="JZK-vq-Vz9" firstAttribute="top" secondItem="nqT-HM-1kl" secondAttribute="bottom" id="NNf-b2-lhD"/>
+                                                <constraint firstItem="nqT-HM-1kl" firstAttribute="top" secondItem="pSa-QB-D2Y" secondAttribute="top" constant="4" id="P83-E2-A6M"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="FeP-3r-Slg" secondAttribute="trailing" constant="18" id="hXK-QB-gv3"/>
+                                                <constraint firstItem="JZK-vq-Vz9" firstAttribute="leading" secondItem="pSa-QB-D2Y" secondAttribute="leadingMargin" constant="9" id="smB-OX-B10"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="nqT-HM-1kl" secondAttribute="trailing" constant="14" id="vZC-gk-wB1"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <inset key="separatorInset" minX="320" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <connections>
+                                            <outlet property="outFileTextField" destination="nqT-HM-1kl" id="92K-Nw-sp2"/>
+                                            <outlet property="paramTextField" destination="FeP-3r-Slg" id="uBs-jL-rmf"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="processCellstep" rowHeight="60" id="jSG-Js-zRH" customClass="Process2Cell">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jSG-Js-zRH" id="Rnz-6M-Oyx">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Parameters" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SMA-Dp-4By">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Step Size" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SMA-Dp-4By">
                                                     <rect key="frame" x="35" y="25" width="259" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="IP2-LN-4HL"/>
@@ -1508,7 +1555,145 @@
                                         <inset key="separatorInset" minX="320" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
                                             <outlet property="outFileTextField" destination="RSl-8n-4wu" id="ZBP-sb-ZpD"/>
-                                            <outlet property="paramTextField" destination="SMA-Dp-4By" id="KXf-mX-Pvf"/>
+                                            <outlet property="stepSizeTextField" destination="SMA-Dp-4By" id="UeZ-BY-X57"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="processCellsratio" rowHeight="85" id="pmj-2Q-O7B" customClass="Process2Cell">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pmj-2Q-O7B" id="s4M-pZ-qfa">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Reads cut off" placeholder="Window Size" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yJI-uB-4Tq">
+                                                    <rect key="frame" x="35" y="55" width="91" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="bWM-sh-zPl"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                                </textField>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Chromosome" placeholder="Mean/Median" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sDS-GU-Ymj">
+                                                    <rect key="frame" x="166" y="55" width="146" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="tS2-cb-jdc"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Outfile name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0CD-he-ZF0">
+                                                    <rect key="frame" x="17" y="4" width="281" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="IFs-0u-Jb1"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Flag" translatesAutoresizingMaskIntoConstraints="NO" id="oSO-At-xrU">
+                                                    <rect key="frame" x="17" y="64" width="10" height="11"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="11" id="1HA-k0-tfy"/>
+                                                        <constraint firstAttribute="width" constant="10" id="hg4-N5-vHE"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Outfile name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hFj-kc-PH1">
+                                                    <rect key="frame" x="17" y="29" width="281" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="EMH-rn-hLc"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="yJI-uB-4Tq" secondAttribute="trailing" constant="185" id="BTi-E6-JLB"/>
+                                                <constraint firstItem="sDS-GU-Ymj" firstAttribute="leading" secondItem="yJI-uB-4Tq" secondAttribute="trailing" constant="1" id="GVj-ht-deT"/>
+                                                <constraint firstItem="0CD-he-ZF0" firstAttribute="leading" secondItem="s4M-pZ-qfa" secondAttribute="leadingMargin" constant="9" id="Gg9-wn-scG"/>
+                                                <constraint firstItem="yJI-uB-4Tq" firstAttribute="leading" secondItem="s4M-pZ-qfa" secondAttribute="leadingMargin" constant="27" id="JDw-hB-zre"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="sDS-GU-Ymj" secondAttribute="trailing" constant="92" id="LAo-MZ-jlb"/>
+                                                <constraint firstItem="yJI-uB-4Tq" firstAttribute="top" secondItem="s4M-pZ-qfa" secondAttribute="topMargin" constant="17" id="R80-Ej-Vz3"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="0CD-he-ZF0" secondAttribute="trailing" constant="14" id="cND-pw-aZ7"/>
+                                                <constraint firstItem="oSO-At-xrU" firstAttribute="leading" secondItem="s4M-pZ-qfa" secondAttribute="leadingMargin" constant="9" id="t2f-OT-TUi"/>
+                                                <constraint firstItem="0CD-he-ZF0" firstAttribute="top" secondItem="s4M-pZ-qfa" secondAttribute="top" constant="4" id="uAu-C6-b9T"/>
+                                                <constraint firstItem="oSO-At-xrU" firstAttribute="top" secondItem="0CD-he-ZF0" secondAttribute="bottom" id="xUo-Jg-Cm7"/>
+                                                <constraint firstItem="sDS-GU-Ymj" firstAttribute="top" secondItem="s4M-pZ-qfa" secondAttribute="topMargin" constant="17" id="yDM-eN-rFg"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <inset key="separatorInset" minX="320" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <connections>
+                                            <outlet property="meanOrMedianTextField" destination="sDS-GU-Ymj" id="hQd-bJ-Bo9"/>
+                                            <outlet property="outFileTextField" destination="0CD-he-ZF0" id="6WY-vC-Rkt"/>
+                                            <outlet property="windowSizeTextField" destination="yJI-uB-4Tq" id="nHs-N0-wRr"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="processCellsmoothie" rowHeight="60" id="aSa-91-qzM" customClass="Process2Cell">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aSa-91-qzM" id="p9k-fn-rzE">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Window Size" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="T1C-74-l0P">
+                                                    <rect key="frame" x="35" y="25" width="92" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="3KZ-9t-PCA"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                                </textField>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Mean/Median" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6mb-fP-yPS">
+                                                    <rect key="frame" x="128" y="25" width="92" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="FoW-yb-VNq"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Outfile name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CZF-wU-eYo">
+                                                    <rect key="frame" x="17" y="4" width="281" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="K69-4h-cv3"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Flag" translatesAutoresizingMaskIntoConstraints="NO" id="7l8-qO-LJ8">
+                                                    <rect key="frame" x="17" y="34" width="10" height="11"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="11" id="4M7-FS-YRR"/>
+                                                        <constraint firstAttribute="width" constant="10" id="7Zz-Uq-Qjh"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Min smooth" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mTF-iu-u21">
+                                                    <rect key="frame" x="220" y="25" width="92" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="Xxs-98-rwe"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="phonePad" returnKeyType="go"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="CZF-wU-eYo" secondAttribute="trailing" constant="14" id="1lB-Kk-ERJ"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="6mb-fP-yPS" secondAttribute="trailing" constant="92" id="2Tf-yb-Jic"/>
+                                                <constraint firstItem="mTF-iu-u21" firstAttribute="leading" secondItem="6mb-fP-yPS" secondAttribute="trailing" id="2nH-fS-7jI"/>
+                                                <constraint firstItem="6mb-fP-yPS" firstAttribute="leading" secondItem="T1C-74-l0P" secondAttribute="trailing" constant="1" id="6cK-di-raa"/>
+                                                <constraint firstItem="6mb-fP-yPS" firstAttribute="top" secondItem="p9k-fn-rzE" secondAttribute="topMargin" constant="17" id="CSK-4F-2WS"/>
+                                                <constraint firstItem="7l8-qO-LJ8" firstAttribute="top" secondItem="CZF-wU-eYo" secondAttribute="bottom" id="EGY-Km-vD7"/>
+                                                <constraint firstItem="CZF-wU-eYo" firstAttribute="leading" secondItem="p9k-fn-rzE" secondAttribute="leadingMargin" constant="9" id="IUE-Kj-ueM"/>
+                                                <constraint firstItem="CZF-wU-eYo" firstAttribute="top" secondItem="p9k-fn-rzE" secondAttribute="top" constant="4" id="Phk-9E-nCu"/>
+                                                <constraint firstItem="mTF-iu-u21" firstAttribute="top" secondItem="p9k-fn-rzE" secondAttribute="topMargin" constant="17" id="R5M-Ex-zG0"/>
+                                                <constraint firstItem="T1C-74-l0P" firstAttribute="leading" secondItem="p9k-fn-rzE" secondAttribute="leadingMargin" constant="27" id="V4o-4M-Jxm"/>
+                                                <constraint firstItem="T1C-74-l0P" firstAttribute="top" secondItem="p9k-fn-rzE" secondAttribute="topMargin" constant="17" id="VZJ-9L-gfe"/>
+                                                <constraint firstItem="mTF-iu-u21" firstAttribute="trailing" secondItem="p9k-fn-rzE" secondAttribute="trailingMargin" id="ba0-Eg-iWO"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="T1C-74-l0P" secondAttribute="trailing" constant="185" id="n2o-Qv-Keo"/>
+                                                <constraint firstItem="7l8-qO-LJ8" firstAttribute="leading" secondItem="p9k-fn-rzE" secondAttribute="leadingMargin" constant="9" id="nlY-fx-mcA"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <inset key="separatorInset" minX="320" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <connections>
+                                            <outlet property="meanOrMedianTextField" destination="6mb-fP-yPS" id="f6f-jR-Uf4"/>
+                                            <outlet property="minSmoothTextField" destination="mTF-iu-u21" id="mID-Up-M1K"/>
+                                            <outlet property="outFileTextField" destination="CZF-wU-eYo" id="eqU-lA-2nO"/>
+                                            <outlet property="windowSizeTextField" destination="T1C-74-l0P" id="Hnz-o8-Sam"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="lastCell" rowHeight="39" id="NSG-Il-fGa" customClass="Process2Cell">
