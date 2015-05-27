@@ -175,25 +175,28 @@
     if ([[JSONBuilder getServerURL] isEqualToString:@"dummyserver/"]) {
         return nil;
     } else {
-    NSDictionary *array = [NSJSONSerialization JSONObjectWithData:POSTReply options: NSJSONReadingMutableContainers error:&internalError];
-    
-    if(internalError == nil) {
-        NSMutableArray *experiments = [[NSMutableArray alloc] init];
-        for(NSDictionary *json in array) {
-            if([json objectForKey:@"name"] != nil){
-                [experiments addObject:[ExperimentParser expParser:json]];
-            } else{
-                *error = [self generateError:@"Server sent incorrectly formatted data" withErrorDomain:@"Server Error" withUnderlyingError:nil];
+        NSString *datastring = [[NSString alloc] initWithData:POSTReply encoding:NSStringEncodingConversionAllowLossy];
+        POSTReply = [datastring dataUsingEncoding:NSUTF8StringEncoding];
+        NSDictionary *array = [NSJSONSerialization JSONObjectWithData:POSTReply options: NSJSONReadingAllowFragments error:&internalError];
+//        NSLog(@"data string: %@", datastring);
+        if(internalError == nil) {
+            NSMutableArray *experiments = [[NSMutableArray alloc] init];
+            for(NSDictionary *json in array) {
+                if([json objectForKey:@"name"] != nil){
+                    [experiments addObject:[ExperimentParser expParser:json]];
+                } else{
+                    *error = [self generateError:@"Server sent incorrectly formatted data" withErrorDomain:@"Server Error" withUnderlyingError:nil];
+                }
+                
+                
             }
-            
-            
+            return experiments;
         }
-        return experiments;
-    }
-    else{
-        *error = [self generateError:@"Server sent incorrectly formatted data" withErrorDomain:@"ServerError" withUnderlyingError:nil];
-    }
-    return nil;
+        else{
+//            NSLog(@"Error: %@ %@", internalError.description, internalError.debugDescription);
+            *error = [self generateError:@"Server sent incorrectly formatted data" withErrorDomain:@"ServerError" withUnderlyingError:nil];
+        }
+        return nil;
     }
 }
 
