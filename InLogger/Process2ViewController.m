@@ -55,7 +55,7 @@
                      @{@"type":@"ratio",
                        @"name":@"Ratio",
                        @"file_ext":@"sgr",
-                       @"infile_ext":@"sgr",
+                       @"infile_ext":@"fastq",
                        @"snd_types":@[@"step", @"smoothie"],
                        @"nr_files":@(2)}];
     
@@ -163,7 +163,7 @@
 
 #pragma mark UITableViewDataSource
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)_tableView{
-    int sec = contentArray.count == 0 ? 0 : contentArray.count+1;
+    NSInteger sec = contentArray.count == 0 ? 0 : contentArray.count+1;
     return sec;
 }
 
@@ -455,10 +455,10 @@
         convertedFiles = [Process2ViewController convertExperimentFilesToAPI:filesToProcess type:currentProcessTypes[index]];
     }
     NSDictionary *dict = @{@"type":currentProcessTypes[index][@"type"], @"files":convertedFiles.copy};
-    int lastNrSections = [self numberOfSectionsInTableView:tableView];;
+    NSInteger lastNrSections = [self numberOfSectionsInTableView:tableView];;
     [contentArray addObject:dict];
-    int currentNrSections = [self numberOfSectionsInTableView:tableView];
-//    [tableView reloadData];
+    NSInteger currentNrSections = [self numberOfSectionsInTableView:tableView];
+
     [tableView beginUpdates];
     [tableView insertSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(lastNrSections, currentNrSections-lastNrSections)] withRowAnimation:UITableViewRowAnimationTop];
     if(lastNrSections > 0){
