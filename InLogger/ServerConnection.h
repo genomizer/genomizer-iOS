@@ -15,7 +15,7 @@
  have return values. Instead the method, when done, reports to the
  viewController it has access to.
  */
-@interface ServerConnection : NSObject
+@interface ServerConnection : NSObject<NSURLConnectionDelegate>
 
 + (void)login:(NSString *)username withPassword:(NSString *)password
   withContext:(void (^)(NSString *,NSError *))completionBlock;
@@ -26,7 +26,7 @@
                                                               NSError *)
                                                      )completionBlock;
 
-+ (void)convert:(NSDictionary*)dict withContext:(void (^)(NSError *,
+- (void)convert:(NSDictionary*)dict withContext:(void (^)(NSError *,
                                                                  NSString *)
                                                         )completionBlock;
 + (NSDictionary*)parseJSONToDictionary:(NSData*)POSTReply

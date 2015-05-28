@@ -34,9 +34,9 @@
     
     processTypes = @[@{@"type":@"rawToProfile",
                        @"name":@"Raw to Profile",
-                       @"file_ext":@"sgr",
+                       @"file_ext":@"wig",
                        @"infile_ext":@"fastq",
-                       @"default_param":@"-a -m 1 --best -p 10 -v 2 -q -S --phred33",
+                       @"default_param":@"-a -m 1 --best -p 10 -v 2 -q -S--phred33",
                        @"snd_types":@[@"smoothie", @"step"]},
 
                      @{@"type":@"smoothie",
@@ -129,8 +129,8 @@
     }
     
     NSDictionary *dict = @{@"expId":firstFile.expID, @"processCommands":sendArray};
-    [ServerConnection convert:dict withContext:^(NSError *errold, NSString *expId) {
-        NSLog(@"Convert sent: %@ %@", expId, errold.localizedDescription);
+    [[[ServerConnection alloc] init ] convert:dict withContext:^(NSError *errold, NSString *expId) {
+        NSLog(@"Convert sent:  %@ %@ %@", expId, errold.localizedDescription, errold);
         if(errold != nil){
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.tabBar2Controller showPopDownWithError:errold];
@@ -528,7 +528,7 @@
         
         NSDictionary *dict = nil;
         if([d[@"type"] isEqualToString:@"rawToProfile"]){
-            dict = @{@"infile":infile_final, @"outfile":[NSString stringWithFormat:@"%@.%@", filename, d[@"file_ext"]], @"params":@"", @"default_param":d[@"default_param"], @"genomeVersion":f.grVersion, @"keepSAM":@(true), @"outfile_ext":d[@"file_ext"]};
+            dict = @{@"infile":infile_final, @"outfile":[NSString stringWithFormat:@"%@.%@", filename, d[@"file_ext"]], @"params":@"", @"default_param":d[@"default_param"], @"genomeVersion":f.grVersion, @"keepSAM":@"true", @"outfile_ext":d[@"file_ext"],@"sortSamStringency":@"STRICT"};
         } else if([d[@"type"] isEqualToString:@"step"]){
             dict = @{@"infile":infile_final, @"outfile":[NSString stringWithFormat:@"%@.%@", filename, d[@"file_ext"]], @"stepsize":@"", @"outfile_ext":d[@"file_ext"]};
         } else if([d[@"type"] isEqualToString:@"smoothie"]){
@@ -562,7 +562,7 @@
         infile_final = prevD == nil ? infile_final : prevD[@"outfile"];
         NSDictionary *dict = nil;
         if([d[@"type"] isEqualToString:@"rawToProfile"]){
-            dict = @{@"infile":infile_final, @"outfile":[NSString stringWithFormat:@"%@.%@", filename, d[@"file_ext"]], @"params":d[@"default_param"], @"genomeVersion":@"", @"keepSAM":@(true), @"outfile_ext":d[@"file_ext"]};
+            dict = @{@"infile":infile_final, @"outfile":[NSString stringWithFormat:@"%@.%@", filename, d[@"file_ext"]], @"params":d[@"default_param"], @"genomeVersion":@"", @"keepSAM":@(true), @"outfile_ext":d[@"file_ext"],@"sortSamStringency":@"STRICT"};
         } else if([d[@"type"] isEqualToString:@"step"]){
             dict = @{@"infile":infile_final, @"outfile":[NSString stringWithFormat:@"%@.%@", filename, d[@"file_ext"]], @"stepsize":@"", @"outfile_ext":d[@"file_ext"]};
         } else if([d[@"type"] isEqualToString:@"smoothie"]){

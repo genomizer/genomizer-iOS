@@ -13,6 +13,7 @@
 #import "ExperimentParser.h"
 #import "Annotation.h"
 #import "DummyServer.h"
+#import "HTTP.h"
 
 
 @implementation ServerConnection
@@ -53,50 +54,50 @@
     if ([[JSONBuilder getServerURL] isEqualToString:@"dummyserver/"]) {
         completionBlock(@"1337", nil);
     } else {
-    NSMutableURLRequest *request = [JSONBuilder getLoginJSON:username withPassword:password];
-    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-    
-    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler: ^(NSURLResponse *response, NSData *POSTReply, NSError *internalError)
-     {
-         //everything in here happens when the asynchronous NSURLRequest is finished, in the same thread.
-         
-         NSMutableDictionary *message;
-         NSError *error;
-         if (POSTReply != nil) {
-             message = [NSJSONSerialization JSONObjectWithData:POSTReply options:kNilOptions error:&error];
-         }
-         if (internalError == nil) {
-
-             NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
-             NSDictionary *json = [self parseJSONToDictionary:POSTReply error:&internalError];
-             if(internalError == nil)
-             {
+        NSMutableURLRequest *request = [JSONBuilder getLoginJSON:username withPassword:password];
+//        NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+        HTTP *http = [[HTTP alloc] init];
+        [http makeRequest:request completion:^(NSData *POSTReply, NSURLResponse *response, NSError *internalError) {
+            //everything in here happens when the asynchronous NSURLRequest is finished, in the same thread.
+            
+            NSMutableDictionary *message;
+            NSError *error;
+            if (POSTReply != nil) {
+                message = [NSJSONSerialization JSONObjectWithData:POSTReply options:kNilOptions error:&error];
+            }
+            if (internalError == nil) {
                 
-                 if([json objectForKey:@"token"] != nil){
-                     token = [json objectForKey:@"token"];
-                     NSLog(@"token=%@", token);
-                 } else{
-                     error = [self generateError:@"Server sent incorrectly formatted data" withErrorDomain:@"Server Error" withUnderlyingError:nil];
-                 }
-                 
-                 if(httpResp.statusCode != 200) {
-                     NSString *errorMessage = [[self parseJSONToDictionary:POSTReply error:&internalError] objectForKey:@"message"];
-                     error = [self generateErrorObjectFromHTTPError:httpResp.statusCode errorMessage:errorMessage];
-                 }
-             }
-             else
-             {
-                 error = [self generateError:@"Server sent incorrectly formatted data" withErrorDomain:@"Server Error" withUnderlyingError:nil];
-             }
-         }
-         else if([message objectForKey:@"message"] != nil){
-             error = [self generateError:[message objectForKey:@"message"] withErrorDomain:@"Connection Error" withUnderlyingError:internalError];
-         }
-         else {
-             error = [self generateError:kConnectionErrorMsg withErrorDomain:@"Connection Error" withUnderlyingError:internalError];
-         }
-         completionBlock(token, error);
-     }];
+                NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
+                NSDictionary *json = [self parseJSONToDictionary:POSTReply error:&internalError];
+                if(internalError == nil)
+                {
+                    
+                    if([json objectForKey:@"token"] != nil){
+                        token = [json objectForKey:@"token"];
+                        NSLog(@"token=%@", token);
+                    } else{
+                        error = [self generateError:@"Server sent incorrectly formatted data" withErrorDomain:@"Server Error" withUnderlyingError:nil];
+                    }
+                    
+                    if(httpResp.statusCode != 200) {
+                        NSString *errorMessage = [[self parseJSONToDictionary:POSTReply error:&internalError] objectForKey:@"message"];
+                        error = [self generateErrorObjectFromHTTPError:httpResp.statusCode errorMessage:errorMessage];
+                    }
+                }
+                else
+                {
+                    error = [self generateError:@"Server sent incorrectly formatted data" withErrorDomain:@"Server Error" withUnderlyingError:nil];
+                }
+            }
+            else if([message objectForKey:@"message"] != nil){
+                error = [self generateError:[message objectForKey:@"message"] withErrorDomain:@"Connection Error" withUnderlyingError:internalError];
+            }
+            else {
+                error = [self generateError:kConnectionErrorMsg withErrorDomain:@"Connection Error" withUnderlyingError:internalError];
+            }
+            completionBlock(token, error);
+
+        }];
     }
 }
 
@@ -105,13 +106,17 @@
     if ([[JSONBuilder getServerURL] isEqualToString:@"dummyserver/"]) {
         
     } else {
-    NSMutableURLRequest *request = [JSONBuilder getLogoutJSON:token];
-    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-    token = nil;
-    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-        NSLog(@"Logout response");
-        completion();
-    }];
+        NSMutableURLRequest *request = [JSONBuilder getLogoutJSON:token];
+//        NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+        token = nil;
+        HTTP *http = [[HTTP alloc] init];
+        [http makeRequest:request completion:^(NSData *POSTReply, NSURLResponse *response, NSError *internalError) {
+            NSLog(@"Logout response");
+            completion();
+        }];
+//    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+//
+//    }];
     }
 }
 
@@ -134,9 +139,11 @@
     } else {
     NSMutableURLRequest *request = [JSONBuilder getSearchJSON:annotations withToken: token];
     
-    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler: ^(NSURLResponse *response, NSData *POSTReply, NSError *internalError)
-     {
+//    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+        HTTP *http = [[HTTP alloc] init];
+        [http makeRequest:request completion:^(NSData *POSTReply, NSURLResponse *response, NSError *internalError) {
+//    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler: ^(NSURLResponse *response, NSData *POSTReply, NSError *internalError)
+//     {
          //everything in here happens when the asynchronous NSURLRequest is finished, in the same thread.
          
          NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
@@ -214,11 +221,15 @@
     if ([[JSONBuilder getServerURL] isEqualToString:@"dummyserver/"]) {
         
     } else {
-    NSMutableURLRequest *request = [JSONBuilder getGenomeReleaseJSON:token];
+        NSMutableURLRequest *request = [JSONBuilder getGenomeReleaseJSON:token];
     
-    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler: ^(NSURLResponse *response, NSData *POSTReply, NSError *internalError)
-     {
+        
+        HTTP *http = [[HTTP alloc] init];
+        [http makeRequest:request completion:^(NSData *POSTReply, NSURLResponse *response, NSError *internalError) {
+//    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+//        
+//    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler: ^(NSURLResponse *response, NSData *POSTReply, NSError *internalError)
+//     {
          //everything in here happens when the asynchronous NSURLRequest is finished, in the same thread.
          
          NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
@@ -256,21 +267,28 @@
  *                         caller to decide what to do with the information.
  *@return nothing
  */
-+(void)convert:(NSDictionary*)dict withContext:(void (^)(NSError *,
+-(void)convert:(NSDictionary*)dict withContext:(void (^)(NSError *,
                                                                 NSString *)
                                                        )completionBlock
 {
     if ([[JSONBuilder getServerURL] isEqualToString:@"dummyserver/"]) {
         completionBlock(nil, @"dummy");
     } else {
-    NSMutableURLRequest *request = [JSONBuilder getProcessCommandJSON:token withDict:dict];
-    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler: ^(NSURLResponse *response, NSData *POSTReply, NSError *internalError)
-     {
+        
+        NSMutableURLRequest *request = [JSONBuilder getProcessCommandJSON:token withDict:dict];
+        HTTP *http = [[HTTP alloc] init];
+        [http makeRequest:request completion:^(NSData *POSTReply, NSURLResponse *response, NSError *internalError) {
+    
+//    [urlConnection start];
+//    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler: ^(NSURLResponse *response, NSData *POSTReply, NSError *internalError)
+//     {
          //everything in here happens when the asynchronous NSURLRequest is finished, in the same thread.
          
          NSError *error;
          NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
+         NSString *datastring = [[NSString alloc] initWithData:POSTReply encoding:NSStringEncodingConversionAllowLossy];
+         NSLog(@"Convert response: %@ %@", httpResp, datastring);
+         NSLog(@"error %@", internalError);
          if(internalError == nil)
          {
              if(httpResp.statusCode != 200)
@@ -279,7 +297,7 @@
              }
          } else
          {
-             error = [self generateError:kConnectionErrorMsg withErrorDomain:@"Connection Error" withUnderlyingError:internalError];
+             error = [ServerConnection generateError:kConnectionErrorMsg withErrorDomain:@"Connection Error" withUnderlyingError:internalError];
          }
          completionBlock(error, [dict objectForKey:@"expid"]);
      }];
@@ -300,10 +318,12 @@
     if ([[JSONBuilder getServerURL] isEqualToString:@"dummyserver/"]) {
         completionBlock([self getDummyServer].annotations, nil);
     } else {
-    NSMutableURLRequest *request = [JSONBuilder getAvailableAnnotationsJSON:token];
-    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler: ^(NSURLResponse *response, NSData *POSTReply, NSError *internalError)
-     {
+        NSMutableURLRequest *request = [JSONBuilder getAvailableAnnotationsJSON:token];
+        HTTP *http = [[HTTP alloc] init];
+        [http makeRequest:request completion:^(NSData *POSTReply, NSURLResponse *response, NSError *internalError) {
+//    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+//    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler: ^(NSURLResponse *response, NSData *POSTReply, NSError *internalError)
+//     {
          //everything in here happens when the asynchronous NSURLRequest is finished, in the same thread.
          NSLog(@"Available annotations: %@ %@", response, internalError.userInfo);
          NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
@@ -367,11 +387,12 @@
         NSMutableArray *temp = [[NSMutableArray alloc] initWithObjects:[self getDummyServer].process, nil];
         completionBlock(temp,nil);
     } else {
-    NSMutableURLRequest *request = [JSONBuilder getProcessStatusJSON:token];
-    
-    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler: ^(NSURLResponse *response, NSData *POSTReply, NSError *internalError)
-     {
+        NSMutableURLRequest *request = [JSONBuilder getProcessStatusJSON:token];
+        HTTP *http = [[HTTP alloc] init];
+        [http makeRequest:request completion:^(NSData *POSTReply, NSURLResponse *response, NSError *internalError) {
+//    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+//    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler: ^(NSURLResponse *response, NSData *POSTReply, NSError *internalError)
+//     {
          //everything in here happens when the asynchronous NSURLRequest is finished, in the same thread.
          
          NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
@@ -506,5 +527,8 @@ Creates error to a HTTP message with other than 200 as responsecode
     }
     return [NSError errorWithDomain:errorDomain code:1 userInfo:dict];
 }
+
+
+
 
 @end

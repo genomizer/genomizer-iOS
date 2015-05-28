@@ -34,6 +34,7 @@
 		76F638DB190FDD9D00F0F4BF /* ExperimentFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F638DA190FDD9D00F0F4BF /* ExperimentFile.m */; };
 		CF5EC0DF1B133E8200CD89D3 /* Process2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5EC0DE1B133E8200CD89D3 /* Process2ViewController.m */; };
 		CF5EC0E21B1345E300CD89D3 /* Process2Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5EC0E11B1345E300CD89D3 /* Process2Cell.m */; };
+		CF718CC41B173EFB000A9FCA /* HTTP.m in Sources */ = {isa = PBXBuildFile; fileRef = CF718CC31B173EFB000A9FCA /* HTTP.m */; };
 		CFE6F04C1AE1049600047985 /* testViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFE6F04B1AE1049600047985 /* testViewController.m */; };
 		D116AEE81ADE5FAE00E8E997 /* AlertWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = D116AEE71ADE5FAE00E8E997 /* AlertWindow.m */; };
 		D134590B1AE0FF6D004EDF31 /* AdvancedSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = D134590A1AE0FF6D004EDF31 /* AdvancedSearchView.m */; };
@@ -149,6 +150,8 @@
 		CF5EC0DE1B133E8200CD89D3 /* Process2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Process2ViewController.m; sourceTree = "<group>"; };
 		CF5EC0E01B1345E300CD89D3 /* Process2Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Process2Cell.h; sourceTree = "<group>"; };
 		CF5EC0E11B1345E300CD89D3 /* Process2Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Process2Cell.m; sourceTree = "<group>"; };
+		CF718CC21B173EFB000A9FCA /* HTTP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HTTP.h; path = ../HTTP.h; sourceTree = "<group>"; };
+		CF718CC31B173EFB000A9FCA /* HTTP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HTTP.m; path = ../HTTP.m; sourceTree = "<group>"; };
 		CFE6F04B1AE1049600047985 /* testViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testViewController.m; sourceTree = "<group>"; };
 		D116AEE61ADE5FAE00E8E997 /* AlertWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertWindow.h; sourceTree = "<group>"; };
 		D116AEE71ADE5FAE00E8E997 /* AlertWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertWindow.m; sourceTree = "<group>"; wrapsLines = 1; };
@@ -332,6 +335,8 @@
 				76E2DA9E190E96C90048069D /* JSONBuilder.m */,
 				6484A2F2190E8F160071BB23 /* ServerConnection.h */,
 				6484A2F3190E8F160071BB23 /* ServerConnection.m */,
+				CF718CC21B173EFB000A9FCA /* HTTP.h */,
+				CF718CC31B173EFB000A9FCA /* HTTP.m */,
 				147DD5CB1B09C23C00AD4313 /* DummyServer.h */,
 				147DD5CC1B09C23C00AD4313 /* DummyServer.m */,
 			);
@@ -685,6 +690,7 @@
 				D1F6637C1ADD5F2E002DBE03 /* FileAboutView.m in Sources */,
 				D1CB5F201AE1905E0017EE4A /* OptionsView.m in Sources */,
 				DED1228E190E966200D8E530 /* SearchResultTableViewCell.m in Sources */,
+				CF718CC41B173EFB000A9FCA /* HTTP.m in Sources */,
 				D134590B1AE0FF6D004EDF31 /* AdvancedSearchView.m in Sources */,
 				649778EF191119FB000FD14F /* MoreViewController.m in Sources */,
 				DE9A3EEF1918CAA100F7C33B /* AnnotationTableViewCell.m in Sources */,

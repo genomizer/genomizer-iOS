@@ -482,10 +482,11 @@
             }
             [dict setObject:metadata forKey:@"metadata"];
             [dict setObject:_genomeFile.text forKey:@"genomeVersion"];
-            [ServerConnection convert:dict withContext:^(NSError *e,
-                                                         NSString *s){
-                [self reportResult:e experiment:s];
-            }];
+#warning add again?
+//            [ServerConnection convert:dict withContext:^(NSError *e,
+//                                                         NSString *s){
+//                [self reportResult:e experiment:s];
+//            }];
             numberOfConvertRequestsLeftToConfirm++;
         }
     }
