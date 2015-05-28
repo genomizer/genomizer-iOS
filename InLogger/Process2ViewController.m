@@ -30,35 +30,53 @@
     tableView.delegate = self;
     tableView.dataSource = self;
 //    tableView.separatorInset = UIEdgeInsetsMake(0, 160, 0, 160);
-    tableView.separatorColor = [UIColor whiteColor];
+    tableView.separatorColor = [UIColor colorWithWhite:0.96 alpha:1.0];
     
     processTypes = @[@{@"type":@"rawToProfile",
-                       @"file_ext":@"wig",
-                       @"default_param":@"-f 9000",
+                       @"name":@"Raw to Profile",
+                       @"file_ext":@"sgr",
+                       @"infile_ext":@"fastq",
+                       @"default_param":@"-a -m 1 --best -p 10 -v 2 -q -S --phred33",
                        @"snd_types":@[@"smoothie", @"step"]},
 
                      @{@"type":@"smoothie",
-                       @"file_ext":@"smth",
+                       @"name":@"Smoothie",
+                       @"file_ext":@"sgr",
+                       @"infile_ext":@"sgr",
                        @"default_param":@"-a 'ballong'",
                        @"snd_types":@[@"step"]},
                      
                      @{@"type":@"step",
-                       @"file_ext":@"stsz",
-                       @"snd_types":@[@"rawToProfile"]},
+                       @"name":@"Step Size",
+                       @"file_ext":@"sgr",
+                       @"infile_ext":@"sgr",
+                       @"snd_types":@[@"smoothie"]},
                      
                      @{@"type":@"ratio",
-                       @"file_ext":@"stsz",
-                       @"snd_types":@[],
+                       @"name":@"Ratio",
+                       @"file_ext":@"sgr",
+                       @"infile_ext":@"sgr",
+                       @"snd_types":@[@"step", @"smoothie"],
                        @"nr_files":@(2)}];
     
-    
-    currentProcessTypes = processTypes.copy;
+    ExperimentFile *file = filesToProcess.firstObject;
+    NSArray *fileNameComps = [file.name componentsSeparatedByString:@"."];
+    NSString *extension = fileNameComps.lastObject;
+    [self updateCurrentProcessTypes:extension numberFiles:filesToProcess.count];
     
     colorArray = @[[UIColor colorWithRed:252/255.f green:115/255.f blue:65/255.f alpha:1.0],
-                   [UIColor colorWithRed:84/255.f green:221/255.f blue:215/255.f alpha:1.0],
                    [UIColor colorWithRed:195/255.f green:122/255.f blue:254/255.f alpha:1.0],
                    [UIColor colorWithRed:81/255.f green:255/255.f blue:159/255.f alpha:1.0],
+                   [UIColor colorWithRed:84/255.f green:221/255.f blue:215/255.f alpha:1.0],
+                   [UIColor colorWithRed:244/255.f green:194/255.f blue:10/255.f alpha:1.0],
+                   [UIColor colorWithRed:220/255.f green:118/255.f blue:223/255.f alpha:1.0],
+                   [UIColor colorWithRed:196/255.f green:29/255.f blue:130/255.f alpha:1.0],
+                   [UIColor colorWithRed:160/255.f green:81/255.f blue:75/255.f alpha:1.0],
+                   [UIColor colorWithRed:110/255.f green:110/255.f blue:110/255.f alpha:1.0],
                    [UIColor greenColor], [UIColor blueColor], [UIColor yellowColor]];
+    
+    UITapGestureRecognizer *tapper = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
+    [self.view addGestureRecognizer:tapper];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -66,6 +84,12 @@
     // Dispose of any resources that can be recreated.
 }
 
+//Dismisses keyboard on tap outside of it.
+-(void)tapped:(UITapGestureRecognizer *)tapper{
+    if(firstresponder){
+        [firstresponder resignFirstResponder];
+    }
+}
 
 -(IBAction)sendProcessRequest:(id)sender{
     if(filesToProcess.count == 0){
@@ -125,7 +149,12 @@
 -(IBAction)clearTapped:(id)sender{
     if([self numberOfSectionsInTableView:tableView] > 1){
         [firstresponder resignFirstResponder];
-        currentProcessTypes = processTypes.copy;
+        
+        ExperimentFile *file = filesToProcess.firstObject;
+        NSArray *fileNameComps = [file.name componentsSeparatedByString:@"."];
+        NSString *extension = fileNameComps.lastObject;
+        [self updateCurrentProcessTypes:extension numberFiles:filesToProcess.count];
+        
         NSInteger sections = [self numberOfSectionsInTableView:tableView];
         [contentArray removeAllObjects];
         [tableView deleteSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, sections)] withRowAnimation:UITableViewRowAnimationTop];
@@ -165,20 +194,68 @@
         cell2.outfile_ext                   = file[@"outfile_ext"];
         cell2.delegate = self;
         
-    } else if(indexPath.section == 0){//first cell
+    }
+//    else if(indexPath.section == 0){//first cell
+//        NSString *type = contentArray[indexPath.section][@"type"];
+//        
+//        cell = [_tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"processCell%@", type]];
+//        Process2Cell *cell2 = (Process2Cell *)cell;
+//        NSDictionary *file = contentArray[indexPath.section][@"files"][indexPath.row];
+//        UIColor *color = colorArray[indexPath.row];
+//        
+//        cell2.outFileTextField.textColor    = color;
+//        cell2.outFileTextField.text         = file[@"infile"];
+//        cell2.outFileTextField.enabled      = false;
+//        cell2.outFilePostTextField.enabled  = false;
+//        cell2.paramTextField.placeholder    = file[@"default_param"];
+//        cell2.paramTextField.text           = file[@"params"];
+//        
+//        //Step
+//        cell2.stepSizeTextField.text        = file[@"stepsize"];
+//        
+//        //Smooth
+//        cell2.minSmoothTextField.text       = file[@"minSmooth"];
+//        cell2.windowSizeTextField.text      = file[@"windowSize"];
+//        cell2.meanOrMedianTextField.text    = [file[@"meanOrMedian"] capitalizedString];
+//        
+//        //Ratio
+//        cell2.readsCutOffTextField.text     = file[@"readsCutoff"];
+//        cell2.chromosomeTextField.text      = file[@"chromosome"];
+//        cell2.outFilePostTextField.text     = file[@"infile_post"];
+//        cell2.switchButton.hidden           = false;
+//        if([type isEqualToString:@"ratio"]){
+//            cell2.outFilePostTextField.textColor = colorArray[1];
+//        }
+//        
+//        cell2.delegate = self;
+//        
+//    }
+    else{ //middle cells
         NSString *type = contentArray[indexPath.section][@"type"];
-        
         cell = [_tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"processCell%@", type]];
         Process2Cell *cell2 = (Process2Cell *)cell;
         NSDictionary *file = contentArray[indexPath.section][@"files"][indexPath.row];
+        NSDictionary *prevFile = nil;
+        if(indexPath.section > 0){
+            prevFile = contentArray[indexPath.section-1][@"files"][indexPath.row];
+        }
         UIColor *color = colorArray[indexPath.row];
         
         cell2.outFileTextField.textColor    = color;
-        cell2.outFileTextField.text         = file[@"infile"];
-        cell2.outFileTextField.enabled      = false;
+        
+        cell2.outFileTextField.enabled      = indexPath.section == 0 ? false : true;
+        cell2.outFilePostTextField.enabled  = indexPath.section == 0 ? false : true;
         cell2.paramTextField.placeholder    = file[@"default_param"];
         cell2.paramTextField.text           = file[@"params"];
         
+        if(prevFile){
+            cell2.outFileTextField.text         = prevFile[@"outfile"];
+            cell2.outfile_ext                   = prevFile[@"outfile_ext"];
+        } else{
+            cell2.outFileTextField.text         = file[@"infile"];
+            cell2.outfile_ext                   = nil;
+        }
+
         //Step
         cell2.stepSizeTextField.text        = file[@"stepsize"];
         
@@ -191,34 +268,14 @@
         cell2.readsCutOffTextField.text     = file[@"readsCutoff"];
         cell2.chromosomeTextField.text      = file[@"chromosome"];
         cell2.outFilePostTextField.text     = file[@"infile_post"];
-        
-        cell2.delegate = self;
-        
-    }else{ //middle cells
-        NSString *type = contentArray[indexPath.section][@"type"];
-        cell = [_tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"processCell%@", type]];
-        Process2Cell *cell2 = (Process2Cell *)cell;
-        NSDictionary *file = contentArray[indexPath.section][@"files"][indexPath.row];
-        NSDictionary *prevFile = contentArray[indexPath.section-1][@"files"][indexPath.row];
-        UIColor *color = colorArray[indexPath.row];
-        
-        cell2.outFileTextField.textColor    = color;
-        cell2.outFileTextField.text         = prevFile[@"outfile"];
-        cell2.outFileTextField.enabled      = indexPath.section == 0 ? false : true;
-        cell2.paramTextField.placeholder    = file[@"default_param"];
-        cell2.paramTextField.text           = file[@"params"];
-        cell2.outfile_ext                   = prevFile[@"outfile_ext"];
-        cell2.stepSizeTextField.text        = file[@"stepsize"];
-        cell2.minSmoothTextField.text       = file[@"minSmooth"];
-        cell2.windowSizeTextField.text      = file[@"windowSize"];
-        cell2.meanOrMedianTextField.text    = [file[@"meanOrMedian"] capitalizedString];
-        
-        cell2.readsCutOffTextField.text     = file[@"readsCutoff"];
-        cell2.chromosomeTextField.text      = file[@"chromosome"];
-        cell2.outFilePostTextField.text     = file[@"infile_post"];
+        cell2.switchButton.hidden           = indexPath.section == 0 ? false : true;
+        if([type isEqualToString:@"ratio"]){
+            cell2.outFilePostTextField.textColor = colorArray[1];
+        }
         
         cell2.delegate = self;
     }
+    cell.separatorInset = UIEdgeInsetsMake(0, 17, 0, 0);
     return cell;
 }
 
@@ -235,7 +292,7 @@
     } else{
         NSDictionary *d = contentArray[indexPath.section];
         if([d[@"type"] isEqualToString:@"ratio"]){
-            return 90;
+            return 102;
         }
         return 60;
     }
@@ -291,11 +348,20 @@
 
 
 -(void)processCell2:(Process2Cell *)cell didChangeValue:(id)val forKey:(NSString *)key{
-    firstresponder = nil;
-    NSIndexPath *cellIndex = [tableView indexPathForCell:cell];
-    [self changeValue:val forKey:key atSection:cellIndex];
+    [self processCell2:cell didChangeValue:val forKey:key forceReload:false];
 }
+-(void)processCell2:(Process2Cell *)cell didChangeValue:(id)val forKey:(NSString *)key forceReload:(BOOL)force{
 
+    NSIndexPath *cellIndex = [tableView indexPathForCell:cell];
+    if([key isEqualToString:@"infile_post"]){
+        [self changeValue:val forKey:@"outfile" atSection:[NSIndexPath indexPathForRow:cellIndex.row+1 inSection:cellIndex.section-1]];
+    }
+    [self changeValue:val forKey:key atSection:cellIndex];
+
+    if(force){
+        [tableView reloadRowsAtIndexPaths:@[cellIndex] withRowAnimation:UITableViewRowAnimationFade];
+    }
+}
 -(void)changeValue:(id)val forKey:(NSString *)key atSection:(NSIndexPath *)cellIndex{
 
     
@@ -315,64 +381,62 @@
     [contentArray removeObjectAtIndex:cellIndex.section];
     [contentArray insertObject:cellDict.copy atIndex:cellIndex.section];
 }
-
 -(void)processCell2:(Process2Cell *)cell didChangeOutFileName:(NSString *)outfileName{
-    firstresponder = nil;
+
     NSIndexPath *cellIndex = [tableView indexPathForCell:cell];
     if(cellIndex == nil){
         return;
     }
-    NSMutableDictionary *cellDict = [(NSDictionary *)contentArray[cellIndex.section-1] mutableCopy];
-    
-    NSMutableArray *a = [cellDict[@"files"] mutableCopy];
-    NSMutableDictionary *d = [(NSDictionary *)a[cellIndex.row] mutableCopy];
-    
-    [d setObject:outfileName forKey:@"outfile"];
-    
-    [a removeObjectAtIndex:cellIndex.row];
-    [a insertObject:d.copy atIndex:cellIndex.row];
-    
-    [cellDict setObject:a forKey:@"files"];
-    
-    [contentArray removeObjectAtIndex:cellIndex.section-1];
-    [contentArray insertObject:cellDict.copy atIndex:cellIndex.section-1];
+    NSIndexPath *curr = [NSIndexPath indexPathForRow:cellIndex.row inSection:cellIndex.section-1];
+    [self changeValue:outfileName forKey:@"outfile" atSection:curr];
     
     if(cellIndex.section < [self numberOfSectionsInTableView:tableView]-1){
-        NSMutableDictionary *cellDict = [(NSDictionary *)contentArray[cellIndex.section] mutableCopy];
+        [self changeValue:outfileName forKey:@"infile" atSection:cellIndex];
         
-        NSMutableArray *a = [cellDict[@"files"] mutableCopy];
-        NSMutableDictionary *d = [(NSDictionary *)a[cellIndex.row] mutableCopy];
-        
-        [d setObject:outfileName forKey:@"infile"];
-        
-        [a removeObjectAtIndex:cellIndex.row];
-        [a insertObject:d.copy atIndex:cellIndex.row];
-        
-        [cellDict setObject:a forKey:@"files"];
-        
-        [contentArray removeObjectAtIndex:cellIndex.section];
-        [contentArray insertObject:cellDict.copy atIndex:cellIndex.section];
-        [tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:cellIndex.row inSection:cellIndex.section+1]] withRowAnimation:UITableViewRowAnimationFade];
     }
-
 }
 
--(void)processCell2DidBeginEdit:(UITextField *)textField{
+-(void)processCell2:(Process2Cell *)cell didBeginEdit:(UITextField *)textField{
+    NSIndexPath *indexPath = [tableView indexPathForCell:cell];
+    CGRect cellFrame = [tableView rectForRowAtIndexPath:indexPath];
+    CGFloat diff = self.view.frame.size.height - 250 - (cellFrame.origin.y + cellFrame.size.height - tableView.contentOffset.y);
+    if(diff < 0){
+        [UIView animateWithDuration:0.2 animations:^{
+            tableView.transform = CGAffineTransformMakeTranslation(0, diff);
+        }];
+    }
     firstresponder = textField;
+}
+-(void)processCell2:(Process2Cell *)cell didEndEdit:(UITextField *)textField{
+    [UIView animateWithDuration:0.2 animations:^{
+        tableView.transform = CGAffineTransformMakeTranslation(0, 0);
+    }];
+    firstresponder = nil;
 }
 -(void)showNewProcessPane {
     [firstresponder resignFirstResponder];
     NSMutableArray *a = [[NSMutableArray alloc] initWithCapacity:currentProcessTypes.count];
+    NSString *extension = nil;
+    if(contentArray.count == 0){
+        ExperimentFile *firstFile = filesToProcess.firstObject;
+        NSArray *fileNameComps = [firstFile.name componentsSeparatedByString:@"."];
+        extension = fileNameComps.lastObject;
+    }
+    
     for(NSDictionary *d in currentProcessTypes){
-        NSString *typename = d[@"type"];
-        if(d[@"nr_files"]){
-            NSNumber *nr_files = d[@"nr_files"];
-            if(nr_files.intValue == filesToProcess.count){
-                [a addObject:typename.capitalizedString];
-            }
-        } else{
-            [a addObject:typename.capitalizedString];
-        }
+        NSString *typename = d[@"name"];
+        
+//        if(extension != nil && ![d[@"infile_ext"] isEqualToString:extension]){
+//            continue;
+//        }
+//        if(d[@"nr_files"]){
+//            NSNumber *nr_files = d[@"nr_files"];
+//            if(nr_files.intValue == filesToProcess.count){
+//                [a addObject:typename];
+//            }
+//        } else{
+            [a addObject:typename];
+//        }
         
     }
     
@@ -382,14 +446,14 @@
 
 -(void)optionsView:(OptionsView *)ov selectedIndex:(NSUInteger)index{
     NSArray *prevFiles = nil;
-
+    NSArray *convertedFiles = nil;
     //Gets the previous out file extension
     if([self numberOfSectionsInTableView:tableView] > 0){
         prevFiles = contentArray[[self numberOfSectionsInTableView:tableView]-2][@"files"];
+        convertedFiles = [Process2ViewController convertExperimentFilesToAPItype:currentProcessTypes[index] prevFiles:prevFiles];
+    } else{
+        convertedFiles = [Process2ViewController convertExperimentFilesToAPI:filesToProcess type:currentProcessTypes[index]];
     }
-    
-    //Converts the files to the new type
-    NSArray *convertedFiles = [Process2ViewController convertExperimentFilesToAPI:filesToProcess type:currentProcessTypes[index] prevFiles:prevFiles];
     NSDictionary *dict = @{@"type":currentProcessTypes[index][@"type"], @"files":convertedFiles.copy};
     int lastNrSections = [self numberOfSectionsInTableView:tableView];;
     [contentArray addObject:dict];
@@ -402,15 +466,32 @@
     }
     [tableView endUpdates];
     //Updates the currentProcessTypes to match the selected types snd_types
+    NSString *outExt = currentProcessTypes[index][@"file_ext"];
+    NSInteger nrOfFiles = [(NSArray *)contentArray[currentNrSections-2][@"files"] count];
+
+    [self updateCurrentProcessTypes:outExt numberFiles:nrOfFiles];
+}
+
+-(void)updateCurrentProcessTypes:(NSString *)inExt numberFiles:(NSInteger)nrOfFiles{
+
     NSMutableArray *temp = [[NSMutableArray alloc] init];
-    for(NSString *s in currentProcessTypes[index][@"snd_types"]){
-        NSDictionary *d = [self getTypeWithName:s];
-        if(d != nil){
+    
+    for(NSDictionary *d in processTypes){
+        if([d[@"infile_ext"] isEqualToString:inExt]){
+            if(d[@"nr_files"]){
+                NSNumber *inNrFiles = d[@"nr_files"];
+                if(inNrFiles.integerValue != nrOfFiles){
+                    continue;
+                }
+            }
             [temp addObject:d];
         }
+        //        NSDictionary *d = [self getTypeWithName:s];
+        //        if(d != nil){
+        //
+        //        }
     }
     currentProcessTypes = temp.copy;
-    
 }
 
 -(NSDictionary *)getTypeWithName:(NSString *)name{
@@ -424,8 +505,7 @@
     return type;
 }
 
-
-+(NSArray *)convertExperimentFilesToAPI:(NSArray *)expFiles type:(NSDictionary *)d prevFiles:(NSArray *)prevFiles{
++(NSArray *)convertExperimentFilesToAPI:(NSArray *)expFiles type:(NSDictionary *)d{
     
     if([d[@"type"] isEqualToString:@"ratio"]){
         ExperimentFile *pre = expFiles[0];
@@ -440,13 +520,12 @@
     NSMutableArray *a = [[NSMutableArray alloc] initWithCapacity:expFiles.count];
     for(int i = 0; i < expFiles.count; i++){
         ExperimentFile *f = expFiles[i];
-        NSDictionary *prevD = prevFiles[i];
-        
+
         NSMutableArray *fileComps = [f.name componentsSeparatedByString:@"."].mutableCopy;
         [fileComps removeLastObject];
         NSString *filename = [fileComps componentsJoinedByString:@"."];
-        NSString *infile_final = prevD == nil ? f.name : [NSString stringWithFormat:@"%@.%@", filename, prevD[@"outfile_ext"]];
-        infile_final = prevD == nil ? infile_final : prevD[@"outfile"];
+        NSString *infile_final = f.name;
+        
         NSDictionary *dict = nil;
         if([d[@"type"] isEqualToString:@"rawToProfile"]){
             dict = @{@"infile":infile_final, @"outfile":[NSString stringWithFormat:@"%@.%@", filename, d[@"file_ext"]], @"params":@"", @"default_param":d[@"default_param"], @"genomeVersion":f.grVersion, @"keepSAM":@(true), @"outfile_ext":d[@"file_ext"]};
@@ -455,7 +534,39 @@
         } else if([d[@"type"] isEqualToString:@"smoothie"]){
             dict = @{@"infile":infile_final, @"outfile":[NSString stringWithFormat:@"%@.%@", filename, d[@"file_ext"]], @"windowSize":@"", @"minSmooth":@"", @"outfile_ext":d[@"file_ext"], @"meanOrMedian":@"Mean"};
         } else if([d[@"type"] isEqualToString:@"ratio"]){
- 
+            
+        }
+        [a addObject:dict];
+    }
+    return a.copy;
+}
++(NSArray *)convertExperimentFilesToAPItype:(NSDictionary *)d prevFiles:(NSArray *)prevFiles{
+    if([d[@"type"] isEqualToString:@"ratio"]){
+        NSDictionary *pre = prevFiles[0];
+        NSDictionary *post = prevFiles[1];
+        NSMutableArray *fileComps = [pre[@"outfile"] componentsSeparatedByString:@"."].mutableCopy;
+        [fileComps removeLastObject];
+        NSString *filename = [fileComps componentsJoinedByString:@"."];
+        
+        NSDictionary *dict = @{@"infile":pre[@"outfile"],@"infile_post":post[@"outfile"], @"outfile":[NSString stringWithFormat:@"%@.%@", filename, d[@"file_ext"]], @"mean":@"single", @"readsCutoff":@"", @"outfile_ext":d[@"file_ext"], @"chromosome":@""};
+        return @[dict];
+    }
+    NSMutableArray *a = [[NSMutableArray alloc] initWithCapacity:prevFiles.count];
+    for(int i = 0; i < prevFiles.count; i++){
+        NSDictionary *prevD = prevFiles[i];
+        NSString *fname = prevD[@"outfile"];
+        NSMutableArray *fileComps = [fname componentsSeparatedByString:@"."].mutableCopy;
+        [fileComps removeLastObject];
+        NSString *filename = [fileComps componentsJoinedByString:@"."];
+        NSString *infile_final = prevD == nil ? fname : [NSString stringWithFormat:@"%@.%@", filename, prevD[@"outfile_ext"]];
+        infile_final = prevD == nil ? infile_final : prevD[@"outfile"];
+        NSDictionary *dict = nil;
+        if([d[@"type"] isEqualToString:@"rawToProfile"]){
+            dict = @{@"infile":infile_final, @"outfile":[NSString stringWithFormat:@"%@.%@", filename, d[@"file_ext"]], @"params":d[@"default_param"], @"genomeVersion":@"", @"keepSAM":@(true), @"outfile_ext":d[@"file_ext"]};
+        } else if([d[@"type"] isEqualToString:@"step"]){
+            dict = @{@"infile":infile_final, @"outfile":[NSString stringWithFormat:@"%@.%@", filename, d[@"file_ext"]], @"stepsize":@"", @"outfile_ext":d[@"file_ext"]};
+        } else if([d[@"type"] isEqualToString:@"smoothie"]){
+            dict = @{@"infile":infile_final, @"outfile":[NSString stringWithFormat:@"%@.%@", filename, d[@"file_ext"]], @"windowSize":@"", @"minSmooth":@"", @"outfile_ext":d[@"file_ext"], @"meanOrMedian":@"Mean"};
         }
         [a addObject:dict];
     }

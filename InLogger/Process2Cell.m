@@ -9,7 +9,7 @@
 #import "Process2Cell.h"
 
 @implementation Process2Cell
-@synthesize paramTextField, outFileTextField, outfile_ext, windowSizeTextField, minSmoothTextField, stepSizeTextField, meanOrMedianTextField, readsCutOffTextField, chromosomeTextField;
+@synthesize paramTextField, outFileTextField, outfile_ext, windowSizeTextField, minSmoothTextField, stepSizeTextField, meanOrMedianTextField, readsCutOffTextField, chromosomeTextField, outFilePostTextField, switchButton;
 @synthesize delegate = _delegate;
 
 - (void)awakeFromNib {
@@ -22,6 +22,7 @@
     chromosomeTextField.delegate    = self;
     readsCutOffTextField.delegate   = self;
     meanOrMedianTextField.delegate  = self;
+    outFilePostTextField.delegate   = self;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -31,11 +32,11 @@
 }
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
-    if([textField isEqual:outFileTextField]){
+    if([textField isEqual:outFileTextField] || [textField isEqual:outFilePostTextField]){
         textField.text = [textField.text stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@".%@", outfile_ext] withString:@""];
     }
-    if([self.delegate respondsToSelector:@selector(processCell2DidBeginEdit:)]){
-        [self.delegate processCell2DidBeginEdit:textField];
+    if([self.delegate respondsToSelector:@selector(processCell2:didBeginEdit:)]){
+        [self.delegate processCell2:self didBeginEdit:textField];
     }
 }
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
@@ -69,11 +70,28 @@
         key = @"readsCutoff";
     } else if([textField isEqual:chromosomeTextField]){
         key = @"chromosome";
+    } else if([textField isEqual:outFilePostTextField]){
+        key = @"infile_post";
+        textField.text = [NSString stringWithFormat:@"%@.%@",textField.text, outfile_ext];
+        value = textField.text;
     }
     
     if([self.delegate respondsToSelector:@selector(processCell2:didChangeValue:forKey:)]){
         [self.delegate processCell2:self didChangeValue:value forKey:key];
     }
+    if([self.delegate respondsToSelector:@selector(processCell2:didEndEdit:)]){
+        [self.delegate processCell2:self didEndEdit:textField];
+    }
 
+}
+
+-(IBAction)ratioSwitchPrePost:(id)sender{
+    NSString *newPost = outFileTextField.text;
+    NSString *newPre = outFilePostTextField.text;
+    if([self.delegate respondsToSelector:@selector(processCell2:didChangeValue:forKey:forceReload:)]){
+        [self.delegate processCell2:self didChangeOutFileName:newPre];
+        [self.delegate processCell2:self didChangeValue:newPost forKey:@"infile_post" forceReload:true];
+        
+    }
 }
 @end

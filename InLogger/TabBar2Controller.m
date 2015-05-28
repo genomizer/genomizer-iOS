@@ -38,17 +38,17 @@
     UIStoryboard *story = self.storyboard;
     
     NavController *nvc1 = [story instantiateViewControllerWithIdentifier:@"search"];
-    NavController *nvc2 = [story instantiateViewControllerWithIdentifier:@"selected"];
+//    NavController *nvc2 = [story instantiateViewControllerWithIdentifier:@"selected"];
     NavController *nvc3 = [story instantiateViewControllerWithIdentifier:@"process"];
     NavController *nvc4 = [story instantiateViewControllerWithIdentifier:@"more"];
     
     
     nvc1.tabBar2Controller = self;
-    nvc2.tabBar2Controller = self;
+//    nvc2.tabBar2Controller = self;
     nvc3.tabBar2Controller = self;
     nvc4.tabBar2Controller = self;
     
-    childControllers = @[nvc1, nvc2, nvc3, nvc4];
+    childControllers = @[nvc1, nvc3, nvc4];
     
     [self.view insertSubview:nvc1.view belowSubview:self.tabBar];
     self.selectedViewController = nvc1;

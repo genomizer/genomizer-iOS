@@ -159,7 +159,16 @@
     
     NSIndexPath *indexPath = [_tableView indexPathForCell:cell];
     ExperimentFile *file = [[_experiment.files getFiles: indexPath.section] objectAtIndex:indexPath.row];
-    
+    NSArray *fileComps = [file.name componentsSeparatedByString:@"."];
+    NSString *extenstion = fileComps.lastObject;
+    for(ExperimentFile *f in filesToProcessing){
+        NSArray *fileNameComps = [f.name componentsSeparatedByString:@"."];
+        NSString *ext = fileNameComps.lastObject;
+        if(![ext isEqualToString:extenstion]){
+            [self.tabBar2Controller showPopDownWithTitle:@"Multiple file types" andMessage:@"Multiple file types can't be sent to process at the same time." type:@"error"];
+            return;
+        }
+    }
     [filesToProcessing addObject:file];
     NSLog(@"filesToProcess: %@", filesToProcessing);
     [processButton setTitle:[NSString stringWithFormat:@"Process (%d)", filesToProcessing.count] forState:UIControlStateNormal];
