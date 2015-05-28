@@ -55,7 +55,7 @@
                      @{@"type":@"ratio",
                        @"name":@"Ratio",
                        @"file_ext":@"sgr",
-                       @"infile_ext":@"fastq",
+                       @"infile_ext":@"sgr",
                        @"snd_types":@[@"step", @"smoothie"],
                        @"nr_files":@(2)}];
     
