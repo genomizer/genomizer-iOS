@@ -69,7 +69,7 @@
     } else if([textField isEqual:readsCutOffTextField]){
         key = @"readsCutoff";
     } else if([textField isEqual:chromosomeTextField]){
-        key = @"chromosome";
+        key = @"chromosomes";
     } else if([textField isEqual:filePostTextField]){
         key = @"infile_post";
         textField.text = [NSString stringWithFormat:@"%@.%@",textField.text, outfile_ext];

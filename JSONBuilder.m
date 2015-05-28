@@ -120,7 +120,7 @@ static NSString *SERVER_URL = nil;//Don't change!!
     NSString *conversionString = @"process/processCommands";
     NSMutableURLRequest *request = [self getRequest:@"PUT" withToken:token];
     [request setHTTPBody:postData];
-    [request setURL:[NSURL URLWithString:[@"https://severus.cs.umu.se:10000/" stringByAppendingString:conversionString]]];
+    [request setURL:[NSURL URLWithString:[[self getServerURL] stringByAppendingString:conversionString]]];
     return request;
 }
 

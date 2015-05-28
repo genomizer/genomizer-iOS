@@ -81,7 +81,7 @@
         if([file valueForKey:@"grVersion"] != nil){
             expFile.grVersion = [file valueForKey:@"grVersion"];
         }else{
-            expFile.grVersion = @"Not set!";
+            expFile.grVersion = @"nothing";
         }
         if([file valueForKey:@"author"] != nil){
             expFile.author = [file valueForKey:@"author"];
