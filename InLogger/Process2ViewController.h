@@ -2,7 +2,7 @@
 //  Process2ViewController.h
 //  Genomizer
 //
-//  Created by Erik Berggren on 25/05/15.
+//  Created by Pål Forsberg on 25/05/15.
 //  Copyright (c) 2015 Mattias. All rights reserved.
 //
 

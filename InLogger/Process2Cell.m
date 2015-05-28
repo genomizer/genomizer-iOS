@@ -9,20 +9,20 @@
 #import "Process2Cell.h"
 
 @implementation Process2Cell
-@synthesize paramTextField, outFileTextField, outfile_ext, windowSizeTextField, minSmoothTextField, stepSizeTextField, meanOrMedianTextField, readsCutOffTextField, chromosomeTextField, outFilePostTextField, switchButton;
+@synthesize paramTextField, fileTextField, outfile_ext, windowSizeTextField, minSmoothTextField, stepSizeTextField, meanOrMedianTextField, readsCutOffTextField, chromosomeTextField, filePostTextField, switchButton;
 @synthesize delegate = _delegate;
 
 - (void)awakeFromNib {
     // Initialization code
     paramTextField.delegate         = self;
-    outFileTextField.delegate       = self;
+    fileTextField.delegate          = self;
     windowSizeTextField.delegate    = self;
     minSmoothTextField.delegate     = self;
     stepSizeTextField.delegate      = self;
     chromosomeTextField.delegate    = self;
     readsCutOffTextField.delegate   = self;
     meanOrMedianTextField.delegate  = self;
-    outFilePostTextField.delegate   = self;
+    filePostTextField.delegate      = self;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -32,7 +32,7 @@
 }
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
-    if([textField isEqual:outFileTextField] || [textField isEqual:outFilePostTextField]){
+    if([textField isEqual:fileTextField] || [textField isEqual:filePostTextField]){
         textField.text = [textField.text stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@".%@", outfile_ext] withString:@""];
     }
     if([self.delegate respondsToSelector:@selector(processCell2:didBeginEdit:)]){
@@ -46,7 +46,7 @@
 
 -(void)textFieldDidEndEditing:(UITextField *)textField{
     NSLog(@"New params: %@", textField.text);
-    if([textField isEqual:outFileTextField]){
+    if([textField isEqual:fileTextField]){
         textField.text = [NSString stringWithFormat:@"%@.%@",textField.text, outfile_ext];
         if([self.delegate respondsToSelector:@selector(processCell2:didChangeOutFileName:)]){
             [self.delegate processCell2:self didChangeOutFileName:textField.text];
@@ -70,7 +70,7 @@
         key = @"readsCutoff";
     } else if([textField isEqual:chromosomeTextField]){
         key = @"chromosome";
-    } else if([textField isEqual:outFilePostTextField]){
+    } else if([textField isEqual:filePostTextField]){
         key = @"infile_post";
         textField.text = [NSString stringWithFormat:@"%@.%@",textField.text, outfile_ext];
         value = textField.text;
@@ -86,8 +86,8 @@
 }
 
 -(IBAction)ratioSwitchPrePost:(id)sender{
-    NSString *newPost = outFileTextField.text;
-    NSString *newPre = outFilePostTextField.text;
+    NSString *newPost = fileTextField.text;
+    NSString *newPre = filePostTextField.text;
     if([self.delegate respondsToSelector:@selector(processCell2:didChangeValue:forKey:forceReload:)]){
         [self.delegate processCell2:self didChangeOutFileName:newPre];
         [self.delegate processCell2:self didChangeValue:newPost forKey:@"infile_post" forceReload:true];

@@ -2,7 +2,7 @@
 //  HTTP.m
 //  Genomizer
 //
-//  Created by Erik Berggren on 28/05/15.
+//  Created by Pål Forsberg on 28/05/15.
 //  Copyright (c) 2015 Mattias. All rights reserved.
 //
 
@@ -18,11 +18,15 @@
 }
 
 
+//Makes request and calls the completion block when finished.
+//Should be able to handle HTTP as well ass HTTPS
 -(void)makeRequest:(NSURLRequest *)_request completion:(void(^)(NSData *POSTReply, NSURLResponse *response, NSError *error))comp{
     completion = comp;
     request = _request;
     [NSURLConnection connectionWithRequest:_request delegate:self];
 }
+
+#pragma mark NSURLConnectionDelegate
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)_response{
     NSLog(@"response: %@", response);
     response = _response;

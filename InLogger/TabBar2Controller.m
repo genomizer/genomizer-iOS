@@ -95,7 +95,12 @@
     
 }
 
-//Pål svamlar
+/**
+ * Panning between different View Controllers
+ *
+ * @param expFiles - ExperimentFiles to be converted.
+ * @param d - type to convert to.
+ */
 -(void)pan:(UIPanGestureRecognizer *)_panner{
     CGPoint translation = [_panner translationInView:_panner.view];
      NSUInteger currentIndex = [childControllers indexOfObject:self.selectedViewController];

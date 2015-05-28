@@ -2,7 +2,7 @@
 //  Process2ViewController.m
 //  Genomizer
 //
-//  Created by Erik Berggren on 25/05/15.
+//  Created by Pål Forsberg on 25/05/15.
 //  Copyright (c) 2015 Mattias. All rights reserved.
 //
 
@@ -81,7 +81,7 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
 }
 
 //Dismisses keyboard on tap outside of it.
@@ -91,6 +91,7 @@
     }
 }
 
+//Removes all extra value-key and sends the request to the server.
 -(IBAction)sendProcessRequest:(id)sender{
     if(filesToProcess.count == 0){
         [self.tabBar2Controller showPopDownWithTitle:@"No files selected" andMessage:@"Please back one step and add some files." type:@"error"];
@@ -143,9 +144,14 @@
     NSLog(@"JSON:\n%@", d1);
 
 }
+
+//Gets called when the Add Process button is tapped
+//Shows a menu with available processes
 -(IBAction)addProcessTapped:(id)sender{
     [self showNewProcessPane];
 }
+//Gets called when the Clear button is tapped
+//Removes all added processes.
 -(IBAction)clearTapped:(id)sender{
     if([self numberOfSectionsInTableView:tableView] > 1){
         [firstresponder resignFirstResponder];
@@ -189,48 +195,12 @@
         NSDictionary *file = contentArray[indexPath.section-1][@"files"][indexPath.row];
         UIColor *color = colorArray[indexPath.row];
         
-        cell2.outFileTextField.textColor    = color;
-        cell2.outFileTextField.text         = file[@"outfile"];
+        cell2.fileTextField.textColor    = color;
+        cell2.fileTextField.text         = file[@"outfile"];
         cell2.outfile_ext                   = file[@"outfile_ext"];
         cell2.delegate = self;
         
-    }
-//    else if(indexPath.section == 0){//first cell
-//        NSString *type = contentArray[indexPath.section][@"type"];
-//        
-//        cell = [_tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"processCell%@", type]];
-//        Process2Cell *cell2 = (Process2Cell *)cell;
-//        NSDictionary *file = contentArray[indexPath.section][@"files"][indexPath.row];
-//        UIColor *color = colorArray[indexPath.row];
-//        
-//        cell2.outFileTextField.textColor    = color;
-//        cell2.outFileTextField.text         = file[@"infile"];
-//        cell2.outFileTextField.enabled      = false;
-//        cell2.outFilePostTextField.enabled  = false;
-//        cell2.paramTextField.placeholder    = file[@"default_param"];
-//        cell2.paramTextField.text           = file[@"params"];
-//        
-//        //Step
-//        cell2.stepSizeTextField.text        = file[@"stepsize"];
-//        
-//        //Smooth
-//        cell2.minSmoothTextField.text       = file[@"minSmooth"];
-//        cell2.windowSizeTextField.text      = file[@"windowSize"];
-//        cell2.meanOrMedianTextField.text    = [file[@"meanOrMedian"] capitalizedString];
-//        
-//        //Ratio
-//        cell2.readsCutOffTextField.text     = file[@"readsCutoff"];
-//        cell2.chromosomeTextField.text      = file[@"chromosome"];
-//        cell2.outFilePostTextField.text     = file[@"infile_post"];
-//        cell2.switchButton.hidden           = false;
-//        if([type isEqualToString:@"ratio"]){
-//            cell2.outFilePostTextField.textColor = colorArray[1];
-//        }
-//        
-//        cell2.delegate = self;
-//        
-//    }
-    else{ //middle cells
+    } else{ //first and middle cells
         NSString *type = contentArray[indexPath.section][@"type"];
         cell = [_tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"processCell%@", type]];
         Process2Cell *cell2 = (Process2Cell *)cell;
@@ -241,18 +211,18 @@
         }
         UIColor *color = colorArray[indexPath.row];
         
-        cell2.outFileTextField.textColor    = color;
+        cell2.fileTextField.textColor    = color;
         
-        cell2.outFileTextField.enabled      = indexPath.section == 0 ? false : true;
-        cell2.outFilePostTextField.enabled  = indexPath.section == 0 ? false : true;
+        cell2.fileTextField.enabled      = indexPath.section == 0 ? false : true;
+        cell2.filePostTextField.enabled  = indexPath.section == 0 ? false : true;
         cell2.paramTextField.placeholder    = file[@"default_param"];
         cell2.paramTextField.text           = file[@"params"];
         
         if(prevFile){
-            cell2.outFileTextField.text         = prevFile[@"outfile"];
+            cell2.fileTextField.text         = prevFile[@"outfile"];
             cell2.outfile_ext                   = prevFile[@"outfile_ext"];
         } else{
-            cell2.outFileTextField.text         = file[@"infile"];
+            cell2.fileTextField.text         = file[@"infile"];
             cell2.outfile_ext                   = nil;
         }
 
@@ -267,10 +237,10 @@
         //Ratio
         cell2.readsCutOffTextField.text     = file[@"readsCutoff"];
         cell2.chromosomeTextField.text      = file[@"chromosome"];
-        cell2.outFilePostTextField.text     = file[@"infile_post"];
+        cell2.filePostTextField.text     = file[@"infile_post"];
         cell2.switchButton.hidden           = indexPath.section == 0 ? false : true;
         if([type isEqualToString:@"ratio"]){
-            cell2.outFilePostTextField.textColor = colorArray[1];
+            cell2.filePostTextField.textColor = colorArray[1];
         }
         
         cell2.delegate = self;
@@ -346,10 +316,18 @@
     }
 }
 
-
+//User change the value in a textfield in cell cell
 -(void)processCell2:(Process2Cell *)cell didChangeValue:(id)val forKey:(NSString *)key{
     [self processCell2:cell didChangeValue:val forKey:key forceReload:false];
 }
+/**
+ * Delegate, gets called when the user changes a value in a cell.
+ *
+ * @param cell - Cell which user the has changed a textfield in
+ * @param val - New value
+ * @param key - The values key in the content array array
+ * @param force - Forces the table to reload the cell
+ */
 -(void)processCell2:(Process2Cell *)cell didChangeValue:(id)val forKey:(NSString *)key forceReload:(BOOL)force{
 
     NSIndexPath *cellIndex = [tableView indexPathForCell:cell];
@@ -362,6 +340,14 @@
         [tableView reloadRowsAtIndexPaths:@[cellIndex] withRowAnimation:UITableViewRowAnimationFade];
     }
 }
+
+/**
+ * Changes the value to val for key key in contentArray
+ *
+ * @param val - New value
+ * @param key - The values key in the content array array
+ * @param cellIndex - The index of the cell which content should be changed
+ */
 -(void)changeValue:(id)val forKey:(NSString *)key atSection:(NSIndexPath *)cellIndex{
 
     
@@ -381,6 +367,13 @@
     [contentArray removeObjectAtIndex:cellIndex.section];
     [contentArray insertObject:cellDict.copy atIndex:cellIndex.section];
 }
+
+/**
+ * Delegate, gets called when the user changes a file name.
+ *
+ * @param cell - Cell which user the has changed a textfield in
+ * @param outfileName - New name for outfile.
+ */
 -(void)processCell2:(Process2Cell *)cell didChangeOutFileName:(NSString *)outfileName{
 
     NSIndexPath *cellIndex = [tableView indexPathForCell:cell];
@@ -396,6 +389,11 @@
     }
 }
 
+/**
+ * Delegate, gets called when the user begins to edit a textfield
+ *
+ * @param cell - Cell which user the has changed a textfield in
+ */
 -(void)processCell2:(Process2Cell *)cell didBeginEdit:(UITextField *)textField{
     NSIndexPath *indexPath = [tableView indexPathForCell:cell];
     CGRect cellFrame = [tableView rectForRowAtIndexPath:indexPath];
@@ -407,12 +405,21 @@
     }
     firstresponder = textField;
 }
+/**
+ * Delegate, gets called when the user ends to edit a textfield
+ *
+ * @param cell - Cell which user the has changed a textfield in
+ */
 -(void)processCell2:(Process2Cell *)cell didEndEdit:(UITextField *)textField{
     [UIView animateWithDuration:0.2 animations:^{
         tableView.transform = CGAffineTransformMakeTranslation(0, 0);
     }];
     firstresponder = nil;
 }
+
+/**
+ * Shows a menu with the processes in currentProcessTypes
+ */
 -(void)showNewProcessPane {
     [firstresponder resignFirstResponder];
     NSMutableArray *a = [[NSMutableArray alloc] initWithCapacity:currentProcessTypes.count];
@@ -425,32 +432,26 @@
     
     for(NSDictionary *d in currentProcessTypes){
         NSString *typename = d[@"name"];
-        
-//        if(extension != nil && ![d[@"infile_ext"] isEqualToString:extension]){
-//            continue;
-//        }
-//        if(d[@"nr_files"]){
-//            NSNumber *nr_files = d[@"nr_files"];
-//            if(nr_files.intValue == filesToProcess.count){
-//                [a addObject:typename];
-//            }
-//        } else{
-            [a addObject:typename];
-//        }
-        
+        [a addObject:typename];
     }
     
     [self.tabBar2Controller showOptions:a delegate:self];
     
 }
-
+/**
+ * Delegate, gets called when the user has selected a process type.
+ * Adds entries to contentarray and insert to tableView
+ *
+ * @param ov - callee
+ * @param index - selected index in ov
+ */
 -(void)optionsView:(OptionsView *)ov selectedIndex:(NSUInteger)index{
     NSArray *prevFiles = nil;
     NSArray *convertedFiles = nil;
     //Gets the previous out file extension
     if([self numberOfSectionsInTableView:tableView] > 0){
         prevFiles = contentArray[[self numberOfSectionsInTableView:tableView]-2][@"files"];
-        convertedFiles = [Process2ViewController convertExperimentFilesToAPItype:currentProcessTypes[index] prevFiles:prevFiles];
+        convertedFiles = [Process2ViewController convertToNewType:currentProcessTypes[index] prevFiles:prevFiles];
     } else{
         convertedFiles = [Process2ViewController convertExperimentFilesToAPI:filesToProcess type:currentProcessTypes[index]];
     }
@@ -472,6 +473,12 @@
     [self updateCurrentProcessTypes:outExt numberFiles:nrOfFiles];
 }
 
+/**
+ * Updates currentProcessTypes to match the last outfile.
+ *
+ * @param inExt - extension of the outfile
+ * @param nrOfFiles - number of files which is the result of the last process.
+ */
 -(void)updateCurrentProcessTypes:(NSString *)inExt numberFiles:(NSInteger)nrOfFiles{
 
     NSMutableArray *temp = [[NSMutableArray alloc] init];
@@ -486,25 +493,16 @@
             }
             [temp addObject:d];
         }
-        //        NSDictionary *d = [self getTypeWithName:s];
-        //        if(d != nil){
-        //
-        //        }
     }
     currentProcessTypes = temp.copy;
 }
 
--(NSDictionary *)getTypeWithName:(NSString *)name{
-    NSDictionary *type = nil;
-    for(NSDictionary *d in processTypes){
-        if([name isEqualToString:d[@"type"]]){
-            type = d;
-            break;
-        }
-    }
-    return type;
-}
-
+/**
+ * Converts from ExperimentFile to dictionary which better matches the API
+ *
+ * @param expFiles - ExperimentFiles to be converted.
+ * @param d - type to convert to.
+ */
 +(NSArray *)convertExperimentFilesToAPI:(NSArray *)expFiles type:(NSDictionary *)d{
     
     if([d[@"type"] isEqualToString:@"ratio"]){
@@ -540,7 +538,15 @@
     }
     return a.copy;
 }
-+(NSArray *)convertExperimentFilesToAPItype:(NSDictionary *)d prevFiles:(NSArray *)prevFiles{
+
+
+/**
+ * Converts old type to new type which almost matches the API
+ *
+ * @param expFiles - ExperimentFiles to be converted.
+ * @param d - type to convert to.
+ */
++(NSArray *)convertToNewType:(NSDictionary *)d prevFiles:(NSArray *)prevFiles{
     if([d[@"type"] isEqualToString:@"ratio"]){
         NSDictionary *pre = prevFiles[0];
         NSDictionary *post = prevFiles[1];
@@ -572,14 +578,6 @@
     }
     return a.copy;
 }
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
