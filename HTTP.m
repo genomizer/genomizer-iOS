@@ -40,6 +40,7 @@
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error{
     NSLog(@"error! %@", error);
     responseError = error;
+    completion(nil, nil, error);
 }
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection{
     NSLog(@"finished!");
