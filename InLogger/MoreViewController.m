@@ -38,6 +38,8 @@
     [ServerConnection logout:^{
         
     }];
+    LogInViewController *viewController = (LogInViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"login"];
+    [self.tabBar2Controller presentViewController:viewController animated:false completion:nil];
 }
 
 @end

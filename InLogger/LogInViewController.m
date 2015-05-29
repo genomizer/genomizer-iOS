@@ -121,7 +121,9 @@
             AppDelegate *app = [UIApplication sharedApplication].delegate;
             app.userIsLoggingOut = NO;
 
-            [self performSegueWithIdentifier:@"loginSegue" sender:self];
+//            [self performSegueWithIdentifier:@"loginSegue" sender:self];
+            UIViewController *vc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"home2"];
+            [self presentViewController:vc animated:true completion:nil];
         });
     } else
     {

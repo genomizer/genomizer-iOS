@@ -42,10 +42,6 @@
 
 - (void) restart {
 
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    LogInViewController *viewController = (LogInViewController *)[storyboard instantiateViewControllerWithIdentifier:@"login"];
-    [self.window.rootViewController.view removeFromSuperview];
-    [self.window setRootViewController:viewController];
 }
 -(void)resetUserToken {
     NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
