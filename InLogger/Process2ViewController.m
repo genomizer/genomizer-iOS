@@ -36,27 +36,22 @@
                        @"name":@"Raw to Profile",
                        @"file_ext":@"wig",
                        @"infile_ext":@"fastq",
-                       @"default_param":@"-a -m 1 --best -p 10 -v 2 -q -S--phred33",
-                       @"snd_types":@[@"smoothing", @"step"]},
+                       @"default_param":@"-a -S"},
 
                      @{@"type":@"smoothing",
                        @"name":@"Smoothie",
                        @"file_ext":@"sgr",
-                       @"infile_ext":@"sgr",
-                       @"default_param":@"-a 'ballong'",
-                       @"snd_types":@[@"step"]},
+                       @"infile_ext":@"sgr"},
                      
                      @{@"type":@"step",
                        @"name":@"Step Size",
                        @"file_ext":@"sgr",
-                       @"infile_ext":@"sgr",
-                       @"snd_types":@[@"smoothing"]},
+                       @"infile_ext":@"sgr"},
                      
                      @{@"type":@"ratio",
                        @"name":@"Ratio",
                        @"file_ext":@"sgr",
                        @"infile_ext":@"sgr",
-                       @"snd_types":@[@"step", @"smoothing"],
                        @"nr_files":@(2)}];
     
     ExperimentFile *file = filesToProcess.firstObject;
@@ -155,6 +150,17 @@
 //Gets called when the Add Process button is tapped
 //Shows a menu with available processes
 -(IBAction)addProcessTapped:(id)sender{
+    if(currentProcessTypes.count == 0){
+        NSString *extension = nil;
+        if(contentArray.count > 0){
+            extension = contentArray.lastObject[@"files"][0][@"outfile_ext"];
+        } else{
+            ExperimentFile *file = filesToProcess.firstObject;
+            extension = [file.name componentsSeparatedByString:@"."].lastObject;
+        }
+        [self.tabBar2Controller showPopDownWithTitle:@"No processes available" andMessage:[NSString stringWithFormat:@"No processess can handle the .%@ format", extension] type:@"error"];
+        return;
+    }
     [self showNewProcessPane];
 }
 //Gets called when the Clear button is tapped
@@ -323,6 +329,7 @@
     }
 }
 
+#pragma mark Process2CellDelegate
 //User change the value in a textfield in cell cell
 -(void)processCell2:(Process2Cell *)cell didChangeValue:(id)val forKey:(NSString *)key{
     [self processCell2:cell didChangeValue:val forKey:key forceReload:false];
@@ -430,13 +437,13 @@
 -(void)showNewProcessPane {
     [firstresponder resignFirstResponder];
     NSMutableArray *a = [[NSMutableArray alloc] initWithCapacity:currentProcessTypes.count];
-    NSString *extension = nil;
-    if(contentArray.count == 0){
-        ExperimentFile *firstFile = filesToProcess.firstObject;
-        NSArray *fileNameComps = [firstFile.name componentsSeparatedByString:@"."];
-        extension = fileNameComps.lastObject;
-    }
-    
+//    NSString *extension = nil;
+//    if(contentArray.count == 0){
+//        ExperimentFile *firstFile = filesToProcess.firstObject;
+//        NSArray *fileNameComps = [firstFile.name componentsSeparatedByString:@"."];
+//        extension = fileNameComps.lastObject;
+//    }
+//    
     for(NSDictionary *d in currentProcessTypes){
         NSString *typename = d[@"name"];
         [a addObject:typename];
@@ -445,6 +452,8 @@
     [self.tabBar2Controller showOptions:a delegate:self];
     
 }
+
+#pragma mark OptionsViewDelegate
 /**
  * Delegate, gets called when the user has selected a process type.
  * Adds entries to contentarray and insert to tableView
@@ -453,11 +462,10 @@
  * @param index - selected index in ov
  */
 -(void)optionsView:(OptionsView *)ov selectedIndex:(NSUInteger)index{
-    NSArray *prevFiles = nil;
     NSArray *convertedFiles = nil;
     //Gets the previous out file extension
     if([self numberOfSectionsInTableView:tableView] > 0){
-        prevFiles = contentArray[[self numberOfSectionsInTableView:tableView]-2][@"files"];
+        NSArray *prevFiles = contentArray[[self numberOfSectionsInTableView:tableView]-2][@"files"];
         convertedFiles = [Process2ViewController convertToNewType:currentProcessTypes[index] prevFiles:prevFiles];
     } else{
         convertedFiles = [Process2ViewController convertExperimentFilesToAPI:filesToProcess type:currentProcessTypes[index]];
@@ -491,7 +499,8 @@
     NSMutableArray *temp = [[NSMutableArray alloc] init];
     
     for(NSDictionary *d in processTypes){
-        if([d[@"infile_ext"] isEqualToString:inExt]){
+        NSString *ext = d[@"infile_ext"];
+        if([ext.lowercaseString isEqualToString:inExt.lowercaseString]){
             if(d[@"nr_files"]){
                 NSNumber *inNrFiles = d[@"nr_files"];
                 if(inNrFiles.integerValue != nrOfFiles){
@@ -510,40 +519,47 @@
  * @param expFiles - ExperimentFiles to be converted.
  * @param d - type to convert to.
  */
-+(NSArray *)convertExperimentFilesToAPI:(NSArray *)expFiles type:(NSDictionary *)d{
++(NSArray *)convertExperimentFilesToAPI:(NSArray *)expFiles type:(NSDictionary *)newType{
+    NSMutableArray *converted = [[NSMutableArray alloc] initWithCapacity:expFiles.count];
+    for(ExperimentFile *f in expFiles){
+        NSDictionary *file = @{@"outfile":f.name, @"grVersion":f.grVersion};
+        [converted addObject:file];
     
-    if([d[@"type"] isEqualToString:@"ratio"]){
-        ExperimentFile *pre = expFiles[0];
-        ExperimentFile *post = expFiles[1];
-        NSMutableArray *fileComps = [pre.name componentsSeparatedByString:@"."].mutableCopy;
-        [fileComps removeLastObject];
-        NSString *filename = [fileComps componentsJoinedByString:@"."];
-        
-        NSDictionary *dict = @{@"infile":pre.name,@"infile_post":post.name, @"outfile":[NSString stringWithFormat:@"%@.%@", filename, d[@"file_ext"]], @"mean":@"single", @"readsCutOff":@"", @"outfile_ext":d[@"file_ext"], @"chromosomes":@""};
-        return @[dict];
     }
-    NSMutableArray *a = [[NSMutableArray alloc] initWithCapacity:expFiles.count];
-    for(int i = 0; i < expFiles.count; i++){
-        ExperimentFile *f = expFiles[i];
-
-        NSMutableArray *fileComps = [f.name componentsSeparatedByString:@"."].mutableCopy;
-        [fileComps removeLastObject];
-        NSString *filename = [fileComps componentsJoinedByString:@"."];
-        NSString *infile_final = f.name;
-        
-        NSDictionary *dict = nil;
-        if([d[@"type"] isEqualToString:@"rawToProfile"]){
-            dict = @{@"infile":infile_final, @"outfile":[NSString stringWithFormat:@"%@.%@", filename, d[@"file_ext"]], @"params":@"", @"default_param":d[@"default_param"], @"genomeVersion":f.grVersion, @"keepSam":@"true", @"outfile_ext":d[@"file_ext"],@"sortSamStringency":@"STRICT"};
-        } else if([d[@"type"] isEqualToString:@"step"]){
-            dict = @{@"infile":infile_final, @"outfile":[NSString stringWithFormat:@"%@.%@", filename, d[@"file_ext"]], @"stepSize":@"", @"outfile_ext":d[@"file_ext"]};
-        } else if([d[@"type"] isEqualToString:@"smoothing"]){
-            dict = @{@"infile":infile_final, @"outfile":[NSString stringWithFormat:@"%@.%@", filename, d[@"file_ext"]], @"windowSize":@"", @"minSmooth":@"", @"outfile_ext":d[@"file_ext"], @"meanOrMedian":@"Mean"};
-        } else if([d[@"type"] isEqualToString:@"ratio"]){
-            
-        }
-        [a addObject:dict];
-    }
-    return a.copy;
+    return [self convertToNewType:newType prevFiles:converted];
+    
+//    if([newType[@"type"] isEqualToString:@"ratio"]){
+//        ExperimentFile *pre = expFiles[0];
+//        ExperimentFile *post = expFiles[1];
+//        NSMutableArray *fileComps = [pre.name componentsSeparatedByString:@"."].mutableCopy;
+//        [fileComps removeLastObject];
+//        NSString *filename = [fileComps componentsJoinedByString:@"."];
+//        
+//        NSDictionary *dict = @{@"infile":pre.name,@"infile_post":post.name, @"outfile":[NSString stringWithFormat:@"%@.%@", filename, newType[@"file_ext"]], @"mean":@"single", @"readsCutOff":@"", @"outfile_ext":newType[@"file_ext"], @"chromosomes":@""};
+//        return @[dict];
+//    }
+//    NSMutableArray *a = [[NSMutableArray alloc] initWithCapacity:expFiles.count];
+//    for(ExperimentFile *f in expFiles){
+////        ExperimentFile *f = expFiles[i];
+//
+//        NSMutableArray *fileComps = [f.name componentsSeparatedByString:@"."].mutableCopy;
+//        [fileComps removeLastObject];
+//        NSString *filename = [fileComps componentsJoinedByString:@"."];
+//        NSString *infile_final = f.name;
+//        
+//        NSDictionary *dict = nil;
+//        if([newType[@"type"] isEqualToString:@"rawToProfile"]){
+//            dict = @{@"infile":infile_final, @"outfile":[NSString stringWithFormat:@"%@.%@", filename, newType[@"file_ext"]], @"params":newType[@"default_param"], @"default_param":newType[@"default_param"], @"genomeVersion":f.grVersion, @"keepSam":@"true", @"outfile_ext":newType[@"file_ext"],@"sortSamStringency":@"STRICT"};
+//        } else if([newType[@"type"] isEqualToString:@"step"]){
+//            dict = @{@"infile":infile_final, @"outfile":[NSString stringWithFormat:@"%@.%@", filename, newType[@"file_ext"]], @"stepSize":@"", @"outfile_ext":newType[@"file_ext"]};
+//        } else if([newType[@"type"] isEqualToString:@"smoothing"]){
+//            dict = @{@"infile":infile_final, @"outfile":[NSString stringWithFormat:@"%@.%@", filename, newType[@"file_ext"]], @"windowSize":@"", @"minSmooth":@"", @"outfile_ext":newType[@"file_ext"], @"meanOrMedian":@"Mean"};
+//        } else if([newType[@"type"] isEqualToString:@"ratio"]){
+//            
+//        }
+//        [a addObject:dict];
+//    }
+//    return a.copy;
 }
 
 
@@ -553,33 +569,56 @@
  * @param expFiles - ExperimentFiles to be converted.
  * @param d - type to convert to.
  */
-+(NSArray *)convertToNewType:(NSDictionary *)d prevFiles:(NSArray *)prevFiles{
-    if([d[@"type"] isEqualToString:@"ratio"]){
++(NSArray *)convertToNewType:(NSDictionary *)newType prevFiles:(NSArray *)prevFiles{
+    if([newType[@"type"] isEqualToString:@"ratio"]){
         NSDictionary *pre = prevFiles[0];
         NSDictionary *post = prevFiles[1];
         NSMutableArray *fileComps = [pre[@"outfile"] componentsSeparatedByString:@"."].mutableCopy;
         [fileComps removeLastObject];
         NSString *filename = [fileComps componentsJoinedByString:@"."];
         
-        NSDictionary *dict = @{@"infile":pre[@"outfile"],@"infile_post":post[@"outfile"], @"outfile":[NSString stringWithFormat:@"%@.%@", filename, d[@"file_ext"]], @"mean":@"single", @"readsCutOff":@"", @"outfile_ext":d[@"file_ext"], @"chromosomes":@""};
+        NSDictionary *dict = @{@"infile":pre[@"outfile"],@"infile_post":post[@"outfile"], @"outfile":[NSString stringWithFormat:@"%@.%@", filename, newType[@"file_ext"]], @"mean":@"single", @"readsCutOff":@"", @"outfile_ext":newType[@"file_ext"], @"chromosomes":@""};
         return @[dict];
     }
     NSMutableArray *a = [[NSMutableArray alloc] initWithCapacity:prevFiles.count];
-    for(int i = 0; i < prevFiles.count; i++){
-        NSDictionary *prevD = prevFiles[i];
+    for(NSDictionary *prevD in prevFiles){
+//        NSDictionary *prevD = prevFiles[i];
+        
         NSString *fname = prevD[@"outfile"];
+        
         NSMutableArray *fileComps = [fname componentsSeparatedByString:@"."].mutableCopy;
         [fileComps removeLastObject];
         NSString *filename = [fileComps componentsJoinedByString:@"."];
-        NSString *infile_final = prevD == nil ? fname : [NSString stringWithFormat:@"%@.%@", filename, prevD[@"outfile_ext"]];
-        infile_final = prevD == nil ? infile_final : prevD[@"outfile"];
+        
+        NSString *infile_final = prevD[@"outfile"];
+        
         NSDictionary *dict = nil;
-        if([d[@"type"] isEqualToString:@"rawToProfile"]){
-            dict = @{@"infile":infile_final, @"outfile":[NSString stringWithFormat:@"%@.%@", filename, d[@"file_ext"]], @"params":d[@"default_param"], @"genomeVersion":@"", @"keepSAM":@(true), @"outfile_ext":d[@"file_ext"],@"sortSamStringency":@"STRICT"};
-        } else if([d[@"type"] isEqualToString:@"step"]){
-            dict = @{@"infile":infile_final, @"outfile":[NSString stringWithFormat:@"%@.%@", filename, d[@"file_ext"]], @"stepSize":@"", @"outfile_ext":d[@"file_ext"]};
-        } else if([d[@"type"] isEqualToString:@"smoothing"]){
-            dict = @{@"infile":infile_final, @"outfile":[NSString stringWithFormat:@"%@.%@", filename, d[@"file_ext"]], @"windowSize":@"", @"minSmooth":@"", @"outfile_ext":d[@"file_ext"], @"meanOrMedian":@"Mean"};
+        NSString *outfile = [NSString stringWithFormat:@"%@.%@", filename, newType[@"file_ext"]];
+        if([newType[@"type"] isEqualToString:@"rawToProfile"]){
+            
+            dict = @{@"infile":infile_final,
+                     @"outfile":outfile,
+                     @"params":newType[@"default_param"],
+                     @"genomeVersion":prevD[@"grVersion"],
+                     @"keepSam":@"true",
+                     @"outfile_ext":newType[@"file_ext"],
+                     @"sortSamStringency":@"STRICT"};
+            
+        } else if([newType[@"type"] isEqualToString:@"step"]){
+            
+            dict = @{@"infile":infile_final,
+                     @"outfile":outfile,
+                     @"stepSize":@"",
+                     @"outfile_ext":newType[@"file_ext"]};
+            
+        } else if([newType[@"type"] isEqualToString:@"smoothing"]){
+            
+            dict = @{@"infile":infile_final,
+                     @"outfile":outfile,
+                     @"windowSize":@"",
+                     @"minSmooth":@"",
+                     @"outfile_ext":newType[@"file_ext"],
+                     @"meanOrMedian":@"Mean"};
         }
         [a addObject:dict];
     }

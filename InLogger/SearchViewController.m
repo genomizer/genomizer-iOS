@@ -171,7 +171,6 @@
         [_tableView reloadData];
     }
     _searchButton.enabled = YES;
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
 
 /*
@@ -179,7 +178,6 @@
  */
 - (void) annotationsIsStarting
 {
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     _searchButton.enabled = NO;
 }
 
@@ -193,7 +191,6 @@
     _searchButton.hidden = NO;
     self.navigationItem.rightBarButtonItem.enabled = YES;
     _searching = NO;
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
 
 /*
@@ -207,7 +204,7 @@
     _searchButton.hidden = YES;
     self.navigationItem.rightBarButtonItem.enabled = NO;
     _searching = YES;
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+
 }
 
 /**

@@ -36,7 +36,6 @@ static NSMutableArray * processingExperimentFiles;
  */
 - (void) updateProcessStatusFromServer
 {
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     [ServerConnection getProcessStatus:^(NSMutableArray *array, NSError *error) {
         [self reportProcessStatusResult:array error:error];
     }];

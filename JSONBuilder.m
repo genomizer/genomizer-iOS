@@ -174,12 +174,15 @@ static NSString *SERVER_URL = nil;//Don't change!!
  *@return NSString containing the server URL.
  */
 + (NSString*) getServerURL{
+    NSLog(@"getServerURL");
     if(SERVER_URL == nil){
         SERVER_URL = [[NSUserDefaults standardUserDefaults] objectForKey:@"serverURL"];
+         NSLog(@"getServerURL NIL, %@", SERVER_URL);
         if(SERVER_URL == nil){
             [JSONBuilder setServerURLFromString:MOCK_URL];
         }
     }
+    NSLog(@"getServerURL return, %@", SERVER_URL);
     return SERVER_URL;
 }
 

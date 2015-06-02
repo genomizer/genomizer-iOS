@@ -8,18 +8,20 @@
 #import "MoreViewController.h"
 #import "ServerConnection.h"
 #import "AppDelegate.h"
-
+#import "JSONBuilder.h"
 @interface MoreViewController ()
 
 @end
 
 @implementation MoreViewController
 @synthesize serverLabel, userLabel;
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    NSString *serverURL = [[NSUserDefaults standardUserDefaults] objectForKey:@"serverURL"];
+    NSString *serverURL = [JSONBuilder getServerURL];
     NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
     self.serverLabel.text = serverURL;
     self.userLabel.text = username;

@@ -44,8 +44,7 @@
 
 }
 -(void)resetUserToken {
-    NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
-    [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"usertoken"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 

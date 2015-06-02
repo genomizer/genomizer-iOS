@@ -24,6 +24,7 @@
     completion = comp;
     request = _request;
     [NSURLConnection connectionWithRequest:_request delegate:self];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 }
 
 #pragma mark NSURLConnectionDelegate
@@ -47,10 +48,12 @@
     NSLog(@"error! %@", error);
     responseError = error;
     completion(nil, nil, error);
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection{
     NSLog(@"finished!");
     completion(responseData, response, responseError);
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
 
 //HTTPS code.
