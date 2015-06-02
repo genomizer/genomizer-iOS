@@ -9,6 +9,23 @@
 
 @implementation ExperimentFile
 
+#warning not used
+- (instancetype)initWithCoder:(NSCoder *)decoder {
+    if((self = [super init])) {
+        //decode properties, other class vars
+        _idFile = [decoder decodeObjectForKey:@"idFile"];
+        _type = [(NSNumber *)[decoder decodeObjectForKey:@"type"] intValue];
+        _name = [decoder decodeObjectForKey:@"name"];
+        _uploadedBy = [decoder decodeObjectForKey:@"uploadedBy"];
+        _date = [decoder decodeObjectForKey:@"date"];
+        _expID = [decoder decodeObjectForKey:@"expID"];
+        _metaData = [decoder decodeObjectForKey:@"metaData"];
+        _author = [decoder decodeObjectForKey:@"author"];
+        _grVersion = [decoder decodeObjectForKey:@"grVersion"];
+        _species = [decoder decodeObjectForKey:@"species"];
+    }
+    return self;
+}
 /**
  * Checks if the files in the given array contains files of multiples 
  * file types.
@@ -32,46 +49,24 @@
 }
 
 /**
- * Returns the name of the file.
- * @return the name of the file
- */
-- (NSString *) getDescription
-{
-    NSMutableString *string = [[NSMutableString alloc] init];
-    [string appendString: [ExperimentFile format: _name]];
-    return string;
-}
-
-/**
  * Returns a string with all information about the file.
  * @return information about the file
  */
 - (NSString *) getAllInfo{
-    NSString *string = [[NSMutableString alloc] init];
+#warning Filename==idFile?
+    NSString *fileInfo = [NSString stringWithFormat:
+                          @"Filename: %@\nDate: %@\n"
+                          "Name: %@\nExperiment ID: %@\n"
+                          "Metadata: %@\nAuthor: %@\n"
+                          "Genome Version: %@\nSpecies: %@\n"
+                          "File size: %@"
+                          ,self.idFile, self.date
+                          ,self.name, self.expID
+                          ,self.metaData, self.author
+                          ,self.grVersion, self.species
+                          ,self.filesize];
     
-    string = [NSString stringWithFormat:             @"Filename: %@\n",      [ExperimentFile format:_idFile]];
-    string = [string stringByAppendingFormat:        @"Date: %@\n",          [ExperimentFile format:_date]];
-    string = [string stringByAppendingFormat:        @"Name: %@\n",          [ExperimentFile format:_name]];
-    string = [string stringByAppendingFormat:        @"Experiment ID: %@\n", [ExperimentFile format:_expID]];
-    string = [string stringByAppendingFormat:        @"Metadata: %@\n",      [ExperimentFile format:_metaData]];
-    string = [string stringByAppendingFormat:        @"Author: %@\n",        [ExperimentFile format:_author]];
-    string = [string stringByAppendingFormat:        @"Genome Version: %@\n",[ExperimentFile format:_grVersion]];
-    string = [string stringByAppendingFormat:        @"Speice: %@\n",        [ExperimentFile format:_species]];
-    return string;
-}
-
-/**
- * Returns a ? if the given string is nil, otherwise the same string is returned.
- * @param string - the string to format
- * @return ? if the string is nil, otherwise the same string
- */
-+ (NSString *) format: (NSString *) string
-{
-    if (string == nil) {
-        return @"?";
-    } else {
-        return string;
-    }
+    return fileInfo;
 }
 
 /**
@@ -121,8 +116,7 @@
 }
 
 /**
- Encode the object to be able to store it in NSUserDefaults
- 
+ *  Encode the object to be able to store it in NSUserDefaults
  */
 - (void)encodeWithCoder:(NSCoder *)encoder {
     //Encode properties, other class variables, etc
@@ -137,22 +131,7 @@
     [encoder encodeObject:_grVersion forKey:@"grVersion"];
     [encoder encodeObject:_species forKey:@"species"];
 }
-- (id)initWithCoder:(NSCoder *)decoder {
-    if((self = [super init])) {
-        //decode properties, other class vars
-        _idFile = [decoder decodeObjectForKey:@"idFile"];
-        _type = [(NSNumber *)[decoder decodeObjectForKey:@"type"] intValue];
-        _name = [decoder decodeObjectForKey:@"name"];
-        _uploadedBy = [decoder decodeObjectForKey:@"uploadedBy"];
-        _date = [decoder decodeObjectForKey:@"date"];
-        _expID = [decoder decodeObjectForKey:@"expID"];
-        _metaData = [decoder decodeObjectForKey:@"metaData"];
-        _author = [decoder decodeObjectForKey:@"author"];
-        _grVersion = [decoder decodeObjectForKey:@"grVersion"];
-        _species = [decoder decodeObjectForKey:@"species"];
-    }
-    return self;
-}
+
 
 @end
 

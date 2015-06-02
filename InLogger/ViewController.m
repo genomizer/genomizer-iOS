@@ -10,8 +10,7 @@
 //
 
 #import "ViewController.h"
-#import "SegueController.h"
-#import "NavController.h"
+
 
 @interface ViewController ()
 
@@ -24,33 +23,25 @@
  */
 - (void) viewDidAppear:(BOOL)animated
 {
-    [SegueController segueDone];
+    //[SegueController segueDone];
     [super viewDidAppear:animated];
 }
 
 -(TabBar2Controller *)getTabbar{
     NavController *nc = (NavController *)self.navigationController;
-    NSLog(@"tabbar 15: %@", nc.tabBar2Controller);
+//    NSLog(@"tabbar 15: %@", nc.tabBar2Controller);
     return nc.tabBar2Controller;
 }
 
-/**
- * Checks if the segue should be performed.
- */
-- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
-{
-    return ![SegueController isPerformingSegue];
-}
 
 /**
  * Marks the segue as started.
  */
 - (void) performSegueWithIdentifier:(NSString *)identifier sender:(id)sender
 {
-    if ([self shouldPerformSegueWithIdentifier:identifier sender:sender]) {
-        [SegueController segueStarted];
+
         [super performSegueWithIdentifier:identifier sender:sender];
-    }
+    
 }
 
 @end

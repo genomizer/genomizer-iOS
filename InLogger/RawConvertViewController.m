@@ -65,13 +65,15 @@
 }
 
 @synthesize tableView;
-@synthesize completionBlock;
+//@synthesize completionBlock;
 - (void)viewDidLoad
 {
     
     [super viewDidLoad];
     // Get genomereleases that are used as datasource for the pickerView.
-    [ServerConnection genomeRelease:self];
+    [ServerConnection genomeRelease:^(NSMutableArray *ma, NSError *e){
+        [self reportGenomeResult:ma withError:e];
+    }];
     _pickerView = [self createPickerView];
     _toolBar = [self createPickerViewToolBar:_pickerView];
     //set up all textfields and switchbuttons.
@@ -152,10 +154,6 @@
     
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, buttonHeight, 0);
     self.tableView.scrollIndicatorInsets = self.tableView.contentInset;
-    //add self to appDelegate
-//Pål did this
-//    AppDelegate *app = [UIApplication sharedApplication].delegate;
-//    [app addController:self];
 }
 
 
@@ -206,6 +204,7 @@
     pickerView.backgroundColor = [UIColor colorWithRed:247.0/255.0f green:248.0/255.0f
                                                   blue:247.0/255 alpha:1.0f];
     pickerView.showsSelectionIndicator = YES;
+    [pickerView setAccessibilityLabel:@"PickerView"];
     return pickerView;
 }
 
@@ -384,7 +383,7 @@
 {
     
     if((_bowtie.text.length == 0) || (_genomeFile.text.length == 0)){
-        [(TabBar2Controller *)self.tabBar2Controller showPopDownWithTitle:@"Not enough information" andMessage:@"Fill in at least the fields \"Bowtie parameters\" and \"Genome file\" to start a process" type:@"error"];
+        [self.tabBar2Controller showPopDownWithTitle:@"Not enough information" andMessage:@"Fill in at least the fields \"Bowtie parameters\" and \"Genome file\" to start a process" type:@"error"];
     }else{
         _convertButton.hidden = YES;
         [_activityIndicator startAnimating];
@@ -459,27 +458,6 @@
             int calcSmoothinZeros = self.ratioCalcSmoothingPrintZeros.on;
             text = [text stringByAppendingFormat:@" %d %@ %d %d", calcSmoothinSmooth, self.ratioCalcSmoothingMinimumStep.text, calcSmoothinMean, calcSmoothinZeros];
             
-//Pål did this
-//            text = [text stringByAppendingString:@" "];
-//            if (self.ratioCalcSmoothingSmoothType.on){
-//                text = [text stringByAppendingString:@"1"];
-//            }else{
-//                text = [text stringByAppendingString:@"0"];
-//            }
-//            text = [text stringByAppendingString:@" "];
-//            text = [text stringByAppendingString:self.ratioCalcSmoothingMinimumStep.text];
-//            text = [text stringByAppendingString:@" "];
-//            if (self.ratioCalcSmoothingPrintMean.on){
-//                text = [text stringByAppendingString:@"1"];
-//            }else{
-//                text = [text stringByAppendingString:@"0"];
-//            }
-//            text = [text stringByAppendingString:@" "];
-//            if (self.ratioCalcSmoothingPrintZeros.on){
-//                text = [text stringByAppendingString:@"1"];
-//            }else{
-//                text = [text stringByAppendingString:@"0"];
-//            }
             [parameters addObject:text];
         }
         else{
@@ -504,7 +482,11 @@
             }
             [dict setObject:metadata forKey:@"metadata"];
             [dict setObject:_genomeFile.text forKey:@"genomeVersion"];
-            [ServerConnection convert:dict withContext:self];
+#warning add again?
+//            [ServerConnection convert:dict withContext:^(NSError *e,
+//                                                         NSString *s){
+//                [self reportResult:e experiment:s];
+//            }];
             numberOfConvertRequestsLeftToConfirm++;
         }
     }
@@ -554,8 +536,8 @@
                 NSString *message = [NSString stringWithFormat:@"%d convert %@ successfully sent to the server.", successfulConvertRequests, requestString];
 //                [PopupGenerator showPopupWithMessage:message withTitle:@"" withCancelButtonTitle:@"OK" withDelegate:self];
                 [self dismissViewControllerAnimated:true completion:nil];
-                [(TabBar2Controller *)self.tabBar2Controller showPopDownWithTitle:@"Convert sent" andMessage:message type:@"success"];
-                self.completionBlock(error, message);
+                [self.tabBar2Controller showPopDownWithTitle:@"Convert sent" andMessage:message type:@"success"];
+//                self.completionBlock(error, message);
             }
             _convertButton.enabled = YES;
             self.navigationItem.leftBarButtonItem.enabled = YES;
@@ -582,7 +564,7 @@
 - (void) reportGenomeResult:(NSMutableArray*) genomeReleases withError:(NSError*) error {
     if(error){
         dispatch_async(dispatch_get_main_queue(), ^{
-            [(TabBar2Controller *)self.tabBar2Controller showPopDownWithError:error];
+            [self.tabBar2Controller showPopDownWithError:error];
         });
     }
     else

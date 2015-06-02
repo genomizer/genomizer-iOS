@@ -10,8 +10,8 @@
 
 #import <UIKit/UIKit.h>
 #import "ViewController.h"
-#import "ExperimentDescriber.h"
-#import "AdvancedSearchView.h"
+//#import "ExperimentDescriber.h"
+//#import "AdvancedSearchView.h"
 
 @interface SearchViewController : ViewController<UITextFieldDelegate, AdvancedSearchViewDelegate, UITableViewDataSource, UITableViewDelegate>
 
@@ -20,8 +20,6 @@
 @property NSArray *annotations;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-//@property (weak, nonatomic) IBOutlet UIView *advancedView;
-//@property (weak, nonatomic) IBOutlet UITextView *pubmedTextView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
 @property (weak, nonatomic) IBOutlet UIButton *searchButton;
 @property (weak, nonatomic) IBOutlet UIView *searchButtonView;

@@ -14,7 +14,6 @@
 
 @implementation AppDelegate
 
-//NSMutableArray* controllers;
 
 - (AppDelegate*) init {
     self = [super init];
@@ -28,7 +27,6 @@
 {
     
     NSString *usertoken = [[NSUserDefaults standardUserDefaults] objectForKey:@"usertoken"];
-//    usertoken = @"mats";
     UIViewController *vc;
     if(!usertoken){
         vc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"login"];
@@ -44,61 +42,13 @@
 
 - (void) restart {
 
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    LogInViewController *viewController = (LogInViewController *)[storyboard instantiateViewControllerWithIdentifier:@"login"];
-    [self.window setRootViewController:viewController];
 }
--(void)resetUserToken{
-//    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"usertoken"];
+-(void)resetUserToken {
     NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
     [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-//- (int) getNumberOfControllers {
-//    return (int)[controllers count];
-//}
-//
-//- (void) addController: (UIViewController*) controller {
-//    [controllers addObject:controller];
-//}
-//
-//- (void) popController {
-//    [controllers removeLastObject];
-//}
-
-//- (bool) threadIsAvailable {
-//    
-//    if(_numberOfThreadsAlive <= 3)
-//    {
-//        _numberOfThreadsAlive++;
-//        return YES;
-//    } else
-//    {
-//        return NO;
-//    }
-//}
-//
-//- (void) threadFinished
-//{
-//    _numberOfThreadsAlive--;
-//}
-
-//- (UIViewController*) getController: (int) index
-//{
-//    return [controllers objectAtIndex:index];
-//}
-
-//- (void) killControllers
-//{
-//    int length = (int)[controllers count];
-//    for(int i = 0; i < length; i++)
-//    {
-//        NSLog(@"kill Controllers");
-//        [[controllers lastObject] dismissViewControllerAnimated:NO completion:nil];
-//        [controllers removeObject:[controllers lastObject]];
-//    }
-//}
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {

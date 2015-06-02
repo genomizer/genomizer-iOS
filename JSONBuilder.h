@@ -7,7 +7,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define MOCK_URL @"http://dumbledore.cs.umu.se:7000/"
+#define MOCK_URL @"http://bellatrix.cs.umu.se:7005/"
 
 /**
  A class that creates NSURLRequests containing JSON objects where applicable
@@ -19,11 +19,12 @@
 + (NSMutableURLRequest*) getLogoutJSON:(NSString *)token;
 + (NSMutableURLRequest*) getGenomeReleaseJSON:(NSString *)token;
 + (NSMutableURLRequest*) getSearchJSON:(NSString *)annotations withToken:(NSString *)token;
-+ (NSMutableURLRequest*) getRawToProfileJSON:(NSString *)token withDict:(NSMutableDictionary*)dict;
++ (NSMutableURLRequest*) getRawToProfileJSON:(NSString *)token withDict:(NSMutableDictionary *)dict __deprecated_msg("Use getProcessCommandJSON instead");
++ (NSMutableURLRequest*) getProcessCommandJSON:(NSString *)token withDict:(NSDictionary *)dict;
 + (NSMutableURLRequest*) getAvailableAnnotationsJSON:(NSString *) token;
 + (NSMutableURLRequest*) getProcessStatusJSON:(NSString *) token;
 + (NSString*) getServerURL;
-+ (void) setServerURLToString: (NSString *) url;
++ (void) setServerURLFromString: (NSString *) url;
 + (NSMutableURLRequest*) getRequest:(NSString*) requestType withToken:(NSString*) token;
 
 @end

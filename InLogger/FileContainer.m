@@ -25,7 +25,7 @@
  * @return an intialized FileContainer
  *
  */
-- (FileContainer *) init
+- (instancetype) init
 {
     self = [super init];
 
@@ -165,7 +165,7 @@
     [encoder encodeObject:_regionFiles forKey:@"region"];
     [encoder encodeObject:_otherFiles forKey:@"other"];
 }
-- (id)initWithCoder:(NSCoder *)decoder {
+- (instancetype)initWithCoder:(NSCoder *)decoder {
     if((self = [super init])) {
         //decode properties, other class vars
         _rawFiles = [decoder decodeObjectForKey:@"raw"];

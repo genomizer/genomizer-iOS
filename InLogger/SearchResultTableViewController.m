@@ -9,7 +9,6 @@
 #import "SearchResultTableViewCell.h"
 #import "DataFileViewController.h"
 #import "AnnotationTableViewController.h"
-#import "PubMedBuilder.h"
 
 @interface SearchResultTableViewController ()
 
@@ -38,9 +37,6 @@
     [self.view addSubview:heightTextView];
     
     //add self to appDelegate
-    //Pål jävlas
-//    AppDelegate *app = [UIApplication sharedApplication].delegate;
-//    [app addController:self];
 }
 
 #pragma mark - Table view data source
@@ -87,12 +83,12 @@
     CGRect rect = [text boundingRectWithSize:CGSizeMake(self.tableCellWidth, CGFLOAT_MAX)
                                 options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
                              attributes:[NSDictionary dictionaryWithObjectsAndKeys:font,NSFontAttributeName, nil] context:nil];
-//    heightTextView.attributedText = [PubMedBuilder formatInfoText:[_experimentDescriber getDescriptionOf:experiment] fontSize:15];
-//    [heightTextView sizeToFit];
-//    [heightTextView layoutIfNeeded];
-//    float height = [heightTextView sizeThatFits:CGSizeMake(heightTextView.frame.size.width, 400)].height;
-//    return height;
+    
     return ceilf(rect.size.height+25);
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 0.01f;
 }
 
 /**
@@ -133,8 +129,6 @@
             if([s isEqualToString:@"Name"]){
                 return [exp1.name compare:exp2.name];
             }
-            NSObject *o1 = exp1.annotations[s];
-            NSObject *o2 = exp2.annotations[s];
             
             return [exp1.annotations[s] compare:exp2.annotations[s] options:NSCaseInsensitiveSearch];
         }];

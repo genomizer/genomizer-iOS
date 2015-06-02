@@ -11,13 +11,13 @@
 #import "ExperimentFile.h"
 #import "AlertWindow.h"
 #import "AdvancedSearchView.h"
-#import "ViewController.h"
+
 #import "OptionsView.h"
 /**
  Child of UITabBarController, handles error messages as well.
  */
-@class TabBar2Controller;
-@interface TabBar2Controller : UIViewController <FileAboutViewDelegate, UIGestureRecognizerDelegate>
+//@class TabBar2Controller;
+@interface TabBar2Controller : UIViewController <FileAboutViewDelegate, UIGestureRecognizerDelegate, OptionsActionDelegate>
 
 @property (strong, nonatomic) AlertWindow *window;
 @property (nonatomic, setter=setSelectedViewController:, getter=getSelectedViewController) UIViewController *selectedViewController;

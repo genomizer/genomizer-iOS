@@ -7,19 +7,16 @@
 
 #import "DataFileViewController.h"
 #import "SearchResultTableViewController.h"
-#import "ExperimentFile.h"
-#import "TitleTableViewCell.h"
 #import "DataFileTableViewCell.h"
-#import "ServerConnection.h"
 #import "SelectedFilesViewController.h"
 #import "PopupGenerator.h"
 #import "SelectTaskTableViewController.h"
-#import "FileContainer.h"
-#import "TabViewController.h"
-@interface DataFileViewController ()
+#import "Process2ViewController.h"
 
-//@property (weak, nonatomic) IBOutlet UIView *infoAboutFile;
-//@property (weak, nonatomic) IBOutlet UITextView *infoFileTextField;
+@interface DataFileViewController (){
+    NSMutableArray *filesToProcessing;
+}
+
 @property (weak, nonatomic) IBOutlet UIView *dimView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property BOOL animating;
@@ -27,6 +24,7 @@
 @end
 
 @implementation DataFileViewController
+@synthesize processButton;
 
 /**
  * Method that runs when the view controller is loaded.
@@ -37,6 +35,7 @@
 {
     [super viewDidLoad];
     _selectedFiles = [[FileContainer alloc] init];
+    filesToProcessing = [[NSMutableArray alloc] init];
 
 }
 
@@ -60,6 +59,15 @@
     _experiment = experiment;
 }
 
+-(NSInteger)timesAdded:(ExperimentFile *)file{
+    NSInteger times = 0;
+    for(ExperimentFile *f in filesToProcessing){
+        if([file isEqual:f]){
+            times++;
+        }
+    }
+    return times;
+}
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -95,14 +103,22 @@
 {
     DataFileTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DataFilePrototypeCell" forIndexPath:indexPath];
     ExperimentFile *file = [[_experiment.files getFiles: indexPath.section] objectAtIndex:indexPath.row];
-    cell.textField.text = [file getDescription];
+    cell.textField.text = file.name;
+    cell.fileSize.text = file.filesize;
     cell.switchButton.on = [_selectedFiles containsFile:file];
     cell.file = file;
     cell.controller = self;
-    BOOL alreadyStared =[SelectedFilesViewController containsExperimentFile:file];
-    NSString *buttonImageName = alreadyStared ? @"Star" : @"Unstar";
-    [cell.starButton setImage:[UIImage imageNamed:buttonImageName] forState:UIControlStateNormal];
-    cell.starButton.tag = alreadyStared;
+    
+    NSInteger timesAdded = [self timesAdded:file];
+    if(timesAdded > 0){
+        cell.numberAddedLabel.text = [NSString stringWithFormat:@"(%d)", timesAdded];
+    } else{
+        cell.numberAddedLabel.text = @"";
+    }
+//    BOOL alreadyStared =[SelectedFilesViewController containsExperimentFile:file];
+//    NSString *buttonImageName = alreadyStared ? @"Star" : @"Unstar";
+//    [cell.starButton setImage:[UIImage imageNamed:buttonImageName] forState:UIControlStateNormal];
+//    cell.starButton.tag = alreadyStared;
     
     return cell;
 }
@@ -135,7 +151,7 @@
 
 
 -(IBAction)starButtonTapped:(UIButton *)sender{
-    BOOL alreadyStared = sender.tag;
+//    BOOL alreadyStared = sender.tag;
     UITableViewCell *cell = (UITableViewCell *)sender.superview;
     while(![cell isKindOfClass:[UITableViewCell class]]){
         cell = (UITableViewCell *)cell.superview;
@@ -143,14 +159,33 @@
     
     NSIndexPath *indexPath = [_tableView indexPathForCell:cell];
     ExperimentFile *file = [[_experiment.files getFiles: indexPath.section] objectAtIndex:indexPath.row];
-    if(alreadyStared){
-        //Unstar
-        [SelectedFilesViewController removeExperimentFile:file];
-    } else {
-        //Star
-        [SelectedFilesViewController addExperimentFile:file];
+    NSArray *fileComps = [file.name componentsSeparatedByString:@"."];
+    NSString *extenstion = fileComps.lastObject;
+    for(ExperimentFile *f in filesToProcessing){
+        NSArray *fileNameComps = [f.name componentsSeparatedByString:@"."];
+        NSString *ext = fileNameComps.lastObject;
+        if(![ext isEqualToString:extenstion]){
+            [self.tabBar2Controller showPopDownWithTitle:@"Multiple file types" andMessage:@"Multiple file types can't be sent to process at the same time." type:@"error"];
+            return;
+        }
     }
-    [_tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+    [filesToProcessing addObject:file];
+    NSLog(@"filesToProcess: %@", filesToProcessing);
+    [processButton setTitle:[NSString stringWithFormat:@"Process (%d)", filesToProcessing.count] forState:UIControlStateNormal];
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+//    if(alreadyStared){
+//        //Unstar
+//        [SelectedFilesViewController removeExperimentFile:file];
+//    } else {
+//        //Star
+//        [SelectedFilesViewController addExperimentFile:file];
+//    }
+//    [_tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+}
+-(IBAction)clearButtonTapped:(id)sender{
+    [filesToProcessing removeAllObjects];
+    [processButton setTitle:@"Process" forState:UIControlStateNormal];
+    [self.tableView reloadData];
 }
 /**
  * Method that is called when the 'Convert Files' button is pressed.
@@ -159,24 +194,33 @@
  */
 - (IBAction)convertToProfileOnTouchUpInside:(id)sender
 {
-    if (_animating) {
+    NSLog(@"Send to process");
+    if(filesToProcessing.count == 0){
+        [self.tabBar2Controller showPopDownWithTitle:@"No files added" andMessage:@"Add some files to process before proceding" type:@"error"];
         return;
     }
-    NSArray *selectedFiles = [_selectedFiles getFiles];
-    if ([selectedFiles count] == 0) {
-        [PopupGenerator showPopupWithMessage:@"Please select files to convert."];
-        return;
-    } else if(![ExperimentFile multipleFileType: selectedFiles]) {
-        FileType type = ((ExperimentFile *)selectedFiles[0]).type;
-        if (type == RAW) {
-            [self performSegueWithIdentifier:@"toSelectTask" sender:selectedFiles];
-        }else{
-            [PopupGenerator showPopupWithMessage:@"Not yet implemented."];
-        }
-    }
-    else{
-        [PopupGenerator showPopupWithMessage:@"Please select files of same type."];
-    }
+    Process2ViewController *pvc = [self.storyboard instantiateViewControllerWithIdentifier:@"process2"];
+    pvc.filesToProcess = filesToProcessing;
+    [self.navigationController pushViewController:pvc animated:true];
+    
+//    if (_animating) {
+//        return;
+//    }
+//    NSArray *selectedFiles = [_selectedFiles getFiles];
+//    if ([selectedFiles count] == 0) {
+//        [PopupGenerator showPopupWithMessage:@"Please select files to convert."];
+//        return;
+//    } else if(![ExperimentFile multipleFileType: selectedFiles]) {
+//        FileType type = ((ExperimentFile *)selectedFiles[0]).type;
+//        if (type == RAW) {
+//            [self performSegueWithIdentifier:@"toSelectTask" sender:selectedFiles];
+//        }else{
+//            [PopupGenerator showPopupWithMessage:@"Not yet implemented."];
+//        }
+//    }
+//    else{
+//        [PopupGenerator showPopupWithMessage:@"Please select files of same type."];
+//    }
 }
 
 /**
@@ -187,19 +231,9 @@
  */
 - (void) showInfoAbout: (ExperimentFile *) file
 {
-    [(TabBar2Controller *)self.tabBar2Controller showInfoAboutFile:file];
+    [self.tabBar2Controller showInfoAboutFile:file];
 }
 
-/**
- * Method for hiding the display for detailed information about a ExperimentFile.
- * This method is called when the 'Close' button in the detailed information view.
- *
- */
-//- (IBAction)closeFileInfo:(id)sender {
-//    _infoAboutFile.hidden = YES;
-//    _dimView.hidden = YES;
-//    
-//}
 
 /**
  * Method which is called when a segue is about to be performed.

@@ -20,21 +20,23 @@ typedef NS_ENUM(NSInteger, FileType) {
     OTHER
 };
 
-@property NSString *idFile;
+@property (nonatomic, strong) NSString *idFile;
 @property FileType type;
-@property NSString *name;
-@property NSString *uploadedBy;
-@property NSString *date;
-@property NSString *expID;
-@property NSString *metaData;
-@property NSString *author;
-@property NSString *grVersion;
-@property NSString *species;
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *uploadedBy;
+@property (nonatomic, strong) NSString *date;
+@property (nonatomic, strong) NSString *expID;
+@property (nonatomic, strong) NSString *metaData;
+@property (nonatomic, strong) NSString *author;
+@property (nonatomic, strong) NSString *grVersion;
+@property (nonatomic, strong) NSString *species;
 
 
-- (NSString *) getDescription;
-- (NSString *) getAllInfo;
-+ (FileType) NSStringFileTypeToEnumFileType: (NSString *) type;
-+ (BOOL) multipleFileType: (NSArray *) files;
+// Might need to be changed depending on how it is saved in DB
+@property (nonatomic, strong) NSString *filesize;
+
+- (NSString *)getAllInfo;
++ (FileType)NSStringFileTypeToEnumFileType:(NSString *) type;
++ (BOOL)multipleFileType:(NSArray *) files;
 
 @end

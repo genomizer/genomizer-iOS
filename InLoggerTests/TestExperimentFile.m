@@ -8,6 +8,8 @@
 
 #import <XCTest/XCTest.h>
 #import "ExperimentFile.h"
+#import "ExperimentParser.h"
+
 @interface TestExperimentFile : XCTestCase
 
 @property ExperimentFile *experimentFile;
@@ -46,7 +48,7 @@
     _experimentFile.uploadedBy = @"Yuri";
     _experimentFile.type = RAW;
     
-    NSString *result = [_experimentFile getDescription];
+    NSString *result = _experimentFile.name;
     
     XCTAssertEqualObjects(result, @"Datafile.wig");
 }
@@ -58,22 +60,23 @@
     _experimentFile.uploadedBy = @"Yuri";
     _experimentFile.type = RAW;
     
-    NSString *result = [_experimentFile getDescription];
+    NSString *result = _experimentFile.name;
     NSString *correct = @"File.wig";
     
     XCTAssertEqualObjects(result, correct);
 }
 
-- (void) testGetDescriptionWithUnknownField
+- (void)testFileSize
 {
-    _experimentFile.date = @"2014-04-01";
-    _experimentFile.uploadedBy = @"Yuri";
-    _experimentFile.type = RAW;
-    
-    NSString *result = [_experimentFile getDescription];
-    NSString *correct = @"?";
-    NSLog(@"%@", result);
-    XCTAssertEqualObjects(result, correct);
+    NSDictionary *annotations = @{@"name":@"sex", @"value":@"female"};
+    NSArray *anno = @[annotations];
+    NSDictionary *file = @{@"filesize":@"10MB"};
+    NSArray *files = @[file];
+    NSDictionary *dict = @{@"annotations":anno, @"files":files};
+    Experiment *experiment = [ExperimentParser expParser:dict];
+    ExperimentFile *expFile = (ExperimentFile *)[[experiment.files getFiles] firstObject];
+    XCTAssertEqualObjects(expFile.filesize, @"10MB");
 }
+
 
 @end

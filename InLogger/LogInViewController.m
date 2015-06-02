@@ -9,10 +9,9 @@
 #import "ServerConnection.h"
 #import "PopupGenerator.h"
 #import "AppDelegate.h"
-#import "SettingsPopupDelegate.h"
 #import "JSONBuilder.h"
-#import "FileHandler.h"
 #import "Reachability.h"
+#import "FileHandler.h"
 
 @interface LogInViewController ()
 
@@ -22,7 +21,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
 @property (weak, nonatomic) IBOutlet UIButton *settingsButton;
 
-@property SettingsPopupDelegate *delegate;
 @end
 
 @implementation LogInViewController
@@ -34,15 +32,6 @@
     _passwordField.delegate = self;
     _spinner.hidden = YES;
     _spinner.hidesWhenStopped = YES;
-    _delegate = [[SettingsPopupDelegate alloc] init];
-
-//    NSString *serverURL = [FileHandler readFromFile: SERVER_URL_FILE_NAME withDefaultData:MOCK_URL];
-//    [JSONBuilder setServerURLToString:serverURL];
-    
-    //Pål did this
-    //add self to appDelegate
-//    AppDelegate *app = [UIApplication sharedApplication].delegate;
-//    [app addController:self];
 }
 
 /**
@@ -54,7 +43,6 @@
 {
     NSString *username = _userField.text;
     NSString *password = _passwordField.text;
-    NSError *error;
     Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
     NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
     if (networkStatus == NotReachable) {
@@ -64,7 +52,11 @@
         
         if((username.length > 0) && (password.length > 0))
         {
-            [ServerConnection login:self.userField.text withPassword:self.passwordField.text error:&error withContext:self];
+            [ServerConnection login:self.userField.text
+                       withPassword:self.passwordField.text
+                        withContext:^(NSString *s, NSError *e){
+                [self reportLoginResult:s error:e];}
+                ];
             [_spinner startAnimating];
             [self deactivateEverything];
             
@@ -129,7 +121,9 @@
             AppDelegate *app = [UIApplication sharedApplication].delegate;
             app.userIsLoggingOut = NO;
 
-            [self performSegueWithIdentifier:@"loginSegue" sender:self];
+//            [self performSegueWithIdentifier:@"loginSegue" sender:self];
+            UIViewController *vc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"home2"];
+            [self presentViewController:vc animated:true completion:nil];
         });
     } else
     {
@@ -175,7 +169,7 @@
 }
 
 /**
- * Describes what is shoud happen if the "next" button on the keyboard is pressed.
+ Describes what is shoud happen if the "next" button on the keyboard is pressed.
  @param textField Textfield which is asked if it should return
  */
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -190,14 +184,23 @@
     return NO;
 }
 
-/**
- * Executes when the settings-icon in top-right corner is pressed.
- * Shows a popup with a textfield where the user can input the URL to the server.
+/*!
+ @discussion Creates a popup-view when settings is pressed
+ @param sender The button that was pressed
+ @return
  */
 - (IBAction)settingsButtonPressed:(id)sender
 {
-    [PopupGenerator showInputPopupWithMessage:@"Enter server URL:" withTitle:@"" withText: [JSONBuilder getServerURL] withDelegate:_delegate];
+    [PopupGenerator showInputPopupWithMessage:@"Enter server URL:" withTitle:@"Settings" withText: [JSONBuilder getServerURL] withDelegate:self];
 }
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    UITextField *textField = [alertView textFieldAtIndex:0];
+    if (buttonIndex == 0) {
+        [JSONBuilder setServerURLFromString:textField.text];
+        [FileHandler writeData: [JSONBuilder getServerURL] toFile:SERVER_URL_FILE_NAME];
+    }
+}
 
 @end

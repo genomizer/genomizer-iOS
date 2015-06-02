@@ -7,7 +7,6 @@
 //
 //
 
-#import "SegueController.h"
 #import "TabViewController.h"
 #import "AppDelegate.h"
 
@@ -38,68 +37,32 @@
     self.view.backgroundColor = [UIColor whiteColor];
     _prevSelectedIndex = 0;
     
-//    UIPanGestureRecognizer *panner = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
-//    [self.view addGestureRecognizer:panner];
 }
 
-//Pål svamlar
-//-(void)pan:(UIPanGestureRecognizer *)panner{
-//    CGPoint translation = [panner translationInView:panner.view];
-//     NSUInteger currentIndex = [self.childViewControllers indexOfObject:self.selectedViewController];
-//    
-//    UINavigationController *nav = (UINavigationController *)self.selectedViewController;
-//    UIViewController *rightVC = self.childViewControllers[currentIndex+1];
-//    
-//    if(panner.state == UIGestureRecognizerStateBegan){
-//       
-//        UIViewController *rightVC = self.childViewControllers[currentIndex+1];
-//        
-//        
-//        if(!rightVC.isViewLoaded){
-//            rightVC = [self.storyboard instantiateViewControllerWithIdentifier:rightVC.restorationIdentifier];
-//        }
-//        self
-//        rightVC.view.center = CGPointMake(nav.view.center.x + 320, rightVC.view.center.y);
-//        [self.view insertSubview:rightVC.view belowSubview:self.tabBar];
-//        rightView = rightVC.view;
-//        
-//    } else if(panner.state == UIGestureRecognizerStateEnded){
-//        [UIView animateWithDuration:0.3 animations:^{
-//            nav.view.center = CGPointMake(self.view.frame.size.width/2, nav.view.center.y);
-//            rightView.center = CGPointMake(self.view.frame.size.width/2 + 320, rightView.center.y);
-//        } completion:^(BOOL finished) {
-//            [rightView removeFromSuperview];
-//            rightView = nil;
-//        }];
-//    }
-//    nav.view.center = CGPointMake(nav.view.center.x + translation.x, panner.view.center.y);
-//    rightVC.view.center = CGPointMake(rightView.center.x + translation.x, rightView.center.y);
-//    [panner setTranslation:CGPointZero inView:panner.view];
+///**
+// * Marks the segue as started.
+// */
+//- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
+//{
+//    [SegueController segueStarted];
 //}
-/**
- * Marks the segue as started.
- */
-- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
-{
-    [SegueController segueStarted];
-}
 
-/**
- * Determines if a segue should be performed. Checks if a segue already is animating.
- *
- */
-- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
-{
-    if ([SegueController isPerformingSegue]) {
-        return false;
-    } else if(viewController != tabBarController.selectedViewController) {
-        return true;
-    } else if ([viewController isKindOfClass:[UINavigationController class]]) {
-        return ((UINavigationController *)viewController).viewControllers.count > 1;
-    } else {
-        return true;
-    }
-}
+///**
+// * Determines if a segue should be performed. Checks if a segue already is animating.
+// *
+// */
+//- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
+//{
+//    if ([SegueController isPerformingSegue]) {
+//        return false;
+//    } else if(viewController != tabBarController.selectedViewController) {
+//        return true;
+//    } else if ([viewController isKindOfClass:[UINavigationController class]]) {
+//        return ((UINavigationController *)viewController).viewControllers.count > 1;
+//    } else {
+//        return true;
+//    }
+//}
 
 
 /*

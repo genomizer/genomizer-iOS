@@ -99,12 +99,29 @@ static NSString *SERVER_URL = nil;//Don't change!!
     NSData *postData = [NSJSONSerialization dataWithJSONObject:dict
                                                            options:0
                                                              error:nil];
-    NSString *conversionString =@"process/rawtoprofile";
+    NSString *conversionString = @"process/rawtoprofile";
     NSMutableURLRequest *request = [self getRequest:@"PUT" withToken:token];
     [request setHTTPBody:postData];
     [request setURL:[NSURL URLWithString: [[self getServerURL] stringByAppendingString:conversionString]]];
     return request;
     
+}
+
+/**
+ * Statis method that generates a URLRequst to process a set of files with specific commands.
+ *
+ * @param token The authorization token to the server.
+ * @param dict A dictionary containing process data.
+ * @return NSMutableURLRequest A request with dict as JSON body.
+ */
++ (NSMutableURLRequest *)getProcessCommandJSON:(NSString *)token withDict:(NSDictionary *)dict {
+    
+    NSData *postData = [NSJSONSerialization dataWithJSONObject:dict options:0 error:nil];
+    NSString *conversionString = @"process/processCommands";
+    NSMutableURLRequest *request = [self getRequest:@"PUT" withToken:token];
+    [request setHTTPBody:postData];
+    [request setURL:[NSURL URLWithString:[[self getServerURL] stringByAppendingString:conversionString]]];
+    return request;
 }
 
 /**
@@ -160,7 +177,7 @@ static NSString *SERVER_URL = nil;//Don't change!!
     if(SERVER_URL == nil){
         SERVER_URL = [[NSUserDefaults standardUserDefaults] objectForKey:@"serverURL"];
         if(SERVER_URL == nil){
-            [JSONBuilder setServerURLToString:MOCK_URL];
+            [JSONBuilder setServerURLFromString:MOCK_URL];
         }
     }
     return SERVER_URL;
@@ -172,7 +189,7 @@ static NSString *SERVER_URL = nil;//Don't change!!
  *
  *@param url - the new server URL.
  */
-+ (void) setServerURLToString: (NSString *) url
++ (void) setServerURLFromString: (NSString *) url
 {
     if ([url length] != 0) {
         NSMutableString *urlString = [[NSMutableString alloc] initWithString:url];

@@ -10,9 +10,6 @@
 //
 
 #import "TableViewController.h"
-#import "SegueController.h"
-#import "TabBar2Controller.h"
-#import "NavController.h"
 
 @interface TableViewController ()
 
@@ -26,7 +23,7 @@
  */
 - (void) viewDidAppear:(BOOL)animated
 {
-    [SegueController segueDone];
+    //[SegueController segueDone];
     [super viewDidAppear:animated];
 }
 
@@ -38,22 +35,13 @@
 
 
 /**
- * Checks if the segue should be performed.
- */
-- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
-{
-    return ![SegueController isPerformingSegue];
-}
-
-/**
  * Marks the segue as started.
  */
 - (void) performSegueWithIdentifier:(NSString *)identifier sender:(id)sender
 {
-    if ([self shouldPerformSegueWithIdentifier:identifier sender:sender]) {
-        [SegueController segueStarted];
+
         [super performSegueWithIdentifier:identifier sender:sender];
-    }
+    
 }
 
 @end

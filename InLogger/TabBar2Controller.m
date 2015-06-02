@@ -7,7 +7,6 @@
 //
 //
 
-#import "SegueController.h"
 #import "TabBar2Controller.h"
 #import "AppDelegate.h"
 #import "NavController.h"
@@ -23,7 +22,7 @@
 
 @implementation TabBar2Controller
 @synthesize window, tabBar, panner;
-//@synthesize selectedViewController = _selectedViewController;
+
 /**
  * Initial setup on view did load. Add self to appdelegate.
  *
@@ -32,27 +31,24 @@
 {
     [super viewDidLoad];
     messagesToShow = [[NSMutableArray alloc] init];
-//    self.delegate = self;
-    self.view.backgroundColor = [UIColor blackColor];
+
     _prevSelectedIndex = 0;
-    UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    self.view.backgroundColor = [UIColor blackColor];
+    
+    UIStoryboard *story = self.storyboard;
     
     NavController *nvc1 = [story instantiateViewControllerWithIdentifier:@"search"];
-    NavController *nvc2 = [story instantiateViewControllerWithIdentifier:@"selected"];
+//    NavController *nvc2 = [story instantiateViewControllerWithIdentifier:@"selected"];
     NavController *nvc3 = [story instantiateViewControllerWithIdentifier:@"process"];
     NavController *nvc4 = [story instantiateViewControllerWithIdentifier:@"more"];
     
-//    ViewController *vc1 = nvc1.childViewControllers.firstObject;
-//    ViewController *vc2 = nvc2.childViewControllers.lastObject;
-//    ViewController *vc3 = nvc3.childViewControllers.firstObject;
-//    ViewController *vc4 = nvc4.childViewControllers.firstObject;
     
     nvc1.tabBar2Controller = self;
-    nvc2.tabBar2Controller = self;
+//    nvc2.tabBar2Controller = self;
     nvc3.tabBar2Controller = self;
     nvc4.tabBar2Controller = self;
     
-    childControllers = @[nvc1, nvc2, nvc3, nvc4];
+    childControllers = @[nvc1, nvc3, nvc4];
     
     [self.view insertSubview:nvc1.view belowSubview:self.tabBar];
     self.selectedViewController = nvc1;
@@ -99,7 +95,12 @@
     
 }
 
-//Pål svamlar
+/**
+ * Panning between different View Controllers
+ *
+ * @param expFiles - ExperimentFiles to be converted.
+ * @param d - type to convert to.
+ */
 -(void)pan:(UIPanGestureRecognizer *)_panner{
     CGPoint translation = [_panner translationInView:_panner.view];
      NSUInteger currentIndex = [childControllers indexOfObject:self.selectedViewController];
@@ -180,21 +181,7 @@
     leftVC.view.center = CGPointMake(leftVC.view.center.x + translation.x * friction, leftVC.view.center.y);
     [_panner setTranslation:CGPointZero inView:_panner.view];
 }
-//
-//-(void)moveViews:(float)duration left:(UIView *)left center:(UIView *)center right:(UIView *)right index:(int)index{
-//    [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-//        left.center = CGPointMake(self.view.frame.size.width/2  - 330, left.center.y);
-//        center.center = CGPointMake(self.view.frame.size.width/2 + 330, center.center.y);
-//        right.center  = CGPointMake(self.view.frame.size.width/2 + 330, right.center.y);
-//        
-//    } completion:^(BOOL finished) {
-//        [left removeFromSuperview];
-//        [right removeFromSuperview];
-//        
-//        left.center = center.center;
-//        right.center = center.center;
-//    }];
-//}
+
 -(IBAction)tabbarButtonTapped:(UIButton *)sender{
 
     UIViewController *vc = [childControllers objectAtIndex:sender.tag-100];
@@ -205,14 +192,6 @@
         return;
     }
     NSLog(@"new vc %@, oldvc: %@", vc, self.selectedViewController);
-//    if(![vc isViewLoaded]){
-//        NSUInteger index = [childControllers indexOfObject:vc];
-//        vc = [self.storyboard instantiateViewControllerWithIdentifier:vc.restorationIdentifier];
-//        NSMutableArray *cop = childControllers.mutableCopy;
-//        [cop removeObjectAtIndex:index];
-//        [cop insertObject:vc atIndex:index];
-//        childControllers = cop.copy;
-//    }
     
     [self.view insertSubview:vc.view belowSubview:self.tabBar];
     [self.selectedViewController.view removeFromSuperview];
@@ -338,6 +317,7 @@
     OptionsView *ov = [[OptionsView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - options.count*50-100, self.view.frame.size.width, options.count*50+100)];
     ov.transform = CGAffineTransformMakeTranslation(0, ov.frame.size.height);
     [ov setDataArray:options];
+    ov.actionDelegate = self;
     ov.optionsDelegate = delegate;
     ov.dimView = dimView;
   
@@ -350,6 +330,9 @@
         ov.transform = CGAffineTransformMakeTranslation(0, 0);
     }];
     [self animateDimViewIn:dimView];
+}
+-(void)optionsViewDidClose:(OptionsView *)ov{
+    [self zoomViewRestore];
 }
 
 /**
@@ -386,9 +369,9 @@
     
     NSDictionary *d = messagesToShow.firstObject;
     
-    NSString *title = d[@"title"];
-    NSString *msg = d[@"message"];
-    NSString *type = d[@"type"];
+    NSString *title =   d[@"title"];
+    NSString *msg =     d[@"message"];
+    NSString *type =    d[@"type"];
     
     window = [[AlertWindow alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 64)
                                           title:title
@@ -396,8 +379,11 @@
                                            type:type];
     
     [window animateDownAndUp:^{
-        [messagesToShow removeObjectAtIndex:0];
-        [self showNextMessage];
+        if(messagesToShow.count > 0){
+            [messagesToShow removeObjectAtIndex:0];
+            [self showNextMessage];
+        }
+        
     }];
 }
 

@@ -136,49 +136,28 @@
 - (void) testCanCreateFromValidDictionaryWithOneValue
 {
     [_dict setObject:@"Exp1" forKey:@"experimentName"];
-    ProcessStatusDescriptor *desc = [[ProcessStatusDescriptor alloc] init: _dict];
+    ProcessStatusDescriptor *desc = [[ProcessStatusDescriptor alloc] initWithStatus: _dict];
     XCTAssertEqualObjects(desc.experimentName, @"Exp1");
 }
 
 - (void) testCanHandleInvalidDictionaryWithoutValues
 {
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-    ProcessStatusDescriptor *desc = [[ProcessStatusDescriptor alloc] init: dict];
-    XCTAssertNil(desc);
-}
-/*
-- (void) testCanHandleInitWithValidDictionaryWithAllValues
-{
-    
-    ProcessStatusDescriptor* desc = [[ProcessStatusDescriptor alloc] init: _dict];
-    
-    XCTAssertEqualObjects(desc.experimentName, @"Exp1");
-    XCTAssertEqualObjects(desc.status, @"Finished");
-    XCTAssertEqualObjects(desc.author, @"yuri");
-    XCTAssertEqualObjects(desc.timeAdded, @"400245668744");
-    XCTAssertEqualObjects(desc.timeStarted, @"400245668744");
-    XCTAssertEqualObjects(desc.timeFinished, @"400245668744");
-}
-*/
-- (void) testCanHandleInitWithoutTimeAdded
-{
-    [_dict removeObjectForKey:@"timeAdded"];
-    ProcessStatusDescriptor* desc = [[ProcessStatusDescriptor alloc] init: _dict];
-    XCTAssertNil(desc);
+    ProcessStatusDescriptor *desc = [[ProcessStatusDescriptor alloc] initWithStatus: dict];
+    XCTAssertEqualObjects(desc.experimentName, @"unknown");
 }
 
 - (void) testCanHandleInitWithTestFiles
 {
-    ProcessStatusDescriptor* desc = [[ProcessStatusDescriptor alloc] init: _dict];
-    
+    ProcessStatusDescriptor* desc = [[ProcessStatusDescriptor alloc] initWithStatus: _dict];
     XCTAssertEqual([desc getNumberOfOutputFiles], 2);
 }
 
 - (void) testCanHandleInitWithNilTestFiles
 {
     [_dict removeObjectForKey:@"outputFiles"];
-    ProcessStatusDescriptor* desc = [[ProcessStatusDescriptor alloc] init: _dict];
-    XCTAssertNil(desc);
+    ProcessStatusDescriptor* desc = [[ProcessStatusDescriptor alloc] initWithStatus: _dict];
+    XCTAssertEqualObjects(@"unknown", desc.outputFile);
 }
 
 

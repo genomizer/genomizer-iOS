@@ -8,10 +8,7 @@
 
 #import "AnnotationTableViewController.h"
 #import "AnnotationTableViewCell.h"
-#import "SearchResultTableViewController.h"
-#import "ServerConnection.h"
-#import "PopupGenerator.h"
-#import "Annotation.h"
+
 
 @interface AnnotationTableViewController ()
 
@@ -44,7 +41,6 @@
         [sortArray insertObject:@"Name" atIndex:0];
         [sortArray insertObject:@"Created by" atIndex:1];
     }
-    //add self to appDelegate
 }
 
 #pragma mark - Table view data source
@@ -75,6 +71,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     AnnotationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AnnotationPrototypeCell" forIndexPath:indexPath];
+    cell.backgroundView = [[UIView alloc] init];
+    cell.backgroundView.backgroundColor = [UIColor whiteColor];
+    
     if(indexPath.section == 0){
         
         Annotation *annotation = [_describer.annotations objectAtIndex:indexPath.row];
@@ -87,21 +86,27 @@
         NSString *annotation = [sortArray objectAtIndex:indexPath.row];
         cell.label.text = annotation;
         cell.switchButton.hidden = true;
-//        if(indexPath.row >= 2){
-//            cell.label.alpha = 0.4;
-//        } else{
-//            cell.label.alpha = 1.0;
-//        }
     }
     return cell;
 }
 
+#define kHeaderHeight 46.f
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, kHeaderHeight)];
+    v.backgroundColor = [UIColor colorWithWhite:0.96 alpha:1.f];
+    
+    UILabel *l = [[UILabel alloc] initWithFrame:CGRectInset(v.bounds, 15, 0)];
+    l.text = [tableView.dataSource tableView:tableView titleForHeaderInSection:section];
+    l.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:17.f];
+    [v addSubview:l];
+    
+    return v;
+}
+
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    CGFloat height = 0;
-    if(section == 1){
-        height = 44;
-    }
-    return height;
+
+
+    return kHeaderHeight;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
@@ -109,7 +114,7 @@
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    NSString *title = @"";
+    NSString *title = @"Show annotations";
     if (section == 1) {
         title = @"Sort by";
     }
@@ -127,9 +132,6 @@
     id object = sortArray[sourceIndexPath.row];
     [sortArray removeObjectAtIndex:sourceIndexPath.row];
     [sortArray insertObject:object atIndex:destinationIndexPath.row];
-//    [tableView moveRowAtIndexPath:sourceIndexPath toIndexPath:destinationIndexPath];
-//    [tableView reloadRowsAtIndexPaths:@[sourceIndexPath, destinationIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-//    [tableView reloadData];
 
 }
 -(BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -150,6 +152,7 @@
  */
 -(void) viewWillDisappear:(BOOL)animated
 {
+    [super viewWillDisappear:animated];
     [_describer saveAnnotationsToFile];
     [[NSUserDefaults standardUserDefaults] setObject:sortArray forKey:@"sortArray"];
     [[NSUserDefaults standardUserDefaults] synchronize];

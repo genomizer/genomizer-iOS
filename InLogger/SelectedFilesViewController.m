@@ -99,14 +99,13 @@ static FileContainer * FILES = nil;
     }
     
     [self updateSelectTaskView];
-//    _selectTaskToPerformButton.enabled = ([_selectedFiles numberOfFilesWithType:_segmentedControl.selectedSegmentIndex] > 0);
 }
 
 -(void)updateFiles{
     experiements = [FILES getAllExperimentIDsOfFileType:_segmentedControl.selectedSegmentIndex].mutableCopy;
     NSMutableArray *newFilesToDisplay = [[NSMutableArray alloc] init];
     for(NSString *expID in experiements){
-        [newFilesToDisplay addObject:[FILES getAllExperimentsWithID:expID fileType:RAW]];
+        [newFilesToDisplay addObject:[FILES getAllExperimentsWithID:expID fileType:_segmentedControl.selectedSegmentIndex]];
     }
     filesToDisplay = newFilesToDisplay;
 }
@@ -118,14 +117,12 @@ static FileContainer * FILES = nil;
     NSLog(@"size: %@", NSStringFromCGRect(_tableView.frame));
     if(!selectTaskEnabled && wasEnabled){
         [UIView animateWithDuration:0.1 animations:^{
-//            _selectTaskView.transform = CGAffineTransformMakeTranslation(0, _selectTaskView.frame.size.height);
             _selectTaskView.frame = CGRectMake(_selectTaskView.frame.origin.x, _selectTaskView.frame.origin.y + _selectTaskView.frame.size.height, _selectTaskView.frame.size.width, _selectTaskView.frame.size.height);
             _tableView.frame = CGRectMake(_tableView.frame.origin.x, _tableView.frame.origin.y, _tableView.frame.size.width, _tableView.frame.size.height + _selectTaskView.frame.size.height);
         }];
         
     } else if(selectTaskEnabled && !wasEnabled){
         [UIView animateWithDuration:0.1 animations:^{
-//            _selectTaskView.transform = CGAffineTransformMakeTranslation(0, 0);
             _selectTaskView.frame = CGRectMake(_selectTaskView.frame.origin.x, _selectTaskView.frame.origin.y - _selectTaskView.frame.size.height, _selectTaskView.frame.size.width, _selectTaskView.frame.size.height);
             _tableView.frame = CGRectMake(_tableView.frame.origin.x, _tableView.frame.origin.y, _tableView.frame.size.width, _tableView.frame.size.height - _selectTaskView.frame.size.height);
         }];
@@ -133,8 +130,6 @@ static FileContainer * FILES = nil;
 }
 - (void) updateTableViewAndButtons
 {
-//    filesToDisplay = [FILES getFiles:_segmentedControl.selectedSegmentIndex];
-
     [self updateSelectTaskView];
     [self updateFiles];
     [_tableView reloadData];
@@ -151,10 +146,8 @@ static FileContainer * FILES = nil;
     
     _selectedFiles = [[FileContainer alloc] init];
     _selectTaskToPerformButton.enabled = false;
-//    [self updateTableViewAndButtons];
     
     //add self to appDelegate
-
 }
 
 
@@ -187,9 +180,8 @@ static FileContainer * FILES = nil;
 {
     DataFileTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DataFilePrototypeCell" forIndexPath:indexPath];
     ExperimentFile *file = filesToDisplay[indexPath.section][indexPath.row];
-    cell.textField.text = [file getDescription];
+    cell.textField.text = file.name;
     cell.switchButton.on = [_selectedFiles containsFile:file];
-    //cell.file = [_selectedFiles objectAtIndex:indexPath.row];
     return cell;
 }
 
@@ -273,8 +265,6 @@ static FileContainer * FILES = nil;
         [FILES removeExperimentFile:file];
         [_selectedFiles removeExperimentFile:file];
     }
-    
-//    [PopupGenerator showPopupWithMessage:@"Files removed"];
     [self updateTableViewAndButtons];
 }
 
@@ -285,47 +275,22 @@ static FileContainer * FILES = nil;
  */
 - (IBAction)selectTaskButton:(id)sender {
     NSLog(@"self.tabbar: %@", self.tabBar2Controller);
-    [(TabBar2Controller *)self.tabBar2Controller showOptions:@[@"Convert to raw"] delegate:self];
-    
-//    NSArray *filesSelected = [_selectedFiles getFiles:[self getSelectedFileType]];
-//    
-//    if(filesSelected.count == 1) {
-//        [self performSegueWithIdentifier:@"convertTask" sender:self];
-//    } else if(filesSelected.count > 1){
-//        ExperimentFile *firstFile = filesSelected[0];
-//        NSString *specie = firstFile.species;
-//        for(int i = 1; i < filesSelected.count; i++){
-//            if(!([specie isEqualToString:[filesSelected[i] species]])){
-//                [PopupGenerator showPopupWithMessage:@"Files with diffrent speices selected"];
-//                break;
-//            }
-//            else if(i == filesSelected.count-1){
-//                [self performSegueWithIdentifier:@"convertTask" sender:self];
-//            }
-//        }
-//    }
+    [self.tabBar2Controller showOptions:@[@"Convert to raw"] delegate:self];
 }
 
 -(void)optionsView:(OptionsView *)ov selectedIndex:(NSUInteger)index{
-    [self optionsViewDidClose:ov];
+
     
     if(index == 0){
-        NavController *nextNVC = [self.storyboard instantiateViewControllerWithIdentifier:@"rawConvertNav"];
-        nextNVC.tabBar2Controller = (TabBar2Controller *)self.tabBar2Controller;
+        ViewController *nextNVC = [self.storyboard instantiateViewControllerWithIdentifier:@"rawConvertNav"];
+        nextNVC.tabBar2Controller = self.tabBar2Controller;
         
         RawConvertViewController *nextVC = nextNVC.childViewControllers.firstObject;
         nextVC.experimentFiles = [FILES getFiles:[self getSelectedFileType]];
         nextVC.ratio = true;
-        nextVC.completionBlock = ^(NSError *error, NSString *message){
-//            NSLog(@"task finished: %@ %@", message, error.userInfo);
-//            [(TabBar2Controller *)self.tabBar2Controller showPopDownWithTitle:@"Convert sent" andMessage:@"Convert request was successfully sent to server" type:@"success"];
-        };
         [self.tabBar2Controller presentViewController:nextNVC animated:true completion:nil];
     }
     
-}
--(void)optionsViewDidClose:(OptionsView *)ov{
-    [(TabBar2Controller *)self.tabBar2Controller zoomViewRestore];
 }
 /**
  * Executes when the "info"-button next to a file is pressed.
@@ -335,56 +300,10 @@ static FileContainer * FILES = nil;
     UITableViewCell *cell = [self cellForButton:sender];
     NSIndexPath *indexPath = [_tableView indexPathForCell:cell];
     ExperimentFile *file = filesToDisplay[indexPath.section][indexPath.row];
-    [(TabBar2Controller *)self.tabBar2Controller showInfoAboutFile:file];
+    [self.tabBar2Controller showInfoAboutFile:file];
 
 }
 
-//Pål did this
-//-(void)fileAboutViewDidClose:(FileAboutView *)fav{
-//    _trashButton.enabled = true;
-//}
-/**
- * Executes when "close"-button in the "infoFile"-popup is pressed.
- */
-//- (IBAction)closeInfoFile:(id)sender {
-//    _infoAboutFile.hidden = YES;
-//    _dimView.hidden = YES;
-//    _trashButton.enabled =YES;
-//}
-
-//Pål did this
-//    NSString *infoText = @"Hejsan allihopa";//[[filesToDisplay objectAtIndex:sender.tag] getAllInfo];
-//    UIView *dimView = ({
-//        UIView *v = [[UIView alloc] initWithFrame:self.view.frame];
-//        v.backgroundColor = [UIColor blackColor];
-//        v.alpha = 0.4;
-//        v;
-//    });
-//    FileAboutView *fav = ({
-//        float height = 150;
-//        FileAboutView *fav = [[FileAboutView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height/2 - height/2, self.view.frame.size.width, height)];
-//        fav.delegate = self;
-//        [fav setText:infoText];
-//        fav.dimView = dimView;
-//        fav;
-//    });
-//
-//    [self.tabBar2Controller.view addSubview:dimView];
-//    [self.tabBar2Controller.view addSubview:fav];
-//
-//    _dimView.hidden = NO;
-//    _infoAboutFile.hidden = NO;
-//    _infoAboutFile.layer.cornerRadius = 5;
-//    _infoAboutFile.layer.masksToBounds = YES;
-//    _tableView.editing = NO;
-//    [self.tableView endEditing:YES];
-//
-//    _trashButton.enabled = NO;
-//    _infoAboutFile.layer.borderWidth = 0.4;
-//    _infoAboutFile.layer.borderColor = [UIColor lightGrayColor].CGColor;
-//    _infoFileTextField.text = [[filesToDisplay objectAtIndex:sender.tag] getAllInfo];
-//    [[_infoFileTextField layer] setBorderColor : [[UIColor lightGrayColor] CGColor]];
-//    [[_infoFileTextField layer] setBorderWidth:0.4];
 /*
  * Used to go back to this view from selectTaskTableViewController.
  */

@@ -21,9 +21,9 @@
 @property NSDate* timeStarted;
 @property NSDate* timeFinished;
 
-- (bool) addOutputFile:(NSString*) fileName;
+- (BOOL) addOutputFile:(NSString*) fileName;
 - (NSString*) getOutputFile: (int) fileNumber;
 - (int) getNumberOfOutputFiles;
-- (ProcessStatusDescriptor*) init: (NSDictionary*) status;
+- (instancetype) initWithStatus: (NSDictionary*) status;
 
 @end

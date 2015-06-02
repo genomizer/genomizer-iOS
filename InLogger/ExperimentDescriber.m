@@ -11,35 +11,34 @@
 #define FILE_NAME @"annotations.asd"
 #define DELIMITER @","
 
-@interface ExperimentDescriber(){
-    NSMutableArray *visibleAnnotations;
-}
+@interface ExperimentDescriber ()
 
-
+    @property (nonatomic)  NSMutableArray *visibleAnnotations;
 
 @end
 
 @implementation ExperimentDescriber
 
 
--(id)init{
+-(instancetype)init
+{
     if(self = [super init]){
-        visibleAnnotations = [[NSMutableArray alloc] init];
+        _visibleAnnotations = [[NSMutableArray alloc] init];
     }
     return self;
 }
 /**
  * Initializes an ExperimentDescriber that displays
  * the given annotations.
- * 
+ *
  * @param annotations - the annotations to display
  */
-- (id) initWithAnnotations: (NSArray *) annotations
+- (instancetype) initWithAnnotations: (NSArray *) annotations
 {
-    if(self = [super init]){
+    if(self = [self init]){
         _annotations = annotations;
-        visibleAnnotations = [self loadAnnotationsFromFile];
-
+        [self loadAnnotationsFromFile];
+        
     }
     return self;
 }
@@ -51,8 +50,8 @@
  */
 - (void) showAnnotation: (Annotation *) annotation
 {
-    if(![visibleAnnotations containsObject:annotation]) {
-        [visibleAnnotations addObject:annotation];
+    if(![self.visibleAnnotations containsObject:annotation]) {
+        [self.visibleAnnotations addObject:annotation];
     }
 }
 
@@ -63,7 +62,7 @@
  */
 - (void) hideAnnotation: (Annotation *) annotation
 {
-    [visibleAnnotations removeObject:annotation];
+    [self.visibleAnnotations removeObject:annotation];
 }
 
 
@@ -74,7 +73,7 @@
  * @return true if the annotation is to display
  */
 - (BOOL) showsAnnotation: (Annotation *) annotation {
-    return [visibleAnnotations containsObject:annotation];
+    return [self.visibleAnnotations containsObject:annotation];
 }
 
 /**
@@ -89,28 +88,27 @@
 {
     NSMutableString *description = [[NSMutableString alloc] init];
     
-    [description appendString:[self createRowForAnnotation:@"Name" withValue:experiment.name andNewLine:true]];
-    [description appendString:[self createRowForAnnotation:@"Created by" withValue:experiment.createdByUser andNewLine:[visibleAnnotations count] > 0]];
-//    for(NSString *key in experiment.annotations){
-//        NSLog(@"key: %@, value: %@", key, experiment.annotations[key]);
-//    }
-     for (NSInteger i = 0; i < [visibleAnnotations count]; i++) {
-         Annotation *annotation = visibleAnnotations[i];
-         NSString *newString = [self createRowForAnnotation:[annotation getFormatedName]
-                                                  withValue:[experiment getValueForAnnotation:annotation.name]
-                                                 andNewLine:i != [visibleAnnotations count] -1];
-//         NSLog(@"NEW STRING: %@", newString);
+    [description appendString: [self createRowForAnnotation:@"Name" withValue:experiment.name andNewLine:true]];
+    [description appendString:[self createRowForAnnotation:@"Created by" withValue:experiment.createdByUser andNewLine:[self.visibleAnnotations count] > 0]];
+    
+    for (NSInteger i = 0; i < [self.visibleAnnotations count]; i++) {
+        Annotation *annotation = self.visibleAnnotations[i];
+        NSString *newString = [self createRowForAnnotation:[annotation getFormatedName]
+                                                 withValue:[experiment getValueForAnnotation:annotation.name]
+                                                andNewLine:i != [self.visibleAnnotations count] -1];
+        NSLog(@"NEW STRING: %@", newString);
         [description appendString: newString];
     }
     NSLog(@"desc: %@", description);
     return description;
 }
 - (NSArray *)getVisibleAnnotations{
-    return visibleAnnotations;
+    return self.visibleAnnotations;
 }
-- (void)setVisibleAnnotations:(NSArray *)array{
-    visibleAnnotations = array.mutableCopy;
-}
+/*
+- (void)setVisibleAnnotations:(NSMutableArray *)array{
+    self.visibleAnnotations = array.mutableCopy;
+}*/
 
 /**
  * Formats the given annotation name and appends the given value to it.
@@ -145,10 +143,10 @@
 - (void) saveAnnotationsToFile
 {
     NSMutableString *data = [[NSMutableString alloc] init];
-    for (NSInteger i = 0; i < visibleAnnotations.count; i++) {
-        Annotation *annotation = visibleAnnotations[i];
+    for (NSInteger i = 0; i < self.visibleAnnotations.count; i++) {
+        Annotation *annotation = self.visibleAnnotations[i];
         [data appendString: annotation.name];
-        if (i < visibleAnnotations.count - 1) {
+        if (i < self.visibleAnnotations.count - 1) {
             [data appendString: DELIMITER];
         }
     }
@@ -159,25 +157,22 @@
  * Reads a text file and generates a list of annotations to display.
  *
  */
-- (NSMutableArray *) loadAnnotationsFromFile
+- (void) loadAnnotationsFromFile
 {
-    NSMutableArray *result = [[NSMutableArray alloc] init];
     NSString *data = [FileHandler readFromFile:FILE_NAME withDefaultData:@""];
-    if ([data isEqualToString:@""]) {
-        return result;
-    }
-    NSArray *seperated = [data componentsSeparatedByString:DELIMITER];
-
-    for (NSString *name in seperated) {
-        for (Annotation *annotation in _annotations) {
-            if ([annotation.name isEqualToString:name]) {
-                [result addObject:annotation];
-                break;
+    if (![data isEqualToString:@""]) {
+        
+        NSArray *seperated = [data componentsSeparatedByString:DELIMITER];
+        
+        for (NSString *name in seperated) {
+            for (Annotation *annotation in _annotations) {
+                if ([annotation.name isEqualToString:name]) {
+                    [self.visibleAnnotations addObject:annotation];
+                    break;
+                }
             }
         }
     }
-    
-    return result;
 }
 
 @end

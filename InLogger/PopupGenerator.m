@@ -85,6 +85,7 @@ static UIView * ACTIVITY_CONTAINER;
     UITextField *textField = [alert textFieldAtIndex:0];
     [textField setReturnKeyType:UIReturnKeyDone];
     textField.text = text;
+    textField.clearButtonMode = UITextFieldViewModeWhileEditing;
     [alert show];
 }
 

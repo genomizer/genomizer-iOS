@@ -81,7 +81,7 @@
         if([file valueForKey:@"grVersion"] != nil){
             expFile.grVersion = [file valueForKey:@"grVersion"];
         }else{
-            expFile.grVersion = @"Not set!";
+            expFile.grVersion = @"nothing";
         }
         if([file valueForKey:@"author"] != nil){
             expFile.author = [file valueForKey:@"author"];
@@ -94,6 +94,13 @@
         }else{
             expFile.date = @"Not set!";
         }
+
+        if ([file valueForKey:@"filesize"] != nil) {
+            expFile.filesize = [file valueForKey:@"filesize"];
+        } else {
+            expFile.filesize = @"0MB";
+        }
+        
         expFile.metaData = @"astringofmeta"; // remove?
         [exp.files addExperimentFile:expFile];
     }

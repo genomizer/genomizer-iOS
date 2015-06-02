@@ -12,10 +12,9 @@
 #import "ViewController.h"
 #import "ExperimentFile.h"
 
-@interface ProcessViewController : ViewController
+@interface ProcessViewController : ViewController<UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 
-//- (void) reportProcessStatusResult: (NSMutableArray*) result error: (NSError*) error;
 
 @end
