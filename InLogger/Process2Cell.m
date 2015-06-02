@@ -51,6 +51,9 @@
         if([self.delegate respondsToSelector:@selector(processCell2:didChangeOutFileName:)]){
             [self.delegate processCell2:self didChangeOutFileName:textField.text];
         }
+        if([self.delegate respondsToSelector:@selector(processCell2:didEndEdit:)]){
+            [self.delegate processCell2:self didEndEdit:textField];
+        }
         return;
     }
     NSString *key = nil;
@@ -62,12 +65,12 @@
     } else if([textField isEqual:minSmoothTextField]){
         key = @"minSmooth";
     } else if([textField isEqual:stepSizeTextField]){
-        key = @"stepsize";
+        key = @"stepSize";
     } else if([textField isEqual:meanOrMedianTextField]){
         key = @"meanOrMedian";
         value = value.lowercaseString;
     } else if([textField isEqual:readsCutOffTextField]){
-        key = @"readsCutoff";
+        key = @"readsCutOff";
     } else if([textField isEqual:chromosomeTextField]){
         key = @"chromosomes";
     } else if([textField isEqual:filePostTextField]){
@@ -89,7 +92,7 @@
     NSString *newPost = fileTextField.text;
     NSString *newPre = filePostTextField.text;
     if([self.delegate respondsToSelector:@selector(processCell2:didChangeValue:forKey:forceReload:)]){
-        [self.delegate processCell2:self didChangeOutFileName:newPre];
+        [self.delegate processCell2:self didChangeValue:newPre forKey:@"infile"];
         [self.delegate processCell2:self didChangeValue:newPost forKey:@"infile_post" forceReload:true];
         
     }

@@ -34,7 +34,7 @@
     
     processTypes = @[@{@"type":@"rawToProfile",
                        @"name":@"Raw to Profile",
-                       @"file_ext":@"sgr",
+                       @"file_ext":@"wig",
                        @"infile_ext":@"fastq",
                        @"default_param":@"-a -m 1 --best -p 10 -v 2 -q -S--phred33",
                        @"snd_types":@[@"smoothing", @"step"]},
@@ -139,7 +139,11 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.tabBar2Controller showPopDownWithError:errold];
             });
+        } else{
+            [self.tabBar2Controller showPopDownWithTitle:@"Process sent" andMessage:expId type:@"success"];
+            [self.navigationController popViewControllerAnimated:true];
         }
+        
     }];
     
      NSData *d = [NSJSONSerialization dataWithJSONObject:dict options:0 error:nil];
@@ -238,7 +242,7 @@
         cell2.meanOrMedianTextField.text    = [file[@"meanOrMedian"] capitalizedString];
         
         //Ratio
-        cell2.readsCutOffTextField.text     = file[@"readsCutoff"];
+        cell2.readsCutOffTextField.text     = file[@"readsCutOff"];
         cell2.chromosomeTextField.text      = file[@"chromosomes"];
         cell2.filePostTextField.text     = file[@"infile_post"];
         cell2.switchButton.hidden           = indexPath.section == 0 ? false : true;
@@ -335,7 +339,7 @@
 
     NSIndexPath *cellIndex = [tableView indexPathForCell:cell];
     if([key isEqualToString:@"infile_post"]){
-        [self changeValue:val forKey:@"outfile" atSection:[NSIndexPath indexPathForRow:cellIndex.row+1 inSection:cellIndex.section-1]];
+        [self changeValue:val forKey:@"outfile" atSection:[NSIndexPath indexPathForRow:cellIndex.row inSection:cellIndex.section]];
     }
     [self changeValue:val forKey:key atSection:cellIndex];
 
@@ -515,7 +519,7 @@
         [fileComps removeLastObject];
         NSString *filename = [fileComps componentsJoinedByString:@"."];
         
-        NSDictionary *dict = @{@"infile":pre.name,@"infile_post":post.name, @"outfile":[NSString stringWithFormat:@"%@.%@", filename, d[@"file_ext"]], @"mean":@"single", @"readsCutoff":@"", @"outfile_ext":d[@"file_ext"], @"chromosomes":@""};
+        NSDictionary *dict = @{@"infile":pre.name,@"infile_post":post.name, @"outfile":[NSString stringWithFormat:@"%@.%@", filename, d[@"file_ext"]], @"mean":@"single", @"readsCutOff":@"", @"outfile_ext":d[@"file_ext"], @"chromosomes":@""};
         return @[dict];
     }
     NSMutableArray *a = [[NSMutableArray alloc] initWithCapacity:expFiles.count];
@@ -531,7 +535,7 @@
         if([d[@"type"] isEqualToString:@"rawToProfile"]){
             dict = @{@"infile":infile_final, @"outfile":[NSString stringWithFormat:@"%@.%@", filename, d[@"file_ext"]], @"params":@"", @"default_param":d[@"default_param"], @"genomeVersion":f.grVersion, @"keepSam":@"true", @"outfile_ext":d[@"file_ext"],@"sortSamStringency":@"STRICT"};
         } else if([d[@"type"] isEqualToString:@"step"]){
-            dict = @{@"infile":infile_final, @"outfile":[NSString stringWithFormat:@"%@.%@", filename, d[@"file_ext"]], @"stepsize":@"", @"outfile_ext":d[@"file_ext"]};
+            dict = @{@"infile":infile_final, @"outfile":[NSString stringWithFormat:@"%@.%@", filename, d[@"file_ext"]], @"stepSize":@"", @"outfile_ext":d[@"file_ext"]};
         } else if([d[@"type"] isEqualToString:@"smoothing"]){
             dict = @{@"infile":infile_final, @"outfile":[NSString stringWithFormat:@"%@.%@", filename, d[@"file_ext"]], @"windowSize":@"", @"minSmooth":@"", @"outfile_ext":d[@"file_ext"], @"meanOrMedian":@"Mean"};
         } else if([d[@"type"] isEqualToString:@"ratio"]){
@@ -557,7 +561,7 @@
         [fileComps removeLastObject];
         NSString *filename = [fileComps componentsJoinedByString:@"."];
         
-        NSDictionary *dict = @{@"infile":pre[@"outfile"],@"infile_post":post[@"outfile"], @"outfile":[NSString stringWithFormat:@"%@.%@", filename, d[@"file_ext"]], @"mean":@"single", @"readsCutoff":@"", @"outfile_ext":d[@"file_ext"], @"chromosomes":@""};
+        NSDictionary *dict = @{@"infile":pre[@"outfile"],@"infile_post":post[@"outfile"], @"outfile":[NSString stringWithFormat:@"%@.%@", filename, d[@"file_ext"]], @"mean":@"single", @"readsCutOff":@"", @"outfile_ext":d[@"file_ext"], @"chromosomes":@""};
         return @[dict];
     }
     NSMutableArray *a = [[NSMutableArray alloc] initWithCapacity:prevFiles.count];
@@ -573,7 +577,7 @@
         if([d[@"type"] isEqualToString:@"rawToProfile"]){
             dict = @{@"infile":infile_final, @"outfile":[NSString stringWithFormat:@"%@.%@", filename, d[@"file_ext"]], @"params":d[@"default_param"], @"genomeVersion":@"", @"keepSAM":@(true), @"outfile_ext":d[@"file_ext"],@"sortSamStringency":@"STRICT"};
         } else if([d[@"type"] isEqualToString:@"step"]){
-            dict = @{@"infile":infile_final, @"outfile":[NSString stringWithFormat:@"%@.%@", filename, d[@"file_ext"]], @"stepsize":@"", @"outfile_ext":d[@"file_ext"]};
+            dict = @{@"infile":infile_final, @"outfile":[NSString stringWithFormat:@"%@.%@", filename, d[@"file_ext"]], @"stepSize":@"", @"outfile_ext":d[@"file_ext"]};
         } else if([d[@"type"] isEqualToString:@"smoothing"]){
             dict = @{@"infile":infile_final, @"outfile":[NSString stringWithFormat:@"%@.%@", filename, d[@"file_ext"]], @"windowSize":@"", @"minSmooth":@"", @"outfile_ext":d[@"file_ext"], @"meanOrMedian":@"Mean"};
         }

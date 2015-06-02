@@ -80,8 +80,9 @@
                     }
                     
                     if(httpResp.statusCode != 200) {
-                        NSString *errorMessage = [[self parseJSONToDictionary:POSTReply error:&internalError] objectForKey:@"message"];
-                        error = [self generateErrorObjectFromHTTPError:httpResp.statusCode errorMessage:errorMessage];
+//                        NSString *errorMessage = [[self parseJSONToDictionary:POSTReply error:&internalError] objectForKey:@"message"];
+                        error = [self generateError:@"Server can't grant you access, perhaps try again" withErrorDomain:@"Login failed" withUnderlyingError:nil];
+//                        error = [self generateErrorObjectFromHTTPError:httpResp.statusCode errorMessage:errorMessage];
                     }
                 }
                 else
@@ -185,7 +186,7 @@
         NSString *datastring = [[NSString alloc] initWithData:POSTReply encoding:NSStringEncodingConversionAllowLossy];
         POSTReply = [datastring dataUsingEncoding:NSUTF8StringEncoding];
         NSDictionary *array = [NSJSONSerialization JSONObjectWithData:POSTReply options: NSJSONReadingAllowFragments error:&internalError];
-//        NSLog(@"data string: %@", datastring);
+        NSLog(@"data string: %@",internalError);
         if(internalError == nil) {
             NSMutableArray *experiments = [[NSMutableArray alloc] init];
             for(NSDictionary *json in array) {
@@ -287,19 +288,22 @@
          NSError *error;
          NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
          NSString *datastring = [[NSString alloc] initWithData:POSTReply encoding:NSStringEncodingConversionAllowLossy];
+        POSTReply = [datastring dataUsingEncoding:NSUTF8StringEncoding];
+        NSDictionary *message = [NSJSONSerialization JSONObjectWithData:POSTReply options:NSJSONReadingAllowFragments error:nil];
          NSLog(@"Convert response: %@ %@", httpResp, datastring);
          NSLog(@"error %@", internalError);
          if(internalError == nil)
          {
              if(httpResp.statusCode != 200)
              {
-                error = [ServerConnection generateError:POSTReply internaleError:internalError response:httpResp];
+                 error = [ServerConnection generateError:message[@"message"] withErrorDomain:@"Process failed" withUnderlyingError:nil];
+//                error = [ServerConnection generateError:data internaleError:internalError response:httpResp];
              }
          } else
          {
              error = [ServerConnection generateError:kConnectionErrorMsg withErrorDomain:@"Connection Error" withUnderlyingError:internalError];
          }
-         completionBlock(error, [dict objectForKey:@"expid"]);
+         completionBlock(error, message[@"message"]);
      }];
     }
 }
@@ -450,8 +454,8 @@
             error = [NSError errorWithDomain:@"Empty response" code:0 userInfo:dict];
             break;
         case 400:
-            [dict setObject:@"400 Bad request. Servers fault." forKey:NSLocalizedDescriptionKey];
-            error = [NSError errorWithDomain:@"Nothing sent" code:0 userInfo:dict];
+            [dict setObject:@"Server couldn't understand the request. Contact developer." forKey:NSLocalizedDescriptionKey];
+            error = [NSError errorWithDomain:@"Bad request" code:0 userInfo:dict];
             break;
         case 401:
             [dict setObject:errorMessage forKey:NSLocalizedDescriptionKey];

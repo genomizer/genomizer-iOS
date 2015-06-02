@@ -34,8 +34,14 @@
 }
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data{
     NSString *datastring = [[NSString alloc] initWithData:data encoding:NSStringEncodingConversionAllowLossy];
-    NSLog(@"Convert response: %@", datastring);
+    NSLog(@"response data: %@", datastring);
+    if(responseData == nil){
     responseData = data;
+    } else {
+        NSMutableData *md = responseData.mutableCopy;
+        [md appendData:data];
+        responseData = md.copy;
+    }
 }
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error{
     NSLog(@"error! %@", error);
