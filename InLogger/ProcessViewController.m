@@ -122,8 +122,13 @@ static NSMutableArray * processingExperimentFiles;
     NSString *started = [NSString stringWithFormat:@"Started %@.", [self dateDiff:temp.timeStarted indexPath:indexPath]];
     
     cell.file.attributedText = expAndFile;
+    
     cell.status.text = temp.status;
-    cell.status.textColor = [temp.status isEqualToString:@"Crashed"] ? [AlertWindow colorForType:@"error"] : cell.status.textColor;
+    if([temp.status isEqualToString:@"Crashed"]){
+        cell.status.textColor = [AlertWindow colorForType:@"error"];
+    } else{
+        cell.status.textColor = [UIColor colorWithRed:73/255.f green:144/255.f blue:226/255.f alpha:1.0];
+    }
     cell.process.text = [NSString stringWithFormat:@"%@ %@", added, started];
     return cell;
 }

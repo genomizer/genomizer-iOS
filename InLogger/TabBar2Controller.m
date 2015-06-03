@@ -54,16 +54,19 @@
     self.selectedViewController = nvc1;
     
     panner = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
-    [self.view addGestureRecognizer:panner];
+    [panner requireGestureRecognizerToFail:nvc1.interactivePopGestureRecognizer];
     panner.delegate = self;
+    
+    [self.view addGestureRecognizer:panner];
+    
     
     for(UIView *v in self.tabBar.subviews){
         if(v.tag != [childControllers indexOfObject:self.selectedViewController]+100){
             v.alpha = 0.3;
         }
     }
-    
-    
+
+
 }
 
 -(BOOL)gestureRecognizerShouldBegin:(UIPanGestureRecognizer *)gestureRecognizer{
